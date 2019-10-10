@@ -62,8 +62,9 @@ async function main(user, repo) {
     const dir = await response.json();
     // console.log(JSON.stringify(myJson));
 
-    var file_content = '';
+    var file_content_main = '';
     var file_content_debug = '';
+    var file_content_extra = '';
 
     for(var k in dir) {
         // console.log(k, dir[k]);
@@ -93,17 +94,15 @@ async function main(user, repo) {
                 // console.log(function_content(code, value.start, value.end));
                 const func_code = function_content(code, value.start, value.end);
                 if (value.id.name == algo_name) {
-                    file_content += func_code;
-                    file_content += '\n\n';
+                    file_content_main += func_code;
+                    file_content_main += '\n\n';
                     file_content_debug += function_make_debuggable(code, value);
                     file_content_debug += '\n\n';
                 } else if (value.id.name == 'usage'|| value.id.name == 'attributes') {
                     const new_name = `__${algo_name}_${value.id.name}`;
                     const ren_code = function_extras_rename(func_code, value.id.name, new_name);
-                    file_content += ren_code;
-                    file_content += '\n\n';
-                    file_content_debug += ren_code;
-                    file_content_debug += '\n\n';
+                    file_content_extra += ren_code;
+                    file_content_extra += '\n\n';
                 } else {
                     console.log(`warning: ignoring function ${value.id.name} in ${dir[k].download_url}`);
                 }
@@ -116,7 +115,7 @@ async function main(user, repo) {
     }
 
 
-    fs.writeFile("./build/algorithms.js", file_content, function(err) {
+    fs.writeFile("./build/algorithms.js", file_content_main, function(err) {
             if(err) {
             return console.log(err);
         }
@@ -128,6 +127,13 @@ async function main(user, repo) {
             return console.log(err);
         }
         console.log("./build/algorithms_debug.js was saved!");
+    }); 
+
+    fs.writeFile("./build/algorithms_extra.js", file_content_extra, function(err) {
+        if(err) {
+            return console.log(err);
+        }
+        console.log("./build/algorithms_extra.js was saved!");
     }); 
 
 }
