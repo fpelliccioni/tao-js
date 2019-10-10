@@ -1,6 +1,4 @@
-function min_element(f, l, r) {
-    if (equal(f, l)) return l;
-
+function min_element_nonempty(f, l, r) {
     var m = f;
     f = successor(f);
 
@@ -17,11 +15,9 @@ function usage() {
     var s = sequence(array_random(), "s");
     var l = end(s);
     
-    var m = min_element(begin(s), l, lt);
+    var m = min_element_nonempty(begin(s), l, lt);
     if ( ! equal(m, l)) {
         print("The min element is: " + source(f));
-    } else {
-        print("An empty sequence has no min element");
     }
 }
 
@@ -32,7 +28,10 @@ function attributes() {
         "type requirements": ['f, l: I: Iterator \u2227 Readable',
                               'r: R: StrictWeakOrdering relation',
                               'Domain(R) = ValueType(I)'],
-        precondition: 'readable_bounded_range(f, l)',
+        precondition: 
+`readable_bounded_range(f, l)
+\u2227 f != l
+`,
         postcondition: 'source(m) = sort_stable_copy(f, l, r)[0]',
         other: ['Stable'],
     };
