@@ -13,7 +13,7 @@ function min_element(f, l, r) {
     }
     return m;
 }
-​
+
 function usage() {
     var d = sequence(array_random(), "d");
 
