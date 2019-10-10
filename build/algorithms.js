@@ -572,6 +572,24 @@ function shift_right_by_one(f, l) {
     copy_backward(f, predecessor(l), l);
 }
 
+function shift_right_while(f, l, p) {
+    while ( ! equal(f, l) && p(source(predecessor(l)))) {
+        sink_move(l, source_move(predecessor(l)));
+        l = predecessor(l);
+    }
+    return l;
+}
+
+function shift_right_while_nonempty(f, l, p) {
+    //precondition: ! equal(f, l)
+    while (p(source(predecessor(l)))) {
+        sink_move(l, source_move(predecessor(l)));
+        l = predecessor(l);
+        if (equal(f, l)) break;
+    }
+    return l;
+}
+
 function swap_ranges(f0, l0, f1) {
     while ( ! equal(f0, l0)) {
         iter_swap(f0, f1);

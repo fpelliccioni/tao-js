@@ -738,13 +738,11 @@ function __reverse_n_with_buffer_attributes() {
 }
 
 function __rotate_bidirectional_usage() {
-    
     var s = sequence(array_random(), "s");
     print(s);
     rotate_bidirectional(begin(s), successor(begin(s), 3), end(s));
     print(s);
     print('...');
-
 }
 
 function __rotate_bidirectional_attributes() {
@@ -843,6 +841,22 @@ function __shift_right_by_one_usage() {
 }
 
 function __shift_right_by_one_attributes() {
+
+}
+
+function __shift_right_while_usage() {
+
+}
+
+function __shift_right_while_attributes() {
+
+}
+
+function __shift_right_while_nonempty_usage() {
+
+}
+
+function __shift_right_while_nonempty_attributes() {
 
 }
 
