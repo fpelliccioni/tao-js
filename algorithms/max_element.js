@@ -5,7 +5,7 @@ function max_element(f, l, r) {
     f = successor(f);
 
     while ( ! equal(f, l)) {
-        if (r(source(f), source(m))) {
+        if ( ! r(source(f), source(m))) {
             m = f;
         }
         f = successor(f);
