@@ -1,4 +1,3 @@
-
 function min_element(f, l, r) {
     if (equal(f, l)) return l;
 
@@ -24,4 +23,17 @@ function usage() {
     if ( ! equal(f, l)) {
         print("The min element is: " + source(f));
     }    
+}
+
+function attributes() {
+    return {
+        class: ['Selection'],
+        complexity: 'n - 1 comparisons',
+        "type requirements": ['f, l: I: Iterator \u2227 Readable',
+                              'r: R: StrictWeakOrdering relation',
+                              'Domain(R) = ValueType(I)'],
+        precondition: 'readable_bounded_range(f, l)',
+        postcondition: 'source(m) = stable_sort_copy(f, l, r)[0]',
+        other: ['Stable'],
+    };
 }
