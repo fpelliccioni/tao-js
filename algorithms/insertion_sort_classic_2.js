@@ -1,13 +1,3 @@
-function shift_right_while_nonempty(f, l, p) {
-    //precondition: ! equal(f, l)
-    while (p(source(predecessor(l)))) {
-        sink_move(l, source_move(predecessor(l)));
-        l = predecessor(l);
-        if (equal(f, l)) break;
-    }
-    return l;
-}
-
 function linear_insert(f, c, r) {
     var value = source_move(c);
     c = shift_right_while_nonempty(f, c, bind(r, value));

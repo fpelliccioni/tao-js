@@ -222,6 +222,20 @@ function make_heap_n(f, n) {
     push_heap_n(f, n);
 }
 
+function make_heap_n_naive_0(f, n) {
+    var i = Math.floor(n / 2) - 1;
+    for (; i >= 0; --i) {
+        shift_down(f, i, n);
+    }
+}
+
+function make_heap_n_naive_1(f, n) {
+    var i = Math.floor(n / 2) - 1;
+    for (; i >= 0; --i) {
+        shift_down(f, i, n);
+    }
+}
+
 function max_element(f, l, r) {
     if (equal(f, l)) return l;
 

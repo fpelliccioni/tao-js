@@ -355,6 +355,34 @@ function make_heap_n(f, n) {
     return res;
 }
 
+function __debug_make_heap_n_naive_0(f, n) {
+    var i = Math.floor(n / 2) - 1;
+    for (; i >= 0; --i) {
+        shift_down(f, i, n);
+    }
+}
+
+function make_heap_n_naive_0(f, n) {
+    var _f_ = start_f('make_heap_n_naive_0', f, n);
+    var res = __debug_make_heap_n_naive_0(f, n);
+    end_f(_f_);
+    return res;
+}
+
+function __debug_make_heap_n_naive_1(f, n) {
+    var i = Math.floor(n / 2) - 1;
+    for (; i >= 0; --i) {
+        shift_down(f, i, n);
+    }
+}
+
+function make_heap_n_naive_1(f, n) {
+    var _f_ = start_f('make_heap_n_naive_1', f, n);
+    var res = __debug_make_heap_n_naive_1(f, n);
+    end_f(_f_);
+    return res;
+}
+
 function __debug_max_element(f, l, r) {
     if (equal(f, l)) return l;
 

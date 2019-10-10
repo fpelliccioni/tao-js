@@ -1,11 +1,3 @@
-function shift_right_while(f, l, p) {
-    while ( ! equal(f, l) && p(source(predecessor(l)))) {
-        sink_move(l, source_move(predecessor(l)));
-        l = predecessor(l);
-    }
-    return l;
-}
-
 function linear_insert(f, c, r) {
     var value = source_move(c);
     c = shift_right_while(f, c, bind(r, value));

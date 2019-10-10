@@ -1,19 +1,3 @@
-function reverse(f, l) {
-    while (true) {
-        if (equal(f, l)) return;
-        l = predecessor(l);
-        if (equal(f, l)) return;
-        iter_swap(f, l);
-        f = successor(f);        
-    }
-}
-
-function rotate(f, m, l) {
-    reverse(f, m);
-    reverse(m, l);
-    reverse(f, l);
-}
-
 function insert(s, ip, f, l) {
     var d = distance(begin(s), ip);
     var ld = distance(ip, end(s));
@@ -30,8 +14,6 @@ function insert(s, ip, f, l) {
 }
 
 function usage() {
-    
-    
     var s = sequence(array_random(), "s");
     var i = sequence(array_random(5), "i");
     
@@ -40,7 +22,6 @@ function usage() {
     s = insert(s, begin(s), begin(i), end(i));
     print(s);
     print('...');
-
 }
 
 function attributes() {

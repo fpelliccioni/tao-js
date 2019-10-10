@@ -100,10 +100,6 @@ function __find_if_attributes() {
 }
 
 function __gcd_usage() {
-    function remainder(a, b) {
-        return a % b;
-    }
-        
     var a = random_int();
     var b = random_int();
     
@@ -301,15 +297,39 @@ function __make_heap_n_attributes() {
 }
 
 function __make_heap_n_naive_0_usage() {
+    function source_i(f, i) {
+        return source(successor(f, i));
+    }
     
+    function shift_down(f, i, n) {
+        while (i < n) {
+            var i_big = i;
+            var c1 = 2 * i + 1;
+            var c2 = c1 + 1;
     
+            if (c1 < n && source_i(f, c1) > source_i(f, i_big)) {
+                i_big = c1;
+            }
+            
+            if (c2 < n && source_i(f, c2) > source_i(f, i_big)) {
+                i_big = c2;
+            }
+            
+            if (i_big == i) {
+                return;
+            }
+    
+            iter_swap(successor(f, i), successor(f, i_big));
+            i = i_big;
+        }
+    }
+
     var s = sequence(array_random(), "s");
     // var s = sequence([24, 88, 59, 31, 91, 0, 87, 91, 40, 52], "s");
     
     print(s);
-    make_heap_n_naive(begin(s), size(s));
+    make_heap_n_naive_0(begin(s), size(s));
     print(s);
-
 }
 
 function __make_heap_n_naive_0_attributes() {
@@ -317,15 +337,39 @@ function __make_heap_n_naive_0_attributes() {
 }
 
 function __make_heap_n_naive_1_usage() {
+    function source_i(f, i) {
+        return source(successor(f, i));
+    }
     
+    function shift_down(f, i, n) {
+        while (i < n) {
+            var i_big = i;
+            var c1 = 2 * i + 1;
+            var c2 = c1 + 1;
+    
+            if (c1 < n && source_i(f, c1) > source_i(f, i_big)) {
+                i_big = c1;
+            }
+            
+            if (c2 < n && source_i(f, c2) > source_i(f, i_big)) {
+                i_big = c2;
+            }
+            
+            if (i_big == i) {
+                return;
+            }
+    
+            iter_swap(successor(f, i), successor(f, i_big));
+            i = i_big;
+        }
+    }
     
     var s = sequence(array_random(), "s");
     // var s = sequence([24, 88, 59, 31, 91, 0, 87, 91, 40, 52], "s");
     
     print(s);
-    make_heap_n_naive(begin(s), size(s));
+    make_heap_n_naive_1(begin(s), size(s));
     print(s);
-
 }
 
 function __make_heap_n_naive_1_attributes() {
@@ -485,8 +529,6 @@ function __palindrome_forward_recursive_attributes() {
 }
 
 function __palindrome_naive_usage() {
-    
-    
     //var word_arr = ['e', 'v', 'i', 't', 'a', 't', 'i', 'v', 'e'];
     var word_arr = ['e', 'v', 'i', 'x', 'a', 't', 'i', 'v', 'e'];
     
@@ -496,7 +538,6 @@ function __palindrome_naive_usage() {
     } else {
         print('the word not is palindrome');
     };
-
 }
 
 function __palindrome_naive_attributes() {
@@ -711,14 +752,11 @@ function __rotate_bidirectional_attributes() {
 }
 
 function __rotate_random_access_usage() {
-    
-    
     var s = sequence(array_random(12), "s");
     print(s);
     rotate_random_access_nontrivial(begin(s), successor(begin(s), 3), end(s));
     print(s);
     print('...');
-
 }
 
 function __rotate_random_access_attributes() {
