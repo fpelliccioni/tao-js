@@ -1,3 +1,25 @@
+function copy_backward(f_i, l_i, l_o) {
+    while ( ! equal(f_i, l_i)) {
+        // copy_backward_step(l_i, l_o);
+        l_i = predecessor(l_i);
+        l_o = predecessor(l_o);
+        sink(l_o, source(l_i));
+    } 
+    return l_o;
+}
+
+function equal_r(f, l, f2, r) {
+    while ( ! equal(f, l)) {
+        if ( ! r(source(f), source(f2))) {
+            return false;
+        }
+
+        f = successor(f);
+        f2 = successor(f2);
+    }
+    return true;
+}
+
 function find(f, l, x) {
     while ( ! equal(f, l) && ! source(f) != x) {
         f = successor(f)
@@ -397,7 +419,6 @@ function partition_stable_with_buffer_0(f, l, p, b) {
 }
 
 function reverse_bidirectional(f, l) {
-
     while (true) {
         if (equal(f, l)) return;
         l = predecessor(l);
@@ -463,10 +484,22 @@ function rotate_bidirectional(f, m, l) {
     reverse(f, l);
 }
 
+function select_1_2(a, b, r) {
+    return r(b, a) ? a : b;
+}
+
 function select_1_3(a, b, c, r) {
     return r(b, a) ? 
               select_1_3_ab(b, a, c, r) 
             : select_1_3_ab(a, b, c, r);
+}
+
+function select_1_3_ab(a, b, c, r) {
+    // precondition: a <= b
+    
+    return ! r(c, b) ? 
+                b :                  // a, b, c are sorted
+                select_1_2(a, c, r); // b is not the median
 }
 
 function selection_sort_classic(f, l, r) {
@@ -484,6 +517,11 @@ function selection_sort_stable(f, l, r) {
         rotate_right_by_one(f, successor(m));
         f = successor(f);
     }
+}
+
+function shift_right_by_one(f, l) {
+    if (equal(f, l)) return;
+    copy_backward(f, predecessor(l), l);
 }
 
 function swap_ranges(f0, l0, f1) {

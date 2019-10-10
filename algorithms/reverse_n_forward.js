@@ -1,17 +1,3 @@
-function half_nonnegative(n) {return n >> 1;}
-
-function twice(n) {return n + n;}
-
-function swap_ranges_n(f0, f1, n) {
-    while (n != 0) {
-        iter_swap(f0, f1);
-        f0 = successor(f0);
-        f1 = successor(f1);
-        --n;
-    }
-    return [f0, f1];
-}
-
 function reverse_n_forward(f, n) {
     if (n < 2) return successor(f, n);
     var h = half_nonnegative(n);

@@ -1,3 +1,39 @@
+function __debug_copy_backward(f_i, l_i, l_o) {
+    while ( ! equal(f_i, l_i)) {
+        // copy_backward_step(l_i, l_o);
+        l_i = predecessor(l_i);
+        l_o = predecessor(l_o);
+        sink(l_o, source(l_i));
+    } 
+    return l_o;
+}
+
+function copy_backward(f_i, l_i, l_o) {
+    var _f_ = start_f('copy_backward', f_i, l_i, l_o);
+    var res = __debug_copy_backward(f_i, l_i, l_o);
+    end_f(_f_);
+    return res;
+}
+
+function __debug_equal_r(f, l, f2, r) {
+    while ( ! equal(f, l)) {
+        if ( ! r(source(f), source(f2))) {
+            return false;
+        }
+
+        f = successor(f);
+        f2 = successor(f2);
+    }
+    return true;
+}
+
+function equal_r(f, l, f2, r) {
+    var _f_ = start_f('equal_r', f, l, f2, r);
+    var res = __debug_equal_r(f, l, f2, r);
+    end_f(_f_);
+    return res;
+}
+
 function __debug_find(f, l, x) {
     while ( ! equal(f, l) && ! source(f) != x) {
         f = successor(f)
@@ -600,7 +636,6 @@ function partition_stable_with_buffer_0(f, l, p, b) {
 }
 
 function __debug_reverse_bidirectional(f, l) {
-
     while (true) {
         if (equal(f, l)) return;
         l = predecessor(l);
@@ -715,6 +750,17 @@ function rotate_bidirectional(f, m, l) {
     return res;
 }
 
+function __debug_select_1_2(a, b, r) {
+    return r(b, a) ? a : b;
+}
+
+function select_1_2(a, b, r) {
+    var _f_ = start_f('select_1_2', a, b, r);
+    var res = __debug_select_1_2(a, b, r);
+    end_f(_f_);
+    return res;
+}
+
 function __debug_select_1_3(a, b, c, r) {
     return r(b, a) ? 
               select_1_3_ab(b, a, c, r) 
@@ -724,6 +770,21 @@ function __debug_select_1_3(a, b, c, r) {
 function select_1_3(a, b, c, r) {
     var _f_ = start_f('select_1_3', a, b, c, r);
     var res = __debug_select_1_3(a, b, c, r);
+    end_f(_f_);
+    return res;
+}
+
+function __debug_select_1_3_ab(a, b, c, r) {
+    // precondition: a <= b
+    
+    return ! r(c, b) ? 
+                b :                  // a, b, c are sorted
+                select_1_2(a, c, r); // b is not the median
+}
+
+function select_1_3_ab(a, b, c, r) {
+    var _f_ = start_f('select_1_3_ab', a, b, c, r);
+    var res = __debug_select_1_3_ab(a, b, c, r);
     end_f(_f_);
     return res;
 }
@@ -755,6 +816,18 @@ function __debug_selection_sort_stable(f, l, r) {
 function selection_sort_stable(f, l, r) {
     var _f_ = start_f('selection_sort_stable', f, l, r);
     var res = __debug_selection_sort_stable(f, l, r);
+    end_f(_f_);
+    return res;
+}
+
+function __debug_shift_right_by_one(f, l) {
+    if (equal(f, l)) return;
+    copy_backward(f, predecessor(l), l);
+}
+
+function shift_right_by_one(f, l) {
+    var _f_ = start_f('shift_right_by_one', f, l);
+    var res = __debug_shift_right_by_one(f, l);
     end_f(_f_);
     return res;
 }

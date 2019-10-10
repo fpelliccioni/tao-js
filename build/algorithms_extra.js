@@ -1,4 +1,11 @@
-function __equal_usage() {
+function __copy_backward_usage() {
+}
+
+function __copy_backward_attributes() {
+
+}
+
+function __equal_r_usage() {
     
     
     var d1_raw = ['e', 'v', 'i', 't', 'a', 't', 'i', 'v', 'e'];
@@ -16,7 +23,7 @@ function __equal_usage() {
 
 }
 
-function __equal_attributes() {
+function __equal_r_attributes() {
 
 }
 
@@ -77,14 +84,15 @@ function __find_if_attributes() {
 }
 
 function __gcd_usage() {
-    
-    
+    function remainder(a, b) {
+        return a % b;
+    }
+        
     var a = random_int();
     var b = random_int();
     
     var g = gcd(a, b);
     print(g);
-
 }
 
 function __gcd_attributes() {
@@ -110,8 +118,6 @@ function __insert_attributes() {
 }
 
 function __insert_naive_usage() {
-    
-    
     var s = sequence(array_random(), "s");
     var i = sequence(array_random(5), "i");
     
@@ -120,7 +126,6 @@ function __insert_naive_usage() {
     s = insert_naive(s, begin(s), begin(i), end(i));
     print(s);
     print('...');
-
 }
 
 function __insert_naive_attributes() {
@@ -604,14 +609,11 @@ function __partition_stable_with_buffer_0_attributes() {
 }
 
 function __reverse_bidirectional_usage() {
-    
-    
     var s = sequence(array_random(), "s1");
     print(s);
     reverse_bidirectional(begin(s), end(s));
     print(s);
     print('...');
-
 }
 
 function __reverse_bidirectional_attributes() {
@@ -651,14 +653,11 @@ function __reverse_n_adaptive_attributes() {
 }
 
 function __reverse_n_forward_usage() {
-    
-    
     var s = sequence(array_random(), "s1");
     print(s);
     var r = reverse_n_forward(begin(s), size(s));
     print(s);
     print('...');
-
 }
 
 function __reverse_n_forward_attributes() {
@@ -666,14 +665,11 @@ function __reverse_n_forward_attributes() {
 }
 
 function __reverse_n_indexed_usage() {
-    
-    
     var s = sequence(array_random(), "s1");
     print(s);
     reverse_n_indexed(begin(s), size(s));
     print(s);
     print('...');
-
 }
 
 function __reverse_n_indexed_attributes() {
@@ -724,9 +720,20 @@ function __rotate_random_access_attributes() {
 
 }
 
+function __select_1_2_usage() {
+    var tmp = array_random(3);
+    var a = tmp[0];
+    var b = tmp[1];
+    
+    var m = select_1_2(a, b, lt);
+    print(m);
+}
+
+function __select_1_2_attributes() {
+
+}
+
 function __select_1_3_usage() {
-    
-    
     var tmp = array_random(3);
     var a = tmp[0];
     var b = tmp[1];
@@ -734,10 +741,22 @@ function __select_1_3_usage() {
     
     var m = select_1_3(a, b, c, lt);
     print(m);
-
 }
 
 function __select_1_3_attributes() {
+
+}
+
+function __select_1_3_ab_usage() {
+    var a = 1;
+    var b = 2;
+    var c = random_int();
+    
+    var m = select_1_3_ab(a, b, c, lt);
+    print(m);
+}
+
+function __select_1_3_ab_attributes() {
 
 }
 
@@ -769,6 +788,14 @@ function __selection_sort_stable_usage() {
 }
 
 function __selection_sort_stable_attributes() {
+
+}
+
+function __shift_right_by_one_usage() {
+
+}
+
+function __shift_right_by_one_attributes() {
 
 }
 

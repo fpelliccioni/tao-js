@@ -1,7 +1,3 @@
-function half_nonnegative(n) {
-    return n >> 1;
-}
-
 function partition_point_n(f, n, p) {
     while (n != 0) {
         var h = half_nonnegative(n);

@@ -9,8 +9,6 @@ function swap_ranges_n(f0, f1, n) {
 }
 
 function usage() {
-    
-    
     var s1 = sequence(array_random(), "s1");
     var s2 = sequence(array_random(5), "s2");
     
@@ -18,7 +16,6 @@ function usage() {
     var f0 = r[0];
     var f1 = r[1];
     print('...');
-
 }
 
 function attributes() {
