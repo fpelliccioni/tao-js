@@ -25,17 +25,13 @@ function reverse_n_forward(f, n) {
 }
 
 function usage() {
-    
-    
     var s = sequence(array_random(), "s1");
     print(s);
     var r = reverse_n_forward(begin(s), size(s));
     print(s);
     print('...');
-
 }
 
 function attributes() {
 
 }
-
