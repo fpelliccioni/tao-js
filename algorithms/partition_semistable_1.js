@@ -1,10 +1,3 @@
-function find_if(f, l, p) {
-    while ( ! equal(f, l) && ! p(source(f))) {
-        f = successor(f)
-    }
-    return f;
-}
-
 function partition_semistable_1(f, l, p) {
     f = find_if(f, l, p);
     if (f == l) return f;
@@ -23,8 +16,6 @@ function partition_semistable_1(f, l, p) {
 }
 
 function usage() {
-    
-    
     var even = predicate(function even(x) { return (x & 1) == 0; });
     var d = sequence(array_random(), "d", even, true);
     var f = begin(d);
@@ -34,7 +25,6 @@ function usage() {
     if ( ! equal(p, l)) {
         print('partition point: ' + source(p));
     }
-
 }
 
 function attributes() {

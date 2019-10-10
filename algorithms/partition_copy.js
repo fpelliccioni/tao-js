@@ -13,9 +13,6 @@ function partition_copy(f, l, r_b, r_g, p) {
 }
 
 function usage() {
-    
-    
-    
     var even = predicate(function even(x) { return (x & 1) == 0; });
     var d = sequence(array_random(), "d", even, true);
     var bad = sequence(new Array(size(d)), "bad");
@@ -27,10 +24,8 @@ function usage() {
     var fb = res[1];
     
     print('...');
-
 }
 
 function attributes() {
 
 }
-
