@@ -8,10 +8,6 @@ function gcd(a, b) {
 }
 
 function usage() {
-    function remainder(a, b) {
-        return a % b;
-    }
-        
     var a = random_int();
     var b = random_int();
     

@@ -1,16 +1,3 @@
-function remainder(a, b) {
-    return a % b;
-}
-
-function gcd(a, b) {
-    while (b != 0) {
-        var r = remainder(a, b);
-        a = b;
-        b = r;
-    }
-    return a;
-}
-
 function cycle_from(i, f) {
     var tmp = source(i);
     var j = i;
@@ -50,14 +37,11 @@ function rotate_random_access_nontrivial(f, m, l) {
 }
 
 function usage() {
-    
-    
     var s = sequence(array_random(12), "s");
     print(s);
     rotate_random_access_nontrivial(begin(s), successor(begin(s), 3), end(s));
     print(s);
     print('...');
-
 }
 
 function attributes() {

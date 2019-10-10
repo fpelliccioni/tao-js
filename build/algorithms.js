@@ -1,3 +1,11 @@
+function copy(f, l, o) {
+    while ( ! equal(f, l)) {
+        sink(o, source(f));
+        o = successor(o);
+        f = successor(f);
+    }
+}
+
 function copy_backward(f_i, l_i, l_o) {
     while ( ! equal(f_i, l_i)) {
         // copy_backward_step(l_i, l_o);
@@ -272,6 +280,16 @@ function min_value(f, l, r) {
     return m;
 }
 
+function move_backward(f_i, l_i, l_o) {
+    while (! equal(f_i, l_i)) {
+        //move_backward_step(l_i, l_o);
+        l_i = predecessor(l_i);
+        l_o = predecessor(l_o);
+        sink_move(l_o, source(l_i));
+    } 
+    return l_o;
+}
+
 function palindrome_bidirectional(f, l, r) {
     while (true) {
         if (equal(f, l)) break;
@@ -490,6 +508,14 @@ function rotate_bidirectional(f, m, l) {
     reverse(f, m);
     reverse(m, l);
     reverse(f, l);
+}
+
+function rotate_right_by_one(f, l) {
+    if (equal(f, l)) return;
+    var butlast = predecessor(l);
+    var x = source_move(butlast);
+    move_backward(f, butlast, l);
+    sink_move(f, x);
 }
 
 function select_1_2(a, b, r) {

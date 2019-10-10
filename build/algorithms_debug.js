@@ -1,3 +1,18 @@
+function __debug_copy(f, l, o) {
+    while ( ! equal(f, l)) {
+        sink(o, source(f));
+        o = successor(o);
+        f = successor(f);
+    }
+}
+
+function copy(f, l, o) {
+    var _f_ = start_f('copy', f, l, o);
+    var res = __debug_copy(f, l, o);
+    end_f(_f_);
+    return res;
+}
+
 function __debug_copy_backward(f_i, l_i, l_o) {
     while ( ! equal(f_i, l_i)) {
         // copy_backward_step(l_i, l_o);
@@ -426,6 +441,23 @@ function min_value(f, l, r) {
     return res;
 }
 
+function __debug_move_backward(f_i, l_i, l_o) {
+    while (! equal(f_i, l_i)) {
+        //move_backward_step(l_i, l_o);
+        l_i = predecessor(l_i);
+        l_o = predecessor(l_o);
+        sink_move(l_o, source(l_i));
+    } 
+    return l_o;
+}
+
+function move_backward(f_i, l_i, l_o) {
+    var _f_ = start_f('move_backward', f_i, l_i, l_o);
+    var res = __debug_move_backward(f_i, l_i, l_o);
+    end_f(_f_);
+    return res;
+}
+
 function __debug_palindrome_bidirectional(f, l, r) {
     while (true) {
         if (equal(f, l)) break;
@@ -761,6 +793,21 @@ function __debug_rotate_bidirectional(f, m, l) {
 function rotate_bidirectional(f, m, l) {
     var _f_ = start_f('rotate_bidirectional', f, m, l);
     var res = __debug_rotate_bidirectional(f, m, l);
+    end_f(_f_);
+    return res;
+}
+
+function __debug_rotate_right_by_one(f, l) {
+    if (equal(f, l)) return;
+    var butlast = predecessor(l);
+    var x = source_move(butlast);
+    move_backward(f, butlast, l);
+    sink_move(f, x);
+}
+
+function rotate_right_by_one(f, l) {
+    var _f_ = start_f('rotate_right_by_one', f, l);
+    var res = __debug_rotate_right_by_one(f, l);
     end_f(_f_);
     return res;
 }

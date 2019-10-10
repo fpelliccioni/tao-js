@@ -1,3 +1,11 @@
+function __copy_usage() {
+
+}
+
+function __copy_attributes() {
+
+}
+
 function __copy_backward_usage() {
 }
 
@@ -420,6 +428,14 @@ function __min_value_attributes() {
 
 }
 
+function __move_backward_usage() {
+
+}
+
+function __move_backward_attributes() {
+
+}
+
 function __palindrome_bidirectional_usage() {
     
     
@@ -488,9 +504,6 @@ function __palindrome_naive_attributes() {
 }
 
 function __partition_copy_usage() {
-    
-    
-    
     var even = predicate(function even(x) { return (x & 1) == 0; });
     var d = sequence(array_random(), "d", even, true);
     var bad = sequence(new Array(size(d)), "bad");
@@ -502,7 +515,6 @@ function __partition_copy_usage() {
     var fb = res[1];
     
     print('...');
-
 }
 
 function __partition_copy_attributes() {
@@ -545,8 +557,6 @@ function __partition_semistable_attributes() {
 }
 
 function __partition_semistable_1_usage() {
-    
-    
     var even = predicate(function even(x) { return (x & 1) == 0; });
     var d = sequence(array_random(), "d", even, true);
     var f = begin(d);
@@ -556,7 +566,6 @@ function __partition_semistable_1_usage() {
     if ( ! equal(p, l)) {
         print('partition point: ' + source(p));
     }
-
 }
 
 function __partition_semistable_1_attributes() {
@@ -599,8 +608,6 @@ function __partition_stable_forward_attributes() {
 }
 
 function __partition_stable_with_buffer_0_usage() {
-    
-    
     var even = predicate(function even(x) { return (x & 1) == 0; });
     var d = sequence(array_random(), "d", even);
     var buf = sequence(new Array(size(d)), "buf");
@@ -609,7 +616,6 @@ function __partition_stable_with_buffer_0_usage() {
     if ( ! equal(p, l)) {
         print('partition point: ' + source(p));
     }
-
 }
 
 function __partition_stable_with_buffer_0_attributes() {
@@ -719,6 +725,13 @@ function __rotate_random_access_attributes() {
 
 }
 
+function __rotate_right_by_one_usage() {
+}
+
+function __rotate_right_by_one_attributes() {
+
+}
+
 function __select_1_2_usage() {
     var tmp = array_random(3);
     var a = tmp[0];
@@ -777,13 +790,10 @@ function __selection_sort_classic_attributes() {
 }
 
 function __selection_sort_stable_usage() {
-    
-      
     var s = sequence(array_random(), "s", lt);
     print(s);
     selection_sort_stable(begin(s), end(s), lt);
     print(s);
-
 }
 
 function __selection_sort_stable_attributes() {
