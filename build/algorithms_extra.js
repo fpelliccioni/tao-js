@@ -5,6 +5,14 @@ function __copy_backward_attributes() {
 
 }
 
+function __copy_n_usage() {
+
+}
+
+function __copy_n_attributes() {
+
+}
+
 function __equal_r_usage() {
     
     
@@ -621,15 +629,12 @@ function __reverse_bidirectional_attributes() {
 }
 
 function __reverse_copy_usage() {
-    
-    
     var d = sequence(array_random(), "d");
     var b = sequence(new Array(size(d)), "b");
     
     var res = reverse_copy(begin(d), end(d), begin(b));
     print(d);
     print(b);
-
 }
 
 function __reverse_copy_attributes() {
@@ -637,15 +642,12 @@ function __reverse_copy_attributes() {
 }
 
 function __reverse_n_adaptive_usage() {
-    
-    
     var s = sequence(array_random(16), "s");
     //var b = sequence(new Array(size(s)), "b");
     var b = sequence(new Array(4), "b");
     print(s);
     var r = reverse_n_adaptive(begin(s), size(s), begin(b), size(b));
     print(s);
-
 }
 
 function __reverse_n_adaptive_attributes() {
@@ -677,14 +679,11 @@ function __reverse_n_indexed_attributes() {
 }
 
 function __reverse_n_with_buffer_usage() {
-    
-    
     var s = sequence(array_random(), "s");
     var b = sequence(new Array(size(s)), "b");
     print(s);
     var r = reverse_n_with_buffer(begin(s), size(s), begin(b));
     print(s);
-
 }
 
 function __reverse_n_with_buffer_attributes() {
@@ -832,8 +831,6 @@ function __swap_ranges_bounded_attributes() {
 }
 
 function __swap_ranges_n_usage() {
-    
-    
     var s1 = sequence(array_random(), "s1");
     var s2 = sequence(array_random(5), "s2");
     
@@ -841,7 +838,6 @@ function __swap_ranges_n_usage() {
     var f0 = r[0];
     var f1 = r[1];
     print('...');
-
 }
 
 function __swap_ranges_n_attributes() {

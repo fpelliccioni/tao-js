@@ -15,6 +15,23 @@ function copy_backward(f_i, l_i, l_o) {
     return res;
 }
 
+function __debug_copy_n(f_i, n, f_o) {
+    while (n != 0) {
+        sink(f_o, source(f_i));
+        f_i = successor(f_i);
+        f_o = successor(f_o);
+        --n;
+    }
+    return [f_i, f_o];
+}
+
+function copy_n(f_i, n, f_o) {
+    var _f_ = start_f('copy_n', f_i, n, f_o);
+    var res = __debug_copy_n(f_i, n, f_o);
+    end_f(_f_);
+    return res;
+}
+
 function __debug_equal_r(f, l, f2, r) {
     while ( ! equal(f, l)) {
         if ( ! r(source(f), source(f2))) {
@@ -657,7 +674,6 @@ function __debug_reverse_copy(f_i, l_i, f_o) {
         l_i = predecessor(l_i);
         sink(f_o, source(l_i));
         f_o = successor(f_o);
-
     } 
     return f_o;
 }
@@ -680,7 +696,6 @@ function __debug_reverse_n_adaptive(f_i, n_i, f_b, n_b) {
 
     swap_ranges_n(f_i, m_i, h_i);
     return l_i;
-
 }
 
 function reverse_n_adaptive(f_i, n_i, f_b, n_b) {
