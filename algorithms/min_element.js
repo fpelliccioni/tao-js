@@ -14,3 +14,14 @@ function min_element(f, l, r) {
     return m;
 }
 ​
+function usage() {
+    var d = sequence(array_random(), "d");
+
+    var f = begin(d);
+    var l = end(d);
+    
+    f = min_element(f, l, lt);
+    if ( ! equal(f, l)) {
+        print("The min element is: " + source(f));
+    }    
+}
