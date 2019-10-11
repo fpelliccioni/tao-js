@@ -9,6 +9,7 @@ insertion_sort_classic_2: [ 'rearrangements/ordering-based/sorting/insertion-sor
 insertion_sort_classic_3: [ 'rearrangements/ordering-based/sorting/insertion-sort', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/rearrangements/ordering-based/sorting/insertion-sort/insertion_sort_classic_3.js' ],
 selection_sort_classic: [ 'rearrangements/ordering-based/sorting/selection-sort', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/rearrangements/ordering-based/sorting/selection-sort/selection_sort_classic.js' ],
 selection_sort_stable: [ 'rearrangements/ordering-based/sorting/selection-sort', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/rearrangements/ordering-based/sorting/selection-sort/selection_sort_stable.js' ],
+reverse: [ 'rearrangements/position-based/reverse', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/rearrangements/position-based/reverse/reverse.js' ],
 reverse_bidirectional: [ 'rearrangements/position-based/reverse', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/rearrangements/position-based/reverse/reverse_bidirectional.js' ],
 reverse_copy: [ 'rearrangements/position-based/reverse', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/rearrangements/position-based/reverse/reverse_copy.js' ],
 reverse_n_adaptive: [ 'rearrangements/position-based/reverse', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/rearrangements/position-based/reverse/reverse_n_adaptive.js' ],
@@ -270,6 +271,18 @@ function __selection_sort_stable_usage() {
 }
 
 function __selection_sort_stable_attributes() {
+
+}
+
+function __reverse_usage() {
+    var s = sequence(array_random(), "s1");
+    print(s);
+    reverse(begin(s), end(s));
+    print(s);
+    print('...');
+}
+
+function __reverse_attributes() {
 
 }
 

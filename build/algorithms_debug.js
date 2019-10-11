@@ -165,6 +165,23 @@ function selection_sort_stable(f, l, r) {
     return res;
 }
 
+function __debug_reverse(f, l) {
+    while (true) {
+        if (equal(f, l)) return;
+        l = predecessor(l);
+        if (equal(f, l)) return;
+        iter_swap(f, l);
+        f = successor(f);        
+    }
+}
+
+function reverse(f, l) {
+    var _f_ = start_f('reverse', f, l);
+    var res = __debug_reverse(f, l);
+    end_f(_f_);
+    return res;
+}
+
 function __debug_reverse_bidirectional(f, l) {
     while (true) {
         if (equal(f, l)) return;
