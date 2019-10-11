@@ -28,10 +28,7 @@ function attributes() {
         "type requirements": ['f, l: I: Iterator \u2227 Readable',
                               'r: R: StrictWeakOrdering relation',
                               'Domain(R) = ValueType(I)'],
-        precondition: 
-`readable_bounded_range(f, l)
-\u2227 f != l
-`,
+        precondition: 'readable_bounded_range(f, l) \u2227 f != l',
         postcondition: 'source(m) = sort_stable_copy(f, l, r)[0]',
         other: ['Stable'],
     };
