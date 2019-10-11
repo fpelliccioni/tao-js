@@ -134,12 +134,42 @@ function process_dir(path) {
 }
 
 
+
+function process_file_helpers(path, filename) {
+    var file_content_debug = '';
+    const algo_name = algorithm_name(filename)
+    const code = fs.readFileSync(path, 'utf8');
+    return code;
+}
+
+function process_dir_helpers(path) {
+
+    var file_content_debug = '';
+
+    fs.readdirSync(path).forEach(function(f) {
+
+        var file = path + '/' + f;
+        var stat = fs.statSync(file);
+    
+        if (stat && stat.isDirectory()) {
+            var res = process_dir_helpers(file);
+        } else {
+            var res = process_file_helpers(file, f);
+        }
+
+        file_content_debug += res;
+    });
+    return file_content_debug;
+}
+
+
 async function main(user, repo) {  
     fs.mkdir('./build/', { recursive: true }, (err) => {
         if (err) throw err;
     });
     
     var res = process_dir('algorithms');
+    var res_helpers = process_dir_helpers('helpers');
 
     // console.log(catalog);
     var catalog_str = 'function __catalog() {\nreturn {'
@@ -157,7 +187,7 @@ async function main(user, repo) {
         console.log("./build/algorithms.js was saved!");
     }); 
 
-    fs.writeFile("./build/algorithms_debug.js", res[1], function(err) {
+    fs.writeFile("./build/algorithms_debug.js", res[1] + '\n\n' + res_helpers, function(err) {
         if(err) {
             return console.log(err);
         }
