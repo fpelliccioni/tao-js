@@ -9,6 +9,8 @@ const repo_def = 'tao-js';
 
 // curl -i https://api.github.com/repos/fpelliccioni/tao-js/contents/algorithms/
 
+var catalog = {};
+
 function algorithm_name(filename) {
     return filename.split('.').slice(0, -1).join('.');
 }
@@ -53,83 +55,116 @@ function function_make_debuggable(code, node) {
     return ren_code + '\n\n' + new_func_code;
 }
 
-async function main(user, repo) {  
-    fs.mkdir('./build/', { recursive: true }, (err) => {
-        if (err) throw err;
-    });
-    
-    const response = await fetch(`https://api.github.com/repos/${user}/${repo}/contents/algorithms/`);
-    const dir = await response.json();
-    // console.log(JSON.stringify(myJson));
+function path_to_catalog(path, name) {
+    path = path.replace(`/${name}`, '');
+    return path.replace('algorithms/', '');
+}
+
+function html_url(path) {
+    return 'https://github.com/fpelliccioni/tao-js/blob/master/' + path;
+}
+
+function process_file(path, filename) {
 
     var file_content_main = '';
     var file_content_debug = '';
     var file_content_extra = '';
 
-    for(var k in dir) {
-        // console.log(k, dir[k]);
-        // console.log(dir[k].name);
-        // console.log(algorithm_name(dir[k].name));
-        // console.log(dir[k].download_url);
-        // console.log(dir[k].html_url);
 
-        const filename = dir[k].name;
-        const algo_name = algorithm_name(filename)
+    const algo_name = algorithm_name(filename)
+    const code = fs.readFileSync(path, 'utf8');
+    // console.log(code)
+    
+    var p = acorn.parse(code);
+    // console.log(p);
+    // console.log(p.body);
 
-        const response = await fetch(dir[k].download_url);
-        const code = await response.text();
-        // console.log(code)
-        
-        var p = acorn.parse(code);
-        // console.log(p);
-        // console.log(p.body);
-
-        for (var n in p.body) {
-            // console.log(n, p.body[n]);
-            const value = p.body[n];
-            if (value.type == 'FunctionDeclaration') {
-                // console.log(value.id.name);
-                // console.log(value.start);
-                // console.log(value.end);
-                // console.log(function_content(code, value.start, value.end));
-                const func_code = function_content(code, value.start, value.end);
-                if (value.id.name == algo_name) {
-                    file_content_main += func_code;
-                    file_content_main += '\n\n';
-                    file_content_debug += function_make_debuggable(code, value);
-                    file_content_debug += '\n\n';
-                } else if (value.id.name == 'usage'|| value.id.name == 'attributes') {
-                    const new_name = `__${algo_name}_${value.id.name}`;
-                    const ren_code = function_extras_rename(func_code, value.id.name, new_name);
-                    file_content_extra += ren_code;
-                    file_content_extra += '\n\n';
-                } else {
-                    console.log(`warning: ignoring function ${value.id.name} in ${dir[k].download_url}`);
-                }
+    for (var n in p.body) {
+        // console.log(n, p.body[n]);
+        const value = p.body[n];
+        if (value.type == 'FunctionDeclaration') {
+            // console.log(value.id.name);
+            // console.log(value.start);
+            // console.log(value.end);
+            // console.log(function_content(code, value.start, value.end));
+            const func_code = function_content(code, value.start, value.end);
+            if (value.id.name == algo_name) {
+                catalog[algo_name] = [path_to_catalog(path, filename), html_url(path)];
+                file_content_main += func_code;
+                file_content_main += '\n\n';
+                file_content_debug += function_make_debuggable(code, value);
+                file_content_debug += '\n\n';
+            } else if (value.id.name == 'usage'|| value.id.name == 'attributes') {
+                const new_name = `__${algo_name}_${value.id.name}`;
+                const ren_code = function_extras_rename(func_code, value.id.name, new_name);
+                file_content_extra += ren_code;
+                file_content_extra += '\n\n';
             } else {
-                console.log(value);
+                console.log(`warning: ignoring function ${value.id.name} in ${path}`);
             }
-
+        } else {
+            console.log(value);
         }
-        // console.log(p.body[0].id.name);
     }
+    return [file_content_main, file_content_debug, file_content_extra];
+}
+
+function process_dir(path) {
+
+    var file_content_main = '';
+    var file_content_debug = '';
+    var file_content_extra = '';
+
+    fs.readdirSync(path).forEach(function(f) {
+
+        var file = path + '/' + f;
+        var stat = fs.statSync(file);
+    
+        if (stat && stat.isDirectory()) {
+            var res = process_dir(file);
+        } else {
+            var res = process_file(file, f);
+        }
+
+        file_content_main  += res[0];
+        file_content_debug += res[1];
+        file_content_extra += res[2];
+    });
+    return [file_content_main, file_content_debug, file_content_extra];
+}
 
 
-    fs.writeFile("./build/algorithms.js", file_content_main, function(err) {
-            if(err) {
+async function main(user, repo) {  
+    fs.mkdir('./build/', { recursive: true }, (err) => {
+        if (err) throw err;
+    });
+    
+    var res = process_dir('algorithms');
+
+    // console.log(catalog);
+    var catalog_str = 'function __catalog() {\nreturn {'
+    for (var ck in catalog) {
+        catalog_str += `${ck}: [ '${catalog[ck][0]}', '${catalog[ck][1]}' ],\n`;
+    }
+    catalog_str += '};}\n\n';
+    // console.log(catalog_str);
+
+
+    fs.writeFile("./build/algorithms.js", res[0], function(err) {
+        if(err) {
             return console.log(err);
         }
         console.log("./build/algorithms.js was saved!");
     }); 
 
-    fs.writeFile("./build/algorithms_debug.js", file_content_debug, function(err) {
+    fs.writeFile("./build/algorithms_debug.js", res[1], function(err) {
         if(err) {
             return console.log(err);
         }
         console.log("./build/algorithms_debug.js was saved!");
     }); 
 
-    fs.writeFile("./build/algorithms_extra.js", file_content_extra, function(err) {
+    fs.writeFile("./build/algorithms_extra.js", catalog_str + res[2], function(err) {
         if(err) {
             return console.log(err);
         }
@@ -148,32 +183,84 @@ async function main(user, repo) {
     }
 })();
 
+// ---------------------------------------------------------------
+// Take from Github
+// ---------------------------------------------------------------
 
+// async function process_file(dir, k) {
 
-// const fs = require("fs");
+//     var file_content_main = '';
+//     var file_content_debug = '';
+//     var file_content_extra = '';
 
-// fs.readFile("algorithms/min_element.js", "utf8", function (err, code) {
-//     if (err) throw err;
-//     console.log(code);
+//     console.log(k, dir[k]);
 
+//     const filename = dir[k].name;
+//     const algo_name = algorithm_name(filename)
+
+//     const response = await fetch(dir[k].download_url);
+//     const code = await response.text();
+//     // console.log(code)
+    
 //     var p = acorn.parse(code);
-//     console.log(p);
-//     console.log(p.body);
-//     console.log(p.body[0].id.name);
-// });
+//     // console.log(p);
+//     // console.log(p.body);
 
+//     for (var n in p.body) {
+//         // console.log(n, p.body[n]);
+//         const value = p.body[n];
+//         if (value.type == 'FunctionDeclaration') {
+//             // console.log(value.id.name);
+//             // console.log(value.start);
+//             // console.log(value.end);
+//             // console.log(function_content(code, value.start, value.end));
+//             const func_code = function_content(code, value.start, value.end);
+//             if (value.id.name == algo_name) {
+//                 catalog[algo_name] = [path_to_catalog(dir[k].path), dir[k].html_url];
+//                 file_content_main += func_code;
+//                 file_content_main += '\n\n';
+//                 file_content_debug += function_make_debuggable(code, value);
+//                 file_content_debug += '\n\n';
+//             } else if (value.id.name == 'usage'|| value.id.name == 'attributes') {
+//                 const new_name = `__${algo_name}_${value.id.name}`;
+//                 const ren_code = function_extras_rename(func_code, value.id.name, new_name);
+//                 file_content_extra += ren_code;
+//                 file_content_extra += '\n\n';
+//             } else {
+//                 console.log(`warning: ignoring function ${value.id.name} in ${dir[k].download_url}`);
+//             }
+//         } else {
+//             console.log(value);
+//         }
+//     }
+//     return [file_content_main, file_content_debug, file_content_extra];
+// }
 
-// // var func = `function min_element(f, l, r) {
-// //     if (equal(f, l)) return l;
+// async function process_dir(user, repo, path) {
+//     const response = await fetch(`https://api.github.com/repos/${user}/${repo}/contents/${path}`);
+//     const dir = await response.json();
+//     // console.log(JSON.stringify(myJson));
 
-// //     var m = f;
-// //     f = successor(f);
+//     var file_content_main = '';
+//     var file_content_debug = '';
+//     var file_content_extra = '';
 
-// //     while ( ! equal(f, l)) {
-// //         if (r(source(f), source(m))) {
-// //             m = f;
-// //         }
-// //         f = successor(f);
-// //     }
-// //     return m;
-// // }`
+//     for(var k in dir) {
+//         // console.log(k, dir[k]);
+//         // console.log(dir[k].name);
+//         // console.log(algorithm_name(dir[k].name));
+//         // console.log(dir[k].download_url);
+//         // console.log(dir[k].html_url);
+
+//         if (dir[k].type == 'dir') {
+//             var res = await process_dir(user, repo, dir[k].path);
+//         } else {
+//             var res = await process_file(dir, k);
+//         }
+
+//         file_content_main  += res[0];
+//         file_content_debug += res[1];
+//         file_content_extra += res[2];
+//     }
+//     return [file_content_main, file_content_debug, file_content_extra];
+// }

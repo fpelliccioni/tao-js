@@ -1,25 +1,3 @@
-function parent(i) {
-    return Math.floor((i - 1) / 2);    
-}
-
-function push_heap_n(f, n) {
-    var ci = n - 1;
-    while (true) {
-        var pi = parent(ci);
-        var c = successor(f, ci);
-        var p = successor(f, pi);
-        var cv = source(c);
-        var pv = source(p);
-
-        if (pv <= cv) break;
-        sink(p, cv);
-        sink(c, pv);
-
-        if (pi == 0) break;
-        ci = pi;
-    }
-}
-
 function make_heap_n(f, n) {
     // assert(n > 2); //other sizes handled outside
     var fpi = Math.floor((n - 3) / 2);
@@ -60,7 +38,27 @@ function make_heap_n(f, n) {
 }
 
 function usage() {
+    function parent(i) {
+        return Math.floor((i - 1) / 2);    
+    }
     
+    function push_heap_n(f, n) {
+        var ci = n - 1;
+        while (true) {
+            var pi = parent(ci);
+            var c = successor(f, ci);
+            var p = successor(f, pi);
+            var cv = source(c);
+            var pv = source(p);
+    
+            if (pv <= cv) break;
+            sink(p, cv);
+            sink(c, pv);
+    
+            if (pi == 0) break;
+            ci = pi;
+        }
+    }    
     
     // var s = sequence(array_random(), "s");
     var s = sequence([24, 88, 59, 31, 91, 0, 87, 91, 40, 52], "s");
