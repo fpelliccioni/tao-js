@@ -272,21 +272,6 @@ function partition_copy(f, l, r_b, r_g, p) {
     return [r_b, r_g];
 }
 
-function partition_point_n(f, n, p) {
-    while (n != 0) {
-        var h = half_nonnegative(n);
-        var m = successor(f, h);
-
-        if (p(source(m))) {
-            n = h;
-        } else {
-            n -= h + 1;
-            f = successor(m);
-        }
-    }
-    return f;
-}
-
 function partition_semistable(f, l, p) {
     while (true) {
         if (equal(f, l)) return f;
@@ -371,6 +356,60 @@ function partition_stable_with_buffer_0(f, l, p, b) {
     var ts = tmp[1];
     copy(b, ts, tf);
     return tf;
+}
+
+function partition_point_n(f, n, p) {
+    while (n != 0) {
+        var h = half_nonnegative(n);
+        var m = successor(f, h);
+
+        if (p(source(m))) {
+            n = h;
+        } else {
+            n -= h + 1;
+            f = successor(m);
+        }
+    }
+    return f;
+}
+
+function partition_point_n_forward(f, n, p) {
+    var t = n;
+    while (n != 0) {
+        var h = half_nonnegative(n);
+        var m = successor(f, h);
+
+        if (p(source(m))) {
+            n = h;
+        } else {
+            n -= h + 1;
+            t -= h + 1;
+            f = successor(m);
+        }
+    }
+    return [f, t];
+}
+
+function find(f, l, x) {
+    while ( ! equal(f, l) && ! source(f) != x) {
+        f = successor(f)
+    }
+    return f;
+}
+
+function find_backward_if(f, l, p) {
+    while (true) {
+        if (equal(l, f)) return f;
+        l = predecessor(l);
+        if (p(source(l))) return successor(l);
+    }    
+}
+
+function find_if(f, l, p) {
+    while ( ! equal(f, l) && ! p(source(f))) {
+        f = successor(f)
+    }
+    return f;
 }
 
 function max_element(f, l, r) {
@@ -487,28 +526,6 @@ function equal_r(f, l, f2, r) {
         f2 = successor(f2);
     }
     return true;
-}
-
-function find(f, l, x) {
-    while ( ! equal(f, l) && ! source(f) != x) {
-        f = successor(f)
-    }
-    return f;
-}
-
-function find_backward_if(f, l, p) {
-    while (true) {
-        if (equal(l, f)) return f;
-        l = predecessor(l);
-        if (p(source(l))) return successor(l);
-    }    
-}
-
-function find_if(f, l, p) {
-    while ( ! equal(f, l) && ! p(source(f))) {
-        f = successor(f)
-    }
-    return f;
 }
 
 function insert(s, ip, f, l) {

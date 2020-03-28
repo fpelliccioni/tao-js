@@ -461,28 +461,6 @@ function partition_copy(f, l, r_b, r_g, p) {
     return res;
 }
 
-function __debug_partition_point_n(f, n, p) {
-    while (n != 0) {
-        var h = half_nonnegative(n);
-        var m = successor(f, h);
-
-        if (p(source(m))) {
-            n = h;
-        } else {
-            n -= h + 1;
-            f = successor(m);
-        }
-    }
-    return f;
-}
-
-function partition_point_n(f, n, p) {
-    var _f_ = start_f('partition_point_n', f, n, p);
-    var res = __debug_partition_point_n(f, n, p);
-    end_f(_f_);
-    return res;
-}
-
 function __debug_partition_semistable(f, l, p) {
     while (true) {
         if (equal(f, l)) return f;
@@ -600,6 +578,95 @@ function __debug_partition_stable_with_buffer_0(f, l, p, b) {
 function partition_stable_with_buffer_0(f, l, p, b) {
     var _f_ = start_f('partition_stable_with_buffer_0', f, l, p, b);
     var res = __debug_partition_stable_with_buffer_0(f, l, p, b);
+    end_f(_f_);
+    return res;
+}
+
+function __debug_partition_point_n(f, n, p) {
+    while (n != 0) {
+        var h = half_nonnegative(n);
+        var m = successor(f, h);
+
+        if (p(source(m))) {
+            n = h;
+        } else {
+            n -= h + 1;
+            f = successor(m);
+        }
+    }
+    return f;
+}
+
+function partition_point_n(f, n, p) {
+    var _f_ = start_f('partition_point_n', f, n, p);
+    var res = __debug_partition_point_n(f, n, p);
+    end_f(_f_);
+    return res;
+}
+
+function __debug_partition_point_n_forward(f, n, p) {
+    var t = n;
+    while (n != 0) {
+        var h = half_nonnegative(n);
+        var m = successor(f, h);
+
+        if (p(source(m))) {
+            n = h;
+        } else {
+            n -= h + 1;
+            t -= h + 1;
+            f = successor(m);
+        }
+    }
+    return [f, t];
+}
+
+function partition_point_n_forward(f, n, p) {
+    var _f_ = start_f('partition_point_n_forward', f, n, p);
+    var res = __debug_partition_point_n_forward(f, n, p);
+    end_f(_f_);
+    return res;
+}
+
+function __debug_find(f, l, x) {
+    while ( ! equal(f, l) && ! source(f) != x) {
+        f = successor(f)
+    }
+    return f;
+}
+
+function find(f, l, x) {
+    var _f_ = start_f('find', f, l, x);
+    var res = __debug_find(f, l, x);
+    end_f(_f_);
+    return res;
+}
+
+function __debug_find_backward_if(f, l, p) {
+    while (true) {
+        if (equal(l, f)) return f;
+        l = predecessor(l);
+        if (p(source(l))) return successor(l);
+    }    
+}
+
+function find_backward_if(f, l, p) {
+    var _f_ = start_f('find_backward_if', f, l, p);
+    var res = __debug_find_backward_if(f, l, p);
+    end_f(_f_);
+    return res;
+}
+
+function __debug_find_if(f, l, p) {
+    while ( ! equal(f, l) && ! p(source(f))) {
+        f = successor(f)
+    }
+    return f;
+}
+
+function find_if(f, l, p) {
+    var _f_ = start_f('find_if', f, l, p);
+    var res = __debug_find_if(f, l, p);
     end_f(_f_);
     return res;
 }
@@ -793,49 +860,6 @@ function __debug_equal_r(f, l, f2, r) {
 function equal_r(f, l, f2, r) {
     var _f_ = start_f('equal_r', f, l, f2, r);
     var res = __debug_equal_r(f, l, f2, r);
-    end_f(_f_);
-    return res;
-}
-
-function __debug_find(f, l, x) {
-    while ( ! equal(f, l) && ! source(f) != x) {
-        f = successor(f)
-    }
-    return f;
-}
-
-function find(f, l, x) {
-    var _f_ = start_f('find', f, l, x);
-    var res = __debug_find(f, l, x);
-    end_f(_f_);
-    return res;
-}
-
-function __debug_find_backward_if(f, l, p) {
-    while (true) {
-        if (equal(l, f)) return f;
-        l = predecessor(l);
-        if (p(source(l))) return successor(l);
-    }    
-}
-
-function find_backward_if(f, l, p) {
-    var _f_ = start_f('find_backward_if', f, l, p);
-    var res = __debug_find_backward_if(f, l, p);
-    end_f(_f_);
-    return res;
-}
-
-function __debug_find_if(f, l, p) {
-    while ( ! equal(f, l) && ! p(source(f))) {
-        f = successor(f)
-    }
-    return f;
-}
-
-function find_if(f, l, p) {
-    var _f_ = start_f('find_if', f, l, p);
-    var res = __debug_find_if(f, l, p);
     end_f(_f_);
     return res;
 }

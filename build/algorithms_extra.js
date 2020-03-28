@@ -26,12 +26,16 @@ make_heap_n: [ 'rearrangements/predicate-based/heaps', 'https://github.com/fpell
 make_heap_n_naive_0: [ 'rearrangements/predicate-based/heaps', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/rearrangements/predicate-based/heaps/make_heap_n_naive_0.js' ],
 make_heap_n_naive_1: [ 'rearrangements/predicate-based/heaps', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/rearrangements/predicate-based/heaps/make_heap_n_naive_1.js' ],
 partition_copy: [ 'rearrangements/predicate-based/partition', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/rearrangements/predicate-based/partition/partition_copy.js' ],
-partition_point_n: [ 'rearrangements/predicate-based/partition', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/rearrangements/predicate-based/partition/partition_point_n.js' ],
 partition_semistable: [ 'rearrangements/predicate-based/partition', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/rearrangements/predicate-based/partition/partition_semistable.js' ],
 partition_semistable_1: [ 'rearrangements/predicate-based/partition', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/rearrangements/predicate-based/partition/partition_semistable_1.js' ],
 partition_semistable_nonempty: [ 'rearrangements/predicate-based/partition', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/rearrangements/predicate-based/partition/partition_semistable_nonempty.js' ],
 partition_stable_forward: [ 'rearrangements/predicate-based/partition', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/rearrangements/predicate-based/partition/partition_stable_forward.js' ],
 partition_stable_with_buffer_0: [ 'rearrangements/predicate-based/partition', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/rearrangements/predicate-based/partition/partition_stable_with_buffer_0.js' ],
+partition_point_n: [ 'search/binary', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/search/binary/partition_point_n.js' ],
+partition_point_n_forward: [ 'search/binary', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/search/binary/partition_point_n_forward.js' ],
+find: [ 'search/lineal', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/search/lineal/find.js' ],
+find_backward_if: [ 'search/lineal', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/search/lineal/find_backward_if.js' ],
+find_if: [ 'search/lineal', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/search/lineal/find_if.js' ],
 max_element: [ 'selection', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/selection/max_element.js' ],
 min_element: [ 'selection', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/selection/min_element.js' ],
 min_element_nonempty: [ 'selection', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/selection/min_element_nonempty.js' ],
@@ -43,9 +47,6 @@ copy: [ 'uncatalogued', 'https://github.com/fpelliccioni/tao-js/blob/master/algo
 copy_backward: [ 'uncatalogued', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/uncatalogued/copy_backward.js' ],
 copy_n: [ 'uncatalogued', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/uncatalogued/copy_n.js' ],
 equal_r: [ 'uncatalogued', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/uncatalogued/equal_r.js' ],
-find: [ 'uncatalogued', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/uncatalogued/find.js' ],
-find_backward_if: [ 'uncatalogued', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/uncatalogued/find_backward_if.js' ],
-find_if: [ 'uncatalogued', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/uncatalogued/find_if.js' ],
 insert: [ 'uncatalogued', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/uncatalogued/insert.js' ],
 insert_naive: [ 'uncatalogued', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/uncatalogued/insert_naive.js' ],
 iota: [ 'uncatalogued', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/uncatalogued/iota.js' ],
@@ -582,22 +583,6 @@ function __partition_copy_attributes() {
 
 }
 
-function __partition_point_n_usage() {
-    
-    
-    var even = predicate(function even(x) { return (x & 1) == 0; });
-    
-    var d = sequence([1, 5, 1, 1, 3, 3, 3, 7, 3, 2, 6, 4], "d", even);
-    
-    var p = partition_point_n(begin(d), size(d), even);
-    print('partition point: ' + source(p));
-
-}
-
-function __partition_point_n_attributes() {
-
-}
-
 function __partition_semistable_usage() {
     
     
@@ -680,6 +665,100 @@ function __partition_stable_with_buffer_0_usage() {
 }
 
 function __partition_stable_with_buffer_0_attributes() {
+
+}
+
+function __partition_point_n_usage() {
+    
+    
+    var even = predicate(function even(x) { return (x & 1) == 0; });
+    
+    var d = sequence([1, 5, 1, 1, 3, 3, 3, 7, 3, 2, 6, 4], "d", even);
+    
+    var p = partition_point_n(begin(d), size(d), even);
+    print('partition point: ' + source(p));
+
+}
+
+function __partition_point_n_attributes() {
+
+}
+
+function __partition_point_n_forward_usage() {
+    var eq3 = predicate(function eq3(x) {return x == 3;});
+    var lt3 = predicate(function lt3(x) {return x < 3;});
+    var gte3 = predicate(function gte3(x) {return x >= 3;});
+    
+    var d = sequence([1, 5, 1, 1, 3, 3, 3, 7, 3, 2, 6, 4], "d", eq3);
+    
+    var lb = partition_point_n_forward(begin(d), size(d), lt3);
+    var ub = partition_point_n_forward(lb[0], lb[1], gte3);
+
+    var f = lb[0];
+    var l = ub[0];
+
+    while ( ! equal(f, l)) {
+        print(source(f) + ", ");
+    }
+}
+
+function __partition_point_n_forward_attributes() {
+
+}
+
+function __find_usage() {
+    
+    
+    print(array_from("Hello, World!"))
+    var s = sequence(array_from("Hello, World!"), "s");
+    
+    var it = find(begin(s), end(s), 'x');
+    if ( ! equal(it, end(s))) {
+        print(source(it));
+    }
+
+}
+
+function __find_attributes() {
+
+}
+
+function __find_backward_if_usage() {
+    
+    
+    var even = predicate(function even(x) { return (x & 1) == 0; });
+    var d = sequence(array_random(), "d");
+    var f = begin(d);
+    var l = end(d);
+    
+    var it = find_backward_if(f, l, even);
+    if ( ! equal(it, f)) {
+        print(source(predecessor(it)));
+    }
+    
+
+}
+
+function __find_backward_if_attributes() {
+
+}
+
+function __find_if_usage() {
+    
+    
+    var even = predicate(function even(x) { return (x & 1) == 0; });
+    var d = sequence(array_random(), "d");
+    var f = begin(d);
+    var l = end(d);
+    
+    var it = find_if(f, l, even);
+    if ( ! equal(it, l)) {
+        print(source(it));
+    }
+
+}
+
+function __find_if_attributes() {
 
 }
 
@@ -858,62 +937,6 @@ function __equal_r_usage() {
 }
 
 function __equal_r_attributes() {
-
-}
-
-function __find_usage() {
-    
-    
-    print(array_from("Hello, World!"))
-    var s = sequence(array_from("Hello, World!"), "s");
-    
-    var it = find(begin(s), end(s), 'x');
-    if ( ! equal(it, end(s))) {
-        print(source(it));
-    }
-
-}
-
-function __find_attributes() {
-
-}
-
-function __find_backward_if_usage() {
-    
-    
-    var even = predicate(function even(x) { return (x & 1) == 0; });
-    var d = sequence(array_random(), "d");
-    var f = begin(d);
-    var l = end(d);
-    
-    var it = find_backward_if(f, l, even);
-    if ( ! equal(it, f)) {
-        print(source(predecessor(it)));
-    }
-    
-
-}
-
-function __find_backward_if_attributes() {
-
-}
-
-function __find_if_usage() {
-    
-    
-    var even = predicate(function even(x) { return (x & 1) == 0; });
-    var d = sequence(array_random(), "d");
-    var f = begin(d);
-    var l = end(d);
-    
-    var it = find_if(f, l, even);
-    if ( ! equal(it, l)) {
-        print(source(it));
-    }
-
-}
-
-function __find_if_attributes() {
 
 }
 
