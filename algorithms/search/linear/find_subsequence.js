@@ -1,3 +1,4 @@
+// naive version
 function find_subsequence_n(f, fn, s, sn, r) {
     if (sn == 0) return [f, fn];
 
