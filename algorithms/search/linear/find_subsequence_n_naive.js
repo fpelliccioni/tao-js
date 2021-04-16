@@ -1,5 +1,4 @@
-// naive version
-function find_subsequence_n(f, fn, s, sn, r) {
+function find_subsequence_n_naive(f, fn, s, sn, r) {
     if (sn == 0) return [f, fn];
 
     while (true) {
@@ -30,7 +29,7 @@ function usage() {
     var seq = sequence(array_from("Hello, World!"), "seq");
     var sub = sequence(array_from("????"), "sub");
 
-    var r = find_subsequence_n(begin(seq), size(seq), begin(sub), size(sub), eq);
+    var r = find_subsequence_n_naive(begin(seq), size(seq), begin(sub), size(sub), eq);
     var it = r[0];
     var n = r[1];
 
