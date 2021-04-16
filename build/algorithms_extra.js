@@ -33,9 +33,10 @@ partition_stable_forward: [ 'rearrangements/predicate-based/partition', 'https:/
 partition_stable_with_buffer_0: [ 'rearrangements/predicate-based/partition', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/rearrangements/predicate-based/partition/partition_stable_with_buffer_0.js' ],
 partition_point_n: [ 'search/binary', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/search/binary/partition_point_n.js' ],
 partition_point_n_forward: [ 'search/binary', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/search/binary/partition_point_n_forward.js' ],
-find: [ 'search/lineal', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/search/lineal/find.js' ],
-find_backward_if: [ 'search/lineal', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/search/lineal/find_backward_if.js' ],
-find_if: [ 'search/lineal', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/search/lineal/find_if.js' ],
+find: [ 'search/linear', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/search/linear/find.js' ],
+find_backward_if: [ 'search/linear', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/search/linear/find_backward_if.js' ],
+find_if: [ 'search/linear', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/search/linear/find_if.js' ],
+find_subsequence_n_naive: [ 'search/linear', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/search/linear/find_subsequence_n_naive.js' ],
 max_element: [ 'selection', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/selection/max_element.js' ],
 min_element: [ 'selection', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/selection/min_element.js' ],
 min_element_nonempty: [ 'selection', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/selection/min_element_nonempty.js' ],
@@ -760,6 +761,28 @@ function __find_if_usage() {
 }
 
 function __find_if_attributes() {
+
+}
+
+function __find_subsequence_n_naive_usage() {
+
+
+    var seq = sequence(array_from("Hello, World!"), "seq");
+    var sub = sequence(array_from("????"), "sub");
+
+    var r = find_subsequence_n_naive(begin(seq), size(seq), begin(sub), size(sub), eq);
+    var it = r[0];
+    var n = r[1];
+
+    if (n == 0) {
+        print("Subsequence not found");
+    } else {
+        print("Subsequence found at: ");
+        print(distance(begin(seq), it));
+    }
+}
+
+function __find_subsequence_n_naive_attributes() {
 
 }
 

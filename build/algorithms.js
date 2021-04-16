@@ -412,6 +412,31 @@ function find_if(f, l, p) {
     return f;
 }
 
+function find_subsequence_n_naive(f, fn, s, sn, r) {
+    if (sn == 0) return [f, fn];
+
+    while (true) {
+        if (fn < sn) return [f, 0];
+
+        var tf = f;
+        var ts = s;
+        var n = sn;
+        while (true) {
+            if (n == 0) return [f, fn];
+            if ( ! r(source(tf), source(ts))) {
+                break;
+            }
+            --n;
+            ts = successor(ts);
+            tf = successor(tf);
+        }
+        --fn;
+        f = successor(f);
+    }
+
+    return [f, fn];
+}
+
 function max_element(f, l, r) {
     if (equal(f, l)) return l;
 
