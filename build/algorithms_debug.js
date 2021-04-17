@@ -703,6 +703,31 @@ function find_subsequence_n_naive(f, fn, s, sn, r) {
     return res;
 }
 
+function __debug_find_subsequence_naive(f, l, sf, sl, r) {
+    if (equal(sf, sl)) return f;
+
+    while (true) {
+        var tf = f;
+        var ts = sf;
+        while (true) {
+            if (equal(tf, l)) return l;
+            if (equal(ts, sl)) return f;
+            if ( ! r(source(tf), source(ts))) break;
+            ts = successor(ts);
+            tf = successor(tf);
+        }
+        f = successor(f);
+    }
+    return f;
+}
+
+function find_subsequence_naive(f, l, sf, sl, r) {
+    var _f_ = start_f('find_subsequence_naive', f, l, sf, sl, r);
+    var res = __debug_find_subsequence_naive(f, l, sf, sl, r);
+    end_f(_f_);
+    return res;
+}
+
 function __debug_max_element(f, l, r) {
     if (equal(f, l)) return l;
 

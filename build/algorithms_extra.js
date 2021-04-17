@@ -37,6 +37,7 @@ find: [ 'search/linear', 'https://github.com/fpelliccioni/tao-js/blob/master/alg
 find_backward_if: [ 'search/linear', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/search/linear/find_backward_if.js' ],
 find_if: [ 'search/linear', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/search/linear/find_if.js' ],
 find_subsequence_n_naive: [ 'search/linear', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/search/linear/find_subsequence_n_naive.js' ],
+find_subsequence_naive: [ 'search/linear', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/search/linear/find_subsequence_naive.js' ],
 max_element: [ 'selection', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/selection/max_element.js' ],
 min_element: [ 'selection', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/selection/min_element.js' ],
 min_element_nonempty: [ 'selection', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/selection/min_element_nonempty.js' ],
@@ -783,6 +784,26 @@ function __find_subsequence_n_naive_usage() {
 }
 
 function __find_subsequence_n_naive_attributes() {
+
+}
+
+function __find_subsequence_naive_usage() {
+
+
+    var seq = sequence(array_from("Hello, World!"), "seq", undefined, "list");
+    var sub = sequence(array_from("????"), "sub", undefined, "list");
+
+    var it = find_subsequence_naive(begin(seq), end(seq), begin(sub), end(sub), eq);
+
+    if (equal(it, end(seq))) {
+        print("Subsequence not found");
+    } else {
+        print("Subsequence found at: ");
+        print(distance(begin(seq), it));
+    }
+}
+
+function __find_subsequence_naive_attributes() {
 
 }
 
