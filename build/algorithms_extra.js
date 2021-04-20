@@ -37,6 +37,7 @@ find: [ 'search/linear', 'https://github.com/fpelliccioni/tao-js/blob/master/alg
 find_backward_if: [ 'search/linear', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/search/linear/find_backward_if.js' ],
 find_if: [ 'search/linear', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/search/linear/find_if.js' ],
 find_subsequence_n_naive: [ 'search/linear', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/search/linear/find_subsequence_n_naive.js' ],
+find_subsequence_n_naive_1: [ 'search/linear', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/search/linear/find_subsequence_n_naive_1.js' ],
 find_subsequence_naive: [ 'search/linear', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/search/linear/find_subsequence_naive.js' ],
 max_element: [ 'selection', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/selection/max_element.js' ],
 min_element: [ 'selection', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/selection/min_element.js' ],
@@ -765,6 +766,28 @@ function __find_if_attributes() {
 
 }
 
+function __find_subsequence_n_kmp_usage() {
+
+
+    var seq = sequence(array_from("Hello, World!"), "seq");
+    var sub = sequence(array_from("????"), "sub");
+
+    var r = find_subsequence_n_naive(begin(seq), size(seq), begin(sub), size(sub), eq);
+    var it = r[0];
+    var n = r[1];
+
+    if (n == 0) {
+        print("Subsequence not found");
+    } else {
+        print("Subsequence found at: ");
+        print(distance(begin(seq), it));
+    }
+}
+
+function __find_subsequence_n_kmp_attributes() {
+
+}
+
 function __find_subsequence_n_naive_usage() {
 
 
@@ -787,6 +810,29 @@ function __find_subsequence_n_naive_attributes() {
 
 }
 
+function __find_subsequence_n_naive_1_usage() {
+
+
+    var seq = sequence(array_from("Until death it is all life"), "seq");
+    //var seq = sequence(array_from("Until dedead it is all life"), "seq");
+    var sub = sequence(array_from("dead"), "sub");
+
+    var r = find_subsequence_n_naive_1(begin(seq), size(seq), begin(sub), size(sub), eq);
+    var it = r[0];
+    var n = r[1];
+
+    if (n == 0) {
+        print("Subsequence not found");
+    } else {
+        print("Subsequence found at: ");
+        print(distance(begin(seq), it));
+    }
+}
+
+function __find_subsequence_n_naive_1_attributes() {
+
+}
+
 function __find_subsequence_naive_usage() {
 
 
@@ -804,6 +850,24 @@ function __find_subsequence_naive_usage() {
 }
 
 function __find_subsequence_naive_attributes() {
+
+}
+
+function __kmp_lps_usage() {
+    // var sub = sequence(array_from("dsgwadsgz"), "sub");          //000001230
+    // var sub = sequence(array_from("abcdabeabf"), "sub");         //0000120120
+    // var sub = sequence(array_from("abcdabaabf"), "sub");         //0000121120
+    // var sub = sequence(array_from("abcdeabfabc"), "sub");        //00000120123
+    // var sub = sequence(array_from("aabcadaabe"), "sub");         //0100101230
+    // var sub = sequence(array_from("aaaabaacd"), "sub");          //012301200
+    // var sub = sequence(array_from("abcabcabc"), "sub");          //000123456
+    // var sub = sequence(array_from("abcxabcabc"), "sub");         //0000123123
+    var sub = sequence(array_from("aabaaba"), "sub");               //0101234
+    var t = lps(begin(sub), size(sub), eq);
+    print(t);
+}
+
+function __kmp_lps_attributes() {
 
 }
 

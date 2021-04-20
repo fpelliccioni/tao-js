@@ -9,9 +9,7 @@ function find_subsequence_n_naive(f, fn, s, sn, r) {
         var n = sn;
         while (true) {
             if (n == 0) return [f, fn];
-            if ( ! r(source(tf), source(ts))) {
-                break;
-            }
+            if ( ! r(source(tf), source(ts))) break;
             --n;
             ts = successor(ts);
             tf = successor(tf);
