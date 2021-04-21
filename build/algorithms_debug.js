@@ -629,7 +629,8 @@ function partition_point_n_forward(f, n, p) {
 }
 
 function __debug_all(f, l, p) {
-    return equal(l, find_if_not(f, l, p));
+    var np = find_if_not(f, l, p);
+    return equal(l, np);
 }
 
 function all(f, l, p) {
