@@ -33,9 +33,11 @@ partition_stable_forward: [ 'rearrangements/predicate-based/partition', 'https:/
 partition_stable_with_buffer_0: [ 'rearrangements/predicate-based/partition', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/rearrangements/predicate-based/partition/partition_stable_with_buffer_0.js' ],
 partition_point_n: [ 'search/binary', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/search/binary/partition_point_n.js' ],
 partition_point_n_forward: [ 'search/binary', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/search/binary/partition_point_n_forward.js' ],
+all: [ 'search/linear', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/search/linear/all.js' ],
 find: [ 'search/linear', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/search/linear/find.js' ],
 find_backward_if: [ 'search/linear', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/search/linear/find_backward_if.js' ],
 find_if: [ 'search/linear', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/search/linear/find_if.js' ],
+find_if_not: [ 'search/linear', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/search/linear/find_if_not.js' ],
 find_subsequence_n_naive: [ 'search/linear', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/search/linear/find_subsequence_n_naive.js' ],
 find_subsequence_n_naive_1: [ 'search/linear', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/search/linear/find_subsequence_n_naive_1.js' ],
 find_subsequence_naive: [ 'search/linear', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/search/linear/find_subsequence_naive.js' ],
@@ -710,6 +712,25 @@ function __partition_point_n_forward_attributes() {
 
 }
 
+function __all_usage() {
+
+
+    var even = predicate(function even(x) { return (x & 1) == 0; });
+    var d = sequence(array_random(), "d");
+    var f = begin(d);
+    var l = end(d);
+
+    if (all(f, l, even)) {
+        print("All the elements of the sequence are even.");
+    } else {
+        print("There is at least one item in the sequence that is not even.");
+    }
+}
+
+function __all_attributes() {
+
+}
+
 function __find_usage() {
     
     
@@ -763,6 +784,25 @@ function __find_if_usage() {
 }
 
 function __find_if_attributes() {
+
+}
+
+function __find_if_not_usage() {
+
+
+    var even = predicate(function even(x) { return (x & 1) == 0; });
+    var d = sequence(array_random(), "d");
+    var f = begin(d);
+    var l = end(d);
+
+    var it = find_if_not(f, l, even);
+    if ( ! equal(it, l)) {
+        print(source(it));
+    }
+
+}
+
+function __find_if_not_attributes() {
 
 }
 

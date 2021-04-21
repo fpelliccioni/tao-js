@@ -390,6 +390,10 @@ function partition_point_n_forward(f, n, p) {
     return [f, t];
 }
 
+function all(f, l, p) {
+    return equal(l, find_if_not(f, l, p));
+}
+
 function find(f, l, x) {
     while ( ! equal(f, l) && ! source(f) != x) {
         f = successor(f)
@@ -407,6 +411,13 @@ function find_backward_if(f, l, p) {
 
 function find_if(f, l, p) {
     while ( ! equal(f, l) && ! p(source(f))) {
+        f = successor(f)
+    }
+    return f;
+}
+
+function find_if_not(f, l, p) {
+    while ( ! equal(f, l) && p(source(f))) {
         f = successor(f)
     }
     return f;

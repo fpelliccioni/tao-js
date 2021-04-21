@@ -628,6 +628,17 @@ function partition_point_n_forward(f, n, p) {
     return res;
 }
 
+function __debug_all(f, l, p) {
+    return equal(l, find_if_not(f, l, p));
+}
+
+function all(f, l, p) {
+    var _f_ = start_f('all', f, l, p);
+    var res = __debug_all(f, l, p);
+    end_f(_f_);
+    return res;
+}
+
 function __debug_find(f, l, x) {
     while ( ! equal(f, l) && ! source(f) != x) {
         f = successor(f)
@@ -667,6 +678,20 @@ function __debug_find_if(f, l, p) {
 function find_if(f, l, p) {
     var _f_ = start_f('find_if', f, l, p);
     var res = __debug_find_if(f, l, p);
+    end_f(_f_);
+    return res;
+}
+
+function __debug_find_if_not(f, l, p) {
+    while ( ! equal(f, l) && p(source(f))) {
+        f = successor(f)
+    }
+    return f;
+}
+
+function find_if_not(f, l, p) {
+    var _f_ = start_f('find_if_not', f, l, p);
+    var res = __debug_find_if_not(f, l, p);
     end_f(_f_);
     return res;
 }
