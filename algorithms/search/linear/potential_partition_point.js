@@ -13,7 +13,7 @@ function usage() {
     var m = potential_partition_point(f, l, even);
 
     print("After p-partitioning the partition point would ocurr here:");
-    print(distance(begin(c), m));
+    print(distance(begin(d), m));
     print(source(m));
 
     print("Lets verify:");
