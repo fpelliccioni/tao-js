@@ -44,6 +44,7 @@ find_subsequence_naive: [ 'search/linear', 'https://github.com/fpelliccioni/tao-
 none: [ 'search/linear', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/search/linear/none.js' ],
 not_all: [ 'search/linear', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/search/linear/not_all.js' ],
 partitioned: [ 'search/linear', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/search/linear/partitioned.js' ],
+partitioned_at_point: [ 'search/linear', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/search/linear/partitioned_at_point.js' ],
 some: [ 'search/linear', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/search/linear/some.js' ],
 max_element: [ 'selection', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/selection/max_element.js' ],
 min_element: [ 'selection', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/selection/min_element.js' ],
@@ -978,6 +979,33 @@ function __partitioned_usage() {
 }
 
 function __partitioned_attributes() {
+
+}
+
+function __partitioned_at_point_usage() {
+
+
+    var even = predicate(function even(x) { return (x & 1) == 0; });
+    var d = sequence(array_random(), "d", even, undefined, true);
+    var f = begin(d);
+    var l = end(d);
+
+    if (partitioned_at_point(f, l, even)) {
+        print('The sequence is already p-partitioned at x.');
+    } else {
+        print('The sequence is not p-partitioned at x, partitioning...');
+
+        var p = partition_semistable(f, l, even);
+
+        if (partitioned_at_point(f, l, even)) {
+            print('Now the sequence is p-partitioned at x.');
+        } else {
+            print('Impossible, this line will never be executed.');
+        }
+    }
+}
+
+function __partitioned_at_point_attributes() {
 
 }
 

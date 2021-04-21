@@ -827,6 +827,20 @@ function partitioned(f, l, p) {
     return res;
 }
 
+function __debug_partitioned_at_point(f, m, l, p) {
+    // precondition: readable_bounded_range(f, l) && m belongs to [f, l)
+    var c0 = none(f, m, p);
+    var c1 = all(m, l, p);
+    return c0 && c1;
+}
+
+function partitioned_at_point(f, m, l, p) {
+    var _f_ = start_f('partitioned_at_point', f, m, l, p);
+    var res = __debug_partitioned_at_point(f, m, l, p);
+    end_f(_f_);
+    return res;
+}
+
 function __debug_some(f, l, p) {
     return ! none(f, l, p);
 }

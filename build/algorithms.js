@@ -512,6 +512,13 @@ function partitioned(f, l, p) {
     return equal(it1, l);
 }
 
+function partitioned_at_point(f, m, l, p) {
+    // precondition: readable_bounded_range(f, l) && m belongs to [f, l)
+    var c0 = none(f, m, p);
+    var c1 = all(m, l, p);
+    return c0 && c1;
+}
+
 function some(f, l, p) {
     return ! none(f, l, p);
 }
