@@ -970,7 +970,7 @@ function __partitioned_usage() {
         var p = partition_semistable(f, l, even);
 
         if (partitioned(f, l, even)) {
-            print('Not the sequence is p-partitioned.');
+            print('Now the sequence is p-partitioned.');
         } else {
             print('Impossible, this line will never be executed.');
         }
