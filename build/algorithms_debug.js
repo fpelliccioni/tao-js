@@ -791,6 +791,18 @@ function find_subsequence_naive(f, l, sf, sl, r) {
     return res;
 }
 
+function __debug_none(f, l, p) {
+    var it = find_if(f, l, p);
+    return equal(l, it);
+}
+
+function none(f, l, p) {
+    var _f_ = start_f('none', f, l, p);
+    var res = __debug_none(f, l, p);
+    end_f(_f_);
+    return res;
+}
+
 function __debug_not_all(f, l, p) {
     return ! all(f, l, p);
 }
@@ -798,6 +810,17 @@ function __debug_not_all(f, l, p) {
 function not_all(f, l, p) {
     var _f_ = start_f('not_all', f, l, p);
     var res = __debug_not_all(f, l, p);
+    end_f(_f_);
+    return res;
+}
+
+function __debug_some(f, l, p) {
+    return ! none(f, l, p);
+}
+
+function some(f, l, p) {
+    var _f_ = start_f('some', f, l, p);
+    var res = __debug_some(f, l, p);
     end_f(_f_);
     return res;
 }
