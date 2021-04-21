@@ -845,7 +845,6 @@ function __debug_potential_partition_point(f, l, p) {
     var j = f;
     while ( ! equal(f, l)) {
         if ( ! p(source(f))) {
-            f = successor(f);
             j = successor(j);
         }
         f = successor(f);
