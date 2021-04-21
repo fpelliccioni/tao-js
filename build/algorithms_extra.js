@@ -998,7 +998,7 @@ function __partitioned_at_point_usage() {
 
         var m2 = partition_semistable(f, l, even);
 
-        if (partitioned_at_point(f, p, l, even)) {
+        if (partitioned_at_point(f, m2, l, even)) {
             print('Now the sequence is p-partitioned at m2.');
         } else {
             print('Impossible, this line will never be executed.');
