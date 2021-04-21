@@ -3,7 +3,7 @@ function partition_semistable_nonempty(f, l, p) {
     while ( ! p(source(f))) {
         f = successor(f);
         if (equal(f, l)) return;
-    }    
+    }
 
     var j = f;
     j = successor(j)
@@ -20,13 +20,13 @@ function partition_semistable_nonempty(f, l, p) {
 }
 
 function usage() {
-    
-    
+
+
     var even = predicate(function even(x) { return (x & 1) == 0; });
-    var d = sequence(array_random(), "d", even, true);
+    var d = sequence(array_random(), "d", even, undefined, true);
     var f = begin(d);
     var l = end(d);
-    
+
     partition_semistable_nonempty(f, l, even);
 
 }

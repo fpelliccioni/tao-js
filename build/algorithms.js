@@ -314,7 +314,7 @@ function partition_semistable_nonempty(f, l, p) {
     while ( ! p(source(f))) {
         f = successor(f);
         if (equal(f, l)) return;
-    }    
+    }
 
     var j = f;
     j = successor(j)

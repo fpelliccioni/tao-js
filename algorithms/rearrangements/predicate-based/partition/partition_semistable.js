@@ -19,13 +19,13 @@ function partition_semistable(f, l, p) {
 }
 
 function usage() {
-    
-    
+
+
     var even = predicate(function even(x) { return (x & 1) == 0; });
-    var d = sequence(array_random(), "d", even, true);
+    var d = sequence(array_random(), "d", even, undefined, true);
     var f = begin(d);
     var l = end(d);
-    
+
     var p = partition_semistable(f, l, even);
     if ( ! equal(p, l)) {
         print('partition point: ' + source(p));

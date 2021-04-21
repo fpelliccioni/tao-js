@@ -570,15 +570,15 @@ function __make_heap_n_naive_1_attributes() {
 
 function __partition_copy_usage() {
     var even = predicate(function even(x) { return (x & 1) == 0; });
-    var d = sequence(array_random(), "d", even, true);
+    var d = sequence(array_random(), "d", even, undefined, true);
     var bad = sequence(new Array(size(d)), "bad");
     var good = sequence(new Array(size(d)), "good");
-    
+
     var res = partition_copy(begin(d), end(d), begin(bad), begin(good), even);
-    
+
     var fg = res[0];
     var fb = res[1];
-    
+
     print('...');
 }
 
@@ -587,13 +587,13 @@ function __partition_copy_attributes() {
 }
 
 function __partition_semistable_usage() {
-    
-    
+
+
     var even = predicate(function even(x) { return (x & 1) == 0; });
-    var d = sequence(array_random(), "d", even, true);
+    var d = sequence(array_random(), "d", even, undefined, true);
     var f = begin(d);
     var l = end(d);
-    
+
     var p = partition_semistable(f, l, even);
     if ( ! equal(p, l)) {
         print('partition point: ' + source(p));
@@ -607,10 +607,10 @@ function __partition_semistable_attributes() {
 
 function __partition_semistable_1_usage() {
     var even = predicate(function even(x) { return (x & 1) == 0; });
-    var d = sequence(array_random(), "d", even, true);
+    var d = sequence(array_random(), "d", even, undefined, true);
     var f = begin(d);
     var l = end(d);
-    
+
     var p = partition_semistable_1(f, l, even);
     if ( ! equal(p, l)) {
         print('partition point: ' + source(p));
@@ -622,13 +622,13 @@ function __partition_semistable_1_attributes() {
 }
 
 function __partition_semistable_nonempty_usage() {
-    
-    
+
+
     var even = predicate(function even(x) { return (x & 1) == 0; });
-    var d = sequence(array_random(), "d", even, true);
+    var d = sequence(array_random(), "d", even, undefined, true);
     var f = begin(d);
     var l = end(d);
-    
+
     partition_semistable_nonempty(f, l, even);
 
 }
