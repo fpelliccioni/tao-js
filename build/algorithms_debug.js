@@ -1026,6 +1026,35 @@ function copy_n(f_i, n, f_o) {
     return res;
 }
 
+function __debug_count_if(f, l, p) {
+    var res = count_if(f, l, p, 0);
+    return res;
+}
+
+function count_if(f, l, p) {
+    var _f_ = start_f('count_if', f, l, p);
+    var res = __debug_count_if(f, l, p);
+    end_f(_f_);
+    return res;
+}
+
+function __debug_count_if_basis(f, l, p, j) {
+    while (f != l) {
+        if (p(source(f))) {
+            j = successor(j);
+        }
+        f = successor(f);
+    }
+    return j;
+}
+
+function count_if_basis(f, l, p, j) {
+    var _f_ = start_f('count_if_basis', f, l, p, j);
+    var res = __debug_count_if_basis(f, l, p, j);
+    end_f(_f_);
+    return res;
+}
+
 function __debug_equal_r(f, l, f2, r) {
     while ( ! equal(f, l)) {
         if ( ! r(source(f), source(f2))) {
