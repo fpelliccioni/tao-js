@@ -520,17 +520,8 @@ function partitioned_at_point(f, m, l, p) {
 }
 
 function potential_partition_point(f, l, p) {
-    var j = f;
-    while ( ! equal(f, l)) {
-        if ( ! p(source(f))) {
-            j = successor(j);
-        }
-        f = successor(f);
-    }
-    return j;
-
-    // var res = count_if_not_basis(f, l, p, f);
-    // return res;
+    var res = count_if_not_basis(f, l, p, f);
+    return res;
 }
 
 function some(f, l, p) {

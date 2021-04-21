@@ -1027,6 +1027,14 @@ function __potential_partition_point_usage() {
     print("After p-partitioning the partition point would ocurr here:");
     print(distance(begin(c), m));
     print(source(m));
+
+    print("Lets verify:");
+    var p = partition_semistable(f, l, even);
+    if (equal(m, p)) {
+        print("Yeah!");
+    } else {
+        print('Impossible, this line will never be executed.');
+    }
 }
 
 function __potential_partition_point_attributes() {
