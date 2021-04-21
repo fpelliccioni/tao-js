@@ -7,7 +7,7 @@ function usage() {
 
 
     var even = predicate(function even(x) { return (x & 1) == 0; });
-    var d = sequence(array_random(), "d", even, undefined, true);
+    var d = sequence(array_random(), "d", even);
     var f = begin(d);
     var l = end(d);
     var m = potential_partition_point(f, l, even);
@@ -16,7 +16,7 @@ function usage() {
     print(distance(begin(d), m));
     print(source(m));
 
-    print("Lets verify:");
+    print("Let's verify...");
     var p = partition_semistable(f, l, even);
     if (equal(m, p)) {
         print("Yeah!");
