@@ -45,6 +45,7 @@ none: [ 'search/linear', 'https://github.com/fpelliccioni/tao-js/blob/master/alg
 not_all: [ 'search/linear', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/search/linear/not_all.js' ],
 partitioned: [ 'search/linear', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/search/linear/partitioned.js' ],
 partitioned_at_point: [ 'search/linear', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/search/linear/partitioned_at_point.js' ],
+potential_partition_point: [ 'search/linear', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/search/linear/potential_partition_point.js' ],
 some: [ 'search/linear', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/search/linear/some.js' ],
 max_element: [ 'selection', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/selection/max_element.js' ],
 min_element: [ 'selection', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/selection/min_element.js' ],
@@ -1011,6 +1012,24 @@ function __partitioned_at_point_usage() {
 }
 
 function __partitioned_at_point_attributes() {
+
+}
+
+function __potential_partition_point_usage() {
+
+
+    var even = predicate(function even(x) { return (x & 1) == 0; });
+    var d = sequence(array_random(), "d", even, undefined, true);
+    var f = begin(d);
+    var l = end(d);
+    var m = potential_partition_point(f, l, even);
+
+    print("After p-partitioning the partition point would ocurr here:");
+    print(distance(begin(c), m));
+    print(source(m));
+}
+
+function __potential_partition_point_attributes() {
 
 }
 

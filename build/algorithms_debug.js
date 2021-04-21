@@ -841,6 +841,28 @@ function partitioned_at_point(f, m, l, p) {
     return res;
 }
 
+function __debug_potential_partition_point(f, l, p) {
+    var j = f;
+    while ( ! equal(f, l)) {
+        if ( ! p(source(f))) {
+            f = successor(f);
+            j = successor(j);
+        }
+        f = successor(f);
+    }
+    return j;
+
+    // var res = count_if_not_basis(f, l, p, f);
+    // return res;
+}
+
+function potential_partition_point(f, l, p) {
+    var _f_ = start_f('potential_partition_point', f, l, p);
+    var res = __debug_potential_partition_point(f, l, p);
+    end_f(_f_);
+    return res;
+}
+
 function __debug_some(f, l, p) {
     return ! none(f, l, p);
 }
