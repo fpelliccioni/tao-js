@@ -1,6 +1,7 @@
 function partitioned(f, l, p) {
-    var it = find_if_not(find_if(f, l, p), l, p);
-    return equal(it, l);
+    var it0 = find_if(f, l, p);
+    var it1 = find_if_not(it0, l, p);
+    return equal(it1, l);
 }
 
 function usage() {
