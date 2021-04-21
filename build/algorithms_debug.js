@@ -1027,7 +1027,7 @@ function copy_n(f_i, n, f_o) {
 }
 
 function __debug_count_if(f, l, p) {
-    var res = count_if(f, l, p, 0);
+    var res = count_if_basis(f, l, p, 0);
     return res;
 }
 
