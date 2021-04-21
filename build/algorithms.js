@@ -642,6 +642,21 @@ function count_if_basis(f, l, p, j) {
     return j;
 }
 
+function count_if_not(f, l, p) {
+    var res = count_if_not_basis(f, l, p, 0);
+    return res;
+}
+
+function count_if_not_basis(f, l, p, j) {
+    while ( ! equal(f, l)) {
+        if ( ! p(source(f))) {
+            j = successor(j);
+        }
+        f = successor(f);
+    }
+    return j;
+}
+
 function equal_r(f, l, f2, r) {
     while ( ! equal(f, l)) {
         if ( ! r(source(f), source(f2))) {

@@ -1055,6 +1055,35 @@ function count_if_basis(f, l, p, j) {
     return res;
 }
 
+function __debug_count_if_not(f, l, p) {
+    var res = count_if_not_basis(f, l, p, 0);
+    return res;
+}
+
+function count_if_not(f, l, p) {
+    var _f_ = start_f('count_if_not', f, l, p);
+    var res = __debug_count_if_not(f, l, p);
+    end_f(_f_);
+    return res;
+}
+
+function __debug_count_if_not_basis(f, l, p, j) {
+    while ( ! equal(f, l)) {
+        if ( ! p(source(f))) {
+            j = successor(j);
+        }
+        f = successor(f);
+    }
+    return j;
+}
+
+function count_if_not_basis(f, l, p, j) {
+    var _f_ = start_f('count_if_not_basis', f, l, p, j);
+    var res = __debug_count_if_not_basis(f, l, p, j);
+    end_f(_f_);
+    return res;
+}
+
 function __debug_equal_r(f, l, f2, r) {
     while ( ! equal(f, l)) {
         if ( ! r(source(f), source(f2))) {

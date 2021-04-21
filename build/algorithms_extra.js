@@ -58,6 +58,8 @@ copy_backward: [ 'uncatalogued', 'https://github.com/fpelliccioni/tao-js/blob/ma
 copy_n: [ 'uncatalogued', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/uncatalogued/copy_n.js' ],
 count_if: [ 'uncatalogued', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/uncatalogued/count_if.js' ],
 count_if_basis: [ 'uncatalogued', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/uncatalogued/count_if_basis.js' ],
+count_if_not: [ 'uncatalogued', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/uncatalogued/count_if_not.js' ],
+count_if_not_basis: [ 'uncatalogued', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/uncatalogued/count_if_not_basis.js' ],
 equal_r: [ 'uncatalogued', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/uncatalogued/equal_r.js' ],
 insert: [ 'uncatalogued', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/uncatalogued/insert.js' ],
 insert_naive: [ 'uncatalogued', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/uncatalogued/insert_naive.js' ],
@@ -1221,6 +1223,43 @@ function __count_if_basis_usage() {
 }
 
 function __count_if_basis_attributes() {
+
+}
+
+function __count_if_not_usage() {
+
+    var even = predicate(function even(x) { return (x & 1) == 0; });
+    var d = sequence(array_random(), "d", even);
+    var f = begin(d);
+    var l = end(d);
+
+    var n = count_if_not(f, l, even);
+
+    print("Odd numbers: ");
+    print(n);
+}
+
+function __count_if_not_attributes() {
+
+}
+
+function __count_if_not_basis_usage() {
+
+    var even = predicate(function even(x) { return (x & 1) == 0; });
+    var d = sequence(array_random(), "d", even);
+    var c = sequence(array_ascending(), "c");
+
+    var f = begin(d);
+    var l = end(d);
+
+    var j = begin(c);
+    j = count_if_not_basis(f, l, even, j);
+
+    print("Odd numbers: ");
+    print(distance(begin(c), j));
+}
+
+function __count_if_not_basis_attributes() {
 
 }
 
