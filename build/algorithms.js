@@ -497,6 +497,10 @@ function find_subsequence_naive(f, l, sf, sl, r) {
     return f;
 }
 
+function not_all(f, l, p) {
+    return ! all(f, l, p);
+}
+
 function max_element(f, l, r) {
     if (equal(f, l)) return l;
 

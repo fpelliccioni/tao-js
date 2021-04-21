@@ -41,6 +41,7 @@ find_if_not: [ 'search/linear', 'https://github.com/fpelliccioni/tao-js/blob/mas
 find_subsequence_n_naive: [ 'search/linear', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/search/linear/find_subsequence_n_naive.js' ],
 find_subsequence_n_naive_1: [ 'search/linear', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/search/linear/find_subsequence_n_naive_1.js' ],
 find_subsequence_naive: [ 'search/linear', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/search/linear/find_subsequence_naive.js' ],
+not_all: [ 'search/linear', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/search/linear/not_all.js' ],
 max_element: [ 'selection', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/selection/max_element.js' ],
 min_element: [ 'selection', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/selection/min_element.js' ],
 min_element_nonempty: [ 'selection', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/selection/min_element_nonempty.js' ],
@@ -908,6 +909,26 @@ function __kmp_lps_usage() {
 }
 
 function __kmp_lps_attributes() {
+
+}
+
+function __not_all_usage() {
+
+
+    var even = predicate(function even(x) { return (x & 1) == 0; });
+    var d = sequence(array_random(), "d");
+    var f = begin(d);
+    var l = end(d);
+
+    if (not_all(f, l, even)) {
+        print("There is at least one item in the sequence that is not even.");
+
+    } else {
+        print("All the elements of the sequence are even.");
+    }
+}
+
+function __not_all_attributes() {
 
 }
 
