@@ -12,16 +12,17 @@ function usage() {
     var d = sequence(array_random(), "d", even, undefined, true);
     var f = begin(d);
     var l = end(d);
+    var m = successor(f, 5);
 
-    if (partitioned_at_point(f, l, even)) {
-        print('The sequence is already p-partitioned at x.');
+    if (partitioned_at_point(f, m, l, even)) {
+        print('The sequence is already p-partitioned at m.');
     } else {
-        print('The sequence is not p-partitioned at x, partitioning...');
+        print('The sequence is not p-partitioned at m, partitioning...');
 
-        var p = partition_semistable(f, l, even);
+        var m2 = partition_semistable(f, l, even);
 
-        if (partitioned_at_point(f, l, even)) {
-            print('Now the sequence is p-partitioned at x.');
+        if (partitioned_at_point(f, p, l, even)) {
+            print('Now the sequence is p-partitioned at m2.');
         } else {
             print('Impossible, this line will never be executed.');
         }
