@@ -1039,7 +1039,7 @@ function count_if(f, l, p) {
 }
 
 function __debug_count_if_basis(f, l, p, j) {
-    while (f != l) {
+    while ( ! equal(f, l)) {
         if (p(source(f))) {
             j = successor(j);
         }
