@@ -814,6 +814,18 @@ function not_all(f, l, p) {
     return res;
 }
 
+function __debug_partitioned(f, l, p) {
+    var it = find_if_not(find_if(f, l, p), l, p);
+    return equal(it, l);
+}
+
+function partitioned(f, l, p) {
+    var _f_ = start_f('partitioned', f, l, p);
+    var res = __debug_partitioned(f, l, p);
+    end_f(_f_);
+    return res;
+}
+
 function __debug_some(f, l, p) {
     return ! none(f, l, p);
 }

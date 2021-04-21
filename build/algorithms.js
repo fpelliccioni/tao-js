@@ -506,6 +506,11 @@ function not_all(f, l, p) {
     return ! all(f, l, p);
 }
 
+function partitioned(f, l, p) {
+    var it = find_if_not(find_if(f, l, p), l, p);
+    return equal(it, l);
+}
+
 function some(f, l, p) {
     return ! none(f, l, p);
 }
