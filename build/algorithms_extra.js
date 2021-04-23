@@ -286,7 +286,8 @@ function __partition_copy_usage() {
 
     partition_copy(begin(s), end(s), begin(odd), begin(even), pred);
 
-    print(z);
+    print(even);
+    print(odd);
 }
 
 function __partition_copy_attributes() {
@@ -305,7 +306,8 @@ function __partition_copy_n_usage() {
 
     partition_copy_n(begin(s), size(s), begin(odd), begin(even), pred);
 
-    print(z);
+    print(even);
+    print(odd);
 }
 
 function __partition_copy_n_attributes() {
@@ -320,7 +322,8 @@ function __split_copy_usage() {
 
     split_copy(begin(s), end(s), begin(odd), begin(even), pred);
 
-    print(z);
+    print(even);
+    print(odd);
 }
 
 function __split_copy_attributes() {
@@ -335,7 +338,8 @@ function __split_copy_n_usage() {
 
     split_copy_n(begin(s), size(s), begin(odd), begin(even), pred);
 
-    print(z);
+    print(even);
+    print(odd);
 }
 
 function __split_copy_n_attributes() {

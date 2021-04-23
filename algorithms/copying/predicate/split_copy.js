@@ -21,7 +21,8 @@ function usage() {
 
     split_copy(begin(s), end(s), begin(odd), begin(even), pred);
 
-    print(z);
+    print(even);
+    print(odd);
 }
 
 function attributes() {
