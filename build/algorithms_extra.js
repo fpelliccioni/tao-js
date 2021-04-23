@@ -56,6 +56,7 @@ select_1_3: [ 'selection', 'https://github.com/fpelliccioni/tao-js/blob/master/a
 select_1_3_ab: [ 'selection', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/selection/select_1_3_ab.js' ],
 copy: [ 'uncatalogued', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/uncatalogued/copy.js' ],
 copy_backward: [ 'uncatalogued', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/uncatalogued/copy_backward.js' ],
+copy_backward_n: [ 'uncatalogued', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/uncatalogued/copy_backward_n.js' ],
 copy_n: [ 'uncatalogued', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/uncatalogued/copy_n.js' ],
 count_if: [ 'uncatalogued', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/uncatalogued/count_if.js' ],
 count_if_basis: [ 'uncatalogued', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/uncatalogued/count_if_basis.js' ],
@@ -1218,6 +1219,20 @@ function __copy_backward_usage() {
 }
 
 function __copy_backward_attributes() {
+
+}
+
+function __copy_backward_n_usage() {
+
+    var s = sequence(array_ascending(), "s");
+    var z = sequence(array_descending(), "z");
+
+    copy_backward_n(end(s), 5, end(z));
+
+    print(z);
+}
+
+function __copy_backward_n_attributes() {
 
 }
 

@@ -621,6 +621,16 @@ function copy_backward(f, l, o) {
     return o;
 }
 
+function copy_backward_n(f, n, o) {
+    while (n != 0) {
+        l = predecessor(l);
+        o = predecessor(o);
+        --n;
+        sink(o, source(f));
+    }
+    return [f, o];
+}
+
 function copy_n(f, n, o) {
     while (n != 0) {
         sink(o, source(f));
