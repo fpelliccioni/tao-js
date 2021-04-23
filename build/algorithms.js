@@ -621,14 +621,14 @@ function copy_backward(f, l, o) {
     return o;
 }
 
-function copy_backward_n(f, n, o) {
+function copy_backward_n(l, n, o) {
     while (n != 0) {
         l = predecessor(l);
         o = predecessor(o);
         --n;
         sink(o, source(f));
     }
-    return [f, o];
+    return [l, o];
 }
 
 function copy_n(f, n, o) {

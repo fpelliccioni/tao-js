@@ -1020,19 +1020,19 @@ function copy_backward(f, l, o) {
     return res;
 }
 
-function __debug_copy_backward_n(f, n, o) {
+function __debug_copy_backward_n(l, n, o) {
     while (n != 0) {
         l = predecessor(l);
         o = predecessor(o);
         --n;
         sink(o, source(f));
     }
-    return [f, o];
+    return [l, o];
 }
 
-function copy_backward_n(f, n, o) {
-    var _f_ = start_f('copy_backward_n', f, n, o);
-    var res = __debug_copy_backward_n(f, n, o);
+function copy_backward_n(l, n, o) {
+    var _f_ = start_f('copy_backward_n', l, n, o);
+    var res = __debug_copy_backward_n(l, n, o);
     end_f(_f_);
     return res;
 }
