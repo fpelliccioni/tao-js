@@ -1,14 +1,20 @@
-function copy_backward(f_i, l_i, l_o) {
-    while ( ! equal(f_i, l_i)) {
-        // copy_backward_step(l_i, l_o);
-        l_i = predecessor(l_i);
-        l_o = predecessor(l_o);
-        sink(l_o, source(l_i));
-    } 
-    return l_o;
+function copy_backward(f, l, o) {
+    while ( ! equal(f, l)) {
+        l = predecessor(l);
+        o = predecessor(o);
+        sink(o, source(l));
+    }
+    return o;
 }
 
 function usage() {
+
+    var s = sequence(array_ascending(), "s");
+    var z = sequence(array_descending(), "z");
+
+    copy_backward(successor(begin(s), 5), end(s), end(z));
+
+    print(z);
 }
 
 function attributes() {

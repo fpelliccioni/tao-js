@@ -1004,19 +1004,18 @@ function copy(f, l, o) {
     return res;
 }
 
-function __debug_copy_backward(f_i, l_i, l_o) {
-    while ( ! equal(f_i, l_i)) {
-        // copy_backward_step(l_i, l_o);
-        l_i = predecessor(l_i);
-        l_o = predecessor(l_o);
-        sink(l_o, source(l_i));
-    } 
-    return l_o;
+function __debug_copy_backward(f, l, o) {
+    while ( ! equal(f, l)) {
+        l = predecessor(l);
+        o = predecessor(o);
+        sink(o, source(l));
+    }
+    return o;
 }
 
-function copy_backward(f_i, l_i, l_o) {
-    var _f_ = start_f('copy_backward', f_i, l_i, l_o);
-    var res = __debug_copy_backward(f_i, l_i, l_o);
+function copy_backward(f, l, o) {
+    var _f_ = start_f('copy_backward', f, l, o);
+    var res = __debug_copy_backward(f, l, o);
     end_f(_f_);
     return res;
 }
@@ -1179,19 +1178,18 @@ function iota(f, l, start, step) {
     return res;
 }
 
-function __debug_move_backward(f_i, l_i, l_o) {
-    while (! equal(f_i, l_i)) {
-        //move_backward_step(l_i, l_o);
-        l_i = predecessor(l_i);
-        l_o = predecessor(l_o);
-        sink_move(l_o, source(l_i));
-    } 
-    return l_o;
+function __debug_move_backward(f, l, o) {
+    while (! equal(f, l)) {
+        l = predecessor(l);
+        o = predecessor(o);
+        sink_move(o, source(l));
+    }
+    return o;
 }
 
-function move_backward(f_i, l_i, l_o) {
-    var _f_ = start_f('move_backward', f_i, l_i, l_o);
-    var res = __debug_move_backward(f_i, l_i, l_o);
+function move_backward(f, l, o) {
+    var _f_ = start_f('move_backward', f, l, o);
+    var res = __debug_move_backward(f, l, o);
     end_f(_f_);
     return res;
 }

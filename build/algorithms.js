@@ -612,14 +612,13 @@ function copy(f, l, o) {
     }
 }
 
-function copy_backward(f_i, l_i, l_o) {
-    while ( ! equal(f_i, l_i)) {
-        // copy_backward_step(l_i, l_o);
-        l_i = predecessor(l_i);
-        l_o = predecessor(l_o);
-        sink(l_o, source(l_i));
-    } 
-    return l_o;
+function copy_backward(f, l, o) {
+    while ( ! equal(f, l)) {
+        l = predecessor(l);
+        o = predecessor(o);
+        sink(o, source(l));
+    }
+    return o;
 }
 
 function copy_n(f_i, n, f_o) {
@@ -717,14 +716,13 @@ function iota(f, l, start, step) {
     return start;
 }
 
-function move_backward(f_i, l_i, l_o) {
-    while (! equal(f_i, l_i)) {
-        //move_backward_step(l_i, l_o);
-        l_i = predecessor(l_i);
-        l_o = predecessor(l_o);
-        sink_move(l_o, source(l_i));
-    } 
-    return l_o;
+function move_backward(f, l, o) {
+    while (! equal(f, l)) {
+        l = predecessor(l);
+        o = predecessor(o);
+        sink_move(o, source(l));
+    }
+    return o;
 }
 
 function palindrome_bidirectional(f, l, r) {

@@ -1202,6 +1202,13 @@ function __copy_attributes() {
 }
 
 function __copy_backward_usage() {
+
+    var s = sequence(array_ascending(), "s");
+    var z = sequence(array_descending(), "z");
+
+    copy_backward(successor(begin(s), 5), end(s), end(z));
+
+    print(z);
 }
 
 function __copy_backward_attributes() {
@@ -1369,6 +1376,12 @@ function __iota_attributes() {
 
 function __move_backward_usage() {
 
+    var s = sequence(array_ascending(), "s");
+    var z = sequence(array_descending(), "z");
+
+    move_backward(successor(begin(s), 5), end(s), end(z));
+
+    print(z);
 }
 
 function __move_backward_attributes() {
