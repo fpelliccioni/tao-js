@@ -12,7 +12,10 @@ copy_if: [ 'copying/predicate', 'https://github.com/fpelliccioni/tao-js/blob/mas
 copy_if_n: [ 'copying/predicate', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/copying/predicate/copy_if_n.js' ],
 copy_select: [ 'copying/predicate', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/copying/predicate/copy_select.js' ],
 copy_select_n: [ 'copying/predicate', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/copying/predicate/copy_select_n.js' ],
+partition_copy: [ 'rearrangements/predicate-based/partition', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/rearrangements/predicate-based/partition/partition_copy.js' ],
+partition_copy_n: [ 'copying/predicate', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/copying/predicate/partition_copy_n.js' ],
 split_copy: [ 'copying/predicate', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/copying/predicate/split_copy.js' ],
+split_copy_n: [ 'copying/predicate', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/copying/predicate/split_copy_n.js' ],
 gcd: [ 'numerics', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/numerics/gcd.js' ],
 insertion_sort: [ 'rearrangements/ordering-based/sorting/insertion-sort', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/rearrangements/ordering-based/sorting/insertion-sort/insertion_sort.js' ],
 insertion_sort_backward: [ 'rearrangements/ordering-based/sorting/insertion-sort', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/rearrangements/ordering-based/sorting/insertion-sort/insertion_sort_backward.js' ],
@@ -38,7 +41,6 @@ shift_right_while_nonempty: [ 'rearrangements/position-based/shift', 'https://gi
 make_heap_n: [ 'rearrangements/predicate-based/heaps', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/rearrangements/predicate-based/heaps/make_heap_n.js' ],
 make_heap_n_naive_0: [ 'rearrangements/predicate-based/heaps', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/rearrangements/predicate-based/heaps/make_heap_n_naive_0.js' ],
 make_heap_n_naive_1: [ 'rearrangements/predicate-based/heaps', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/rearrangements/predicate-based/heaps/make_heap_n_naive_1.js' ],
-partition_copy: [ 'rearrangements/predicate-based/partition', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/rearrangements/predicate-based/partition/partition_copy.js' ],
 partition_semistable: [ 'rearrangements/predicate-based/partition', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/rearrangements/predicate-based/partition/partition_semistable.js' ],
 partition_semistable_1: [ 'rearrangements/predicate-based/partition', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/rearrangements/predicate-based/partition/partition_semistable_1.js' ],
 partition_semistable_nonempty: [ 'rearrangements/predicate-based/partition', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/rearrangements/predicate-based/partition/partition_semistable_nonempty.js' ],
@@ -272,6 +274,44 @@ function __copy_select_n_attributes() {
 
 }
 
+function __partition_copy_usage() {
+    function predicate_source(p) {
+        return function(x) { return p(source(x)); }
+    }
+
+    var pred = predicate(function even(x) { return (x & 1) == 0; });
+    var s = sequence(array_random(), "s", even);
+    var even = sequence(array_all_equal(size(s), "-"), "even");
+    var odd = sequence(array_all_equal(size(s), "-"), "odd");
+
+    partition_copy(begin(s), end(s), begin(odd), begin(even), pred);
+
+    print(z);
+}
+
+function __partition_copy_attributes() {
+
+}
+
+function __partition_copy_n_usage() {
+    function predicate_source(p) {
+        return function(x) { return p(source(x)); }
+    }
+
+    var pred = predicate(function even(x) { return (x & 1) == 0; });
+    var s = sequence(array_random(), "s", even);
+    var even = sequence(array_all_equal(size(s), "-"), "even");
+    var odd = sequence(array_all_equal(size(s), "-"), "odd");
+
+    partition_copy_n(begin(s), size(s), begin(odd), begin(even), pred);
+
+    print(z);
+}
+
+function __partition_copy_n_attributes() {
+
+}
+
 function __split_copy_usage() {
     var pred = predicate(function even(x) { return (source(x) & 1) == 0; });
     var s = sequence(array_random(), "s");
@@ -284,6 +324,21 @@ function __split_copy_usage() {
 }
 
 function __split_copy_attributes() {
+
+}
+
+function __split_copy_n_usage() {
+    var pred = predicate(function even(x) { return (source(x) & 1) == 0; });
+    var s = sequence(array_random(), "s");
+    var even = sequence(array_all_equal(size(s), "-"), "even");
+    var odd = sequence(array_all_equal(size(s), "-"), "odd");
+
+    split_copy_n(begin(s), size(s), begin(odd), begin(even), pred);
+
+    print(z);
+}
+
+function __split_copy_n_attributes() {
 
 }
 

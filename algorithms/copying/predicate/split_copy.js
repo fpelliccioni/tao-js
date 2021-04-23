@@ -10,7 +10,7 @@ function split_copy(f, l, u, t, p) {
         }
         f = successor(f);
     }
-    return o;
+    return [u, t];
 }
 
 function usage() {

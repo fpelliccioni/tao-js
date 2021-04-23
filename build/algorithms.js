@@ -116,6 +116,16 @@ function copy_select_n(f, n, o, p) {
     return [f, o];
 }
 
+function partition_copy(f, l, u, t, p) {
+    var ps = predicate_source(p);
+    return split_copy(f, l, u, t, ps);
+}
+
+function partition_copy_n(f, l, u, t, p) {
+    var ps = predicate_source(p);
+    return split_copy_n(f, n, u, t, ps);
+}
+
 function split_copy(f, l, u, t, p) {
     while ( ! equal(f, l)) {
         if (p(f)) {
@@ -127,7 +137,22 @@ function split_copy(f, l, u, t, p) {
         }
         f = successor(f);
     }
-    return o;
+    return [u, t];
+}
+
+function split_copy_n(f, n, u, t, p) {
+    while (n != 0) {
+        if (p(f)) {
+            sink(t, source(f));
+            t = successor(t);
+        } else {
+            sink(u, source(f));
+            u = successor(u);
+        }
+        f = successor(f);
+        --n;
+    }
+    return [f, u, t];
 }
 
 function gcd(a, b) {
