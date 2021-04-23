@@ -4,6 +4,7 @@ function __debug_copy(f, l, o) {
         o = successor(o);
         f = successor(f);
     }
+    return o;
 }
 
 function copy(f, l, o) {
@@ -59,6 +60,72 @@ function __debug_copy_n(f, n, o) {
 function copy_n(f, n, o) {
     var _f_ = start_f('copy_n', f, n, o);
     var res = __debug_copy_n(f, n, o);
+    end_f(_f_);
+    return res;
+}
+
+function __debug_reverse_copy(f, l, o) {
+    while ( ! equal(f, l)) {
+        l = predecessor(l);
+        sink(o, source(l));
+        o = successor(o);
+    }
+    return o;
+}
+
+function reverse_copy(f, l, o) {
+    var _f_ = start_f('reverse_copy', f, l, o);
+    var res = __debug_reverse_copy(f, l, o);
+    end_f(_f_);
+    return res;
+}
+
+function __debug_reverse_copy_backward(f, l, o) {
+    while ( ! equal(f, l)) {
+        o = predecessor(o);
+        sink(o, source(f));
+        f = successor(f);
+    }
+    return o;
+}
+
+function reverse_copy_backward(f, l, o) {
+    var _f_ = start_f('reverse_copy_backward', f, l, o);
+    var res = __debug_reverse_copy_backward(f, l, o);
+    end_f(_f_);
+    return res;
+}
+
+function __debug_reverse_copy_backward_n(f, n, o) {
+    while (n != 0) {
+        o = predecessor(o);
+        sink(o, source(f));
+        f = successor(f);
+        --n;
+    }
+    return [f, o];
+}
+
+function reverse_copy_backward_n(f, n, o) {
+    var _f_ = start_f('reverse_copy_backward_n', f, n, o);
+    var res = __debug_reverse_copy_backward_n(f, n, o);
+    end_f(_f_);
+    return res;
+}
+
+function __debug_reverse_copy_n(l, n, o) {
+    while (n != 0) {
+        l = predecessor(l);
+        sink(o, source(l));
+        o = successor(o);
+        --n;
+    }
+    return [l, o];
+}
+
+function reverse_copy_n(l, n, o) {
+    var _f_ = start_f('reverse_copy_n', l, n, o);
+    var res = __debug_reverse_copy_n(l, n, o);
     end_f(_f_);
     return res;
 }

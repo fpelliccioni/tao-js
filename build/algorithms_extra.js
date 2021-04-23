@@ -3,6 +3,10 @@ return {copy: [ 'copying', 'https://github.com/fpelliccioni/tao-js/blob/master/a
 copy_backward: [ 'copying', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/copying/copy_backward.js' ],
 copy_backward_n: [ 'copying', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/copying/copy_backward_n.js' ],
 copy_n: [ 'copying', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/copying/copy_n.js' ],
+reverse_copy: [ 'rearrangements/position-based/reverse', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/rearrangements/position-based/reverse/reverse_copy.js' ],
+reverse_copy_backward: [ 'copying', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/copying/reverse_copy_backward.js' ],
+reverse_copy_backward_n: [ 'copying', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/copying/reverse_copy_backward_n.js' ],
+reverse_copy_n: [ 'copying', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/copying/reverse_copy_n.js' ],
 gcd: [ 'numerics', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/numerics/gcd.js' ],
 insertion_sort: [ 'rearrangements/ordering-based/sorting/insertion-sort', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/rearrangements/ordering-based/sorting/insertion-sort/insertion_sort.js' ],
 insertion_sort_backward: [ 'rearrangements/ordering-based/sorting/insertion-sort', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/rearrangements/ordering-based/sorting/insertion-sort/insertion_sort_backward.js' ],
@@ -15,7 +19,6 @@ selection_sort_classic: [ 'rearrangements/ordering-based/sorting/selection-sort'
 selection_sort_stable: [ 'rearrangements/ordering-based/sorting/selection-sort', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/rearrangements/ordering-based/sorting/selection-sort/selection_sort_stable.js' ],
 reverse: [ 'rearrangements/position-based/reverse', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/rearrangements/position-based/reverse/reverse.js' ],
 reverse_bidirectional: [ 'rearrangements/position-based/reverse', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/rearrangements/position-based/reverse/reverse_bidirectional.js' ],
-reverse_copy: [ 'rearrangements/position-based/reverse', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/rearrangements/position-based/reverse/reverse_copy.js' ],
 reverse_n_adaptive: [ 'rearrangements/position-based/reverse', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/rearrangements/position-based/reverse/reverse_n_adaptive.js' ],
 reverse_n_forward: [ 'rearrangements/position-based/reverse', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/rearrangements/position-based/reverse/reverse_n_forward.js' ],
 reverse_n_indexed: [ 'rearrangements/position-based/reverse', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/rearrangements/position-based/reverse/reverse_n_indexed.js' ],
@@ -127,6 +130,62 @@ function __copy_n_usage() {
 }
 
 function __copy_n_attributes() {
+
+}
+
+function __reverse_copy_usage() {
+
+    var s = sequence(array_ascending(), "s");
+    var z = sequence(array_descending(), "z");
+
+    reverse_copy(successor(begin(s), 5), end(s), begin(z));
+
+    print(z);
+}
+
+function __reverse_copy_attributes() {
+
+}
+
+function __reverse_copy_backward_usage() {
+
+    var s = sequence(array_ascending(), "s");
+    var z = sequence(array_descending(), "z");
+
+    reverse_copy_backward(successor(begin(s), 5), end(s), end(z));
+
+    print(z);
+}
+
+function __reverse_copy_backward_attributes() {
+
+}
+
+function __reverse_copy_backward_n_usage() {
+
+    var s = sequence(array_ascending(), "s");
+    var z = sequence(array_descending(), "z");
+
+    reverse_copy_backward_n(successor(begin(s), 5), 5, end(z));
+
+    print(z);
+}
+
+function __reverse_copy_backward_n_attributes() {
+
+}
+
+function __reverse_copy_n_usage() {
+
+    var s = sequence(array_ascending(), "s");
+    var z = sequence(array_descending(), "z");
+
+    reverse_copy_n(successor(begin(s), 5), end(s), begin(z));
+
+    print(z);
+}
+
+function __reverse_copy_n_attributes() {
 
 }
 
