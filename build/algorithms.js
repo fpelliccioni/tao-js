@@ -1,3 +1,40 @@
+function copy(f, l, o) {
+    while ( ! equal(f, l)) {
+        sink(o, source(f));
+        o = successor(o);
+        f = successor(f);
+    }
+}
+
+function copy_backward(f, l, o) {
+    while ( ! equal(f, l)) {
+        l = predecessor(l);
+        o = predecessor(o);
+        sink(o, source(l));
+    }
+    return o;
+}
+
+function copy_backward_n(l, n, o) {
+    while (n != 0) {
+        l = predecessor(l);
+        o = predecessor(o);
+        --n;
+        sink(o, source(f));
+    }
+    return [l, o];
+}
+
+function copy_n(f, n, o) {
+    while (n != 0) {
+        sink(o, source(f));
+        f = successor(f);
+        o = successor(o);
+        --n;
+    }
+    return [f, o];
+}
+
 function gcd(a, b) {
     while (b != 0) {
         var r = remainder(a, b);
@@ -602,43 +639,6 @@ function select_1_3_ab(a, b, c, r) {
     return ! r(c, b) ? 
                 b :                  // a, b, c are sorted
                 select_1_2(a, c, r); // b is not the median
-}
-
-function copy(f, l, o) {
-    while ( ! equal(f, l)) {
-        sink(o, source(f));
-        o = successor(o);
-        f = successor(f);
-    }
-}
-
-function copy_backward(f, l, o) {
-    while ( ! equal(f, l)) {
-        l = predecessor(l);
-        o = predecessor(o);
-        sink(o, source(l));
-    }
-    return o;
-}
-
-function copy_backward_n(l, n, o) {
-    while (n != 0) {
-        l = predecessor(l);
-        o = predecessor(o);
-        --n;
-        sink(o, source(f));
-    }
-    return [l, o];
-}
-
-function copy_n(f, n, o) {
-    while (n != 0) {
-        sink(o, source(f));
-        f = successor(f);
-        o = successor(o);
-        --n;
-    }
-    return [f, o];
 }
 
 function count_if(f, l, p) {

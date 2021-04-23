@@ -1,5 +1,9 @@
 function __catalog() {
-return {gcd: [ 'numerics', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/numerics/gcd.js' ],
+return {copy: [ 'copying', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/copying/copy.js' ],
+copy_backward: [ 'copying', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/copying/copy_backward.js' ],
+copy_backward_n: [ 'copying', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/copying/copy_backward_n.js' ],
+copy_n: [ 'copying', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/copying/copy_n.js' ],
+gcd: [ 'numerics', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/numerics/gcd.js' ],
 insertion_sort: [ 'rearrangements/ordering-based/sorting/insertion-sort', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/rearrangements/ordering-based/sorting/insertion-sort/insertion_sort.js' ],
 insertion_sort_backward: [ 'rearrangements/ordering-based/sorting/insertion-sort', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/rearrangements/ordering-based/sorting/insertion-sort/insertion_sort_backward.js' ],
 insertion_sort_classic: [ 'rearrangements/ordering-based/sorting/insertion-sort', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/rearrangements/ordering-based/sorting/insertion-sort/insertion_sort_classic.js' ],
@@ -54,10 +58,6 @@ min_value: [ 'selection', 'https://github.com/fpelliccioni/tao-js/blob/master/al
 select_1_2: [ 'selection', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/selection/select_1_2.js' ],
 select_1_3: [ 'selection', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/selection/select_1_3.js' ],
 select_1_3_ab: [ 'selection', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/selection/select_1_3_ab.js' ],
-copy: [ 'uncatalogued', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/uncatalogued/copy.js' ],
-copy_backward: [ 'uncatalogued', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/uncatalogued/copy_backward.js' ],
-copy_backward_n: [ 'uncatalogued', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/uncatalogued/copy_backward_n.js' ],
-copy_n: [ 'uncatalogued', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/uncatalogued/copy_n.js' ],
 count_if: [ 'uncatalogued', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/uncatalogued/count_if.js' ],
 count_if_basis: [ 'uncatalogued', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/uncatalogued/count_if_basis.js' ],
 count_if_not: [ 'uncatalogued', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/uncatalogued/count_if_not.js' ],
@@ -73,6 +73,62 @@ swap_ranges: [ 'uncatalogued', 'https://github.com/fpelliccioni/tao-js/blob/mast
 swap_ranges_bounded: [ 'uncatalogued', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/uncatalogued/swap_ranges_bounded.js' ],
 swap_ranges_n: [ 'uncatalogued', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/uncatalogued/swap_ranges_n.js' ],
 };}
+
+function __copy_usage() {
+
+    var s = sequence(array_ascending(), "s");
+    var z = sequence(array_descending(), "z");
+
+    copy(successor(begin(s), 5), end(s), begin(z));
+
+    print(z);
+}
+
+function __copy_attributes() {
+
+}
+
+function __copy_backward_usage() {
+
+    var s = sequence(array_ascending(), "s");
+    var z = sequence(array_descending(), "z");
+
+    copy_backward(successor(begin(s), 5), end(s), end(z));
+
+    print(z);
+}
+
+function __copy_backward_attributes() {
+
+}
+
+function __copy_backward_n_usage() {
+
+    var s = sequence(array_ascending(), "s");
+    var z = sequence(array_descending(), "z");
+
+    copy_backward_n(end(s), 5, end(z));
+
+    print(z);
+}
+
+function __copy_backward_n_attributes() {
+
+}
+
+function __copy_n_usage() {
+
+    var s = sequence(array_ascending(), "s");
+    var z = sequence(array_descending(), "z");
+
+    copy_n(begin(s), 5, begin(z));
+
+    print(z);
+}
+
+function __copy_n_attributes() {
+
+}
 
 function __gcd_usage() {
     var a = random_int();
@@ -1191,62 +1247,6 @@ function __select_1_3_ab_usage() {
 }
 
 function __select_1_3_ab_attributes() {
-
-}
-
-function __copy_usage() {
-
-    var s = sequence(array_ascending(), "s");
-    var z = sequence(array_descending(), "z");
-
-    copy(successor(begin(s), 5), end(s), begin(z));
-
-    print(z);
-}
-
-function __copy_attributes() {
-
-}
-
-function __copy_backward_usage() {
-
-    var s = sequence(array_ascending(), "s");
-    var z = sequence(array_descending(), "z");
-
-    copy_backward(successor(begin(s), 5), end(s), end(z));
-
-    print(z);
-}
-
-function __copy_backward_attributes() {
-
-}
-
-function __copy_backward_n_usage() {
-
-    var s = sequence(array_ascending(), "s");
-    var z = sequence(array_descending(), "z");
-
-    copy_backward_n(end(s), 5, end(z));
-
-    print(z);
-}
-
-function __copy_backward_n_attributes() {
-
-}
-
-function __copy_n_usage() {
-
-    var s = sequence(array_ascending(), "s");
-    var z = sequence(array_descending(), "z");
-
-    copy_n(begin(s), 5, begin(z));
-
-    print(z);
-}
-
-function __copy_n_attributes() {
 
 }
 

@@ -1,3 +1,68 @@
+function __debug_copy(f, l, o) {
+    while ( ! equal(f, l)) {
+        sink(o, source(f));
+        o = successor(o);
+        f = successor(f);
+    }
+}
+
+function copy(f, l, o) {
+    var _f_ = start_f('copy', f, l, o);
+    var res = __debug_copy(f, l, o);
+    end_f(_f_);
+    return res;
+}
+
+function __debug_copy_backward(f, l, o) {
+    while ( ! equal(f, l)) {
+        l = predecessor(l);
+        o = predecessor(o);
+        sink(o, source(l));
+    }
+    return o;
+}
+
+function copy_backward(f, l, o) {
+    var _f_ = start_f('copy_backward', f, l, o);
+    var res = __debug_copy_backward(f, l, o);
+    end_f(_f_);
+    return res;
+}
+
+function __debug_copy_backward_n(l, n, o) {
+    while (n != 0) {
+        l = predecessor(l);
+        o = predecessor(o);
+        --n;
+        sink(o, source(f));
+    }
+    return [l, o];
+}
+
+function copy_backward_n(l, n, o) {
+    var _f_ = start_f('copy_backward_n', l, n, o);
+    var res = __debug_copy_backward_n(l, n, o);
+    end_f(_f_);
+    return res;
+}
+
+function __debug_copy_n(f, n, o) {
+    while (n != 0) {
+        sink(o, source(f));
+        f = successor(f);
+        o = successor(o);
+        --n;
+    }
+    return [f, o];
+}
+
+function copy_n(f, n, o) {
+    var _f_ = start_f('copy_n', f, n, o);
+    var res = __debug_copy_n(f, n, o);
+    end_f(_f_);
+    return res;
+}
+
 function __debug_gcd(a, b) {
     while (b != 0) {
         var r = remainder(a, b);
@@ -985,71 +1050,6 @@ function __debug_select_1_3_ab(a, b, c, r) {
 function select_1_3_ab(a, b, c, r) {
     var _f_ = start_f('select_1_3_ab', a, b, c, r);
     var res = __debug_select_1_3_ab(a, b, c, r);
-    end_f(_f_);
-    return res;
-}
-
-function __debug_copy(f, l, o) {
-    while ( ! equal(f, l)) {
-        sink(o, source(f));
-        o = successor(o);
-        f = successor(f);
-    }
-}
-
-function copy(f, l, o) {
-    var _f_ = start_f('copy', f, l, o);
-    var res = __debug_copy(f, l, o);
-    end_f(_f_);
-    return res;
-}
-
-function __debug_copy_backward(f, l, o) {
-    while ( ! equal(f, l)) {
-        l = predecessor(l);
-        o = predecessor(o);
-        sink(o, source(l));
-    }
-    return o;
-}
-
-function copy_backward(f, l, o) {
-    var _f_ = start_f('copy_backward', f, l, o);
-    var res = __debug_copy_backward(f, l, o);
-    end_f(_f_);
-    return res;
-}
-
-function __debug_copy_backward_n(l, n, o) {
-    while (n != 0) {
-        l = predecessor(l);
-        o = predecessor(o);
-        --n;
-        sink(o, source(f));
-    }
-    return [l, o];
-}
-
-function copy_backward_n(l, n, o) {
-    var _f_ = start_f('copy_backward_n', l, n, o);
-    var res = __debug_copy_backward_n(l, n, o);
-    end_f(_f_);
-    return res;
-}
-
-function __debug_copy_n(f, n, o) {
-    while (n != 0) {
-        sink(o, source(f));
-        f = successor(f);
-        o = successor(o);
-        --n;
-    }
-    return [f, o];
-}
-
-function copy_n(f, n, o) {
-    var _f_ = start_f('copy_n', f, n, o);
-    var res = __debug_copy_n(f, n, o);
     end_f(_f_);
     return res;
 }
