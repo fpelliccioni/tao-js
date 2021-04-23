@@ -8,6 +8,7 @@ reverse_copy: [ 'copying/position', 'https://github.com/fpelliccioni/tao-js/blob
 reverse_copy_backward: [ 'copying/position', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/copying/position/reverse_copy_backward.js' ],
 reverse_copy_backward_n: [ 'copying/position', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/copying/position/reverse_copy_backward_n.js' ],
 reverse_copy_n: [ 'copying/position', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/copying/position/reverse_copy_n.js' ],
+copy_if: [ 'copying/predicate', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/copying/predicate/copy_if.js' ],
 copy_select: [ 'copying/predicate', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/copying/predicate/copy_select.js' ],
 gcd: [ 'numerics', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/numerics/gcd.js' ],
 insertion_sort: [ 'rearrangements/ordering-based/sorting/insertion-sort', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/rearrangements/ordering-based/sorting/insertion-sort/insertion_sort.js' ],
@@ -201,6 +202,20 @@ function __reverse_copy_n_usage() {
 }
 
 function __reverse_copy_n_attributes() {
+
+}
+
+function __copy_if_usage() {
+    var even = predicate(function even(x) { return (x & 1) == 0; });
+    var s = sequence(array_random(), "s", even);
+    var z = sequence(array_all_equal(size(s), "-"), "z");
+
+    copy_if(begin(s), end(s), begin(z), even);
+
+    print(z);
+}
+
+function __copy_if_attributes() {
 
 }
 

@@ -83,6 +83,11 @@ function reverse_copy_n(l, n, o) {
     return [l, o];
 }
 
+function copy_if(f, l, o, p) {
+    var ps = predicate_source(p);
+    return copy_select(f, l, o, ps);
+}
+
 function copy_select(f, l, o, p) {
     while ( ! equal(f, l)) {
         if (p(f)) {
