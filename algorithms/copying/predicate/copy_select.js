@@ -1,4 +1,4 @@
-function copy_select(f, l, o, p) {
+function copy_selectX(f, l, o, p) {
     while ( ! equal(f, l)) {
         if (p(f)) {
             sink(o, source(f));

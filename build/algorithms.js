@@ -83,17 +83,6 @@ function reverse_copy_n(l, n, o) {
     return [l, o];
 }
 
-function copy_select(f, l, o, p) {
-    while ( ! equal(f, l)) {
-        if (p(f)) {
-            sink(o, source(f));
-            o = successor(o);
-        }
-        f = successor(f);
-    }
-    return o;
-}
-
 function gcd(a, b) {
     while (b != 0) {
         var r = remainder(a, b);
