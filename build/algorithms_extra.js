@@ -3,6 +3,7 @@ return {copy: [ 'copying', 'https://github.com/fpelliccioni/tao-js/blob/master/a
 copy_backward: [ 'copying', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/copying/copy_backward.js' ],
 copy_backward_n: [ 'copying', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/copying/copy_backward_n.js' ],
 copy_n: [ 'copying', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/copying/copy_n.js' ],
+move_backward: [ 'copying', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/copying/move_backward.js' ],
 reverse_copy: [ 'copying', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/copying/reverse_copy.js' ],
 reverse_copy_backward: [ 'copying', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/copying/reverse_copy_backward.js' ],
 reverse_copy_backward_n: [ 'copying', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/copying/reverse_copy_backward_n.js' ],
@@ -69,7 +70,6 @@ equal_r: [ 'uncatalogued', 'https://github.com/fpelliccioni/tao-js/blob/master/a
 insert: [ 'uncatalogued', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/uncatalogued/insert.js' ],
 insert_naive: [ 'uncatalogued', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/uncatalogued/insert_naive.js' ],
 iota: [ 'uncatalogued', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/uncatalogued/iota.js' ],
-move_backward: [ 'uncatalogued', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/uncatalogued/move_backward.js' ],
 palindrome_bidirectional: [ 'uncatalogued', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/uncatalogued/palindrome_bidirectional.js' ],
 palindrome_naive: [ 'uncatalogued', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/uncatalogued/palindrome_naive.js' ],
 swap_ranges: [ 'uncatalogued', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/uncatalogued/swap_ranges.js' ],
@@ -130,6 +130,20 @@ function __copy_n_usage() {
 }
 
 function __copy_n_attributes() {
+
+}
+
+function __move_backward_usage() {
+
+    var s = sequence(array_ascending(), "s");
+    var z = sequence(array_descending(), "z");
+
+    move_backward(successor(begin(s), 5), end(s), end(z));
+
+    print(z);
+}
+
+function __move_backward_attributes() {
 
 }
 
@@ -1444,20 +1458,6 @@ function __iota_usage() {
 }
 
 function __iota_attributes() {
-
-}
-
-function __move_backward_usage() {
-
-    var s = sequence(array_ascending(), "s");
-    var z = sequence(array_descending(), "z");
-
-    move_backward(successor(begin(s), 5), end(s), end(z));
-
-    print(z);
-}
-
-function __move_backward_attributes() {
 
 }
 

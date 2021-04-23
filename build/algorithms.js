@@ -36,6 +36,15 @@ function copy_n(f, n, o) {
     return [f, o];
 }
 
+function move_backward(f, l, o) {
+    while (! equal(f, l)) {
+        l = predecessor(l);
+        o = predecessor(o);
+        sink_move(o, source(l));
+    }
+    return o;
+}
+
 function reverse_copy(f, l, o) {
     while ( ! equal(f, l)) {
         l = predecessor(l);
@@ -754,15 +763,6 @@ function iota(f, l, start, step) {
         f = successor(f);
     }
     return start;
-}
-
-function move_backward(f, l, o) {
-    while (! equal(f, l)) {
-        l = predecessor(l);
-        o = predecessor(o);
-        sink_move(o, source(l));
-    }
-    return o;
 }
 
 function palindrome_bidirectional(f, l, r) {

@@ -64,6 +64,22 @@ function copy_n(f, n, o) {
     return res;
 }
 
+function __debug_move_backward(f, l, o) {
+    while (! equal(f, l)) {
+        l = predecessor(l);
+        o = predecessor(o);
+        sink_move(o, source(l));
+    }
+    return o;
+}
+
+function move_backward(f, l, o) {
+    var _f_ = start_f('move_backward', f, l, o);
+    var res = __debug_move_backward(f, l, o);
+    end_f(_f_);
+    return res;
+}
+
 function __debug_reverse_copy(f, l, o) {
     while ( ! equal(f, l)) {
         l = predecessor(l);
@@ -1242,22 +1258,6 @@ function __debug_iota(f, l, start, step) {
 function iota(f, l, start, step) {
     var _f_ = start_f('iota', f, l, start, step);
     var res = __debug_iota(f, l, start, step);
-    end_f(_f_);
-    return res;
-}
-
-function __debug_move_backward(f, l, o) {
-    while (! equal(f, l)) {
-        l = predecessor(l);
-        o = predecessor(o);
-        sink_move(o, source(l));
-    }
-    return o;
-}
-
-function move_backward(f, l, o) {
-    var _f_ = start_f('move_backward', f, l, o);
-    var res = __debug_move_backward(f, l, o);
     end_f(_f_);
     return res;
 }
