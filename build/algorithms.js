@@ -191,15 +191,6 @@ function reverse_bidirectional(f, l) {
     }
 }
 
-function reverse_copy(f_i, l_i, f_o) {
-    while ( ! equal(f_i, l_i)) {
-        l_i = predecessor(l_i);
-        sink(f_o, source(l_i));
-        f_o = successor(f_o);
-    } 
-    return f_o;
-}
-
 function reverse_n_adaptive(f_i, n_i, f_b, n_b) {
     if (n_i < 2) return successor(f_i, n_i);
     if (n_i <= n_b) return reverse_n_with_buffer(f_i, n_i, f_b);

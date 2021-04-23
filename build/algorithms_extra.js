@@ -3,7 +3,7 @@ return {copy: [ 'copying', 'https://github.com/fpelliccioni/tao-js/blob/master/a
 copy_backward: [ 'copying', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/copying/copy_backward.js' ],
 copy_backward_n: [ 'copying', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/copying/copy_backward_n.js' ],
 copy_n: [ 'copying', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/copying/copy_n.js' ],
-reverse_copy: [ 'rearrangements/position-based/reverse', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/rearrangements/position-based/reverse/reverse_copy.js' ],
+reverse_copy: [ 'copying', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/copying/reverse_copy.js' ],
 reverse_copy_backward: [ 'copying', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/copying/reverse_copy_backward.js' ],
 reverse_copy_backward_n: [ 'copying', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/copying/reverse_copy_backward_n.js' ],
 reverse_copy_n: [ 'copying', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/copying/reverse_copy_n.js' ],
@@ -427,19 +427,6 @@ function __reverse_bidirectional_usage() {
 }
 
 function __reverse_bidirectional_attributes() {
-
-}
-
-function __reverse_copy_usage() {
-    var d = sequence(array_random(), "d");
-    var b = sequence(new Array(size(d)), "b");
-    
-    var res = reverse_copy(begin(d), end(d), begin(b));
-    print(d);
-    print(b);
-}
-
-function __reverse_copy_attributes() {
 
 }
 
