@@ -8,6 +8,7 @@ reverse_copy: [ 'copying/position', 'https://github.com/fpelliccioni/tao-js/blob
 reverse_copy_backward: [ 'copying/position', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/copying/position/reverse_copy_backward.js' ],
 reverse_copy_backward_n: [ 'copying/position', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/copying/position/reverse_copy_backward_n.js' ],
 reverse_copy_n: [ 'copying/position', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/copying/position/reverse_copy_n.js' ],
+combine_copy: [ 'copying/predicate', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/copying/predicate/combine_copy.js' ],
 copy_if: [ 'copying/predicate', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/copying/predicate/copy_if.js' ],
 copy_if_n: [ 'copying/predicate', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/copying/predicate/copy_if_n.js' ],
 copy_select: [ 'copying/predicate', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/copying/predicate/copy_select.js' ],
@@ -207,6 +208,22 @@ function __reverse_copy_n_usage() {
 }
 
 function __reverse_copy_n_attributes() {
+
+}
+
+function __combine_copy_usage() {
+    var lti = relation(function lt(x, y) {return source(x) < source(y);});
+
+    var a1 = sequence(array_random(8), "a1");
+    var a2 = sequence(array_random(5), "a2");
+    var r = sequence(array_random(size(a1) + size(a2)), "r");
+
+    combine_copy(begin(a1), end(a1), begin(a2), end(a2), begin(r), lti);
+
+    print(r);
+}
+
+function __combine_copy_attributes() {
 
 }
 

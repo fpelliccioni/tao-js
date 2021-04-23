@@ -146,6 +146,27 @@ function reverse_copy_n(l, n, o) {
     return res;
 }
 
+function __debug_combine_copy(f, l, f2, l2, o, r) {
+    while ( ! equal(f, l) && ! equal(f2, l2)) {
+        if (r(f2, f)) {
+            sink(o, source(f2));
+            f2 = successor(f2);
+        } else {
+            sink(o, source(f));
+            f = successor(f);
+        }
+        o = successor(o);
+    }
+    return copy(f2, l2, copy(f, l, o));
+}
+
+function combine_copy(f, l, f2, l2, o, r) {
+    var _f_ = start_f('combine_copy', f, l, f2, l2, o, r);
+    var res = __debug_combine_copy(f, l, f2, l2, o, r);
+    end_f(_f_);
+    return res;
+}
+
 function __debug_copy_if(f, l, o, p) {
     var ps = predicate_source(p);
     return copy_select(f, l, o, ps);
