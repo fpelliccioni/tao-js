@@ -146,6 +146,24 @@ function reverse_copy_n(l, n, o) {
     return res;
 }
 
+function __debug_copy_select(f, l, o, p) {
+    while ( ! equal(f, l)) {
+        if (p(f)) {
+            sink(o, source(f));
+            o = successor(o);
+        }
+        f = successor(f);
+    }
+    return o;
+}
+
+function copy_select(f, l, o, p) {
+    var _f_ = start_f('copy_select', f, l, o, p);
+    var res = __debug_copy_select(f, l, o, p);
+    end_f(_f_);
+    return res;
+}
+
 function __debug_gcd(a, b) {
     while (b != 0) {
         var r = remainder(a, b);
