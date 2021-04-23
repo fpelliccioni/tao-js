@@ -20,7 +20,7 @@ function copy_backward_n(l, n, o) {
         l = predecessor(l);
         o = predecessor(o);
         --n;
-        sink(o, source(f));
+        sink(o, source(l));
     }
     return [l, o];
 }
