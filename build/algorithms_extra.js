@@ -36,6 +36,7 @@ reverse_n_with_buffer: [ 'rearrangements/position-based/reverse', 'https://githu
 rotate_bidirectional: [ 'rearrangements/position-based/rotate', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/rearrangements/position-based/rotate/rotate_bidirectional.js' ],
 rotate_random_access_nontrivial: [ 'rearrangements/position-based/rotate', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/rearrangements/position-based/rotate/rotate_random_access_nontrivial.js' ],
 rotate_right_by_one: [ 'rearrangements/position-based/rotate', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/rearrangements/position-based/rotate/rotate_right_by_one.js' ],
+rotate_right_by_one_nonempty: [ 'rearrangements/position-based/rotate', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/rearrangements/position-based/rotate/rotate_right_by_one_nonempty.js' ],
 shift_right_by_one: [ 'rearrangements/position-based/shift', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/rearrangements/position-based/shift/shift_right_by_one.js' ],
 shift_right_while: [ 'rearrangements/position-based/shift', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/rearrangements/position-based/shift/shift_right_while.js' ],
 shift_right_while_nonempty: [ 'rearrangements/position-based/shift', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/rearrangements/position-based/shift/shift_right_while_nonempty.js' ],
@@ -717,6 +718,13 @@ function __rotate_right_by_one_usage() {
 }
 
 function __rotate_right_by_one_attributes() {
+
+}
+
+function __rotate_right_by_one_nonempty_usage() {
+}
+
+function __rotate_right_by_one_nonempty_attributes() {
 
 }
 

@@ -603,6 +603,20 @@ function rotate_right_by_one(f, l) {
     return res;
 }
 
+function __debug_rotate_right_by_one_nonempty(f, l) {
+    var butlast = predecessor(l);
+    var x = source_move(butlast);
+    move_backward(f, butlast, l);
+    sink_move(f, x);
+}
+
+function rotate_right_by_one_nonempty(f, l) {
+    var _f_ = start_f('rotate_right_by_one_nonempty', f, l);
+    var res = __debug_rotate_right_by_one_nonempty(f, l);
+    end_f(_f_);
+    return res;
+}
+
 function __debug_shift_right_by_one(f, l) {
     if (equal(f, l)) return;
     copy_backward(f, predecessor(l), l);
