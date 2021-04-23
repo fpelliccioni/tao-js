@@ -406,20 +406,6 @@ function make_heap_n_naive_1(f, n) {
     }
 }
 
-function partition_copy(f, l, r_b, r_g, p) {
-    while ( ! equal(f, l)) {
-        if (p(source(f))) {
-            sink(r_g, source(f));
-            r_g = successor(r_g);
-        } else {
-            sink(r_b, source(f));
-            r_b = successor(r_b);
-        }
-        f = successor(f);
-    }
-    return [r_b, r_g];
-}
-
 function partition_semistable(f, l, p) {
     while (true) {
         if (equal(f, l)) return f;

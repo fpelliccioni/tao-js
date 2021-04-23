@@ -12,7 +12,7 @@ copy_if: [ 'copying/predicate', 'https://github.com/fpelliccioni/tao-js/blob/mas
 copy_if_n: [ 'copying/predicate', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/copying/predicate/copy_if_n.js' ],
 copy_select: [ 'copying/predicate', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/copying/predicate/copy_select.js' ],
 copy_select_n: [ 'copying/predicate', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/copying/predicate/copy_select_n.js' ],
-partition_copy: [ 'rearrangements/predicate-based/partition', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/rearrangements/predicate-based/partition/partition_copy.js' ],
+partition_copy: [ 'copying/predicate', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/copying/predicate/partition_copy.js' ],
 partition_copy_n: [ 'copying/predicate', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/copying/predicate/partition_copy_n.js' ],
 split_copy: [ 'copying/predicate', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/copying/predicate/split_copy.js' ],
 split_copy_n: [ 'copying/predicate', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/copying/predicate/split_copy_n.js' ],
@@ -837,24 +837,6 @@ function __make_heap_n_naive_1_usage() {
 }
 
 function __make_heap_n_naive_1_attributes() {
-
-}
-
-function __partition_copy_usage() {
-    var even = predicate(function even(x) { return (x & 1) == 0; });
-    var d = sequence(array_random(), "d", even, undefined, true);
-    var bad = sequence(new Array(size(d)), "bad");
-    var good = sequence(new Array(size(d)), "good");
-
-    var res = partition_copy(begin(d), end(d), begin(bad), begin(good), even);
-
-    var fg = res[0];
-    var fb = res[1];
-
-    print('...');
-}
-
-function __partition_copy_attributes() {
 
 }
 
