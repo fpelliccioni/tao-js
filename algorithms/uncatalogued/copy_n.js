@@ -1,15 +1,21 @@
-function copy_n(f_i, n, f_o) {
+function copy_n(f, n, o) {
     while (n != 0) {
-        sink(f_o, source(f_i));
-        f_i = successor(f_i);
-        f_o = successor(f_o);
+        sink(o, source(f));
+        f = successor(f);
+        o = successor(o);
         --n;
     }
-    return [f_i, f_o];
+    return [f, o];
 }
 
 function usage() {
 
+    var s = sequence(array_ascending(), "s");
+    var z = sequence(array_descending(), "z");
+
+    copy_n(begin(s), 5, begin(z));
+
+    print(z);
 }
 
 function attributes() {

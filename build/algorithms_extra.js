@@ -1195,6 +1195,12 @@ function __select_1_3_ab_attributes() {
 
 function __copy_usage() {
 
+    var s = sequence(array_ascending(), "s");
+    var z = sequence(array_descending(), "z");
+
+    copy(successor(begin(s), 5), end(s), begin(z));
+
+    print(z);
 }
 
 function __copy_attributes() {
@@ -1217,6 +1223,12 @@ function __copy_backward_attributes() {
 
 function __copy_n_usage() {
 
+    var s = sequence(array_ascending(), "s");
+    var z = sequence(array_descending(), "z");
+
+    copy_n(begin(s), 5, begin(z));
+
+    print(z);
 }
 
 function __copy_n_attributes() {

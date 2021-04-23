@@ -621,14 +621,14 @@ function copy_backward(f, l, o) {
     return o;
 }
 
-function copy_n(f_i, n, f_o) {
+function copy_n(f, n, o) {
     while (n != 0) {
-        sink(f_o, source(f_i));
-        f_i = successor(f_i);
-        f_o = successor(f_o);
+        sink(o, source(f));
+        f = successor(f);
+        o = successor(o);
         --n;
     }
-    return [f_i, f_o];
+    return [f, o];
 }
 
 function count_if(f, l, p) {
