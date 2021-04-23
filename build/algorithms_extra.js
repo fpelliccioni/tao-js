@@ -216,7 +216,10 @@ function __combine_copy_usage() {
 
     var a1 = sequence(array_random(8), "a1");
     var a2 = sequence(array_random(5), "a2");
-    var r = sequence(array_random(size(a1) + size(a2)), "r");
+    insertion_sort(begin(a1), end(a1), lt);
+    insertion_sort(begin(a2), end(a2), lt);
+
+    var r = sequence(array_all_equal(size(a1) + size(a2), '-'), "r");
 
     combine_copy(begin(a1), end(a1), begin(a2), end(a2), begin(r), lti);
 
