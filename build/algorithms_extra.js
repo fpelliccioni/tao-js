@@ -25,6 +25,8 @@ insertion_sort_classic_0: [ 'rearrangements/ordering-based/sorting/insertion-sor
 insertion_sort_classic_1: [ 'rearrangements/ordering-based/sorting/insertion-sort', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/rearrangements/ordering-based/sorting/insertion-sort/insertion_sort_classic_1.js' ],
 insertion_sort_classic_2: [ 'rearrangements/ordering-based/sorting/insertion-sort', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/rearrangements/ordering-based/sorting/insertion-sort/insertion_sort_classic_2.js' ],
 insertion_sort_classic_3: [ 'rearrangements/ordering-based/sorting/insertion-sort', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/rearrangements/ordering-based/sorting/insertion-sort/insertion_sort_classic_3.js' ],
+insertion_sort_suffix_nonempty: [ 'rearrangements/ordering-based/sorting/insertion-sort', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/rearrangements/ordering-based/sorting/insertion-sort/insertion_sort_suffix_nonempty.js' ],
+linear_insert_unguarded: [ 'rearrangements/ordering-based/sorting/insertion-sort', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/rearrangements/ordering-based/sorting/insertion-sort/linear_insert_unguarded.js' ],
 selection_sort_classic: [ 'rearrangements/ordering-based/sorting/selection-sort', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/rearrangements/ordering-based/sorting/selection-sort/selection_sort_classic.js' ],
 selection_sort_stable: [ 'rearrangements/ordering-based/sorting/selection-sort', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/rearrangements/ordering-based/sorting/selection-sort/selection_sort_stable.js' ],
 reverse: [ 'rearrangements/position-based/reverse', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/rearrangements/position-based/reverse/reverse.js' ],
@@ -40,6 +42,7 @@ rotate_right_by_one_nonempty: [ 'rearrangements/position-based/rotate', 'https:/
 shift_right_by_one: [ 'rearrangements/position-based/shift', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/rearrangements/position-based/shift/shift_right_by_one.js' ],
 shift_right_while: [ 'rearrangements/position-based/shift', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/rearrangements/position-based/shift/shift_right_while.js' ],
 shift_right_while_nonempty: [ 'rearrangements/position-based/shift', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/rearrangements/position-based/shift/shift_right_while_nonempty.js' ],
+shift_right_while_unguarded: [ 'rearrangements/position-based/shift', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/rearrangements/position-based/shift/shift_right_while_unguarded.js' ],
 make_heap_n: [ 'rearrangements/predicate-based/heaps', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/rearrangements/predicate-based/heaps/make_heap_n.js' ],
 make_heap_n_naive_0: [ 'rearrangements/predicate-based/heaps', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/rearrangements/predicate-based/heaps/make_heap_n_naive_0.js' ],
 make_heap_n_naive_1: [ 'rearrangements/predicate-based/heaps', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/rearrangements/predicate-based/heaps/make_heap_n_naive_1.js' ],
@@ -556,6 +559,20 @@ function __insertion_sort_classic_3_attributes() {
 
 }
 
+function __insertion_sort_suffix_nonempty_usage() {
+}
+
+function __insertion_sort_suffix_nonempty_attributes() {
+
+}
+
+function __linear_insert_unguarded_usage() {
+}
+
+function __linear_insert_unguarded_attributes() {
+
+}
+
 function __selection_sort_classic_usage() {
     
       
@@ -749,6 +766,14 @@ function __shift_right_while_nonempty_usage() {
 }
 
 function __shift_right_while_nonempty_attributes() {
+
+}
+
+function __shift_right_while_unguarded_usage() {
+
+}
+
+function __shift_right_while_unguarded_attributes() {
 
 }
 

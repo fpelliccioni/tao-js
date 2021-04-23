@@ -249,6 +249,27 @@ function insertion_sort_classic_3(f, l, r) {
     }
 }
 
+function insertion_sort_suffix_nonempty(f, l, r) {
+    //precondition: ! equal(f, l)
+    var c = successor(f);
+    while ( ! equal(c, l)) {
+        linear_insert_unguarded(c, r);
+        c = successor(c);
+    }
+}
+
+function linear_insert_unguarded(c, r) {
+    if ( ! call(r, c, predecessor(c))) return c;
+
+    increment_custom_stat("Misplaced elements");
+
+    var value = source_move(c);
+    var d = shift_right_while_unguarded(c, bind(r, value));
+    sink_move(d, value);
+    register_move_distance(distance(d, c));
+    return d;
+}
+
 function selection_sort_classic(f, l, r) {
     // postcondition: is_sorted(f, l, r)
     while ( ! equal(f, l)) {
@@ -370,6 +391,14 @@ function shift_right_while_nonempty(f, l, p) {
         sink_move(l, source_move(predecessor(l)));
         l = predecessor(l);
         if (equal(f, l)) break;
+    }
+    return l;
+}
+
+function shift_right_while_unguarded(f, l, p) {
+    while (p(source(predecessor(l)))) {
+        sink_move(l, source_move(predecessor(l)));
+        l = predecessor(l);
     }
     return l;
 }

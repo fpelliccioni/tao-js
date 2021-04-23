@@ -431,6 +431,41 @@ function insertion_sort_classic_3(f, l, r) {
     return res;
 }
 
+function __debug_insertion_sort_suffix_nonempty(f, l, r) {
+    //precondition: ! equal(f, l)
+    var c = successor(f);
+    while ( ! equal(c, l)) {
+        linear_insert_unguarded(c, r);
+        c = successor(c);
+    }
+}
+
+function insertion_sort_suffix_nonempty(f, l, r) {
+    var _f_ = start_f('insertion_sort_suffix_nonempty', f, l, r);
+    var res = __debug_insertion_sort_suffix_nonempty(f, l, r);
+    end_f(_f_);
+    return res;
+}
+
+function __debug_linear_insert_unguarded(c, r) {
+    if ( ! call(r, c, predecessor(c))) return c;
+
+    increment_custom_stat("Misplaced elements");
+
+    var value = source_move(c);
+    var d = shift_right_while_unguarded(c, bind(r, value));
+    sink_move(d, value);
+    register_move_distance(distance(d, c));
+    return d;
+}
+
+function linear_insert_unguarded(c, r) {
+    var _f_ = start_f('linear_insert_unguarded', c, r);
+    var res = __debug_linear_insert_unguarded(c, r);
+    end_f(_f_);
+    return res;
+}
+
 function __debug_selection_sort_classic(f, l, r) {
     // postcondition: is_sorted(f, l, r)
     while ( ! equal(f, l)) {
@@ -657,6 +692,21 @@ function __debug_shift_right_while_nonempty(f, l, p) {
 function shift_right_while_nonempty(f, l, p) {
     var _f_ = start_f('shift_right_while_nonempty', f, l, p);
     var res = __debug_shift_right_while_nonempty(f, l, p);
+    end_f(_f_);
+    return res;
+}
+
+function __debug_shift_right_while_unguarded(f, l, p) {
+    while (p(source(predecessor(l)))) {
+        sink_move(l, source_move(predecessor(l)));
+        l = predecessor(l);
+    }
+    return l;
+}
+
+function shift_right_while_unguarded(f, l, p) {
+    var _f_ = start_f('shift_right_while_unguarded', f, l, p);
+    var res = __debug_shift_right_while_unguarded(f, l, p);
     end_f(_f_);
     return res;
 }
