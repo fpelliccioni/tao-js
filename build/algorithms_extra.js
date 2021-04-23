@@ -9,7 +9,10 @@ reverse_copy_backward: [ 'copying/position', 'https://github.com/fpelliccioni/ta
 reverse_copy_backward_n: [ 'copying/position', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/copying/position/reverse_copy_backward_n.js' ],
 reverse_copy_n: [ 'copying/position', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/copying/position/reverse_copy_n.js' ],
 copy_if: [ 'copying/predicate', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/copying/predicate/copy_if.js' ],
+copy_if_n: [ 'copying/predicate', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/copying/predicate/copy_if_n.js' ],
 copy_select: [ 'copying/predicate', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/copying/predicate/copy_select.js' ],
+copy_select_n: [ 'copying/predicate', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/copying/predicate/copy_select_n.js' ],
+split_copy: [ 'copying/predicate', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/copying/predicate/split_copy.js' ],
 gcd: [ 'numerics', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/numerics/gcd.js' ],
 insertion_sort: [ 'rearrangements/ordering-based/sorting/insertion-sort', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/rearrangements/ordering-based/sorting/insertion-sort/insertion_sort.js' ],
 insertion_sort_backward: [ 'rearrangements/ordering-based/sorting/insertion-sort', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/rearrangements/ordering-based/sorting/insertion-sort/insertion_sort_backward.js' ],
@@ -223,6 +226,24 @@ function __copy_if_attributes() {
 
 }
 
+function __copy_if_n_usage() {
+    function predicate_source(p) {
+        return function(x) { return p(source(x)); }
+    }
+
+    var even = predicate(function even(x) { return (x & 1) == 0; });
+    var s = sequence(array_random(), "s", even);
+    var z = sequence(array_all_equal(size(s), "-"), "z");
+
+    copy_if_n(begin(s), size(s), begin(z), even);
+
+    print(z);
+}
+
+function __copy_if_n_attributes() {
+
+}
+
 function __copy_select_usage() {
     var even = predicate(function even(x) { return (source(x) & 1) == 0; });
     var s = sequence(array_random(), "s");
@@ -234,6 +255,35 @@ function __copy_select_usage() {
 }
 
 function __copy_select_attributes() {
+
+}
+
+function __copy_select_n_usage() {
+    var even = predicate(function even(x) { return (source(x) & 1) == 0; });
+    var s = sequence(array_random(), "s");
+    var z = sequence(array_all_equal(size(s), "-"), "z");
+
+    copy_select_n(begin(s), size(s), begin(z), even);
+
+    print(z);
+}
+
+function __copy_select_n_attributes() {
+
+}
+
+function __split_copy_usage() {
+    var pred = predicate(function even(x) { return (source(x) & 1) == 0; });
+    var s = sequence(array_random(), "s");
+    var even = sequence(array_all_equal(size(s), "-"), "even");
+    var odd = sequence(array_all_equal(size(s), "-"), "odd");
+
+    split_copy(begin(s), end(s), begin(odd), begin(even), pred);
+
+    print(z);
+}
+
+function __split_copy_attributes() {
 
 }
 

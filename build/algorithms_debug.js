@@ -158,6 +158,18 @@ function copy_if(f, l, o, p) {
     return res;
 }
 
+function __debug_copy_if_n(f, n, o, p) {
+    var ps = predicate_source(p);
+    return copy_select(f, n, o, ps);
+}
+
+function copy_if_n(f, n, o, p) {
+    var _f_ = start_f('copy_if_n', f, n, o, p);
+    var res = __debug_copy_if_n(f, n, o, p);
+    end_f(_f_);
+    return res;
+}
+
 function __debug_copy_select(f, l, o, p) {
     while ( ! equal(f, l)) {
         if (p(f)) {
@@ -172,6 +184,46 @@ function __debug_copy_select(f, l, o, p) {
 function copy_select(f, l, o, p) {
     var _f_ = start_f('copy_select', f, l, o, p);
     var res = __debug_copy_select(f, l, o, p);
+    end_f(_f_);
+    return res;
+}
+
+function __debug_copy_select_n(f, n, o, p) {
+    while (n != 0) {
+        if (p(f)) {
+            sink(o, source(f));
+            o = successor(o);
+        }
+        f = successor(f);
+        --n;
+    }
+    return [f, o];
+}
+
+function copy_select_n(f, n, o, p) {
+    var _f_ = start_f('copy_select_n', f, n, o, p);
+    var res = __debug_copy_select_n(f, n, o, p);
+    end_f(_f_);
+    return res;
+}
+
+function __debug_split_copy(f, l, u, t, p) {
+    while ( ! equal(f, l)) {
+        if (p(f)) {
+            sink(t, source(f));
+            t = successor(t);
+        } else {
+            sink(u, source(f));
+            u = successor(u);
+        }
+        f = successor(f);
+    }
+    return o;
+}
+
+function split_copy(f, l, u, t, p) {
+    var _f_ = start_f('split_copy', f, l, u, t, p);
+    var res = __debug_split_copy(f, l, u, t, p);
     end_f(_f_);
     return res;
 }

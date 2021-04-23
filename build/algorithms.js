@@ -88,11 +88,42 @@ function copy_if(f, l, o, p) {
     return copy_select(f, l, o, ps);
 }
 
+function copy_if_n(f, n, o, p) {
+    var ps = predicate_source(p);
+    return copy_select(f, n, o, ps);
+}
+
 function copy_select(f, l, o, p) {
     while ( ! equal(f, l)) {
         if (p(f)) {
             sink(o, source(f));
             o = successor(o);
+        }
+        f = successor(f);
+    }
+    return o;
+}
+
+function copy_select_n(f, n, o, p) {
+    while (n != 0) {
+        if (p(f)) {
+            sink(o, source(f));
+            o = successor(o);
+        }
+        f = successor(f);
+        --n;
+    }
+    return [f, o];
+}
+
+function split_copy(f, l, u, t, p) {
+    while ( ! equal(f, l)) {
+        if (p(f)) {
+            sink(t, source(f));
+            t = successor(t);
+        } else {
+            sink(u, source(f));
+            u = successor(u);
         }
         f = successor(f);
     }
