@@ -180,7 +180,7 @@ function __reverse_copy_n_usage() {
     var s = sequence(array_ascending(), "s");
     var z = sequence(array_descending(), "z");
 
-    reverse_copy_n(successor(begin(s), 5), end(s), begin(z));
+    reverse_copy_n(successor(begin(s), 5), 5, begin(z));
 
     print(z);
 }
