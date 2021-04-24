@@ -97,6 +97,20 @@ function combine_copy(f, l, f2, l2, o, r) {
     return copy(f2, l2, copy(f, l, o));
 }
 
+function combine_copy_backward(f, l, f2, l2, o, r) {
+    while ( ! equal(f, l) && ! equal(f2, l2)) {
+        o = predecessor(o);
+        if (r(f2, f)) {
+            l2 = predecessor(l2);
+            sink(o, source(l2));
+        } else {
+            l = predecessor(l);
+            sink(o, source(l));
+        }
+    }
+    return copy(f2, l2, copy(f, l, o));
+}
+
 function copy_if(f, l, o, p) {
     var ps = predicate_source(p);
     return copy_select(f, l, o, ps);
