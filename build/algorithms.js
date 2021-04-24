@@ -189,6 +189,11 @@ function merge_copy(f, l, f2, l2, o, r) {
     return combine_copy(f, l, f2, l2, o, rs);
 }
 
+function merge_copy_backward(f, l, f2, l2, o, r) {
+    var rs = relation_source(r);
+    return combine_copy_backward(f, l, f2, l2, o, rs);
+}
+
 function partition_copy(f, l, u, t, p) {
     var ps = predicate_source(p);
     return split_copy(f, l, u, t, ps);

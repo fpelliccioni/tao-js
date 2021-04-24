@@ -315,6 +315,18 @@ function merge_copy(f, l, f2, l2, o, r) {
     return res;
 }
 
+function __debug_merge_copy_backward(f, l, f2, l2, o, r) {
+    var rs = relation_source(r);
+    return combine_copy_backward(f, l, f2, l2, o, rs);
+}
+
+function merge_copy_backward(f, l, f2, l2, o, r) {
+    var _f_ = start_f('merge_copy_backward', f, l, f2, l2, o, r);
+    var res = __debug_merge_copy_backward(f, l, f2, l2, o, r);
+    end_f(_f_);
+    return res;
+}
+
 function __debug_partition_copy(f, l, u, t, p) {
     var ps = predicate_source(p);
     return split_copy(f, l, u, t, ps);
