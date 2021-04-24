@@ -16,6 +16,7 @@ copy_if: [ 'copying/predicate', 'https://github.com/fpelliccioni/tao-js/blob/mas
 copy_if_n: [ 'copying/predicate', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/copying/predicate/copy_if_n.js' ],
 copy_select: [ 'copying/predicate', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/copying/predicate/copy_select.js' ],
 copy_select_n: [ 'copying/predicate', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/copying/predicate/copy_select_n.js' ],
+merge_copy: [ 'copying/predicate', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/copying/predicate/merge_copy.js' ],
 partition_copy: [ 'copying/predicate', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/copying/predicate/partition_copy.js' ],
 partition_copy_n: [ 'copying/predicate', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/copying/predicate/partition_copy_n.js' ],
 split_copy: [ 'copying/predicate', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/copying/predicate/split_copy.js' ],
@@ -361,6 +362,29 @@ function __copy_select_n_usage() {
 }
 
 function __copy_select_n_attributes() {
+
+}
+
+function __merge_copy_usage() {
+    function relation_source(r) {
+        return function(x, y) { return r(source(x), source(y)); }
+    }
+
+    var lti = relation(function lt(x, y) {return source(x) < source(y);});
+
+    var a1 = sequence(array_random(8), "a1");
+    var a2 = sequence(array_random(5), "a2");
+    insertion_sort(begin(a1), end(a1), lt);
+    insertion_sort(begin(a2), end(a2), lt);
+
+    var r = sequence(array_all_equal(size(a1) + size(a2), '-'), "r");
+
+    merge_copy(begin(a1), end(a1), begin(a2), end(a2), begin(r), lti);
+
+    print(r);
+}
+
+function __merge_copy_attributes() {
 
 }
 

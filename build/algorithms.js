@@ -184,6 +184,11 @@ function copy_select_n(f, n, o, p) {
     return [f, o];
 }
 
+function merge_copy(f, l, f2, l2, o, r) {
+    var rs = relation_source(r);
+    return combine_copy(f, l, f2, l2, o, rs);
+}
+
 function partition_copy(f, l, u, t, p) {
     var ps = predicate_source(p);
     return split_copy(f, l, u, t, ps);
