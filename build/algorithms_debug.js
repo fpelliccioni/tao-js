@@ -170,15 +170,15 @@ function combine_copy(f, l, f2, l2, o, r) {
 function __debug_combine_copy_backward(f, l, f2, l2, o, r) {
     while ( ! equal(f, l) && ! equal(f2, l2)) {
         o = predecessor(o);
-        if (r(f2, f)) {
-            l2 = predecessor(l2);
-            sink(o, source(l2));
-        } else {
+        if (r(predecessor(l2), predecessor(l))) {
             l = predecessor(l);
             sink(o, source(l));
+        } else {
+            l2 = predecessor(l2);
+            sink(o, source(l2));
         }
     }
-    return copy(f2, l2, copy(f, l, o));
+    return copy_backward(f, l, copy_backward(f2, l2, o));
 }
 
 function combine_copy_backward(f, l, f2, l2, o, r) {
