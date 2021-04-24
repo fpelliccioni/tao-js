@@ -188,6 +188,33 @@ function combine_copy_backward(f, l, f2, l2, o, r) {
     return res;
 }
 
+function __debug_combine_copy_n(f, n, f2, n2, o, r) {
+    while (n != 0 && n2 != 0) {
+        if (r(f2, f)) {
+            sink(o, source(f2));
+            f2 = successor(f2);
+            --n2;
+        } else {
+            sink(o, source(f));
+            f = successor(f);
+            --n;
+        }
+        o = successor(o);
+    }
+    var res0 = copy_n(f, n, o);
+    o = res0[1];
+    var res1 = copy_n(f2, n2, o);
+    o = res1[1];
+    return [res0[0], res1[0], o];
+}
+
+function combine_copy_n(f, n, f2, n2, o, r) {
+    var _f_ = start_f('combine_copy_n', f, n, f2, n2, o, r);
+    var res = __debug_combine_copy_n(f, n, f2, n2, o, r);
+    end_f(_f_);
+    return res;
+}
+
 function __debug_copy_if(f, l, o, p) {
     var ps = predicate_source(p);
     return copy_select(f, l, o, ps);
