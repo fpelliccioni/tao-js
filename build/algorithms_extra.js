@@ -10,6 +10,7 @@ reverse_copy_backward_n: [ 'copying/position', 'https://github.com/fpelliccioni/
 reverse_copy_n: [ 'copying/position', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/copying/position/reverse_copy_n.js' ],
 combine_copy: [ 'copying/predicate', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/copying/predicate/combine_copy.js' ],
 combine_copy_backward: [ 'copying/predicate', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/copying/predicate/combine_copy_backward.js' ],
+combine_copy_backward_n: [ 'copying/predicate', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/copying/predicate/combine_copy_backward_n.js' ],
 combine_copy_n: [ 'copying/predicate', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/copying/predicate/combine_copy_n.js' ],
 copy_if: [ 'copying/predicate', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/copying/predicate/copy_if.js' ],
 copy_if_n: [ 'copying/predicate', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/copying/predicate/copy_if_n.js' ],
@@ -255,6 +256,28 @@ function __combine_copy_backward_attributes() {
 
 }
 
+function __combine_copy_backward_n_usage() {
+    var lti = relation(function lt(x, y) {return source(x) < source(y);});
+
+    var a1 = sequence(array_random(8), "a1");
+    var a2 = sequence(array_random(5), "a2");
+    insertion_sort(begin(a1), end(a1), gt);
+    insertion_sort(begin(a2), end(a2), gt);
+
+    var r = sequence(array_all_equal(size(a1) + size(a2), '-'), "r");
+
+    var res = combine_copy_backward_n(end(a1), size(a1) - 3, end(a2), size(a2) - 2, end(r), lti);
+    var l = res[0];
+    var l2 = res[1];
+    var o = res[2];
+
+    print(r);
+}
+
+function __combine_copy_backward_n_attributes() {
+
+}
+
 function __combine_copy_n_usage() {
     var lti = relation(function lt(x, y) {return source(x) < source(y);});
 
@@ -265,7 +288,10 @@ function __combine_copy_n_usage() {
 
     var r = sequence(array_all_equal(size(a1) + size(a2), '-'), "r");
 
-    combine_copy_n(begin(a1), size(a1), begin(a2), size(a2), begin(r), lti);
+    var res = combine_copy_n(begin(a1), size(a1) - 3, begin(a2), size(a2) - 2, begin(r), lti);
+    var f = res[0];
+    var f2 = res[1];
+    var o = res[2];
 
     print(r);
 }

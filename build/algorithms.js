@@ -111,6 +111,26 @@ function combine_copy_backward(f, l, f2, l2, o, r) {
     return copy_backward(f, l, copy_backward(f2, l2, o));
 }
 
+function combine_copy_backward_n(l, n, l2, n2, o, r) {
+    while (n != 0 && n2 != 0) {
+        o = predecessor(o);
+        if (r(predecessor(l2), predecessor(l))) {
+            l = predecessor(l);
+            --n;
+            sink(o, source(l));
+        } else {
+            l2 = predecessor(l2);
+            --n2;
+            sink(o, source(l2));
+        }
+    }
+    var res0 = copy_backward_n(l2, n2, o);
+    o = res0[1];
+    var res1 = copy_backward_n(l, n, o);
+    o = res1[1];
+    return [res1[0], res0[0], o];
+}
+
 function combine_copy_n(f, n, f2, n2, o, r) {
     while (n != 0 && n2 != 0) {
         if (r(f2, f)) {
