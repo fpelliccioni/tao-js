@@ -312,7 +312,7 @@ function gcd(a, b) {
 }
 
 function __debug_insertion_sort(f, l, r) {
-    if (equal(f, l)) return; 
+    if (equal(f, l)) return;
     var c = successor(f);
     if (equal(c, l)) return;
 
@@ -352,7 +352,7 @@ function insertion_sort_backward(f, l, r) {
 }
 
 function __debug_insertion_sort_classic(f, l, r) {
-    if (equal(f, l)) return; 
+    if (equal(f, l)) return;
     var c = successor(f);
     while ( ! equal(c, l)) {
         linear_insert(f, c, r);
@@ -696,7 +696,7 @@ function shift_right_while_nonempty(f, l, p) {
     return res;
 }
 
-function __debug_shift_right_while_unguarded(f, l, p) {
+function __debug_shift_right_while_unguarded(l, p) {
     while (p(source(predecessor(l)))) {
         sink_move(l, source_move(predecessor(l)));
         l = predecessor(l);
@@ -704,9 +704,9 @@ function __debug_shift_right_while_unguarded(f, l, p) {
     return l;
 }
 
-function shift_right_while_unguarded(f, l, p) {
-    var _f_ = start_f('shift_right_while_unguarded', f, l, p);
-    var res = __debug_shift_right_while_unguarded(f, l, p);
+function shift_right_while_unguarded(l, p) {
+    var _f_ = start_f('shift_right_while_unguarded', l, p);
+    var res = __debug_shift_right_while_unguarded(l, p);
     end_f(_f_);
     return res;
 }

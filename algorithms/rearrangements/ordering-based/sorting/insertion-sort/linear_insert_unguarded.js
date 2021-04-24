@@ -11,6 +11,7 @@ function linear_insert_unguarded(c, r) {
 }
 
 function usage() {
+    register_custom_stat("Misplaced elements");
 }
 
 function attributes() {

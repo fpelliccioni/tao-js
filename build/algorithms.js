@@ -179,7 +179,7 @@ function gcd(a, b) {
 }
 
 function insertion_sort(f, l, r) {
-    if (equal(f, l)) return; 
+    if (equal(f, l)) return;
     var c = successor(f);
     if (equal(c, l)) return;
 
@@ -205,7 +205,7 @@ function insertion_sort_backward(f, l, r) {
 }
 
 function insertion_sort_classic(f, l, r) {
-    if (equal(f, l)) return; 
+    if (equal(f, l)) return;
     var c = successor(f);
     while ( ! equal(c, l)) {
         linear_insert(f, c, r);
@@ -395,7 +395,7 @@ function shift_right_while_nonempty(f, l, p) {
     return l;
 }
 
-function shift_right_while_unguarded(f, l, p) {
+function shift_right_while_unguarded(l, p) {
     while (p(source(predecessor(l)))) {
         sink_move(l, source_move(predecessor(l)));
         l = predecessor(l);

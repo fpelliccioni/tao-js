@@ -385,33 +385,36 @@ function __gcd_attributes() {
 function __insertion_sort_usage() {
     function linear_insert_unguarded(c, r) {
         if ( ! call(r, c, predecessor(c))) return c;
-    
+
         increment_custom_stat("Misplaced elements");
-    
+
         var value = source_move(c);
         var d = shift_right_while_unguarded(c, bind(r, value));
         sink_move(d, value);
         register_move_distance(distance(d, c));
         return d;
     }
-    
+
     function insertion_sort_suffix_nonempty(f, l, r) {
-        //precondition: ! equal(f, l) 
+        //precondition: ! equal(f, l)
         var c = successor(f);
         while ( ! equal(c, l)) {
-            linear_insert_unguarded(c, r);     
+            linear_insert_unguarded(c, r);
             c = successor(c);
         }
-    }    
-      
+    }
+
+
+    register_custom_stat("Misplaced elements");
+
     // var s = sequence([1, 2, 3, 4, 5], "s", lt);
     // var s = sequence([1, 2], "s", lt);
-    
+
     // var s = sequence(array_random(), "s", lt);
     // var s = sequence(array_all_equal(), "s", lt);
     // var s = sequence(array_ascending(), "s", lt);
     var s = sequence(array_descending(), "s", lt);
-    
+
     print(s);
     insertion_sort(begin(s), end(s), lt);
     print(s);
@@ -450,21 +453,23 @@ function __insertion_sort_backward_attributes() {
 function __insertion_sort_classic_usage() {
     function linear_insert(f, c, r) {
         if ( ! call(r, c, predecessor(c))) return c;
-    
+
         increment_custom_stat("Misplaced elements");
-    
+
         var value = source_move(c);
         sink_move(c, source(predecessor(c)));
         var d = shift_right_while(f, predecessor(c), bind(r, value));
         sink_move(d, value);
-    
+
         register_move_distance(distance(d, c));
         return d;
     }
-    
+
+    register_custom_stat("Misplaced elements");
+
     // var s = sequence(array_random(), "s", lt);
     var s = sequence(array_descending(), "s", lt);
-    
+
     print(s);
     insertion_sort_classic(begin(s), end(s), lt);
     print(s);
@@ -567,6 +572,7 @@ function __insertion_sort_suffix_nonempty_attributes() {
 }
 
 function __linear_insert_unguarded_usage() {
+    register_custom_stat("Misplaced elements");
 }
 
 function __linear_insert_unguarded_attributes() {
