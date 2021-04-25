@@ -80,7 +80,9 @@ select_1_2: [ 'selection', 'https://github.com/fpelliccioni/tao-js/blob/master/a
 select_1_3: [ 'selection', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/selection/select_1_3.js' ],
 select_1_3_ab: [ 'selection', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/selection/select_1_3_ab.js' ],
 exchange_values: [ 'swapping', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/swapping/exchange_values.js' ],
-swap_ranges: [ 'uncatalogued', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/uncatalogued/swap_ranges.js' ],
+swap_ranges: [ 'swapping', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/swapping/swap_ranges.js' ],
+swap_ranges_bounded: [ 'swapping', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/swapping/swap_ranges_bounded.js' ],
+swap_ranges_n: [ 'swapping', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/swapping/swap_ranges_n.js' ],
 count_if: [ 'uncatalogued', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/uncatalogued/count_if.js' ],
 count_if_basis: [ 'uncatalogued', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/uncatalogued/count_if_basis.js' ],
 count_if_not: [ 'uncatalogued', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/uncatalogued/count_if_not.js' ],
@@ -91,8 +93,6 @@ insert_naive: [ 'uncatalogued', 'https://github.com/fpelliccioni/tao-js/blob/mas
 iota: [ 'uncatalogued', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/uncatalogued/iota.js' ],
 palindrome_bidirectional: [ 'uncatalogued', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/uncatalogued/palindrome_bidirectional.js' ],
 palindrome_naive: [ 'uncatalogued', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/uncatalogued/palindrome_naive.js' ],
-swap_ranges_bounded: [ 'uncatalogued', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/uncatalogued/swap_ranges_bounded.js' ],
-swap_ranges_n: [ 'uncatalogued', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/uncatalogued/swap_ranges_n.js' ],
 };}
 
 function __copy_usage() {
@@ -1637,6 +1637,37 @@ function __swap_ranges_attributes() {
 
 }
 
+function __swap_ranges_bounded_usage() {
+    
+    
+    var s1 = sequence(array_random(), "s1");
+    var s2 = sequence(array_random(5), "s2");
+    
+    var r = swap_ranges_bounded(begin(s1), end(s1), begin(s2), end(s2));
+    var f0 = r[0];
+    var f1 = r[1];
+    print('...');
+
+}
+
+function __swap_ranges_bounded_attributes() {
+
+}
+
+function __swap_ranges_n_usage() {
+    var s1 = sequence(array_random(), "s1");
+    var s2 = sequence(array_random(5), "s2");
+    
+    var r = swap_ranges_n(begin(s1), begin(s2), 5);
+    var f0 = r[0];
+    var f1 = r[1];
+    print('...');
+}
+
+function __swap_ranges_n_attributes() {
+
+}
+
 function __count_if_usage() {
 
     var even = predicate(function even(x) { return (x & 1) == 0; });
@@ -1861,52 +1892,6 @@ function __palindrome_naive_usage() {
 }
 
 function __palindrome_naive_attributes() {
-
-}
-
-function __swap_ranges_usage() {
-    
-    
-    var s1 = sequence(array_random(), "s1");
-    var s2 = sequence(array_random(), "s2");
-    
-    var r = swap_ranges(begin(s1), end(s1), begin(s2));
-    print('...');
-
-}
-
-function __swap_ranges_attributes() {
-
-}
-
-function __swap_ranges_bounded_usage() {
-    
-    
-    var s1 = sequence(array_random(), "s1");
-    var s2 = sequence(array_random(5), "s2");
-    
-    var r = swap_ranges_bounded(begin(s1), end(s1), begin(s2), end(s2));
-    var f0 = r[0];
-    var f1 = r[1];
-    print('...');
-
-}
-
-function __swap_ranges_bounded_attributes() {
-
-}
-
-function __swap_ranges_n_usage() {
-    var s1 = sequence(array_random(), "s1");
-    var s2 = sequence(array_random(5), "s2");
-    
-    var r = swap_ranges_n(begin(s1), begin(s2), 5);
-    var f0 = r[0];
-    var f1 = r[1];
-    print('...');
-}
-
-function __swap_ranges_n_attributes() {
 
 }
 

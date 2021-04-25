@@ -1441,6 +1441,39 @@ function swap_ranges(f, l, f1) {
     return res;
 }
 
+function __debug_swap_ranges_bounded(f0, l0, f1, l1) {
+    while ( ! equal(f0, l0) && ! equal(f1, l1)) {
+        iter_swap(f0, f1);
+        f0 = successor(f0);
+        f1 = successor(f1);
+    } 
+    return [f0, f1];
+}
+
+function swap_ranges_bounded(f0, l0, f1, l1) {
+    var _f_ = start_f('swap_ranges_bounded', f0, l0, f1, l1);
+    var res = __debug_swap_ranges_bounded(f0, l0, f1, l1);
+    end_f(_f_);
+    return res;
+}
+
+function __debug_swap_ranges_n(f0, f1, n) {
+    while (n != 0) {
+        iter_swap(f0, f1);
+        f0 = successor(f0);
+        f1 = successor(f1);
+        --n;
+    }
+    return [f0, f1];
+}
+
+function swap_ranges_n(f0, f1, n) {
+    var _f_ = start_f('swap_ranges_n', f0, f1, n);
+    var res = __debug_swap_ranges_n(f0, f1, n);
+    end_f(_f_);
+    return res;
+}
+
 function __debug_count_if(f, l, p) {
     var res = count_if_basis(f, l, p, 0);
     return res;
@@ -1619,55 +1652,6 @@ function __debug_palindrome_naive(seq_arr, r) {
 function palindrome_naive(seq_arr, r) {
     var _f_ = start_f('palindrome_naive', seq_arr, r);
     var res = __debug_palindrome_naive(seq_arr, r);
-    end_f(_f_);
-    return res;
-}
-
-function __debug_swap_ranges(f0, l0, f1) {
-    while ( ! equal(f0, l0)) {
-        iter_swap(f0, f1);
-        f0 = successor(f0);
-        f1 = successor(f1);
-    }
-    return f1; 
-}
-
-function swap_ranges(f0, l0, f1) {
-    var _f_ = start_f('swap_ranges', f0, l0, f1);
-    var res = __debug_swap_ranges(f0, l0, f1);
-    end_f(_f_);
-    return res;
-}
-
-function __debug_swap_ranges_bounded(f0, l0, f1, l1) {
-    while ( ! equal(f0, l0) && ! equal(f1, l1)) {
-        iter_swap(f0, f1);
-        f0 = successor(f0);
-        f1 = successor(f1);
-    } 
-    return [f0, f1];
-}
-
-function swap_ranges_bounded(f0, l0, f1, l1) {
-    var _f_ = start_f('swap_ranges_bounded', f0, l0, f1, l1);
-    var res = __debug_swap_ranges_bounded(f0, l0, f1, l1);
-    end_f(_f_);
-    return res;
-}
-
-function __debug_swap_ranges_n(f0, f1, n) {
-    while (n != 0) {
-        iter_swap(f0, f1);
-        f0 = successor(f0);
-        f1 = successor(f1);
-        --n;
-    }
-    return [f0, f1];
-}
-
-function swap_ranges_n(f0, f1, n) {
-    var _f_ = start_f('swap_ranges_n', f0, f1, n);
-    var res = __debug_swap_ranges_n(f0, f1, n);
     end_f(_f_);
     return res;
 }

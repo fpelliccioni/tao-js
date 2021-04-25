@@ -867,6 +867,25 @@ function swap_ranges(f, l, f1) {
     return f1;
 }
 
+function swap_ranges_bounded(f0, l0, f1, l1) {
+    while ( ! equal(f0, l0) && ! equal(f1, l1)) {
+        iter_swap(f0, f1);
+        f0 = successor(f0);
+        f1 = successor(f1);
+    } 
+    return [f0, f1];
+}
+
+function swap_ranges_n(f0, f1, n) {
+    while (n != 0) {
+        iter_swap(f0, f1);
+        f0 = successor(f0);
+        f1 = successor(f1);
+        --n;
+    }
+    return [f0, f1];
+}
+
 function count_if(f, l, p) {
     var res = count_if_basis(f, l, p, 0);
     return res;
@@ -977,33 +996,5 @@ function palindrome_naive(seq_arr, r) {
     var res = equal_r(f, l, f2, r);
 
     return res;
-}
-
-function swap_ranges(f0, l0, f1) {
-    while ( ! equal(f0, l0)) {
-        iter_swap(f0, f1);
-        f0 = successor(f0);
-        f1 = successor(f1);
-    }
-    return f1; 
-}
-
-function swap_ranges_bounded(f0, l0, f1, l1) {
-    while ( ! equal(f0, l0) && ! equal(f1, l1)) {
-        iter_swap(f0, f1);
-        f0 = successor(f0);
-        f1 = successor(f1);
-    } 
-    return [f0, f1];
-}
-
-function swap_ranges_n(f0, f1, n) {
-    while (n != 0) {
-        iter_swap(f0, f1);
-        f0 = successor(f0);
-        f1 = successor(f1);
-        --n;
-    }
-    return [f0, f1];
 }
 
