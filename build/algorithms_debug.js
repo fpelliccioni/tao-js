@@ -47,6 +47,22 @@ function copy_backward_n(l, n, o) {
     return res;
 }
 
+function __debug_copy_bounded(f, l, fo, lo) {
+    while ( ! equal(f, l) && ! equal(fo, lo)) {
+        sink(fo, source(f));
+        fo = successor(fo);
+        f = successor(f);
+    }
+    return [f, fo];
+}
+
+function copy_bounded(f, l, fo, lo) {
+    var _f_ = start_f('copy_bounded', f, l, fo, lo);
+    var res = __debug_copy_bounded(f, l, fo, lo);
+    end_f(_f_);
+    return res;
+}
+
 function __debug_copy_n(f, n, o) {
     while (n != 0) {
         sink(o, source(f));

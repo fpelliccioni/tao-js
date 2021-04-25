@@ -2,6 +2,7 @@ function __catalog() {
 return {copy: [ 'copying/position', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/copying/position/copy.js' ],
 copy_backward: [ 'copying/position', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/copying/position/copy_backward.js' ],
 copy_backward_n: [ 'copying/position', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/copying/position/copy_backward_n.js' ],
+copy_bounded: [ 'copying/position', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/copying/position/copy_bounded.js' ],
 copy_n: [ 'copying/position', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/copying/position/copy_n.js' ],
 move_backward: [ 'copying/position', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/copying/position/move_backward.js' ],
 reverse_copy: [ 'copying/position', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/copying/position/reverse_copy.js' ],
@@ -134,6 +135,22 @@ function __copy_backward_n_usage() {
 }
 
 function __copy_backward_n_attributes() {
+
+}
+
+function __copy_bounded_usage() {
+
+    var s = sequence(array_ascending(), "s");
+    var z = sequence(array_descending(), "z");
+
+    var res = copy_bounded(successor(begin(s), 5), end(s), begin(z));
+    var f1 = res[0];
+    var f2 = res[1];
+
+    print(z);
+}
+
+function __copy_bounded_attributes() {
 
 }
 
