@@ -852,6 +852,21 @@ function select_1_3_ab(a, b, c, r) {
                 select_1_2(a, c, r); // b is not the median
 }
 
+function exchange_values(x, y) {
+    var t = source(x);
+    sink(x, source(y));
+    sink(y, t);
+}
+
+function swap_ranges(f, l, f1) {
+    while ( ! equal(f, l)) {
+        exchange_values(f, f1);
+        f = successor(f);
+        f1 = successor(f1);
+    }
+    return f1;
+}
+
 function count_if(f, l, p) {
     var res = count_if_basis(f, l, p, 0);
     return res;

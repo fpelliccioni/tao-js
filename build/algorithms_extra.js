@@ -79,6 +79,8 @@ min_value: [ 'selection', 'https://github.com/fpelliccioni/tao-js/blob/master/al
 select_1_2: [ 'selection', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/selection/select_1_2.js' ],
 select_1_3: [ 'selection', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/selection/select_1_3.js' ],
 select_1_3_ab: [ 'selection', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/selection/select_1_3_ab.js' ],
+exchange_values: [ 'swapping', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/swapping/exchange_values.js' ],
+swap_ranges: [ 'uncatalogued', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/uncatalogued/swap_ranges.js' ],
 count_if: [ 'uncatalogued', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/uncatalogued/count_if.js' ],
 count_if_basis: [ 'uncatalogued', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/uncatalogued/count_if_basis.js' ],
 count_if_not: [ 'uncatalogued', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/uncatalogued/count_if_not.js' ],
@@ -89,7 +91,6 @@ insert_naive: [ 'uncatalogued', 'https://github.com/fpelliccioni/tao-js/blob/mas
 iota: [ 'uncatalogued', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/uncatalogued/iota.js' ],
 palindrome_bidirectional: [ 'uncatalogued', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/uncatalogued/palindrome_bidirectional.js' ],
 palindrome_naive: [ 'uncatalogued', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/uncatalogued/palindrome_naive.js' ],
-swap_ranges: [ 'uncatalogued', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/uncatalogued/swap_ranges.js' ],
 swap_ranges_bounded: [ 'uncatalogued', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/uncatalogued/swap_ranges_bounded.js' ],
 swap_ranges_n: [ 'uncatalogued', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/uncatalogued/swap_ranges_n.js' ],
 };}
@@ -1601,6 +1602,38 @@ function __select_1_3_ab_usage() {
 }
 
 function __select_1_3_ab_attributes() {
+
+}
+
+function __exchange_values_usage() {
+
+    var s = sequence(array_ascending(), "s");
+
+    exchange_values(begin(s), successor(begin(s), 5));
+
+    print(s);
+}
+
+function __exchange_values_attributes() {
+
+}
+
+function __swap_ranges_usage() {
+    function exchange_values(x, y) {
+        var t = source(x);
+        sink(x, source(y));
+        sink(y, t);
+    }
+
+    var s = sequence(array_ascending(), "s");
+    var z = sequence(array_all_equal(size(s), '-'), "z");
+
+    swap_ranges(successor(begin(s), 5), end(s), begin(z));
+
+    print(z);
+}
+
+function __swap_ranges_attributes() {
 
 }
 
