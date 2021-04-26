@@ -3,8 +3,8 @@ function reverse_n_with_buffer(f_i, n, f_b) {
 }
 
 function usage() {
-    var s = sequence(array_random(), "s");
-    var b = sequence(new Array(size(s)), "b");
+    var s = sequence(array_random(), "s", undefined, "list");
+    var b = sequence(array_all_equal(size(s), '-'), "b");
     print(s);
     var r = reverse_n_with_buffer(begin(s), size(s), begin(b));
     print(s);

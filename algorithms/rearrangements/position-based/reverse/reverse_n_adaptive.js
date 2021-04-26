@@ -12,9 +12,9 @@ function reverse_n_adaptive(f_i, n_i, f_b, n_b) {
 }
 
 function usage() {
-    var s = sequence(array_random(16), "s");
-    //var b = sequence(new Array(size(s)), "b");
-    var b = sequence(new Array(4), "b");
+    var s = sequence(array_random(16), "s", undefined, "list");
+    //var b = sequence(array_all_equal(size(s), '-'), "b");
+    var b = sequence(array_all_equal(4, '-'), "b");
     print(s);
     var r = reverse_n_adaptive(begin(s), size(s), begin(b), size(b));
     print(s);
