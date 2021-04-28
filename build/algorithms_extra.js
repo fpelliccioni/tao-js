@@ -35,6 +35,8 @@ insertion_sort_suffix_nonempty: [ 'rearrangements/ordering-based/sorting/inserti
 linear_insert_unguarded: [ 'rearrangements/ordering-based/sorting/insertion-sort', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/rearrangements/ordering-based/sorting/insertion-sort/linear_insert_unguarded.js' ],
 selection_sort_classic: [ 'rearrangements/ordering-based/sorting/selection-sort', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/rearrangements/ordering-based/sorting/selection-sort/selection_sort_classic.js' ],
 selection_sort_stable: [ 'rearrangements/ordering-based/sorting/selection-sort', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/rearrangements/ordering-based/sorting/selection-sort/selection_sort_stable.js' ],
+cycle_from: [ 'rearrangements/position-based/cycle', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/rearrangements/position-based/cycle/cycle_from.js' ],
+cycle_to: [ 'rearrangements/position-based/cycle', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/rearrangements/position-based/cycle/cycle_to.js' ],
 reverse: [ 'rearrangements/position-based/reverse', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/rearrangements/position-based/reverse/reverse.js' ],
 reverse_bidirectional: [ 'rearrangements/position-based/reverse', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/rearrangements/position-based/reverse/reverse_bidirectional.js' ],
 reverse_n_adaptive: [ 'rearrangements/position-based/reverse', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/rearrangements/position-based/reverse/reverse_n_adaptive.js' ],
@@ -732,6 +734,39 @@ function __selection_sort_stable_usage() {
 }
 
 function __selection_sort_stable_attributes() {
+
+}
+
+function __cycle_from_usage() {
+    var s = sequence(array_random(), "s");
+    print(s);
+    rotate_bidirectional(begin(s), successor(begin(s), 3), end(s));
+    print(s);
+    print('...');
+}
+
+function __cycle_from_attributes() {
+
+}
+
+function __cycle_to_usage() {
+    function successorMod10(i) {
+        var f = begin(s);
+        var index = distance(begin(s), i);
+        ++index;
+        index = index % 10;
+        var ret = successor(f, index);
+        return ret;
+    }
+
+    var s = sequence(array_random(), "s");
+    print(s);
+    cycle_to(begin(s), successorMod10);
+    print(s);
+    print('...');
+}
+
+function __cycle_to_attributes() {
 
 }
 

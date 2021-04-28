@@ -612,6 +612,40 @@ function selection_sort_stable(f, l, r) {
     return res;
 }
 
+function __debug_cycle_from(i, f) {
+    var tmp = source(i);
+    var j = i;
+    var k = f(i);
+    while ( ! equal(k, i)) {
+        sink(j, source(k));
+        j = k;
+        k = f(k);
+    }
+    sink(j, tmp);
+}
+
+function cycle_from(i, f) {
+    var _f_ = start_f('cycle_from', i, f);
+    var res = __debug_cycle_from(i, f);
+    end_f(_f_);
+    return res;
+}
+
+function __debug_cycle_to(i, f) {
+    var k = f(i);
+    while ( ! equal(k, i)) {
+        exchange_values(i, k);
+        k = f(k);
+    }
+}
+
+function cycle_to(i, f) {
+    var _f_ = start_f('cycle_to', i, f);
+    var res = __debug_cycle_to(i, f);
+    end_f(_f_);
+    return res;
+}
+
 function __debug_reverse(f, l) {
     while (true) {
         if (equal(f, l)) return;

@@ -360,6 +360,26 @@ function selection_sort_stable(f, l, r) {
     }
 }
 
+function cycle_from(i, f) {
+    var tmp = source(i);
+    var j = i;
+    var k = f(i);
+    while ( ! equal(k, i)) {
+        sink(j, source(k));
+        j = k;
+        k = f(k);
+    }
+    sink(j, tmp);
+}
+
+function cycle_to(i, f) {
+    var k = f(i);
+    while ( ! equal(k, i)) {
+        exchange_values(i, k);
+        k = f(k);
+    }
+}
+
 function reverse(f, l) {
     while (true) {
         if (equal(f, l)) return;
