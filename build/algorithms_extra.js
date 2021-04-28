@@ -82,7 +82,7 @@ min_value: [ 'selection', 'https://github.com/fpelliccioni/tao-js/blob/master/al
 select_1_2: [ 'selection', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/selection/select_1_2.js' ],
 select_1_3: [ 'selection', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/selection/select_1_3.js' ],
 select_1_3_ab: [ 'selection', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/selection/select_1_3_ab.js' ],
-exchange_values: [ 'swapping', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/swapping/exchange_values.js' ],
+exchange_values_2: [ 'swapping', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/swapping/exchange_values_2.js' ],
 swap_ranges: [ 'swapping', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/swapping/swap_ranges.js' ],
 swap_ranges_bounded: [ 'swapping', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/swapping/swap_ranges_bounded.js' ],
 swap_ranges_n: [ 'swapping', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/swapping/swap_ranges_n.js' ],
@@ -1657,16 +1657,16 @@ function __select_1_3_ab_attributes() {
 
 }
 
-function __exchange_values_usage() {
+function __exchange_values_2_usage() {
 
     var s = sequence(array_ascending(), "s");
 
-    exchange_values(begin(s), successor(begin(s), 5));
+    exchange_values_2(begin(s), successor(begin(s), 5));
 
     print(s);
 }
 
-function __exchange_values_attributes() {
+function __exchange_values_2_attributes() {
 
 }
 

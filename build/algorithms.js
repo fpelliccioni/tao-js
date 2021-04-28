@@ -881,10 +881,13 @@ function select_1_3_ab(a, b, c, r) {
                 select_1_2(a, c, r); // b is not the median
 }
 
-function exchange_values(x, y) {
+function exchange_values_2(x, y) {
     var t = source(x);
     sink(x, source(y));
     sink(y, t);
+
+    increment_assignment_stat(); // we have to count 3 assignments
+    increment_swap_stat(); // we need to count a swap
 }
 
 function swap_ranges(f, l, f1) {

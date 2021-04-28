@@ -1462,15 +1462,18 @@ function select_1_3_ab(a, b, c, r) {
     return res;
 }
 
-function __debug_exchange_values(x, y) {
+function __debug_exchange_values_2(x, y) {
     var t = source(x);
     sink(x, source(y));
     sink(y, t);
+
+    increment_assignment_stat(); // we have to count 3 assignments
+    increment_swap_stat(); // we need to count a swap
 }
 
-function exchange_values(x, y) {
-    var _f_ = start_f('exchange_values', x, y);
-    var res = __debug_exchange_values(x, y);
+function exchange_values_2(x, y) {
+    var _f_ = start_f('exchange_values_2', x, y);
+    var res = __debug_exchange_values_2(x, y);
     end_f(_f_);
     return res;
 }
