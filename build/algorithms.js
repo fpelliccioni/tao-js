@@ -485,6 +485,17 @@ function rotate_bidirectional(f, m, l) {
     reverse(f, l);
 }
 
+function rotate_cycles(f, m, l, from) {
+    var l_m = distance(l, m);
+    var d = gcd(distance(m, f), l_m);
+
+    while (d != 0) {
+        cycle_from(successor(f, d), from);
+        --d;
+    }
+    return successor(f, l_m);
+}
+
 function rotate_random_access_nontrivial(f, m, l) {
     var p = k_rotate_from_permutation_random_access(f, m, l);
     return rotate_cycles(f, m, l, p);

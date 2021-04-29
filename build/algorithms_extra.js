@@ -46,6 +46,7 @@ reverse_n_forward: [ 'rearrangements/position-based/reverse', 'https://github.co
 reverse_n_indexed: [ 'rearrangements/position-based/reverse', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/rearrangements/position-based/reverse/reverse_n_indexed.js' ],
 reverse_n_with_buffer: [ 'rearrangements/position-based/reverse', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/rearrangements/position-based/reverse/reverse_n_with_buffer.js' ],
 rotate_bidirectional: [ 'rearrangements/position-based/rotate', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/rearrangements/position-based/rotate/rotate_bidirectional.js' ],
+rotate_cycles: [ 'rearrangements/position-based/rotate', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/rearrangements/position-based/rotate/rotate_cycles.js' ],
 rotate_random_access_nontrivial: [ 'rearrangements/position-based/rotate', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/rearrangements/position-based/rotate/rotate_random_access_nontrivial.js' ],
 rotate_right_by_one: [ 'rearrangements/position-based/rotate', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/rearrangements/position-based/rotate/rotate_right_by_one.js' ],
 rotate_right_by_one_nonempty: [ 'rearrangements/position-based/rotate', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/rearrangements/position-based/rotate/rotate_right_by_one_nonempty.js' ],
@@ -919,6 +920,46 @@ function __rotate_bidirectional_usage() {
 }
 
 function __rotate_bidirectional_attributes() {
+
+}
+
+function __rotate_cycles_usage() {
+
+    function k_rotate_from_permutation_random_access(f, m, l) {
+        var k = distance(l, m);
+        var n_minus_k = distance(m, f);
+        var m_prime = successor(f, k);
+
+        return function (x) {
+            if (x < m_prime) return successor(x, n_minus_k);
+            return predecessor(x, k);
+        }
+    }
+
+    function k_rotate_from_permutation_indexed(f, m, l) {
+        var k = distance(l, m);
+        var n_minus_k = distance(m, f);
+
+        return function (x) {
+            var i = distance(x, f);
+            if (i < k) return successor(x, n_minus_k);
+            return successor(f, i - k);
+        }
+    }
+
+    var s = sequence(array_random(), "s");
+    print(s);
+
+    var f = begin(s);
+    var m = successor(begin(s), 3);
+    var l = end(s);
+    var from = k_rotate_from_permutation_indexed(f, m, l);
+    rotate_cycles(f, m, l, from);
+    print(s);
+    print('...');
+}
+
+function __rotate_cycles_attributes() {
 
 }
 

@@ -814,6 +814,24 @@ function rotate_bidirectional(f, m, l) {
     return res;
 }
 
+function __debug_rotate_cycles(f, m, l, from) {
+    var l_m = distance(l, m);
+    var d = gcd(distance(m, f), l_m);
+
+    while (d != 0) {
+        cycle_from(successor(f, d), from);
+        --d;
+    }
+    return successor(f, l_m);
+}
+
+function rotate_cycles(f, m, l, from) {
+    var _f_ = start_f('rotate_cycles', f, m, l, from);
+    var res = __debug_rotate_cycles(f, m, l, from);
+    end_f(_f_);
+    return res;
+}
+
 function __debug_rotate_random_access_nontrivial(f, m, l) {
     var p = k_rotate_from_permutation_random_access(f, m, l);
     return rotate_cycles(f, m, l, p);
