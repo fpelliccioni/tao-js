@@ -740,9 +740,18 @@ function __selection_sort_stable_attributes() {
 }
 
 function __cycle_from_usage() {
+    function successorMod10(i) {
+        var f = begin(s);
+        var index = distance(begin(s), i);
+        ++index;
+        index = index % 10;
+        var ret = successor(f, index);
+        return ret;
+    }
+
     var s = sequence(array_random(), "s");
     print(s);
-    rotate_bidirectional(begin(s), successor(begin(s), 3), end(s));
+    cycle_from(begin(s), successorMod10);
     print(s);
     print('...');
 }
