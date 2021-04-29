@@ -646,6 +646,60 @@ function cycle_to(i, f) {
     return res;
 }
 
+function __debug_cycle_to_2n_1(i, f) {
+    var k = f(i);
+    if (equal(k, i)) return;
+
+    var buf = sequence(array_all_equal(1, "-"), "buf");
+    var b = begin(buf);
+    var b2 = i;
+
+    sink(b, source(k));
+    sink(k, source(b2));
+
+    var res = swap_iters(b, b2);
+    b = res[0];
+    b2 = res[1];
+
+    k = f(k);
+    while ( ! equal(k, i)) {
+        sink(b, source(k));
+        sink(k, source(b2));
+
+        var res = swap_iters(b, b2);
+        b = res[0];
+        b2 = res[1];
+
+        k = f(k);
+    }
+    sink(i, source(b2));
+}
+
+function cycle_to_2n_1(i, f) {
+    var _f_ = start_f('cycle_to_2n_1', i, f);
+    var res = __debug_cycle_to_2n_1(i, f);
+    end_f(_f_);
+    return res;
+}
+
+function __debug_cycle_to_recursive(i, f) {
+    var k = f(i);
+    if (equal(k, i)) return;
+
+    var buf = sequence(array_all_equal(1, "-"), "buf");
+    var b = begin(buf);
+    cycle_to_internal(i, k, f, b);
+    sink(k, source(i));
+    sink(i, source(b));
+}
+
+function cycle_to_recursive(i, f) {
+    var _f_ = start_f('cycle_to_recursive', i, f);
+    var res = __debug_cycle_to_recursive(i, f);
+    end_f(_f_);
+    return res;
+}
+
 function __debug_reverse(f, l) {
     while (true) {
         if (equal(f, l)) return;

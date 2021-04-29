@@ -380,6 +380,46 @@ function cycle_to(i, f) {
     }
 }
 
+function cycle_to_2n_1(i, f) {
+    var k = f(i);
+    if (equal(k, i)) return;
+
+    var buf = sequence(array_all_equal(1, "-"), "buf");
+    var b = begin(buf);
+    var b2 = i;
+
+    sink(b, source(k));
+    sink(k, source(b2));
+
+    var res = swap_iters(b, b2);
+    b = res[0];
+    b2 = res[1];
+
+    k = f(k);
+    while ( ! equal(k, i)) {
+        sink(b, source(k));
+        sink(k, source(b2));
+
+        var res = swap_iters(b, b2);
+        b = res[0];
+        b2 = res[1];
+
+        k = f(k);
+    }
+    sink(i, source(b2));
+}
+
+function cycle_to_recursive(i, f) {
+    var k = f(i);
+    if (equal(k, i)) return;
+
+    var buf = sequence(array_all_equal(1, "-"), "buf");
+    var b = begin(buf);
+    cycle_to_internal(i, k, f, b);
+    sink(k, source(i));
+    sink(i, source(b));
+}
+
 function reverse(f, l) {
     while (true) {
         if (equal(f, l)) return;

@@ -37,6 +37,8 @@ selection_sort_classic: [ 'rearrangements/ordering-based/sorting/selection-sort'
 selection_sort_stable: [ 'rearrangements/ordering-based/sorting/selection-sort', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/rearrangements/ordering-based/sorting/selection-sort/selection_sort_stable.js' ],
 cycle_from: [ 'rearrangements/position-based/cycle', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/rearrangements/position-based/cycle/cycle_from.js' ],
 cycle_to: [ 'rearrangements/position-based/cycle', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/rearrangements/position-based/cycle/cycle_to.js' ],
+cycle_to_2n_1: [ 'rearrangements/position-based/cycle', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/rearrangements/position-based/cycle/cycle_to_2n_1.js' ],
+cycle_to_recursive: [ 'rearrangements/position-based/cycle', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/rearrangements/position-based/cycle/cycle_to_recursive.js' ],
 reverse: [ 'rearrangements/position-based/reverse', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/rearrangements/position-based/reverse/reverse.js' ],
 reverse_bidirectional: [ 'rearrangements/position-based/reverse', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/rearrangements/position-based/reverse/reverse_bidirectional.js' ],
 reverse_n_adaptive: [ 'rearrangements/position-based/reverse', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/rearrangements/position-based/reverse/reverse_n_adaptive.js' ],
@@ -767,6 +769,62 @@ function __cycle_to_usage() {
 }
 
 function __cycle_to_attributes() {
+
+}
+
+function __cycle_to_2n_1_usage() {
+    function swap_iters(a, b) {
+        return [b, a];
+    }
+
+    function successorMod10(i) {
+        var f = begin(s);
+        var index = distance(begin(s), i);
+        ++index;
+        index = index % 10;
+        var ret = successor(f, index);
+        return ret;
+    }
+
+    var s = sequence(array_random(), "s");
+    print(s);
+    cycle_to_2n_1(begin(s), successorMod10);
+    print(s);
+    print('...');
+}
+
+function __cycle_to_2n_1_attributes() {
+
+}
+
+function __cycle_to_recursive_usage() {
+    function cycle_to_internal(i, k, f, b) {
+        var n = f(k);
+        if (equal(n, i)) {
+            sink(b, source(k));
+            return;
+        }
+        cycle_to_internal(i, n, f, b);
+        sink(n, source(k));
+    }
+
+    function successorMod10(i) {
+        var f = begin(s);
+        var index = distance(begin(s), i);
+        ++index;
+        index = index % 5;
+        var ret = successor(f, index);
+        return ret;
+    }
+
+    var s = sequence(array_random(5), "s");
+    print(s);
+    cycle_to_recursive(begin(s), successorMod10);
+    print(s);
+    print('...');
+}
+
+function __cycle_to_recursive_attributes() {
 
 }
 
