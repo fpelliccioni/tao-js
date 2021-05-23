@@ -289,7 +289,7 @@ function multiply4(n, a) {
     }
     if (n == 1) return a;
     // even(n - 1) ==> n - 1 != 1
-    return multiply_accumulate4(a, half(n - 1), a);
+    return multiply_accumulate4(a, half(n - 1), a + a);
 
 }
 
