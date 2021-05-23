@@ -12,8 +12,7 @@ function print_sieve(f, n) {
 }
 
 function usage() {
-    var v = sequence(array_all_equal(20, '0'), "v");
-    mark_sieve(begin(v), end(v), 3);
+    var v = sequence([1, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1, 0, 0, 1, 1, 0, 0, 1, 0, 1], "v");
     print_sieve(begin(v), size(v));
   }
 

@@ -731,8 +731,7 @@ function __mark_sieve_n_attributes() {
 }
 
 function __print_sieve_usage() {
-    var v = sequence(array_all_equal(20, '0'), "v");
-    mark_sieve(begin(v), end(v), 3);
+    var v = sequence([1, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1, 0, 0, 1, 1, 0, 0, 1, 0, 1], "v");
     print_sieve(begin(v), size(v));
   }
 
