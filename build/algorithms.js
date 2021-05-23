@@ -251,6 +251,47 @@ function gcd(a, b) {
     return a;
 }
 
+function gcd0(a, b) {
+    while (a != b) {
+        if (b < a) a -= b;
+        else       b -= a;
+    }
+    return a;
+}
+
+function gcd1(a, b) {
+    while (a != b) {
+        while (b < a) a -= b;
+        //swap(a, b) not possible in ES5
+        var tmp = a;
+        a = b;
+        b = tmp;
+    }
+    return a;
+}
+
+function gcd2(a, b) {
+    while (a != b) {
+        a = remainder_slow(a, b);
+        //swap(a, b) not possible in ES5
+        var tmp = a;
+        a = b;
+        b = tmp;
+    }
+    return a;
+}
+
+function gcd3(a, b) {
+    while (a != b) {
+        a = remainder(a, b);
+        //swap(a, b) not possible in ES5
+        var tmp = a;
+        a = b;
+        b = tmp;
+    }
+    return a;
+}
+
 function multiply0(n, a) {
     if (n == 1) return a;
     var product = multiply0(n - 1, a)
@@ -334,6 +375,99 @@ function multiply_accumulate4(r, n, a) {
         n = half(n);
         a += a;
     }
+}
+
+function largest_doubling(a, b) {
+    // precondition: b != 0
+    while (a - b >= b) b += b;
+    return b;
+}
+
+function quotient(a, b) {
+    // precondition: b > 0
+    if (a < b) return 0;
+    var c = largest_doubling(a, b);
+    var n = 1;
+    a -= c;
+    while (c != b) {
+        c = half(c);
+        n += n;
+        if (c <= a) {
+            a -= c;
+            ++n;
+        }
+    }
+    return n;
+}
+
+function quotient_remainder(a, b) {
+    // precondition: b > 0
+    if (a < b) return [0, a];
+    var c = largest_doubling(a, b);
+    var n = 1;
+    a -= c;
+    while (c != b) {
+        c = half(c);
+        n += n;
+        if (c <= a) {
+            a -= c;
+            ++n;
+        }
+    }
+    return [n, a];
+}
+
+function remainder(a, b) {
+    // precondition: b != 0
+    if (a < b) return a;
+    var c = largest_doubling(a, b);
+    a -= c;
+    while (c != b) {
+        c = half(c);
+        if (c <= a) a -= c;
+    }
+    return a;
+}
+
+function remainder_fast0(a, b) {
+    if (a <= b) return a;
+    if (a - b <= b) return a - b;
+    a = remainder_fast0(a, b + b);
+    if (a <= b) return a;
+    return a - b
+}
+
+function remainder_fast1(a, b) {
+    // precondition: b != 0
+
+    if (a < b) return a;
+    if (a - b < b) return a - b;
+    a = remainder_fast1(a, b + b);
+    if (a < b) return a;
+    return a - b
+}
+
+function remainder_fibonacci(a, b) {
+    // precondition: b > 0
+    if (a < b) return a;
+    var c = b;
+    do {
+        var tmp = c;
+        c += b;
+        b = tmp;
+    } while (a >= c);
+    do {
+        if (a >= b) a -= b;
+        var tmp = c - b;
+        c = b;
+        b = tmp;
+    } while (b < c);
+    return a;
+}
+
+function remainder_slow(a, b) {
+    while (b < a) a -= b;
+    return a;
 }
 
 function mark_sieve(f, l, factor) {

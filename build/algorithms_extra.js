@@ -23,7 +23,11 @@ partition_copy: [ 'copying/predicate', 'https://github.com/fpelliccioni/tao-js/b
 partition_copy_n: [ 'copying/predicate', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/copying/predicate/partition_copy_n.js' ],
 split_copy: [ 'copying/predicate', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/copying/predicate/split_copy.js' ],
 split_copy_n: [ 'copying/predicate', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/copying/predicate/split_copy_n.js' ],
-gcd: [ 'numerics', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/numerics/gcd.js' ],
+gcd: [ 'numerics/gcd', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/numerics/gcd/gcd.js' ],
+gcd0: [ 'numerics/gcd', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/numerics/gcd/gcd0.js' ],
+gcd1: [ 'numerics/gcd', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/numerics/gcd/gcd1.js' ],
+gcd2: [ 'numerics/gcd', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/numerics/gcd/gcd2.js' ],
+gcd3: [ 'numerics/gcd', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/numerics/gcd/gcd3.js' ],
 multiply0: [ 'numerics/power', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/numerics/power/multiply0.js' ],
 multiply1: [ 'numerics/power', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/numerics/power/multiply1.js' ],
 multiply2: [ 'numerics/power', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/numerics/power/multiply2.js' ],
@@ -34,6 +38,14 @@ multiply_accumulate1: [ 'numerics/power', 'https://github.com/fpelliccioni/tao-j
 multiply_accumulate2: [ 'numerics/power', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/numerics/power/multiply_accumulate2.js' ],
 multiply_accumulate3: [ 'numerics/power', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/numerics/power/multiply_accumulate3.js' ],
 multiply_accumulate4: [ 'numerics/power', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/numerics/power/multiply_accumulate4.js' ],
+largest_doubling: [ 'numerics/remainder', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/numerics/remainder/largest_doubling.js' ],
+quotient: [ 'numerics/remainder', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/numerics/remainder/quotient.js' ],
+quotient_remainder: [ 'numerics/remainder', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/numerics/remainder/quotient_remainder.js' ],
+remainder: [ 'numerics/remainder', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/numerics/remainder/remainder.js' ],
+remainder_fast0: [ 'numerics/remainder', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/numerics/remainder/remainder_fast0.js' ],
+remainder_fast1: [ 'numerics/remainder', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/numerics/remainder/remainder_fast1.js' ],
+remainder_fibonacci: [ 'numerics/remainder', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/numerics/remainder/remainder_fibonacci.js' ],
+remainder_slow: [ 'numerics/remainder', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/numerics/remainder/remainder_slow.js' ],
 mark_sieve: [ 'numerics/sift', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/numerics/sift/mark_sieve.js' ],
 mark_sieve_n: [ 'numerics/sift', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/numerics/sift/mark_sieve_n.js' ],
 print_sieve: [ 'numerics/sift', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/numerics/sift/print_sieve.js' ],
@@ -533,6 +545,54 @@ function __gcd_attributes() {
 
 }
 
+function __gcd0_usage() {
+    var a = random_int();
+    var b = random_int();
+
+    var d = gcd0(a, b);
+    print(d);
+}
+
+function __gcd0_attributes() {
+
+}
+
+function __gcd1_usage() {
+    var a = random_int();
+    var b = random_int();
+
+    var d = gcd1(a, b);
+    print(d);
+}
+
+function __gcd1_attributes() {
+
+}
+
+function __gcd2_usage() {
+    var a = random_int();
+    var b = random_int();
+
+    var d = gcd2(a, b);
+    print(d);
+}
+
+function __gcd2_attributes() {
+
+}
+
+function __gcd3_usage() {
+    var a = random_int();
+    var b = random_int();
+
+    var d = gcd3(a, b);
+    print(d);
+}
+
+function __gcd3_attributes() {
+
+}
+
 function __multiply0_usage() {
     var n = random_int();
     var a = random_int();
@@ -698,15 +758,127 @@ function __power_attributes() {
 
 }
 
-function __remainder_usage() {
+function __largest_doubling_usage() {
+
     var a = random_int();
     var b = random_int();
-    
-    var g = gcd(a, b);
-    print(g);
+
+    var r = largest_doubling(a, b);
+    print(r);
+}
+
+function __largest_doubling_attributes() {
+
+}
+
+function __quotient_usage() {
+    function largest_doubling(a, b) {
+        // precondition: b != 0
+        while (a - b >= b) b += b;
+        return b;
+    }
+
+    var a = random_int();
+    var b = random_int();
+
+    var r = remainder(a, b);
+    print(r);
+}
+
+function __quotient_attributes() {
+
+}
+
+function __quotient_remainder_usage() {
+    function largest_doubling(a, b) {
+        // precondition: b != 0
+        while (a - b >= b) b += b;
+        return b;
+    }
+
+    var a = random_int();
+    var b = random_int();
+
+    var res = quotient_remainder(a, b);
+    var q = res[0];
+    var r = res[1];
+    print(q);
+    print(r);
+}
+
+function __quotient_remainder_attributes() {
+
+}
+
+function __remainder_usage() {
+    function largest_doubling(a, b) {
+        // precondition: b != 0
+        while (a - b >= b) b += b;
+        return b;
+    }
+
+    var a = random_int();
+    var b = random_int();
+
+    var r = remainder(a, b);
+    print(r);
 }
 
 function __remainder_attributes() {
+
+}
+
+function __remainder_fast0_usage() {
+    var a = random_int();
+    var b = random_int();
+
+    var r = remainder_fast0(a, b);
+    print(r);
+}
+
+function __remainder_fast0_attributes() {
+
+}
+
+function __remainder_fast1_usage() {
+    var a = random_int();
+    var b = random_int();
+
+    var r = remainder_fast1(a, b);
+    print(r);
+}
+
+function __remainder_fast1_attributes() {
+
+}
+
+function __remainder_fibonacci_usage() {
+    function largest_doubling(a, b) {
+        // precondition: b != 0
+        while (a - b >= b) b += b;
+        return b;
+    }
+
+    var a = random_int();
+    var b = random_int();
+
+    var r = remainder_fibonacci(a, b);
+    print(r);
+}
+
+function __remainder_fibonacci_attributes() {
+
+}
+
+function __remainder_slow_usage() {
+    var a = random_int();
+    var b = random_int();
+
+    var r = remainder_slow(a, b);
+    print(r);
+}
+
+function __remainder_slow_attributes() {
 
 }
 
