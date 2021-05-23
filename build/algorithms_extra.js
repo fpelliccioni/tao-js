@@ -557,7 +557,7 @@ function __multiply2_usage() {
                 if (n == 1) return r;
             }
             n = half(n);
-            a =+ a;
+            a += a;
         }
     }
 
@@ -580,7 +580,7 @@ function __multiply3_usage() {
                 if (n == 1) return r;
             }
             n = half(n);
-            a =+ a;
+            a += a;
         }
     }
 
@@ -603,7 +603,7 @@ function __multiply4_usage() {
                 if (n == 1) return r;
             }
             n = half(n);
-            a =+ a;
+            a += a;
         }
     }
 
