@@ -321,7 +321,7 @@ function multiply_accumulate3(r, n, a) {
         if (n == 1) return r;
     }
     n = half(n);
-    a =+ a;
+    a += a;
     return multiply_accumulate3(r, n,  a);
 }
 
@@ -1164,5 +1164,20 @@ function palindrome_naive(seq_arr, r) {
     var res = equal_r(f, l, f2, r);
 
     return res;
+}
+
+function fill(f, l, x) {
+    while ( ! equal(f, l)) {
+        sink(f, x);
+        f = successor(f);
+    }
+}
+
+function fill_n(f, n, x) {
+    while (n != 0) {
+        sink(f, x);
+        f = successor(f);
+        --n;
+    }
 }
 

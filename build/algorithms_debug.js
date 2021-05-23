@@ -552,7 +552,7 @@ function __debug_multiply_accumulate3(r, n, a) {
         if (n == 1) return r;
     }
     n = half(n);
-    a =+ a;
+    a += a;
     return multiply_accumulate3(r, n,  a);
 }
 
@@ -1932,6 +1932,35 @@ function __debug_palindrome_naive(seq_arr, r) {
 function palindrome_naive(seq_arr, r) {
     var _f_ = start_f('palindrome_naive', seq_arr, r);
     var res = __debug_palindrome_naive(seq_arr, r);
+    end_f(_f_);
+    return res;
+}
+
+function __debug_fill(f, l, x) {
+    while ( ! equal(f, l)) {
+        sink(f, x);
+        f = successor(f);
+    }
+}
+
+function fill(f, l, x) {
+    var _f_ = start_f('fill', f, l, x);
+    var res = __debug_fill(f, l, x);
+    end_f(_f_);
+    return res;
+}
+
+function __debug_fill_n(f, n, x) {
+    while (n != 0) {
+        sink(f, x);
+        f = successor(f);
+        --n;
+    }
+}
+
+function fill_n(f, n, x) {
+    var _f_ = start_f('fill_n', f, n, x);
+    var res = __debug_fill_n(f, n, x);
     end_f(_f_);
     return res;
 }

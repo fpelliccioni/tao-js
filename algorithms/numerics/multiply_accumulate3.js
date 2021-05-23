@@ -4,7 +4,7 @@ function multiply_accumulate3(r, n, a) {
         if (n == 1) return r;
     }
     n = half(n);
-    a =+ a;
+    a += a;
     return multiply_accumulate3(r, n,  a);
 }
 

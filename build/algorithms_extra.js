@@ -109,6 +109,8 @@ insert_naive: [ 'uncatalogued', 'https://github.com/fpelliccioni/tao-js/blob/mas
 iota: [ 'uncatalogued', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/uncatalogued/iota.js' ],
 palindrome_bidirectional: [ 'uncatalogued', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/uncatalogued/palindrome_bidirectional.js' ],
 palindrome_naive: [ 'uncatalogued', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/uncatalogued/palindrome_naive.js' ],
+fill: [ 'writing', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/writing/fill.js' ],
+fill_n: [ 'writing', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/writing/fill_n.js' ],
 };}
 
 function __copy_usage() {
@@ -699,6 +701,29 @@ function __remainder_usage() {
 }
 
 function __remainder_attributes() {
+
+}
+
+function __sift0_usage() {
+    function multiply_accumulate4(r, n, a) {
+        while (true) {
+            if (odd(n)) {
+                r += a;
+                if (n == 1) return r;
+            }
+            n = half(n);
+            a += a;
+        }
+    }
+
+    var n = random_int();
+    var a = random_int();
+
+    var p = multiply4(n, a);
+    print(p);
+}
+
+function __sift0_attributes() {
 
 }
 
@@ -2239,6 +2264,28 @@ function __palindrome_naive_usage() {
 }
 
 function __palindrome_naive_attributes() {
+
+}
+
+function __fill_usage() {
+
+    var s = sequence(new Array(10), "s");
+    fill(begin(s), end(s), '?');
+    print(s);
+}
+
+function __fill_attributes() {
+
+}
+
+function __fill_n_usage() {
+
+    var s = sequence(new Array(10), "s");
+    fill_n(begin(s), size(s), '?');
+    print(s);
+}
+
+function __fill_n_attributes() {
 
 }
 
