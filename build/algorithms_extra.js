@@ -34,6 +34,7 @@ multiply_accumulate1: [ 'numerics', 'https://github.com/fpelliccioni/tao-js/blob
 multiply_accumulate2: [ 'numerics', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/numerics/multiply_accumulate2.js' ],
 multiply_accumulate3: [ 'numerics', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/numerics/multiply_accumulate3.js' ],
 multiply_accumulate4: [ 'numerics', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/numerics/multiply_accumulate4.js' ],
+sift0: [ 'numerics', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/numerics/sift0.js' ],
 insertion_sort: [ 'rearrangements/ordering-based/sorting/insertion-sort', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/rearrangements/ordering-based/sorting/insertion-sort/insertion_sort.js' ],
 insertion_sort_backward: [ 'rearrangements/ordering-based/sorting/insertion-sort', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/rearrangements/ordering-based/sorting/insertion-sort/insertion_sort_backward.js' ],
 insertion_sort_classic: [ 'rearrangements/ordering-based/sorting/insertion-sort', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/rearrangements/ordering-based/sorting/insertion-sort/insertion_sort_classic.js' ],
@@ -705,23 +706,34 @@ function __remainder_attributes() {
 }
 
 function __sift0_usage() {
-    function multiply_accumulate4(r, n, a) {
-        while (true) {
-            if (odd(n)) {
-                r += a;
-                if (n == 1) return r;
-            }
-            n = half(n);
-            a += a;
+    function mark_sieve(f, l, factor) {
+        // precondition: ! equal(f, l)
+
+        sink(f, false);
+        var xxx = distance(f, l);
+        while (distance(f, l) > factor) {
+            f = successor(f, factor);
+            sink(f, false);
         }
     }
 
-    var n = random_int();
-    var a = random_int();
+    function print_sieve(f, n) {
+        var i = 0;
+        var out = "2";
+        while (i < n) {
+            if (source(f)) {
+                out += " " + (2 * i + 3);
+            }
+            f = successor(f);
+            ++i;
+        }
+        print(out);
+    }
 
-    var p = multiply4(n, a);
-    print(p);
-}
+    var v = sequence(new Array(20), "v");
+    sift0(begin(v), size(v));
+    print_sieve(begin(v), size(v));
+  }
 
 function __sift0_attributes() {
 
