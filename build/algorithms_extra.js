@@ -24,6 +24,16 @@ partition_copy_n: [ 'copying/predicate', 'https://github.com/fpelliccioni/tao-js
 split_copy: [ 'copying/predicate', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/copying/predicate/split_copy.js' ],
 split_copy_n: [ 'copying/predicate', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/copying/predicate/split_copy_n.js' ],
 gcd: [ 'numerics', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/numerics/gcd.js' ],
+multiply0: [ 'numerics', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/numerics/multiply0.js' ],
+multiply1: [ 'numerics', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/numerics/multiply1.js' ],
+multiply2: [ 'numerics', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/numerics/multiply2.js' ],
+multiply3: [ 'numerics', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/numerics/multiply3.js' ],
+multiply4: [ 'numerics', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/numerics/multiply4.js' ],
+multiply_accumulate0: [ 'numerics', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/numerics/multiply_accumulate0.js' ],
+multiply_accumulate1: [ 'numerics', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/numerics/multiply_accumulate1.js' ],
+multiply_accumulate2: [ 'numerics', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/numerics/multiply_accumulate2.js' ],
+multiply_accumulate3: [ 'numerics', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/numerics/multiply_accumulate3.js' ],
+multiply_accumulate4: [ 'numerics', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/numerics/multiply_accumulate4.js' ],
 insertion_sort: [ 'rearrangements/ordering-based/sorting/insertion-sort', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/rearrangements/ordering-based/sorting/insertion-sort/insertion_sort.js' ],
 insertion_sort_backward: [ 'rearrangements/ordering-based/sorting/insertion-sort', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/rearrangements/ordering-based/sorting/insertion-sort/insertion_sort_backward.js' ],
 insertion_sort_classic: [ 'rearrangements/ordering-based/sorting/insertion-sort', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/rearrangements/ordering-based/sorting/insertion-sort/insertion_sort_classic.js' ],
@@ -512,6 +522,183 @@ function __gcd_usage() {
 }
 
 function __gcd_attributes() {
+
+}
+
+function __multiply0_usage() {
+    var n = random_int();
+    var a = random_int();
+
+    var p = multiply0(n, a);
+    print(p);
+}
+
+function __multiply0_attributes() {
+
+}
+
+function __multiply1_usage() {
+    var n = random_int();
+    var a = random_int();
+
+    var p = multiply1(n, a);
+    print(p);
+}
+
+function __multiply1_attributes() {
+
+}
+
+function __multiply2_usage() {
+    function multiply_accumulate4(r, n, a) {
+        while (true) {
+            if (odd(n)) {
+                r += a;
+                if (n == 1) return r;
+            }
+            n = half(n);
+            a =+ a;
+        }
+    }
+
+    var n = random_int();
+    var a = random_int();
+
+    var p = multiply2(n, a);
+    print(p);
+}
+
+function __multiply2_attributes() {
+
+}
+
+function __multiply3_usage() {
+    function multiply_accumulate4(r, n, a) {
+        while (true) {
+            if (odd(n)) {
+                r += a;
+                if (n == 1) return r;
+            }
+            n = half(n);
+            a =+ a;
+        }
+    }
+
+    var n = random_int();
+    var a = random_int();
+
+    var p = multiply3(n, a);
+    print(p);
+}
+
+function __multiply3_attributes() {
+
+}
+
+function __multiply4_usage() {
+    function multiply_accumulate4(r, n, a) {
+        while (true) {
+            if (odd(n)) {
+                r += a;
+                if (n == 1) return r;
+            }
+            n = half(n);
+            a =+ a;
+        }
+    }
+
+    var n = random_int();
+    var a = random_int();
+
+    var p = multiply4(n, a);
+    print(p);
+}
+
+function __multiply4_attributes() {
+
+}
+
+function __multiply_accumulate0_usage() {
+    var n = random_int();
+    var a = random_int();
+
+    var p = multiply_accumulate0(0, n, a);
+    print(p);
+}
+
+function __multiply_accumulate0_attributes() {
+
+}
+
+function __multiply_accumulate1_usage() {
+    var n = random_int();
+    var a = random_int();
+
+    var p = multiply_accumulate1(0, n, a);
+    print(p);
+}
+
+function __multiply_accumulate1_attributes() {
+
+}
+
+function __multiply_accumulate2_usage() {
+    var n = random_int();
+    var a = random_int();
+
+    var p = multiply_accumulate2(0, n, a);
+    print(p);
+}
+
+function __multiply_accumulate2_attributes() {
+
+}
+
+function __multiply_accumulate3_usage() {
+    var n = random_int();
+    var a = random_int();
+
+    var p = multiply_accumulate3(0, n, a);
+    print(p);
+}
+
+function __multiply_accumulate3_attributes() {
+
+}
+
+function __multiply_accumulate4_usage() {
+    var n = random_int();
+    var a = random_int();
+
+    var p = multiply_accumulate4(0, n, a);
+    print(p);
+}
+
+function __multiply_accumulate4_attributes() {
+
+}
+
+function __power_usage() {
+    var a = random_int();
+    var b = random_int();
+    
+    var g = gcd(a, b);
+    print(g);
+}
+
+function __power_attributes() {
+
+}
+
+function __remainder_usage() {
+    var a = random_int();
+    var b = random_int();
+    
+    var g = gcd(a, b);
+    print(g);
+}
+
+function __remainder_attributes() {
 
 }
 

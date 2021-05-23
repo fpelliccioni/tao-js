@@ -251,6 +251,89 @@ function gcd(a, b) {
     return a;
 }
 
+function multiply0(n, a) {
+    if (n == 1) return a;
+    return multiply0(n - 1, a) + a;
+}
+
+function multiply1(n, a) {
+    if (n == 1) return a;
+    var product = multiply1(half(n),  a + a);
+    if (odd(n)) product += a;
+    return product;
+
+}
+
+function multiply2(n, a) {
+    if (n == 1) return a;
+    return multiply_accumulate4(a, n - 1, a);
+
+}
+
+function multiply3(n, a) {
+    while (even(n)) {
+        a += a;
+        n = half(n);
+    }
+    if (n == 1) return a;
+    return multiply_accumulate4(a, n - 1, a);
+
+}
+
+function multiply4(n, a) {
+    while (even(n)) {
+        a += a;
+        n = half(n);
+    }
+    if (n == 1) return a;
+    // even(n - 1) ==> n - 1 != 1
+    return multiply_accumulate4(a, half(n - 1), a);
+
+}
+
+function multiply_accumulate0(r, n, a) {
+    if (n == 1) return r + a;
+    if (odd(n)) {
+        return multiply_accumulate0(r + a, half(n),  a + a);
+    }
+    return multiply_accumulate0(r, half(n),  a + a);
+}
+
+function multiply_accumulate1(r, n, a) {
+    if (n == 1) return r + a;
+    if (odd(n)) r += a;
+    return multiply_accumulate1(r, half(n),  a + a);
+}
+
+function multiply_accumulate2(r, n, a) {
+    if (odd(n)) {
+        r += a;
+        if (n == 1) return r;
+    }
+    return multiply_accumulate2(r, half(n),  a + a);
+}
+
+function multiply_accumulate3(r, n, a) {
+    if (odd(n)) {
+        r += a;
+        if (n == 1) return r;
+    }
+    n = half(n);
+    a =+ a;
+    return multiply_accumulate3(r, n,  a);
+}
+
+function multiply_accumulate4(r, n, a) {
+    while (true) {
+        if (odd(n)) {
+            r += a;
+            if (n == 1) return r;
+        }
+        n = half(n);
+        a =+ a;
+    }
+}
+
 function insertion_sort(f, l, r) {
     if (equal(f, l)) return;
     var c = successor(f);
