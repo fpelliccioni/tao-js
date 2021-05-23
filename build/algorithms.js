@@ -400,6 +400,27 @@ function quotient(a, b) {
     return n;
 }
 
+function quotient_fibonacci(a, b) {
+    // precondition: b > 0
+    if (a < b) return a;
+    var c = b;
+    do {
+        var tmp = c;
+        c += b;
+        b = tmp;
+    } while (a >= c);
+
+    var n = 1;
+    do {
+        if (a >= b) a -= b;
+        var tmp = c - b;
+        c = b;
+        b = tmp;
+        ++n;
+    } while (b < c);
+    return n;
+}
+
 function quotient_remainder(a, b) {
     // precondition: b > 0
     if (a < b) return [0, a];

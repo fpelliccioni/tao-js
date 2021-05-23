@@ -40,6 +40,7 @@ multiply_accumulate3: [ 'numerics/power', 'https://github.com/fpelliccioni/tao-j
 multiply_accumulate4: [ 'numerics/power', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/numerics/power/multiply_accumulate4.js' ],
 largest_doubling: [ 'numerics/remainder', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/numerics/remainder/largest_doubling.js' ],
 quotient: [ 'numerics/remainder', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/numerics/remainder/quotient.js' ],
+quotient_fibonacci: [ 'numerics/remainder', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/numerics/remainder/quotient_fibonacci.js' ],
 quotient_remainder: [ 'numerics/remainder', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/numerics/remainder/quotient_remainder.js' ],
 remainder: [ 'numerics/remainder', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/numerics/remainder/remainder.js' ],
 remainder_fast0: [ 'numerics/remainder', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/numerics/remainder/remainder_fast0.js' ],
@@ -781,11 +782,25 @@ function __quotient_usage() {
     var a = random_int();
     var b = random_int();
 
-    var r = remainder(a, b);
-    print(r);
+    var q = quotient(a, b);
+    print(q);
 }
 
 function __quotient_attributes() {
+
+}
+
+function __quotient_fibonacci_usage() {
+    // var a = random_int();
+    // var b = random_int();
+    var a = 45;
+    var b = 6;
+
+    var q = quotient_fibonacci(a, b);
+    print(q);
+}
+
+function __quotient_fibonacci_attributes() {
 
 }
 
@@ -853,12 +868,6 @@ function __remainder_fast1_attributes() {
 }
 
 function __remainder_fibonacci_usage() {
-    function largest_doubling(a, b) {
-        // precondition: b != 0
-        while (a - b >= b) b += b;
-        return b;
-    }
-
     var a = random_int();
     var b = random_int();
 

@@ -18,12 +18,6 @@ function remainder_fibonacci(a, b) {
 }
 
 function usage() {
-    function largest_doubling(a, b) {
-        // precondition: b != 0
-        while (a - b >= b) b += b;
-        return b;
-    }
-
     var a = random_int();
     var b = random_int();
 

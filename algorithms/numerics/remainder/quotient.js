@@ -25,8 +25,8 @@ function usage() {
     var a = random_int();
     var b = random_int();
 
-    var r = remainder(a, b);
-    print(r);
+    var q = quotient(a, b);
+    print(q);
 }
 
 function attributes() {
