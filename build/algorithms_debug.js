@@ -687,34 +687,6 @@ function quotient(a, b) {
     return res;
 }
 
-function __debug_quotient_fibonacci(a, b) {
-    // precondition: b > 0
-    if (a < b) return a;
-    var c = b;
-    do {
-        var tmp = c;
-        c += b;
-        b = tmp;
-    } while (a >= c);
-
-    var n = 1;
-    do {
-        if (a >= b) a -= b;
-        var tmp = c - b;
-        c = b;
-        b = tmp;
-        ++n;
-    } while (b < c);
-    return n;
-}
-
-function quotient_fibonacci(a, b) {
-    var _f_ = start_f('quotient_fibonacci', a, b);
-    var res = __debug_quotient_fibonacci(a, b);
-    end_f(_f_);
-    return res;
-}
-
 function __debug_quotient_remainder(a, b) {
     // precondition: b > 0
     if (a < b) return [0, a];
