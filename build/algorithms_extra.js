@@ -24,17 +24,22 @@ partition_copy_n: [ 'copying/predicate', 'https://github.com/fpelliccioni/tao-js
 split_copy: [ 'copying/predicate', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/copying/predicate/split_copy.js' ],
 split_copy_n: [ 'copying/predicate', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/copying/predicate/split_copy_n.js' ],
 gcd: [ 'numerics', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/numerics/gcd.js' ],
-multiply0: [ 'numerics', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/numerics/multiply0.js' ],
-multiply1: [ 'numerics', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/numerics/multiply1.js' ],
-multiply2: [ 'numerics', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/numerics/multiply2.js' ],
-multiply3: [ 'numerics', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/numerics/multiply3.js' ],
-multiply4: [ 'numerics', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/numerics/multiply4.js' ],
-multiply_accumulate0: [ 'numerics', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/numerics/multiply_accumulate0.js' ],
-multiply_accumulate1: [ 'numerics', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/numerics/multiply_accumulate1.js' ],
-multiply_accumulate2: [ 'numerics', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/numerics/multiply_accumulate2.js' ],
-multiply_accumulate3: [ 'numerics', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/numerics/multiply_accumulate3.js' ],
-multiply_accumulate4: [ 'numerics', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/numerics/multiply_accumulate4.js' ],
-sift0: [ 'numerics', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/numerics/sift0.js' ],
+multiply0: [ 'numerics/power', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/numerics/power/multiply0.js' ],
+multiply1: [ 'numerics/power', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/numerics/power/multiply1.js' ],
+multiply2: [ 'numerics/power', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/numerics/power/multiply2.js' ],
+multiply3: [ 'numerics/power', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/numerics/power/multiply3.js' ],
+multiply4: [ 'numerics/power', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/numerics/power/multiply4.js' ],
+multiply_accumulate0: [ 'numerics/power', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/numerics/power/multiply_accumulate0.js' ],
+multiply_accumulate1: [ 'numerics/power', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/numerics/power/multiply_accumulate1.js' ],
+multiply_accumulate2: [ 'numerics/power', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/numerics/power/multiply_accumulate2.js' ],
+multiply_accumulate3: [ 'numerics/power', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/numerics/power/multiply_accumulate3.js' ],
+multiply_accumulate4: [ 'numerics/power', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/numerics/power/multiply_accumulate4.js' ],
+mark_sieve: [ 'numerics/sift', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/numerics/sift/mark_sieve.js' ],
+mark_sieve_n: [ 'numerics/sift', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/numerics/sift/mark_sieve_n.js' ],
+print_sieve: [ 'numerics/sift', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/numerics/sift/print_sieve.js' ],
+sift: [ 'numerics/sift', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/numerics/sift/sift.js' ],
+sift0: [ 'numerics/sift', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/numerics/sift/sift0.js' ],
+sift1: [ 'numerics/sift', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/numerics/sift/sift1.js' ],
 insertion_sort: [ 'rearrangements/ordering-based/sorting/insertion-sort', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/rearrangements/ordering-based/sorting/insertion-sort/insertion_sort.js' ],
 insertion_sort_backward: [ 'rearrangements/ordering-based/sorting/insertion-sort', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/rearrangements/ordering-based/sorting/insertion-sort/insertion_sort_backward.js' ],
 insertion_sort_classic: [ 'rearrangements/ordering-based/sorting/insertion-sort', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/rearrangements/ordering-based/sorting/insertion-sort/insertion_sort_classic.js' ],
@@ -705,15 +710,54 @@ function __remainder_attributes() {
 
 }
 
+function __mark_sieve_usage() {
+    var v = sequence(array_all_equal(20, '0'), "v");
+    mark_sieve(begin(v), end(v), 3);
+    print_sieve(begin(v), size(v));
+  }
+
+function __mark_sieve_attributes() {
+
+}
+
+function __mark_sieve_n_usage() {
+    var v = sequence(array_all_equal(20, '0'), "v");
+    mark_sieve_n(begin(v), size(v), 3);
+    print_sieve(begin(v), size(v));
+  }
+
+function __mark_sieve_n_attributes() {
+
+}
+
+function __print_sieve_usage() {
+    var v = sequence(array_all_equal(20, '0'), "v");
+    mark_sieve(begin(v), end(v), 3);
+    print_sieve(begin(v), size(v));
+  }
+
+function __print_sieve_attributes() {
+
+}
+
+function __sift_usage() {
+    var v = sequence(array_all_equal(20, '0'), "v");
+    sift(begin(v), size(v));
+    print_sieve(begin(v), size(v));
+  }
+
+function __sift_attributes() {
+
+}
+
 function __sift0_usage() {
     function mark_sieve(f, l, factor) {
         // precondition: ! equal(f, l)
 
-        sink(f, false);
-        var xxx = distance(f, l);
+        sink(f, 0);
         while (distance(f, l) > factor) {
             f = successor(f, factor);
-            sink(f, false);
+            sink(f, 0);
         }
     }
 
@@ -730,12 +774,45 @@ function __sift0_usage() {
         print(out);
     }
 
-    var v = sequence(new Array(20), "v");
+    var v = sequence(array_all_equal(20, '0'), "v");
     sift0(begin(v), size(v));
     print_sieve(begin(v), size(v));
   }
 
 function __sift0_attributes() {
+
+}
+
+function __sift1_usage() {
+    function mark_sieve(f, l, factor) {
+        // precondition: ! equal(f, l)
+
+        sink(f, 0);
+        while (distance(f, l) > factor) {
+            f = successor(f, factor);
+            sink(f, 0);
+        }
+    }
+
+    function print_sieve(f, n) {
+        var i = 0;
+        var out = "2";
+        while (i < n) {
+            if (source(f)) {
+                out += " " + (2 * i + 3);
+            }
+            f = successor(f);
+            ++i;
+        }
+        print(out);
+    }
+
+    var v = sequence(array_all_equal(20, '0'), "v");
+    sift1(begin(v), size(v));
+    print_sieve(begin(v), size(v));
+  }
+
+function __sift1_attributes() {
 
 }
 

@@ -1,5 +1,5 @@
 function sift0(f, n) {
-    fill_n(f, n, true);
+    fill_n(f, n, 1);
     var i = 0;
     var index_square = 3;
     var current = f;
@@ -21,11 +21,10 @@ function usage() {
     function mark_sieve(f, l, factor) {
         // precondition: ! equal(f, l)
 
-        sink(f, false);
-        var xxx = distance(f, l);
+        sink(f, 0);
         while (distance(f, l) > factor) {
             f = successor(f, factor);
-            sink(f, false);
+            sink(f, 0);
         }
     }
 
@@ -42,7 +41,7 @@ function usage() {
         print(out);
     }
 
-    var v = sequence(new Array(20), "v");
+    var v = sequence(array_all_equal(20, '0'), "v");
     sift0(begin(v), size(v));
     print_sieve(begin(v), size(v));
   }

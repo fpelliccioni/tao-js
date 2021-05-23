@@ -581,8 +581,88 @@ function multiply_accumulate4(r, n, a) {
     return res;
 }
 
+function __debug_mark_sieve(f, l, factor) {
+    // precondition: ! equal(f, l)
+    sink(f, 0);
+    while (distance(f, l) > factor) {
+        f = successor(f, factor);
+        sink(f, 0);
+    }
+}
+
+function mark_sieve(f, l, factor) {
+    var _f_ = start_f('mark_sieve', f, l, factor);
+    var res = __debug_mark_sieve(f, l, factor);
+    end_f(_f_);
+    return res;
+}
+
+function __debug_mark_sieve_n(f, n, factor) {
+    // precondition: n > 0
+    sink(f, 0);
+    while (n > factor) {
+        f = successor(f, factor);
+        n -= factor;
+        sink(f, 0);
+    }
+}
+
+function mark_sieve_n(f, n, factor) {
+    var _f_ = start_f('mark_sieve_n', f, n, factor);
+    var res = __debug_mark_sieve_n(f, n, factor);
+    end_f(_f_);
+    return res;
+}
+
+function __debug_print_sieve(f, n) {
+    var i = 0;
+    var out = "2";
+    while (i < n) {
+        if (source(f)) {
+            out += " " + (2 * i + 3);
+        }
+        f = successor(f);
+        ++i;
+    }
+    print(out);
+}
+
+function print_sieve(f, n) {
+    var _f_ = start_f('print_sieve', f, n);
+    var res = __debug_print_sieve(f, n);
+    end_f(_f_);
+    return res;
+}
+
+function __debug_sift(f, n) {
+    fill_n(f, n, 1);
+    var i = 0;
+    var index_square = 3;
+    var factor = 3;
+    var current = f;
+    var last = successor(f, n);
+    while (index_square < n) {
+        // invariant: index_square = 2i^2 + 6i + 3
+
+        if (source(current)) {
+            mark_sieve(successor(f, index_square), last, factor);
+        }
+        ++i;
+        current = successor(current);
+        factor = i + i + 3;
+        index_square = 2 * i * (i + 3) + 3;
+    }
+}
+
+function sift(f, n) {
+    var _f_ = start_f('sift', f, n);
+    var res = __debug_sift(f, n);
+    end_f(_f_);
+    return res;
+}
+
 function __debug_sift0(f, n) {
-    fill_n(f, n, true);
+    fill_n(f, n, 1);
     var i = 0;
     var index_square = 3;
     var current = f;
@@ -603,6 +683,35 @@ function __debug_sift0(f, n) {
 function sift0(f, n) {
     var _f_ = start_f('sift0', f, n);
     var res = __debug_sift0(f, n);
+    end_f(_f_);
+    return res;
+}
+
+function __debug_sift1(f, n) {
+    fill_n(f, n, 1);
+    var i = 0;
+    var index_square = 3;
+    var factor = 3;
+    var current = f;
+    var last = successor(f, n);
+    while (index_square < n) {
+        // invariant: index_square = 2i^2 + 6i + 3
+
+        if (source(current)) {            // if current candidate is prime
+            mark_sieve(successor(f, index_square),
+                       last,
+                       factor);
+        }
+        ++i;
+        current = successor(current);
+        factor = i + i + 3;
+        index_square = 2 * i * (i + 3) + 3;
+    }
+}
+
+function sift1(f, n) {
+    var _f_ = start_f('sift1', f, n);
+    var res = __debug_sift1(f, n);
     end_f(_f_);
     return res;
 }
