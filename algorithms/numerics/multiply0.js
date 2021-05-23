@@ -1,6 +1,8 @@
 function multiply0(n, a) {
     if (n == 1) return a;
-    return multiply0(n - 1, a) + a;
+    var product = multiply0(n - 1, a)
+    product += a;
+    return product;
 }
 
 function usage() {
