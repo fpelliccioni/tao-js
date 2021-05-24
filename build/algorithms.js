@@ -390,6 +390,14 @@ function multiply_accumulate_semigroup(r, n, a) {
     }
 }
 
+function multiply_group(n, a) {
+    if (n < 0) {
+        n = -n;
+        a = negate(a);
+    }
+    return multiply_monoid(n, a);
+}
+
 function multiply_monoid(n, a) {
     // precondition: n >= 0
     if (n == 0) return 0;

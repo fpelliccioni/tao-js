@@ -670,6 +670,21 @@ function multiply_accumulate_semigroup(r, n, a) {
     return res;
 }
 
+function __debug_multiply_group(n, a) {
+    if (n < 0) {
+        n = -n;
+        a = negate(a);
+    }
+    return multiply_monoid(n, a);
+}
+
+function multiply_group(n, a) {
+    var _f_ = start_f('multiply_group', n, a);
+    var res = __debug_multiply_group(n, a);
+    end_f(_f_);
+    return res;
+}
+
 function __debug_multiply_monoid(n, a) {
     // precondition: n >= 0
     if (n == 0) return 0;
@@ -2379,10 +2394,19 @@ if ( ! Number.prototype.add) {
     };
 }
 
+if ( ! Number.prototype.negate) {
+    Number.prototype.negate = function () {
+        return -this;
+    };
+}
+
 function add(x, y) {
     return x.add(y);
 }
 
+function negate(x) {
+    return x.negate();
+}
 function half_nonnegative(n) {return n >> 1;}
 function half(n) {return n >> 1;}
 function twice(n) {return n + n;}
