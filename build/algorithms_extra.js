@@ -38,6 +38,9 @@ multiply_accumulate1: [ 'numerics/power', 'https://github.com/fpelliccioni/tao-j
 multiply_accumulate2: [ 'numerics/power', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/numerics/power/multiply_accumulate2.js' ],
 multiply_accumulate3: [ 'numerics/power', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/numerics/power/multiply_accumulate3.js' ],
 multiply_accumulate4: [ 'numerics/power', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/numerics/power/multiply_accumulate4.js' ],
+multiply_accumulate_semigroup: [ 'numerics/power', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/numerics/power/multiply_accumulate_semigroup.js' ],
+multiply_monoid: [ 'numerics/power', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/numerics/power/multiply_monoid.js' ],
+multiply_semigroup: [ 'numerics/power', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/numerics/power/multiply_semigroup.js' ],
 largest_doubling: [ 'numerics/remainder', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/numerics/remainder/largest_doubling.js' ],
 quotient: [ 'numerics/remainder', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/numerics/remainder/quotient.js' ],
 quotient_remainder: [ 'numerics/remainder', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/numerics/remainder/quotient_remainder.js' ],
@@ -743,6 +746,104 @@ function __multiply_accumulate4_usage() {
 }
 
 function __multiply_accumulate4_attributes() {
+
+}
+
+function __multiply_accumulate_semigroup_usage() {
+    var n = random_int();
+    var a = random_int();
+
+    var p = multiply_accumulate_semigroup(0, n, a);
+    print(p);
+
+    // - NonCommutativeAdditiveSemigroup: is a Semigroup where the associative binary operation is +.
+    //     commutativity is not required but could be present.
+    // - Semigroup is a set on which the following is defined:
+    //        operation: x ° y
+    //   and on which the following axiom holds:
+    //        x ° (y ° z) = (x ° y) ° z       associativity
+    // - commutativity: x ° y = y ° x
+}
+
+function __multiply_accumulate_semigroup_attributes() {
+
+}
+
+function __multiply_monoid_usage() {
+    var n = random_int();
+    var a = random_int();
+
+    var p = multiply_monoid(n, a);
+    print(p);
+
+    function SquareMatrix(n, data) {
+        this.n = n;
+
+        if (typeof data === "undefined" || data.length % n != 0)
+            this.data = new Array(n * n);
+        else
+            this.data = data;
+
+        this.add = function(x) {
+            if (this.n != x.n) return undefined;
+
+            var res = new SquareMatrix(this.n);
+            for (let i = 0; i < this.data.length; ++i) {
+                res.data[i] = this.data[i] + x.data[i];
+            }
+            return res;
+        };
+
+        this.str = function() {
+            var res = "| ";
+            for (let i = 0; i < this.data.length; ++i) {
+                res += this.data[i] + " ";
+                if (i % this.n) res += "| ";
+            }
+            return res;
+        }
+    }
+
+    var m1 = new SquareMatrix(2, [1, 3, 7, 5]);
+    print(m1.str());
+
+    var m2 = multiply_monoid(65, m1);
+    print(m2.str());
+
+
+
+    // - NonCommutativeAdditiveMonoid: is a Monoid where the associative binary operation is + and the identity element is 0
+    //     commutativity is not required but could be present.
+    // - Monoid is a set on which the following is defined:
+    //        operation:                    x ° y
+    //        constant / identity element:  e
+    //   and on which the following axiom holds:
+    //        x ° (y ° z) = (x ° y) ° z       associativity
+    //        x ° e = e ° x = x               identity
+    // - commutativity (not required): x ° y = y ° x
+}
+
+function __multiply_monoid_attributes() {
+
+}
+
+function __multiply_semigroup_usage() {
+    var n = random_int();
+    var a = random_int();
+
+    var p = multiply_semigroup(n, a);
+    print(p);
+
+    // - NonCommutativeAdditiveSemigroup: is a Semigroup where the associative binary operation is +.
+    //     commutativity is not required but could be present.
+    // - Semigroup is a set on which the following is defined:
+    //        operation: x ° y
+    //   and on which the following axiom holds:
+    //        x ° (y ° z) = (x ° y) ° z       associativity
+    // - commutativity (not required): x ° y = y ° x
+}
+
+function __multiply_semigroup_attributes() {
 
 }
 

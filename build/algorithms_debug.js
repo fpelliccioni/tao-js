@@ -650,6 +650,58 @@ function multiply_accumulate4(r, n, a) {
     return res;
 }
 
+function __debug_multiply_accumulate_semigroup(r, n, a) {
+    // precondition: n >= 0
+    if (n == 0) return r;
+    while (true) {
+        if (odd(n)) {
+            r = add(r, a);
+            if (n == 1) return r;
+        }
+        n = half(n);
+        a = add(a, a);
+    }
+}
+
+function multiply_accumulate_semigroup(r, n, a) {
+    var _f_ = start_f('multiply_accumulate_semigroup', r, n, a);
+    var res = __debug_multiply_accumulate_semigroup(r, n, a);
+    end_f(_f_);
+    return res;
+}
+
+function __debug_multiply_monoid(n, a) {
+    // precondition: n >= 0
+    if (n == 0) return 0;
+    return multiply_semigroup(n, a);
+}
+
+function multiply_monoid(n, a) {
+    var _f_ = start_f('multiply_monoid', n, a);
+    var res = __debug_multiply_monoid(n, a);
+    end_f(_f_);
+    return res;
+}
+
+function __debug_multiply_semigroup(n, a) {
+    // precondition: n > 0
+    while (even(n)) {
+        a = add(a, a);
+        n = half(n);
+    }
+    if (n == 1) return a;
+    // even(n - 1) ==> n - 1 != 1
+    return multiply_accumulate_semigroup(a, half(n - 1), add(a, a));
+
+}
+
+function multiply_semigroup(n, a) {
+    var _f_ = start_f('multiply_semigroup', n, a);
+    var res = __debug_multiply_semigroup(n, a);
+    end_f(_f_);
+    return res;
+}
+
 function __debug_largest_doubling(a, b) {
     // precondition: b != 0
     while (a - b >= b) b += b;
@@ -2319,6 +2371,17 @@ function fill_n(f, n, x) {
 }
 
 
+
+if ( ! Number.prototype.add) {
+    Number.prototype.add = function (x) {
+        if (typeof x === 'undefined') x = 0;
+        return this + x;
+    };
+}
+
+function add(x, y) {
+    return x.add(y);
+}
 
 function half_nonnegative(n) {return n >> 1;}
 function half(n) {return n >> 1;}

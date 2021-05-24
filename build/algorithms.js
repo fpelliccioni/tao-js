@@ -377,6 +377,37 @@ function multiply_accumulate4(r, n, a) {
     }
 }
 
+function multiply_accumulate_semigroup(r, n, a) {
+    // precondition: n >= 0
+    if (n == 0) return r;
+    while (true) {
+        if (odd(n)) {
+            r = add(r, a);
+            if (n == 1) return r;
+        }
+        n = half(n);
+        a = add(a, a);
+    }
+}
+
+function multiply_monoid(n, a) {
+    // precondition: n >= 0
+    if (n == 0) return 0;
+    return multiply_semigroup(n, a);
+}
+
+function multiply_semigroup(n, a) {
+    // precondition: n > 0
+    while (even(n)) {
+        a = add(a, a);
+        n = half(n);
+    }
+    if (n == 1) return a;
+    // even(n - 1) ==> n - 1 != 1
+    return multiply_accumulate_semigroup(a, half(n - 1), add(a, a));
+
+}
+
 function largest_doubling(a, b) {
     // precondition: b != 0
     while (a - b >= b) b += b;
