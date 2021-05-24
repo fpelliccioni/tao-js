@@ -26,7 +26,7 @@ function usage() {
             if (this.n != x.n) return undefined;
 
             var res = new SquareMatrix(this.n);
-            for (let i = 0; i < this.data.length; ++i) {
+            for (var i = 0; i < this.data.length; ++i) {
                 res.data[i] = this.data[i] + x.data[i];
             }
             return res;
@@ -34,7 +34,7 @@ function usage() {
 
         this.str = function() {
             var res = "| ";
-            for (let i = 0; i < this.data.length; ++i) {
+            for (var i = 0; i < this.data.length; ++i) {
                 res += this.data[i] + " ";
                 if (i % this.n) res += "| ";
             }
