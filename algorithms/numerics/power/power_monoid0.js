@@ -17,7 +17,7 @@ function usage() {
     var m1 = new SquareMatrix(2, [1, 3, 7, 5]);
     print(m1.str());
 
-    var m2 = power_monoid0(m1, 65);
+    var m2 = power_monoid0(m1, 5);
     print(m2.str());
 
     // - MultiplicativeMonoid: is a Monoid where the associative binary operation is * and the identity element is 1

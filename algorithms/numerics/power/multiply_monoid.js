@@ -46,7 +46,7 @@ function usage() {
     var m1 = new SquareMatrix(2, [1, 3, 7, 5]);
     print(m1.str());
 
-    var m2 = multiply_monoid(65, m1);
+    var m2 = multiply_monoid(5, m1);
     print(m2.str());
 
 

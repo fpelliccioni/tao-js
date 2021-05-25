@@ -829,7 +829,7 @@ function __multiply_group_usage() {
     var m1 = new SquareMatrix(2, [1, 3, 7, 5]);
     print(m1.str());
 
-    var m2 = multiply_group(-65, m1);
+    var m2 = multiply_group(-5, m1);
     print(m2.str());
 
 
@@ -890,7 +890,7 @@ function __multiply_monoid_usage() {
     var m1 = new SquareMatrix(2, [1, 3, 7, 5]);
     print(m1.str());
 
-    var m2 = multiply_monoid(65, m1);
+    var m2 = multiply_monoid(5, m1);
     print(m2.str());
 
 
@@ -971,15 +971,15 @@ function __power_group0_usage() {
     print(m1.str());
     print(m1.multiplicative_inverse().str());
 
-    var m2 = power_group0(m1, -65);
+    var m2 = power_group0(m1, -5);
     print(m2.str());
 
 
     var m3 = new SquareMatrix(2, [3, 6, 1, 2]); //non-invertible matrix
     print(m3.multiplicative_inverse());
-    var m4 = power_group0(m3, 65);
+    var m4 = power_group0(m3, 5);
     print(m4.str());
-    var m5 = power_group0(m3, -65);
+    var m5 = power_group0(m3, -5);
     print(m5.str());
 
 
@@ -1009,7 +1009,7 @@ function __power_monoid0_usage() {
     var m1 = new SquareMatrix(2, [1, 3, 7, 5]);
     print(m1.str());
 
-    var m2 = power_monoid0(m1, 65);
+    var m2 = power_monoid0(m1, 5);
     print(m2.str());
 
     // - MultiplicativeMonoid: is a Monoid where the associative binary operation is * and the identity element is 1
