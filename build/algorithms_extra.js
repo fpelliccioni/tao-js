@@ -961,7 +961,7 @@ function __power_group0_usage() {
 
     var m1 = new SquareMatrix(2, [2, 1, 5, 3]); //invertible matrix
     print(m1.str());
-    print(m2.multiplicative_inverse().str());
+    print(m1.multiplicative_inverse().str());
 
     var m2 = power_group0(m1, -65);
     print(m2.str());
