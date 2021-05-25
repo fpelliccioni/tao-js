@@ -498,7 +498,7 @@ function gcd3(a, b) {
 function __debug_multiply0(n, a) {
     if (n == 1) return a;
     var product = multiply0(n - 1, a)
-    product += a;
+    product = add(product, a);
     return product;
 }
 
@@ -512,7 +512,9 @@ function multiply0(n, a) {
 function __debug_multiply1(n, a) {
     if (n == 1) return a;
     var product = multiply1(half(n),  a + a);
-    if (odd(n)) product += a;
+    if (odd(n)) {
+        product = add(product, a);
+    }
     return product;
 
 }

@@ -1,7 +1,7 @@
 function multiply0(n, a) {
     if (n == 1) return a;
     var product = multiply0(n - 1, a)
-    product += a;
+    product = add(product, a);
     return product;
 }
 
