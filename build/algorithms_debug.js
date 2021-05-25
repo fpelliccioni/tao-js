@@ -2544,7 +2544,6 @@ function SquareMatrix(n, data) {
     }
 
     this.add = function(x) {
-        print("SquareMatrix.add() call")
         if (this.n != x.n) return undefined;
 
         var res = new SquareMatrix(this.n);
@@ -2555,7 +2554,6 @@ function SquareMatrix(n, data) {
     };
 
     this.additive_identity = function() {
-        print("SquareMatrix.additive_identity() call")
         var res = new SquareMatrix(this.n);
         for (var i = 0; i < this.data.length; ++i) {
             res.data[i] = 0;
@@ -2564,7 +2562,6 @@ function SquareMatrix(n, data) {
     }
 
     this.negate = function() {
-        print("SquareMatrix.negate() call")
         var res = new SquareMatrix(this.n);
         for (var i = 0; i < this.data.length; ++i) {
             res.data[i] = -this.data[i];
@@ -2577,7 +2574,6 @@ function SquareMatrix(n, data) {
     }
 
     this.multiply = function(x) {
-        print("SquareMatrix.multiply() call")
         if (this.n != x.n) return undefined;
 
         var res = new SquareMatrix(this.n);
@@ -2596,7 +2592,6 @@ function SquareMatrix(n, data) {
     };
 
     this.multiplicative_identity = function() {
-        print("SquareMatrix.multiplicative_identity() call")
         var res = new SquareMatrix(this.n);
         for (var i = 0; i < this.data.length; ++i) {
             res.data[i] = 0;
@@ -2610,7 +2605,6 @@ function SquareMatrix(n, data) {
     }
 
     this.multiplicative_inverse = function() {
-        print("SquareMatrix.multiplicative_inverse() call")
         // There is no simple formula to find the inverse of a nxn matrix with n > 2.
         if (this.n > 2) return undefined;
 
