@@ -400,7 +400,7 @@ function multiply_group(n, a) {
 
 function multiply_monoid(n, a) {
     // precondition: n >= 0
-    if (n == 0) return 0;
+    if (n == 0) return 0;  //TODO
     return multiply_semigroup(n, a);
 }
 
@@ -413,6 +413,45 @@ function multiply_semigroup(n, a) {
     if (n == 1) return a;
     // even(n - 1) ==> n - 1 != 1
     return multiply_accumulate_semigroup(a, half(n - 1), add(a, a));
+
+}
+
+function power_accumulate_semigroup0(r, a, n) {
+    // precondition: n >= 0
+    if (n == 0) return r;
+    while (true) {
+        if (odd(n)) {
+            r = multiply(r, a);
+            if (n == 1) return r;
+        }
+        n = half(n);
+        a = multiply(a, a);
+    }
+}
+
+function power_group0(a, n) {
+    if (n < 0) {
+        n = -n;
+        a = multiplicative_inverse(a);
+    }
+    return power_monoid0(a, n);
+}
+
+function power_monoid0(a, n) {
+    // precondition: n >= 0
+    if (n == 0) return multiplicative_identity(a);
+    return power_semigroup0(a, n);
+}
+
+function power_semigroup0(a, n) {
+    // precondition: n > 0
+    while (even(n)) {
+        a = multiply(a, a);
+        n = half(n);
+    }
+    if (n == 1) return a;
+    // even(n - 1) ==> n - 1 != 1
+    return power_accumulate_semigroup0(a, multiply(a, a), half(n - 1));
 
 }
 

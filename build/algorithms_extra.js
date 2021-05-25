@@ -42,6 +42,10 @@ multiply_accumulate_semigroup: [ 'numerics/power', 'https://github.com/fpellicci
 multiply_group: [ 'numerics/power', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/numerics/power/multiply_group.js' ],
 multiply_monoid: [ 'numerics/power', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/numerics/power/multiply_monoid.js' ],
 multiply_semigroup: [ 'numerics/power', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/numerics/power/multiply_semigroup.js' ],
+power_accumulate_semigroup0: [ 'numerics/power', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/numerics/power/power_accumulate_semigroup0.js' ],
+power_group0: [ 'numerics/power', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/numerics/power/power_group0.js' ],
+power_monoid0: [ 'numerics/power', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/numerics/power/power_monoid0.js' ],
+power_semigroup0: [ 'numerics/power', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/numerics/power/power_semigroup0.js' ],
 largest_doubling: [ 'numerics/remainder', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/numerics/remainder/largest_doubling.js' ],
 quotient: [ 'numerics/remainder', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/numerics/remainder/quotient.js' ],
 quotient_remainder: [ 'numerics/remainder', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/numerics/remainder/quotient_remainder.js' ],
@@ -927,6 +931,107 @@ function __power_usage() {
 }
 
 function __power_attributes() {
+
+}
+
+function __power_accumulate_semigroup0_usage() {
+    var n = random_int();
+    var a = random_int();
+
+    var p = power_accumulate_semigroup0(0, a, n);
+    print(p);
+
+    // - MultiplicativeSemigroup: is a Semigroup where the associative binary operation is *.
+    // - Semigroup is a set on which the following is defined:
+    //        operation: x ° y
+    //   and on which the following axiom holds:
+    //        x ° (y ° z) = (x ° y) ° z       associativity
+}
+
+function __power_accumulate_semigroup0_attributes() {
+
+}
+
+function __power_group0_usage() {
+    var n = random_int();
+    var a = random_int();
+
+    var p = power_group0(a, n);
+    print(p);
+
+    var m1 = new SquareMatrix(2, [2, 1, 5, 3]); //invertible matrix
+    print(m1.str());
+    print(m2.multiplicative_inverse().str());
+
+    var m2 = power_group0(m1, -65);
+    print(m2.str());
+
+
+    var m3 = new SquareMatrix(2, [3, 6, 1, 2]); //non-invertible matrix
+    print(m3.multiplicative_inverse());
+    var m4 = power_group0(m3, 65);
+    print(m4.str());
+    var m5 = power_group0(m3, -65);
+    print(m5.str());
+
+
+
+    // - MultiplicativeGroup: is a Group where the associative binary operation is * and the identity element is 1.
+    // - Group is a set on which the following is defined:
+    //        operation:                    x ° y
+    //        operation:                    x^-1
+    //        constant / identity element:  e
+    //   and on which the following axiom holds:
+    //        x ° (y ° z) = (x ° y) ° z       associativity
+    //        x ° e = e ° x = x               identity
+    //        x ° x^-1 = x^-1 ° x = e         cancellation
+}
+
+function __power_group0_attributes() {
+
+}
+
+function __power_monoid0_usage() {
+    var n = random_int();
+    var a = random_int();
+
+    var p = power_monoid0(a, n);
+    print(p);
+
+    var m1 = new SquareMatrix(2, [1, 3, 7, 5]);
+    print(m1.str());
+
+    var m2 = power_monoid0(m1, 65);
+    print(m2.str());
+
+    // - MultiplicativeMonoid: is a Monoid where the associative binary operation is * and the identity element is 1
+    // - Monoid is a set on which the following is defined:
+    //        operation:                    x ° y
+    //        constant / identity element:  e
+    //   and on which the following axiom holds:
+    //        x ° (y ° z) = (x ° y) ° z       associativity
+    //        x ° e = e ° x = x               identity
+}
+
+function __power_monoid0_attributes() {
+
+}
+
+function __power_semigroup0_usage() {
+    var n = random_int();
+    var a = random_int();
+
+    var p = power_semigroup0(a, n);
+    print(p);
+
+    // - MultiplicativeSemigroup: is a Semigroup where the associative binary operation is *.
+    // - Semigroup is a set on which the following is defined:
+    //        operation: x ° y
+    //   and on which the following axiom holds:
+    //        x ° (y ° z) = (x ° y) ° z       associativity
+}
+
+function __power_semigroup0_attributes() {
 
 }
 

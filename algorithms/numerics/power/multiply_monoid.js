@@ -3,7 +3,7 @@
 
 function multiply_monoid(n, a) {
     // precondition: n >= 0
-    if (n == 0) return 0;
+    if (n == 0) return 0;  //TODO
     return multiply_semigroup(n, a);
 }
 
