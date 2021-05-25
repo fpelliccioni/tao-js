@@ -57,9 +57,8 @@ function multiplicative_identity(x) {
 }
 
 function multiplicative_inverse(x) {
-    return x.multiplicative_identity(x);
+    return x.multiplicative_inverse(x);
 }
-
 
 function SquareMatrix(n, data) {
     this.n = n;
