@@ -2494,30 +2494,6 @@ if ( ! Number.prototype.multiplicative_inverse) {
     };
 }
 
-function add(x, y) {
-    return x.add(y);
-}
-
-function multiply(x, y) {
-    return x.multiply(y);
-}
-
-function negate(x) {
-    return x.negate();
-}
-
-function additive_inverse(x) {
-    return negate(x);
-}
-
-function multiplicative_identity(x) {
-    return x.multiplicative_identity();
-}
-
-function multiplicative_inverse(x) {
-    return x.multiplicative_inverse(x);
-}
-
 function SquareMatrix(n, data) {
     this.n = n;
 
@@ -2626,6 +2602,14 @@ function SquareMatrix(n, data) {
     }
 }
 
+
+
+var add = binary_operation(function add(x, y) {return x.add(y);});
+var multiply = binary_operation(function multiply(x, y) {return x.multiply(y);});
+var negate = unary_operation(function negate(x, y) {return x.negate();});
+var additive_inverse = unary_operation(function additive_inverse(x, y) {return x.negate();});
+var multiplicative_identity = unary_operation(function multiplicative_identity(x, y) {return x.multiplicative_identity();});
+var multiplicative_inverse = unary_operation(function multiplicative_inverse(x, y) {return x.multiplicative_inverse();});
 
 function half_nonnegative(n) {return n >> 1;}
 function half(n) {return n >> 1;}
