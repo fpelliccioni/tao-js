@@ -602,8 +602,8 @@ function __gcd3_attributes() {
 }
 
 function __multiply0_usage() {
-    var n = random_int();
-    var a = random_int();
+    var n = 41;
+    var a = 59;
 
     var p = multiply0(n, a);
     print(p);
@@ -614,8 +614,8 @@ function __multiply0_attributes() {
 }
 
 function __multiply1_usage() {
-    var n = random_int();
-    var a = random_int();
+    var n = 41;
+    var a = 59;
 
     var p = multiply1(n, a);
     print(p);
@@ -637,8 +637,8 @@ function __multiply2_usage() {
         }
     }
 
-    var n = random_int();
-    var a = random_int();
+    var n = 41;
+    var a = 59;
 
     var p = multiply2(n, a);
     print(p);
@@ -660,8 +660,8 @@ function __multiply3_usage() {
         }
     }
 
-    var n = random_int();
-    var a = random_int();
+    var n = 41;
+    var a = 59;
 
     var p = multiply3(n, a);
     print(p);
@@ -683,8 +683,8 @@ function __multiply4_usage() {
         }
     }
 
-    var n = random_int();
-    var a = random_int();
+    var n = 41;
+    var a = 59;
 
     var p = multiply4(n, a);
     print(p);

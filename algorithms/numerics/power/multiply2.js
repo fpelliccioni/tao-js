@@ -16,8 +16,8 @@ function usage() {
         }
     }
 
-    var n = random_int();
-    var a = random_int();
+    var n = 41;
+    var a = 59;
 
     var p = multiply2(n, a);
     print(p);
