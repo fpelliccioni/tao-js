@@ -1,6 +1,6 @@
 function multiply1(n, a) {
     if (n == 1) return a;
-    var product = multiply1(half(n),  a + a);
+    var product = multiply1(half(n),  add(a, a));
     if (odd(n)) {
         product = add(product, a);
     }
