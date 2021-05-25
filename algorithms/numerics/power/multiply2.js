@@ -8,11 +8,11 @@ function usage() {
     function multiply_accumulate4(r, n, a) {
         while (true) {
             if (odd(n)) {
-                r += a;
+                r = add(r, a);
                 if (n == 1) return r;
             }
             n = half(n);
-            a += a;
+            a = add(a, a);
         }
     }
 

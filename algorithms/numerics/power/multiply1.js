@@ -14,6 +14,9 @@ function usage() {
 
     var p = multiply1(n, a);
     print(p);
+
+    // Then go to multiply_accumulate0
+    // http://componentsprogramming.com/algorithms/?repo=tao-js&snippet=multiply_accumulate0
 }
 
 function attributes() {

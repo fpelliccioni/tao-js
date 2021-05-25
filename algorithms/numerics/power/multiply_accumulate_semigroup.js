@@ -16,8 +16,8 @@ function multiply_accumulate_semigroup(r, n, a) {
 }
 
 function usage() {
-    var n = random_int();
-    var a = random_int();
+    var n = 41;
+    var a = 59;
 
     var p = multiply_accumulate_semigroup(0, n, a);
     print(p);

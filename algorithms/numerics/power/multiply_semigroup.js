@@ -14,8 +14,8 @@ function multiply_semigroup(n, a) {
 }
 
 function usage() {
-    var n = random_int();
-    var a = random_int();
+    var n = 41;
+    var a = 59;
 
     var p = multiply_semigroup(n, a);
     print(p);

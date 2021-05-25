@@ -8,8 +8,8 @@ function power_monoid0(a, n) {
 }
 
 function usage() {
-    var n = random_int();
-    var a = random_int();
+    var n = 41;
+    var a = 59;
 
     var p = power_monoid0(a, n);
     print(p);

@@ -619,6 +619,9 @@ function __multiply1_usage() {
 
     var p = multiply1(n, a);
     print(p);
+
+    // Then go to multiply_accumulate0
+    // http://componentsprogramming.com/algorithms/?repo=tao-js&snippet=multiply_accumulate0
 }
 
 function __multiply1_attributes() {
@@ -629,11 +632,11 @@ function __multiply2_usage() {
     function multiply_accumulate4(r, n, a) {
         while (true) {
             if (odd(n)) {
-                r += a;
+                r = add(r, a);
                 if (n == 1) return r;
             }
             n = half(n);
-            a += a;
+            a = add(a, a);
         }
     }
 
@@ -652,11 +655,11 @@ function __multiply3_usage() {
     function multiply_accumulate4(r, n, a) {
         while (true) {
             if (odd(n)) {
-                r += a;
+                r = add(r, a);
                 if (n == 1) return r;
             }
             n = half(n);
-            a += a;
+            a = add(a, a);
         }
     }
 
@@ -675,11 +678,11 @@ function __multiply4_usage() {
     function multiply_accumulate4(r, n, a) {
         while (true) {
             if (odd(n)) {
-                r += a;
+                r = add(r, a);
                 if (n == 1) return r;
             }
             n = half(n);
-            a += a;
+            a = add(a, a);
         }
     }
 
@@ -695,8 +698,8 @@ function __multiply4_attributes() {
 }
 
 function __multiply_accumulate0_usage() {
-    var n = random_int();
-    var a = random_int();
+    var n = 41;
+    var a = 59;
 
     var p = multiply_accumulate0(0, n, a);
     print(p);
@@ -707,8 +710,8 @@ function __multiply_accumulate0_attributes() {
 }
 
 function __multiply_accumulate1_usage() {
-    var n = random_int();
-    var a = random_int();
+    var n = 41;
+    var a = 59;
 
     var p = multiply_accumulate1(0, n, a);
     print(p);
@@ -719,8 +722,9 @@ function __multiply_accumulate1_attributes() {
 }
 
 function __multiply_accumulate2_usage() {
-    var n = random_int();
-    var a = random_int();
+    var n = 41;
+    var a = 59;
+
 
     var p = multiply_accumulate2(0, n, a);
     print(p);
@@ -731,8 +735,8 @@ function __multiply_accumulate2_attributes() {
 }
 
 function __multiply_accumulate3_usage() {
-    var n = random_int();
-    var a = random_int();
+    var n = 41;
+    var a = 59;
 
     var p = multiply_accumulate3(0, n, a);
     print(p);
@@ -743,11 +747,15 @@ function __multiply_accumulate3_attributes() {
 }
 
 function __multiply_accumulate4_usage() {
-    var n = random_int();
-    var a = random_int();
+    var n = 41;
+    var a = 59;
 
     var p = multiply_accumulate4(0, n, a);
     print(p);
+
+    // Then go to multiply2
+    // http://componentsprogramming.com/algorithms/?repo=tao-js&snippet=multiply2
+
 }
 
 function __multiply_accumulate4_attributes() {
@@ -755,8 +763,8 @@ function __multiply_accumulate4_attributes() {
 }
 
 function __multiply_accumulate_semigroup_usage() {
-    var n = random_int();
-    var a = random_int();
+    var n = 41;
+    var a = 59;
 
     var p = multiply_accumulate_semigroup(0, n, a);
     print(p);
@@ -775,8 +783,8 @@ function __multiply_accumulate_semigroup_attributes() {
 }
 
 function __multiply_group_usage() {
-    var n = random_int();
-    var a = random_int();
+    var n = 41;
+    var a = 59;
 
     var p = multiply_group(n, a);
     print(p);
@@ -844,8 +852,8 @@ function __multiply_group_attributes() {
 }
 
 function __multiply_monoid_usage() {
-    var n = random_int();
-    var a = random_int();
+    var n = 41;
+    var a = 59;
 
     var p = multiply_monoid(n, a);
     print(p);
@@ -903,8 +911,8 @@ function __multiply_monoid_attributes() {
 }
 
 function __multiply_semigroup_usage() {
-    var n = random_int();
-    var a = random_int();
+    var n = 41;
+    var a = 59;
 
     var p = multiply_semigroup(n, a);
     print(p);
@@ -935,8 +943,8 @@ function __power_attributes() {
 }
 
 function __power_accumulate_semigroup0_usage() {
-    var n = random_int();
-    var a = random_int();
+    var n = 41;
+    var a = 59;
 
     var p = power_accumulate_semigroup0(0, a, n);
     print(p);
@@ -953,8 +961,8 @@ function __power_accumulate_semigroup0_attributes() {
 }
 
 function __power_group0_usage() {
-    var n = random_int();
-    var a = random_int();
+    var n = 41;
+    var a = 59;
 
     var p = power_group0(a, n);
     print(p);
@@ -992,8 +1000,8 @@ function __power_group0_attributes() {
 }
 
 function __power_monoid0_usage() {
-    var n = random_int();
-    var a = random_int();
+    var n = 41;
+    var a = 59;
 
     var p = power_monoid0(a, n);
     print(p);
@@ -1018,8 +1026,8 @@ function __power_monoid0_attributes() {
 }
 
 function __power_semigroup0_usage() {
-    var n = random_int();
-    var a = random_int();
+    var n = 41;
+    var a = 59;
 
     var p = power_semigroup0(a, n);
     print(p);

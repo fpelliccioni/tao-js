@@ -317,7 +317,7 @@ function multiply2(n, a) {
 
 function multiply3(n, a) {
     while (even(n)) {
-        a += a;
+        a = add(a, a);
         n = half(n);
     }
     if (n == 1) return a;
@@ -327,55 +327,57 @@ function multiply3(n, a) {
 
 function multiply4(n, a) {
     while (even(n)) {
-        a += a;
+        a = add(a, a);
         n = half(n);
     }
     if (n == 1) return a;
     // even(n - 1) ==> n - 1 != 1
-    return multiply_accumulate4(a, half(n - 1), a + a);
+    return multiply_accumulate4(a, half(n - 1), add(a, a));
 
 }
 
 function multiply_accumulate0(r, n, a) {
-    if (n == 1) return r + a;
+    if (n == 1) return add(r, a);
     if (odd(n)) {
-        return multiply_accumulate0(r + a, half(n),  a + a);
+        return multiply_accumulate0(add(r, a), half(n),  add(a, a));
     }
-    return multiply_accumulate0(r, half(n),  a + a);
+    return multiply_accumulate0(r, half(n),  add(a, a));
 }
 
 function multiply_accumulate1(r, n, a) {
-    if (n == 1) return r + a;
-    if (odd(n)) r += a;
-    return multiply_accumulate1(r, half(n),  a + a);
+    if (n == 1) return add(r, a);
+    if (odd(n)) {
+        r = add(r, a);
+    }
+    return multiply_accumulate1(r, half(n),  add(a, a));
 }
 
 function multiply_accumulate2(r, n, a) {
     if (odd(n)) {
-        r += a;
+        r = add(r, a);
         if (n == 1) return r;
     }
-    return multiply_accumulate2(r, half(n),  a + a);
+    return multiply_accumulate2(r, half(n),  add(a, a));
 }
 
 function multiply_accumulate3(r, n, a) {
     if (odd(n)) {
-        r += a;
+        r = add(r, a);
         if (n == 1) return r;
     }
     n = half(n);
-    a += a;
+    a = add(a, a);
     return multiply_accumulate3(r, n,  a);
 }
 
 function multiply_accumulate4(r, n, a) {
     while (true) {
         if (odd(n)) {
-            r += a;
+            r = add(r, a);
             if (n == 1) return r;
         }
         n = half(n);
-        a += a;
+        a = add(a, a);
     }
 }
 
