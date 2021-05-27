@@ -722,6 +722,21 @@ function multiply_semigroup(n, a) {
     return res;
 }
 
+function __debug_power(a, n, op) {
+    if (n < 0) {
+        n = -n;
+        a = inverse_operation(op, a);
+    }
+    return power_monoid(a, n, op);
+}
+
+function power(a, n, op) {
+    var _f_ = start_f('power', a, n, op);
+    var res = __debug_power(a, n, op);
+    end_f(_f_);
+    return res;
+}
+
 function __debug_power_accumulate_semigroup(r, a, n, op) {
     // precondition: n >= 0
     if (n == 0) return r;

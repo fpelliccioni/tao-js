@@ -421,6 +421,14 @@ function multiply_semigroup(n, a) {
 
 }
 
+function power(a, n, op) {
+    if (n < 0) {
+        n = -n;
+        a = inverse_operation(op, a);
+    }
+    return power_monoid(a, n, op);
+}
+
 function power_accumulate_semigroup(r, a, n, op) {
     // precondition: n >= 0
     if (n == 0) return r;
