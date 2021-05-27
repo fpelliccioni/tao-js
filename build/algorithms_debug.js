@@ -2541,13 +2541,13 @@ if ( ! Number.prototype.multiply) {
 }
 
 if ( ! Number.prototype.additive_identity) {
-    Number.prototype.additive_identity = function (x) {
+    Number.prototype.additive_identity = function () {
         return 0;
     };
 }
 
 if ( ! Number.prototype.multiplicative_identity) {
-    Number.prototype.multiplicative_identity = function (x) {
+    Number.prototype.multiplicative_identity = function () {
         return 1;
     };
 }
@@ -2559,8 +2559,8 @@ if ( ! Number.prototype.negate) {
 }
 
 if ( ! Number.prototype.multiplicative_inverse) {
-    Number.prototype.multiplicative_inverse = function (x) {
-        return x.multiplicative_identity() / x;
+    Number.prototype.multiplicative_inverse = function () {
+        return this.multiplicative_identity() / this;
     };
 }
 
