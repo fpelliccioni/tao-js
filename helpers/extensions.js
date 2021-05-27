@@ -149,7 +149,25 @@ function SquareMatrix(n, data) {
 var add = binary_operation(function add(x, y) {return x.add(y);});
 var multiply = binary_operation(function multiply(x, y) {return x.multiply(y);});
 var negate = unary_operation(function negate(x, y) {return x.negate();});
-var additive_inverse = unary_operation(function additive_inverse(x, y) {return x.negate();});
-var multiplicative_identity = unary_operation(function multiplicative_identity(x, y) {return x.multiplicative_identity();});
-var multiplicative_inverse = unary_operation(function multiplicative_inverse(x, y) {return x.multiplicative_inverse();});
 
+var additive_identity = unary_operation(function additive_identity(x) {return x.additive_identity();});
+var additive_inverse = unary_operation(function additive_inverse(x) {return x.negate();});
+
+var multiplicative_identity = unary_operation(function multiplicative_identity(x) {return x.multiplicative_identity();});
+var multiplicative_inverse = unary_operation(function multiplicative_inverse(x) {return x.multiplicative_inverse();});
+
+
+var identity_elements = {
+    "add": additive_identity,
+    "multiply": multiplicative_identity,
+};
+
+var identity_element = function(op, x) {
+    var getter = identity_elements[op.inner_name];
+    if (getter) return getter(x);
+    return undefined;
+    // if (x.inner_name === "add") return additive_identity(x);
+    // if (x.inner_name === "multiply") return multiplicative_identity(x);
+
+}
+// print(x.inner_name)
