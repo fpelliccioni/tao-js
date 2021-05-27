@@ -44,6 +44,7 @@ multiply_monoid: [ 'numerics/power', 'https://github.com/fpelliccioni/tao-js/blo
 multiply_semigroup: [ 'numerics/power', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/numerics/power/multiply_semigroup.js' ],
 power_accumulate_semigroup: [ 'numerics/power', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/numerics/power/power_accumulate_semigroup.js' ],
 power_accumulate_semigroup0: [ 'numerics/power', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/numerics/power/power_accumulate_semigroup0.js' ],
+power_group: [ 'numerics/power', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/numerics/power/power_group.js' ],
 power_group0: [ 'numerics/power', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/numerics/power/power_group0.js' ],
 power_monoid: [ 'numerics/power', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/numerics/power/power_monoid.js' ],
 power_monoid0: [ 'numerics/power', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/numerics/power/power_monoid0.js' ],
@@ -981,6 +982,41 @@ function __power_accumulate_semigroup0_usage() {
 }
 
 function __power_accumulate_semigroup0_attributes() {
+
+}
+
+function __power_group_usage() {
+    var n = 41;
+    var a = 59;
+
+    var p = power_group(a, n);
+    print(p);
+
+    var m1 = new SquareMatrix(2, [2, 1, 5, 3]); //invertible matrix
+    print(m1.str());
+    print(m1.multiplicative_inverse().str());
+
+    var m2 = power_group(m1, -5);
+    print(m2.str());
+
+    var m3 = new SquareMatrix(2, [3, 6, 1, 2]); //non-invertible matrix
+    print(m3.multiplicative_inverse());
+    var m4 = power_group(m3, 5);
+    print(m4.str());
+    var m5 = power_group(m3, -5);
+    print(m5.str());
+
+    // - GroupOperation is a associative binary operation on which the following is defined:
+    //        operation:                    x ° y
+    //        operation:                    x^-1
+    //        constant / identity element:  e
+    //   and on which the following axiom holds:
+    //        x ° (y ° z) = (x ° y) ° z       associativity
+    //        x ° e = e ° x = x               identity
+    //        x ° x^-1 = x^-1 ° x = e         cancellation
+}
+
+function __power_group_attributes() {
 
 }
 

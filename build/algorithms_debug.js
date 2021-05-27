@@ -762,6 +762,21 @@ function power_accumulate_semigroup0(r, a, n) {
     return res;
 }
 
+function __debug_power_group(a, n, op) {
+    if (n < 0) {
+        n = -n;
+        a = inverse_operation(op, a);
+    }
+    return power_monoid(a, n, op);
+}
+
+function power_group(a, n, op) {
+    var _f_ = start_f('power_group', a, n, op);
+    var res = __debug_power_group(a, n, op);
+    end_f(_f_);
+    return res;
+}
+
 function __debug_power_group0(a, n) {
     if (n < 0) {
         n = -n;
@@ -2679,10 +2694,21 @@ var identity_element = function(op, x) {
     var getter = identity_elements[op.inner_name];
     if (getter) return getter(x);
     return undefined;
-    // if (x.inner_name === "add") return additive_identity(x);
-    // if (x.inner_name === "multiply") return multiplicative_identity(x);
-
 }
+
+var inverse_operations = {
+    "add": additive_inverse,
+    "multiply": multiplicative_inverse,
+};
+
+var inverse_operation = function(op, x) {
+    var getter = inverse_operations[op.inner_name];
+    if (getter) return getter(x);
+    return undefined;
+}
+
+
+
 // print(x.inner_name)function half_nonnegative(n) {return n >> 1;}
 function half(n) {return n >> 1;}
 function twice(n) {return n + n;}

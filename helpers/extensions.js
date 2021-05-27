@@ -166,8 +166,19 @@ var identity_element = function(op, x) {
     var getter = identity_elements[op.inner_name];
     if (getter) return getter(x);
     return undefined;
-    // if (x.inner_name === "add") return additive_identity(x);
-    // if (x.inner_name === "multiply") return multiplicative_identity(x);
-
 }
+
+var inverse_operations = {
+    "add": additive_inverse,
+    "multiply": multiplicative_inverse,
+};
+
+var inverse_operation = function(op, x) {
+    var getter = inverse_operations[op.inner_name];
+    if (getter) return getter(x);
+    return undefined;
+}
+
+
+
 // print(x.inner_name)

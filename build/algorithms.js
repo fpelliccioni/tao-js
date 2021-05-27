@@ -447,6 +447,14 @@ function power_accumulate_semigroup0(r, a, n) {
     }
 }
 
+function power_group(a, n, op) {
+    if (n < 0) {
+        n = -n;
+        a = inverse_operation(op, a);
+    }
+    return power_monoid(a, n, op);
+}
+
 function power_group0(a, n) {
     if (n < 0) {
         n = -n;
