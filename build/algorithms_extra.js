@@ -989,21 +989,21 @@ function __power_group_usage() {
     var n = 41;
     var a = 59;
 
-    var p = power_group(a, n);
+    var p = power_group(a, n, multiply);
     print(p);
 
     var m1 = new SquareMatrix(2, [2, 1, 5, 3]); //invertible matrix
     print(m1.str());
     print(m1.multiplicative_inverse().str());
 
-    var m2 = power_group(m1, -5);
+    var m2 = power_group(m1, -5, multiply);
     print(m2.str());
 
     var m3 = new SquareMatrix(2, [3, 6, 1, 2]); //non-invertible matrix
     print(m3.multiplicative_inverse());
-    var m4 = power_group(m3, 5);
+    var m4 = power_group(m3, 5, multiply);
     print(m4.str());
-    var m5 = power_group(m3, -5);
+    var m5 = power_group(m3, -5, multiply);
     print(m5.str());
 
     // - GroupOperation is a associative binary operation on which the following is defined:
