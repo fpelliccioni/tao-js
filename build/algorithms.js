@@ -300,6 +300,7 @@ function multiply0(n, a) {
 }
 
 function multiply1(n, a) {
+    snapshot();
     if (n == 1) return a;
     var product = multiply1(half(n),  add(a, a));
     if (odd(n)) {

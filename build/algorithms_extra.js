@@ -617,6 +617,10 @@ function __multiply1_usage() {
     var n = 41;
     var a = 59;
 
+    track_variable("n", 10);
+    track_variable("n", 2);
+    track_variable("a", 10);
+
     var p = multiply1(n, a);
     print(p);
 
