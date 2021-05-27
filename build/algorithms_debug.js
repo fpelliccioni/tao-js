@@ -722,6 +722,26 @@ function multiply_semigroup(n, a) {
     return res;
 }
 
+function __debug_power_accumulate_semigroup(r, a, n, op) {
+    // precondition: n >= 0
+    if (n == 0) return r;
+    while (true) {
+        if (odd(n)) {
+            r = op(r, a);
+            if (n == 1) return r;
+        }
+        n = half(n);
+        a = op(a, a);
+    }
+}
+
+function power_accumulate_semigroup(r, a, n, op) {
+    var _f_ = start_f('power_accumulate_semigroup', r, a, n, op);
+    var res = __debug_power_accumulate_semigroup(r, a, n, op);
+    end_f(_f_);
+    return res;
+}
+
 function __debug_power_accumulate_semigroup0(r, a, n) {
     // precondition: n >= 0
     if (n == 0) return r;
@@ -757,6 +777,19 @@ function power_group0(a, n) {
     return res;
 }
 
+function __debug_power_monoid(a, n, op) {
+    // precondition: n >= 0
+    if (n == 0) return identity_element(op, a);
+    return power_semigroup(a, n, op);
+}
+
+function power_monoid(a, n, op) {
+    var _f_ = start_f('power_monoid', a, n, op);
+    var res = __debug_power_monoid(a, n, op);
+    end_f(_f_);
+    return res;
+}
+
 function __debug_power_monoid0(a, n) {
     // precondition: n >= 0
     if (n == 0) return multiplicative_identity(a);
@@ -766,6 +799,25 @@ function __debug_power_monoid0(a, n) {
 function power_monoid0(a, n) {
     var _f_ = start_f('power_monoid0', a, n);
     var res = __debug_power_monoid0(a, n);
+    end_f(_f_);
+    return res;
+}
+
+function __debug_power_semigroup(a, n, op) {
+    // precondition: n > 0
+    while (even(n)) {
+        a = op(a, a);
+        n = half(n);
+    }
+    if (n == 1) return a;
+    // even(n - 1) ==> n - 1 != 1
+    return power_accumulate_semigroup(a, op(a, a), half(n - 1), op);
+
+}
+
+function power_semigroup(a, n, op) {
+    var _f_ = start_f('power_semigroup', a, n, op);
+    var res = __debug_power_semigroup(a, n, op);
     end_f(_f_);
     return res;
 }
@@ -2610,11 +2662,28 @@ function SquareMatrix(n, data) {
 var add = binary_operation(function add(x, y) {return x.add(y);});
 var multiply = binary_operation(function multiply(x, y) {return x.multiply(y);});
 var negate = unary_operation(function negate(x, y) {return x.negate();});
-var additive_inverse = unary_operation(function additive_inverse(x, y) {return x.negate();});
-var multiplicative_identity = unary_operation(function multiplicative_identity(x, y) {return x.multiplicative_identity();});
-var multiplicative_inverse = unary_operation(function multiplicative_inverse(x, y) {return x.multiplicative_inverse();});
 
-function half_nonnegative(n) {return n >> 1;}
+var additive_identity = unary_operation(function additive_identity(x) {return x.additive_identity();});
+var additive_inverse = unary_operation(function additive_inverse(x) {return x.negate();});
+
+var multiplicative_identity = unary_operation(function multiplicative_identity(x) {return x.multiplicative_identity();});
+var multiplicative_inverse = unary_operation(function multiplicative_inverse(x) {return x.multiplicative_inverse();});
+
+
+var identity_elements = {
+    "add": additive_identity,
+    "multiply": multiplicative_identity,
+};
+
+var identity_element = function(op, x) {
+    var getter = identity_elements[op.inner_name];
+    if (getter) return getter(x);
+    return undefined;
+    // if (x.inner_name === "add") return additive_identity(x);
+    // if (x.inner_name === "multiply") return multiplicative_identity(x);
+
+}
+// print(x.inner_name)function half_nonnegative(n) {return n >> 1;}
 function half(n) {return n >> 1;}
 function twice(n) {return n + n;}
 function remainder_native(a, b) {return a % b;}

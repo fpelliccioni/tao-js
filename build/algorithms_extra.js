@@ -42,9 +42,12 @@ multiply_accumulate_semigroup: [ 'numerics/power', 'https://github.com/fpellicci
 multiply_group: [ 'numerics/power', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/numerics/power/multiply_group.js' ],
 multiply_monoid: [ 'numerics/power', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/numerics/power/multiply_monoid.js' ],
 multiply_semigroup: [ 'numerics/power', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/numerics/power/multiply_semigroup.js' ],
+power_accumulate_semigroup: [ 'numerics/power', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/numerics/power/power_accumulate_semigroup.js' ],
 power_accumulate_semigroup0: [ 'numerics/power', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/numerics/power/power_accumulate_semigroup0.js' ],
 power_group0: [ 'numerics/power', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/numerics/power/power_group0.js' ],
+power_monoid: [ 'numerics/power', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/numerics/power/power_monoid.js' ],
 power_monoid0: [ 'numerics/power', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/numerics/power/power_monoid0.js' ],
+power_semigroup: [ 'numerics/power', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/numerics/power/power_semigroup.js' ],
 power_semigroup0: [ 'numerics/power', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/numerics/power/power_semigroup0.js' ],
 largest_doubling: [ 'numerics/remainder', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/numerics/remainder/largest_doubling.js' ],
 quotient: [ 'numerics/remainder', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/numerics/remainder/quotient.js' ],
@@ -946,6 +949,23 @@ function __power_attributes() {
 
 }
 
+function __power_accumulate_semigroup_usage() {
+    var n = 41;
+    var a = 59;
+
+    var p = power_accumulate_semigroup(0, a, n, multiply);
+    print(p);
+
+    // - SemigroupOperation is a associative binary operation on which the following is defined:
+    //        operation: x ° y
+    //   and on which the following axiom holds:
+    //        x ° (y ° z) = (x ° y) ° z       associativity
+}
+
+function __power_accumulate_semigroup_attributes() {
+
+}
+
 function __power_accumulate_semigroup0_usage() {
     var n = 41;
     var a = 59;
@@ -1003,6 +1023,31 @@ function __power_group0_attributes() {
 
 }
 
+function __power_monoid_usage() {
+    var n = 41;
+    var a = 59;
+
+    var p = power_monoid(a, n, multiply);
+    print(p);
+
+    var m1 = new SquareMatrix(2, [1, 3, 7, 5]);
+    print(m1.str());
+
+    var m2 = power_monoid(m1, 5, multiply);
+    print(m2.str());
+
+    // - MonoidOperation is a associative binary operation on which the following is defined:
+    //        operation:                    x ° y
+    //        constant / identity element:  e
+    //   and on which the following axiom holds:
+    //        x ° (y ° z) = (x ° y) ° z       associativity
+    //        x ° e = e ° x = x               identity
+}
+
+function __power_monoid_attributes() {
+
+}
+
 function __power_monoid0_usage() {
     var n = 41;
     var a = 59;
@@ -1026,6 +1071,23 @@ function __power_monoid0_usage() {
 }
 
 function __power_monoid0_attributes() {
+
+}
+
+function __power_semigroup_usage() {
+    var n = 41;
+    var a = 59;
+
+    var p = power_semigroup(a, n, multiply);
+    print(p);
+
+    // - SemigroupOperation is a associative binary operation on which the following is defined:
+    //        operation: x ° y
+    //   and on which the following axiom holds:
+    //        x ° (y ° z) = (x ° y) ° z       associativity
+}
+
+function __power_semigroup_attributes() {
 
 }
 
