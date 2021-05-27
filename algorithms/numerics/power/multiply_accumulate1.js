@@ -3,7 +3,7 @@ function multiply_accumulate1(r, n, a) {
     if (odd(n)) {
         r = add(r, a);
     }
-    return multiply_accumulate1(r, half(n),  add(a, a));
+    return multiply_accumulate1(r, half(n), add(a, a));
 }
 
 function usage() {

@@ -3,7 +3,7 @@ function multiply_accumulate2(r, n, a) {
         r = add(r, a);
         if (n == 1) return r;
     }
-    return multiply_accumulate2(r, half(n),  add(a, a));
+    return multiply_accumulate2(r, half(n), add(a, a));
 }
 
 function usage() {

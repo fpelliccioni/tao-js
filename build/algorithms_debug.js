@@ -512,7 +512,7 @@ function multiply0(n, a) {
 function __debug_multiply1(n, a) {
     snapshot();
     if (n == 1) return a;
-    var product = multiply1(half(n),  add(a, a));
+    var product = multiply1(half(n), add(a, a));
     if (odd(n)) {
         product = add(product, a);
     }
@@ -578,9 +578,9 @@ function multiply4(n, a) {
 function __debug_multiply_accumulate0(r, n, a) {
     if (n == 1) return add(r, a);
     if (odd(n)) {
-        return multiply_accumulate0(add(r, a), half(n),  add(a, a));
+        return multiply_accumulate0(add(r, a), half(n), add(a, a));
     }
-    return multiply_accumulate0(r, half(n),  add(a, a));
+    return multiply_accumulate0(r, half(n), add(a, a));
 }
 
 function multiply_accumulate0(r, n, a) {
@@ -595,7 +595,7 @@ function __debug_multiply_accumulate1(r, n, a) {
     if (odd(n)) {
         r = add(r, a);
     }
-    return multiply_accumulate1(r, half(n),  add(a, a));
+    return multiply_accumulate1(r, half(n), add(a, a));
 }
 
 function multiply_accumulate1(r, n, a) {
@@ -610,7 +610,7 @@ function __debug_multiply_accumulate2(r, n, a) {
         r = add(r, a);
         if (n == 1) return r;
     }
-    return multiply_accumulate2(r, half(n),  add(a, a));
+    return multiply_accumulate2(r, half(n), add(a, a));
 }
 
 function multiply_accumulate2(r, n, a) {
