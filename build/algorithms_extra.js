@@ -23,6 +23,7 @@ partition_copy: [ 'copying/predicate', 'https://github.com/fpelliccioni/tao-js/b
 partition_copy_n: [ 'copying/predicate', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/copying/predicate/partition_copy_n.js' ],
 split_copy: [ 'copying/predicate', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/copying/predicate/split_copy.js' ],
 split_copy_n: [ 'copying/predicate', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/copying/predicate/split_copy_n.js' ],
+divides: [ 'numerics', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/numerics/divides.js' ],
 gcd: [ 'numerics/gcd', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/numerics/gcd/gcd.js' ],
 gcd0: [ 'numerics/gcd', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/numerics/gcd/gcd0.js' ],
 gcd1: [ 'numerics/gcd', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/numerics/gcd/gcd1.js' ],
@@ -51,6 +52,9 @@ power_monoid: [ 'numerics/power', 'https://github.com/fpelliccioni/tao-js/blob/m
 power_monoid0: [ 'numerics/power', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/numerics/power/power_monoid0.js' ],
 power_semigroup: [ 'numerics/power', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/numerics/power/power_semigroup.js' ],
 power_semigroup0: [ 'numerics/power', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/numerics/power/power_semigroup0.js' ],
+fermat_test: [ 'numerics/primality_testing', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/numerics/primality_testing/fermat_test.js' ],
+is_prime: [ 'numerics/primality_testing', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/numerics/primality_testing/is_prime.js' ],
+multiplicative_inverse_fermat: [ 'numerics/primality_testing', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/numerics/primality_testing/multiplicative_inverse_fermat.js' ],
 largest_doubling: [ 'numerics/remainder', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/numerics/remainder/largest_doubling.js' ],
 quotient: [ 'numerics/remainder', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/numerics/remainder/quotient.js' ],
 quotient_remainder: [ 'numerics/remainder', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/numerics/remainder/quotient_remainder.js' ],
@@ -65,6 +69,7 @@ print_sieve: [ 'numerics/sift', 'https://github.com/fpelliccioni/tao-js/blob/mas
 sift: [ 'numerics/sift', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/numerics/sift/sift.js' ],
 sift0: [ 'numerics/sift', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/numerics/sift/sift0.js' ],
 sift1: [ 'numerics/sift', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/numerics/sift/sift1.js' ],
+smallest_divisor: [ 'numerics', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/numerics/smallest_divisor.js' ],
 insertion_sort: [ 'rearrangements/ordering-based/sorting/insertion-sort', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/rearrangements/ordering-based/sorting/insertion-sort/insertion_sort.js' ],
 insertion_sort_backward: [ 'rearrangements/ordering-based/sorting/insertion-sort', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/rearrangements/ordering-based/sorting/insertion-sort/insertion_sort_backward.js' ],
 insertion_sort_classic: [ 'rearrangements/ordering-based/sorting/insertion-sort', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/rearrangements/ordering-based/sorting/insertion-sort/insertion_sort_classic.js' ],
@@ -543,6 +548,20 @@ function __split_copy_n_usage() {
 }
 
 function __split_copy_n_attributes() {
+
+}
+
+function __divides_usage() {
+    var i = random_int();
+    var n = random_int();
+    print(divides(i, n));
+
+    i = 5;
+    n = 15;
+    print(divides(i, n));
+}
+
+function __divides_attributes() {
 
 }
 
@@ -1169,6 +1188,59 @@ function __power_semigroup0_attributes() {
 
 }
 
+function __fermat_test_usage() {
+    function modulo_multiply(modulus) {
+        return function(n, m) {
+            return (n * m) % modulus;
+        }
+    }
+
+    var n = random_int();
+    var witness = random_int(0, n - 1);
+    var is_prime = fermat_test(n, witness);
+    print(is_prime);
+}
+
+function __fermat_test_attributes() {
+
+}
+
+function __is_prime_usage() {
+    var n = random_int();
+    print(is_prime(n));
+
+    n = 13;
+    print(is_prime(n));
+}
+
+function __is_prime_attributes() {
+
+}
+
+function __multiplicative_inverse_fermat_usage() {
+    function modulo_multiply_c(modulus) {
+        var f = binary_operation(function modulo_multiply(n, m) {
+            return (n * m) % modulus;
+        });
+        return f;
+    }
+
+    var modulo_multiply_identity = unary_operation(function modulo_multiply_identity(x) {return 1;});
+    identity_elements["modulo_multiply"] = modulo_multiply_identity;
+
+    var p = 7;
+    for (var a = 1; a < p; ++a) {
+        var inv = multiplicative_inverse_fermat(a, p);
+        print("the multiplicative inverse mod" + p + " of " + a +   " is " + inv);
+        var id = modulo_multiply_c(p)(a, inv);
+        print("verification: " + a + " * " + inv + " mod" + p + " = " + id);
+    }
+}
+
+function __multiplicative_inverse_fermat_attributes() {
+
+}
+
 function __largest_doubling_usage() {
 
     var a = random_int();
@@ -1403,6 +1475,18 @@ function __sift1_usage() {
   }
 
 function __sift1_attributes() {
+
+}
+
+function __smallest_divisor_usage() {
+    var n = random_int();
+    print(smallest_divisor(n));
+
+    n = 15;
+    print(smallest_divisor(n));
+}
+
+function __smallest_divisor_attributes() {
 
 }
 
