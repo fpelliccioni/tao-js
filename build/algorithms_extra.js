@@ -56,6 +56,8 @@ power_semigroup: [ 'numerics/power', 'https://github.com/fpelliccioni/tao-js/blo
 power_semigroup0: [ 'numerics/power', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/numerics/power/power_semigroup0.js' ],
 fermat_test: [ 'numerics/primality_testing', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/numerics/primality_testing/fermat_test.js' ],
 is_charmichael: [ 'numerics/primality_testing', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/numerics/primality_testing/is_charmichael.js' ],
+is_charmichael0: [ 'numerics/primality_testing', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/numerics/primality_testing/is_charmichael0.js' ],
+is_charmichael1: [ 'numerics/primality_testing', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/numerics/primality_testing/is_charmichael1.js' ],
 is_prime: [ 'numerics/primality_testing', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/numerics/primality_testing/is_prime.js' ],
 multiplicative_inverse_fermat: [ 'numerics/primality_testing', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/numerics/primality_testing/multiplicative_inverse_fermat.js' ],
 largest_doubling: [ 'numerics/remainder', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/numerics/remainder/largest_doubling.js' ],
@@ -1233,23 +1235,65 @@ function __fermat_test_attributes() {
 }
 
 function __is_charmichael_usage() {
-function are_coprime(m, n) {
-    var d = gcd(m, n);
-    return d == 1;
-}
-
-function modulo_multiply(modulus) {
-    return function(n, m) {
-        return (n * m) % modulus;
+    function are_coprime(m, n) {
+        var d = gcd(m, n);
+        return d != 1;
     }
-}
 
-var n = 172081;
-var res = is_charmichael(n);
-print(res);
+    function modulo_multiply(modulus) {
+        return function(n, m) {
+            return (n * m) % modulus;
+        }
+    }
+
+    var n = 172081;
+    var res = is_charmichael0(n);
+    print(res);
 }
 
 function __is_charmichael_attributes() {
+
+}
+
+function __is_charmichael0_usage() {
+    function are_coprime(m, n) {
+        var d = gcd(m, n);
+        return d != 1;
+    }
+
+    function modulo_multiply(modulus) {
+        return function(n, m) {
+            return (n * m) % modulus;
+        }
+    }
+
+    var n = 172081;
+    var res = is_charmichael0(n);
+    print(res);
+}
+
+function __is_charmichael0_attributes() {
+
+}
+
+function __is_charmichael1_usage() {
+    function are_coprime(m, n) {
+        var d = gcd(m, n);
+        return d != 1;
+    }
+
+    function modulo_multiply(modulus) {
+        return function(n, m) {
+            return (n * m) % modulus;
+        }
+    }
+
+    var n = 172081;
+    var res = is_charmichael1(n);
+    print(res);
+}
+
+function __is_charmichael1_attributes() {
 
 }
 
