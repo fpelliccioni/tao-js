@@ -36,7 +36,7 @@ function usage() {
     }
 
     var n = 172081;
-    var res = is_charmichael0(n);
+    var res = is_charmichael(n);
     print(res);
 }
 

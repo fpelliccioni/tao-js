@@ -1247,7 +1247,7 @@ function __is_charmichael_usage() {
     }
 
     var n = 172081;
-    var res = is_charmichael0(n);
+    var res = is_charmichael(n);
     print(res);
 }
 
