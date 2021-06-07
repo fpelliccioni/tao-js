@@ -29,6 +29,7 @@ gcd0: [ 'numerics/gcd', 'https://github.com/fpelliccioni/tao-js/blob/master/algo
 gcd1: [ 'numerics/gcd', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/numerics/gcd/gcd1.js' ],
 gcd2: [ 'numerics/gcd', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/numerics/gcd/gcd2.js' ],
 gcd3: [ 'numerics/gcd', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/numerics/gcd/gcd3.js' ],
+integer_sqrt_recursive: [ 'numerics', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/numerics/integer_sqrt_recursive.js' ],
 multiply0: [ 'numerics/power', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/numerics/power/multiply0.js' ],
 multiply1: [ 'numerics/power', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/numerics/power/multiply1.js' ],
 multiply2: [ 'numerics/power', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/numerics/power/multiply2.js' ],
@@ -53,6 +54,7 @@ power_monoid0: [ 'numerics/power', 'https://github.com/fpelliccioni/tao-js/blob/
 power_semigroup: [ 'numerics/power', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/numerics/power/power_semigroup.js' ],
 power_semigroup0: [ 'numerics/power', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/numerics/power/power_semigroup0.js' ],
 fermat_test: [ 'numerics/primality_testing', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/numerics/primality_testing/fermat_test.js' ],
+is_charmichael: [ 'numerics/primality_testing', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/numerics/primality_testing/is_charmichael.js' ],
 is_prime: [ 'numerics/primality_testing', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/numerics/primality_testing/is_prime.js' ],
 multiplicative_inverse_fermat: [ 'numerics/primality_testing', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/numerics/primality_testing/multiplicative_inverse_fermat.js' ],
 largest_doubling: [ 'numerics/remainder', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/numerics/remainder/largest_doubling.js' ],
@@ -622,6 +624,32 @@ function __gcd3_usage() {
 }
 
 function __gcd3_attributes() {
+
+}
+
+function __integer_sqrt_usage() {
+    var i = random_int();
+    var n = random_int();
+    print(divides(i, n));
+
+    i = 5;
+    n = 15;
+    print(divides(i, n));
+}
+
+function __integer_sqrt_attributes() {
+
+}
+
+function __integer_sqrt_recursive_usage() {
+    var n = random_int();
+    // var n = 53;
+    var i = integer_sqrt_recursive(n);
+    print(i);
+    print(Math.floor(Math.sqrt(n)));
+}
+
+function __integer_sqrt_recursive_attributes() {
 
 }
 
@@ -1202,6 +1230,27 @@ function __fermat_test_usage() {
 }
 
 function __fermat_test_attributes() {
+
+}
+
+function __is_charmichael_usage() {
+function are_coprime(m, n) {
+    var d = gcd(m, n);
+    return d == 1;
+}
+
+function modulo_multiply(modulus) {
+    return function(n, m) {
+        return (n * m) % modulus;
+    }
+}
+
+var n = 172081;
+var res = is_charmichael(n);
+print(res);
+}
+
+function __is_charmichael_attributes() {
 
 }
 

@@ -506,6 +506,30 @@ function gcd3(a, b) {
     return res;
 }
 
+function __debug_integer_sqrt_recursive(n) {
+    //precondition: n >= 0
+    if (n < 2) {
+        return n
+    }
+
+    var tmp = n >> 2;
+    var small_cand = integer_sqrt_recursive(n >> 2);
+    var small_cand = small_cand << 1;
+    var large_cand = small_cand + 1
+    if (large_cand * large_cand > n) {
+        return small_cand;
+    }
+
+    return large_cand;
+}
+
+function integer_sqrt_recursive(n) {
+    var _f_ = start_f('integer_sqrt_recursive', n);
+    var res = __debug_integer_sqrt_recursive(n);
+    end_f(_f_);
+    return res;
+}
+
 function __debug_multiply0(n, a) {
     if (n == 1) return a;
     var product = multiply0(n - 1, a)
@@ -891,6 +915,29 @@ function __debug_fermat_test(n, witness) {
 function fermat_test(n, witness) {
     var _f_ = start_f('fermat_test', n, witness);
     var res = __debug_fermat_test(n, witness);
+    end_f(_f_);
+    return res;
+}
+
+function __debug_is_charmichael(n) {
+    //precondition: n > 1 && n is composite
+
+    var b = 2;
+    while (true) {
+        if (are_coprime(b, n)) {
+            var x = power_semigroup(b, n - 1, modulo_multiply(n));
+            if (x == 1) {
+                return true;
+            }
+        }
+        ++b;
+    }
+    return false; // never returns
+}
+
+function is_charmichael(n) {
+    var _f_ = start_f('is_charmichael', n);
+    var res = __debug_is_charmichael(n);
     end_f(_f_);
     return res;
 }

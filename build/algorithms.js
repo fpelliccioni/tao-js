@@ -296,6 +296,23 @@ function gcd3(a, b) {
     return a;
 }
 
+function integer_sqrt_recursive(n) {
+    //precondition: n >= 0
+    if (n < 2) {
+        return n
+    }
+
+    var tmp = n >> 2;
+    var small_cand = integer_sqrt_recursive(n >> 2);
+    var small_cand = small_cand << 1;
+    var large_cand = small_cand + 1
+    if (large_cand * large_cand > n) {
+        return small_cand;
+    }
+
+    return large_cand;
+}
+
 function multiply0(n, a) {
     if (n == 1) return a;
     var product = multiply0(n - 1, a)
@@ -515,6 +532,22 @@ function fermat_test(n, witness) {
     //precondition: witness > 0 && witness < n
     var reminder = power_semigroup(witness, n - 1, modulo_multiply(n));
     return reminder == 1;
+}
+
+function is_charmichael(n) {
+    //precondition: n > 1 && n is composite
+
+    var b = 2;
+    while (true) {
+        if (are_coprime(b, n)) {
+            var x = power_semigroup(b, n - 1, modulo_multiply(n));
+            if (x == 1) {
+                return true;
+            }
+        }
+        ++b;
+    }
+    return false; // never returns
 }
 
 function is_prime(n) {
