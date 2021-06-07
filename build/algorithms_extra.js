@@ -29,6 +29,7 @@ gcd0: [ 'numerics/gcd', 'https://github.com/fpelliccioni/tao-js/blob/master/algo
 gcd1: [ 'numerics/gcd', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/numerics/gcd/gcd1.js' ],
 gcd2: [ 'numerics/gcd', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/numerics/gcd/gcd2.js' ],
 gcd3: [ 'numerics/gcd', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/numerics/gcd/gcd3.js' ],
+integer_sqrt: [ 'numerics', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/numerics/integer_sqrt.js' ],
 integer_sqrt_recursive: [ 'numerics', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/numerics/integer_sqrt_recursive.js' ],
 multiply0: [ 'numerics/power', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/numerics/power/multiply0.js' ],
 multiply1: [ 'numerics/power', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/numerics/power/multiply1.js' ],
@@ -628,13 +629,11 @@ function __gcd3_attributes() {
 }
 
 function __integer_sqrt_usage() {
-    var i = random_int();
     var n = random_int();
-    print(divides(i, n));
-
-    i = 5;
-    n = 15;
-    print(divides(i, n));
+    // var n = 53;
+    var i = integer_sqrt(n);
+    print(i);
+    print(Math.floor(Math.sqrt(n)));
 }
 
 function __integer_sqrt_attributes() {

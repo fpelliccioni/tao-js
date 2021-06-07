@@ -1,7 +1,7 @@
 function integer_sqrt_recursive(n) {
     //precondition: n >= 0
     if (n < 2) {
-        return n
+        return n;
     }
 
     var tmp = n >> 2;
