@@ -410,17 +410,6 @@ function split_copy_n(f, n, u, t, p) {
     return res;
 }
 
-function __debug_divides(i, n) {
-    return n % i == 0;
-}
-
-function divides(i, n) {
-    var _f_ = start_f('divides', i, n);
-    var res = __debug_divides(i, n);
-    end_f(_f_);
-    return res;
-}
-
 function __debug_gcd(a, b) {
     while (b != 0) {
         var r = remainder(a, b);
@@ -506,6 +495,17 @@ function gcd3(a, b) {
     return res;
 }
 
+function __debug_divides(i, n) {
+    return n % i == 0;
+}
+
+function divides(i, n) {
+    var _f_ = start_f('divides', i, n);
+    var res = __debug_divides(i, n);
+    end_f(_f_);
+    return res;
+}
+
 function __debug_integer_sqrt(n) {
     //precondition: n >= 0
     if (n < 2) {
@@ -562,6 +562,25 @@ function __debug_integer_sqrt_recursive(n) {
 function integer_sqrt_recursive(n) {
     var _f_ = start_f('integer_sqrt_recursive', n);
     var res = __debug_integer_sqrt_recursive(n);
+    end_f(_f_);
+    return res;
+}
+
+function __debug_smallest_divisor(n) {
+    //precondition: n > 0
+    if (even(n)) return 2;
+
+    for (var i = 3; i * i <= n; i += 2) {
+        if (divides(i, n)) {
+            return i;
+        }
+    }
+    return n;
+}
+
+function smallest_divisor(n) {
+    var _f_ = start_f('smallest_divisor', n);
+    var res = __debug_smallest_divisor(n);
     end_f(_f_);
     return res;
 }
@@ -1349,25 +1368,6 @@ function __debug_sift1(f, n) {
 function sift1(f, n) {
     var _f_ = start_f('sift1', f, n);
     var res = __debug_sift1(f, n);
-    end_f(_f_);
-    return res;
-}
-
-function __debug_smallest_divisor(n) {
-    //precondition: n > 0
-    if (even(n)) return 2;
-
-    for (var i = 3; i * i <= n; i += 2) {
-        if (divides(i, n)) {
-            return i;
-        }
-    }
-    return n;
-}
-
-function smallest_divisor(n) {
-    var _f_ = start_f('smallest_divisor', n);
-    var res = __debug_smallest_divisor(n);
     end_f(_f_);
     return res;
 }

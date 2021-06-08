@@ -23,14 +23,15 @@ partition_copy: [ 'copying/predicate', 'https://github.com/fpelliccioni/tao-js/b
 partition_copy_n: [ 'copying/predicate', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/copying/predicate/partition_copy_n.js' ],
 split_copy: [ 'copying/predicate', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/copying/predicate/split_copy.js' ],
 split_copy_n: [ 'copying/predicate', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/copying/predicate/split_copy_n.js' ],
-divides: [ 'numerics', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/numerics/divides.js' ],
 gcd: [ 'numerics/gcd', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/numerics/gcd/gcd.js' ],
 gcd0: [ 'numerics/gcd', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/numerics/gcd/gcd0.js' ],
 gcd1: [ 'numerics/gcd', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/numerics/gcd/gcd1.js' ],
 gcd2: [ 'numerics/gcd', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/numerics/gcd/gcd2.js' ],
 gcd3: [ 'numerics/gcd', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/numerics/gcd/gcd3.js' ],
-integer_sqrt: [ 'numerics', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/numerics/integer_sqrt.js' ],
-integer_sqrt_recursive: [ 'numerics', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/numerics/integer_sqrt_recursive.js' ],
+divides: [ 'numerics/misc', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/numerics/misc/divides.js' ],
+integer_sqrt: [ 'numerics/misc', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/numerics/misc/integer_sqrt.js' ],
+integer_sqrt_recursive: [ 'numerics/misc', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/numerics/misc/integer_sqrt_recursive.js' ],
+smallest_divisor: [ 'numerics/misc', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/numerics/misc/smallest_divisor.js' ],
 multiply0: [ 'numerics/power', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/numerics/power/multiply0.js' ],
 multiply1: [ 'numerics/power', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/numerics/power/multiply1.js' ],
 multiply2: [ 'numerics/power', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/numerics/power/multiply2.js' ],
@@ -74,7 +75,6 @@ print_sieve: [ 'numerics/sift', 'https://github.com/fpelliccioni/tao-js/blob/mas
 sift: [ 'numerics/sift', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/numerics/sift/sift.js' ],
 sift0: [ 'numerics/sift', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/numerics/sift/sift0.js' ],
 sift1: [ 'numerics/sift', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/numerics/sift/sift1.js' ],
-smallest_divisor: [ 'numerics', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/numerics/smallest_divisor.js' ],
 insertion_sort: [ 'rearrangements/ordering-based/sorting/insertion-sort', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/rearrangements/ordering-based/sorting/insertion-sort/insertion_sort.js' ],
 insertion_sort_backward: [ 'rearrangements/ordering-based/sorting/insertion-sort', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/rearrangements/ordering-based/sorting/insertion-sort/insertion_sort_backward.js' ],
 insertion_sort_classic: [ 'rearrangements/ordering-based/sorting/insertion-sort', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/rearrangements/ordering-based/sorting/insertion-sort/insertion_sort_classic.js' ],
@@ -556,20 +556,6 @@ function __split_copy_n_attributes() {
 
 }
 
-function __divides_usage() {
-    var i = random_int();
-    var n = random_int();
-    print(divides(i, n));
-
-    i = 5;
-    n = 15;
-    print(divides(i, n));
-}
-
-function __divides_attributes() {
-
-}
-
 function __gcd_usage() {
     var a = random_int();
     var b = random_int();
@@ -630,6 +616,20 @@ function __gcd3_attributes() {
 
 }
 
+function __divides_usage() {
+    var i = random_int();
+    var n = random_int();
+    print(divides(i, n));
+
+    i = 5;
+    n = 15;
+    print(divides(i, n));
+}
+
+function __divides_attributes() {
+
+}
+
 function __integer_sqrt_usage() {
     var n = random_int();
     // var n = 53;
@@ -651,6 +651,18 @@ function __integer_sqrt_recursive_usage() {
 }
 
 function __integer_sqrt_recursive_attributes() {
+
+}
+
+function __smallest_divisor_usage() {
+    var n = random_int();
+    print(smallest_divisor(n));
+
+    n = 15;
+    print(smallest_divisor(n));
+}
+
+function __smallest_divisor_attributes() {
 
 }
 
@@ -1567,18 +1579,6 @@ function __sift1_usage() {
   }
 
 function __sift1_attributes() {
-
-}
-
-function __smallest_divisor_usage() {
-    var n = random_int();
-    print(smallest_divisor(n));
-
-    n = 15;
-    print(smallest_divisor(n));
-}
-
-function __smallest_divisor_attributes() {
 
 }
 

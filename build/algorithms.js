@@ -242,10 +242,6 @@ function split_copy_n(f, n, u, t, p) {
     return [f, u, t];
 }
 
-function divides(i, n) {
-    return n % i == 0;
-}
-
 function gcd(a, b) {
     while (b != 0) {
         var r = remainder(a, b);
@@ -296,6 +292,10 @@ function gcd3(a, b) {
     return a;
 }
 
+function divides(i, n) {
+    return n % i == 0;
+}
+
 function integer_sqrt(n) {
     //precondition: n >= 0
     if (n < 2) {
@@ -340,6 +340,18 @@ function integer_sqrt_recursive(n) {
     }
 
     return large_cand;
+}
+
+function smallest_divisor(n) {
+    //precondition: n > 0
+    if (even(n)) return 2;
+
+    for (var i = 3; i * i <= n; i += 2) {
+        if (divides(i, n)) {
+            return i;
+        }
+    }
+    return n;
 }
 
 function multiply0(n, a) {
@@ -826,18 +838,6 @@ function sift1(f, n) {
         factor = i + i + 3;
         index_square = 2 * i * (i + 3) + 3;
     }
-}
-
-function smallest_divisor(n) {
-    //precondition: n > 0
-    if (even(n)) return 2;
-
-    for (var i = 3; i * i <= n; i += 2) {
-        if (divides(i, n)) {
-            return i;
-        }
-    }
-    return n;
 }
 
 function insertion_sort(f, l, r) {
