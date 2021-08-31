@@ -3,7 +3,7 @@ function push_heap_gnu(f, l, r) {
 
     l = predecessor(l);
     var value = source_move(l);
-    push_heap(f, distance(f, l), 0, move_obj(value), r);
+    push_heap_gnu_helper(f, distance(f, l), 0, move_obj(value), r);
 }
 
 function usage() {

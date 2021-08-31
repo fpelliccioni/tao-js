@@ -1189,6 +1189,14 @@ function make_heap_n_naive_1(f, n) {
     }
 }
 
+function push_heap_gnu(f, l, r) {
+    //precondition: [f, l - 1) is a valid heap
+
+    l = predecessor(l);
+    var value = source_move(l);
+    push_heap_gnu_helper(f, distance(f, l), 0, move_obj(value), r);
+}
+
 function push_heap_n(f, n) {
     while (n > 1) {
         var l = successor(f, n - 1);

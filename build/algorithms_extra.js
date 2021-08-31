@@ -108,6 +108,7 @@ shift_right_while_unguarded: [ 'rearrangements/position-based/shift', 'https://g
 make_heap_n: [ 'rearrangements/predicate-based/heaps', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/rearrangements/predicate-based/heaps/make_heap_n.js' ],
 make_heap_n_naive_0: [ 'rearrangements/predicate-based/heaps', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/rearrangements/predicate-based/heaps/make_heap_n_naive_0.js' ],
 make_heap_n_naive_1: [ 'rearrangements/predicate-based/heaps', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/rearrangements/predicate-based/heaps/make_heap_n_naive_1.js' ],
+push_heap_gnu: [ 'rearrangements/predicate-based/heaps', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/rearrangements/predicate-based/heaps/push_heap_gnu.js' ],
 push_heap_n: [ 'rearrangements/predicate-based/heaps', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/rearrangements/predicate-based/heaps/push_heap_n.js' ],
 partition_semistable: [ 'rearrangements/predicate-based/partition', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/rearrangements/predicate-based/partition/partition_semistable.js' ],
 partition_semistable_1: [ 'rearrangements/predicate-based/partition', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/rearrangements/predicate-based/partition/partition_semistable_1.js' ],
@@ -2235,6 +2236,39 @@ function __make_heap_n_naive_1_usage() {
 }
 
 function __make_heap_n_naive_1_attributes() {
+
+}
+
+function __push_heap_gnu_usage() {
+    function parent(n) {
+        return half(n - 1);
+    }    
+
+    function push_heap_gnu_helper(f, hole_idx, top_idx, value, r) {
+        //precondition: TODO
+        var parent_idx = half(hole_idx - 1);
+        while (hole_idx > top_idx && r(source(successor(f, parent_idx)), value)) {
+            sink_move(successor(f, hole_idx), source_move(successor(f, parent_idx)));
+            hole_idx = parent_idx;
+            parent_idx = half(hole_idx - 1);
+        }
+        sink_move(successor(f, hole_idx), value);
+    }
+
+    //var s = sequence(array_random(), "s", undefined, undefined, false, true);
+    //var s = sequence([10, 8, 6, 4, 5, 3, 1], "s", undefined, undefined, false, true);
+    var s = sequence([10, 8, 6, 4, 5, 3, 7], "s", undefined, undefined, false, true);
+    //var s = sequence([10, 8, 6, 4, 5, 3, 11], "s", undefined, undefined, false, true);
+
+    var f = begin(s);
+    var l = end(s);
+
+    print(s);
+    push_heap_gnu(f, l, lt);
+    print(s);
+}
+
+function __push_heap_gnu_attributes() {
 
 }
 

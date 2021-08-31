@@ -69,6 +69,8 @@ function html_url(path) {
 
 function process_file(path, filename) {
 
+    console.log(`process_file: path: ${path} filename: ${filename}`);
+
     var file_content_main = '';
     var file_content_debug = '';
     var file_content_extra = '';
