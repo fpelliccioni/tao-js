@@ -12,6 +12,25 @@ function push_heap_n(f, n) {
     }
 }
 
+
+// function push_heap_n(f, n) {
+//     var ci = n - 1;
+//     while (true) {
+//         var pi = parent(ci);
+//         var c = successor(f, ci);
+//         var p = successor(f, pi);
+//         var cv = source(c);
+//         var pv = source(p);
+
+//         if (pv <= cv) break;
+//         sink(p, cv);
+//         sink(c, pv);
+
+//         if (pi == 0) break;
+//         ci = pi;
+//     }
+// }    
+
 function usage() {
     function parent(n) {
         return half(n - 1);
