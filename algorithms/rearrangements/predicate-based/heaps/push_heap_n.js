@@ -1,4 +1,4 @@
-function push_heap(f, n) {
+function push_heap_n(f, n) {
     while (n > 1) {
         var l = successor(f, n - 1);
         var pidx = parent(n - 1);
