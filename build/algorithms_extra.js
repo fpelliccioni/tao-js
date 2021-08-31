@@ -2272,10 +2272,9 @@ function __push_heap_gnu_0_usage() {
         sink_move(successor(f, hole_idx), value);
     }
 
-    //var s = sequence(array_random(), "s", undefined, undefined, false, true);
-    //var s = sequence([10, 8, 6, 4, 5, 3, 1], "s", undefined, undefined, false, true);
-    var s = sequence([10, 8, 6, 4, 5, 3, 7], "s", undefined, undefined, false, true);
-    //var s = sequence([10, 8, 6, 4, 5, 3, 11], "s", undefined, undefined, false, true);
+    //var s = sequenceTree([10, 8, 6, 4, 5, 3, 1], "s");
+    var s = sequenceTree([10, 8, 6, 4, 5, 3, 7], "s");
+    //var s = sequenceTree([10, 8, 6, 4, 5, 3, 11], "s");
 
     var f = begin(s);
     var l = end(s);
@@ -2311,10 +2310,9 @@ function __push_heap_gnu_1_usage() {
         sink_move(successor(f, hole_idx), value);
     }
 
-    //var s = sequence(array_random(), "s", undefined, undefined, false, true);
-    //var s = sequence([10, 8, 6, 4, 5, 3, 1], "s", undefined, undefined, false, true);
-    var s = sequence([10, 8, 6, 4, 5, 3, 7], "s", undefined, undefined, false, true);
-    //var s = sequence([10, 8, 6, 4, 5, 3, 11], "s", undefined, undefined, false, true);
+    //var s = sequenceTree([10, 8, 6, 4, 5, 3, 1], "s");
+    var s = sequenceTree([10, 8, 6, 4, 5, 3, 7], "s");
+    //var s = sequenceTree([10, 8, 6, 4, 5, 3, 11], "s");
 
     var f = begin(s);
     var l = end(s);
@@ -2333,10 +2331,9 @@ function __push_heap_n_usage() {
         return half(n - 1);
     }
 
-    //var s = sequence(array_random(), "s", undefined, undefined, false, true);
-    //var s = sequence([10, 8, 6, 4, 5, 3, 1], "s", undefined, undefined, false, true);
-    var s = sequence([10, 8, 6, 4, 5, 3, 7], "s", undefined, undefined, false, true);
-    //var s = sequence([10, 8, 6, 4, 5, 3, 11], "s", undefined, undefined, false, true);
+    //var s = sequenceTree([10, 8, 6, 4, 5, 3, 1], "s");
+    var s = sequenceTree([10, 8, 6, 4, 5, 3, 7], "s");
+    //var s = sequenceTree([10, 8, 6, 4, 5, 3, 11], "s");
 
     var f = begin(s);
     var n = size(s);
