@@ -1,3 +1,6 @@
+// npm install acorn@8.4.1
+// npm install node-fetch@2.6.1
+
 const acorn = require("acorn")
 // const walk = require("acorn-walk")
 const fetch = require("node-fetch");
