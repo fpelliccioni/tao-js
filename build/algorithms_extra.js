@@ -60,6 +60,7 @@ is_charmichael: [ 'numerics/primality_testing', 'https://github.com/fpelliccioni
 is_charmichael0: [ 'numerics/primality_testing', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/numerics/primality_testing/is_charmichael0.js' ],
 is_charmichael1: [ 'numerics/primality_testing', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/numerics/primality_testing/is_charmichael1.js' ],
 is_prime: [ 'numerics/primality_testing', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/numerics/primality_testing/is_prime.js' ],
+miller_rabin_test: [ 'numerics/primality_testing', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/numerics/primality_testing/miller_rabin_test.js' ],
 multiplicative_inverse_fermat: [ 'numerics/primality_testing', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/numerics/primality_testing/multiplicative_inverse_fermat.js' ],
 largest_doubling: [ 'numerics/remainder', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/numerics/remainder/largest_doubling.js' ],
 quotient: [ 'numerics/remainder', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/numerics/remainder/quotient.js' ],
@@ -108,7 +109,8 @@ shift_right_while_unguarded: [ 'rearrangements/position-based/shift', 'https://g
 make_heap_n: [ 'rearrangements/predicate-based/heaps', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/rearrangements/predicate-based/heaps/make_heap_n.js' ],
 make_heap_n_naive_0: [ 'rearrangements/predicate-based/heaps', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/rearrangements/predicate-based/heaps/make_heap_n_naive_0.js' ],
 make_heap_n_naive_1: [ 'rearrangements/predicate-based/heaps', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/rearrangements/predicate-based/heaps/make_heap_n_naive_1.js' ],
-push_heap_gnu: [ 'rearrangements/predicate-based/heaps', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/rearrangements/predicate-based/heaps/push_heap_gnu.js' ],
+push_heap_gnu_0: [ 'rearrangements/predicate-based/heaps', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/rearrangements/predicate-based/heaps/push_heap_gnu_0.js' ],
+push_heap_gnu_1: [ 'rearrangements/predicate-based/heaps', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/rearrangements/predicate-based/heaps/push_heap_gnu_1.js' ],
 push_heap_n: [ 'rearrangements/predicate-based/heaps', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/rearrangements/predicate-based/heaps/push_heap_n.js' ],
 partition_semistable: [ 'rearrangements/predicate-based/partition', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/rearrangements/predicate-based/partition/partition_semistable.js' ],
 partition_semistable_1: [ 'rearrangements/predicate-based/partition', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/rearrangements/predicate-based/partition/partition_semistable_1.js' ],
@@ -1323,6 +1325,24 @@ function __is_prime_attributes() {
 
 }
 
+function __miller_rabin_test_usage() {
+    //
+    function modulo_multiply(modulus) {
+        return function(n, m) {
+            return (n * m) % modulus;
+        }
+    }
+
+    var n = random_int();
+    var witness = random_int(0, n - 1);
+    var is_prime = fermat_test(n, witness);
+    print(is_prime);
+}
+
+function __miller_rabin_test_attributes() {
+
+}
+
 function __multiplicative_inverse_fermat_usage() {
     function modulo_multiply_c(modulus) {
         var f = binary_operation(function modulo_multiply(n, m) {
@@ -2239,16 +2259,13 @@ function __make_heap_n_naive_1_attributes() {
 
 }
 
-function __push_heap_gnu_usage() {
-    function parent(n) {
-        return half(n - 1);
-    }    
-
+function __push_heap_gnu_0_usage() {
+    // Copied from The GNU C++ Library implementation of std::push_heap
     function push_heap_gnu_helper(f, hole_idx, top_idx, value, r) {
         //precondition: TODO
         var parent_idx = half(hole_idx - 1);
         while (hole_idx > top_idx && r(source(successor(f, parent_idx)), value)) {
-            sink_move(successor(f, hole_idx), source_move(successor(f, parent_idx)));
+            sink_move_from_it(successor(f, hole_idx), successor(f, parent_idx));
             hole_idx = parent_idx;
             parent_idx = half(hole_idx - 1);
         }
@@ -2264,11 +2281,50 @@ function __push_heap_gnu_usage() {
     var l = end(s);
 
     print(s);
-    push_heap_gnu(f, l, lt);
+    push_heap_gnu_0(f, l, lt);
     print(s);
 }
 
-function __push_heap_gnu_attributes() {
+function __push_heap_gnu_0_attributes() {
+
+}
+
+function __push_heap_gnu_1_usage() {
+    // Copied from The GNU C++ Library implementation of std::push_heap
+    function push_heap_gnu_helper(f, hole_idx, top_idx, value, r) {
+        //precondition: TODO
+        var parent_idx = half(hole_idx - 1);
+        while (true) {
+            if (hole_idx <= top_idx) {
+                break;
+            }
+
+            var p = successor(f, parent_idx);
+            if ( ! r(source(p), value)) {
+                break;
+            }
+
+            sink_move_from_it(successor(f, hole_idx), p);
+            hole_idx = parent_idx;
+            parent_idx = half(hole_idx - 1);
+        }
+        sink_move(successor(f, hole_idx), value);
+    }
+
+    //var s = sequence(array_random(), "s", undefined, undefined, false, true);
+    //var s = sequence([10, 8, 6, 4, 5, 3, 1], "s", undefined, undefined, false, true);
+    var s = sequence([10, 8, 6, 4, 5, 3, 7], "s", undefined, undefined, false, true);
+    //var s = sequence([10, 8, 6, 4, 5, 3, 11], "s", undefined, undefined, false, true);
+
+    var f = begin(s);
+    var l = end(s);
+
+    print(s);
+    push_heap_gnu_1(f, l, lt);
+    print(s);
+}
+
+function __push_heap_gnu_1_attributes() {
 
 }
 

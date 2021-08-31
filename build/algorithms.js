@@ -649,6 +649,29 @@ function is_prime(n) {
     return sd == n;
 }
 
+function miller_rabin_test(n, q, k, w) {
+    //returns true is n is probably prime, returns false if it definitely is not.
+    //precondition: n > 1 && n - 1 = 2^k * q && q is odd
+
+    var mmult = modulo_multiply(n);
+    var x = power_semigroup(w, q, mmult);
+    if (x == 1 || x == n - 1) {
+        return true;
+    }
+
+    for (var i = 1; i < k; ++i) {
+        //invariant: x = w^(2^(i-1)) * q
+        x = mmult(x, x);
+        if (x == n - 1) {
+            return true;
+        }
+        if (x == 1) {
+            return false;
+        }
+    }
+    return false;
+}
+
 function multiplicative_inverse_fermat(a, p) {
     //precondition: p is prime && a > 0
     return power_monoid(a, p - 2, modulo_multiply_c(p));
@@ -1189,7 +1212,15 @@ function make_heap_n_naive_1(f, n) {
     }
 }
 
-function push_heap_gnu(f, l, r) {
+function push_heap_gnu_0(f, l, r) {
+    //precondition: [f, l - 1) is a valid heap
+
+    l = predecessor(l);
+    var value = source_move(l);
+    push_heap_gnu_helper(f, distance(f, l), 0, move_obj(value), r);
+}
+
+function push_heap_gnu_1(f, l, r) {
     //precondition: [f, l - 1) is a valid heap
 
     l = predecessor(l);

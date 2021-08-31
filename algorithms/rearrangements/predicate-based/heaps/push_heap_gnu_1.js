@@ -1,4 +1,4 @@
-function push_heap_gnu(f, l, r) {
+function push_heap_gnu_1(f, l, r) {
     //precondition: [f, l - 1) is a valid heap
 
     l = predecessor(l);
@@ -7,15 +7,21 @@ function push_heap_gnu(f, l, r) {
 }
 
 function usage() {
-    function parent(n) {
-        return half(n - 1);
-    }    
-
+    // Copied from The GNU C++ Library implementation of std::push_heap
     function push_heap_gnu_helper(f, hole_idx, top_idx, value, r) {
         //precondition: TODO
         var parent_idx = half(hole_idx - 1);
-        while (hole_idx > top_idx && r(source(successor(f, parent_idx)), value)) {
-            sink_move(successor(f, hole_idx), source_move(successor(f, parent_idx)));
+        while (true) {
+            if (hole_idx <= top_idx) {
+                break;
+            }
+
+            var p = successor(f, parent_idx);
+            if ( ! r(source(p), value)) {
+                break;
+            }
+
+            sink_move_from_it(successor(f, hole_idx), p);
             hole_idx = parent_idx;
             parent_idx = half(hole_idx - 1);
         }
@@ -31,7 +37,7 @@ function usage() {
     var l = end(s);
 
     print(s);
-    push_heap_gnu(f, l, lt);
+    push_heap_gnu_1(f, l, lt);
     print(s);
 }
 
