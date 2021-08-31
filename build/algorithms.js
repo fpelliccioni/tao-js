@@ -1228,13 +1228,13 @@ function push_heap_gnu_1(f, l, r) {
     push_heap_gnu_helper(f, distance(f, l), 0, move_obj(value), r);
 }
 
-function push_heap_n(f, n) {
+function push_heap_n(f, n, r) {
     while (n > 1) {
         var l = successor(f, n - 1);
         var pidx = parent(n - 1);
         var p = successor(f, pidx);
 
-        if (source(l) <= source(p)) {
+        if ( ! r(source(p) <= source(l))) {
             return;
         }
         iter_swap(p, l);

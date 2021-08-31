@@ -2331,8 +2331,8 @@ function __push_heap_gnu_1_attributes() {
 function __push_heap_n_usage() {
     function parent(n) {
         return half(n - 1);
-    }    
-    
+    }
+
     //var s = sequence(array_random(), "s", undefined, undefined, false, true);
     //var s = sequence([10, 8, 6, 4, 5, 3, 1], "s", undefined, undefined, false, true);
     var s = sequence([10, 8, 6, 4, 5, 3, 7], "s", undefined, undefined, false, true);
@@ -2342,7 +2342,7 @@ function __push_heap_n_usage() {
     var n = size(s);
 
     print(s);
-    push_heap_n(f, n);
+    push_heap_n(f, n, lt);
     print(s);
 }
 

@@ -2012,13 +2012,13 @@ function push_heap_gnu_1(f, l, r) {
     return res;
 }
 
-function __debug_push_heap_n(f, n) {
+function __debug_push_heap_n(f, n, r) {
     while (n > 1) {
         var l = successor(f, n - 1);
         var pidx = parent(n - 1);
         var p = successor(f, pidx);
 
-        if (source(l) <= source(p)) {
+        if ( ! r(source(p) <= source(l))) {
             return;
         }
         iter_swap(p, l);
@@ -2026,9 +2026,9 @@ function __debug_push_heap_n(f, n) {
     }
 }
 
-function push_heap_n(f, n) {
-    var _f_ = start_f('push_heap_n', f, n);
-    var res = __debug_push_heap_n(f, n);
+function push_heap_n(f, n, r) {
+    var _f_ = start_f('push_heap_n', f, n, r);
+    var res = __debug_push_heap_n(f, n, r);
     end_f(_f_);
     return res;
 }

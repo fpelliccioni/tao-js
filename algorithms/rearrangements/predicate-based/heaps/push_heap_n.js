@@ -1,16 +1,23 @@
-function push_heap_n(f, n) {
+function push_heap_n(f, n, r) {
     while (n > 1) {
         var l = successor(f, n - 1);
         var pidx = parent(n - 1);
         var p = successor(f, pidx);
 
-        if (source(l) <= source(p)) {
+        if ( ! r(source(p) <= source(l))) {
             return;
         }
         iter_swap(p, l);
         n = pidx + 1;
     }
 }
+
+// a < b
+// negate
+// !(a < b) -> a >= b
+
+
+// a <= b
 
 
 // function push_heap_n(f, n) {
@@ -29,13 +36,13 @@ function push_heap_n(f, n) {
 //         if (pi == 0) break;
 //         ci = pi;
 //     }
-// }    
+// }
 
 function usage() {
     function parent(n) {
         return half(n - 1);
-    }    
-    
+    }
+
     //var s = sequence(array_random(), "s", undefined, undefined, false, true);
     //var s = sequence([10, 8, 6, 4, 5, 3, 1], "s", undefined, undefined, false, true);
     var s = sequence([10, 8, 6, 4, 5, 3, 7], "s", undefined, undefined, false, true);
@@ -45,7 +52,7 @@ function usage() {
     var n = size(s);
 
     print(s);
-    push_heap_n(f, n);
+    push_heap_n(f, n, lt);
     print(s);
 }
 
