@@ -1189,6 +1189,20 @@ function make_heap_n_naive_1(f, n) {
     }
 }
 
+function push_heap_n(f, n) {
+    while (n > 1) {
+        var l = successor(f, n - 1);
+        var pidx = parent(n - 1);
+        var p = successor(f, pidx);
+
+        if (source(l) <= source(p)) {
+            return;
+        }
+        iter_swap(p, l);
+        n = pidx + 1;
+    }
+}
+
 function partition_semistable(f, l, p) {
     while (true) {
         if (equal(f, l)) return f;

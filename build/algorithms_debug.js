@@ -1952,6 +1952,27 @@ function make_heap_n_naive_1(f, n) {
     return res;
 }
 
+function __debug_push_heap_n(f, n) {
+    while (n > 1) {
+        var l = successor(f, n - 1);
+        var pidx = parent(n - 1);
+        var p = successor(f, pidx);
+
+        if (source(l) <= source(p)) {
+            return;
+        }
+        iter_swap(p, l);
+        n = pidx + 1;
+    }
+}
+
+function push_heap_n(f, n) {
+    var _f_ = start_f('push_heap_n', f, n);
+    var res = __debug_push_heap_n(f, n);
+    end_f(_f_);
+    return res;
+}
+
 function __debug_partition_semistable(f, l, p) {
     while (true) {
         if (equal(f, l)) return f;
