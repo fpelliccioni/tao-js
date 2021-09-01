@@ -4,7 +4,7 @@ function push_heap_n(f, n, r) {
         var pidx = parent(n - 1);
         var p = successor(f, pidx);
 
-        if ( ! r(source(p) <= source(l))) {
+        if ( ! r(source(p), source(l))) {
             return;
         }
         iter_swap(p, l);
