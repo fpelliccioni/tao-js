@@ -1,18 +1,21 @@
-function is_heap_until(f, l, r) {
-    while (n > 1) {
-        var l = successor(f, n - 1);
-        var pidx = parent(n - 1);
-        var p = successor(f, pidx);
-
-        if ( ! r(source(p), source(l))) {
-            return;
+function is_heap_until_n(f, n, r) {
+    var pi = 0;
+    for (var ci = 1; ci < n; ++ci) {
+        var c = successor(f, ci);
+        var p = successor(f, pi);
+        if (r(source(p), source(c))) {
+            return ci;
         }
-        iter_swap(p, l);
-        n = pidx + 1;
+            
+        if (even(ci)) {
+            ++pi;
+        }
     }
+    return n;    
 }
 
 function usage() {
+
     //var s = sequenceTree([10, 8, 6, 4, 5, 3, 1], "s");
     var s = sequenceTree([10, 8, 6, 4, 5, 3, 7], "s");
     //var s = sequenceTree([10, 8, 6, 4, 5, 3, 11], "s");
@@ -20,9 +23,8 @@ function usage() {
     var f = begin(s);
     var n = size(s);
 
-    print(s);
-    push_heap_n(f, n, lt);
-    print(s);
+    var i = is_heap_until_n(f, n, lt);
+    print(i);
 }
 
 function attributes() {

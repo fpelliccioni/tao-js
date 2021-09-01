@@ -1,14 +1,13 @@
-function is_heap_until_n_0(f, n, r) {
-    var pi = 0;
+function is_heap_until_n(f, n, r) {
+    var p = f;
     for (var ci = 1; ci < n; ++ci) {
         var c = successor(f, ci);
-        var p = successor(f, pi);
         if (r(source(p), source(c))) {
             return ci;
         }
             
         if (even(ci)) {
-            ++pi;
+            p = successor(p);
         }
     }
     return n;    
@@ -23,7 +22,7 @@ function usage() {
     var f = begin(s);
     var n = size(s);
 
-    var i = is_heap_until_n_0(f, n, lt);
+    var i = is_heap_until_n(f, n, lt);
     print(i);
 }
 

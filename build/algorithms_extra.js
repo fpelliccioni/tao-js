@@ -106,6 +106,8 @@ shift_right_by_one: [ 'rearrangements/position-based/shift', 'https://github.com
 shift_right_while: [ 'rearrangements/position-based/shift', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/rearrangements/position-based/shift/shift_right_while.js' ],
 shift_right_while_nonempty: [ 'rearrangements/position-based/shift', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/rearrangements/position-based/shift/shift_right_while_nonempty.js' ],
 shift_right_while_unguarded: [ 'rearrangements/position-based/shift', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/rearrangements/position-based/shift/shift_right_while_unguarded.js' ],
+is_heap_until_n: [ 'rearrangements/predicate-based/heaps', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/rearrangements/predicate-based/heaps/is_heap_until_n.js' ],
+is_heap_until_n_0: [ 'rearrangements/predicate-based/heaps', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/rearrangements/predicate-based/heaps/is_heap_until_n_0.js' ],
 make_heap_n: [ 'rearrangements/predicate-based/heaps', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/rearrangements/predicate-based/heaps/make_heap_n.js' ],
 make_heap_n_naive_0: [ 'rearrangements/predicate-based/heaps', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/rearrangements/predicate-based/heaps/make_heap_n_naive_0.js' ],
 make_heap_n_naive_1: [ 'rearrangements/predicate-based/heaps', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/rearrangements/predicate-based/heaps/make_heap_n_naive_1.js' ],
@@ -2140,6 +2142,57 @@ function __shift_right_while_unguarded_usage() {
 }
 
 function __shift_right_while_unguarded_attributes() {
+
+}
+
+function __is_heap_until_usage() {
+
+    //var s = sequenceTree([10, 8, 6, 4, 5, 3, 1], "s");
+    var s = sequenceTree([10, 8, 6, 4, 5, 3, 7], "s");
+    //var s = sequenceTree([10, 8, 6, 4, 5, 3, 11], "s");
+
+    var f = begin(s);
+    var n = size(s);
+
+    var i = is_heap_until_n(f, n, lt);
+    print(i);
+}
+
+function __is_heap_until_attributes() {
+
+}
+
+function __is_heap_until_n_usage() {
+
+    //var s = sequenceTree([10, 8, 6, 4, 5, 3, 1], "s");
+    var s = sequenceTree([10, 8, 6, 4, 5, 3, 7], "s");
+    //var s = sequenceTree([10, 8, 6, 4, 5, 3, 11], "s");
+
+    var f = begin(s);
+    var n = size(s);
+
+    var i = is_heap_until_n(f, n, lt);
+    print(i);
+}
+
+function __is_heap_until_n_attributes() {
+
+}
+
+function __is_heap_until_n_0_usage() {
+
+    //var s = sequenceTree([10, 8, 6, 4, 5, 3, 1], "s");
+    var s = sequenceTree([10, 8, 6, 4, 5, 3, 7], "s");
+    //var s = sequenceTree([10, 8, 6, 4, 5, 3, 11], "s");
+
+    var f = begin(s);
+    var n = size(s);
+
+    var i = is_heap_until_n_0(f, n, lt);
+    print(i);
+}
+
+function __is_heap_until_n_0_attributes() {
 
 }
 

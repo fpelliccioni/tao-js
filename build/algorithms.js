@@ -1159,6 +1159,37 @@ function shift_right_while_unguarded(l, p) {
     return l;
 }
 
+function is_heap_until_n(f, n, r) {
+    var p = f;
+    for (var ci = 1; ci < n; ++ci) {
+        var c = successor(f, ci);
+        if (r(source(p), source(c))) {
+            return ci;
+        }
+            
+        if (even(ci)) {
+            p = successor(p);
+        }
+    }
+    return n;    
+}
+
+function is_heap_until_n_0(f, n, r) {
+    var pi = 0;
+    for (var ci = 1; ci < n; ++ci) {
+        var c = successor(f, ci);
+        var p = successor(f, pi);
+        if (r(source(p), source(c))) {
+            return ci;
+        }
+            
+        if (even(ci)) {
+            ++pi;
+        }
+    }
+    return n;    
+}
+
 function make_heap_n(f, n) {
     // assert(n > 2); //other sizes handled outside
     var fpi = Math.floor((n - 3) / 2);
