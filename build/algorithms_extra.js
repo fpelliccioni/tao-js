@@ -87,6 +87,7 @@ insertion_sort_suffix_nonempty: [ 'rearrangements/ordering-based/sorting/inserti
 linear_insert_unguarded: [ 'rearrangements/ordering-based/sorting/insertion-sort', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/rearrangements/ordering-based/sorting/insertion-sort/linear_insert_unguarded.js' ],
 selection_sort_classic: [ 'rearrangements/ordering-based/sorting/selection-sort', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/rearrangements/ordering-based/sorting/selection-sort/selection_sort_classic.js' ],
 selection_sort_stable: [ 'rearrangements/ordering-based/sorting/selection-sort', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/rearrangements/ordering-based/sorting/selection-sort/selection_sort_stable.js' ],
+sort3: [ 'rearrangements/ordering-based/sorting/sort-n', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/rearrangements/ordering-based/sorting/sort-n/sort3.js' ],
 cycle_from: [ 'rearrangements/position-based/cycle', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/rearrangements/position-based/cycle/cycle_from.js' ],
 cycle_to: [ 'rearrangements/position-based/cycle', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/rearrangements/position-based/cycle/cycle_to.js' ],
 cycle_to_2n_1: [ 'rearrangements/position-based/cycle', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/rearrangements/position-based/cycle/cycle_to_2n_1.js' ],
@@ -1828,6 +1829,26 @@ function __selection_sort_stable_usage() {
 }
 
 function __selection_sort_stable_attributes() {
+
+}
+
+function __sort3_usage() {
+    register_custom_stat("Misplaced elements");
+
+    var s = sequence([1, 2, 3, 4, 5], "s", lt);
+    // var s = sequence([1, 2], "s", lt);
+    // var s = sequence(array_random(), "s", lt);
+    // var s = sequence(array_all_equal(), "s", lt);
+    // var s = sequence(array_ascending(), "s", lt);
+    // var s = sequence(array_descending(), "s", lt);
+
+    print(s);
+    sort3(begin(s), successor(begin(s)), successor(begin(s), 2), lt);
+    print(s);
+
+}
+
+function __sort3_attributes() {
 
 }
 

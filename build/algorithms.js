@@ -972,6 +972,35 @@ function selection_sort_stable(f, l, r) {
     }
 }
 
+function sort3(x, y, z, c) {
+    var r = 0;
+    if ( ! call(c, y, x)) {        // if x <= y
+        if ( ! call(c, z, y)) {    // if y <= z
+            return r;              // x <= y && y <= z
+        }
+                                   // x <= y && y > z
+        iter_swap(y, z);           // x <= z && y < z
+        r = 1;
+        if (call(c, y, x)) {       // if x > y
+            iter_swap(x, y);       // x < y && y <= z
+            r = 2;
+        }
+        return r;                  // x <= y && y < z
+    }
+    if (call(c, z, y)) {           // x > y, if y > z
+        iter_swap(x, z);           // x < y && y < z
+        r = 1;
+        return r;
+    }
+    iter_swap(x, y);               // x > y && y <= z
+    r = 1;                         // x < y && x <= z
+    if (call(c, z, y)) {           // if y > z
+        iter_swap(y, z);           // x <= y && y < z
+        r = 2;
+    }
+    return r;
+}
+
 function cycle_from(i, f) {
     var tmp = source(i);
     var j = i;

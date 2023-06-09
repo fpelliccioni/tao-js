@@ -54,7 +54,7 @@ function function_make_debuggable(code, node) {
     end_f(_f_);
     return res;
 }`;
-    
+
     return ren_code + '\n\n' + new_func_code;
 }
 
@@ -79,7 +79,7 @@ function process_file(path, filename) {
     const algo_name = algorithm_name(filename)
     const code = fs.readFileSync(path, 'utf8');
     // console.log(code)
-    
+
     var p = acorn.parse(code);
     // console.log(p);
     // console.log(p.body);
@@ -88,10 +88,12 @@ function process_file(path, filename) {
         // console.log(n, p.body[n]);
         const value = p.body[n];
         if (value.type == 'FunctionDeclaration') {
-            // console.log(value.id.name);
-            // console.log(value.start);
-            // console.log(value.end);
-            // console.log(function_content(code, value.start, value.end));
+            // if (value.id.name == 'sort3') {
+            //     console.log(value.id.name);
+            //     console.log(value.start);
+            //     console.log(value.end);
+            //     console.log(function_content(code, value.start, value.end));
+            // }
             const func_code = function_content(code, value.start, value.end);
             if (value.id.name == algo_name) {
                 catalog[algo_name] = [path_to_catalog(path, filename), html_url(path)];
@@ -124,7 +126,7 @@ function process_dir(path) {
 
         var file = path + '/' + f;
         var stat = fs.statSync(file);
-    
+
         if (stat && stat.isDirectory()) {
             var res = process_dir(file);
         } else {
@@ -155,7 +157,7 @@ function process_dir_helpers(path) {
 
         var file = path + '/' + f;
         var stat = fs.statSync(file);
-    
+
         if (stat && stat.isDirectory()) {
             var res = process_dir_helpers(file);
         } else {
@@ -168,11 +170,11 @@ function process_dir_helpers(path) {
 }
 
 
-async function main(user, repo) {  
+async function main(user, repo) {
     fs.mkdir('./build/', { recursive: true }, (err) => {
         if (err) throw err;
     });
-    
+
     var res = process_dir('algorithms');
     var res_helpers = process_dir_helpers('helpers');
 
@@ -190,21 +192,21 @@ async function main(user, repo) {
             return console.log(err);
         }
         console.log("./build/algorithms.js was saved!");
-    }); 
+    });
 
     fs.writeFile("./build/algorithms_debug.js", res[1] + '\n\n' + res_helpers, function(err) {
         if(err) {
             return console.log(err);
         }
         console.log("./build/algorithms_debug.js was saved!");
-    }); 
+    });
 
     fs.writeFile("./build/algorithms_extra.js", catalog_str + res[2], function(err) {
         if(err) {
             return console.log(err);
         }
         console.log("./build/algorithms_extra.js was saved!");
-    }); 
+    });
 
 }
 
@@ -236,7 +238,7 @@ async function main(user, repo) {
 //     const response = await fetch(dir[k].download_url);
 //     const code = await response.text();
 //     // console.log(code)
-    
+
 //     var p = acorn.parse(code);
 //     // console.log(p);
 //     // console.log(p.body);
