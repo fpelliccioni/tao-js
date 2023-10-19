@@ -1,6 +1,6 @@
 function reverse_n_forward(f, n) {
     if (n < 2) return successor(f, n);
-    var h = half_nonnegative(n);
+    var h = half(n);
     var n_mod_2 = n - twice(h);
 
     var m = successor(reverse_n_forward(f, h), n_mod_2);
