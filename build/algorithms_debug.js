@@ -1426,12 +1426,11 @@ function insertion_sort(f, l, r) {
 
 function __debug_insertion_sort_backward(f, l, r) {
     if (equal(f, l)) return;
-
-    r = complement(r);
-    var c = predecessor(l);
+    l = predecessor(l);
+    var c = l;
     while ( ! equal(c, f)) {
         c = predecessor(c);
-        linear_insert_backward(c, l, r);     
+        linear_insert_backward(c, l, r);
     }
 }
 
@@ -1750,7 +1749,7 @@ function __debug_reverse_n_adaptive(f_i, n_i, f_b, n_b) {
     if (n_i < 2) return successor(f_i, n_i);
     if (n_i <= n_b) return reverse_n_with_buffer(f_i, n_i, f_b);
 
-    var h_i = half_nonnegative(n_i);
+    var h_i = half(n_i);
     var n_mod_2 = n_i - twice(h_i);
     var m_i = successor(reverse_n_adaptive(f_i, h_i, f_b, n_b), n_mod_2);
     var l_i = reverse_n_adaptive(m_i, h_i, f_b, n_b);
@@ -1768,7 +1767,7 @@ function reverse_n_adaptive(f_i, n_i, f_b, n_b) {
 
 function __debug_reverse_n_forward(f, n) {
     if (n < 2) return successor(f, n);
-    var h = half_nonnegative(n);
+    var h = half(n);
     var n_mod_2 = n - twice(h);
 
     var m = successor(reverse_n_forward(f, h), n_mod_2);
@@ -2237,7 +2236,7 @@ function partition_stable_with_buffer_0(f, l, p, b) {
 
 function __debug_partition_point_n(f, n, p) {
     while (n != 0) {
-        var h = half_nonnegative(n);
+        var h = half(n);
         var m = successor(f, h);
 
         if (p(source(m))) {
@@ -2260,7 +2259,7 @@ function partition_point_n(f, n, p) {
 function __debug_partition_point_n_forward(f, n, p) {
     var t = n;
     while (n != 0) {
-        var h = half_nonnegative(n);
+        var h = half(n);
         var m = successor(f, h);
 
         if (p(source(m))) {

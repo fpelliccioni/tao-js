@@ -1652,20 +1652,18 @@ function __insertion_sort_attributes() {
 
 function __insertion_sort_backward_usage() {
     function linear_insert_backward(c, l, r) {
+        // precondition: is_sorted(c, l, r) && current is a valid iterator
         var value = source(c);
-        c = successor(c);
-        while ( ! equal(c, l) && r(value, source(c))) {
-          sink(c, source(c));
+        while ( ! equal(c, l) && r(source(successor(c)), value)) {
+          sink(c, source(successor(c)));
           c = successor(c);
         }
-        sink(c, value); 
+        sink(c, value);
         return c;
     }
-      
-    // var s = sequence(array_random(), "s", lt);
-    // var s = sequence([81, 28, 20, 67, 36, 84, 86, 48, 34, 5], "s", lt);
-    var s = sequence([34, 5], "s", lt);
-    
+
+    var s = sequence(array_descending(), "s", undefined, "list");
+
     print(s);
     insertion_sort_backward(begin(s), end(s), lt);
     print(s);
@@ -2507,12 +2505,12 @@ function __partition_stable_with_buffer_0_attributes() {
 }
 
 function __partition_point_n_usage() {
-    
-    
+
+
     var even = predicate(function even(x) { return (x & 1) == 0; });
-    
+
     var d = sequence([1, 5, 1, 1, 3, 3, 3, 7, 3, 2, 6, 4], "d", even);
-    
+
     var p = partition_point_n(begin(d), size(d), even);
     print('partition point: ' + source(p));
 
@@ -2526,9 +2524,9 @@ function __partition_point_n_forward_usage() {
     var eq3 = predicate(function eq3(x) {return x == 3;});
     var gt3 = predicate(function gt3(x) {return x > 3;});
     var gte3 = predicate(function gte3(x) {return x >= 3;});
-    
+
     var d = sequence([1, 1, 1, 1, 3, 3, 3, 3, 3, 7, 8, 9], "d", eq3);
-    
+
     var lb = partition_point_n_forward(begin(d), size(d), gte3);
     var ub = partition_point_n_forward(lb[0], lb[1], gt3);
 

@@ -1,30 +1,27 @@
 function insertion_sort_backward(f, l, r) {
     if (equal(f, l)) return;
-
-    r = complement(r);
-    var c = predecessor(l);
+    l = predecessor(l);
+    var c = l;
     while ( ! equal(c, f)) {
         c = predecessor(c);
-        linear_insert_backward(c, l, r);     
+        linear_insert_backward(c, l, r);
     }
 }
 
 function usage() {
     function linear_insert_backward(c, l, r) {
+        // precondition: is_sorted(c, l, r) && current is a valid iterator
         var value = source(c);
-        c = successor(c);
-        while ( ! equal(c, l) && r(value, source(c))) {
-          sink(c, source(c));
+        while ( ! equal(c, l) && r(source(successor(c)), value)) {
+          sink(c, source(successor(c)));
           c = successor(c);
         }
-        sink(c, value); 
+        sink(c, value);
         return c;
     }
-      
-    // var s = sequence(array_random(), "s", lt);
-    // var s = sequence([81, 28, 20, 67, 36, 84, 86, 48, 34, 5], "s", lt);
-    var s = sequence([34, 5], "s", lt);
-    
+
+    var s = sequence(array_descending(), "s", undefined, "list");
+
     print(s);
     insertion_sort_backward(begin(s), end(s), lt);
     print(s);
