@@ -19,8 +19,8 @@ function find_subsequence_naive(f, l, sf, sl, r) {
 function usage() {
 
 
-    var seq = sequence(array_from("Hello, World!"), "seq", undefined, "list");
-    var sub = sequence(array_from("????"), "sub", undefined, "list");
+    var seq = sequence(array_from("Hello, World!"), "seq", undefined, "sll"); // singly-linked list
+    var sub = sequence(array_from("????"), "sub", undefined, "sll");
 
     var it = find_subsequence_naive(begin(seq), end(seq), begin(sub), end(sub), eq);
 

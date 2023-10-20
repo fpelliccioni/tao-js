@@ -12,7 +12,7 @@ function reverse_n_adaptive(f_i, n_i, f_b, n_b) {
 }
 
 function usage() {
-    var s = sequence(array_random(16), "s", undefined, "list");
+    var s = sequence(array_random(16), "s", undefined, "sll"); // singly-linked list
     //var b = sequence(array_all_equal(size(s), '-'), "b");
     var b = sequence(array_all_equal(4, '-'), "b");
     print(s);

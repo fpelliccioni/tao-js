@@ -20,7 +20,7 @@ function usage() {
         return c;
     }
 
-    var s = sequence(array_descending(), "s", undefined, "list");
+    var s = sequence(array_descending(), "s", undefined, "dll"); // doubly-linked list
 
     print(s);
     insertion_sort_backward(begin(s), end(s), lt);

@@ -1662,7 +1662,7 @@ function __insertion_sort_backward_usage() {
         return c;
     }
 
-    var s = sequence(array_descending(), "s", undefined, "list");
+    var s = sequence(array_descending(), "s", undefined, "dll"); // doubly-linked list
 
     print(s);
     insertion_sort_backward(begin(s), end(s), lt);
@@ -1973,7 +1973,7 @@ function __reverse_bidirectional_attributes() {
 }
 
 function __reverse_n_adaptive_usage() {
-    var s = sequence(array_random(16), "s", undefined, "list");
+    var s = sequence(array_random(16), "s", undefined, "sll"); // singly-linked list
     //var b = sequence(array_all_equal(size(s), '-'), "b");
     var b = sequence(array_all_equal(4, '-'), "b");
     print(s);
@@ -2010,7 +2010,7 @@ function __reverse_n_indexed_attributes() {
 }
 
 function __reverse_n_with_buffer_usage() {
-    var s = sequence(array_random(), "s", undefined, "list");
+    var s = sequence(array_random(), "s", undefined, "sll"); // singly-linked list
     var b = sequence(array_all_equal(size(s), '-'), "b");
     print(s);
     var r = reverse_n_with_buffer(begin(s), size(s), begin(b));
@@ -2505,8 +2505,6 @@ function __partition_stable_with_buffer_0_attributes() {
 }
 
 function __partition_point_n_usage() {
-
-
     var even = predicate(function even(x) { return (x & 1) == 0; });
 
     var d = sequence([1, 5, 1, 1, 3, 3, 3, 7, 3, 2, 6, 4], "d", even);
@@ -2707,8 +2705,8 @@ function __find_subsequence_n_naive_1_attributes() {
 function __find_subsequence_naive_usage() {
 
 
-    var seq = sequence(array_from("Hello, World!"), "seq", undefined, "list");
-    var sub = sequence(array_from("????"), "sub", undefined, "list");
+    var seq = sequence(array_from("Hello, World!"), "seq", undefined, "sll"); // singly-linked list
+    var sub = sequence(array_from("????"), "sub", undefined, "sll");
 
     var it = find_subsequence_naive(begin(seq), end(seq), begin(sub), end(sub), eq);
 
