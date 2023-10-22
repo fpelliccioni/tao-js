@@ -2234,6 +2234,18 @@ function partition_stable_with_buffer_0(f, l, p, b) {
     return res;
 }
 
+function __debug_lower_bound_n(f, n, a, r) {
+    var p = function(x) { return ! r(x, a); };
+    return partition_point_n(f, n, p);
+}
+
+function lower_bound_n(f, n, a, r) {
+    var _f_ = start_f('lower_bound_n', f, n, a, r);
+    var res = __debug_lower_bound_n(f, n, a, r);
+    end_f(_f_);
+    return res;
+}
+
 function __debug_partition_point_n(f, n, p) {
     while (n != 0) {
         var h = half(n);
