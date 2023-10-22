@@ -1424,6 +1424,11 @@ function partition_point_n_forward(f, n, p) {
     return [f, t];
 }
 
+function upper_bound_n(f, n, a, r) {
+    var p = function(x) { return r(a, x); };
+    return partition_point_n(f, n, p);
+}
+
 function all(f, l, p) {
     var np = find_if_not(f, l, p);
     return equal(l, np);

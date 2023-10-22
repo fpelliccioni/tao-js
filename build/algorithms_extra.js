@@ -123,6 +123,7 @@ partition_stable_with_buffer_0: [ 'rearrangements/predicate-based/partition', 'h
 lower_bound_n: [ 'search/binary', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/search/binary/lower_bound_n.js' ],
 partition_point_n: [ 'search/binary', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/search/binary/partition_point_n.js' ],
 partition_point_n_forward: [ 'search/binary', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/search/binary/partition_point_n_forward.js' ],
+upper_bound_n: [ 'search/binary', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/search/binary/upper_bound_n.js' ],
 all: [ 'search/linear', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/search/linear/all.js' ],
 find: [ 'search/linear', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/search/linear/find.js' ],
 find_backward_if: [ 'search/linear', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/search/linear/find_backward_if.js' ],
@@ -2561,6 +2562,28 @@ function __partition_point_n_forward_usage() {
 }
 
 function __partition_point_n_forward_attributes() {
+
+}
+
+function __upper_bound_n_usage() {
+    function digitSum(num) {
+        return num.toString().split('').reduce(function(sum, digit) {
+            return sum + parseInt(digit);
+        }, 0);
+    }
+
+    var hasLowerDigitSum = relation(function hasLowerDigitSum(x, y) {
+        return digitSum(x) < digitSum(y);
+    });
+
+    var d = sequence([11, 22, 49, 58, 67], "d");
+
+    var lb = upper_bound_n(begin(d), size(d), 38, hasLowerDigitSum);
+    print('insertion point: ' + source(lb));
+
+}
+
+function __upper_bound_n_attributes() {
 
 }
 

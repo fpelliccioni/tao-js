@@ -2292,6 +2292,18 @@ function partition_point_n_forward(f, n, p) {
     return res;
 }
 
+function __debug_upper_bound_n(f, n, a, r) {
+    var p = function(x) { return r(a, x); };
+    return partition_point_n(f, n, p);
+}
+
+function upper_bound_n(f, n, a, r) {
+    var _f_ = start_f('upper_bound_n', f, n, a, r);
+    var res = __debug_upper_bound_n(f, n, a, r);
+    end_f(_f_);
+    return res;
+}
+
 function __debug_all(f, l, p) {
     var np = find_if_not(f, l, p);
     return equal(l, np);
