@@ -1136,6 +1136,16 @@ function rotate_cycles(f, m, l, from) {
     return successor(f, l_m);
 }
 
+function rotate_forward(f, m, l) {
+    // precondition: mutable_bounded_range(f, l) ∧ f ≺ m ≺ l
+    rotate_forward_step(f, m, l);
+    var m_prime = f;
+    while (m != l) {
+        rotate_forward_step(f, m, l);
+    }
+    return m_prime;
+}
+
 function rotate_random_access_nontrivial(f, m, l) {
     var p = k_rotate_from_permutation_random_access(f, m, l);
     return rotate_cycles(f, m, l, p);

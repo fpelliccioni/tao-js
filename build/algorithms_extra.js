@@ -100,6 +100,7 @@ reverse_n_indexed: [ 'rearrangements/position-based/reverse', 'https://github.co
 reverse_n_with_buffer: [ 'rearrangements/position-based/reverse', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/rearrangements/position-based/reverse/reverse_n_with_buffer.js' ],
 rotate_bidirectional: [ 'rearrangements/position-based/rotate', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/rearrangements/position-based/rotate/rotate_bidirectional.js' ],
 rotate_cycles: [ 'rearrangements/position-based/rotate', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/rearrangements/position-based/rotate/rotate_cycles.js' ],
+rotate_forward: [ 'rearrangements/position-based/rotate', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/rearrangements/position-based/rotate/rotate_forward.js' ],
 rotate_random_access_nontrivial: [ 'rearrangements/position-based/rotate', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/rearrangements/position-based/rotate/rotate_random_access_nontrivial.js' ],
 rotate_right_by_one: [ 'rearrangements/position-based/rotate', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/rearrangements/position-based/rotate/rotate_right_by_one.js' ],
 rotate_right_by_one_nonempty: [ 'rearrangements/position-based/rotate', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/rearrangements/position-based/rotate/rotate_right_by_one_nonempty.js' ],
@@ -2072,6 +2073,40 @@ function __rotate_cycles_usage() {
 }
 
 function __rotate_cycles_attributes() {
+
+}
+
+function __rotate_forward_usage() {
+    function exchange_values(x, y) {
+        var t = source(x);
+        sink(x, source(y));
+        sink(y, t);
+    }
+
+    function swap_step(f0, f1) {
+        // precondition: deref(f0) and deref(f1) are defined
+        exchange_values(f0, f1);
+        f0 = successor(f0);
+        f1 = successor(f1);
+        return {f0: f0, f1: f1}
+    }
+
+    function rotate_forward_step(f, m, l) {
+        // precondition: mutable_bounded_range(f, l) ∧ f ≺ m ≺ l
+        var c = m;
+        do {
+            f, c = swap_step(f, c);
+            if (f == m) m = c;
+        } while (c != l);
+    }
+
+    var s = sequence(array_random(), "s", undefined, "sll");
+    print(s);
+    rotate_forward(begin(s), successor(begin(s), 3), end(s));
+    print(s);
+}
+
+function __rotate_forward_attributes() {
 
 }
 
