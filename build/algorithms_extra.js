@@ -2093,7 +2093,7 @@ function __rotate_forward_usage() {
             f = successor(f);
             c = successor(c);
 
-            if (f == m) {
+            if (equal(f, m)) {
                 m = c;
             }
         } while ( ! equal(c, l));
