@@ -1138,10 +1138,11 @@ function rotate_cycles(f, m, l, from) {
 
 function rotate_forward(f, m, l) {
     // precondition: mutable_bounded_range(f, l) ∧ f ≺ m ≺ l
-    rotate_forward_step(f, m, l);
-    var m_prime = f;
-    while (m != l) {
-        rotate_forward_step(f, m, l);
+    var ref = {f: f, m: m};
+    rotate_forward_step(ref, l);
+    var m_prime = ref.f;
+    while (ref.m != l) {
+        rotate_forward_step(ref, l);
     }
     return m_prime;
 }

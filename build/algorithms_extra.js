@@ -569,7 +569,7 @@ function __split_copy_n_attributes() {
 function __gcd_usage() {
     var a = random_int();
     var b = random_int();
-
+    
     var g = gcd(a, b);
     print(g);
 }
@@ -1712,7 +1712,7 @@ function __insertion_sort_classic_0_usage() {
           sink(c, source(predecessor(c)));
           c = predecessor(c);
         }
-        sink(c, value);
+        sink(c, value); 
         return c;
     }
 
@@ -1751,8 +1751,8 @@ function __insertion_sort_classic_2_usage() {
         c = shift_right_while_nonempty(f, c, bind(r, value));
         sink_move(c, value);
         return c;
-    }
-
+    }    
+      
     var s = sequence(array_random(), "s", lt);
     print(s);
     insertion_sort_classic_2(begin(s), end(s), lt);
@@ -1766,12 +1766,12 @@ function __insertion_sort_classic_2_attributes() {
 function __insertion_sort_classic_3_usage() {
     function linear_insert(f, c, r) {
         if ( ! r(source(c), source(predecessor(c)))) return c;
-
+    
         var value = source_move(c);
         while (true) {
             sink_move(c, source(predecessor(c)));
             c = predecessor(c);
-
+            
             if (equal(f, c)) break;
             if ( ! r(value, source(predecessor(c)))) break;
         }
@@ -1806,15 +1806,15 @@ function __linear_insert_unguarded_attributes() {
 }
 
 function __selection_sort_classic_usage() {
-
-
+    
+      
     var s = sequence(array_random(), "s", lt);
-
+    
     print(s);
     selection_sort_classic(begin(s), end(s), lt);
     print(s);
     print(is_sorted(begin(s), end(s), lt));
-
+    
 
 }
 
@@ -2083,15 +2083,29 @@ function __rotate_forward_usage() {
         sink(y, t);
     }
 
-    function rotate_forward_step(f, m, l) {
-        var c = m;
+    // function rotate_forward_step(f, m, l) {
+    //     var c = m;
+    //     do {
+    //         exchange_values(f, c);
+    //         f = successor(f);
+    //         c = successor(c);
+
+    //         if (f == m) {
+    //             m = c;
+    //         }
+    //     } while (c != l);
+    // }
+
+    function rotate_forward_step(ref, l) {
+        // precondition: mutable bounded range(ref.f, l) ∧ ref.f ≺ ref.m ≺ l
+        var c = ref.m;
         do {
-            exchange_values(f, c);
-            f = successor(f);
+            exchange_values(ref.f, c);
+            ref.f = successor(ref.f);
             c = successor(c);
 
-            if (f == m) {
-                m = c;
+            if (ref.f == ref.m) {
+                ref.m = c;
             }
         } while (c != l);
     }
@@ -2118,22 +2132,22 @@ function __rotate_random_access_nontrivial_usage() {
         }
         sink(j, tmp);
     }
-
+    
     function rotate_cycles(f, m, l, from) {
         var d = gcd(distance(f, m), distance(m, l));
-
+    
         while (d != 0) {
             --d;
             cycle_from(successor(f, d), from);
         }
         return successor(f, distance(m, l));
     }
-
+    
     function k_rotate_from_permutation_random_access(f, m, l) {
         var k = distance(m, l);
         var n_minus_k = distance(f, m);
         var m_prime = successor(f, distance(m, l));
-
+    
         return function(x) {
             if ( distance(x, m_prime) > 0) return successor(x, n_minus_k);
             return predecessor(x, k);
@@ -2250,9 +2264,9 @@ function __is_heap_until_n_0_attributes() {
 
 function __make_heap_n_usage() {
     function parent(i) {
-        return Math.floor((i - 1) / 2);
+        return Math.floor((i - 1) / 2);    
     }
-
+    
     function push_heap_n(f, n) {
         var ci = n - 1;
         while (true) {
@@ -2261,19 +2275,19 @@ function __make_heap_n_usage() {
             var p = successor(f, pi);
             var cv = source(c);
             var pv = source(p);
-
+    
             if (pv <= cv) break;
             sink(p, cv);
             sink(c, pv);
-
+    
             if (pi == 0) break;
             ci = pi;
         }
-    }
-
+    }    
+    
     // var s = sequence(array_random(), "s");
     var s = sequence([24, 88, 59, 31, 91, 0, 87, 91, 40, 52], "s");
-
+    
     print(s);
     make_heap_n(begin(s), size(s));
     print(s);
@@ -2288,25 +2302,25 @@ function __make_heap_n_naive_0_usage() {
     function source_i(f, i) {
         return source(successor(f, i));
     }
-
+    
     function shift_down(f, i, n) {
         while (i < n) {
             var i_big = i;
             var c1 = 2 * i + 1;
             var c2 = c1 + 1;
-
+    
             if (c1 < n && source_i(f, c1) > source_i(f, i_big)) {
                 i_big = c1;
             }
-
+            
             if (c2 < n && source_i(f, c2) > source_i(f, i_big)) {
                 i_big = c2;
             }
-
+            
             if (i_big == i) {
                 return;
             }
-
+    
             iter_swap(successor(f, i), successor(f, i_big));
             i = i_big;
         }
@@ -2314,7 +2328,7 @@ function __make_heap_n_naive_0_usage() {
 
     var s = sequence(array_random(), "s");
     // var s = sequence([24, 88, 59, 31, 91, 0, 87, 91, 40, 52], "s");
-
+    
     print(s);
     make_heap_n_naive_0(begin(s), size(s));
     print(s);
@@ -2328,33 +2342,33 @@ function __make_heap_n_naive_1_usage() {
     function source_i(f, i) {
         return source(successor(f, i));
     }
-
+    
     function shift_down(f, i, n) {
         while (i < n) {
             var i_big = i;
             var c1 = 2 * i + 1;
             var c2 = c1 + 1;
-
+    
             if (c1 < n && source_i(f, c1) > source_i(f, i_big)) {
                 i_big = c1;
             }
-
+            
             if (c2 < n && source_i(f, c2) > source_i(f, i_big)) {
                 i_big = c2;
             }
-
+            
             if (i_big == i) {
                 return;
             }
-
+    
             iter_swap(successor(f, i), successor(f, i_big));
             i = i_big;
         }
     }
-
+    
     var s = sequence(array_random(), "s");
     // var s = sequence([24, 88, 59, 31, 91, 0, 87, 91, 40, 52], "s");
-
+    
     print(s);
     make_heap_n_naive_1(begin(s), size(s));
     print(s);
@@ -2504,13 +2518,13 @@ function __partition_semistable_nonempty_attributes() {
 }
 
 function __partition_stable_forward_usage() {
-
-
+    
+    
     var even = predicate(function even(x) { return (x & 1) == 0; });
     var d = sequence(array_random(), "d", even);
     var f = begin(d);
     var l = end(d);
-
+    
     var p = partition_stable_forward(f, l, even);
     if ( ! equal(p, l)) {
         print('partition point: ' + source(p));
@@ -2526,7 +2540,7 @@ function __partition_stable_with_buffer_0_usage() {
     var even = predicate(function even(x) { return (x & 1) == 0; });
     var d = sequence(array_random(), "d", even);
     var buf = sequence(new Array(size(d)), "buf");
-
+    
     var p = partition_stable_with_buffer_0(begin(d), end(d), even, begin(buf));
     if ( ! equal(p, l)) {
         print('partition point: ' + source(p));
@@ -2638,11 +2652,11 @@ function __all_attributes() {
 }
 
 function __find_usage() {
-
-
+    
+    
     print(array_from("Hello, World!"))
     var s = sequence(array_from("Hello, World!"), "s");
-
+    
     var it = find(begin(s), end(s), 'x');
     if ( ! equal(it, end(s))) {
         print(source(it));
@@ -2655,18 +2669,18 @@ function __find_attributes() {
 }
 
 function __find_backward_if_usage() {
-
-
+    
+    
     var even = predicate(function even(x) { return (x & 1) == 0; });
     var d = sequence(array_random(), "d");
     var f = begin(d);
     var l = end(d);
-
+    
     var it = find_backward_if(f, l, even);
     if ( ! equal(it, f)) {
         print(source(predecessor(it)));
     }
-
+    
 
 }
 
@@ -2675,13 +2689,13 @@ function __find_backward_if_attributes() {
 }
 
 function __find_if_usage() {
-
-
+    
+    
     var even = predicate(function even(x) { return (x & 1) == 0; });
     var d = sequence(array_random(), "d");
     var f = begin(d);
     var l = end(d);
-
+    
     var it = find_if(f, l, even);
     if ( ! equal(it, l)) {
         print(source(it));
@@ -2960,7 +2974,7 @@ function __max_element_usage() {
     var s = sequence(array_random(), "s");
 
     var l = end(s);
-
+    
     var m = max_element(begin(s), l, lt);
     if ( ! equal(m, l)) {
         print("The max element is: " + source(m));
@@ -2985,7 +2999,7 @@ function __max_element_attributes() {
 function __min_element_usage() {
     var s = sequence(array_random(), "s");
     var l = end(s);
-
+    
     var m = min_element(begin(s), l, lt);
     if ( ! equal(m, l)) {
         print("The min element is: " + source(f));
@@ -3010,7 +3024,7 @@ function __min_element_attributes() {
 function __min_element_nonempty_usage() {
     var s = sequence(array_random(), "s");
     var l = end(s);
-
+    
     var m = min_element_nonempty(begin(s), l, lt);
     if ( ! equal(m, l)) {
         print("The min element is: " + source(f));
@@ -3031,13 +3045,13 @@ function __min_element_nonempty_attributes() {
 }
 
 function __min_value_usage() {
-
-
+    
+    
     var d = sequence(array_random(), "d", true);
-
+    
     var f = begin(d);
     var l = end(d);
-
+    
     f = min_element(f, l, lt);
     if ( ! equal(f, l)) {
         print("The min element is: " + source(f));
@@ -3053,7 +3067,7 @@ function __select_1_2_usage() {
     var tmp = array_random(3);
     var a = tmp[0];
     var b = tmp[1];
-
+    
     var m = select_1_2(a, b, lt);
     print(m);
 }
@@ -3067,7 +3081,7 @@ function __select_1_3_usage() {
     var a = tmp[0];
     var b = tmp[1];
     var c = tmp[2];
-
+    
     var m = select_1_3(a, b, c, lt);
     print(m);
 }
@@ -3080,7 +3094,7 @@ function __select_1_3_ab_usage() {
     var a = 1;
     var b = 2;
     var c = random_int();
-
+    
     var m = select_1_3_ab(a, b, c, lt);
     print(m);
 }
@@ -3122,11 +3136,11 @@ function __swap_ranges_attributes() {
 }
 
 function __swap_ranges_bounded_usage() {
-
-
+    
+    
     var s1 = sequence(array_random(), "s1");
     var s2 = sequence(array_random(5), "s2");
-
+    
     var r = swap_ranges_bounded(begin(s1), end(s1), begin(s2), end(s2));
     var f0 = r[0];
     var f1 = r[1];
@@ -3141,7 +3155,7 @@ function __swap_ranges_bounded_attributes() {
 function __swap_ranges_n_usage() {
     var s1 = sequence(array_random(), "s1");
     var s2 = sequence(array_random(5), "s2");
-
+    
     var r = swap_ranges_n(begin(s1), begin(s2), 5);
     var f0 = r[0];
     var f1 = r[1];
@@ -3227,18 +3241,18 @@ function __count_if_not_basis_attributes() {
 }
 
 function __equal_r_usage() {
-
-
+    
+    
     var d1_raw = ['e', 'v', 'i', 't', 'a', 't', 'i', 'v', 'e'];
     var d2_raw = ['e', 'v', 'i', 't', 'x', 't', 'i', 'v', 'e'];
-
+    
     var d1 = sequence(d1_raw, "d1");
     var d2 = sequence(d2_raw, "d2");
-
+    
     var f = begin(d1);
     var l = end(d1);
     var f2 = begin(d2);
-
+    
     var res = equal_r(f, l, f2, eq);
     print(res);
 
@@ -3251,7 +3265,7 @@ function __equal_r_attributes() {
 function __insert_usage() {
     var s = sequence(array_random(), "s");
     var i = sequence(array_random(5), "i");
-
+    
     print(s);
     print(i);
     s = insert(s, begin(s), begin(i), end(i));
@@ -3266,7 +3280,7 @@ function __insert_attributes() {
 function __insert_naive_usage() {
     var s = sequence(array_random(), "s");
     var i = sequence(array_random(5), "i");
-
+    
     print(s);
     print(i);
     s = insert_naive(s, begin(s), begin(i), end(i));
@@ -3279,21 +3293,21 @@ function __insert_naive_attributes() {
 }
 
 function __iota_usage() {
-
-
+    
+    
     var d1 = sequence(new Array(8), "d1");
     var d2 = sequence(new Array(5), "d2");
-
+    
     var f = successor(begin(d1));
     var l = predecessor(end(d1));
-
+    
     var r = iota(f, l);
     print(r);
-
+    
     f = begin(d2);
     l = end(d2);
-
-
+    
+    
     r = iota(f, l, r);
     print(r);
 
@@ -3304,17 +3318,17 @@ function __iota_attributes() {
 }
 
 function __palindrome_bidirectional_usage() {
-
-
+    
+    
     //var word = sequence(['e', 'v', 'i', 't', 'a', 't', 'i', 'v', 'e'], "word");
     //var word = sequence(['e', 'v', 'i', 'x', 'a', 't', 'i', 'v', 'e'], "word");
     var word = sequence(['e', 'v', 'i', 't', 't', 'i', 'v', 'e'], "word");
-
+    
     var f = begin(word);
     var l = end(word);
-
+    
     var res = palindrome_bidirectional(f, l, eq);
-
+    
     if (res) {
         print('the word is palindrome');
     } else {
@@ -3331,26 +3345,26 @@ function __palindrome_forward_recursive_usage() {
     function palindrome_forward_recursive(f, n, r) {
         if (n == 0) return [true, f];
         if (n == 1) return [true, successor(f)];
-
+    
         var ret = palindrome_forward_recursive(successor(f), n - 2, r);
         var ret_first = ret[0];
         var f2 = ret[1];
-
+    
         if ( ! ret_first) return ret;
         if ( ! r(source(f), source(f2))) return [false, f2];
-
+    
         return [true, successor(f2)];
-    }
-
+    }    
+    
     var word = sequence(['e', 'v', 'i', 't', 'a', 't', 'i', 'v', 'e'], "word");
     // var word = sequence(['e', 'v', 'i', 'x', 'a', 't', 'i', 'v', 'e'], "word");
-
+    
     var f = begin(word);
     var n = size(word);
-
+    
     var res = palindrome_forward(f, n, eq);
-
-
+    
+    
     if (res[0]) {
         print('the word is palindrome');
     } else {
@@ -3366,7 +3380,7 @@ function __palindrome_forward_recursive_attributes() {
 function __palindrome_naive_usage() {
     //var word_arr = ['e', 'v', 'i', 't', 'a', 't', 'i', 'v', 'e'];
     var word_arr = ['e', 'v', 'i', 'x', 'a', 't', 'i', 'v', 'e'];
-
+    
     var res = palindrome_naive(word_arr, eq);
     if (res) {
         print('the word is palindrome');

@@ -1,11 +1,11 @@
-
 // Nontrivial rotate using forward iterators
 function rotate_forward(f, m, l) {
     // precondition: mutable_bounded_range(f, l) ∧ f ≺ m ≺ l
-    rotate_forward_step(f, m, l);
-    var m_prime = f;
-    while (m != l) {
-        rotate_forward_step(f, m, l);
+    var ref = {f: f, m: m};
+    rotate_forward_step(ref, l);
+    var m_prime = ref.f;
+    while (ref.m != l) {
+        rotate_forward_step(ref, l);
     }
     return m_prime;
 }
@@ -17,15 +17,29 @@ function usage() {
         sink(y, t);
     }
 
-    function rotate_forward_step(f, m, l) {
-        var c = m;
+    // function rotate_forward_step(f, m, l) {
+    //     var c = m;
+    //     do {
+    //         exchange_values(f, c);
+    //         f = successor(f);
+    //         c = successor(c);
+
+    //         if (f == m) {
+    //             m = c;
+    //         }
+    //     } while (c != l);
+    // }
+
+    function rotate_forward_step(ref, l) {
+        // precondition: mutable bounded range(ref.f, l) ∧ ref.f ≺ ref.m ≺ l
+        var c = ref.m;
         do {
-            exchange_values(f, c);
-            f = successor(f);
+            exchange_values(ref.f, c);
+            ref.f = successor(ref.f);
             c = successor(c);
 
-            if (f == m) {
-                m = c;
+            if (ref.f == ref.m) {
+                ref.m = c;
             }
         } while (c != l);
     }
