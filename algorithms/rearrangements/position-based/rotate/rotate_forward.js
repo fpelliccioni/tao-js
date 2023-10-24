@@ -1,11 +1,17 @@
 // Nontrivial rotate using forward iterators
 function rotate_forward(f, m, l) {
     // precondition: mutable_bounded_range(f, l) ∧ f ≺ m ≺ l
+
     var ref = {f: f, m: m};
     rotate_forward_step(ref, l);
-    var m_prime = ref.f;
-    while (ref.m != l) {
+    f = ref.f;
+    m = ref.m;
+    var m_prime = f;
+    while ( ! equal(m, l)) {
+        var ref = {f: f, m: m};
         rotate_forward_step(ref, l);
+        f = ref.f;
+        m = ref.m;
     }
     return m_prime;
 }
@@ -17,31 +23,22 @@ function usage() {
         sink(y, t);
     }
 
-    // function rotate_forward_step(f, m, l) {
-    //     var c = m;
-    //     do {
-    //         exchange_values(f, c);
-    //         f = successor(f);
-    //         c = successor(c);
-
-    //         if (f == m) {
-    //             m = c;
-    //         }
-    //     } while (c != l);
-    // }
-
     function rotate_forward_step(ref, l) {
-        // precondition: mutable bounded range(ref.f, l) ∧ ref.f ≺ ref.m ≺ l
-        var c = ref.m;
+        // precondition: mutable_bounded_range(ref.f, l) ∧ ref.f ≺ ref.m ≺ l
+        var f = ref.f;
+        var m = ref.m;
+        var c = m;
         do {
-            exchange_values(ref.f, c);
-            ref.f = successor(ref.f);
+            exchange_values(f, c);
+            f = successor(f);
             c = successor(c);
 
-            if (ref.f == ref.m) {
-                ref.m = c;
+            if (f == m) {
+                m = c;
             }
-        } while (c != l);
+        } while ( ! equal(c, l));
+        ref.f = f;
+        ref.m = m;
     }
 
     var s = sequence(array_random(), "s", undefined, "sll");

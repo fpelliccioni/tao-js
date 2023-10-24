@@ -2083,31 +2083,22 @@ function __rotate_forward_usage() {
         sink(y, t);
     }
 
-    // function rotate_forward_step(f, m, l) {
-    //     var c = m;
-    //     do {
-    //         exchange_values(f, c);
-    //         f = successor(f);
-    //         c = successor(c);
-
-    //         if (f == m) {
-    //             m = c;
-    //         }
-    //     } while (c != l);
-    // }
-
     function rotate_forward_step(ref, l) {
-        // precondition: mutable bounded range(ref.f, l) ∧ ref.f ≺ ref.m ≺ l
-        var c = ref.m;
+        // precondition: mutable_bounded_range(ref.f, l) ∧ ref.f ≺ ref.m ≺ l
+        var f = ref.f;
+        var m = ref.m;
+        var c = m;
         do {
-            exchange_values(ref.f, c);
-            ref.f = successor(ref.f);
+            exchange_values(f, c);
+            f = successor(f);
             c = successor(c);
 
-            if (ref.f == ref.m) {
-                ref.m = c;
+            if (f == m) {
+                m = c;
             }
-        } while (c != l);
+        } while ( ! equal(c, l));
+        ref.f = f;
+        ref.m = m;
     }
 
     var s = sequence(array_random(), "s", undefined, "sll");
