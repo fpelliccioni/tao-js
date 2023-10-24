@@ -2083,20 +2083,13 @@ function __rotate_forward_usage() {
         sink(y, t);
     }
 
-    function swap_step(obj) {
-        // precondition: deref(obj.f0) and deref(obj.f1) are defined
-        exchange_values(obj.f0, obj.f1);
-        obj.f0 = successor(obj.f0);
-        obj.f1 = successor(obj.f1);
-    }
-
     function rotate_forward_step(f, m, l) {
         var c = m;
-        var swapObj = {f0: f, f1: c};
         do {
-            swap_step(swapObj);
-            f = swapObj.f0;
-            c = swapObj.f1;
+            exchange_values(f, c);
+            f = successor(f);
+            c = successor(c);
+
             if (f == m) {
                 m = c;
             }
