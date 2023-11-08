@@ -1126,14 +1126,15 @@ function rotate_bidirectional(f, m, l) {
 }
 
 function rotate_cycles(f, m, l, from) {
-    var l_m = distance(l, m);
-    var d = gcd(distance(m, f), l_m);
+    var m_l = distance(m, l);
+    var f_m = distance(f, m);
+    var d = gcd(f_m, m_l);
 
     while (d != 0) {
         cycle_from(successor(f, d), from);
         --d;
     }
-    return successor(f, l_m);
+    return successor(f, m_l);
 }
 
 function rotate_forward(f, m, l) {
