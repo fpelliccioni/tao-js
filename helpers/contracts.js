@@ -10,14 +10,3 @@ function is_partitioned_n(first, count, test) {
     }
     return true;
 }
-
-function is_partition_point_n(first, count, test, result) {
-    let reachedResult = false;
-    let current = first;
-    for (let i = 0; i < count; i++) {
-        if (equal(current, result)) reachedResult = true;
-        if (Boolean(test(source(current))) !== reachedResult) return false;
-        current = successor(current);
-    }
-    return reachedResult || equal(current, result);
-}
