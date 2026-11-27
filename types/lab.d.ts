@@ -16,6 +16,8 @@ type Seq<T, K extends SequenceKind = SequenceKind> = {
 };
 type ForwardIterator<T = unknown> = Iter<T, Exclude<SequenceKind, "stream">>;
 type BidirectionalIterator<T = unknown> = Iter<T, "array" | "dll">;
+// All bidirectional sequences exposed by the lab support element assignment.
+type MutableBidirectionalIterator<T = unknown> = BidirectionalIterator<T>;
 type ValueOf<I extends Readable<unknown>> = I[typeof iteratorElement];
 type Predicate<T> = (value: T) => boolean;
 
@@ -116,3 +118,7 @@ declare function parent(index: number): number;
 declare function pre(condition: () => boolean, message?: string): void;
 declare function post(condition: () => boolean, message?: string): void;
 declare function is_partitioned_n<T>(first: Iter<T>, count: number, test: Predicate<T>): boolean;
+
+declare function is_bounded_range<I extends Iter<unknown>>(first: I, last: I): boolean;
+declare function range_value_counts<I extends Iter<unknown>>(first: I, last: I): Map<ValueOf<I>, number>;
+declare function has_range_value_counts<I extends Iter<unknown>>(first: I, last: I, counts: Map<ValueOf<I>, number>): boolean;

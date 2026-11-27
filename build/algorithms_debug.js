@@ -2270,6 +2270,38 @@ function push_heap_n(f, n, r) {
     return res;
 }
 
+function __debug_partition_bidirectional(f, l, p) {
+    pre(() => is_bounded_range(f, l), "The iterators must delimit a valid range.");
+    let original;
+    pre(() => {
+        original = range_value_counts(f, l);
+        return true;
+    });
+    const misses = (value) => !p(value);
+    let first = f;
+    let last = l;
+    while (true) {
+        first = find_if(first, last, p);
+        last = find_backward_if(first, last, misses);
+        if (equal(first, last))
+            break;
+        last = predecessor(last);
+        exchange_values(first, last);
+        first = successor(first);
+    }
+    post(() => is_bounded_range(f, first) && is_bounded_range(first, l), "The partition point must belong to the range.");
+    post(() => partitioned_at_point(f, first, l, p), "The result must separate false and true elements.");
+    post(() => has_range_value_counts(f, l, original), "The output must be a permutation of the input.");
+    return first;
+}
+
+function partition_bidirectional(f, l, p) {
+    var _f_ = start_f('partition_bidirectional', f, l, p);
+    var res = __debug_partition_bidirectional(f, l, p);
+    end_f(_f_);
+    return res;
+}
+
 function __debug_partition_semistable(f, l, p) {
     while (true) {
         if (equal(f, l))
@@ -2344,6 +2376,45 @@ function __debug_partition_semistable_nonempty(f, l, p) {
 function partition_semistable_nonempty(f, l, p) {
     var _f_ = start_f('partition_semistable_nonempty', f, l, p);
     var res = __debug_partition_semistable_nonempty(f, l, p);
+    end_f(_f_);
+    return res;
+}
+
+function __debug_partition_sentinel(f, l, p) {
+    pre(() => is_bounded_range(f, l), "The iterators must delimit a valid range.");
+    let original;
+    pre(() => {
+        original = range_value_counts(f, l);
+        return true;
+    });
+    const misses = (value) => !p(value);
+    let first = f;
+    let last = l;
+    first = find_if(first, last, p);
+    last = find_backward_if(first, last, misses);
+    if (!equal(first, last)) {
+        // The first exchange puts one sentinel on each side.
+        last = predecessor(last);
+        exchange_values(first, last);
+        first = successor(first);
+        while (true) {
+            first = find_if_unguarded(first, p);
+            last = find_backward_if_not_unguarded(last, p);
+            if (equal(successor(last), first))
+                break;
+            exchange_values(first, last);
+            first = successor(first);
+        }
+    }
+    post(() => is_bounded_range(f, first) && is_bounded_range(first, l), "The partition point must belong to the range.");
+    post(() => partitioned_at_point(f, first, l, p), "The result must separate false and true elements.");
+    post(() => has_range_value_counts(f, l, original), "The output must be a permutation of the input.");
+    return first;
+}
+
+function partition_sentinel(f, l, p) {
+    var _f_ = start_f('partition_sentinel', f, l, p);
+    var res = __debug_partition_sentinel(f, l, p);
     end_f(_f_);
     return res;
 }
@@ -2817,6 +2888,23 @@ function __debug_find_backward_if(f, l, p) {
 function find_backward_if(f, l, p) {
     var _f_ = start_f('find_backward_if', f, l, p);
     var res = __debug_find_backward_if(f, l, p);
+    end_f(_f_);
+    return res;
+}
+
+function __debug_find_backward_if_not_unguarded(l, p) {
+    // Precondition: there is a finite integer k > 0 such that
+    // p(source(predecessor(l, k))) is false.
+    do {
+        l = predecessor(l);
+    } while (p(source(l)));
+    post(() => !p(source(l)), "The result must point to an element that fails the predicate.");
+    return l;
+}
+
+function find_backward_if_not_unguarded(l, p) {
+    var _f_ = start_f('find_backward_if_not_unguarded', l, p);
+    var res = __debug_find_backward_if_not_unguarded(l, p);
     end_f(_f_);
     return res;
 }
@@ -3747,6 +3835,30 @@ function is_partitioned_n(first, count, test) {
         if (test(source(current))) inTrueGroup = true;
         else if (inTrueGroup) return false;
         current = successor(current);
+    }
+    return true;
+}
+
+function is_bounded_range(first, last) {
+    const count = distance(first, last);
+    return count >= 0 && equal(successor(first, count), last);
+}
+
+function range_value_counts(first, last) {
+    const counts = new Map();
+    while (!equal(first, last)) {
+        const value = source(first);
+        counts.set(value, (counts.get(value) ?? 0) + 1);
+        first = successor(first);
+    }
+    return counts;
+}
+
+function has_range_value_counts(first, last, expected) {
+    const actual = range_value_counts(first, last);
+    if (actual.size !== expected.size) return false;
+    for (const [value, count] of expected) {
+        if (actual.get(value) !== count) return false;
     }
     return true;
 }
