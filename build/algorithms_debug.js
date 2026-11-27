@@ -2291,10 +2291,12 @@ function partition_stable_with_buffer_0(f, l, p, b) {
 }
 
 function __debug_lower_bound_n(f, n, a, r) {
-    const p = (x) => !r(x, a);
+    const below = (x) => r(x, a);
+    const p = (x) => !below(x);
     pre(() => is_partitioned_n(f, n, p), "The range must be partitioned around the search value.");
     const result = partition_point_n(f, n, p);
-    post(() => is_partition_point_n(f, n, p, result), "The result must mark the partition boundary.");
+    post(() => all(f, result, below), "Every element before the result must compare less than the search value.");
+    post(() => none(result, successor(f, n), below), "No element from the result onward may compare less than the search value.");
     return result;
 }
 
@@ -3005,17 +3007,6 @@ function is_partitioned_n(first, count, test) {
         current = successor(current);
     }
     return true;
-}
-
-function is_partition_point_n(first, count, test, result) {
-    let reachedResult = false;
-    let current = first;
-    for (let i = 0; i < count; i++) {
-        if (equal(current, result)) reachedResult = true;
-        if (Boolean(test(source(current))) !== reachedResult) return false;
-        current = successor(current);
-    }
-    return reachedResult || equal(current, result);
 }
 if ( ! Number.prototype.add) {
     Number.prototype.add = function (x) {

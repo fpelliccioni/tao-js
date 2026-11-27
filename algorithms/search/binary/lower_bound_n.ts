@@ -1,8 +1,10 @@
 function lower_bound_n<T>(f: Iter<T>, n: number, a: T, r: Relation<T>) {
-    const p = (x: T) => !r(x, a);
+    const below = (x: T) => r(x, a);
+    const p = (x: T) => !below(x);
     pre(() => is_partitioned_n(f, n, p), "The range must be partitioned around the search value.");
     const result = partition_point_n(f, n, p);
-    post(() => is_partition_point_n(f, n, p, result), "The result must mark the partition boundary.");
+    post(() => all(f, result, below), "Every element before the result must compare less than the search value.");
+    post(() => none(result, successor(f, n), below), "No element from the result onward may compare less than the search value.");
     return result;
 }
 

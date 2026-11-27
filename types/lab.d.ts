@@ -99,4 +99,3 @@ declare function parent(index: number): number;
 declare function pre(condition: () => boolean, message?: string): void;
 declare function post(condition: () => boolean, message?: string): void;
 declare function is_partitioned_n<T>(first: Iter<T>, count: number, test: Predicate<T>): boolean;
-declare function is_partition_point_n<T>(first: Iter<T>, count: number, test: Predicate<T>, result: Iter<T>): boolean;
