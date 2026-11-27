@@ -1438,7 +1438,10 @@ function partition_stable_with_buffer_0(f, l, p, b) {
 
 function lower_bound_n(f, n, a, r) {
     const p = (x) => !r(x, a);
-    return partition_point_n(f, n, p);
+    pre(() => is_partitioned_n(f, n, p), "The range must be partitioned around the search value.");
+    const result = partition_point_n(f, n, p);
+    post(() => is_partition_point_n(f, n, p, result), "The result must mark the partition boundary.");
+    return result;
 }
 
 function partition_point_n(f, n, p) {
