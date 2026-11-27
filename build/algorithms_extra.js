@@ -2727,14 +2727,14 @@ function __reduce_usage() {
 function __reduce_attributes() {
 }
 
-function __reduce_balanced_typescript() { return ["function reduce_balanced<I extends Iter<unknown>>(\n    f: I, l: I, op: Operation<ValueOf<I>>, z: ValueOf<I>,\n): ValueOf<I> {\n    const bins: ValueOf<I>[] = [];\n    while (!equal(f, l)) {\n        let carry = source(f);\n        if (carry !== z) {\n            let i = 0;\n            while (i < bins.length && bins[i] !== z) {\n                carry = op(bins[i], carry);\n                bins[i] = z;\n                ++i;\n            }\n            if (i < bins.length || carry !== z) bins[i] = carry;\n        }\n        f = successor(f);\n    }\n\n    let i = 0;\n    while (i < bins.length && bins[i] === z) ++i;\n    if (i === bins.length) return z;\n\n    let result = bins[i];\n    for (++i; i < bins.length; ++i) {\n        if (bins[i] !== z) result = op(bins[i], result);\n    }\n    return result;\n}","const concatenate = binary_operation<string>((left, right) => left + right);\nconst d = sequence([\"a\", \"b\", \"c\", \"d\", \"e\"]);\nconst concatenated = reduce_balanced(begin(d), end(d), concatenate, \"\");\nprint(\"Concatenation: \" + concatenated);"]; }
+function __reduce_balanced_typescript() { return ["function reduce_balanced<I extends Iter<unknown>>(\n    f: I, l: I, op: Operation<ValueOf<I>>, z: ValueOf<I>,\n): ValueOf<I> {\n    const bins: ValueOf<I>[] = [];\n    while (!equal(f, l)) {\n        let carry = source(f);\n        if (carry !== z) {\n            let i = 0;\n            while (i < bins.length && bins[i] !== z) {\n                carry = op(bins[i], carry);\n                bins[i] = z;\n                ++i;\n            }\n            if (i < bins.length || carry !== z) bins[i] = carry;\n        }\n        f = successor(f);\n    }\n\n    let i = 0;\n    while (i < bins.length && bins[i] === z) ++i;\n    if (i === bins.length) return z;\n\n    let result = bins[i];\n    for (++i; i < bins.length; ++i) {\n        if (bins[i] !== z) result = op(bins[i], result);\n    }\n    return result;\n}","const concatenate = binary_operation<string>((l, r) => l + r);\nconst d = sequence([\"a\", \"b\", \"c\", \"d\", \"e\"]);\nconst concatenated = reduce_balanced(begin(d), end(d), concatenate, \"\");\nprint(\"Concatenation: \" + concatenated);"]; }
 
 function __reduce_balanced_documentation() { return ["Combina bloques de tamaño parecido sin cambiar el orden de los elementos. Requiere una operación asociativa y usa z como identidad.","Combines similarly sized blocks while preserving element order. Requires an associative operation and uses z as its identity.","function reduce_balanced<I extends Iter<unknown>>(\n    f: I, l: I, op: Operation<ValueOf<I>>, z: ValueOf<I>,\n): ValueOf<I>"]; }
 
 function __reduce_balanced_references() { return ["Elements of Programming, ch. 11, p. 198 (value-based overload in eop.h)."]; }
 
 function __reduce_balanced_usage() {
-    const concatenate = binary_operation((left, right) => left + right);
+    const concatenate = binary_operation((l, r) => l + r);
     const d = sequence(["a", "b", "c", "d", "e"]);
     const concatenated = reduce_balanced(begin(d), end(d), concatenate, "");
     print("Concatenation: " + concatenated);
