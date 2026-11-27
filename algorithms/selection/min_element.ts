@@ -19,7 +19,8 @@ function __min_element_usage() {
 
     const m = min_element(begin(s), l, lt);
     if ( ! equal(m, l)) {
-        print("The min element is: " + source(m));
+        const minimum = source(m);
+        print("The min element is: " + minimum);
     } else {
         print("An empty sequence has no min element");
     }

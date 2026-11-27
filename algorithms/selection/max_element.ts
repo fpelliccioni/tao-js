@@ -20,7 +20,8 @@ function __max_element_usage() {
 
     const m = max_element(begin(s), l, lt);
     if ( ! equal(m, l)) {
-        print("The max element is: " + source(m));
+        const maximum = source(m);
+        print("The max element is: " + maximum);
     } else {
         print("An empty sequence has no max element");
     }

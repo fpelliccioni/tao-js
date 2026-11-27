@@ -17,8 +17,12 @@ function __find_if_n_usage() {
     const d = sequence([1, 3, 8, 5, 6]);
     const [result, remaining] = find_if_n(begin(d), size(d), even);
 
-    if (remaining === 0) print("No matching element.");
-    else print("Found " + source(result) + " with " + remaining + " elements remaining.");
+    if (remaining === 0) {
+        print("No matching element.");
+    } else {
+        const value = source(result);
+        print("Found " + value + " with " + remaining + " elements remaining.");
+    }
 }
 
 function __find_if_n_attributes() {

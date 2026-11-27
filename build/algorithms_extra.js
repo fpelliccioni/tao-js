@@ -690,57 +690,63 @@ function __gcd3_usage() {
 function __gcd3_attributes() {
 }
 
-function __divides_typescript() { return ["function divides(i: number, n: number) {\n    return n % i == 0;\n}","let i = random_int();\nlet n = random_int();\nprint(divides(i, n));\n\ni = 5;\nn = 15;\nprint(divides(i, n));"]; }
+function __divides_typescript() { return ["function divides(i: number, n: number) {\n    return n % i == 0;\n}","let i = random_int();\nlet n = random_int();\nconst divisible = divides(i, n);\nprint(divisible);\n\ni = 5;\nn = 15;\nconst nextDivisible = divides(i, n);\nprint(nextDivisible);"]; }
 
 function __divides_references() { return ["From Mathematics to Generic Programming, ch. 13, p. 240 (ch13.h)."]; }
 
 function __divides_usage() {
     let i = random_int();
     let n = random_int();
-    print(divides(i, n));
+    const divisible = divides(i, n);
+    print(divisible);
     i = 5;
     n = 15;
-    print(divides(i, n));
+    const nextDivisible = divides(i, n);
+    print(nextDivisible);
 }
 
 function __divides_attributes() {
 }
 
-function __integer_sqrt_typescript() { return ["function integer_sqrt(n: number) {\n    //precondition: n >= 0\n    if (n < 2) {\n        return n;\n    }\n\n    // Find the shift amount.\n    // shift = ceil(log2(n) * 0.5) * 2\n    let shift = 2\n    while ((n >> shift) != 0) {\n        shift += 2;\n    }\n\n\n    // Unroll the bit-setting loop.\n    let result = 0\n    while (shift >= 0) {\n        result = result << 1;\n        const large_cand = result ^ 1;\n        // large_cand = result + 1;\n        if (large_cand * large_cand <= n >> shift) {\n            result = large_cand;\n        }\n        shift -= 2;\n    }\n\n    return result;\n}","const n = random_int();\n// var n = 53;\nconst i = integer_sqrt(n);\nprint(i);\nprint(Math.floor(Math.sqrt(n)));"]; }
+function __integer_sqrt_typescript() { return ["function integer_sqrt(n: number) {\n    //precondition: n >= 0\n    if (n < 2) {\n        return n;\n    }\n\n    // Find the shift amount.\n    // shift = ceil(log2(n) * 0.5) * 2\n    let shift = 2\n    while ((n >> shift) != 0) {\n        shift += 2;\n    }\n\n\n    // Unroll the bit-setting loop.\n    let result = 0\n    while (shift >= 0) {\n        result = result << 1;\n        const large_cand = result ^ 1;\n        // large_cand = result + 1;\n        if (large_cand * large_cand <= n >> shift) {\n            result = large_cand;\n        }\n        shift -= 2;\n    }\n\n    return result;\n}","const n = random_int();\n// var n = 53;\nconst i = integer_sqrt(n);\nprint(i);\nconst expected = Math.floor(Math.sqrt(n));\nprint(expected);"]; }
 
 function __integer_sqrt_usage() {
     const n = random_int();
     // var n = 53;
     const i = integer_sqrt(n);
     print(i);
-    print(Math.floor(Math.sqrt(n)));
+    const expected = Math.floor(Math.sqrt(n));
+    print(expected);
 }
 
 function __integer_sqrt_attributes() {
 }
 
-function __integer_sqrt_recursive_typescript() { return ["function integer_sqrt_recursive(n: number): number {\n    //precondition: n >= 0\n    if (n < 2) {\n        return n;\n    }\n\n    const tmp = n >> 2;\n    const small_cand = integer_sqrt_recursive(tmp) << 1;\n    const large_cand = small_cand + 1\n    if (large_cand * large_cand > n) {\n        return small_cand;\n    }\n\n    return large_cand;\n}","const n = random_int();\n// var n = 53;\nconst i = integer_sqrt_recursive(n);\nprint(i);\nprint(Math.floor(Math.sqrt(n)));"]; }
+function __integer_sqrt_recursive_typescript() { return ["function integer_sqrt_recursive(n: number): number {\n    //precondition: n >= 0\n    if (n < 2) {\n        return n;\n    }\n\n    const tmp = n >> 2;\n    const small_cand = integer_sqrt_recursive(tmp) << 1;\n    const large_cand = small_cand + 1\n    if (large_cand * large_cand > n) {\n        return small_cand;\n    }\n\n    return large_cand;\n}","const n = random_int();\n// var n = 53;\nconst i = integer_sqrt_recursive(n);\nprint(i);\nconst expected = Math.floor(Math.sqrt(n));\nprint(expected);"]; }
 
 function __integer_sqrt_recursive_usage() {
     const n = random_int();
     // var n = 53;
     const i = integer_sqrt_recursive(n);
     print(i);
-    print(Math.floor(Math.sqrt(n)));
+    const expected = Math.floor(Math.sqrt(n));
+    print(expected);
 }
 
 function __integer_sqrt_recursive_attributes() {
 }
 
-function __smallest_divisor_typescript() { return ["function smallest_divisor(n: number) {\n    //precondition: n > 0\n    if (even(n)) return 2;\n\n    for (let i = 3; i * i <= n; i += 2) {\n        if (divides(i, n)) {\n            return i;\n        }\n    }\n    return n;\n}","let n = random_int();\nprint(smallest_divisor(n));\n\nn = 15;\nprint(smallest_divisor(n));"]; }
+function __smallest_divisor_typescript() { return ["function smallest_divisor(n: number) {\n    //precondition: n > 0\n    if (even(n)) return 2;\n\n    for (let i = 3; i * i <= n; i += 2) {\n        if (divides(i, n)) {\n            return i;\n        }\n    }\n    return n;\n}","let n = random_int();\nconst divisor = smallest_divisor(n);\nprint(divisor);\n\nn = 15;\nconst nextDivisor = smallest_divisor(n);\nprint(nextDivisor);"]; }
 
 function __smallest_divisor_references() { return ["From Mathematics to Generic Programming, ch. 13, p. 240 (ch13.h)."]; }
 
 function __smallest_divisor_usage() {
     let n = random_int();
-    print(smallest_divisor(n));
+    const divisor = smallest_divisor(n);
+    print(divisor);
     n = 15;
-    print(smallest_divisor(n));
+    const nextDivisor = smallest_divisor(n);
+    print(nextDivisor);
 }
 
 function __smallest_divisor_attributes() {
@@ -947,7 +953,7 @@ function __multiply_accumulate_semigroup_usage() {
 function __multiply_accumulate_semigroup_attributes() {
 }
 
-function __multiply_group_typescript() { return ["function multiply_group<T>(n: number, a: T) {\n    if (n < 0) {\n        n = -n;\n        a = negate(a);\n    }\n    return multiply_monoid(n, a);\n}","const n = 41;\nconst a = 59;\n\nconst p = multiply_group(n, a);\nprint(p);\n\nclass SquareMatrix {\n    data: number[];\n\n    constructor(readonly n: number, data?: number[]) {\n\n        this.data = data === undefined || data.length % n !== 0 ? new Array<number>(n * n) : data;\n    }\n\n    add(x: SquareMatrix) {\n        print(\"add() call\")\n        if (this.n != x.n) return undefined;\n\n        const res = new SquareMatrix(this.n);\n        for (let i = 0; i < this.data.length; ++i) {\n            res.data[i] = this.data[i] + x.data[i];\n        }\n        return res;\n    }\n\n    negate() {\n        const res = new SquareMatrix(this.n);\n        for (let i = 0; i < this.data.length; ++i) {\n            res.data[i] = -this.data[i];\n        }\n        return res;\n    }\n\n    str() {\n        let res = \"| \";\n        for (let i = 0; i < this.data.length; ++i) {\n            res += this.data[i] + \" \";\n            if (i % this.n) res += \"| \";\n        }\n        return res;\n    }\n}\n\nconst m1 = new SquareMatrix(2, [1, 3, 7, 5]);\nprint(m1.str());\n\nconst m2 = multiply_group(-5, m1);\nif (typeof m2 !== \"number\") print(m2.str());\n\n\n\n// - NonCommutativeAdditiveGroup: is a Group where the associative binary operation is + and the identity element is 0\n//     commutativity is not required but could be present.\n// - Group is a set on which the following is defined:\n//        operation:                    x ° y\n//        operation:                    x^-1\n//        constant / identity element:  e\n//   and on which the following axiom holds:\n//        x ° (y ° z) = (x ° y) ° z       associativity\n//        x ° e = e ° x = x               identity\n//        x ° x^-1 = x^-1 ° x = e         cancellation\n// - commutativity (not required): x ° y = y ° x"]; }
+function __multiply_group_typescript() { return ["function multiply_group<T>(n: number, a: T) {\n    if (n < 0) {\n        n = -n;\n        a = negate(a);\n    }\n    return multiply_monoid(n, a);\n}","const n = 41;\nconst a = 59;\n\nconst p = multiply_group(n, a);\nprint(p);\n\nclass SquareMatrix {\n    data: number[];\n\n    constructor(readonly n: number, data?: number[]) {\n\n        this.data = data === undefined || data.length % n !== 0 ? new Array<number>(n * n) : data;\n    }\n\n    add(x: SquareMatrix) {\n        print(\"add() call\")\n        if (this.n != x.n) return undefined;\n\n        const res = new SquareMatrix(this.n);\n        for (let i = 0; i < this.data.length; ++i) {\n            res.data[i] = this.data[i] + x.data[i];\n        }\n        return res;\n    }\n\n    negate() {\n        const res = new SquareMatrix(this.n);\n        for (let i = 0; i < this.data.length; ++i) {\n            res.data[i] = -this.data[i];\n        }\n        return res;\n    }\n\n    str() {\n        let res = \"| \";\n        for (let i = 0; i < this.data.length; ++i) {\n            res += this.data[i] + \" \";\n            if (i % this.n) res += \"| \";\n        }\n        return res;\n    }\n}\n\nconst m1 = new SquareMatrix(2, [1, 3, 7, 5]);\nconst m1Text = m1.str();\nprint(m1Text);\n\nconst m2 = multiply_group(-5, m1);\nif (typeof m2 !== \"number\") {\n    const m2Text = m2.str();\n    print(m2Text);\n}\n\n\n\n// - NonCommutativeAdditiveGroup: is a Group where the associative binary operation is + and the identity element is 0\n//     commutativity is not required but could be present.\n// - Group is a set on which the following is defined:\n//        operation:                    x ° y\n//        operation:                    x^-1\n//        constant / identity element:  e\n//   and on which the following axiom holds:\n//        x ° (y ° z) = (x ° y) ° z       associativity\n//        x ° e = e ° x = x               identity\n//        x ° x^-1 = x^-1 ° x = e         cancellation\n// - commutativity (not required): x ° y = y ° x"]; }
 
 function __multiply_group_references() { return ["From Mathematics to Generic Programming, ch. 7, §7.4, pp. 118–119 (ch07.h)."]; }
 
@@ -989,10 +995,13 @@ function __multiply_group_usage() {
         }
     }
     const m1 = new SquareMatrix(2, [1, 3, 7, 5]);
-    print(m1.str());
+    const m1Text = m1.str();
+    print(m1Text);
     const m2 = multiply_group(-5, m1);
-    if (typeof m2 !== "number")
-        print(m2.str());
+    if (typeof m2 !== "number") {
+        const m2Text = m2.str();
+        print(m2Text);
+    }
     // - NonCommutativeAdditiveGroup: is a Group where the associative binary operation is + and the identity element is 0
     //     commutativity is not required but could be present.
     // - Group is a set on which the following is defined:
@@ -1009,7 +1018,7 @@ function __multiply_group_usage() {
 function __multiply_group_attributes() {
 }
 
-function __multiply_monoid_typescript() { return ["function multiply_monoid<T>(n: number, a: T) {\n    // precondition: n >= 0\n    if (n == 0) return 0;  //TODO\n    return multiply_semigroup(n, a);\n}","const n = 41;\nconst a = 59;\n\nconst p = multiply_monoid(n, a);\nprint(p);\n\nclass SquareMatrix {\n    data: number[];\n\n    constructor(readonly n: number, data?: number[]) {\n\n        this.data = data === undefined || data.length % n !== 0 ? new Array<number>(n * n) : data;\n    }\n\n    add(x: SquareMatrix) {\n        print(\"add() call\")\n        if (this.n != x.n) return undefined;\n\n        const res = new SquareMatrix(this.n);\n        for (let i = 0; i < this.data.length; ++i) {\n            res.data[i] = this.data[i] + x.data[i];\n        }\n        return res;\n    }\n\n    str() {\n        let res = \"| \";\n        for (let i = 0; i < this.data.length; ++i) {\n            res += this.data[i] + \" \";\n            if (i % this.n) res += \"| \";\n        }\n        return res;\n    }\n}\n\nconst m1 = new SquareMatrix(2, [1, 3, 7, 5]);\nprint(m1.str());\n\nconst m2 = multiply_monoid(5, m1);\nif (typeof m2 !== \"number\") print(m2.str());\n\n\n\n// - NonCommutativeAdditiveMonoid: is a Monoid where the associative binary operation is + and the identity element is 0\n//     commutativity is not required but could be present.\n// - Monoid is a set on which the following is defined:\n//        operation:                    x ° y\n//        constant / identity element:  e\n//   and on which the following axiom holds:\n//        x ° (y ° z) = (x ° y) ° z       associativity\n//        x ° e = e ° x = x               identity\n// - commutativity (not required): x ° y = y ° x"]; }
+function __multiply_monoid_typescript() { return ["function multiply_monoid<T>(n: number, a: T) {\n    // precondition: n >= 0\n    if (n == 0) return 0;  //TODO\n    return multiply_semigroup(n, a);\n}","const n = 41;\nconst a = 59;\n\nconst p = multiply_monoid(n, a);\nprint(p);\n\nclass SquareMatrix {\n    data: number[];\n\n    constructor(readonly n: number, data?: number[]) {\n\n        this.data = data === undefined || data.length % n !== 0 ? new Array<number>(n * n) : data;\n    }\n\n    add(x: SquareMatrix) {\n        print(\"add() call\")\n        if (this.n != x.n) return undefined;\n\n        const res = new SquareMatrix(this.n);\n        for (let i = 0; i < this.data.length; ++i) {\n            res.data[i] = this.data[i] + x.data[i];\n        }\n        return res;\n    }\n\n    str() {\n        let res = \"| \";\n        for (let i = 0; i < this.data.length; ++i) {\n            res += this.data[i] + \" \";\n            if (i % this.n) res += \"| \";\n        }\n        return res;\n    }\n}\n\nconst m1 = new SquareMatrix(2, [1, 3, 7, 5]);\nconst m1Text = m1.str();\nprint(m1Text);\n\nconst m2 = multiply_monoid(5, m1);\nif (typeof m2 !== \"number\") {\n    const m2Text = m2.str();\n    print(m2Text);\n}\n\n\n\n// - NonCommutativeAdditiveMonoid: is a Monoid where the associative binary operation is + and the identity element is 0\n//     commutativity is not required but could be present.\n// - Monoid is a set on which the following is defined:\n//        operation:                    x ° y\n//        constant / identity element:  e\n//   and on which the following axiom holds:\n//        x ° (y ° z) = (x ° y) ° z       associativity\n//        x ° e = e ° x = x               identity\n// - commutativity (not required): x ° y = y ° x"]; }
 
 function __multiply_monoid_references() { return ["From Mathematics to Generic Programming, ch. 7, §7.4, pp. 118–119 (ch07.h)."]; }
 
@@ -1044,10 +1053,13 @@ function __multiply_monoid_usage() {
         }
     }
     const m1 = new SquareMatrix(2, [1, 3, 7, 5]);
-    print(m1.str());
+    const m1Text = m1.str();
+    print(m1Text);
     const m2 = multiply_monoid(5, m1);
-    if (typeof m2 !== "number")
-        print(m2.str());
+    if (typeof m2 !== "number") {
+        const m2Text = m2.str();
+        print(m2Text);
+    }
     // - NonCommutativeAdditiveMonoid: is a Monoid where the associative binary operation is + and the identity element is 0
     //     commutativity is not required but could be present.
     // - Monoid is a set on which the following is defined:
@@ -1083,7 +1095,7 @@ function __multiply_semigroup_usage() {
 function __multiply_semigroup_attributes() {
 }
 
-function __power_typescript() { return ["function power<T>(a: T, n: number, op: Operation<T>) {\n    if (n < 0) {\n        n = -n;\n        a = inverse_operation(op, a);\n    }\n    return power_monoid(a, n, op);\n}","const n = 41;\nconst a = 59;\n\nconst p = power(a, n, multiply);\nprint(p);\n\nconst m1 = new SquareMatrix(2, [2, 1, 5, 3]); //invertible matrix\nprint(m1.str());\nprint(m1.multiplicative_inverse()?.str());\n\nconst m2 = power(m1, -5, multiply);\nprint(m2.str());\n\nconst m3 = new SquareMatrix(2, [3, 6, 1, 2]); //non-invertible matrix\nprint(\"The singular matrix has no multiplicative inverse.\");\nconst m4 = power(m3, 5, multiply);\nprint(m4.str());\n\n// - GroupOperation is a associative binary operation on which the following is defined:\n//        operation:                    x ° y\n//        operation:                    x^-1\n//        constant / identity element:  e\n//   and on which the following axiom holds:\n//        x ° (y ° z) = (x ° y) ° z       associativity\n//        x ° e = e ° x = x               identity\n//        x ° x^-1 = x^-1 ° x = e         cancellation"]; }
+function __power_typescript() { return ["function power<T>(a: T, n: number, op: Operation<T>) {\n    if (n < 0) {\n        n = -n;\n        a = inverse_operation(op, a);\n    }\n    return power_monoid(a, n, op);\n}","const n = 41;\nconst a = 59;\n\nconst p = power(a, n, multiply);\nprint(p);\n\nconst m1 = new SquareMatrix(2, [2, 1, 5, 3]); //invertible matrix\nconst m1Text = m1.str();\nprint(m1Text);\nconst inverseText = m1.multiplicative_inverse()?.str();\nprint(inverseText);\n\nconst m2 = power(m1, -5, multiply);\nconst m2Text = m2.str();\nprint(m2Text);\n\nconst m3 = new SquareMatrix(2, [3, 6, 1, 2]); //non-invertible matrix\nprint(\"The singular matrix has no multiplicative inverse.\");\nconst m4 = power(m3, 5, multiply);\nconst m4Text = m4.str();\nprint(m4Text);\n\n// - GroupOperation is a associative binary operation on which the following is defined:\n//        operation:                    x ° y\n//        operation:                    x^-1\n//        constant / identity element:  e\n//   and on which the following axiom holds:\n//        x ° (y ° z) = (x ° y) ° z       associativity\n//        x ° e = e ° x = x               identity\n//        x ° x^-1 = x^-1 ° x = e         cancellation"]; }
 
 function __power_references() { return ["From Mathematics to Generic Programming, ch. 7, p. 123 (variant of power_group in ch07.h)."]; }
 
@@ -1093,14 +1105,18 @@ function __power_usage() {
     const p = power(a, n, multiply);
     print(p);
     const m1 = new SquareMatrix(2, [2, 1, 5, 3]); //invertible matrix
-    print(m1.str());
-    print(m1.multiplicative_inverse()?.str());
+    const m1Text = m1.str();
+    print(m1Text);
+    const inverseText = m1.multiplicative_inverse()?.str();
+    print(inverseText);
     const m2 = power(m1, -5, multiply);
-    print(m2.str());
+    const m2Text = m2.str();
+    print(m2Text);
     const m3 = new SquareMatrix(2, [3, 6, 1, 2]); //non-invertible matrix
     print("The singular matrix has no multiplicative inverse.");
     const m4 = power(m3, 5, multiply);
-    print(m4.str());
+    const m4Text = m4.str();
+    print(m4Text);
     // - GroupOperation is a associative binary operation on which the following is defined:
     //        operation:                    x ° y
     //        operation:                    x^-1
@@ -1151,7 +1167,7 @@ function __power_accumulate_semigroup0_usage() {
 function __power_accumulate_semigroup0_attributes() {
 }
 
-function __power_group_typescript() { return ["function power_group<T>(a: T, n: number, op: Operation<T>) {\n    if (n < 0) {\n        n = -n;\n        a = inverse_operation(op, a);\n    }\n    return power_monoid(a, n, op);\n}","const n = 41;\nconst a = 59;\n\nconst p = power_group(a, n, multiply);\nprint(p);\n\nconst m1 = new SquareMatrix(2, [2, 1, 5, 3]); //invertible matrix\nprint(m1.str());\nprint(m1.multiplicative_inverse()?.str());\n\nconst m2 = power_group(m1, -5, multiply);\nprint(m2.str());\n\nconst m3 = new SquareMatrix(2, [3, 6, 1, 2]); //non-invertible matrix\nprint(\"The singular matrix has no multiplicative inverse.\");\nconst m4 = power_group(m3, 5, multiply);\nprint(m4.str());\n\n// - GroupOperation is a associative binary operation on which the following is defined:\n//        operation:                    x ° y\n//        operation:                    x^-1\n//        constant / identity element:  e\n//   and on which the following axiom holds:\n//        x ° (y ° z) = (x ° y) ° z       associativity\n//        x ° e = e ° x = x               identity\n//        x ° x^-1 = x^-1 ° x = e         cancellation"]; }
+function __power_group_typescript() { return ["function power_group<T>(a: T, n: number, op: Operation<T>) {\n    if (n < 0) {\n        n = -n;\n        a = inverse_operation(op, a);\n    }\n    return power_monoid(a, n, op);\n}","const n = 41;\nconst a = 59;\n\nconst p = power_group(a, n, multiply);\nprint(p);\n\nconst m1 = new SquareMatrix(2, [2, 1, 5, 3]); //invertible matrix\nconst m1Text = m1.str();\nprint(m1Text);\nconst inverseText = m1.multiplicative_inverse()?.str();\nprint(inverseText);\n\nconst m2 = power_group(m1, -5, multiply);\nconst m2Text = m2.str();\nprint(m2Text);\n\nconst m3 = new SquareMatrix(2, [3, 6, 1, 2]); //non-invertible matrix\nprint(\"The singular matrix has no multiplicative inverse.\");\nconst m4 = power_group(m3, 5, multiply);\nconst m4Text = m4.str();\nprint(m4Text);\n\n// - GroupOperation is a associative binary operation on which the following is defined:\n//        operation:                    x ° y\n//        operation:                    x^-1\n//        constant / identity element:  e\n//   and on which the following axiom holds:\n//        x ° (y ° z) = (x ° y) ° z       associativity\n//        x ° e = e ° x = x               identity\n//        x ° x^-1 = x^-1 ° x = e         cancellation"]; }
 
 function __power_group_references() { return ["From Mathematics to Generic Programming, ch. 7, p. 123 (operation-parameterized overload in ch07.h)."]; }
 
@@ -1161,14 +1177,18 @@ function __power_group_usage() {
     const p = power_group(a, n, multiply);
     print(p);
     const m1 = new SquareMatrix(2, [2, 1, 5, 3]); //invertible matrix
-    print(m1.str());
-    print(m1.multiplicative_inverse()?.str());
+    const m1Text = m1.str();
+    print(m1Text);
+    const inverseText = m1.multiplicative_inverse()?.str();
+    print(inverseText);
     const m2 = power_group(m1, -5, multiply);
-    print(m2.str());
+    const m2Text = m2.str();
+    print(m2Text);
     const m3 = new SquareMatrix(2, [3, 6, 1, 2]); //non-invertible matrix
     print("The singular matrix has no multiplicative inverse.");
     const m4 = power_group(m3, 5, multiply);
-    print(m4.str());
+    const m4Text = m4.str();
+    print(m4Text);
     // - GroupOperation is a associative binary operation on which the following is defined:
     //        operation:                    x ° y
     //        operation:                    x^-1
@@ -1182,7 +1202,7 @@ function __power_group_usage() {
 function __power_group_attributes() {
 }
 
-function __power_group0_typescript() { return ["function power_group0<T>(a: T, n: number) {\n    if (n < 0) {\n        n = -n;\n        a = multiplicative_inverse(a);\n    }\n    return power_monoid0(a, n);\n}","const n = 41;\nconst a = 59;\n\nconst p = power_group0(a, n);\nprint(p);\n\nconst m1 = new SquareMatrix(2, [2, 1, 5, 3]); //invertible matrix\nprint(m1.str());\nprint(m1.multiplicative_inverse()?.str());\n\nconst m2 = power_group0(m1, -5);\nprint(m2.str());\n\n\nconst m3 = new SquareMatrix(2, [3, 6, 1, 2]); //non-invertible matrix\nprint(\"The singular matrix has no multiplicative inverse.\");\nconst m4 = power_group0(m3, 5);\nprint(m4.str());\n\n\n\n// - MultiplicativeGroup: is a Group where the associative binary operation is * and the identity element is 1.\n// - Group is a set on which the following is defined:\n//        operation:                    x ° y\n//        operation:                    x^-1\n//        constant / identity element:  e\n//   and on which the following axiom holds:\n//        x ° (y ° z) = (x ° y) ° z       associativity\n//        x ° e = e ° x = x               identity\n//        x ° x^-1 = x^-1 ° x = e         cancellation"]; }
+function __power_group0_typescript() { return ["function power_group0<T>(a: T, n: number) {\n    if (n < 0) {\n        n = -n;\n        a = multiplicative_inverse(a);\n    }\n    return power_monoid0(a, n);\n}","const n = 41;\nconst a = 59;\n\nconst p = power_group0(a, n);\nprint(p);\n\nconst m1 = new SquareMatrix(2, [2, 1, 5, 3]); //invertible matrix\nconst m1Text = m1.str();\nprint(m1Text);\nconst inverseText = m1.multiplicative_inverse()?.str();\nprint(inverseText);\n\nconst m2 = power_group0(m1, -5);\nconst m2Text = m2.str();\nprint(m2Text);\n\n\nconst m3 = new SquareMatrix(2, [3, 6, 1, 2]); //non-invertible matrix\nprint(\"The singular matrix has no multiplicative inverse.\");\nconst m4 = power_group0(m3, 5);\nconst m4Text = m4.str();\nprint(m4Text);\n\n\n\n// - MultiplicativeGroup: is a Group where the associative binary operation is * and the identity element is 1.\n// - Group is a set on which the following is defined:\n//        operation:                    x ° y\n//        operation:                    x^-1\n//        constant / identity element:  e\n//   and on which the following axiom holds:\n//        x ° (y ° z) = (x ° y) ° z       associativity\n//        x ° e = e ° x = x               identity\n//        x ° x^-1 = x^-1 ° x = e         cancellation"]; }
 
 function __power_group0_references() { return ["From Mathematics to Generic Programming, ch. 7, §7.5, pp. 119–121 (multiplicative overloads in ch07.h)."]; }
 
@@ -1192,14 +1212,18 @@ function __power_group0_usage() {
     const p = power_group0(a, n);
     print(p);
     const m1 = new SquareMatrix(2, [2, 1, 5, 3]); //invertible matrix
-    print(m1.str());
-    print(m1.multiplicative_inverse()?.str());
+    const m1Text = m1.str();
+    print(m1Text);
+    const inverseText = m1.multiplicative_inverse()?.str();
+    print(inverseText);
     const m2 = power_group0(m1, -5);
-    print(m2.str());
+    const m2Text = m2.str();
+    print(m2Text);
     const m3 = new SquareMatrix(2, [3, 6, 1, 2]); //non-invertible matrix
     print("The singular matrix has no multiplicative inverse.");
     const m4 = power_group0(m3, 5);
-    print(m4.str());
+    const m4Text = m4.str();
+    print(m4Text);
     // - MultiplicativeGroup: is a Group where the associative binary operation is * and the identity element is 1.
     // - Group is a set on which the following is defined:
     //        operation:                    x ° y
@@ -1214,7 +1238,7 @@ function __power_group0_usage() {
 function __power_group0_attributes() {
 }
 
-function __power_monoid_typescript() { return ["function power_monoid<T>(a: T, n: number, op: Operation<T>) {\n    // precondition: n >= 0\n    if (n == 0) return identity_element(op, a);\n    return power_semigroup(a, n, op);\n}","const n = 41;\nconst a = 59;\n\nconst p = power_monoid(a, n, multiply);\nprint(p);\n\nconst m1 = new SquareMatrix(2, [1, 3, 7, 5]);\nprint(m1.str());\n\nconst m2 = power_monoid(m1, 5, multiply);\nprint(m2.str());\n\n// - MonoidOperation is a associative binary operation on which the following is defined:\n//        operation:                    x ° y\n//        constant / identity element:  e\n//   and on which the following axiom holds:\n//        x ° (y ° z) = (x ° y) ° z       associativity\n//        x ° e = e ° x = x               identity"]; }
+function __power_monoid_typescript() { return ["function power_monoid<T>(a: T, n: number, op: Operation<T>) {\n    // precondition: n >= 0\n    if (n == 0) return identity_element(op, a);\n    return power_semigroup(a, n, op);\n}","const n = 41;\nconst a = 59;\n\nconst p = power_monoid(a, n, multiply);\nprint(p);\n\nconst m1 = new SquareMatrix(2, [1, 3, 7, 5]);\nconst m1Text = m1.str();\nprint(m1Text);\n\nconst m2 = power_monoid(m1, 5, multiply);\nconst m2Text = m2.str();\nprint(m2Text);\n\n// - MonoidOperation is a associative binary operation on which the following is defined:\n//        operation:                    x ° y\n//        constant / identity element:  e\n//   and on which the following axiom holds:\n//        x ° (y ° z) = (x ° y) ° z       associativity\n//        x ° e = e ° x = x               identity"]; }
 
 function __power_monoid_references() { return ["From Mathematics to Generic Programming, ch. 7, p. 122 (operation-parameterized overload in ch07.h)."]; }
 
@@ -1224,9 +1248,11 @@ function __power_monoid_usage() {
     const p = power_monoid(a, n, multiply);
     print(p);
     const m1 = new SquareMatrix(2, [1, 3, 7, 5]);
-    print(m1.str());
+    const m1Text = m1.str();
+    print(m1Text);
     const m2 = power_monoid(m1, 5, multiply);
-    print(m2.str());
+    const m2Text = m2.str();
+    print(m2Text);
     // - MonoidOperation is a associative binary operation on which the following is defined:
     //        operation:                    x ° y
     //        constant / identity element:  e
@@ -1238,7 +1264,7 @@ function __power_monoid_usage() {
 function __power_monoid_attributes() {
 }
 
-function __power_monoid0_typescript() { return ["function power_monoid0<T>(a: T, n: number) {\n    // precondition: n >= 0\n    if (n == 0) return multiplicative_identity(a);\n    return power_semigroup0(a, n);\n}","const n = 41;\nconst a = 59;\n\nconst p = power_monoid0(a, n);\nprint(p);\n\nconst m1 = new SquareMatrix(2, [1, 3, 7, 5]);\nprint(m1.str());\n\nconst m2 = power_monoid0(m1, 5);\nprint(m2.str());\n\n// - MultiplicativeMonoid: is a Monoid where the associative binary operation is * and the identity element is 1\n// - Monoid is a set on which the following is defined:\n//        operation:                    x ° y\n//        constant / identity element:  e\n//   and on which the following axiom holds:\n//        x ° (y ° z) = (x ° y) ° z       associativity\n//        x ° e = e ° x = x               identity"]; }
+function __power_monoid0_typescript() { return ["function power_monoid0<T>(a: T, n: number) {\n    // precondition: n >= 0\n    if (n == 0) return multiplicative_identity(a);\n    return power_semigroup0(a, n);\n}","const n = 41;\nconst a = 59;\n\nconst p = power_monoid0(a, n);\nprint(p);\n\nconst m1 = new SquareMatrix(2, [1, 3, 7, 5]);\nconst m1Text = m1.str();\nprint(m1Text);\n\nconst m2 = power_monoid0(m1, 5);\nconst m2Text = m2.str();\nprint(m2Text);\n\n// - MultiplicativeMonoid: is a Monoid where the associative binary operation is * and the identity element is 1\n// - Monoid is a set on which the following is defined:\n//        operation:                    x ° y\n//        constant / identity element:  e\n//   and on which the following axiom holds:\n//        x ° (y ° z) = (x ° y) ° z       associativity\n//        x ° e = e ° x = x               identity"]; }
 
 function __power_monoid0_references() { return ["From Mathematics to Generic Programming, ch. 7, §7.5, pp. 119–121 (multiplicative overloads in ch07.h)."]; }
 
@@ -1248,9 +1274,11 @@ function __power_monoid0_usage() {
     const p = power_monoid0(a, n);
     print(p);
     const m1 = new SquareMatrix(2, [1, 3, 7, 5]);
-    print(m1.str());
+    const m1Text = m1.str();
+    print(m1Text);
     const m2 = power_monoid0(m1, 5);
-    print(m2.str());
+    const m2Text = m2.str();
+    print(m2Text);
     // - MultiplicativeMonoid: is a Monoid where the associative binary operation is * and the identity element is 1
     // - Monoid is a set on which the following is defined:
     //        operation:                    x ° y
@@ -1379,15 +1407,17 @@ function __is_charmichael1_usage() {
 function __is_charmichael1_attributes() {
 }
 
-function __is_prime_typescript() { return ["function is_prime(n: number) {\n    if (n <= 1) return false;\n    const sd = smallest_divisor(n);\n    return sd == n;\n}","let n = random_int();\nprint(is_prime(n));\n\nn = 13;\nprint(is_prime(n));"]; }
+function __is_prime_typescript() { return ["function is_prime(n: number) {\n    if (n <= 1) return false;\n    const sd = smallest_divisor(n);\n    return sd == n;\n}","let n = random_int();\nconst prime = is_prime(n);\nprint(prime);\n\nn = 13;\nconst nextPrime = is_prime(n);\nprint(nextPrime);"]; }
 
 function __is_prime_references() { return ["From Mathematics to Generic Programming, ch. 13, p. 241 (ch13.h)."]; }
 
 function __is_prime_usage() {
     let n = random_int();
-    print(is_prime(n));
+    const prime = is_prime(n);
+    print(prime);
     n = 13;
-    print(is_prime(n));
+    const nextPrime = is_prime(n);
+    print(nextPrime);
 }
 
 function __is_prime_attributes() {
@@ -1883,7 +1913,7 @@ function __linear_insert_unguarded_usage() {
 function __linear_insert_unguarded_attributes() {
 }
 
-function __selection_sort_classic_typescript() { return ["function selection_sort_classic<T>(f: Iter<T>, l: Iter<T>, r: Relation<T>) {\n    // postcondition: is_sorted(f, l, r)\n    while ( ! equal(f, l)) {\n        const m = min_element(f, l, r);\n        iter_swap(f, m);\n        f = successor(f);\n    }\n}","const s = sequence(array_random(), \"s\", lt);\n\nprint(s);\nselection_sort_classic(begin(s), end(s), lt);\nprint(s);\nfunction is_sorted<T>(f: Iter<T>, l: Iter<T>, r: Relation<T>) {\n    if (equal(f, l)) return true;\n    let next = successor(f);\n    while (!equal(next, l)) {\n        if (r(source(next), source(f))) return false;\n        f = next;\n        next = successor(next);\n    }\n    return true;\n}\nprint(is_sorted(begin(s), end(s), lt));"]; }
+function __selection_sort_classic_typescript() { return ["function selection_sort_classic<T>(f: Iter<T>, l: Iter<T>, r: Relation<T>) {\n    // postcondition: is_sorted(f, l, r)\n    while ( ! equal(f, l)) {\n        const m = min_element(f, l, r);\n        iter_swap(f, m);\n        f = successor(f);\n    }\n}","const s = sequence(array_random(), \"s\", lt);\n\nprint(s);\nselection_sort_classic(begin(s), end(s), lt);\nprint(s);\nfunction is_sorted<T>(f: Iter<T>, l: Iter<T>, r: Relation<T>) {\n    if (equal(f, l)) return true;\n    let next = successor(f);\n    while (!equal(next, l)) {\n        if (r(source(next), source(f))) return false;\n        f = next;\n        next = successor(next);\n    }\n    return true;\n}\nconst sorted = is_sorted(begin(s), end(s), lt);\nprint(sorted);"]; }
 
 function __selection_sort_classic_usage() {
     const s = sequence(array_random(), "s", lt);
@@ -1902,7 +1932,8 @@ function __selection_sort_classic_usage() {
         }
         return true;
     }
-    print(is_sorted(begin(s), end(s), lt));
+    const sorted = is_sorted(begin(s), end(s), lt);
+    print(sorted);
 }
 
 function __selection_sort_classic_attributes() {
@@ -2522,7 +2553,7 @@ function __push_heap_n_usage() {
 function __push_heap_n_attributes() {
 }
 
-function __partition_semistable_typescript() { return ["function partition_semistable<T>(f: Iter<T>, l: Iter<T>, p: Predicate<T>) {\n    while (true) {\n        if (equal(f, l)) return f;\n        if (p(source(f))) break;\n        f = successor(f);\n    }\n\n    let j = f;\n    j = successor(j)\n\n    while ( ! equal(j, l)) {\n        if ( ! p(source(j))) {\n            iter_swap(f, j);\n            f = successor(f);\n        }\n        j = successor(j);\n    }\n    return f;\n}","const even = predicate(x => (x & 1) === 0);\nconst d = sequence(array_random(), \"d\", even, undefined, true);\nconst f = begin(d);\nconst l = end(d);\n\nconst p = partition_semistable(f, l, even);\nif ( ! equal(p, l)) {\n    print('partition point: ' + source(p));\n}"]; }
+function __partition_semistable_typescript() { return ["function partition_semistable<T>(f: Iter<T>, l: Iter<T>, p: Predicate<T>) {\n    while (true) {\n        if (equal(f, l)) return f;\n        if (p(source(f))) break;\n        f = successor(f);\n    }\n\n    let j = f;\n    j = successor(j)\n\n    while ( ! equal(j, l)) {\n        if ( ! p(source(j))) {\n            iter_swap(f, j);\n            f = successor(f);\n        }\n        j = successor(j);\n    }\n    return f;\n}","const even = predicate(x => (x & 1) === 0);\nconst d = sequence(array_random(), \"d\", even, undefined, true);\nconst f = begin(d);\nconst l = end(d);\n\nconst p = partition_semistable(f, l, even);\nif ( ! equal(p, l)) {\n    const partitionValue = source(p);\n    print('partition point: ' + partitionValue);\n}"]; }
 
 function __partition_semistable_references() { return ["Elements of Programming, ch. 11, p. 190."]; }
 
@@ -2533,14 +2564,15 @@ function __partition_semistable_usage() {
     const l = end(d);
     const p = partition_semistable(f, l, even);
     if (!equal(p, l)) {
-        print('partition point: ' + source(p));
+        const partitionValue = source(p);
+        print('partition point: ' + partitionValue);
     }
 }
 
 function __partition_semistable_attributes() {
 }
 
-function __partition_semistable_1_typescript() { return ["function partition_semistable_1<T>(f: Iter<T>, l: Iter<T>, p: Predicate<T>) {\n    f = find_if(f, l, p);\n    if (f == l) return f;\n\n    let j = f;\n    j = successor(j)\n\n    while ( ! equal(j, l)) {\n        if ( ! p(source(j))) {\n            iter_swap(f, j);\n            f = successor(f);\n        }\n        j = successor(j);\n    }\n    return f;\n}","const even = predicate(x => (x & 1) === 0);\nconst d = sequence(array_random(), \"d\", even, undefined, true);\nconst f = begin(d);\nconst l = end(d);\n\nconst p = partition_semistable_1(f, l, even);\nif ( ! equal(p, l)) {\n    print('partition point: ' + source(p));\n}"]; }
+function __partition_semistable_1_typescript() { return ["function partition_semistable_1<T>(f: Iter<T>, l: Iter<T>, p: Predicate<T>) {\n    f = find_if(f, l, p);\n    if (f == l) return f;\n\n    let j = f;\n    j = successor(j)\n\n    while ( ! equal(j, l)) {\n        if ( ! p(source(j))) {\n            iter_swap(f, j);\n            f = successor(f);\n        }\n        j = successor(j);\n    }\n    return f;\n}","const even = predicate(x => (x & 1) === 0);\nconst d = sequence(array_random(), \"d\", even, undefined, true);\nconst f = begin(d);\nconst l = end(d);\n\nconst p = partition_semistable_1(f, l, even);\nif ( ! equal(p, l)) {\n    const partitionValue = source(p);\n    print('partition point: ' + partitionValue);\n}"]; }
 
 function __partition_semistable_1_references() { return ["Elements of Programming, ch. 11, pp. 190–191 (variant of partition_semistable)."]; }
 
@@ -2551,7 +2583,8 @@ function __partition_semistable_1_usage() {
     const l = end(d);
     const p = partition_semistable_1(f, l, even);
     if (!equal(p, l)) {
-        print('partition point: ' + source(p));
+        const partitionValue = source(p);
+        print('partition point: ' + partitionValue);
     }
 }
 
@@ -2573,7 +2606,7 @@ function __partition_semistable_nonempty_usage() {
 function __partition_semistable_nonempty_attributes() {
 }
 
-function __partition_stable_forward_typescript() { return ["function partition_stable_forward<T>(f: Iter<T>, l: Iter<T>, p: Predicate<T>) {\n    while (true) {\n        if (equal(f, l)) return f;\n        if (p(source(f))) break;\n        f = successor(f);\n    }\n\n    let j = f;\n    j = successor(j)\n\n    while ( ! equal(j, l)) {\n        if ( ! p(source(j))) {\n            rotate_bidirectional(f, j, successor(j));     //TODO: refine rotate_bidirectional(...)\n            f = successor(f);\n        }\n        j = successor(j);\n    }\n    return f;\n}","const even = predicate(x => (x & 1) === 0);\nconst d = sequence(array_random(), \"d\", even);\nconst f = begin(d);\nconst l = end(d);\n\nconst p = partition_stable_forward(f, l, even);\nif ( ! equal(p, l)) {\n    print('partition point: ' + source(p));\n}"]; }
+function __partition_stable_forward_typescript() { return ["function partition_stable_forward<T>(f: Iter<T>, l: Iter<T>, p: Predicate<T>) {\n    while (true) {\n        if (equal(f, l)) return f;\n        if (p(source(f))) break;\n        f = successor(f);\n    }\n\n    let j = f;\n    j = successor(j)\n\n    while ( ! equal(j, l)) {\n        if ( ! p(source(j))) {\n            rotate_bidirectional(f, j, successor(j));     //TODO: refine rotate_bidirectional(...)\n            f = successor(f);\n        }\n        j = successor(j);\n    }\n    return f;\n}","const even = predicate(x => (x & 1) === 0);\nconst d = sequence(array_random(), \"d\", even);\nconst f = begin(d);\nconst l = end(d);\n\nconst p = partition_stable_forward(f, l, even);\nif ( ! equal(p, l)) {\n    const partitionValue = source(p);\n    print('partition point: ' + partitionValue);\n}"]; }
 
 function __partition_stable_forward_usage() {
     const even = predicate(x => (x & 1) === 0);
@@ -2582,14 +2615,15 @@ function __partition_stable_forward_usage() {
     const l = end(d);
     const p = partition_stable_forward(f, l, even);
     if (!equal(p, l)) {
-        print('partition point: ' + source(p));
+        const partitionValue = source(p);
+        print('partition point: ' + partitionValue);
     }
 }
 
 function __partition_stable_forward_attributes() {
 }
 
-function __partition_stable_with_buffer_0_typescript() { return ["function partition_stable_with_buffer_0<T>(f: Iter<T>, l: Iter<T>, p: Predicate<T>, b: Iter<T>) {\n    const tmp = partition_copy(f, l, f, b, p);\n    const tf = tmp[0];\n    const ts = tmp[1];\n    copy(b, ts, tf);\n    return tf;\n}","const even = predicate(x => (x & 1) === 0);\nconst d = sequence(array_random(), \"d\", even);\nconst buf = sequence(array_all_equal(size(d), 0), \"buf\");\n\nconst p = partition_stable_with_buffer_0(begin(d), end(d), even, begin(buf));\nif ( ! equal(p, end(d))) {\n    print('partition point: ' + source(p));\n}"]; }
+function __partition_stable_with_buffer_0_typescript() { return ["function partition_stable_with_buffer_0<T>(f: Iter<T>, l: Iter<T>, p: Predicate<T>, b: Iter<T>) {\n    const tmp = partition_copy(f, l, f, b, p);\n    const tf = tmp[0];\n    const ts = tmp[1];\n    copy(b, ts, tf);\n    return tf;\n}","const even = predicate(x => (x & 1) === 0);\nconst d = sequence(array_random(), \"d\", even);\nconst buf = sequence(array_all_equal(size(d), 0), \"buf\");\n\nconst p = partition_stable_with_buffer_0(begin(d), end(d), even, begin(buf));\nif ( ! equal(p, end(d))) {\n    const partitionValue = source(p);\n    print('partition point: ' + partitionValue);\n}"]; }
 
 function __partition_stable_with_buffer_0_references() { return ["Elements of Programming, ch. 11, p. 193 (variant of partition_stable_with_buffer)."]; }
 
@@ -2599,7 +2633,8 @@ function __partition_stable_with_buffer_0_usage() {
     const buf = sequence(array_all_equal(size(d), 0), "buf");
     const p = partition_stable_with_buffer_0(begin(d), end(d), even, begin(buf));
     if (!equal(p, end(d))) {
-        print('partition point: ' + source(p));
+        const partitionValue = source(p);
+        print('partition point: ' + partitionValue);
     }
 }
 
@@ -2633,7 +2668,7 @@ function __reduce_usage() {
 function __reduce_attributes() {
 }
 
-function __reduce_balanced_typescript() { return ["function reduce_balanced<I extends Iter<unknown>>(\n    f: I, l: I, op: Operation<ValueOf<I>>, z: ValueOf<I>,\n): ValueOf<I> {\n    const bins: ValueOf<I>[] = [];\n    while (!equal(f, l)) {\n        let carry = source(f);\n        if (carry !== z) {\n            let i = 0;\n            while (i < bins.length && bins[i] !== z) {\n                carry = op(bins[i], carry);\n                bins[i] = z;\n                ++i;\n            }\n            if (i < bins.length || carry !== z) bins[i] = carry;\n        }\n        f = successor(f);\n    }\n\n    let i = 0;\n    while (i < bins.length && bins[i] === z) ++i;\n    if (i === bins.length) return z;\n\n    let result = bins[i];\n    for (++i; i < bins.length; ++i) {\n        if (bins[i] !== z) result = op(bins[i], result);\n    }\n    return result;\n}","const concatenate = binary_operation(function concatenate(left: string, right: string) {\n    return left + right;\n});\nconst d = sequence([\"a\", \"b\", \"c\", \"d\", \"e\"]);\nprint(\"Concatenation: \" + reduce_balanced(begin(d), end(d), concatenate, \"\"));"]; }
+function __reduce_balanced_typescript() { return ["function reduce_balanced<I extends Iter<unknown>>(\n    f: I, l: I, op: Operation<ValueOf<I>>, z: ValueOf<I>,\n): ValueOf<I> {\n    const bins: ValueOf<I>[] = [];\n    while (!equal(f, l)) {\n        let carry = source(f);\n        if (carry !== z) {\n            let i = 0;\n            while (i < bins.length && bins[i] !== z) {\n                carry = op(bins[i], carry);\n                bins[i] = z;\n                ++i;\n            }\n            if (i < bins.length || carry !== z) bins[i] = carry;\n        }\n        f = successor(f);\n    }\n\n    let i = 0;\n    while (i < bins.length && bins[i] === z) ++i;\n    if (i === bins.length) return z;\n\n    let result = bins[i];\n    for (++i; i < bins.length; ++i) {\n        if (bins[i] !== z) result = op(bins[i], result);\n    }\n    return result;\n}","const concatenate = binary_operation(function concatenate(left: string, right: string) {\n    return left + right;\n});\nconst d = sequence([\"a\", \"b\", \"c\", \"d\", \"e\"]);\nconst concatenated = reduce_balanced(begin(d), end(d), concatenate, \"\");\nprint(\"Concatenation: \" + concatenated);"]; }
 
 function __reduce_balanced_references() { return ["Elements of Programming, ch. 11, p. 198 (value-based overload in eop.h)."]; }
 
@@ -2642,37 +2677,40 @@ function __reduce_balanced_usage() {
         return left + right;
     });
     const d = sequence(["a", "b", "c", "d", "e"]);
-    print("Concatenation: " + reduce_balanced(begin(d), end(d), concatenate, ""));
+    const concatenated = reduce_balanced(begin(d), end(d), concatenate, "");
+    print("Concatenation: " + concatenated);
 }
 
 function __reduce_balanced_attributes() {
 }
 
-function __reduce_nonempty_typescript() { return ["function reduce_nonempty<I extends Iter<unknown>>(\n    f: I, l: I, op: Operation<ValueOf<I>>,\n): ValueOf<I> {\n    pre(() => !equal(f, l), \"The range must not be empty.\");\n\n    let result = source(f);\n    f = successor(f);\n    while (!equal(f, l)) {\n        result = op(result, source(f));\n        f = successor(f);\n    }\n    return result;\n}","const d = sequence([2, 3, 4], \"d\", undefined, \"stream\");\nprint(\"Product: \" + reduce_nonempty(begin(d), end(d), multiply));"]; }
+function __reduce_nonempty_typescript() { return ["function reduce_nonempty<I extends Iter<unknown>>(\n    f: I, l: I, op: Operation<ValueOf<I>>,\n): ValueOf<I> {\n    pre(() => !equal(f, l), \"The range must not be empty.\");\n\n    let result = source(f);\n    f = successor(f);\n    while (!equal(f, l)) {\n        result = op(result, source(f));\n        f = successor(f);\n    }\n    return result;\n}","const d = sequence([2, 3, 4], \"d\", undefined, \"stream\");\nconst product = reduce_nonempty(begin(d), end(d), multiply);\nprint(\"Product: \" + product);"]; }
 
 function __reduce_nonempty_references() { return ["Elements of Programming, ch. 6, pp. 96–97 (value-based overload in eop.h)."]; }
 
 function __reduce_nonempty_usage() {
     const d = sequence([2, 3, 4], "d", undefined, "stream");
-    print("Product: " + reduce_nonempty(begin(d), end(d), multiply));
+    const product = reduce_nonempty(begin(d), end(d), multiply);
+    print("Product: " + product);
 }
 
 function __reduce_nonempty_attributes() {
 }
 
-function __reduce_nonzeroes_typescript() { return ["function reduce_nonzeroes<I extends Iter<unknown>>(\n    f: I, l: I, op: Operation<ValueOf<I>>, z: ValueOf<I>,\n): ValueOf<I> {\n    let result;\n    do {\n        if (equal(f, l)) return z;\n        result = source(f);\n        f = successor(f);\n    } while (result === z);\n\n    while (!equal(f, l)) {\n        const value = source(f);\n        if (value !== z) result = op(result, value);\n        f = successor(f);\n    }\n    return result;\n}","const d = sequence([0, 2, 0, 4, 0, 8]);\nprint(\"Sum after skipping zeroes: \" + reduce_nonzeroes(begin(d), end(d), add, 0));"]; }
+function __reduce_nonzeroes_typescript() { return ["function reduce_nonzeroes<I extends Iter<unknown>>(\n    f: I, l: I, op: Operation<ValueOf<I>>, z: ValueOf<I>,\n): ValueOf<I> {\n    let result;\n    do {\n        if (equal(f, l)) return z;\n        result = source(f);\n        f = successor(f);\n    } while (result === z);\n\n    while (!equal(f, l)) {\n        const value = source(f);\n        if (value !== z) result = op(result, value);\n        f = successor(f);\n    }\n    return result;\n}","const d = sequence([0, 2, 0, 4, 0, 8]);\nconst sum = reduce_nonzeroes(begin(d), end(d), add, 0);\nprint(\"Sum after skipping zeroes: \" + sum);"]; }
 
 function __reduce_nonzeroes_references() { return ["Elements of Programming, ch. 6, pp. 97–98 (value-based overload in eop.h)."]; }
 
 function __reduce_nonzeroes_usage() {
     const d = sequence([0, 2, 0, 4, 0, 8]);
-    print("Sum after skipping zeroes: " + reduce_nonzeroes(begin(d), end(d), add, 0));
+    const sum = reduce_nonzeroes(begin(d), end(d), add, 0);
+    print("Sum after skipping zeroes: " + sum);
 }
 
 function __reduce_nonzeroes_attributes() {
 }
 
-function __lower_bound_n_typescript() { return ["function lower_bound_n<I extends ForwardIterator>(\n    f: I, n: number, a: ValueOf<I>, r: Relation<ValueOf<I>>,\n): I {\n    const below = (x: ValueOf<I>) => r(x, a);\n    const p = (x: ValueOf<I>) => !below(x);\n    pre(() => is_partitioned_n(f, n, p), \"The range must be partitioned around the search value.\");\n    const result = partition_point_n(f, n, p);\n    post(() => all(f, result, below), \"Every element before the result must compare less than the search value.\");\n    post(() => none(result, successor(f, n), below), \"No element from the result onward may compare less than the search value.\");\n    return result;\n}","const hasLowerDigitSum = relation((x, y) => digitSum(x) < digitSum(y));\n\nconst d = sequence([11, 22, 49, 58, 67]);\n\nconst lb = lower_bound_n(begin(d), size(d), 38, hasLowerDigitSum);\nprint('insertion point: ' + source(lb));"]; }
+function __lower_bound_n_typescript() { return ["function lower_bound_n<I extends ForwardIterator>(\n    f: I, n: number, a: ValueOf<I>, r: Relation<ValueOf<I>>,\n): I {\n    const below = (x: ValueOf<I>) => r(x, a);\n    const p = (x: ValueOf<I>) => !below(x);\n    pre(() => is_partitioned_n(f, n, p), \"The range must be partitioned around the search value.\");\n    const result = partition_point_n(f, n, p);\n    post(() => all(f, result, below), \"Every element before the result must compare less than the search value.\");\n    post(() => none(result, successor(f, n), below), \"No element from the result onward may compare less than the search value.\");\n    return result;\n}","const hasLowerDigitSum = relation((x, y) => digitSum(x) < digitSum(y));\n\nconst d = sequence([11, 22, 49, 58, 67]);\n\nconst lb = lower_bound_n(begin(d), size(d), 38, hasLowerDigitSum);\nconst insertionValue = source(lb);\nprint('insertion point: ' + insertionValue);"]; }
 
 function __lower_bound_n_references() { return ["Elements of Programming, ch. 6, pp. 105–106 (adapted with explicit contracts)."]; }
 
@@ -2680,13 +2718,14 @@ function __lower_bound_n_usage() {
     const hasLowerDigitSum = relation((x, y) => digitSum(x) < digitSum(y));
     const d = sequence([11, 22, 49, 58, 67]);
     const lb = lower_bound_n(begin(d), size(d), 38, hasLowerDigitSum);
-    print('insertion point: ' + source(lb));
+    const insertionValue = source(lb);
+    print('insertion point: ' + insertionValue);
 }
 
 function __lower_bound_n_attributes() {
 }
 
-function __partition_point_n_typescript() { return ["function partition_point_n<I extends Iter<unknown>>(f: I, n: number, p: Predicate<ValueOf<I>>): I {\n    while (n != 0) {\n        const h = half(n);\n        const m = successor(f, h);\n\n        if (p(source(m))) {\n            n = h;\n        } else {\n            n -= h + 1;\n            f = successor(m);\n        }\n    }\n    return f;\n}","const even = predicate(x => (x & 1) === 0);\n\nconst d = sequence([1, 5, 1, 1, 3, 3, 3, 7, 3, 2, 6, 4], \"d\", even);\n\nconst p = partition_point_n(begin(d), size(d), even);\nprint('partition point: ' + source(p));"]; }
+function __partition_point_n_typescript() { return ["function partition_point_n<I extends Iter<unknown>>(f: I, n: number, p: Predicate<ValueOf<I>>): I {\n    while (n != 0) {\n        const h = half(n);\n        const m = successor(f, h);\n\n        if (p(source(m))) {\n            n = h;\n        } else {\n            n -= h + 1;\n            f = successor(m);\n        }\n    }\n    return f;\n}","const even = predicate(x => (x & 1) === 0);\n\nconst d = sequence([1, 5, 1, 1, 3, 3, 3, 7, 3, 2, 6, 4], \"d\", even);\n\nconst p = partition_point_n(begin(d), size(d), even);\nconst partitionValue = source(p);\nprint('partition point: ' + partitionValue);"]; }
 
 function __partition_point_n_references() { return ["Elements of Programming, ch. 6, p. 104.","From Mathematics to Generic Programming, ch. 10, p. 193 (ch10.h)."]; }
 
@@ -2694,13 +2733,14 @@ function __partition_point_n_usage() {
     const even = predicate(x => (x & 1) === 0);
     const d = sequence([1, 5, 1, 1, 3, 3, 3, 7, 3, 2, 6, 4], "d", even);
     const p = partition_point_n(begin(d), size(d), even);
-    print('partition point: ' + source(p));
+    const partitionValue = source(p);
+    print('partition point: ' + partitionValue);
 }
 
 function __partition_point_n_attributes() {
 }
 
-function __partition_point_n_forward_typescript() { return ["function partition_point_n_forward<T>(f: Iter<T>, n: number, p: Predicate<T>): [Iter<T>, number] {\n    let t = n;\n    while (n != 0) {\n        const h = half(n);\n        const m = successor(f, h);\n\n        if (p(source(m))) {\n            n = h;\n        } else {\n            n -= h + 1;\n            t -= h + 1;\n            f = successor(m);\n        }\n    }\n    return [f, t];\n}","const eq3 = predicate(x => x == 3);\nconst gt3 = predicate(x => x > 3);\nconst gte3 = predicate(x => x >= 3);\n\nconst d = sequence([1, 1, 1, 1, 3, 3, 3, 3, 3, 7, 8, 9], \"d\", eq3);\n\nconst lb = partition_point_n_forward(begin(d), size(d), gte3);\nconst ub = partition_point_n_forward(lb[0], lb[1], gt3);\n\nlet f = lb[0];\nconst l = ub[0];\n\nwhile ( ! equal(f, l)) {\n    print(source(f) + \", \");\n    f = successor(f);\n}"]; }
+function __partition_point_n_forward_typescript() { return ["function partition_point_n_forward<T>(f: Iter<T>, n: number, p: Predicate<T>): [Iter<T>, number] {\n    let t = n;\n    while (n != 0) {\n        const h = half(n);\n        const m = successor(f, h);\n\n        if (p(source(m))) {\n            n = h;\n        } else {\n            n -= h + 1;\n            t -= h + 1;\n            f = successor(m);\n        }\n    }\n    return [f, t];\n}","const eq3 = predicate(x => x == 3);\nconst gt3 = predicate(x => x > 3);\nconst gte3 = predicate(x => x >= 3);\n\nconst d = sequence([1, 1, 1, 1, 3, 3, 3, 3, 3, 7, 8, 9], \"d\", eq3);\n\nconst lb = partition_point_n_forward(begin(d), size(d), gte3);\nconst ub = partition_point_n_forward(lb[0], lb[1], gt3);\n\nlet f = lb[0];\nconst l = ub[0];\n\nwhile ( ! equal(f, l)) {\n    const partitionValue = source(f);\n    print(partitionValue + \", \");\n    f = successor(f);\n}"]; }
 
 function __partition_point_n_forward_references() { return ["Elements of Programming, ch. 6, p. 104 (variant of partition_point_n that also returns a count)."]; }
 
@@ -2714,7 +2754,8 @@ function __partition_point_n_forward_usage() {
     let f = lb[0];
     const l = ub[0];
     while (!equal(f, l)) {
-        print(source(f) + ", ");
+        const partitionValue = source(f);
+        print(partitionValue + ", ");
         f = successor(f);
     }
 }
@@ -2722,7 +2763,7 @@ function __partition_point_n_forward_usage() {
 function __partition_point_n_forward_attributes() {
 }
 
-function __upper_bound_n_typescript() { return ["function upper_bound_n<T>(f: Iter<T>, n: number, a: T, r: Relation<T>) {\n    const p = (x: T) => r(a, x);\n    return partition_point_n(f, n, p);\n}","const hasLowerDigitSum = relation((x, y) => digitSum(x) < digitSum(y));\n\nconst d = sequence([11, 22, 49, 58, 67]);\n\nconst lb = upper_bound_n(begin(d), size(d), 38, hasLowerDigitSum);\nprint('insertion point: ' + source(lb));"]; }
+function __upper_bound_n_typescript() { return ["function upper_bound_n<T>(f: Iter<T>, n: number, a: T, r: Relation<T>) {\n    const p = (x: T) => r(a, x);\n    return partition_point_n(f, n, p);\n}","const hasLowerDigitSum = relation((x, y) => digitSum(x) < digitSum(y));\n\nconst d = sequence([11, 22, 49, 58, 67]);\n\nconst lb = upper_bound_n(begin(d), size(d), 38, hasLowerDigitSum);\nconst insertionValue = source(lb);\nprint('insertion point: ' + insertionValue);"]; }
 
 function __upper_bound_n_references() { return ["Elements of Programming, ch. 6, p. 106."]; }
 
@@ -2730,7 +2771,8 @@ function __upper_bound_n_usage() {
     const hasLowerDigitSum = relation((x, y) => digitSum(x) < digitSum(y));
     const d = sequence([11, 22, 49, 58, 67]);
     const lb = upper_bound_n(begin(d), size(d), 38, hasLowerDigitSum);
-    print('insertion point: ' + source(lb));
+    const insertionValue = source(lb);
+    print('insertion point: ' + insertionValue);
 }
 
 function __upper_bound_n_attributes() {
@@ -2756,55 +2798,63 @@ function __all_usage() {
 function __all_attributes() {
 }
 
-function __find_typescript() { return ["function find<T>(f: Iter<T>, l: Iter<T>, x: T) {\n    while ( ! equal(f, l) && ! source(f) != x) {\n        f = successor(f)\n    }\n    return f;\n}","print(array_from(\"Hello, World!\"))\nconst s = sequence(array_from(\"Hello, World!\"), \"s\");\n\nconst it = find(begin(s), end(s), 'x');\nif ( ! equal(it, end(s))) {\n    print(source(it));\n}"]; }
+function __find_typescript() { return ["function find<T>(f: Iter<T>, l: Iter<T>, x: T) {\n    while ( ! equal(f, l) && ! source(f) != x) {\n        f = successor(f)\n    }\n    return f;\n}","const characters = array_from(\"Hello, World!\");\nprint(characters);\nconst s = sequence(array_from(\"Hello, World!\"), \"s\");\n\nconst it = find(begin(s), end(s), 'x');\nif ( ! equal(it, end(s))) {\n    const value = source(it);\n    print(value);\n}"]; }
 
 function __find_references() { return ["Elements of Programming, ch. 6, p. 94."]; }
 
 function __find_usage() {
-    print(array_from("Hello, World!"));
+    const characters = array_from("Hello, World!");
+    print(characters);
     const s = sequence(array_from("Hello, World!"), "s");
     const it = find(begin(s), end(s), 'x');
     if (!equal(it, end(s))) {
-        print(source(it));
+        const value = source(it);
+        print(value);
     }
 }
 
 function __find_attributes() {
 }
 
-function __find_adjacent_mismatch_typescript() { return ["function find_adjacent_mismatch<I extends Iter<unknown>>(\n    f: I, l: I, r: Relation<ValueOf<I>>,\n): I {\n    if (equal(f, l)) return l;\n\n    let previous = source(f);\n    f = successor(f);\n    while (!equal(f, l)) {\n        const current = source(f);\n        if (!r(previous, current)) return f;\n        previous = current;\n        f = successor(f);\n    }\n    return l;\n}","const d = sequence([1, 4, 3, 8], \"d\", undefined, \"stream\");\nconst result = find_adjacent_mismatch(begin(d), end(d), lt);\n\nif (equal(result, end(d))) print(\"All adjacent pairs are strictly increasing.\");\nelse print(\"First element that breaks the ordering: \" + source(result));"]; }
+function __find_adjacent_mismatch_typescript() { return ["function find_adjacent_mismatch<I extends Iter<unknown>>(\n    f: I, l: I, r: Relation<ValueOf<I>>,\n): I {\n    if (equal(f, l)) return l;\n\n    let previous = source(f);\n    f = successor(f);\n    while (!equal(f, l)) {\n        const current = source(f);\n        if (!r(previous, current)) return f;\n        previous = current;\n        f = successor(f);\n    }\n    return l;\n}","const d = sequence([1, 4, 3, 8], \"d\", undefined, \"stream\");\nconst result = find_adjacent_mismatch(begin(d), end(d), lt);\n\nif (equal(result, end(d))) {\n    print(\"All adjacent pairs are strictly increasing.\");\n} else {\n    const value = source(result);\n    print(\"First element that breaks the ordering: \" + value);\n}"]; }
 
 function __find_adjacent_mismatch_references() { return ["Elements of Programming, ch. 6, p. 100."]; }
 
 function __find_adjacent_mismatch_usage() {
     const d = sequence([1, 4, 3, 8], "d", undefined, "stream");
     const result = find_adjacent_mismatch(begin(d), end(d), lt);
-    if (equal(result, end(d)))
+    if (equal(result, end(d))) {
         print("All adjacent pairs are strictly increasing.");
-    else
-        print("First element that breaks the ordering: " + source(result));
+    }
+    else {
+        const value = source(result);
+        print("First element that breaks the ordering: " + value);
+    }
 }
 
 function __find_adjacent_mismatch_attributes() {
 }
 
-function __find_adjacent_mismatch_forward_typescript() { return ["function find_adjacent_mismatch_forward<I extends ForwardIterator>(\n    f: I, l: I, r: Relation<ValueOf<I>>,\n): I {\n    if (equal(f, l)) return l;\n\n    let previous = f;\n    f = successor(f);\n    while (!equal(f, l) && r(source(previous), source(f))) {\n        previous = f;\n        f = successor(f);\n    }\n    return f;\n}","const d = sequence([1, 4, 3, 8], \"d\", undefined, \"sll\");\nconst result = find_adjacent_mismatch_forward(begin(d), end(d), lt);\n\nif (equal(result, end(d))) print(\"All adjacent pairs are strictly increasing.\");\nelse print(\"First element that breaks the ordering: \" + source(result));"]; }
+function __find_adjacent_mismatch_forward_typescript() { return ["function find_adjacent_mismatch_forward<I extends ForwardIterator>(\n    f: I, l: I, r: Relation<ValueOf<I>>,\n): I {\n    if (equal(f, l)) return l;\n\n    let previous = f;\n    f = successor(f);\n    while (!equal(f, l) && r(source(previous), source(f))) {\n        previous = f;\n        f = successor(f);\n    }\n    return f;\n}","const d = sequence([1, 4, 3, 8], \"d\", undefined, \"sll\");\nconst result = find_adjacent_mismatch_forward(begin(d), end(d), lt);\n\nif (equal(result, end(d))) {\n    print(\"All adjacent pairs are strictly increasing.\");\n} else {\n    const value = source(result);\n    print(\"First element that breaks the ordering: \" + value);\n}"]; }
 
 function __find_adjacent_mismatch_forward_references() { return ["Elements of Programming, ch. 6, p. 103."]; }
 
 function __find_adjacent_mismatch_forward_usage() {
     const d = sequence([1, 4, 3, 8], "d", undefined, "sll");
     const result = find_adjacent_mismatch_forward(begin(d), end(d), lt);
-    if (equal(result, end(d)))
+    if (equal(result, end(d))) {
         print("All adjacent pairs are strictly increasing.");
-    else
-        print("First element that breaks the ordering: " + source(result));
+    }
+    else {
+        const value = source(result);
+        print("First element that breaks the ordering: " + value);
+    }
 }
 
 function __find_adjacent_mismatch_forward_attributes() {
 }
 
-function __find_backward_if_typescript() { return ["function find_backward_if<T>(f: Iter<T>, l: Iter<T>, p: Predicate<T>) {\n    while (true) {\n        if (equal(l, f)) return f;\n        l = predecessor(l);\n        if (p(source(l))) return successor(l);\n    }\n}","const even = predicate(x => (x & 1) === 0);\nconst d = sequence(array_random(), \"d\");\nconst f = begin(d);\nconst l = end(d);\n\nconst it = find_backward_if(f, l, even);\nif ( ! equal(it, f)) {\n    print(source(predecessor(it)));\n}"]; }
+function __find_backward_if_typescript() { return ["function find_backward_if<T>(f: Iter<T>, l: Iter<T>, p: Predicate<T>) {\n    while (true) {\n        if (equal(l, f)) return f;\n        l = predecessor(l);\n        if (p(source(l))) return successor(l);\n    }\n}","const even = predicate(x => (x & 1) === 0);\nconst d = sequence(array_random(), \"d\");\nconst f = begin(d);\nconst l = end(d);\n\nconst it = find_backward_if(f, l, even);\nif ( ! equal(it, f)) {\n    const value = source(predecessor(it));\n    print(value);\n}"]; }
 
 function __find_backward_if_references() { return ["Elements of Programming, ch. 6, p. 108."]; }
 
@@ -2815,14 +2865,15 @@ function __find_backward_if_usage() {
     const l = end(d);
     const it = find_backward_if(f, l, even);
     if (!equal(it, f)) {
-        print(source(predecessor(it)));
+        const value = source(predecessor(it));
+        print(value);
     }
 }
 
 function __find_backward_if_attributes() {
 }
 
-function __find_if_typescript() { return ["function find_if<T>(f: Iter<T>, l: Iter<T>, p: Predicate<T>) {\n    while ( ! equal(f, l) && ! p(source(f))) {\n        f = successor(f)\n    }\n    return f;\n}","const even = predicate(x => (x & 1) === 0);\nconst d = sequence(array_random(), \"d\");\nconst f = begin(d);\nconst l = end(d);\n\nconst it = find_if(f, l, even);\nif ( ! equal(it, l)) {\n    print(source(it));\n}"]; }
+function __find_if_typescript() { return ["function find_if<T>(f: Iter<T>, l: Iter<T>, p: Predicate<T>) {\n    while ( ! equal(f, l) && ! p(source(f))) {\n        f = successor(f)\n    }\n    return f;\n}","const even = predicate(x => (x & 1) === 0);\nconst d = sequence(array_random(), \"d\");\nconst f = begin(d);\nconst l = end(d);\n\nconst it = find_if(f, l, even);\nif ( ! equal(it, l)) {\n    const value = source(it);\n    print(value);\n}"]; }
 
 function __find_if_references() { return ["Elements of Programming, ch. 6, pp. 94–95.","From Mathematics to Generic Programming, ch. 10, pp. 190–191 (ch10.h)."]; }
 
@@ -2833,14 +2884,15 @@ function __find_if_usage() {
     const l = end(d);
     const it = find_if(f, l, even);
     if (!equal(it, l)) {
-        print(source(it));
+        const value = source(it);
+        print(value);
     }
 }
 
 function __find_if_attributes() {
 }
 
-function __find_if_n_typescript() { return ["function find_if_n<I extends Iter<unknown>>(\n    f: I, n: number, p: Predicate<ValueOf<I>>,\n): [I, number] {\n    pre(() => Number.isSafeInteger(n) && n >= 0, \"The count must be a nonnegative safe integer.\");\n\n    while (n !== 0 && !p(source(f))) {\n        f = successor(f);\n        --n;\n    }\n    return [f, n];\n}","const even = predicate(x => (x & 1) === 0);\nconst d = sequence([1, 3, 8, 5, 6]);\nconst [result, remaining] = find_if_n(begin(d), size(d), even);\n\nif (remaining === 0) print(\"No matching element.\");\nelse print(\"Found \" + source(result) + \" with \" + remaining + \" elements remaining.\");"]; }
+function __find_if_n_typescript() { return ["function find_if_n<I extends Iter<unknown>>(\n    f: I, n: number, p: Predicate<ValueOf<I>>,\n): [I, number] {\n    pre(() => Number.isSafeInteger(n) && n >= 0, \"The count must be a nonnegative safe integer.\");\n\n    while (n !== 0 && !p(source(f))) {\n        f = successor(f);\n        --n;\n    }\n    return [f, n];\n}","const even = predicate(x => (x & 1) === 0);\nconst d = sequence([1, 3, 8, 5, 6]);\nconst [result, remaining] = find_if_n(begin(d), size(d), even);\n\nif (remaining === 0) {\n    print(\"No matching element.\");\n} else {\n    const value = source(result);\n    print(\"Found \" + value + \" with \" + remaining + \" elements remaining.\");\n}"]; }
 
 function __find_if_n_references() { return ["From Mathematics to Generic Programming, ch. 10, p. 191 (ch10.h)."]; }
 
@@ -2848,16 +2900,19 @@ function __find_if_n_usage() {
     const even = predicate(x => (x & 1) === 0);
     const d = sequence([1, 3, 8, 5, 6]);
     const [result, remaining] = find_if_n(begin(d), size(d), even);
-    if (remaining === 0)
+    if (remaining === 0) {
         print("No matching element.");
-    else
-        print("Found " + source(result) + " with " + remaining + " elements remaining.");
+    }
+    else {
+        const value = source(result);
+        print("Found " + value + " with " + remaining + " elements remaining.");
+    }
 }
 
 function __find_if_n_attributes() {
 }
 
-function __find_if_not_typescript() { return ["function find_if_not<T>(f: Iter<T>, l: Iter<T>, p: Predicate<T>) {\n    while ( ! equal(f, l) && p(source(f))) {\n        f = successor(f)\n    }\n    return f;\n}","const even = predicate(x => (x & 1) === 0);\nconst d = sequence(array_random(), \"d\");\nconst f = begin(d);\nconst l = end(d);\n\nconst it = find_if_not(f, l, even);\nif ( ! equal(it, l)) {\n    print(source(it));\n}"]; }
+function __find_if_not_typescript() { return ["function find_if_not<T>(f: Iter<T>, l: Iter<T>, p: Predicate<T>) {\n    while ( ! equal(f, l) && p(source(f))) {\n        f = successor(f)\n    }\n    return f;\n}","const even = predicate(x => (x & 1) === 0);\nconst d = sequence(array_random(), \"d\");\nconst f = begin(d);\nconst l = end(d);\n\nconst it = find_if_not(f, l, even);\nif ( ! equal(it, l)) {\n    const value = source(it);\n    print(value);\n}"]; }
 
 function __find_if_not_references() { return ["Elements of Programming, ch. 6, p. 95 (described in the text; implementation in eop.h)."]; }
 
@@ -2868,14 +2923,15 @@ function __find_if_not_usage() {
     const l = end(d);
     const it = find_if_not(f, l, even);
     if (!equal(it, l)) {
-        print(source(it));
+        const value = source(it);
+        print(value);
     }
 }
 
 function __find_if_not_attributes() {
 }
 
-function __find_mismatch_typescript() { return ["function find_mismatch<I extends Iter<unknown>, J extends Iter<ValueOf<I>>>(\n    f0: I, l0: I, f1: J, l1: J, r: Relation<ValueOf<I>>,\n): [I, J] {\n    while (!equal(f0, l0) && !equal(f1, l1) && r(source(f0), source(f1))) {\n        f0 = successor(f0);\n        f1 = successor(f1);\n    }\n    return [f0, f1];\n}","const left = sequence([2, 4, 6, 8]);\nconst right = sequence([2, 4, 7, 8]);\nconst [a, b] = find_mismatch(begin(left), end(left), begin(right), end(right), eq);\n\nif (equal(a, end(left)) || equal(b, end(right))) print(\"No mismatch in the common prefix.\");\nelse print(\"First mismatch: \" + source(a) + \" and \" + source(b));"]; }
+function __find_mismatch_typescript() { return ["function find_mismatch<I extends Iter<unknown>, J extends Iter<ValueOf<I>>>(\n    f0: I, l0: I, f1: J, l1: J, r: Relation<ValueOf<I>>,\n): [I, J] {\n    while (!equal(f0, l0) && !equal(f1, l1) && r(source(f0), source(f1))) {\n        f0 = successor(f0);\n        f1 = successor(f1);\n    }\n    return [f0, f1];\n}","const left = sequence([2, 4, 6, 8]);\nconst right = sequence([2, 4, 7, 8]);\nconst [a, b] = find_mismatch(begin(left), end(left), begin(right), end(right), eq);\n\nif (equal(a, end(left)) || equal(b, end(right))) {\n    print(\"No mismatch in the common prefix.\");\n} else {\n    const leftValue = source(a);\n    const rightValue = source(b);\n    print(\"First mismatch: \" + leftValue + \" and \" + rightValue);\n}"]; }
 
 function __find_mismatch_references() { return ["Elements of Programming, ch. 6, pp. 99–100."]; }
 
@@ -2883,42 +2939,52 @@ function __find_mismatch_usage() {
     const left = sequence([2, 4, 6, 8]);
     const right = sequence([2, 4, 7, 8]);
     const [a, b] = find_mismatch(begin(left), end(left), begin(right), end(right), eq);
-    if (equal(a, end(left)) || equal(b, end(right)))
+    if (equal(a, end(left)) || equal(b, end(right))) {
         print("No mismatch in the common prefix.");
-    else
-        print("First mismatch: " + source(a) + " and " + source(b));
+    }
+    else {
+        const leftValue = source(a);
+        const rightValue = source(b);
+        print("First mismatch: " + leftValue + " and " + rightValue);
+    }
 }
 
 function __find_mismatch_attributes() {
 }
 
-function __find_n_typescript() { return ["function find_n<I extends Iter<unknown>>(\n    f: I, n: number, x: ValueOf<I>,\n): [I, number] {\n    return find_if_n(f, n, value => value === x);\n}","const d = sequence([3, 7, 11, 7, 13]);\nconst [result, remaining] = find_n(begin(d), size(d), 7);\n\nif (remaining === 0) print(\"No matching element.\");\nelse print(\"Found \" + source(result) + \" with \" + remaining + \" elements remaining.\");"]; }
+function __find_n_typescript() { return ["function find_n<I extends Iter<unknown>>(\n    f: I, n: number, x: ValueOf<I>,\n): [I, number] {\n    return find_if_n(f, n, value => value === x);\n}","const d = sequence([3, 7, 11, 7, 13]);\nconst [result, remaining] = find_n(begin(d), size(d), 7);\n\nif (remaining === 0) {\n    print(\"No matching element.\");\n} else {\n    const value = source(result);\n    print(\"Found \" + value + \" with \" + remaining + \" elements remaining.\");\n}"]; }
 
 function __find_n_references() { return ["Elements of Programming, ch. 6, pp. 98–99 (adapted using find_if_n)."]; }
 
 function __find_n_usage() {
     const d = sequence([3, 7, 11, 7, 13]);
     const [result, remaining] = find_n(begin(d), size(d), 7);
-    if (remaining === 0)
+    if (remaining === 0) {
         print("No matching element.");
-    else
-        print("Found " + source(result) + " with " + remaining + " elements remaining.");
+    }
+    else {
+        const value = source(result);
+        print("Found " + value + " with " + remaining + " elements remaining.");
+    }
 }
 
 function __find_n_attributes() {
 }
 
-function __find_not_typescript() { return ["function find_not<I extends Iter<unknown>>(f: I, l: I, x: ValueOf<I>): I {\n    while (!equal(f, l) && source(f) === x) {\n        f = successor(f);\n    }\n    return f;\n}","const d = sequence([7, 7, 11, 7]);\nconst result = find_not(begin(d), end(d), 7);\n\nif (equal(result, end(d))) print(\"No differing element.\");\nelse print(\"First differing element: \" + source(result));"]; }
+function __find_not_typescript() { return ["function find_not<I extends Iter<unknown>>(f: I, l: I, x: ValueOf<I>): I {\n    while (!equal(f, l) && source(f) === x) {\n        f = successor(f);\n    }\n    return f;\n}","const d = sequence([7, 7, 11, 7]);\nconst result = find_not(begin(d), end(d), 7);\n\nif (equal(result, end(d))) {\n    print(\"No differing element.\");\n} else {\n    const value = source(result);\n    print(\"First differing element: \" + value);\n}"]; }
 
 function __find_not_references() { return ["Elements of Programming, ch. 6, p. 94 (companion implementation in eop.h)."]; }
 
 function __find_not_usage() {
     const d = sequence([7, 7, 11, 7]);
     const result = find_not(begin(d), end(d), 7);
-    if (equal(result, end(d)))
+    if (equal(result, end(d))) {
         print("No differing element.");
-    else
-        print("First differing element: " + source(result));
+    }
+    else {
+        const value = source(result);
+        print("First differing element: " + value);
+    }
 }
 
 function __find_not_attributes() {
@@ -2938,7 +3004,8 @@ function __find_subsequence_n_kmp_usage() {
         print("Subsequence not found");
     } else {
         print("Subsequence found at: ");
-        print(distance(begin(seq), it));
+        const offset = distance(begin(seq), it);
+        print(offset);
     }
 }
 
@@ -2946,7 +3013,7 @@ function __find_subsequence_n_kmp_attributes() {
 
 }
 
-function __find_subsequence_n_naive_typescript() { return ["function find_subsequence_n_naive<T>(f: Iter<T>, fn: number, s: Iter<T>, sn: number, r: Relation<T>): [Iter<T>, number] {\n    if (sn == 0) return [f, fn];\n\n    while (true) {\n        if (fn < sn) return [f, 0];\n\n        let tf = f;\n        let ts = s;\n        let n = sn;\n        while (true) {\n            if (n == 0) return [f, fn];\n            if ( ! r(source(tf), source(ts))) break;\n            --n;\n            ts = successor(ts);\n            tf = successor(tf);\n        }\n        --fn;\n        f = successor(f);\n    }\n\n    return [f, fn];\n}","const seq = sequence(array_from(\"Hello, World!\"), \"seq\");\nconst sub = sequence(array_from(\"????\"), \"sub\");\n\nconst r = find_subsequence_n_naive(begin(seq), size(seq), begin(sub), size(sub), eq);\nconst it = r[0];\nconst n = r[1];\n\nif (n == 0) {\n    print(\"Subsequence not found\");\n} else {\n    print(\"Subsequence found at: \");\n    print(distance(begin(seq), it));\n}"]; }
+function __find_subsequence_n_naive_typescript() { return ["function find_subsequence_n_naive<T>(f: Iter<T>, fn: number, s: Iter<T>, sn: number, r: Relation<T>): [Iter<T>, number] {\n    if (sn == 0) return [f, fn];\n\n    while (true) {\n        if (fn < sn) return [f, 0];\n\n        let tf = f;\n        let ts = s;\n        let n = sn;\n        while (true) {\n            if (n == 0) return [f, fn];\n            if ( ! r(source(tf), source(ts))) break;\n            --n;\n            ts = successor(ts);\n            tf = successor(tf);\n        }\n        --fn;\n        f = successor(f);\n    }\n\n    return [f, fn];\n}","const seq = sequence(array_from(\"Hello, World!\"), \"seq\");\nconst sub = sequence(array_from(\"????\"), \"sub\");\n\nconst r = find_subsequence_n_naive(begin(seq), size(seq), begin(sub), size(sub), eq);\nconst it = r[0];\nconst n = r[1];\n\nif (n == 0) {\n    print(\"Subsequence not found\");\n} else {\n    print(\"Subsequence found at: \");\n    const offset = distance(begin(seq), it);\n    print(offset);\n}"]; }
 
 function __find_subsequence_n_naive_usage() {
     const seq = sequence(array_from("Hello, World!"), "seq");
@@ -2959,14 +3026,15 @@ function __find_subsequence_n_naive_usage() {
     }
     else {
         print("Subsequence found at: ");
-        print(distance(begin(seq), it));
+        const offset = distance(begin(seq), it);
+        print(offset);
     }
 }
 
 function __find_subsequence_n_naive_attributes() {
 }
 
-function __find_subsequence_n_naive_1_typescript() { return ["function find_subsequence_n_naive_1<T>(f: Iter<T>, fn: number, s: Iter<T>, sn: number, r: Relation<T>): [Iter<T>, number] {\n    if (sn == 0) return [f, fn];\n\n    while (true) {\n        if (fn < sn) return [f, 0];\n\n        let tf = f;\n        let ts = s;\n        let n = sn;\n        while (true) {\n            if (n == 0) return [f, fn];\n            if ( ! r(source(tf), source(ts))) break;\n            --n;\n            ts = successor(ts);\n            tf = successor(tf);\n        }\n        let skip = 1;\n        if (n != sn) {\n            const eqf = predicate<T>(function eqf(x) { return r(x, source(tf)); });\n            const it = find_if(s, ts, eqf);\n\n            if (equal(it, ts)) {\n                skip = sn - n;\n            }\n        }\n        fn -= skip;\n        f = successor(f, skip);\n    }\n\n    return [f, fn];\n}","const seq = sequence(array_from(\"Until death it is all life\"), \"seq\");\n//var seq = sequence(array_from(\"Until dedead it is all life\"), \"seq\");\nconst sub = sequence(array_from(\"dead\"), \"sub\");\n\nconst r = find_subsequence_n_naive_1(begin(seq), size(seq), begin(sub), size(sub), eq);\nconst it = r[0];\nconst n = r[1];\n\nif (n == 0) {\n    print(\"Subsequence not found\");\n} else {\n    print(\"Subsequence found at: \");\n    print(distance(begin(seq), it));\n}"]; }
+function __find_subsequence_n_naive_1_typescript() { return ["function find_subsequence_n_naive_1<T>(f: Iter<T>, fn: number, s: Iter<T>, sn: number, r: Relation<T>): [Iter<T>, number] {\n    if (sn == 0) return [f, fn];\n\n    while (true) {\n        if (fn < sn) return [f, 0];\n\n        let tf = f;\n        let ts = s;\n        let n = sn;\n        while (true) {\n            if (n == 0) return [f, fn];\n            if ( ! r(source(tf), source(ts))) break;\n            --n;\n            ts = successor(ts);\n            tf = successor(tf);\n        }\n        let skip = 1;\n        if (n != sn) {\n            const eqf = predicate<T>(function eqf(x) { return r(x, source(tf)); });\n            const it = find_if(s, ts, eqf);\n\n            if (equal(it, ts)) {\n                skip = sn - n;\n            }\n        }\n        fn -= skip;\n        f = successor(f, skip);\n    }\n\n    return [f, fn];\n}","const seq = sequence(array_from(\"Until death it is all life\"), \"seq\");\n//var seq = sequence(array_from(\"Until dedead it is all life\"), \"seq\");\nconst sub = sequence(array_from(\"dead\"), \"sub\");\n\nconst r = find_subsequence_n_naive_1(begin(seq), size(seq), begin(sub), size(sub), eq);\nconst it = r[0];\nconst n = r[1];\n\nif (n == 0) {\n    print(\"Subsequence not found\");\n} else {\n    print(\"Subsequence found at: \");\n    const offset = distance(begin(seq), it);\n    print(offset);\n}"]; }
 
 function __find_subsequence_n_naive_1_usage() {
     const seq = sequence(array_from("Until death it is all life"), "seq");
@@ -2980,14 +3048,15 @@ function __find_subsequence_n_naive_1_usage() {
     }
     else {
         print("Subsequence found at: ");
-        print(distance(begin(seq), it));
+        const offset = distance(begin(seq), it);
+        print(offset);
     }
 }
 
 function __find_subsequence_n_naive_1_attributes() {
 }
 
-function __find_subsequence_naive_typescript() { return ["function find_subsequence_naive<T>(f: Iter<T>, l: Iter<T>, sf: Iter<T>, sl: Iter<T>, r: Relation<T>) {\n    if (equal(sf, sl)) return f;\n\n    while (true) {\n        let tf = f;\n        let ts = sf;\n        while (true) {\n            if (equal(tf, l)) return l;\n            if (equal(ts, sl)) return f;\n            if ( ! r(source(tf), source(ts))) break;\n            ts = successor(ts);\n            tf = successor(tf);\n        }\n        f = successor(f);\n    }\n    return f;\n}","const seq = sequence(array_from(\"Hello, World!\"), \"seq\", undefined, \"sll\"); // singly-linked list\nconst sub = sequence(array_from(\"????\"), \"sub\", undefined, \"sll\");\n\nconst it = find_subsequence_naive(begin(seq), end(seq), begin(sub), end(sub), eq);\n\nif (equal(it, end(seq))) {\n    print(\"Subsequence not found\");\n} else {\n    print(\"Subsequence found at: \");\n    print(distance(begin(seq), it));\n}"]; }
+function __find_subsequence_naive_typescript() { return ["function find_subsequence_naive<T>(f: Iter<T>, l: Iter<T>, sf: Iter<T>, sl: Iter<T>, r: Relation<T>) {\n    if (equal(sf, sl)) return f;\n\n    while (true) {\n        let tf = f;\n        let ts = sf;\n        while (true) {\n            if (equal(tf, l)) return l;\n            if (equal(ts, sl)) return f;\n            if ( ! r(source(tf), source(ts))) break;\n            ts = successor(ts);\n            tf = successor(tf);\n        }\n        f = successor(f);\n    }\n    return f;\n}","const seq = sequence(array_from(\"Hello, World!\"), \"seq\", undefined, \"sll\"); // singly-linked list\nconst sub = sequence(array_from(\"????\"), \"sub\", undefined, \"sll\");\n\nconst it = find_subsequence_naive(begin(seq), end(seq), begin(sub), end(sub), eq);\n\nif (equal(it, end(seq))) {\n    print(\"Subsequence not found\");\n} else {\n    print(\"Subsequence found at: \");\n    const offset = distance(begin(seq), it);\n    print(offset);\n}"]; }
 
 function __find_subsequence_naive_usage() {
     const seq = sequence(array_from("Hello, World!"), "seq", undefined, "sll"); // singly-linked list
@@ -2998,7 +3067,8 @@ function __find_subsequence_naive_usage() {
     }
     else {
         print("Subsequence found at: ");
-        print(distance(begin(seq), it));
+        const offset = distance(begin(seq), it);
+        print(offset);
     }
 }
 
@@ -3118,7 +3188,7 @@ function __partitioned_at_point_usage() {
 function __partitioned_at_point_attributes() {
 }
 
-function __potential_partition_point_typescript() { return ["function potential_partition_point<T>(f: Iter<T>, l: Iter<T>, p: Predicate<T>) {\n    const res = count_if_not_basis(f, l, p, f);\n    return res;\n}","const even = predicate(x => (x & 1) === 0);\nconst d = sequence(array_random(), \"d\", even);\nconst f = begin(d);\nconst l = end(d);\nconst m = potential_partition_point(f, l, even);\n\nprint(\"After p-partitioning the partition point would ocurr here:\");\nprint(distance(begin(d), m));\nprint(source(m));\n\nprint(\"Let's verify...\");\nconst p = partition_semistable(f, l, even);\nif (equal(m, p)) {\n    print(\"Yeah!\");\n} else {\n    print('Impossible, this line will never be executed.');\n}"]; }
+function __potential_partition_point_typescript() { return ["function potential_partition_point<T>(f: Iter<T>, l: Iter<T>, p: Predicate<T>) {\n    const res = count_if_not_basis(f, l, p, f);\n    return res;\n}","const even = predicate(x => (x & 1) === 0);\nconst d = sequence(array_random(), \"d\", even);\nconst f = begin(d);\nconst l = end(d);\nconst m = potential_partition_point(f, l, even);\n\nprint(\"After p-partitioning the partition point would ocurr here:\");\nconst offset = distance(begin(d), m);\nprint(offset);\nconst partitionValue = source(m);\nprint(partitionValue);\n\nprint(\"Let's verify...\");\nconst p = partition_semistable(f, l, even);\nif (equal(m, p)) {\n    print(\"Yeah!\");\n} else {\n    print('Impossible, this line will never be executed.');\n}"]; }
 
 function __potential_partition_point_references() { return ["Elements of Programming, ch. 11, p. 189, exercise 11.2 (companion implementation in eop.h)."]; }
 
@@ -3129,8 +3199,10 @@ function __potential_partition_point_usage() {
     const l = end(d);
     const m = potential_partition_point(f, l, even);
     print("After p-partitioning the partition point would ocurr here:");
-    print(distance(begin(d), m));
-    print(source(m));
+    const offset = distance(begin(d), m);
+    print(offset);
+    const partitionValue = source(m);
+    print(partitionValue);
     print("Let's verify...");
     const p = partition_semistable(f, l, even);
     if (equal(m, p)) {
@@ -3164,14 +3236,15 @@ function __some_usage() {
 function __some_attributes() {
 }
 
-function __max_element_typescript() { return ["function max_element<T>(f: Iter<T>, l: Iter<T>, r: Relation<T>) {\n    if (equal(f, l)) return l;\n\n    let m = f;\n    f = successor(f);\n\n    while ( ! equal(f, l)) {\n        if ( ! r(source(f), source(m))) {\n            m = f;\n        }\n        f = successor(f);\n    }\n    return m;\n}","const s = sequence(array_random(), \"s\");\n\nconst l = end(s);\n\nconst m = max_element(begin(s), l, lt);\nif ( ! equal(m, l)) {\n    print(\"The max element is: \" + source(m));\n} else {\n    print(\"An empty sequence has no max element\");\n}"]; }
+function __max_element_typescript() { return ["function max_element<T>(f: Iter<T>, l: Iter<T>, r: Relation<T>) {\n    if (equal(f, l)) return l;\n\n    let m = f;\n    f = successor(f);\n\n    while ( ! equal(f, l)) {\n        if ( ! r(source(f), source(m))) {\n            m = f;\n        }\n        f = successor(f);\n    }\n    return m;\n}","const s = sequence(array_random(), \"s\");\n\nconst l = end(s);\n\nconst m = max_element(begin(s), l, lt);\nif ( ! equal(m, l)) {\n    const maximum = source(m);\n    print(\"The max element is: \" + maximum);\n} else {\n    print(\"An empty sequence has no max element\");\n}"]; }
 
 function __max_element_usage() {
     const s = sequence(array_random(), "s");
     const l = end(s);
     const m = max_element(begin(s), l, lt);
     if (!equal(m, l)) {
-        print("The max element is: " + source(m));
+        const maximum = source(m);
+        print("The max element is: " + maximum);
     }
     else {
         print("An empty sequence has no max element");
@@ -3191,14 +3264,15 @@ function __max_element_attributes() {
     };
 }
 
-function __min_element_typescript() { return ["function min_element<T>(f: Iter<T>, l: Iter<T>, r: Relation<T>) {\n    if (equal(f, l)) return l;\n\n    let m = f;\n    f = successor(f);\n\n    while ( ! equal(f, l)) {\n        if (r(source(f), source(m))) {\n            m = f;\n        }\n        f = successor(f);\n    }\n    return m;\n}","const s = sequence(array_random(), \"s\");\nconst l = end(s);\n\nconst m = min_element(begin(s), l, lt);\nif ( ! equal(m, l)) {\n    print(\"The min element is: \" + source(m));\n} else {\n    print(\"An empty sequence has no min element\");\n}"]; }
+function __min_element_typescript() { return ["function min_element<T>(f: Iter<T>, l: Iter<T>, r: Relation<T>) {\n    if (equal(f, l)) return l;\n\n    let m = f;\n    f = successor(f);\n\n    while ( ! equal(f, l)) {\n        if (r(source(f), source(m))) {\n            m = f;\n        }\n        f = successor(f);\n    }\n    return m;\n}","const s = sequence(array_random(), \"s\");\nconst l = end(s);\n\nconst m = min_element(begin(s), l, lt);\nif ( ! equal(m, l)) {\n    const minimum = source(m);\n    print(\"The min element is: \" + minimum);\n} else {\n    print(\"An empty sequence has no min element\");\n}"]; }
 
 function __min_element_usage() {
     const s = sequence(array_random(), "s");
     const l = end(s);
     const m = min_element(begin(s), l, lt);
     if (!equal(m, l)) {
-        print("The min element is: " + source(m));
+        const minimum = source(m);
+        print("The min element is: " + minimum);
     }
     else {
         print("An empty sequence has no min element");
@@ -3218,14 +3292,15 @@ function __min_element_attributes() {
     };
 }
 
-function __min_element_nonempty_typescript() { return ["function min_element_nonempty<T>(f: Iter<T>, l: Iter<T>, r: Relation<T>) {\n    let m = f;\n    f = successor(f);\n\n    while ( ! equal(f, l)) {\n        if (r(source(f), source(m))) {\n            m = f;\n        }\n        f = successor(f);\n    }\n    return m;\n}","const s = sequence(array_random(), \"s\");\nconst l = end(s);\n\nconst m = min_element_nonempty(begin(s), l, lt);\nif ( ! equal(m, l)) {\n    print(\"The min element is: \" + source(m));\n}"]; }
+function __min_element_nonempty_typescript() { return ["function min_element_nonempty<T>(f: Iter<T>, l: Iter<T>, r: Relation<T>) {\n    let m = f;\n    f = successor(f);\n\n    while ( ! equal(f, l)) {\n        if (r(source(f), source(m))) {\n            m = f;\n        }\n        f = successor(f);\n    }\n    return m;\n}","const s = sequence(array_random(), \"s\");\nconst l = end(s);\n\nconst m = min_element_nonempty(begin(s), l, lt);\nif ( ! equal(m, l)) {\n    const minimum = source(m);\n    print(\"The min element is: \" + minimum);\n}"]; }
 
 function __min_element_nonempty_usage() {
     const s = sequence(array_random(), "s");
     const l = end(s);
     const m = min_element_nonempty(begin(s), l, lt);
     if (!equal(m, l)) {
-        print("The min element is: " + source(m));
+        const minimum = source(m);
+        print("The min element is: " + minimum);
     }
 }
 
@@ -3242,7 +3317,7 @@ function __min_element_nonempty_attributes() {
     };
 }
 
-function __min_value_typescript() { return ["function min_value<I extends Iter<unknown>>(f: I, l: I, r: Relation<ValueOf<I>>): I {\n    //precondition: ! equal(f, l)) return l;\n\n    let m = f;\n    f = successor(f);\n\n    while ( ! equal(f, l)) {\n        if (r(source(f), source(m))) {\n            m = f;\n        }\n        f = successor(f);\n    }\n    return m;\n}","const d = sequence(array_random(), \"d\");\n\nlet f = begin(d);\nconst l = end(d);\n\nf = min_value(f, l, lt);\nif ( ! equal(f, l)) {\n    print(\"The min element is: \" + source(f));\n}"]; }
+function __min_value_typescript() { return ["function min_value<I extends Iter<unknown>>(f: I, l: I, r: Relation<ValueOf<I>>): I {\n    //precondition: ! equal(f, l)) return l;\n\n    let m = f;\n    f = successor(f);\n\n    while ( ! equal(f, l)) {\n        if (r(source(f), source(m))) {\n            m = f;\n        }\n        f = successor(f);\n    }\n    return m;\n}","const d = sequence(array_random(), \"d\");\n\nlet f = begin(d);\nconst l = end(d);\n\nf = min_value(f, l, lt);\nif ( ! equal(f, l)) {\n    const minimum = source(f);\n    print(\"The min element is: \" + minimum);\n}"]; }
 
 function __min_value_usage() {
     const d = sequence(array_random(), "d");
@@ -3250,7 +3325,8 @@ function __min_value_usage() {
     const l = end(d);
     f = min_value(f, l, lt);
     if (!equal(f, l)) {
-        print("The min element is: " + source(f));
+        const minimum = source(f);
+        print("The min element is: " + minimum);
     }
 }
 
@@ -3416,7 +3492,7 @@ function __count_if_usage() {
 function __count_if_attributes() {
 }
 
-function __count_if_basis_typescript() { return ["function count_if_basis<T, U extends number | Iter<unknown>>(f: Iter<T>, l: Iter<T>, p: Predicate<T>, j: U) {\n    while ( ! equal(f, l)) {\n        if (p(source(f))) {\n            j = successor(j);\n        }\n        f = successor(f);\n    }\n    return j;\n}","const even = predicate(x => (x & 1) === 0);\nconst d = sequence(array_random(), \"d\", even);\nconst c = sequence(array_ascending(), \"c\");\n\nconst f = begin(d);\nconst l = end(d);\n\nlet j = begin(c);\nj = count_if_basis(f, l, even, j);\n\nprint(\"Even numbers: \");\nprint(distance(begin(c), j));"]; }
+function __count_if_basis_typescript() { return ["function count_if_basis<T, U extends number | Iter<unknown>>(f: Iter<T>, l: Iter<T>, p: Predicate<T>, j: U) {\n    while ( ! equal(f, l)) {\n        if (p(source(f))) {\n            j = successor(j);\n        }\n        f = successor(f);\n    }\n    return j;\n}","const even = predicate(x => (x & 1) === 0);\nconst d = sequence(array_random(), \"d\", even);\nconst c = sequence(array_ascending(), \"c\");\n\nconst f = begin(d);\nconst l = end(d);\n\nlet j = begin(c);\nj = count_if_basis(f, l, even, j);\n\nprint(\"Even numbers: \");\nconst offset = distance(begin(c), j);\nprint(offset);"]; }
 
 function __count_if_basis_references() { return ["Elements of Programming, ch. 6, p. 95 (count_if overloads)."]; }
 
@@ -3429,7 +3505,8 @@ function __count_if_basis_usage() {
     let j = begin(c);
     j = count_if_basis(f, l, even, j);
     print("Even numbers: ");
-    print(distance(begin(c), j));
+    const offset = distance(begin(c), j);
+    print(offset);
 }
 
 function __count_if_basis_attributes() {
@@ -3452,7 +3529,7 @@ function __count_if_not_usage() {
 function __count_if_not_attributes() {
 }
 
-function __count_if_not_basis_typescript() { return ["function count_if_not_basis<T, U extends number | Iter<unknown>>(f: Iter<T>, l: Iter<T>, p: Predicate<T>, j: U) {\n    while ( ! equal(f, l)) {\n        if ( ! p(source(f))) {\n            j = successor(j);\n        }\n        f = successor(f);\n    }\n    return j;\n}","const even = predicate(x => (x & 1) === 0);\nconst d = sequence(array_random(), \"d\", even);\nconst c = sequence(array_ascending(), \"c\");\n\nconst f = begin(d);\nconst l = end(d);\n\nlet j = begin(c);\nj = count_if_not_basis(f, l, even, j);\n\nprint(\"Odd numbers: \");\nprint(distance(begin(c), j));"]; }
+function __count_if_not_basis_typescript() { return ["function count_if_not_basis<T, U extends number | Iter<unknown>>(f: Iter<T>, l: Iter<T>, p: Predicate<T>, j: U) {\n    while ( ! equal(f, l)) {\n        if ( ! p(source(f))) {\n            j = successor(j);\n        }\n        f = successor(f);\n    }\n    return j;\n}","const even = predicate(x => (x & 1) === 0);\nconst d = sequence(array_random(), \"d\", even);\nconst c = sequence(array_ascending(), \"c\");\n\nconst f = begin(d);\nconst l = end(d);\n\nlet j = begin(c);\nj = count_if_not_basis(f, l, even, j);\n\nprint(\"Odd numbers: \");\nconst offset = distance(begin(c), j);\nprint(offset);"]; }
 
 function __count_if_not_basis_references() { return ["Elements of Programming, ch. 6, p. 95 (negated count described in the text; implementation in eop.h)."]; }
 
@@ -3465,7 +3542,8 @@ function __count_if_not_basis_usage() {
     let j = begin(c);
     j = count_if_not_basis(f, l, even, j);
     print("Odd numbers: ");
-    print(distance(begin(c), j));
+    const offset = distance(begin(c), j);
+    print(offset);
 }
 
 function __count_if_not_basis_attributes() {

@@ -16,7 +16,8 @@ function __find_backward_if_usage() {
 
     const it = find_backward_if(f, l, even);
     if ( ! equal(it, f)) {
-        print(source(predecessor(it)));
+        const value = source(predecessor(it));
+        print(value);
     }
 
 

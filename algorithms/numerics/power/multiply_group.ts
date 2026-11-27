@@ -56,10 +56,14 @@ function __multiply_group_usage() {
     }
 
     const m1 = new SquareMatrix(2, [1, 3, 7, 5]);
-    print(m1.str());
+    const m1Text = m1.str();
+    print(m1Text);
 
     const m2 = multiply_group(-5, m1);
-    if (typeof m2 !== "number") print(m2.str());
+    if (typeof m2 !== "number") {
+        const m2Text = m2.str();
+        print(m2Text);
+    }
 
 
 

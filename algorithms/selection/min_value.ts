@@ -21,7 +21,8 @@ function __min_value_usage() {
 
     f = min_value(f, l, lt);
     if ( ! equal(f, l)) {
-        print("The min element is: " + source(f));
+        const minimum = source(f);
+        print("The min element is: " + minimum);
     }
 
 }

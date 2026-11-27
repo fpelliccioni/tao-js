@@ -23,7 +23,8 @@ function __selection_sort_classic_usage() {
         }
         return true;
     }
-    print(is_sorted(begin(s), end(s), lt));
+    const sorted = is_sorted(begin(s), end(s), lt);
+    print(sorted);
 
 
 }

@@ -22,7 +22,8 @@ function __count_if_basis_usage() {
     j = count_if_basis(f, l, even, j);
 
     print("Even numbers: ");
-    print(distance(begin(c), j));
+    const offset = distance(begin(c), j);
+    print(offset);
 }
 
 function __count_if_basis_attributes() {

@@ -8,10 +8,12 @@ function is_prime(n: number) {
 
 function __is_prime_usage() {
     let n = random_int();
-    print(is_prime(n));
+    const prime = is_prime(n);
+    print(prime);
 
     n = 13;
-    print(is_prime(n));
+    const nextPrime = is_prime(n);
+    print(nextPrime);
 }
 
 function __is_prime_attributes() {

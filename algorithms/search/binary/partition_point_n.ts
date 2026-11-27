@@ -22,7 +22,8 @@ function __partition_point_n_usage() {
     const d = sequence([1, 5, 1, 1, 3, 3, 3, 7, 3, 2, 6, 4], "d", even);
 
     const p = partition_point_n(begin(d), size(d), even);
-    print('partition point: ' + source(p));
+    const partitionValue = source(p);
+    print('partition point: ' + partitionValue);
 
 }
 

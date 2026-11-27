@@ -15,7 +15,8 @@ function __partition_stable_with_buffer_0_usage() {
 
     const p = partition_stable_with_buffer_0(begin(d), end(d), even, begin(buf));
     if ( ! equal(p, end(d))) {
-        print('partition point: ' + source(p));
+        const partitionValue = source(p);
+        print('partition point: ' + partitionValue);
     }
 }
 
