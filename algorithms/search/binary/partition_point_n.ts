@@ -17,7 +17,6 @@ function partition_point_n<I extends Iter<unknown>>(f: I, n: number, p: Predicat
 }
 
 function __partition_point_n_usage() {
-    const even = predicate(x => (x & 1) === 0);
 
     const d = sequence([1, 5, 1, 1, 3, 3, 3, 7, 3, 2, 6, 4], "d", even);
 

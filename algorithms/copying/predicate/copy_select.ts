@@ -12,11 +12,11 @@ function copy_select<T, U>(f: Iter<T>, l: Iter<T>, o: Iter<U>, p: Predicate<Iter
 }
 
 function __copy_select_usage() {
-    const even = predicate<Iter<number>>(function even(x) { return (source(x) & 1) == 0; });
+    const evenAt = predicate_source(even);
     const s = sequence(array_random());
     const z = sequence(array_all_equal(size(s), "-"));
 
-    copy_select(begin(s), end(s), begin(z), even);
+    copy_select(begin(s), end(s), begin(z), evenAt);
 
     print(z);
 }

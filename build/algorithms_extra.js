@@ -197,7 +197,7 @@ fill: [ 'writing', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithm
 fill_n: [ 'writing', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/writing/fill_n.ts' ],
 };}
 
-function __lab_types_declarations() { return ["// Typed view of the opaque objects supplied by the lab runtime.\ndeclare const iteratorElement: unique symbol;\ndeclare const sequenceElement: unique symbol;\ndeclare const iteratorKind: unique symbol;\ndeclare const sequenceKind: unique symbol;\n\ntype SequenceKind = \"array\" | \"sll\" | \"dll\" | \"stream\";\ntype SequenceInputKind = SequenceKind | \"list\" | \"double\" | \"buffer\";\ntype SequenceKindOf<K extends SequenceInputKind> =\n    K extends \"list\" ? \"sll\" : K extends \"double\" ? \"dll\" : K extends \"buffer\" ? \"stream\" : K;\ntype Readable<T> = { readonly [iteratorElement]: T };\ntype Iter<T, K extends SequenceKind = SequenceKind> = Readable<T> & { readonly [iteratorKind]: K };\ntype Seq<T, K extends SequenceKind = SequenceKind> = {\n    readonly [sequenceElement]: T;\n    readonly [sequenceKind]: K;\n};\ntype ForwardIterator<T = unknown> = Iter<T, Exclude<SequenceKind, \"stream\">>;\ntype BidirectionalIterator<T = unknown> = Iter<T, \"array\" | \"dll\">;\ntype ValueOf<I extends Readable<unknown>> = I[typeof iteratorElement];\ntype Predicate<T> = (value: T) => boolean;\n\ntype Relation<T> = (left: T, right: T) => boolean;\ntype Operation<T> = (left: T, right: T) => T;\ntype IteratorPermutation<T> = (iterator: Iter<T>) => Iter<T>;\n\ndeclare function equal<T, U>(f: Iter<T>, l: Iter<U>): boolean;\n// Unannotated lambdas in numeric examples default to number. Typed callbacks infer T.\ndeclare function predicate<T = number>(fn: Predicate<T>): Predicate<T>;\ndeclare function relation<T = number>(fn: Relation<T>): Relation<T>;\ndeclare function array_random(n?: number, from?: number, to?: number): number[];\ndeclare function array_all_equal<T = number>(n?: number, value?: T): T[];\ndeclare function array_ascending(n?: number, from?: number): number[];\ndeclare function array_descending(n?: number, from?: number): number[];\ndeclare function array_from(value: string): string[];\ndeclare function random_int(from?: number, to?: number): number;\ndeclare function sequence<T>(values: readonly T[], name?: string, color?: Relation<T> | Predicate<T>, type?: undefined, drawChart?: boolean, drawTree?: boolean): Seq<T, \"array\">;\ndeclare function sequence<T, K extends SequenceInputKind>(values: readonly T[], name: string | undefined, color: Relation<T> | Predicate<T> | undefined, type: K, drawChart?: boolean, drawTree?: boolean): Seq<T, SequenceKindOf<K>>;\ndeclare function begin<T, K extends SequenceKind>(data: Seq<T, K>): Iter<T, K>;\ndeclare function end<T, K extends SequenceKind>(data: Seq<T, K>): Iter<T, K>;\ndeclare function source<T>(it: Iter<T>): T;\ndeclare function sink<T, U>(it: Iter<T>, value: U): void;\ndeclare function successor<I extends Iter<unknown>>(it: I, n?: number): I;\ndeclare function successor<T extends number | Iter<unknown>>(it: T, n?: number): T;\ndeclare function predecessor<I extends Iter<unknown>>(it: I, n?: number): I;\ndeclare function predecessor<T>(it: Iter<T>, n?: number): Iter<T>;\ndeclare function distance<T, U>(f: Iter<T>, l: Iter<U>): number;\ndeclare function size<T>(data: Seq<T>): number;\ndeclare function capacity<T>(data: Seq<T>): number;\ndeclare function print<T>(value: T): void;\ndeclare function iter_swap<T, U>(a: Iter<T>, b: Iter<U>): void;\ndeclare function exchange_values<T, U>(a: Iter<T>, b: Iter<U>): void;\ndeclare function call<T>(r: Relation<T>, f: Iter<T>, l: Iter<T>): boolean;\ndeclare function bind<T>(r: Relation<T>, value: T, arg?: number): Predicate<T>;\ndeclare function eq<T>(a: T, b: T): boolean;\ndeclare function lt<T>(a: T, b: T): boolean;\ndeclare function gt<T>(a: T, b: T): boolean;\ndeclare function lte<T>(a: T, b: T): boolean;\ndeclare function gte<T>(a: T, b: T): boolean;\ndeclare function digitSum(value: number): number;\ndeclare function half(n: number): number;\ndeclare function half_nonnegative(n: number): number;\ndeclare function twice(n: number): number;\ndeclare function odd(n: number): boolean;\ndeclare function even(n: number): boolean;\ndeclare function complement<T>(r: Relation<T>): Relation<T>;\ndeclare function converse<T>(r: Relation<T>): Relation<T>;\ndeclare function complement_of_converse<T>(r: Relation<T>): Relation<T>;\ndeclare function source_move<T>(it: Iter<T>): T;\ndeclare function sink_move<T, U>(it: Iter<T>, value: U): void;\ndeclare function sink_move_from_it<T, U>(target: Iter<T>, source: Iter<U>): void;\ndeclare function move_obj<T>(value: T): T;\ndeclare function push_back<T, K extends SequenceKind>(seq: Seq<T, K>, value: NoInfer<T>): Seq<T, K>;\ndeclare function swap_iters<T, U>(a: Iter<T>, b: Iter<U>): [Iter<U>, Iter<T>];\ndeclare function register_move_distance(distance: number): void;\ndeclare function register_custom_stat(name: string): void;\ndeclare function increment_custom_stat(name: string): void;\ndeclare function increment_swap_stat(): void;\ndeclare function increment_assignment_stat(): void;\ndeclare function track_variable<T>(value: T, name: string | number): void;\ndeclare function snapshot(): void;\ndeclare const sequenceTree: typeof sequence;\ndeclare const sequenceChart: typeof sequence;\n\ndeclare function binary_operation<T>(op: Operation<T>): Operation<T>;\ndeclare function unary_operation<T>(op: (value: T) => T): (value: T) => T;\ndeclare function add<T>(a: T, b: T): T;\ndeclare function multiply<T>(a: T, b: T): T;\ndeclare function negate<T>(value: T): T;\ndeclare function multiplicative_identity<T>(value: T): T;\ndeclare function multiplicative_inverse<T>(value: T): T;\ndeclare function identity_element<T>(op: Operation<T>, value: T): T;\ndeclare function inverse_operation<T>(op: Operation<T>, value: T): T;\ndeclare const identity_elements: Record<string, (value: number) => number>;\ndeclare class SquareMatrix {\n    constructor(n: number, data?: number[]);\n    str(): string;\n    multiplicative_inverse(): SquareMatrix | undefined;\n}\n\ndeclare function predicate_source<T>(p: Predicate<T>): Predicate<Iter<T>>;\ndeclare function relation_source<T>(r: Relation<T>): Relation<Iter<T>>;\n\n// The corresponding examples supply these helpers in their usage code.\ndeclare function modulo_multiply(modulus: number): Operation<number>;\ndeclare function modulo_multiply_c(modulus: number): Operation<number>;\ndeclare function are_coprime(m: number, n: number): boolean;\ndeclare function cycle_to_internal<T, U>(i: Iter<T>, k: Iter<T>, permutation: IteratorPermutation<T>, buffer: Iter<U>): void;\ndeclare function linear_insert<T>(f: Iter<T>, c: Iter<T>, r: Relation<T>): void;\ndeclare function linear_insert_backward<T>(c: Iter<T>, l: Iter<T>, r: Relation<T>): void;\ndeclare function shift_down<T>(f: Iter<T>, i: number, n: number): void;\ndeclare function rotate_forward_step<T>(ref: {f: Iter<T>; m: Iter<T>}, l: Iter<T>): void;\ndeclare function k_rotate_from_permutation_random_access<T>(f: Iter<T>, m: Iter<T>, l: Iter<T>): IteratorPermutation<T>;\ndeclare function push_heap_gnu_helper<T>(f: Iter<T>, hole: number, top: number, value: T, r: Relation<T>): void;\ndeclare function parent(index: number): number;\n\ndeclare function pre(condition: () => boolean, message?: string): void;\ndeclare function post(condition: () => boolean, message?: string): void;\ndeclare function is_partitioned_n<T>(first: Iter<T>, count: number, test: Predicate<T>): boolean;\n\ndeclare function lexicographical_compare<I extends Iter<unknown>, J extends Iter<ValueOf<I>>>(f0: I, l0: I, f1: J, l1: J, r: Relation<ValueOf<I>>): boolean;\ndeclare function lexicographical_equal<I extends Iter<unknown>, J extends Iter<ValueOf<I>>>(f0: I, l0: I, f1: J, l1: J): boolean;\ndeclare function lexicographical_equivalent<I extends Iter<unknown>, J extends Iter<ValueOf<I>>>(f0: I, l0: I, f1: J, l1: J, r: Relation<ValueOf<I>>): boolean;\ndeclare function lexicographical_less<I extends Iter<unknown>, J extends Iter<ValueOf<I>>>(f0: I, l0: I, f1: J, l1: J): boolean;\ndeclare function copy<T, U>(f: Iter<T>, l: Iter<T>, o: Iter<U>): Iter<U, SequenceKind>;\ndeclare function copy_backward<T, U>(f: Iter<T>, l: Iter<T>, o: Iter<U>): Iter<U, SequenceKind>;\ndeclare function copy_backward_n<T, U>(l: Iter<T>, n: number, o: Iter<U>): [Iter<T>, Iter<U>];\ndeclare function copy_bounded<T, U>(f: Iter<T>, l: Iter<T>, fo: Iter<U>, lo: Iter<U>): [Iter<T>, Iter<U>];\ndeclare function copy_n<T, U>(f: Iter<T>, n: number, o: Iter<U>): [Iter<T>, Iter<U>];\ndeclare function move_backward<T, U>(f: Iter<T>, l: Iter<T>, o: Iter<U>): Iter<U, SequenceKind>;\ndeclare function reverse_copy<T, U>(f: Iter<T>, l: Iter<T>, o: Iter<U>): Iter<U, SequenceKind>;\ndeclare function reverse_copy_backward<T, U>(f: Iter<T>, l: Iter<T>, o: Iter<U>): Iter<U, SequenceKind>;\ndeclare function reverse_copy_backward_n<T, U>(f: Iter<T>, n: number, o: Iter<U>): [Iter<T>, Iter<U>];\ndeclare function reverse_copy_n<T, U>(l: Iter<T>, n: number, o: Iter<U>): [Iter<T>, Iter<U>];\ndeclare function combine_copy<T, U>(f: Iter<T>, l: Iter<T>, f2: Iter<T>, l2: Iter<T>, o: Iter<U>, r: Relation<Iter<T>>): Iter<U, SequenceKind>;\ndeclare function combine_copy_backward<T, U>(f: Iter<T>, l: Iter<T>, f2: Iter<T>, l2: Iter<T>, o: Iter<U>, r: Relation<Iter<T>>): Iter<U, SequenceKind>;\ndeclare function combine_copy_backward_n<T, U>(l: Iter<T>, n: number, l2: Iter<T>, n2: number, o: Iter<U>, r: Relation<Iter<T>>): (Iter<T, SequenceKind> | Iter<U, SequenceKind>)[];\ndeclare function combine_copy_n<T, U>(f: Iter<T>, n: number, f2: Iter<T>, n2: number, o: Iter<U>, r: Relation<Iter<T>>): (Iter<T, SequenceKind> | Iter<U, SequenceKind>)[];\ndeclare function copy_if<T, U>(f: Iter<T>, l: Iter<T>, o: Iter<U>, p: Predicate<T>): Iter<U, SequenceKind>;\ndeclare function copy_if_n<T, U>(f: Iter<T>, n: number, o: Iter<U>, p: Predicate<T>): [Iter<T, SequenceKind>, Iter<U, SequenceKind>];\ndeclare function copy_select<T, U>(f: Iter<T>, l: Iter<T>, o: Iter<U>, p: Predicate<Iter<T>>): Iter<U, SequenceKind>;\ndeclare function copy_select_n<T, U>(f: Iter<T>, n: number, o: Iter<U>, p: Predicate<Iter<T>>): [Iter<T>, Iter<U>];\ndeclare function merge_copy<T, U>(f: Iter<T>, l: Iter<T>, f2: Iter<T>, l2: Iter<T>, o: Iter<U>, r: Relation<T>): Iter<U, SequenceKind>;\ndeclare function merge_copy_backward<T, U>(f: Iter<T>, l: Iter<T>, f2: Iter<T>, l2: Iter<T>, o: Iter<U>, r: Relation<T>): Iter<U, SequenceKind>;\ndeclare function partition_copy<T, U>(f: Iter<T>, l: Iter<T>, u: Iter<U>, t: Iter<U>, p: Predicate<T>): Iter<U, SequenceKind>[];\ndeclare function partition_copy_n<T, U>(f: Iter<T>, n: number, u: Iter<U>, t: Iter<U>, p: Predicate<T>): (Iter<T, SequenceKind> | Iter<U, SequenceKind>)[];\ndeclare function split_copy<T, U>(f: Iter<T>, l: Iter<T>, u: Iter<U>, t: Iter<U>, p: Predicate<Iter<T>>): Iter<U, SequenceKind>[];\ndeclare function split_copy_n<T, U>(f: Iter<T>, n: number, u: Iter<U>, t: Iter<U>, p: Predicate<Iter<T>>): (Iter<T, SequenceKind> | Iter<U, SequenceKind>)[];\ndeclare function gcd(a: number, b: number): number;\ndeclare function gcd0(a: number, b: number): number;\ndeclare function gcd1(a: number, b: number): number;\ndeclare function gcd2(a: number, b: number): number;\ndeclare function gcd3(a: number, b: number): number;\ndeclare function stein_gcd(a: number, b: number): number;\ndeclare function stein_gcd_nonnegative(a: number, b: number): number;\ndeclare function divides(i: number, n: number): boolean;\ndeclare function integer_sqrt(n: number): number;\ndeclare function integer_sqrt_recursive(n: number): number;\ndeclare function smallest_divisor(n: number): number;\ndeclare function multiply0(n: number, a: number): number;\ndeclare function multiply1(n: number, a: number): number;\ndeclare function multiply2(n: number, a: number): number;\ndeclare function multiply3(n: number, a: number): number;\ndeclare function multiply4(n: number, a: number): number;\ndeclare function multiply_accumulate0(r: number, n: number, a: number): number;\ndeclare function multiply_accumulate1(r: number, n: number, a: number): number;\ndeclare function multiply_accumulate2(r: number, n: number, a: number): number;\ndeclare function multiply_accumulate3(r: number, n: number, a: number): number;\ndeclare function multiply_accumulate4(r: number, n: number, a: number): number;\ndeclare function multiply_accumulate_semigroup<T>(r: T, n: number, a: T): T;\ndeclare function multiply_group<T>(n: number, a: T): 0 | T;\ndeclare function multiply_monoid<T>(n: number, a: T): 0 | T;\ndeclare function multiply_semigroup<T>(n: number, a: T): T;\ndeclare function power<T>(a: T, n: number, op: Operation<T>): T;\ndeclare function power_accumulate_semigroup<T>(r: T, a: T, n: number, op: Operation<T>): T;\ndeclare function power_accumulate_semigroup0<T>(r: T, a: T, n: number): T;\ndeclare function power_group<T>(a: T, n: number, op: Operation<T>): T;\ndeclare function power_group0<T>(a: T, n: number): T;\ndeclare function power_monoid<T>(a: T, n: number, op: Operation<T>): T;\ndeclare function power_monoid0<T>(a: T, n: number): T;\ndeclare function power_semigroup<T>(a: T, n: number, op: Operation<T>): T;\ndeclare function power_semigroup0<T>(a: T, n: number): T;\ndeclare function fermat_test(n: number, witness: number): boolean;\ndeclare function is_charmichael(n: number): boolean;\ndeclare function is_charmichael0(n: number): boolean;\ndeclare function is_charmichael1(n: number): boolean;\ndeclare function is_prime(n: number): boolean;\ndeclare function miller_rabin_test(n: number, q: number, k: number, w: number): boolean;\ndeclare function multiplicative_inverse_fermat(a: number, p: number): number;\ndeclare function largest_doubling(a: number, b: number): number;\ndeclare function quotient(a: number, b: number): number;\ndeclare function quotient_remainder(a: number, b: number): number[];\ndeclare function remainder(a: number, b: number): number;\ndeclare function remainder_fast0(a: number, b: number): number;\ndeclare function remainder_fast1(a: number, b: number): number;\ndeclare function remainder_fibonacci(a: number, b: number): number;\ndeclare function remainder_slow(a: number, b: number): number;\ndeclare function mark_sieve(f: Iter<number | string>, l: Iter<number | string>, factor: number): void;\ndeclare function mark_sieve_n(f: Iter<number | string>, n: number, factor: number): void;\ndeclare function print_sieve(f: Iter<number | string>, n: number): void;\ndeclare function sift(f: Iter<number | string>, n: number): void;\ndeclare function sift0(f: Iter<number | string>, n: number): void;\ndeclare function sift1(f: Iter<number | string>, n: number): void;\ndeclare function insertion_sort<T>(f: Iter<T>, l: Iter<T>, r: Relation<T>): void;\ndeclare function insertion_sort_backward<T>(f: Iter<T>, l: Iter<T>, r: Relation<T>): void;\ndeclare function insertion_sort_classic<T>(f: Iter<T>, l: Iter<T>, r: Relation<T>): void;\ndeclare function insertion_sort_classic_0<T>(f: Iter<T>, l: Iter<T>, r: Relation<T>): void;\ndeclare function insertion_sort_classic_1<T>(f: Iter<T>, l: Iter<T>, r: Relation<T>): void;\ndeclare function insertion_sort_classic_2<T>(f: Iter<T>, l: Iter<T>, r: Relation<T>): void;\ndeclare function insertion_sort_classic_3<T>(f: Iter<T>, l: Iter<T>, r: Relation<T>): void;\ndeclare function insertion_sort_suffix_nonempty<T>(f: Iter<T>, l: Iter<T>, r: Relation<T>): void;\ndeclare function linear_insert_unguarded<T>(c: Iter<T>, r: Relation<T>): Iter<T, SequenceKind>;\ndeclare function selection_sort_classic<T>(f: Iter<T>, l: Iter<T>, r: Relation<T>): void;\ndeclare function selection_sort_stable<T>(f: Iter<T>, l: Iter<T>, r: Relation<T>): void;\ndeclare function sort3<T>(x: Iter<T>, y: Iter<T>, z: Iter<T>, c: Relation<T>): number;\ndeclare function cycle_from<T>(i: Iter<T>, f: IteratorPermutation<T>): void;\ndeclare function cycle_to<T>(i: Iter<T>, f: IteratorPermutation<T>): void;\ndeclare function cycle_to_2n_1<T>(i: Iter<T>, f: IteratorPermutation<T>): void;\ndeclare function cycle_to_recursive<T>(i: Iter<T>, f: IteratorPermutation<T>): void;\ndeclare function reverse<T>(f: Iter<T>, l: Iter<T>): void;\ndeclare function reverse_bidirectional<T>(f: Iter<T>, l: Iter<T>): void;\ndeclare function reverse_n_adaptive<T, U>(f_i: Iter<T>, n_i: number, f_b: Iter<U>, n_b: number): Iter<T>;\ndeclare function reverse_n_forward<T>(f: Iter<T>, n: number): Iter<T>;\ndeclare function reverse_n_indexed<T>(f: Iter<T>, n: number): void;\ndeclare function reverse_n_with_buffer<T, U>(f_i: Iter<T>, n: number, f_b: Iter<U>): Iter<T, SequenceKind>;\ndeclare function rotate_bidirectional<T>(f: Iter<T>, m: Iter<T>, l: Iter<T>): void;\ndeclare function rotate_cycles<T>(f: Iter<T>, m: Iter<T>, l: Iter<T>, from: IteratorPermutation<T>): Iter<T, SequenceKind>;\ndeclare function rotate_forward<T>(f: Iter<T>, m: Iter<T>, l: Iter<T>): Iter<T, SequenceKind>;\ndeclare function rotate_random_access_nontrivial<T>(f: Iter<T>, m: Iter<T>, l: Iter<T>): Iter<T, SequenceKind>;\ndeclare function rotate_right_by_one<T>(f: Iter<T>, l: Iter<T>): void;\ndeclare function rotate_right_by_one_nonempty<T>(f: Iter<T>, l: Iter<T>): void;\ndeclare function shift_right_by_one<T>(f: Iter<T>, l: Iter<T>): void;\ndeclare function shift_right_while<T>(f: Iter<T>, l: Iter<T>, p: Predicate<T>): Iter<T, SequenceKind>;\ndeclare function shift_right_while_nonempty<T>(f: Iter<T>, l: Iter<T>, p: Predicate<T>): Iter<T, SequenceKind>;\ndeclare function shift_right_while_unguarded<T>(l: Iter<T>, p: Predicate<T>): Iter<T, SequenceKind>;\ndeclare function is_heap_until_n<T>(f: Iter<T>, n: number, r: Relation<T>): number;\ndeclare function is_heap_until_n_0<T>(f: Iter<T>, n: number, r: Relation<T>): number;\ndeclare function make_heap_n<T>(f: Iter<T>, n: number): void;\ndeclare function make_heap_n_naive_0<T>(f: Iter<T>, n: number): void;\ndeclare function make_heap_n_naive_1<T>(f: Iter<T>, n: number): void;\ndeclare function push_heap_gnu_0<T>(f: Iter<T>, l: Iter<T>, r: Relation<T>): void;\ndeclare function push_heap_gnu_1<T>(f: Iter<T>, l: Iter<T>, r: Relation<T>): void;\ndeclare function push_heap_n<T>(f: Iter<T>, n: number, r: Relation<T>): void;\ndeclare function partition_semistable<T>(f: Iter<T>, l: Iter<T>, p: Predicate<T>): Iter<T, SequenceKind>;\ndeclare function partition_semistable_1<T>(f: Iter<T>, l: Iter<T>, p: Predicate<T>): Iter<T, SequenceKind>;\ndeclare function partition_semistable_nonempty<T>(f: Iter<T>, l: Iter<T>, p: Predicate<T>): void;\ndeclare function partition_stable_forward<T>(f: Iter<T>, l: Iter<T>, p: Predicate<T>): Iter<T, SequenceKind>;\ndeclare function partition_stable_with_buffer_0<T>(f: Iter<T>, l: Iter<T>, p: Predicate<T>, b: Iter<T>): Iter<T, SequenceKind>;\ndeclare function add_to_counter<I extends ForwardIterator>(f: I, l: I, op: Operation<ValueOf<I>>, x: ValueOf<I>, z: ValueOf<I>): ValueOf<I>;\ndeclare function reduce<I extends Iter<unknown>>(f: I, l: I, op: Operation<ValueOf<I>>, z: ValueOf<I>): ValueOf<I>;\ndeclare function reduce_balanced<I extends Iter<unknown>>(f: I, l: I, op: Operation<ValueOf<I>>, z: ValueOf<I>): ValueOf<I>;\ndeclare function reduce_nonempty<I extends Iter<unknown>>(f: I, l: I, op: Operation<ValueOf<I>>): ValueOf<I>;\ndeclare function reduce_nonzeroes<I extends Iter<unknown>>(f: I, l: I, op: Operation<ValueOf<I>>, z: ValueOf<I>): ValueOf<I>;\ndeclare function equal_range<I extends ForwardIterator>(f: I, n: number, a: ValueOf<I>, r: Relation<ValueOf<I>>): [I, I];\ndeclare function lower_bound_n<I extends ForwardIterator>(f: I, n: number, a: ValueOf<I>, r: Relation<ValueOf<I>>): I;\ndeclare function partition_point_n<I extends Iter<unknown>>(f: I, n: number, p: Predicate<ValueOf<I>>): I;\ndeclare function partition_point_n_forward<T>(f: Iter<T>, n: number, p: Predicate<T>): [Iter<T>, number];\ndeclare function upper_bound_n<I extends Iter<unknown>>(f: I, n: number, a: ValueOf<I>, r: Relation<ValueOf<I>>): I;\ndeclare function all<I extends Iter<unknown>>(f: I, l: I, p: Predicate<ValueOf<I>>): boolean;\ndeclare function all_n<I extends Iter<unknown>>(f: I, n: number, p: Predicate<ValueOf<I>>): boolean;\ndeclare function find<I extends Iter<unknown>>(f: I, l: I, x: ValueOf<I>): I;\ndeclare function find_adjacent_mismatch<I extends Iter<unknown>>(f: I, l: I, r: Relation<ValueOf<I>>): I;\ndeclare function find_adjacent_mismatch_forward<I extends ForwardIterator>(f: I, l: I, r: Relation<ValueOf<I>>): I;\ndeclare function find_backward_if<I extends BidirectionalIterator>(f: I, l: I, p: Predicate<ValueOf<I>>): I;\ndeclare function find_if<I extends Iter<unknown>>(f: I, l: I, p: Predicate<ValueOf<I>>): I;\ndeclare function find_if_n<I extends Iter<unknown>>(f: I, n: number, p: Predicate<ValueOf<I>>): [I, number];\ndeclare function find_if_not<I extends Iter<unknown>>(f: I, l: I, p: Predicate<ValueOf<I>>): I;\ndeclare function find_if_not_n<I extends Iter<unknown>>(f: I, n: number, p: Predicate<ValueOf<I>>): [I, number];\ndeclare function find_if_not_unguarded<I extends Iter<unknown>>(f: I, p: Predicate<ValueOf<I>>): I;\ndeclare function find_if_unguarded<I extends Iter<unknown>>(f: I, p: Predicate<ValueOf<I>>): I;\ndeclare function find_mismatch<I extends Iter<unknown>, J extends Iter<ValueOf<I>>>(f0: I, l0: I, f1: J, l1: J, r: Relation<ValueOf<I>>): [I, J];\ndeclare function find_mismatch_bounded_n<I extends Iter<unknown>, J extends Iter<ValueOf<I>>>(f0: I, l0: I, f1: J, n1: number, r: Relation<ValueOf<I>>): [left: I, right: J, remainingRight: number];\ndeclare function find_mismatch_n<I extends Iter<unknown>, J extends Iter<ValueOf<I>>>(f0: I, n0: number, f1: J, n1: number, r: Relation<ValueOf<I>>): [left: I, right: J, remainingLeft: number, remainingRight: number];\ndeclare function find_mismatch_n_bounded<I extends Iter<unknown>, J extends Iter<ValueOf<I>>>(f0: I, n0: number, f1: J, l1: J, r: Relation<ValueOf<I>>): [left: I, right: J, remainingLeft: number];\ndeclare function find_n<I extends Iter<unknown>>(f: I, n: number, x: ValueOf<I>): [I, number];\ndeclare function find_not<I extends Iter<unknown>>(f: I, l: I, x: ValueOf<I>): I;\ndeclare function find_subsequence_n_naive<T>(f: Iter<T>, fn: number, s: Iter<T>, sn: number, r: Relation<T>): [Iter<T>, number];\ndeclare function find_subsequence_n_naive_1<T>(f: Iter<T>, fn: number, s: Iter<T>, sn: number, r: Relation<T>): [Iter<T>, number];\ndeclare function find_subsequence_naive<T>(f: Iter<T>, l: Iter<T>, sf: Iter<T>, sl: Iter<T>, r: Relation<T>): Iter<T, SequenceKind>;\ndeclare function find_with_sentinel<I extends BidirectionalIterator>(f: I, l: I, x: ValueOf<I>): I;\ndeclare function none<I extends Iter<unknown>>(f: I, l: I, p: Predicate<ValueOf<I>>): boolean;\ndeclare function none_n<I extends Iter<unknown>>(f: I, n: number, p: Predicate<ValueOf<I>>): boolean;\ndeclare function not_all<I extends Iter<unknown>>(f: I, l: I, p: Predicate<ValueOf<I>>): boolean;\ndeclare function not_all_n<I extends Iter<unknown>>(f: I, n: number, p: Predicate<ValueOf<I>>): boolean;\ndeclare function partitioned<T>(f: Iter<T>, l: Iter<T>, p: Predicate<T>): boolean;\ndeclare function partitioned_at_point<T>(f: Iter<T>, m: Iter<T>, l: Iter<T>, p: Predicate<T>): boolean;\ndeclare function partitioned_n<I extends Iter<unknown>>(f: I, n: number, p: Predicate<ValueOf<I>>): boolean;\ndeclare function potential_partition_point<T>(f: Iter<T>, l: Iter<T>, p: Predicate<T>): Iter<T, SequenceKind>;\ndeclare function some<I extends Iter<unknown>>(f: I, l: I, p: Predicate<ValueOf<I>>): boolean;\ndeclare function some_n<I extends Iter<unknown>>(f: I, n: number, p: Predicate<ValueOf<I>>): boolean;\ndeclare function max_element<T>(f: Iter<T>, l: Iter<T>, r: Relation<T>): Iter<T, SequenceKind>;\ndeclare function min_element<T>(f: Iter<T>, l: Iter<T>, r: Relation<T>): Iter<T, SequenceKind>;\ndeclare function min_element_nonempty<T>(f: Iter<T>, l: Iter<T>, r: Relation<T>): Iter<T, SequenceKind>;\ndeclare function min_value<I extends Iter<unknown>>(f: I, l: I, r: Relation<ValueOf<I>>): I;\ndeclare function select_1_2<T>(a: T, b: T, r: Relation<T>): T;\ndeclare function select_1_3<T>(a: T, b: T, c: T, r: Relation<T>): T;\ndeclare function select_1_3_ab<T>(a: T, b: T, c: T, r: Relation<T>): T;\ndeclare function exchange_values_2<T>(x: Iter<T>, y: Iter<T>): void;\ndeclare function swap_ranges<T, U>(f: Iter<T>, l: Iter<T>, f1: Iter<U>): Iter<U, SequenceKind>;\ndeclare function swap_ranges_bounded<T>(f0: Iter<T>, l0: Iter<T>, f1: Iter<T>, l1: Iter<T>): Iter<T, SequenceKind>[];\ndeclare function swap_ranges_n<T>(f0: Iter<T>, f1: Iter<T>, n: number): Iter<T, SequenceKind>[];\ndeclare function for_each<I extends Iter<unknown>, Proc extends (value: ValueOf<I>) => void>(f: I, l: I, proc: Proc): Proc;\ndeclare function for_each_n<I extends Iter<unknown>, Proc extends (value: ValueOf<I>) => void>(f: I, n: number, proc: Proc): [Proc, I];\ndeclare function count_if<T>(f: Iter<T>, l: Iter<T>, p: Predicate<T>): 0;\ndeclare function count_if_basis<T, U extends number | Iter<unknown>>(f: Iter<T>, l: Iter<T>, p: Predicate<T>, j: U): U;\ndeclare function count_if_for_each<I extends Iter<unknown>>(f: I, l: I, p: Predicate<ValueOf<I>>): number;\ndeclare function count_if_not<T>(f: Iter<T>, l: Iter<T>, p: Predicate<T>): 0;\ndeclare function count_if_not_basis<T, U extends number | Iter<unknown>>(f: Iter<T>, l: Iter<T>, p: Predicate<T>, j: U): U;\ndeclare function equal_r<T>(f: Iter<T>, l: Iter<T>, f2: Iter<T>, r: Relation<T>): boolean;\ndeclare function insert<T, K extends SequenceKind>(s: Seq<T, K>, ip: Iter<T>, f: Iter<T>, l: Iter<T>): Seq<T, K>;\ndeclare function insert_naive<T, K extends SequenceKind>(s: Seq<T | number, K>, ip: Iter<T | number>, f: Iter<T>, l: Iter<T>): Seq<number | T, K>;\ndeclare function iota(f: Iter<number>, l: Iter<number>, start?: number, step?: number): number;\ndeclare function palindrome_bidirectional<I extends BidirectionalIterator>(f: I, l: I, r: Relation<ValueOf<I>>): boolean;\ndeclare function palindrome_naive<T>(seq_arr: T[], r: Relation<T>): boolean;\ndeclare function fill<T>(f: Iter<T>, l: Iter<T>, x: T): void;\ndeclare function fill_n<T>(f: Iter<T>, n: number, x: T): void;"]; }
+function __lab_types_declarations() { return ["// Typed view of the opaque objects supplied by the lab runtime.\ndeclare const iteratorElement: unique symbol;\ndeclare const sequenceElement: unique symbol;\ndeclare const iteratorKind: unique symbol;\ndeclare const sequenceKind: unique symbol;\n\ntype SequenceKind = \"array\" | \"sll\" | \"dll\" | \"stream\";\ntype SequenceInputKind = SequenceKind | \"list\" | \"double\" | \"buffer\";\ntype SequenceKindOf<K extends SequenceInputKind> =\n    K extends \"list\" ? \"sll\" : K extends \"double\" ? \"dll\" : K extends \"buffer\" ? \"stream\" : K;\ntype Readable<T> = { readonly [iteratorElement]: T };\ntype Iter<T, K extends SequenceKind = SequenceKind> = Readable<T> & { readonly [iteratorKind]: K };\ntype Seq<T, K extends SequenceKind = SequenceKind> = {\n    readonly [sequenceElement]: T;\n    readonly [sequenceKind]: K;\n};\ntype ForwardIterator<T = unknown> = Iter<T, Exclude<SequenceKind, \"stream\">>;\ntype BidirectionalIterator<T = unknown> = Iter<T, \"array\" | \"dll\">;\ntype ValueOf<I extends Readable<unknown>> = I[typeof iteratorElement];\ntype Predicate<T> = (value: T) => boolean;\n\ntype Relation<T> = (left: T, right: T) => boolean;\ntype Operation<T> = (left: T, right: T) => T;\ntype IteratorPermutation<T> = (iterator: Iter<T>) => Iter<T>;\n\ndeclare function equal<T, U>(f: Iter<T>, l: Iter<U>): boolean;\n// Unannotated lambdas in numeric examples default to number. Typed callbacks infer T.\ndeclare function predicate<T = number>(fn: Predicate<T>): Predicate<T>;\ndeclare function relation<T = number>(fn: Relation<T>): Relation<T>;\ndeclare function array_random(n?: number, from?: number, to?: number): number[];\ndeclare function array_all_equal<T = number>(n?: number, value?: T): T[];\ndeclare function array_ascending(n?: number, from?: number): number[];\ndeclare function array_descending(n?: number, from?: number): number[];\ndeclare function array_from(value: string): string[];\ndeclare function random_int(from?: number, to?: number): number;\ndeclare function sequence<T>(values: readonly T[], name?: string, color?: Relation<T> | Predicate<T>, type?: undefined, drawChart?: boolean, drawTree?: boolean): Seq<T, \"array\">;\ndeclare function sequence<T, K extends SequenceInputKind>(values: readonly T[], name: string | undefined, color: Relation<T> | Predicate<T> | undefined, type: K, drawChart?: boolean, drawTree?: boolean): Seq<T, SequenceKindOf<K>>;\ndeclare function begin<T, K extends SequenceKind>(data: Seq<T, K>): Iter<T, K>;\ndeclare function end<T, K extends SequenceKind>(data: Seq<T, K>): Iter<T, K>;\ndeclare function source<T>(it: Iter<T>): T;\ndeclare function sink<T, U>(it: Iter<T>, value: U): void;\ndeclare function successor<I extends Iter<unknown>>(it: I, n?: number): I;\ndeclare function successor<T extends number | Iter<unknown>>(it: T, n?: number): T;\ndeclare function predecessor<I extends Iter<unknown>>(it: I, n?: number): I;\ndeclare function predecessor<T>(it: Iter<T>, n?: number): Iter<T>;\ndeclare function distance<T, U>(f: Iter<T>, l: Iter<U>): number;\ndeclare function size<T>(data: Seq<T>): number;\ndeclare function capacity<T>(data: Seq<T>): number;\ndeclare function print<T>(value: T): void;\ndeclare function iter_swap<T, U>(a: Iter<T>, b: Iter<U>): void;\ndeclare function exchange_values<T, U>(a: Iter<T>, b: Iter<U>): void;\ndeclare function call<T>(r: Relation<T>, f: Iter<T>, l: Iter<T>): boolean;\ndeclare function bind<T>(r: Relation<T>, value: T, arg?: number): Predicate<T>;\ndeclare function eq<T>(a: T, b: T): boolean;\ndeclare function lt<T>(a: T, b: T): boolean;\ndeclare function gt<T>(a: T, b: T): boolean;\ndeclare function lte<T>(a: T, b: T): boolean;\ndeclare function gte<T>(a: T, b: T): boolean;\ndeclare function digitSum(value: number): number;\ndeclare function half(n: number): number;\ndeclare function half_nonnegative(n: number): number;\ndeclare function twice(n: number): number;\ndeclare const odd: Predicate<number>;\ndeclare const even: Predicate<number>;\ndeclare function complement<T>(r: Relation<T>): Relation<T>;\ndeclare function converse<T>(r: Relation<T>): Relation<T>;\ndeclare function complement_of_converse<T>(r: Relation<T>): Relation<T>;\ndeclare function source_move<T>(it: Iter<T>): T;\ndeclare function sink_move<T, U>(it: Iter<T>, value: U): void;\ndeclare function sink_move_from_it<T, U>(target: Iter<T>, source: Iter<U>): void;\ndeclare function move_obj<T>(value: T): T;\ndeclare function push_back<T, K extends SequenceKind>(seq: Seq<T, K>, value: NoInfer<T>): Seq<T, K>;\ndeclare function swap_iters<T, U>(a: Iter<T>, b: Iter<U>): [Iter<U>, Iter<T>];\ndeclare function register_move_distance(distance: number): void;\ndeclare function register_custom_stat(name: string): void;\ndeclare function increment_custom_stat(name: string): void;\ndeclare function increment_swap_stat(): void;\ndeclare function increment_assignment_stat(): void;\ndeclare function track_variable<T>(value: T, name: string | number): void;\ndeclare function snapshot(): void;\ndeclare const sequenceTree: typeof sequence;\ndeclare const sequenceChart: typeof sequence;\n\ndeclare function binary_operation<T>(op: Operation<T>): Operation<T>;\ndeclare function unary_operation<T>(op: (value: T) => T): (value: T) => T;\ndeclare function add<T>(a: T, b: T): T;\ndeclare function multiply<T>(a: T, b: T): T;\ndeclare function negate<T>(value: T): T;\ndeclare function multiplicative_identity<T>(value: T): T;\ndeclare function multiplicative_inverse<T>(value: T): T;\ndeclare function identity_element<T>(op: Operation<T>, value: T): T;\ndeclare function inverse_operation<T>(op: Operation<T>, value: T): T;\ndeclare const identity_elements: Record<string, (value: number) => number>;\ndeclare class SquareMatrix {\n    constructor(n: number, data?: number[]);\n    str(): string;\n    multiplicative_inverse(): SquareMatrix | undefined;\n}\n\ndeclare function predicate_source<T>(p: Predicate<T>): Predicate<Iter<T>>;\ndeclare function relation_source<T>(r: Relation<T>): Relation<Iter<T>>;\n\n// The corresponding examples supply these helpers in their usage code.\ndeclare function modulo_multiply(modulus: number): Operation<number>;\ndeclare function modulo_multiply_c(modulus: number): Operation<number>;\ndeclare function are_coprime(m: number, n: number): boolean;\ndeclare function cycle_to_internal<T, U>(i: Iter<T>, k: Iter<T>, permutation: IteratorPermutation<T>, buffer: Iter<U>): void;\ndeclare function linear_insert<T>(f: Iter<T>, c: Iter<T>, r: Relation<T>): void;\ndeclare function linear_insert_backward<T>(c: Iter<T>, l: Iter<T>, r: Relation<T>): void;\ndeclare function shift_down<T>(f: Iter<T>, i: number, n: number): void;\ndeclare function rotate_forward_step<T>(ref: {f: Iter<T>; m: Iter<T>}, l: Iter<T>): void;\ndeclare function k_rotate_from_permutation_random_access<T>(f: Iter<T>, m: Iter<T>, l: Iter<T>): IteratorPermutation<T>;\ndeclare function push_heap_gnu_helper<T>(f: Iter<T>, hole: number, top: number, value: T, r: Relation<T>): void;\ndeclare function parent(index: number): number;\n\ndeclare function pre(condition: () => boolean, message?: string): void;\ndeclare function post(condition: () => boolean, message?: string): void;\ndeclare function is_partitioned_n<T>(first: Iter<T>, count: number, test: Predicate<T>): boolean;\n\ndeclare function lexicographical_compare<I extends Iter<unknown>, J extends Iter<ValueOf<I>>>(f0: I, l0: I, f1: J, l1: J, r: Relation<ValueOf<I>>): boolean;\ndeclare function lexicographical_equal<I extends Iter<unknown>, J extends Iter<ValueOf<I>>>(f0: I, l0: I, f1: J, l1: J): boolean;\ndeclare function lexicographical_equivalent<I extends Iter<unknown>, J extends Iter<ValueOf<I>>>(f0: I, l0: I, f1: J, l1: J, r: Relation<ValueOf<I>>): boolean;\ndeclare function lexicographical_less<I extends Iter<unknown>, J extends Iter<ValueOf<I>>>(f0: I, l0: I, f1: J, l1: J): boolean;\ndeclare function copy<T, U>(f: Iter<T>, l: Iter<T>, o: Iter<U>): Iter<U, SequenceKind>;\ndeclare function copy_backward<T, U>(f: Iter<T>, l: Iter<T>, o: Iter<U>): Iter<U, SequenceKind>;\ndeclare function copy_backward_n<T, U>(l: Iter<T>, n: number, o: Iter<U>): [Iter<T>, Iter<U>];\ndeclare function copy_bounded<T, U>(f: Iter<T>, l: Iter<T>, fo: Iter<U>, lo: Iter<U>): [Iter<T>, Iter<U>];\ndeclare function copy_n<T, U>(f: Iter<T>, n: number, o: Iter<U>): [Iter<T>, Iter<U>];\ndeclare function move_backward<T, U>(f: Iter<T>, l: Iter<T>, o: Iter<U>): Iter<U, SequenceKind>;\ndeclare function reverse_copy<T, U>(f: Iter<T>, l: Iter<T>, o: Iter<U>): Iter<U, SequenceKind>;\ndeclare function reverse_copy_backward<T, U>(f: Iter<T>, l: Iter<T>, o: Iter<U>): Iter<U, SequenceKind>;\ndeclare function reverse_copy_backward_n<T, U>(f: Iter<T>, n: number, o: Iter<U>): [Iter<T>, Iter<U>];\ndeclare function reverse_copy_n<T, U>(l: Iter<T>, n: number, o: Iter<U>): [Iter<T>, Iter<U>];\ndeclare function combine_copy<T, U>(f: Iter<T>, l: Iter<T>, f2: Iter<T>, l2: Iter<T>, o: Iter<U>, r: Relation<Iter<T>>): Iter<U, SequenceKind>;\ndeclare function combine_copy_backward<T, U>(f: Iter<T>, l: Iter<T>, f2: Iter<T>, l2: Iter<T>, o: Iter<U>, r: Relation<Iter<T>>): Iter<U, SequenceKind>;\ndeclare function combine_copy_backward_n<T, U>(l: Iter<T>, n: number, l2: Iter<T>, n2: number, o: Iter<U>, r: Relation<Iter<T>>): (Iter<T, SequenceKind> | Iter<U, SequenceKind>)[];\ndeclare function combine_copy_n<T, U>(f: Iter<T>, n: number, f2: Iter<T>, n2: number, o: Iter<U>, r: Relation<Iter<T>>): (Iter<T, SequenceKind> | Iter<U, SequenceKind>)[];\ndeclare function copy_if<T, U>(f: Iter<T>, l: Iter<T>, o: Iter<U>, p: Predicate<T>): Iter<U, SequenceKind>;\ndeclare function copy_if_n<T, U>(f: Iter<T>, n: number, o: Iter<U>, p: Predicate<T>): [Iter<T, SequenceKind>, Iter<U, SequenceKind>];\ndeclare function copy_select<T, U>(f: Iter<T>, l: Iter<T>, o: Iter<U>, p: Predicate<Iter<T>>): Iter<U, SequenceKind>;\ndeclare function copy_select_n<T, U>(f: Iter<T>, n: number, o: Iter<U>, p: Predicate<Iter<T>>): [Iter<T>, Iter<U>];\ndeclare function merge_copy<T, U>(f: Iter<T>, l: Iter<T>, f2: Iter<T>, l2: Iter<T>, o: Iter<U>, r: Relation<T>): Iter<U, SequenceKind>;\ndeclare function merge_copy_backward<T, U>(f: Iter<T>, l: Iter<T>, f2: Iter<T>, l2: Iter<T>, o: Iter<U>, r: Relation<T>): Iter<U, SequenceKind>;\ndeclare function partition_copy<T, U>(f: Iter<T>, l: Iter<T>, u: Iter<U>, t: Iter<U>, p: Predicate<T>): Iter<U, SequenceKind>[];\ndeclare function partition_copy_n<T, U>(f: Iter<T>, n: number, u: Iter<U>, t: Iter<U>, p: Predicate<T>): (Iter<T, SequenceKind> | Iter<U, SequenceKind>)[];\ndeclare function split_copy<T, U>(f: Iter<T>, l: Iter<T>, u: Iter<U>, t: Iter<U>, p: Predicate<Iter<T>>): Iter<U, SequenceKind>[];\ndeclare function split_copy_n<T, U>(f: Iter<T>, n: number, u: Iter<U>, t: Iter<U>, p: Predicate<Iter<T>>): (Iter<T, SequenceKind> | Iter<U, SequenceKind>)[];\ndeclare function gcd(a: number, b: number): number;\ndeclare function gcd0(a: number, b: number): number;\ndeclare function gcd1(a: number, b: number): number;\ndeclare function gcd2(a: number, b: number): number;\ndeclare function gcd3(a: number, b: number): number;\ndeclare function stein_gcd(a: number, b: number): number;\ndeclare function stein_gcd_nonnegative(a: number, b: number): number;\ndeclare function divides(i: number, n: number): boolean;\ndeclare function integer_sqrt(n: number): number;\ndeclare function integer_sqrt_recursive(n: number): number;\ndeclare function smallest_divisor(n: number): number;\ndeclare function multiply0(n: number, a: number): number;\ndeclare function multiply1(n: number, a: number): number;\ndeclare function multiply2(n: number, a: number): number;\ndeclare function multiply3(n: number, a: number): number;\ndeclare function multiply4(n: number, a: number): number;\ndeclare function multiply_accumulate0(r: number, n: number, a: number): number;\ndeclare function multiply_accumulate1(r: number, n: number, a: number): number;\ndeclare function multiply_accumulate2(r: number, n: number, a: number): number;\ndeclare function multiply_accumulate3(r: number, n: number, a: number): number;\ndeclare function multiply_accumulate4(r: number, n: number, a: number): number;\ndeclare function multiply_accumulate_semigroup<T>(r: T, n: number, a: T): T;\ndeclare function multiply_group<T>(n: number, a: T): 0 | T;\ndeclare function multiply_monoid<T>(n: number, a: T): 0 | T;\ndeclare function multiply_semigroup<T>(n: number, a: T): T;\ndeclare function power<T>(a: T, n: number, op: Operation<T>): T;\ndeclare function power_accumulate_semigroup<T>(r: T, a: T, n: number, op: Operation<T>): T;\ndeclare function power_accumulate_semigroup0<T>(r: T, a: T, n: number): T;\ndeclare function power_group<T>(a: T, n: number, op: Operation<T>): T;\ndeclare function power_group0<T>(a: T, n: number): T;\ndeclare function power_monoid<T>(a: T, n: number, op: Operation<T>): T;\ndeclare function power_monoid0<T>(a: T, n: number): T;\ndeclare function power_semigroup<T>(a: T, n: number, op: Operation<T>): T;\ndeclare function power_semigroup0<T>(a: T, n: number): T;\ndeclare function fermat_test(n: number, witness: number): boolean;\ndeclare function is_charmichael(n: number): boolean;\ndeclare function is_charmichael0(n: number): boolean;\ndeclare function is_charmichael1(n: number): boolean;\ndeclare function is_prime(n: number): boolean;\ndeclare function miller_rabin_test(n: number, q: number, k: number, w: number): boolean;\ndeclare function multiplicative_inverse_fermat(a: number, p: number): number;\ndeclare function largest_doubling(a: number, b: number): number;\ndeclare function quotient(a: number, b: number): number;\ndeclare function quotient_remainder(a: number, b: number): number[];\ndeclare function remainder(a: number, b: number): number;\ndeclare function remainder_fast0(a: number, b: number): number;\ndeclare function remainder_fast1(a: number, b: number): number;\ndeclare function remainder_fibonacci(a: number, b: number): number;\ndeclare function remainder_slow(a: number, b: number): number;\ndeclare function mark_sieve(f: Iter<number | string>, l: Iter<number | string>, factor: number): void;\ndeclare function mark_sieve_n(f: Iter<number | string>, n: number, factor: number): void;\ndeclare function print_sieve(f: Iter<number | string>, n: number): void;\ndeclare function sift(f: Iter<number | string>, n: number): void;\ndeclare function sift0(f: Iter<number | string>, n: number): void;\ndeclare function sift1(f: Iter<number | string>, n: number): void;\ndeclare function insertion_sort<T>(f: Iter<T>, l: Iter<T>, r: Relation<T>): void;\ndeclare function insertion_sort_backward<T>(f: Iter<T>, l: Iter<T>, r: Relation<T>): void;\ndeclare function insertion_sort_classic<T>(f: Iter<T>, l: Iter<T>, r: Relation<T>): void;\ndeclare function insertion_sort_classic_0<T>(f: Iter<T>, l: Iter<T>, r: Relation<T>): void;\ndeclare function insertion_sort_classic_1<T>(f: Iter<T>, l: Iter<T>, r: Relation<T>): void;\ndeclare function insertion_sort_classic_2<T>(f: Iter<T>, l: Iter<T>, r: Relation<T>): void;\ndeclare function insertion_sort_classic_3<T>(f: Iter<T>, l: Iter<T>, r: Relation<T>): void;\ndeclare function insertion_sort_suffix_nonempty<T>(f: Iter<T>, l: Iter<T>, r: Relation<T>): void;\ndeclare function linear_insert_unguarded<T>(c: Iter<T>, r: Relation<T>): Iter<T, SequenceKind>;\ndeclare function selection_sort_classic<T>(f: Iter<T>, l: Iter<T>, r: Relation<T>): void;\ndeclare function selection_sort_stable<T>(f: Iter<T>, l: Iter<T>, r: Relation<T>): void;\ndeclare function sort3<T>(x: Iter<T>, y: Iter<T>, z: Iter<T>, c: Relation<T>): number;\ndeclare function cycle_from<T>(i: Iter<T>, f: IteratorPermutation<T>): void;\ndeclare function cycle_to<T>(i: Iter<T>, f: IteratorPermutation<T>): void;\ndeclare function cycle_to_2n_1<T>(i: Iter<T>, f: IteratorPermutation<T>): void;\ndeclare function cycle_to_recursive<T>(i: Iter<T>, f: IteratorPermutation<T>): void;\ndeclare function reverse<T>(f: Iter<T>, l: Iter<T>): void;\ndeclare function reverse_bidirectional<T>(f: Iter<T>, l: Iter<T>): void;\ndeclare function reverse_n_adaptive<T, U>(f_i: Iter<T>, n_i: number, f_b: Iter<U>, n_b: number): Iter<T>;\ndeclare function reverse_n_forward<T>(f: Iter<T>, n: number): Iter<T>;\ndeclare function reverse_n_indexed<T>(f: Iter<T>, n: number): void;\ndeclare function reverse_n_with_buffer<T, U>(f_i: Iter<T>, n: number, f_b: Iter<U>): Iter<T, SequenceKind>;\ndeclare function rotate_bidirectional<T>(f: Iter<T>, m: Iter<T>, l: Iter<T>): void;\ndeclare function rotate_cycles<T>(f: Iter<T>, m: Iter<T>, l: Iter<T>, from: IteratorPermutation<T>): Iter<T, SequenceKind>;\ndeclare function rotate_forward<T>(f: Iter<T>, m: Iter<T>, l: Iter<T>): Iter<T, SequenceKind>;\ndeclare function rotate_random_access_nontrivial<T>(f: Iter<T>, m: Iter<T>, l: Iter<T>): Iter<T, SequenceKind>;\ndeclare function rotate_right_by_one<T>(f: Iter<T>, l: Iter<T>): void;\ndeclare function rotate_right_by_one_nonempty<T>(f: Iter<T>, l: Iter<T>): void;\ndeclare function shift_right_by_one<T>(f: Iter<T>, l: Iter<T>): void;\ndeclare function shift_right_while<T>(f: Iter<T>, l: Iter<T>, p: Predicate<T>): Iter<T, SequenceKind>;\ndeclare function shift_right_while_nonempty<T>(f: Iter<T>, l: Iter<T>, p: Predicate<T>): Iter<T, SequenceKind>;\ndeclare function shift_right_while_unguarded<T>(l: Iter<T>, p: Predicate<T>): Iter<T, SequenceKind>;\ndeclare function is_heap_until_n<T>(f: Iter<T>, n: number, r: Relation<T>): number;\ndeclare function is_heap_until_n_0<T>(f: Iter<T>, n: number, r: Relation<T>): number;\ndeclare function make_heap_n<T>(f: Iter<T>, n: number): void;\ndeclare function make_heap_n_naive_0<T>(f: Iter<T>, n: number): void;\ndeclare function make_heap_n_naive_1<T>(f: Iter<T>, n: number): void;\ndeclare function push_heap_gnu_0<T>(f: Iter<T>, l: Iter<T>, r: Relation<T>): void;\ndeclare function push_heap_gnu_1<T>(f: Iter<T>, l: Iter<T>, r: Relation<T>): void;\ndeclare function push_heap_n<T>(f: Iter<T>, n: number, r: Relation<T>): void;\ndeclare function partition_semistable<T>(f: Iter<T>, l: Iter<T>, p: Predicate<T>): Iter<T, SequenceKind>;\ndeclare function partition_semistable_1<T>(f: Iter<T>, l: Iter<T>, p: Predicate<T>): Iter<T, SequenceKind>;\ndeclare function partition_semistable_nonempty<T>(f: Iter<T>, l: Iter<T>, p: Predicate<T>): void;\ndeclare function partition_stable_forward<T>(f: Iter<T>, l: Iter<T>, p: Predicate<T>): Iter<T, SequenceKind>;\ndeclare function partition_stable_with_buffer_0<T>(f: Iter<T>, l: Iter<T>, p: Predicate<T>, b: Iter<T>): Iter<T, SequenceKind>;\ndeclare function add_to_counter<I extends ForwardIterator>(f: I, l: I, op: Operation<ValueOf<I>>, x: ValueOf<I>, z: ValueOf<I>): ValueOf<I>;\ndeclare function reduce<I extends Iter<unknown>>(f: I, l: I, op: Operation<ValueOf<I>>, z: ValueOf<I>): ValueOf<I>;\ndeclare function reduce_balanced<I extends Iter<unknown>>(f: I, l: I, op: Operation<ValueOf<I>>, z: ValueOf<I>): ValueOf<I>;\ndeclare function reduce_nonempty<I extends Iter<unknown>>(f: I, l: I, op: Operation<ValueOf<I>>): ValueOf<I>;\ndeclare function reduce_nonzeroes<I extends Iter<unknown>>(f: I, l: I, op: Operation<ValueOf<I>>, z: ValueOf<I>): ValueOf<I>;\ndeclare function equal_range<I extends ForwardIterator>(f: I, n: number, a: ValueOf<I>, r: Relation<ValueOf<I>>): [I, I];\ndeclare function lower_bound_n<I extends ForwardIterator>(f: I, n: number, a: ValueOf<I>, r: Relation<ValueOf<I>>): I;\ndeclare function partition_point_n<I extends Iter<unknown>>(f: I, n: number, p: Predicate<ValueOf<I>>): I;\ndeclare function partition_point_n_forward<T>(f: Iter<T>, n: number, p: Predicate<T>): [Iter<T>, number];\ndeclare function upper_bound_n<I extends Iter<unknown>>(f: I, n: number, a: ValueOf<I>, r: Relation<ValueOf<I>>): I;\ndeclare function all<I extends Iter<unknown>>(f: I, l: I, p: Predicate<ValueOf<I>>): boolean;\ndeclare function all_n<I extends Iter<unknown>>(f: I, n: number, p: Predicate<ValueOf<I>>): boolean;\ndeclare function find<I extends Iter<unknown>>(f: I, l: I, x: ValueOf<I>): I;\ndeclare function find_adjacent_mismatch<I extends Iter<unknown>>(f: I, l: I, r: Relation<ValueOf<I>>): I;\ndeclare function find_adjacent_mismatch_forward<I extends ForwardIterator>(f: I, l: I, r: Relation<ValueOf<I>>): I;\ndeclare function find_backward_if<I extends BidirectionalIterator>(f: I, l: I, p: Predicate<ValueOf<I>>): I;\ndeclare function find_if<I extends Iter<unknown>>(f: I, l: I, p: Predicate<ValueOf<I>>): I;\ndeclare function find_if_n<I extends Iter<unknown>>(f: I, n: number, p: Predicate<ValueOf<I>>): [I, number];\ndeclare function find_if_not<I extends Iter<unknown>>(f: I, l: I, p: Predicate<ValueOf<I>>): I;\ndeclare function find_if_not_n<I extends Iter<unknown>>(f: I, n: number, p: Predicate<ValueOf<I>>): [I, number];\ndeclare function find_if_not_unguarded<I extends Iter<unknown>>(f: I, p: Predicate<ValueOf<I>>): I;\ndeclare function find_if_unguarded<I extends Iter<unknown>>(f: I, p: Predicate<ValueOf<I>>): I;\ndeclare function find_mismatch<I extends Iter<unknown>, J extends Iter<ValueOf<I>>>(f0: I, l0: I, f1: J, l1: J, r: Relation<ValueOf<I>>): [I, J];\ndeclare function find_mismatch_bounded_n<I extends Iter<unknown>, J extends Iter<ValueOf<I>>>(f0: I, l0: I, f1: J, n1: number, r: Relation<ValueOf<I>>): [left: I, right: J, remainingRight: number];\ndeclare function find_mismatch_n<I extends Iter<unknown>, J extends Iter<ValueOf<I>>>(f0: I, n0: number, f1: J, n1: number, r: Relation<ValueOf<I>>): [left: I, right: J, remainingLeft: number, remainingRight: number];\ndeclare function find_mismatch_n_bounded<I extends Iter<unknown>, J extends Iter<ValueOf<I>>>(f0: I, n0: number, f1: J, l1: J, r: Relation<ValueOf<I>>): [left: I, right: J, remainingLeft: number];\ndeclare function find_n<I extends Iter<unknown>>(f: I, n: number, x: ValueOf<I>): [I, number];\ndeclare function find_not<I extends Iter<unknown>>(f: I, l: I, x: ValueOf<I>): I;\ndeclare function find_subsequence_n_naive<T>(f: Iter<T>, fn: number, s: Iter<T>, sn: number, r: Relation<T>): [Iter<T>, number];\ndeclare function find_subsequence_n_naive_1<T>(f: Iter<T>, fn: number, s: Iter<T>, sn: number, r: Relation<T>): [Iter<T>, number];\ndeclare function find_subsequence_naive<T>(f: Iter<T>, l: Iter<T>, sf: Iter<T>, sl: Iter<T>, r: Relation<T>): Iter<T, SequenceKind>;\ndeclare function find_with_sentinel<I extends BidirectionalIterator>(f: I, l: I, x: ValueOf<I>): I;\ndeclare function none<I extends Iter<unknown>>(f: I, l: I, p: Predicate<ValueOf<I>>): boolean;\ndeclare function none_n<I extends Iter<unknown>>(f: I, n: number, p: Predicate<ValueOf<I>>): boolean;\ndeclare function not_all<I extends Iter<unknown>>(f: I, l: I, p: Predicate<ValueOf<I>>): boolean;\ndeclare function not_all_n<I extends Iter<unknown>>(f: I, n: number, p: Predicate<ValueOf<I>>): boolean;\ndeclare function partitioned<T>(f: Iter<T>, l: Iter<T>, p: Predicate<T>): boolean;\ndeclare function partitioned_at_point<T>(f: Iter<T>, m: Iter<T>, l: Iter<T>, p: Predicate<T>): boolean;\ndeclare function partitioned_n<I extends Iter<unknown>>(f: I, n: number, p: Predicate<ValueOf<I>>): boolean;\ndeclare function potential_partition_point<T>(f: Iter<T>, l: Iter<T>, p: Predicate<T>): Iter<T, SequenceKind>;\ndeclare function some<I extends Iter<unknown>>(f: I, l: I, p: Predicate<ValueOf<I>>): boolean;\ndeclare function some_n<I extends Iter<unknown>>(f: I, n: number, p: Predicate<ValueOf<I>>): boolean;\ndeclare function max_element<T>(f: Iter<T>, l: Iter<T>, r: Relation<T>): Iter<T, SequenceKind>;\ndeclare function min_element<T>(f: Iter<T>, l: Iter<T>, r: Relation<T>): Iter<T, SequenceKind>;\ndeclare function min_element_nonempty<T>(f: Iter<T>, l: Iter<T>, r: Relation<T>): Iter<T, SequenceKind>;\ndeclare function min_value<I extends Iter<unknown>>(f: I, l: I, r: Relation<ValueOf<I>>): I;\ndeclare function select_1_2<T>(a: T, b: T, r: Relation<T>): T;\ndeclare function select_1_3<T>(a: T, b: T, c: T, r: Relation<T>): T;\ndeclare function select_1_3_ab<T>(a: T, b: T, c: T, r: Relation<T>): T;\ndeclare function exchange_values_2<T>(x: Iter<T>, y: Iter<T>): void;\ndeclare function swap_ranges<T, U>(f: Iter<T>, l: Iter<T>, f1: Iter<U>): Iter<U, SequenceKind>;\ndeclare function swap_ranges_bounded<T>(f0: Iter<T>, l0: Iter<T>, f1: Iter<T>, l1: Iter<T>): Iter<T, SequenceKind>[];\ndeclare function swap_ranges_n<T>(f0: Iter<T>, f1: Iter<T>, n: number): Iter<T, SequenceKind>[];\ndeclare function for_each<I extends Iter<unknown>, Proc extends (value: ValueOf<I>) => void>(f: I, l: I, proc: Proc): Proc;\ndeclare function for_each_n<I extends Iter<unknown>, Proc extends (value: ValueOf<I>) => void>(f: I, n: number, proc: Proc): [Proc, I];\ndeclare function count_if<T>(f: Iter<T>, l: Iter<T>, p: Predicate<T>): 0;\ndeclare function count_if_basis<T, U extends number | Iter<unknown>>(f: Iter<T>, l: Iter<T>, p: Predicate<T>, j: U): U;\ndeclare function count_if_for_each<I extends Iter<unknown>>(f: I, l: I, p: Predicate<ValueOf<I>>): number;\ndeclare function count_if_not<T>(f: Iter<T>, l: Iter<T>, p: Predicate<T>): 0;\ndeclare function count_if_not_basis<T, U extends number | Iter<unknown>>(f: Iter<T>, l: Iter<T>, p: Predicate<T>, j: U): U;\ndeclare function equal_r<T>(f: Iter<T>, l: Iter<T>, f2: Iter<T>, r: Relation<T>): boolean;\ndeclare function insert<T, K extends SequenceKind>(s: Seq<T, K>, ip: Iter<T>, f: Iter<T>, l: Iter<T>): Seq<T, K>;\ndeclare function insert_naive<T, K extends SequenceKind>(s: Seq<T | number, K>, ip: Iter<T | number>, f: Iter<T>, l: Iter<T>): Seq<number | T, K>;\ndeclare function iota(f: Iter<number>, l: Iter<number>, start?: number, step?: number): number;\ndeclare function palindrome_bidirectional<I extends BidirectionalIterator>(f: I, l: I, r: Relation<ValueOf<I>>): boolean;\ndeclare function palindrome_naive<T>(seq_arr: T[], r: Relation<T>): boolean;\ndeclare function fill<T>(f: Iter<T>, l: Iter<T>, x: T): void;\ndeclare function fill_n<T>(f: Iter<T>, n: number, x: T): void;"]; }
 
 function __lexicographical_compare_typescript() { return ["function lexicographical_compare<I extends Iter<unknown>, J extends Iter<ValueOf<I>>>(\n    f0: I, l0: I, f1: J, l1: J, r: Relation<ValueOf<I>>,\n): boolean {\n    while (true) {\n        if (equal(f1, l1)) return false;\n        if (equal(f0, l0)) return true;\n\n        const a = source(f0);\n        const b = source(f1);\n        if (r(a, b)) return true;\n        if (r(b, a)) return false;\n\n        f0 = successor(f0);\n        f1 = successor(f1);\n    }\n}","const left = sequence([9, 7, 1]);\nconst right = sequence([9, 5, 8]);\nconst before = lexicographical_compare(begin(left), end(left), begin(right), end(right), gt);\nprint(\"Left comes first in descending order: \" + before);"]; }
 
@@ -474,12 +474,11 @@ function __combine_copy_n_usage() {
 function __combine_copy_n_attributes() {
 }
 
-function __copy_if_typescript() { return ["function copy_if<T, U>(f: Iter<T>, l: Iter<T>, o: Iter<U>, p: Predicate<T>) {\n    const ps = predicate_source(p);\n    return copy_select(f, l, o, ps);\n}","const even = predicate(x => (x & 1) === 0);\nconst s = sequence(array_random(), \"s\", even);\nconst z = sequence(array_all_equal(size(s), \"-\"));\n\ncopy_if(begin(s), end(s), begin(z), even);\n\nprint(z);"]; }
+function __copy_if_typescript() { return ["function copy_if<T, U>(f: Iter<T>, l: Iter<T>, o: Iter<U>, p: Predicate<T>) {\n    const ps = predicate_source(p);\n    return copy_select(f, l, o, ps);\n}","const s = sequence(array_random(), \"s\", even);\nconst z = sequence(array_all_equal(size(s), \"-\"));\n\ncopy_if(begin(s), end(s), begin(z), even);\n\nprint(z);"]; }
 
 function __copy_if_references() { return ["Elements of Programming, ch. 9, p. 156."]; }
 
 function __copy_if_usage() {
-    const even = predicate(x => (x & 1) === 0);
     const s = sequence(array_random(), "s", even);
     const z = sequence(array_all_equal(size(s), "-"));
     copy_if(begin(s), end(s), begin(z), even);
@@ -489,12 +488,11 @@ function __copy_if_usage() {
 function __copy_if_attributes() {
 }
 
-function __copy_if_n_typescript() { return ["function copy_if_n<T, U>(f: Iter<T>, n: number, o: Iter<U>, p: Predicate<T>) {\n    const ps = predicate_source(p);\n    return copy_select_n(f, n, o, ps);\n}","const even = predicate(x => (x & 1) === 0);\nconst s = sequence(array_random(), \"s\", even);\nconst z = sequence(array_all_equal(size(s), \"-\"));\n\ncopy_if_n(begin(s), size(s), begin(z), even);\n\nprint(z);"]; }
+function __copy_if_n_typescript() { return ["function copy_if_n<T, U>(f: Iter<T>, n: number, o: Iter<U>, p: Predicate<T>) {\n    const ps = predicate_source(p);\n    return copy_select_n(f, n, o, ps);\n}","const s = sequence(array_random(), \"s\", even);\nconst z = sequence(array_all_equal(size(s), \"-\"));\n\ncopy_if_n(begin(s), size(s), begin(z), even);\n\nprint(z);"]; }
 
 function __copy_if_n_references() { return ["Elements of Programming, ch. 9, p. 156 (counted variant of copy_if)."]; }
 
 function __copy_if_n_usage() {
-    const even = predicate(x => (x & 1) === 0);
     const s = sequence(array_random(), "s", even);
     const z = sequence(array_all_equal(size(s), "-"));
     copy_if_n(begin(s), size(s), begin(z), even);
@@ -504,30 +502,30 @@ function __copy_if_n_usage() {
 function __copy_if_n_attributes() {
 }
 
-function __copy_select_typescript() { return ["function copy_select<T, U>(f: Iter<T>, l: Iter<T>, o: Iter<U>, p: Predicate<Iter<T>>) {\n    while ( ! equal(f, l)) {\n        if (p(f)) {\n            sink(o, source(f));\n            o = successor(o);\n        }\n        f = successor(f);\n    }\n    return o;\n}","const even = predicate<Iter<number>>(function even(x) { return (source(x) & 1) == 0; });\nconst s = sequence(array_random());\nconst z = sequence(array_all_equal(size(s), \"-\"));\n\ncopy_select(begin(s), end(s), begin(z), even);\n\nprint(z);"]; }
+function __copy_select_typescript() { return ["function copy_select<T, U>(f: Iter<T>, l: Iter<T>, o: Iter<U>, p: Predicate<Iter<T>>) {\n    while ( ! equal(f, l)) {\n        if (p(f)) {\n            sink(o, source(f));\n            o = successor(o);\n        }\n        f = successor(f);\n    }\n    return o;\n}","const evenAt = predicate_source(even);\nconst s = sequence(array_random());\nconst z = sequence(array_all_equal(size(s), \"-\"));\n\ncopy_select(begin(s), end(s), begin(z), evenAt);\n\nprint(z);"]; }
 
 function __copy_select_references() { return ["Elements of Programming, ch. 9, pp. 155–156."]; }
 
 function __copy_select_usage() {
-    const even = predicate(function even(x) { return (source(x) & 1) == 0; });
+    const evenAt = predicate_source(even);
     const s = sequence(array_random());
     const z = sequence(array_all_equal(size(s), "-"));
-    copy_select(begin(s), end(s), begin(z), even);
+    copy_select(begin(s), end(s), begin(z), evenAt);
     print(z);
 }
 
 function __copy_select_attributes() {
 }
 
-function __copy_select_n_typescript() { return ["function copy_select_n<T, U>(f: Iter<T>, n: number, o: Iter<U>, p: Predicate<Iter<T>>): [Iter<T>, Iter<U>] {\n    while (n != 0) {\n        if (p(f)) {\n            sink(o, source(f));\n            o = successor(o);\n        }\n        f = successor(f);\n        --n;\n    }\n    return [f, o];\n}","const even = predicate<Iter<number>>(function even(x) { return (source(x) & 1) == 0; });\nconst s = sequence(array_random());\nconst z = sequence(array_all_equal(size(s), \"-\"));\n\ncopy_select_n(begin(s), size(s), begin(z), even);\n\nprint(z);"]; }
+function __copy_select_n_typescript() { return ["function copy_select_n<T, U>(f: Iter<T>, n: number, o: Iter<U>, p: Predicate<Iter<T>>): [Iter<T>, Iter<U>] {\n    while (n != 0) {\n        if (p(f)) {\n            sink(o, source(f));\n            o = successor(o);\n        }\n        f = successor(f);\n        --n;\n    }\n    return [f, o];\n}","const evenAt = predicate_source(even);\nconst s = sequence(array_random());\nconst z = sequence(array_all_equal(size(s), \"-\"));\n\ncopy_select_n(begin(s), size(s), begin(z), evenAt);\n\nprint(z);"]; }
 
 function __copy_select_n_references() { return ["Elements of Programming, ch. 9, pp. 155–156 (counted variant of copy_select)."]; }
 
 function __copy_select_n_usage() {
-    const even = predicate(function even(x) { return (source(x) & 1) == 0; });
+    const evenAt = predicate_source(even);
     const s = sequence(array_random());
     const z = sequence(array_all_equal(size(s), "-"));
-    copy_select_n(begin(s), size(s), begin(z), even);
+    copy_select_n(begin(s), size(s), begin(z), evenAt);
     print(z);
 }
 
@@ -568,69 +566,67 @@ function __merge_copy_backward_usage() {
 function __merge_copy_backward_attributes() {
 }
 
-function __partition_copy_typescript() { return ["function partition_copy<T, U>(f: Iter<T>, l: Iter<T>, u: Iter<U>, t: Iter<U>, p: Predicate<T>) {\n    const ps = predicate_source(p);\n    return split_copy(f, l, u, t, ps);\n}","const pred = predicate(x => (x & 1) === 0);\nconst s = sequence(array_random(), \"s\", pred);\nconst even = sequence(array_all_equal(size(s), \"-\"));\nconst odd = sequence(array_all_equal(size(s), \"-\"));\n\npartition_copy(begin(s), end(s), begin(odd), begin(even), pred);\n\nprint(even);\nprint(odd);"]; }
+function __partition_copy_typescript() { return ["function partition_copy<T, U>(f: Iter<T>, l: Iter<T>, u: Iter<U>, t: Iter<U>, p: Predicate<T>) {\n    const ps = predicate_source(p);\n    return split_copy(f, l, u, t, ps);\n}","const s = sequence(array_random(), \"s\", even);\nconst evens = sequence(array_all_equal(size(s), \"-\"));\nconst odds = sequence(array_all_equal(size(s), \"-\"));\n\npartition_copy(begin(s), end(s), begin(odds), begin(evens), even);\n\nprint(evens);\nprint(odds);"]; }
 
 function __partition_copy_references() { return ["Elements of Programming, ch. 9, p. 158."]; }
 
 function __partition_copy_usage() {
-    const pred = predicate(x => (x & 1) === 0);
-    const s = sequence(array_random(), "s", pred);
-    const even = sequence(array_all_equal(size(s), "-"));
-    const odd = sequence(array_all_equal(size(s), "-"));
-    partition_copy(begin(s), end(s), begin(odd), begin(even), pred);
-    print(even);
-    print(odd);
+    const s = sequence(array_random(), "s", even);
+    const evens = sequence(array_all_equal(size(s), "-"));
+    const odds = sequence(array_all_equal(size(s), "-"));
+    partition_copy(begin(s), end(s), begin(odds), begin(evens), even);
+    print(evens);
+    print(odds);
 }
 
 function __partition_copy_attributes() {
 }
 
-function __partition_copy_n_typescript() { return ["function partition_copy_n<T, U>(f: Iter<T>, n: number, u: Iter<U>, t: Iter<U>, p: Predicate<T>) {\n    const ps = predicate_source(p);\n    return split_copy_n(f, n, u, t, ps);\n}","const pred = predicate(x => (x & 1) === 0);\nconst s = sequence(array_random(), \"s\", pred);\nconst even = sequence(array_all_equal(size(s), \"-\"));\nconst odd = sequence(array_all_equal(size(s), \"-\"));\n\npartition_copy_n(begin(s), size(s), begin(odd), begin(even), pred);\n\nprint(even);\nprint(odd);"]; }
+function __partition_copy_n_typescript() { return ["function partition_copy_n<T, U>(f: Iter<T>, n: number, u: Iter<U>, t: Iter<U>, p: Predicate<T>) {\n    const ps = predicate_source(p);\n    return split_copy_n(f, n, u, t, ps);\n}","const s = sequence(array_random(), \"s\", even);\nconst evens = sequence(array_all_equal(size(s), \"-\"));\nconst odds = sequence(array_all_equal(size(s), \"-\"));\n\npartition_copy_n(begin(s), size(s), begin(odds), begin(evens), even);\n\nprint(evens);\nprint(odds);"]; }
 
 function __partition_copy_n_references() { return ["Elements of Programming, ch. 9, p. 158 (counted variant in eop.h)."]; }
 
 function __partition_copy_n_usage() {
-    const pred = predicate(x => (x & 1) === 0);
-    const s = sequence(array_random(), "s", pred);
-    const even = sequence(array_all_equal(size(s), "-"));
-    const odd = sequence(array_all_equal(size(s), "-"));
-    partition_copy_n(begin(s), size(s), begin(odd), begin(even), pred);
-    print(even);
-    print(odd);
+    const s = sequence(array_random(), "s", even);
+    const evens = sequence(array_all_equal(size(s), "-"));
+    const odds = sequence(array_all_equal(size(s), "-"));
+    partition_copy_n(begin(s), size(s), begin(odds), begin(evens), even);
+    print(evens);
+    print(odds);
 }
 
 function __partition_copy_n_attributes() {
 }
 
-function __split_copy_typescript() { return ["function split_copy<T, U>(f: Iter<T>, l: Iter<T>, u: Iter<U>, t: Iter<U>, p: Predicate<Iter<T>>) {\n    while ( ! equal(f, l)) {\n        if (p(f)) {\n            sink(t, source(f));\n            t = successor(t);\n        } else {\n            sink(u, source(f));\n            u = successor(u);\n        }\n        f = successor(f);\n    }\n    return [u, t];\n}","const pred = predicate<Iter<number>>(function even(x) { return (source(x) & 1) == 0; });\nconst s = sequence(array_random());\nconst even = sequence(array_all_equal(size(s), \"-\"));\nconst odd = sequence(array_all_equal(size(s), \"-\"));\n\nsplit_copy(begin(s), end(s), begin(odd), begin(even), pred);\n\nprint(even);\nprint(odd);"]; }
+function __split_copy_typescript() { return ["function split_copy<T, U>(f: Iter<T>, l: Iter<T>, u: Iter<U>, t: Iter<U>, p: Predicate<Iter<T>>) {\n    while ( ! equal(f, l)) {\n        if (p(f)) {\n            sink(t, source(f));\n            t = successor(t);\n        } else {\n            sink(u, source(f));\n            u = successor(u);\n        }\n        f = successor(f);\n    }\n    return [u, t];\n}","const evenAt = predicate_source(even);\nconst s = sequence(array_random());\nconst evens = sequence(array_all_equal(size(s), \"-\"));\nconst odds = sequence(array_all_equal(size(s), \"-\"));\n\nsplit_copy(begin(s), end(s), begin(odds), begin(evens), evenAt);\n\nprint(evens);\nprint(odds);"]; }
 
 function __split_copy_references() { return ["Elements of Programming, ch. 9, pp. 156–157."]; }
 
 function __split_copy_usage() {
-    const pred = predicate(function even(x) { return (source(x) & 1) == 0; });
+    const evenAt = predicate_source(even);
     const s = sequence(array_random());
-    const even = sequence(array_all_equal(size(s), "-"));
-    const odd = sequence(array_all_equal(size(s), "-"));
-    split_copy(begin(s), end(s), begin(odd), begin(even), pred);
-    print(even);
-    print(odd);
+    const evens = sequence(array_all_equal(size(s), "-"));
+    const odds = sequence(array_all_equal(size(s), "-"));
+    split_copy(begin(s), end(s), begin(odds), begin(evens), evenAt);
+    print(evens);
+    print(odds);
 }
 
 function __split_copy_attributes() {
 }
 
-function __split_copy_n_typescript() { return ["function split_copy_n<T, U>(f: Iter<T>, n: number, u: Iter<U>, t: Iter<U>, p: Predicate<Iter<T>>) {\n    while (n != 0) {\n        if (p(f)) {\n            sink(t, source(f));\n            t = successor(t);\n        } else {\n            sink(u, source(f));\n            u = successor(u);\n        }\n        f = successor(f);\n        --n;\n    }\n    return [f, u, t];\n}","const pred = predicate<Iter<number>>(function even(x) { return (source(x) & 1) == 0; });\nconst s = sequence(array_random());\nconst even = sequence(array_all_equal(size(s), \"-\"));\nconst odd = sequence(array_all_equal(size(s), \"-\"));\n\nsplit_copy_n(begin(s), size(s), begin(odd), begin(even), pred);\n\nprint(even);\nprint(odd);"]; }
+function __split_copy_n_typescript() { return ["function split_copy_n<T, U>(f: Iter<T>, n: number, u: Iter<U>, t: Iter<U>, p: Predicate<Iter<T>>) {\n    while (n != 0) {\n        if (p(f)) {\n            sink(t, source(f));\n            t = successor(t);\n        } else {\n            sink(u, source(f));\n            u = successor(u);\n        }\n        f = successor(f);\n        --n;\n    }\n    return [f, u, t];\n}","const evenAt = predicate_source(even);\nconst s = sequence(array_random());\nconst evens = sequence(array_all_equal(size(s), \"-\"));\nconst odds = sequence(array_all_equal(size(s), \"-\"));\n\nsplit_copy_n(begin(s), size(s), begin(odds), begin(evens), evenAt);\n\nprint(evens);\nprint(odds);"]; }
 
 function __split_copy_n_references() { return ["Elements of Programming, ch. 9, pp. 156–157 (counted variant in eop.h)."]; }
 
 function __split_copy_n_usage() {
-    const pred = predicate(function even(x) { return (source(x) & 1) == 0; });
+    const evenAt = predicate_source(even);
     const s = sequence(array_random());
-    const even = sequence(array_all_equal(size(s), "-"));
-    const odd = sequence(array_all_equal(size(s), "-"));
-    split_copy_n(begin(s), size(s), begin(odd), begin(even), pred);
-    print(even);
-    print(odd);
+    const evens = sequence(array_all_equal(size(s), "-"));
+    const odds = sequence(array_all_equal(size(s), "-"));
+    split_copy_n(begin(s), size(s), begin(odds), begin(evens), evenAt);
+    print(evens);
+    print(odds);
 }
 
 function __split_copy_n_attributes() {
@@ -2559,12 +2555,11 @@ function __push_heap_n_usage() {
 function __push_heap_n_attributes() {
 }
 
-function __partition_semistable_typescript() { return ["function partition_semistable<T>(f: Iter<T>, l: Iter<T>, p: Predicate<T>) {\n    while (true) {\n        if (equal(f, l)) return f;\n        if (p(source(f))) break;\n        f = successor(f);\n    }\n\n    let j = f;\n    j = successor(j)\n\n    while ( ! equal(j, l)) {\n        if ( ! p(source(j))) {\n            iter_swap(f, j);\n            f = successor(f);\n        }\n        j = successor(j);\n    }\n    return f;\n}","const even = predicate(x => (x & 1) === 0);\nconst d = sequence(array_random(), \"d\", even, undefined, true);\nconst f = begin(d);\nconst l = end(d);\n\nconst p = partition_semistable(f, l, even);\nif ( ! equal(p, l)) {\n    const partitionValue = source(p);\n    print('partition point: ' + partitionValue);\n}"]; }
+function __partition_semistable_typescript() { return ["function partition_semistable<T>(f: Iter<T>, l: Iter<T>, p: Predicate<T>) {\n    while (true) {\n        if (equal(f, l)) return f;\n        if (p(source(f))) break;\n        f = successor(f);\n    }\n\n    let j = f;\n    j = successor(j)\n\n    while ( ! equal(j, l)) {\n        if ( ! p(source(j))) {\n            iter_swap(f, j);\n            f = successor(f);\n        }\n        j = successor(j);\n    }\n    return f;\n}","const d = sequence(array_random(), \"d\", even, undefined, true);\nconst f = begin(d);\nconst l = end(d);\n\nconst p = partition_semistable(f, l, even);\nif ( ! equal(p, l)) {\n    const partitionValue = source(p);\n    print('partition point: ' + partitionValue);\n}"]; }
 
 function __partition_semistable_references() { return ["Elements of Programming, ch. 11, p. 190."]; }
 
 function __partition_semistable_usage() {
-    const even = predicate(x => (x & 1) === 0);
     const d = sequence(array_random(), "d", even, undefined, true);
     const f = begin(d);
     const l = end(d);
@@ -2578,12 +2573,11 @@ function __partition_semistable_usage() {
 function __partition_semistable_attributes() {
 }
 
-function __partition_semistable_1_typescript() { return ["function partition_semistable_1<T>(f: Iter<T>, l: Iter<T>, p: Predicate<T>) {\n    f = find_if(f, l, p);\n    if (f == l) return f;\n\n    let j = f;\n    j = successor(j)\n\n    while ( ! equal(j, l)) {\n        if ( ! p(source(j))) {\n            iter_swap(f, j);\n            f = successor(f);\n        }\n        j = successor(j);\n    }\n    return f;\n}","const even = predicate(x => (x & 1) === 0);\nconst d = sequence(array_random(), \"d\", even, undefined, true);\nconst f = begin(d);\nconst l = end(d);\n\nconst p = partition_semistable_1(f, l, even);\nif ( ! equal(p, l)) {\n    const partitionValue = source(p);\n    print('partition point: ' + partitionValue);\n}"]; }
+function __partition_semistable_1_typescript() { return ["function partition_semistable_1<T>(f: Iter<T>, l: Iter<T>, p: Predicate<T>) {\n    f = find_if(f, l, p);\n    if (f == l) return f;\n\n    let j = f;\n    j = successor(j)\n\n    while ( ! equal(j, l)) {\n        if ( ! p(source(j))) {\n            iter_swap(f, j);\n            f = successor(f);\n        }\n        j = successor(j);\n    }\n    return f;\n}","const d = sequence(array_random(), \"d\", even, undefined, true);\nconst f = begin(d);\nconst l = end(d);\n\nconst p = partition_semistable_1(f, l, even);\nif ( ! equal(p, l)) {\n    const partitionValue = source(p);\n    print('partition point: ' + partitionValue);\n}"]; }
 
 function __partition_semistable_1_references() { return ["Elements of Programming, ch. 11, pp. 190–191 (variant of partition_semistable)."]; }
 
 function __partition_semistable_1_usage() {
-    const even = predicate(x => (x & 1) === 0);
     const d = sequence(array_random(), "d", even, undefined, true);
     const f = begin(d);
     const l = end(d);
@@ -2597,12 +2591,11 @@ function __partition_semistable_1_usage() {
 function __partition_semistable_1_attributes() {
 }
 
-function __partition_semistable_nonempty_typescript() { return ["function partition_semistable_nonempty<T>(f: Iter<T>, l: Iter<T>, p: Predicate<T>) {\n    //precondition: nonempty: ! equal(f, l)\n    while ( ! p(source(f))) {\n        f = successor(f);\n        if (equal(f, l)) return;\n    }\n\n    let j = f;\n    j = successor(j)\n    if (equal(j, l)) return;\n\n    while ( ! equal(successor(j), l)) {\n        if ( ! p(source(j))) {\n            iter_swap(f, j);\n            f = successor(f);\n        }\n        j = successor(j);\n    }\n    iter_swap(f, j);\n}","const even = predicate(x => (x & 1) === 0);\nconst d = sequence(array_random(), \"d\", even, undefined, true);\nconst f = begin(d);\nconst l = end(d);\n\npartition_semistable_nonempty(f, l, even);"]; }
+function __partition_semistable_nonempty_typescript() { return ["function partition_semistable_nonempty<T>(f: Iter<T>, l: Iter<T>, p: Predicate<T>) {\n    //precondition: nonempty: ! equal(f, l)\n    while ( ! p(source(f))) {\n        f = successor(f);\n        if (equal(f, l)) return;\n    }\n\n    let j = f;\n    j = successor(j)\n    if (equal(j, l)) return;\n\n    while ( ! equal(successor(j), l)) {\n        if ( ! p(source(j))) {\n            iter_swap(f, j);\n            f = successor(f);\n        }\n        j = successor(j);\n    }\n    iter_swap(f, j);\n}","const d = sequence(array_random(), \"d\", even, undefined, true);\nconst f = begin(d);\nconst l = end(d);\n\npartition_semistable_nonempty(f, l, even);"]; }
 
 function __partition_semistable_nonempty_references() { return ["Elements of Programming, ch. 11, pp. 190–191 (variant of partition_semistable)."]; }
 
 function __partition_semistable_nonempty_usage() {
-    const even = predicate(x => (x & 1) === 0);
     const d = sequence(array_random(), "d", even, undefined, true);
     const f = begin(d);
     const l = end(d);
@@ -2612,10 +2605,9 @@ function __partition_semistable_nonempty_usage() {
 function __partition_semistable_nonempty_attributes() {
 }
 
-function __partition_stable_forward_typescript() { return ["function partition_stable_forward<T>(f: Iter<T>, l: Iter<T>, p: Predicate<T>) {\n    while (true) {\n        if (equal(f, l)) return f;\n        if (p(source(f))) break;\n        f = successor(f);\n    }\n\n    let j = f;\n    j = successor(j)\n\n    while ( ! equal(j, l)) {\n        if ( ! p(source(j))) {\n            rotate_bidirectional(f, j, successor(j));     //TODO: refine rotate_bidirectional(...)\n            f = successor(f);\n        }\n        j = successor(j);\n    }\n    return f;\n}","const even = predicate(x => (x & 1) === 0);\nconst d = sequence(array_random(), \"d\", even);\nconst f = begin(d);\nconst l = end(d);\n\nconst p = partition_stable_forward(f, l, even);\nif ( ! equal(p, l)) {\n    const partitionValue = source(p);\n    print('partition point: ' + partitionValue);\n}"]; }
+function __partition_stable_forward_typescript() { return ["function partition_stable_forward<T>(f: Iter<T>, l: Iter<T>, p: Predicate<T>) {\n    while (true) {\n        if (equal(f, l)) return f;\n        if (p(source(f))) break;\n        f = successor(f);\n    }\n\n    let j = f;\n    j = successor(j)\n\n    while ( ! equal(j, l)) {\n        if ( ! p(source(j))) {\n            rotate_bidirectional(f, j, successor(j));     //TODO: refine rotate_bidirectional(...)\n            f = successor(f);\n        }\n        j = successor(j);\n    }\n    return f;\n}","const d = sequence(array_random(), \"d\", even);\nconst f = begin(d);\nconst l = end(d);\n\nconst p = partition_stable_forward(f, l, even);\nif ( ! equal(p, l)) {\n    const partitionValue = source(p);\n    print('partition point: ' + partitionValue);\n}"]; }
 
 function __partition_stable_forward_usage() {
-    const even = predicate(x => (x & 1) === 0);
     const d = sequence(array_random(), "d", even);
     const f = begin(d);
     const l = end(d);
@@ -2629,12 +2621,11 @@ function __partition_stable_forward_usage() {
 function __partition_stable_forward_attributes() {
 }
 
-function __partition_stable_with_buffer_0_typescript() { return ["function partition_stable_with_buffer_0<T>(f: Iter<T>, l: Iter<T>, p: Predicate<T>, b: Iter<T>) {\n    const tmp = partition_copy(f, l, f, b, p);\n    const tf = tmp[0];\n    const ts = tmp[1];\n    copy(b, ts, tf);\n    return tf;\n}","const even = predicate(x => (x & 1) === 0);\nconst d = sequence(array_random(), \"d\", even);\nconst buf = sequence(array_all_equal(size(d), 0));\n\nconst p = partition_stable_with_buffer_0(begin(d), end(d), even, begin(buf));\nif ( ! equal(p, end(d))) {\n    const partitionValue = source(p);\n    print('partition point: ' + partitionValue);\n}"]; }
+function __partition_stable_with_buffer_0_typescript() { return ["function partition_stable_with_buffer_0<T>(f: Iter<T>, l: Iter<T>, p: Predicate<T>, b: Iter<T>) {\n    const tmp = partition_copy(f, l, f, b, p);\n    const tf = tmp[0];\n    const ts = tmp[1];\n    copy(b, ts, tf);\n    return tf;\n}","const d = sequence(array_random(), \"d\", even);\nconst buf = sequence(array_all_equal(size(d), 0));\n\nconst p = partition_stable_with_buffer_0(begin(d), end(d), even, begin(buf));\nif ( ! equal(p, end(d))) {\n    const partitionValue = source(p);\n    print('partition point: ' + partitionValue);\n}"]; }
 
 function __partition_stable_with_buffer_0_references() { return ["Elements of Programming, ch. 11, p. 193 (variant of partition_stable_with_buffer)."]; }
 
 function __partition_stable_with_buffer_0_usage() {
-    const even = predicate(x => (x & 1) === 0);
     const d = sequence(array_random(), "d", even);
     const buf = sequence(array_all_equal(size(d), 0));
     const p = partition_stable_with_buffer_0(begin(d), end(d), even, begin(buf));
@@ -2747,12 +2738,11 @@ function __lower_bound_n_usage() {
 function __lower_bound_n_attributes() {
 }
 
-function __partition_point_n_typescript() { return ["function partition_point_n<I extends Iter<unknown>>(f: I, n: number, p: Predicate<ValueOf<I>>): I {\n    while (n != 0) {\n        const h = half(n);\n        const m = successor(f, h);\n\n        if (p(source(m))) {\n            n = h;\n        } else {\n            n -= h + 1;\n            f = successor(m);\n        }\n    }\n    return f;\n}","const even = predicate(x => (x & 1) === 0);\n\nconst d = sequence([1, 5, 1, 1, 3, 3, 3, 7, 3, 2, 6, 4], \"d\", even);\n\nconst p = partition_point_n(begin(d), size(d), even);\nconst partitionValue = source(p);\nprint('partition point: ' + partitionValue);"]; }
+function __partition_point_n_typescript() { return ["function partition_point_n<I extends Iter<unknown>>(f: I, n: number, p: Predicate<ValueOf<I>>): I {\n    while (n != 0) {\n        const h = half(n);\n        const m = successor(f, h);\n\n        if (p(source(m))) {\n            n = h;\n        } else {\n            n -= h + 1;\n            f = successor(m);\n        }\n    }\n    return f;\n}","const d = sequence([1, 5, 1, 1, 3, 3, 3, 7, 3, 2, 6, 4], \"d\", even);\n\nconst p = partition_point_n(begin(d), size(d), even);\nconst partitionValue = source(p);\nprint('partition point: ' + partitionValue);"]; }
 
 function __partition_point_n_references() { return ["Elements of Programming, ch. 6, p. 104.","From Mathematics to Generic Programming, ch. 10, p. 193 (ch10.h)."]; }
 
 function __partition_point_n_usage() {
-    const even = predicate(x => (x & 1) === 0);
     const d = sequence([1, 5, 1, 1, 3, 3, 3, 7, 3, 2, 6, 4], "d", even);
     const p = partition_point_n(begin(d), size(d), even);
     const partitionValue = source(p);
@@ -2800,12 +2790,11 @@ function __upper_bound_n_usage() {
 function __upper_bound_n_attributes() {
 }
 
-function __all_typescript() { return ["function all<I extends Iter<unknown>>(f: I, l: I, p: Predicate<ValueOf<I>>): boolean {\n    const np = find_if_not(f, l, p);\n    return equal(l, np);\n}","const even = predicate(x => (x & 1) === 0);\nconst d = sequence([2, 4, 6]);\nconst f = begin(d);\nconst l = end(d);\n\nconst result = all(f, l, even);\n\nif (result) {\n    print(\"All the elements of the sequence are even.\");\n} else {\n    print(\"There is at least one item in the sequence that is not even.\");\n}"]; }
+function __all_typescript() { return ["function all<I extends Iter<unknown>>(f: I, l: I, p: Predicate<ValueOf<I>>): boolean {\n    const np = find_if_not(f, l, p);\n    return equal(l, np);\n}","const d = sequence([2, 4, 6]);\nconst f = begin(d);\nconst l = end(d);\n\nconst result = all(f, l, even);\n\nif (result) {\n    print(\"All the elements of the sequence are even.\");\n} else {\n    print(\"There is at least one item in the sequence that is not even.\");\n}"]; }
 
 function __all_references() { return ["Elements of Programming, ch. 6, p. 95, exercise 6.1 (companion implementation in eop.h)."]; }
 
 function __all_usage() {
-    const even = predicate(x => (x & 1) === 0);
     const d = sequence([2, 4, 6]);
     const f = begin(d);
     const l = end(d);
@@ -2821,12 +2810,11 @@ function __all_usage() {
 function __all_attributes() {
 }
 
-function __all_n_typescript() { return ["function all_n<I extends Iter<unknown>>(f: I, n: number, p: Predicate<ValueOf<I>>): boolean {\n    const [, remaining] = find_if_not_n(f, n, p);\n    return remaining === 0;\n}","const even = predicate(x => (x & 1) === 0);\nconst d = sequence([2, 4, 6, 7]);\nconst result = all_n(begin(d), 3, even);\nprint(\"All of the first three elements are even: \" + result);"]; }
+function __all_n_typescript() { return ["function all_n<I extends Iter<unknown>>(f: I, n: number, p: Predicate<ValueOf<I>>): boolean {\n    const [, remaining] = find_if_not_n(f, n, p);\n    return remaining === 0;\n}","const d = sequence([2, 4, 6, 7]);\nconst result = all_n(begin(d), 3, even);\nprint(\"All of the first three elements are even: \" + result);"]; }
 
 function __all_n_references() { return ["Elements of Programming, ch. 6, p. 99, exercise 6.3."]; }
 
 function __all_n_usage() {
-    const even = predicate(x => (x & 1) === 0);
     const d = sequence([2, 4, 6, 7]);
     const result = all_n(begin(d), 3, even);
     print("All of the first three elements are even: " + result);
@@ -2894,12 +2882,11 @@ function __find_adjacent_mismatch_forward_usage() {
 function __find_adjacent_mismatch_forward_attributes() {
 }
 
-function __find_backward_if_typescript() { return ["function find_backward_if<I extends BidirectionalIterator>(\n    f: I, l: I, p: Predicate<ValueOf<I>>,\n): I {\n    while (true) {\n        if (equal(l, f)) return f;\n        l = predecessor(l);\n        if (p(source(l))) return successor(l);\n    }\n}","const even = predicate(x => (x & 1) === 0);\nconst d = sequence([2, 3, 4, 7]);\nconst f = begin(d);\nconst result = find_backward_if(f, end(d), even);\n\nif (equal(result, f)) {\n    print(\"No matching element.\");\n} else {\n    const value = source(predecessor(result));\n    print(\"Last even element: \" + value);\n}"]; }
+function __find_backward_if_typescript() { return ["function find_backward_if<I extends BidirectionalIterator>(\n    f: I, l: I, p: Predicate<ValueOf<I>>,\n): I {\n    while (true) {\n        if (equal(l, f)) return f;\n        l = predecessor(l);\n        if (p(source(l))) return successor(l);\n    }\n}","const d = sequence([2, 3, 4, 7]);\nconst f = begin(d);\nconst result = find_backward_if(f, end(d), even);\n\nif (equal(result, f)) {\n    print(\"No matching element.\");\n} else {\n    const value = source(predecessor(result));\n    print(\"Last even element: \" + value);\n}"]; }
 
 function __find_backward_if_references() { return ["Elements of Programming, ch. 6, pp. 108–109 (exercise 6.8)."]; }
 
 function __find_backward_if_usage() {
-    const even = predicate(x => (x & 1) === 0);
     const d = sequence([2, 3, 4, 7]);
     const f = begin(d);
     const result = find_backward_if(f, end(d), even);
@@ -2915,12 +2902,11 @@ function __find_backward_if_usage() {
 function __find_backward_if_attributes() {
 }
 
-function __find_if_typescript() { return ["function find_if<I extends Iter<unknown>>(f: I, l: I, p: Predicate<ValueOf<I>>): I {\n    while (!equal(f, l) && !p(source(f))) {\n        f = successor(f);\n    }\n    return f;\n}","const even = predicate(x => (x & 1) === 0);\nconst d = sequence([1, 3, 8, 5, 6]);\nconst l = end(d);\nconst result = find_if(begin(d), l, even);\n\nif (equal(result, l)) {\n    print(\"No matching element.\");\n} else {\n    const value = source(result);\n    print(\"First even element: \" + value);\n}"]; }
+function __find_if_typescript() { return ["function find_if<I extends Iter<unknown>>(f: I, l: I, p: Predicate<ValueOf<I>>): I {\n    while (!equal(f, l) && !p(source(f))) {\n        f = successor(f);\n    }\n    return f;\n}","const d = sequence([1, 3, 8, 5, 6]);\nconst l = end(d);\nconst result = find_if(begin(d), l, even);\n\nif (equal(result, l)) {\n    print(\"No matching element.\");\n} else {\n    const value = source(result);\n    print(\"First even element: \" + value);\n}"]; }
 
 function __find_if_references() { return ["Elements of Programming, ch. 6, pp. 94–95.","From Mathematics to Generic Programming, ch. 10, pp. 190–191 (ch10.h)."]; }
 
 function __find_if_usage() {
-    const even = predicate(x => (x & 1) === 0);
     const d = sequence([1, 3, 8, 5, 6]);
     const l = end(d);
     const result = find_if(begin(d), l, even);
@@ -2936,12 +2922,11 @@ function __find_if_usage() {
 function __find_if_attributes() {
 }
 
-function __find_if_n_typescript() { return ["function find_if_n<I extends Iter<unknown>>(\n    f: I, n: number, p: Predicate<ValueOf<I>>,\n): [I, number] {\n    pre(() => Number.isSafeInteger(n) && n >= 0, \"The count must be a nonnegative safe integer.\");\n\n    while (n !== 0 && !p(source(f))) {\n        f = successor(f);\n        --n;\n    }\n    return [f, n];\n}","const even = predicate(x => (x & 1) === 0);\nconst d = sequence([1, 3, 8, 5, 6]);\nconst [result, remaining] = find_if_n(begin(d), size(d), even);\n\nif (remaining === 0) {\n    print(\"No matching element.\");\n} else {\n    const value = source(result);\n    print(\"Found \" + value + \" with \" + remaining + \" elements remaining.\");\n}"]; }
+function __find_if_n_typescript() { return ["function find_if_n<I extends Iter<unknown>>(\n    f: I, n: number, p: Predicate<ValueOf<I>>,\n): [I, number] {\n    pre(() => Number.isSafeInteger(n) && n >= 0, \"The count must be a nonnegative safe integer.\");\n\n    while (n !== 0 && !p(source(f))) {\n        f = successor(f);\n        --n;\n    }\n    return [f, n];\n}","const d = sequence([1, 3, 8, 5, 6]);\nconst [result, remaining] = find_if_n(begin(d), size(d), even);\n\nif (remaining === 0) {\n    print(\"No matching element.\");\n} else {\n    const value = source(result);\n    print(\"Found \" + value + \" with \" + remaining + \" elements remaining.\");\n}"]; }
 
 function __find_if_n_references() { return ["From Mathematics to Generic Programming, ch. 10, p. 191 (ch10.h)."]; }
 
 function __find_if_n_usage() {
-    const even = predicate(x => (x & 1) === 0);
     const d = sequence([1, 3, 8, 5, 6]);
     const [result, remaining] = find_if_n(begin(d), size(d), even);
     if (remaining === 0) {
@@ -2956,12 +2941,11 @@ function __find_if_n_usage() {
 function __find_if_n_attributes() {
 }
 
-function __find_if_not_typescript() { return ["function find_if_not<I extends Iter<unknown>>(f: I, l: I, p: Predicate<ValueOf<I>>): I {\n    while (!equal(f, l) && p(source(f))) {\n        f = successor(f);\n    }\n    return f;\n}","const even = predicate(x => (x & 1) === 0);\nconst d = sequence([2, 4, 7, 8]);\nconst l = end(d);\nconst result = find_if_not(begin(d), l, even);\n\nif (equal(result, l)) {\n    print(\"No matching element.\");\n} else {\n    const value = source(result);\n    print(\"First element that is not even: \" + value);\n}"]; }
+function __find_if_not_typescript() { return ["function find_if_not<I extends Iter<unknown>>(f: I, l: I, p: Predicate<ValueOf<I>>): I {\n    while (!equal(f, l) && p(source(f))) {\n        f = successor(f);\n    }\n    return f;\n}","const d = sequence([2, 4, 7, 8]);\nconst l = end(d);\nconst result = find_if_not(begin(d), l, even);\n\nif (equal(result, l)) {\n    print(\"No matching element.\");\n} else {\n    const value = source(result);\n    print(\"First element that is not even: \" + value);\n}"]; }
 
 function __find_if_not_references() { return ["Elements of Programming, ch. 6, p. 95 (described in the text; implementation in eop.h)."]; }
 
 function __find_if_not_usage() {
-    const even = predicate(x => (x & 1) === 0);
     const d = sequence([2, 4, 7, 8]);
     const l = end(d);
     const result = find_if_not(begin(d), l, even);
@@ -2977,12 +2961,11 @@ function __find_if_not_usage() {
 function __find_if_not_attributes() {
 }
 
-function __find_if_not_n_typescript() { return ["function find_if_not_n<I extends Iter<unknown>>(\n    f: I, n: number, p: Predicate<ValueOf<I>>,\n): [I, number] {\n    return find_if_n(f, n, value => !p(value));\n}","const even = predicate(x => (x & 1) === 0);\nconst d = sequence([2, 4, 7, 8]);\nconst [result, remaining] = find_if_not_n(begin(d), size(d), even);\nif (remaining === 0) {\n    print(\"No odd element.\");\n} else {\n    const value = source(result);\n    print(\"First odd element: \" + value);\n}"]; }
+function __find_if_not_n_typescript() { return ["function find_if_not_n<I extends Iter<unknown>>(\n    f: I, n: number, p: Predicate<ValueOf<I>>,\n): [I, number] {\n    return find_if_n(f, n, value => !p(value));\n}","const d = sequence([2, 4, 7, 8]);\nconst [result, remaining] = find_if_not_n(begin(d), size(d), even);\nif (remaining === 0) {\n    print(\"No odd element.\");\n} else {\n    const value = source(result);\n    print(\"First odd element: \" + value);\n}"]; }
 
 function __find_if_not_n_references() { return ["Elements of Programming, ch. 6, p. 99, exercise 6.3."]; }
 
 function __find_if_not_n_usage() {
-    const even = predicate(x => (x & 1) === 0);
     const d = sequence([2, 4, 7, 8]);
     const [result, remaining] = find_if_not_n(begin(d), size(d), even);
     if (remaining === 0) {
@@ -2997,12 +2980,11 @@ function __find_if_not_n_usage() {
 function __find_if_not_n_attributes() {
 }
 
-function __find_if_not_unguarded_typescript() { return ["function find_if_not_unguarded<I extends Iter<unknown>>(f: I, p: Predicate<ValueOf<I>>): I {\n    // Precondition: an element reachable from f does not satisfy p.\n    while (p(source(f))) {\n        f = successor(f);\n    }\n    return f;\n}","const even = predicate(x => (x & 1) === 0);\n// The final element is the sentinel.\nconst d = sequence([2, 4, 8, 7]);\nconst result = find_if_not_unguarded(begin(d), even);\nconst value = source(result);\nprint(\"First odd element: \" + value);"]; }
+function __find_if_not_unguarded_typescript() { return ["function find_if_not_unguarded<I extends Iter<unknown>>(f: I, p: Predicate<ValueOf<I>>): I {\n    // Precondition: an element reachable from f does not satisfy p.\n    while (p(source(f))) {\n        f = successor(f);\n    }\n    return f;\n}","// The final element is the sentinel.\nconst d = sequence([2, 4, 8, 7]);\nconst result = find_if_not_unguarded(begin(d), even);\nconst value = source(result);\nprint(\"First odd element: \" + value);"]; }
 
 function __find_if_not_unguarded_references() { return ["Elements of Programming, ch. 6, p. 99."]; }
 
 function __find_if_not_unguarded_usage() {
-    const even = predicate(x => (x & 1) === 0);
     // The final element is the sentinel.
     const d = sequence([2, 4, 8, 7]);
     const result = find_if_not_unguarded(begin(d), even);
@@ -3013,12 +2995,11 @@ function __find_if_not_unguarded_usage() {
 function __find_if_not_unguarded_attributes() {
 }
 
-function __find_if_unguarded_typescript() { return ["function find_if_unguarded<I extends Iter<unknown>>(f: I, p: Predicate<ValueOf<I>>): I {\n    // Precondition: an element reachable from f satisfies p.\n    while (!p(source(f))) {\n        f = successor(f);\n    }\n    return f;\n}","const even = predicate(x => (x & 1) === 0);\n// The final element is the sentinel.\nconst d = sequence([1, 3, 5, 8]);\nconst result = find_if_unguarded(begin(d), even);\nconst value = source(result);\nprint(\"First even element: \" + value);"]; }
+function __find_if_unguarded_typescript() { return ["function find_if_unguarded<I extends Iter<unknown>>(f: I, p: Predicate<ValueOf<I>>): I {\n    // Precondition: an element reachable from f satisfies p.\n    while (!p(source(f))) {\n        f = successor(f);\n    }\n    return f;\n}","// The final element is the sentinel.\nconst d = sequence([1, 3, 5, 8]);\nconst result = find_if_unguarded(begin(d), even);\nconst value = source(result);\nprint(\"First even element: \" + value);"]; }
 
 function __find_if_unguarded_references() { return ["Elements of Programming, ch. 6, p. 99."]; }
 
 function __find_if_unguarded_usage() {
-    const even = predicate(x => (x & 1) === 0);
     // The final element is the sentinel.
     const d = sequence([1, 3, 5, 8]);
     const result = find_if_unguarded(begin(d), even);
@@ -3276,12 +3257,11 @@ function __kmp_lps_attributes() {
 
 }
 
-function __none_typescript() { return ["function none<I extends Iter<unknown>>(f: I, l: I, p: Predicate<ValueOf<I>>): boolean {\n    const it = find_if(f, l, p);\n    return equal(l, it);\n}","const even = predicate(x => (x & 1) === 0);\nconst d = sequence([1, 3, 5]);\nconst f = begin(d);\nconst l = end(d);\n\nconst result = none(f, l, even);\n\nif (result) {\n    print(\"None of the elements in the sequence are even.\");\n} else {\n    print(\"There is at least one item in the sequence that is even.\");\n}"]; }
+function __none_typescript() { return ["function none<I extends Iter<unknown>>(f: I, l: I, p: Predicate<ValueOf<I>>): boolean {\n    const it = find_if(f, l, p);\n    return equal(l, it);\n}","const d = sequence([1, 3, 5]);\nconst f = begin(d);\nconst l = end(d);\n\nconst result = none(f, l, even);\n\nif (result) {\n    print(\"None of the elements in the sequence are even.\");\n} else {\n    print(\"There is at least one item in the sequence that is even.\");\n}"]; }
 
 function __none_references() { return ["Elements of Programming, ch. 6, p. 95, exercise 6.1 (companion implementation in eop.h)."]; }
 
 function __none_usage() {
-    const even = predicate(x => (x & 1) === 0);
     const d = sequence([1, 3, 5]);
     const f = begin(d);
     const l = end(d);
@@ -3297,12 +3277,11 @@ function __none_usage() {
 function __none_attributes() {
 }
 
-function __none_n_typescript() { return ["function none_n<I extends Iter<unknown>>(f: I, n: number, p: Predicate<ValueOf<I>>): boolean {\n    const [, remaining] = find_if_n(f, n, p);\n    return remaining === 0;\n}","const even = predicate(x => (x & 1) === 0);\nconst d = sequence([1, 3, 5, 8]);\nconst result = none_n(begin(d), 3, even);\nprint(\"None of the first three elements are even: \" + result);"]; }
+function __none_n_typescript() { return ["function none_n<I extends Iter<unknown>>(f: I, n: number, p: Predicate<ValueOf<I>>): boolean {\n    const [, remaining] = find_if_n(f, n, p);\n    return remaining === 0;\n}","const d = sequence([1, 3, 5, 8]);\nconst result = none_n(begin(d), 3, even);\nprint(\"None of the first three elements are even: \" + result);"]; }
 
 function __none_n_references() { return ["Elements of Programming, ch. 6, p. 99, exercise 6.3."]; }
 
 function __none_n_usage() {
-    const even = predicate(x => (x & 1) === 0);
     const d = sequence([1, 3, 5, 8]);
     const result = none_n(begin(d), 3, even);
     print("None of the first three elements are even: " + result);
@@ -3311,12 +3290,11 @@ function __none_n_usage() {
 function __none_n_attributes() {
 }
 
-function __not_all_typescript() { return ["function not_all<I extends Iter<unknown>>(f: I, l: I, p: Predicate<ValueOf<I>>): boolean {\n    return !all(f, l, p);\n}","const even = predicate(x => (x & 1) === 0);\nconst d = sequence([2, 3, 4]);\nconst f = begin(d);\nconst l = end(d);\n\nconst result = not_all(f, l, even);\n\nif (result) {\n    print(\"There is at least one item in the sequence that is not even.\");\n} else {\n    print(\"All the elements of the sequence are even.\");\n}"]; }
+function __not_all_typescript() { return ["function not_all<I extends Iter<unknown>>(f: I, l: I, p: Predicate<ValueOf<I>>): boolean {\n    return !all(f, l, p);\n}","const d = sequence([2, 3, 4]);\nconst f = begin(d);\nconst l = end(d);\n\nconst result = not_all(f, l, even);\n\nif (result) {\n    print(\"There is at least one item in the sequence that is not even.\");\n} else {\n    print(\"All the elements of the sequence are even.\");\n}"]; }
 
 function __not_all_references() { return ["Elements of Programming, ch. 6, p. 95, exercise 6.1 (companion implementation in eop.h)."]; }
 
 function __not_all_usage() {
-    const even = predicate(x => (x & 1) === 0);
     const d = sequence([2, 3, 4]);
     const f = begin(d);
     const l = end(d);
@@ -3332,12 +3310,11 @@ function __not_all_usage() {
 function __not_all_attributes() {
 }
 
-function __not_all_n_typescript() { return ["function not_all_n<I extends Iter<unknown>>(f: I, n: number, p: Predicate<ValueOf<I>>): boolean {\n    return !all_n(f, n, p);\n}","const even = predicate(x => (x & 1) === 0);\nconst d = sequence([2, 3, 6, 8]);\nconst result = not_all_n(begin(d), 3, even);\nprint(\"At least one of the first three elements is odd: \" + result);"]; }
+function __not_all_n_typescript() { return ["function not_all_n<I extends Iter<unknown>>(f: I, n: number, p: Predicate<ValueOf<I>>): boolean {\n    return !all_n(f, n, p);\n}","const d = sequence([2, 3, 6, 8]);\nconst result = not_all_n(begin(d), 3, even);\nprint(\"At least one of the first three elements is odd: \" + result);"]; }
 
 function __not_all_n_references() { return ["Elements of Programming, ch. 6, p. 99, exercise 6.3."]; }
 
 function __not_all_n_usage() {
-    const even = predicate(x => (x & 1) === 0);
     const d = sequence([2, 3, 6, 8]);
     const result = not_all_n(begin(d), 3, even);
     print("At least one of the first three elements is odd: " + result);
@@ -3346,12 +3323,11 @@ function __not_all_n_usage() {
 function __not_all_n_attributes() {
 }
 
-function __partitioned_typescript() { return ["function partitioned<T>(f: Iter<T>, l: Iter<T>, p: Predicate<T>) {\n    const it0 = find_if(f, l, p);\n    const it1 = find_if_not(it0, l, p);\n    return equal(it1, l);\n}","const even = predicate(x => (x & 1) === 0);\nconst d = sequence(array_random(), \"d\", even, undefined, true);\nconst f = begin(d);\nconst l = end(d);\n\nif (partitioned(f, l, even)) {\n    print('The sequence is already p-partitioned.');\n} else {\n    print('The sequence is not p-partitioned, partitioning...');\n\n    const p = partition_semistable(f, l, even);\n\n    if (partitioned(f, l, even)) {\n        print('Now the sequence is p-partitioned.');\n    } else {\n        print('Impossible, this line will never be executed.');\n    }\n}"]; }
+function __partitioned_typescript() { return ["function partitioned<T>(f: Iter<T>, l: Iter<T>, p: Predicate<T>) {\n    const it0 = find_if(f, l, p);\n    const it1 = find_if_not(it0, l, p);\n    return equal(it1, l);\n}","const d = sequence(array_random(), \"d\", even, undefined, true);\nconst f = begin(d);\nconst l = end(d);\n\nif (partitioned(f, l, even)) {\n    print('The sequence is already p-partitioned.');\n} else {\n    print('The sequence is not p-partitioned, partitioning...');\n\n    const p = partition_semistable(f, l, even);\n\n    if (partitioned(f, l, even)) {\n        print('Now the sequence is p-partitioned.');\n    } else {\n        print('Impossible, this line will never be executed.');\n    }\n}"]; }
 
 function __partitioned_references() { return ["Elements of Programming, ch. 6, p. 102."]; }
 
 function __partitioned_usage() {
-    const even = predicate(x => (x & 1) === 0);
     const d = sequence(array_random(), "d", even, undefined, true);
     const f = begin(d);
     const l = end(d);
@@ -3373,12 +3349,11 @@ function __partitioned_usage() {
 function __partitioned_attributes() {
 }
 
-function __partitioned_at_point_typescript() { return ["function partitioned_at_point<T>(f: Iter<T>, m: Iter<T>, l: Iter<T>, p: Predicate<T>) {\n    // precondition: readable_bounded_range(f, l) && m belongs to [f, l)\n    const c0 = none(f, m, p);\n    const c1 = all(m, l, p);\n    return c0 && c1;\n}","const even = predicate(x => (x & 1) === 0);\nconst d = sequence(array_random(), \"d\", even, undefined, true);\nconst f = begin(d);\nconst l = end(d);\nconst m = successor(f, 5);\n\nif (partitioned_at_point(f, m, l, even)) {\n    print('The sequence is already p-partitioned at m.');\n} else {\n    print('The sequence is not p-partitioned at m, partitioning...');\n\n    const m2 = partition_semistable(f, l, even);\n\n    if (partitioned_at_point(f, m2, l, even)) {\n        print('Now the sequence is p-partitioned at m2.');\n    } else {\n        print('Impossible, this line will never be executed.');\n    }\n}"]; }
+function __partitioned_at_point_typescript() { return ["function partitioned_at_point<T>(f: Iter<T>, m: Iter<T>, l: Iter<T>, p: Predicate<T>) {\n    // precondition: readable_bounded_range(f, l) && m belongs to [f, l)\n    const c0 = none(f, m, p);\n    const c1 = all(m, l, p);\n    return c0 && c1;\n}","const d = sequence(array_random(), \"d\", even, undefined, true);\nconst f = begin(d);\nconst l = end(d);\nconst m = successor(f, 5);\n\nif (partitioned_at_point(f, m, l, even)) {\n    print('The sequence is already p-partitioned at m.');\n} else {\n    print('The sequence is not p-partitioned at m, partitioning...');\n\n    const m2 = partition_semistable(f, l, even);\n\n    if (partitioned_at_point(f, m2, l, even)) {\n        print('Now the sequence is p-partitioned at m2.');\n    } else {\n        print('Impossible, this line will never be executed.');\n    }\n}"]; }
 
 function __partitioned_at_point_references() { return ["Elements of Programming, ch. 11, p. 189, exercise 11.1 (companion implementation in eop.h)."]; }
 
 function __partitioned_at_point_usage() {
-    const even = predicate(x => (x & 1) === 0);
     const d = sequence(array_random(), "d", even, undefined, true);
     const f = begin(d);
     const l = end(d);
@@ -3401,12 +3376,11 @@ function __partitioned_at_point_usage() {
 function __partitioned_at_point_attributes() {
 }
 
-function __partitioned_n_typescript() { return ["function partitioned_n<I extends Iter<unknown>>(f: I, n: number, p: Predicate<ValueOf<I>>): boolean {\n    const [middle, remaining] = find_if_n(f, n, p);\n    if (remaining === 0) return true;\n\n    const [, untested] = find_if_n(successor(middle), remaining - 1, value => !p(value));\n    return untested === 0;\n}","const even = predicate(x => (x & 1) === 0);\nconst d = sequence([1, 3, 2, 4, 7]);\nconst prefix = partitioned_n(begin(d), 4, even);\nconst full = partitioned_n(begin(d), size(d), even);\nprint(\"First four elements are partitioned: \" + prefix);\nprint(\"Full range is partitioned: \" + full);"]; }
+function __partitioned_n_typescript() { return ["function partitioned_n<I extends Iter<unknown>>(f: I, n: number, p: Predicate<ValueOf<I>>): boolean {\n    const [middle, remaining] = find_if_n(f, n, p);\n    if (remaining === 0) return true;\n\n    const [, untested] = find_if_n(successor(middle), remaining - 1, value => !p(value));\n    return untested === 0;\n}","const d = sequence([1, 3, 2, 4, 7]);\nconst prefix = partitioned_n(begin(d), 4, even);\nconst full = partitioned_n(begin(d), size(d), even);\nprint(\"First four elements are partitioned: \" + prefix);\nprint(\"Full range is partitioned: \" + full);"]; }
 
 function __partitioned_n_references() { return ["Elements of Programming, ch. 6, p. 102, exercise 6.6."]; }
 
 function __partitioned_n_usage() {
-    const even = predicate(x => (x & 1) === 0);
     const d = sequence([1, 3, 2, 4, 7]);
     const prefix = partitioned_n(begin(d), 4, even);
     const full = partitioned_n(begin(d), size(d), even);
@@ -3417,12 +3391,11 @@ function __partitioned_n_usage() {
 function __partitioned_n_attributes() {
 }
 
-function __potential_partition_point_typescript() { return ["function potential_partition_point<T>(f: Iter<T>, l: Iter<T>, p: Predicate<T>) {\n    const res = count_if_not_basis(f, l, p, f);\n    return res;\n}","const even = predicate(x => (x & 1) === 0);\nconst d = sequence(array_random(), \"d\", even);\nconst f = begin(d);\nconst l = end(d);\nconst m = potential_partition_point(f, l, even);\n\nprint(\"After p-partitioning the partition point would ocurr here:\");\nconst offset = distance(begin(d), m);\nprint(offset);\nconst partitionValue = source(m);\nprint(partitionValue);\n\nprint(\"Let's verify...\");\nconst p = partition_semistable(f, l, even);\nif (equal(m, p)) {\n    print(\"Yeah!\");\n} else {\n    print('Impossible, this line will never be executed.');\n}"]; }
+function __potential_partition_point_typescript() { return ["function potential_partition_point<T>(f: Iter<T>, l: Iter<T>, p: Predicate<T>) {\n    const res = count_if_not_basis(f, l, p, f);\n    return res;\n}","const d = sequence(array_random(), \"d\", even);\nconst f = begin(d);\nconst l = end(d);\nconst m = potential_partition_point(f, l, even);\n\nprint(\"After p-partitioning the partition point would ocurr here:\");\nconst offset = distance(begin(d), m);\nprint(offset);\nconst partitionValue = source(m);\nprint(partitionValue);\n\nprint(\"Let's verify...\");\nconst p = partition_semistable(f, l, even);\nif (equal(m, p)) {\n    print(\"Yeah!\");\n} else {\n    print('Impossible, this line will never be executed.');\n}"]; }
 
 function __potential_partition_point_references() { return ["Elements of Programming, ch. 11, p. 189, exercise 11.2 (companion implementation in eop.h)."]; }
 
 function __potential_partition_point_usage() {
-    const even = predicate(x => (x & 1) === 0);
     const d = sequence(array_random(), "d", even);
     const f = begin(d);
     const l = end(d);
@@ -3445,12 +3418,11 @@ function __potential_partition_point_usage() {
 function __potential_partition_point_attributes() {
 }
 
-function __some_typescript() { return ["function some<I extends Iter<unknown>>(f: I, l: I, p: Predicate<ValueOf<I>>): boolean {\n    return !none(f, l, p);\n}","const even = predicate(x => (x & 1) === 0);\nconst d = sequence([1, 2, 3]);\nconst f = begin(d);\nconst l = end(d);\n\nconst result = some(f, l, even);\n\nif (result) {\n    print(\"Some of the elements in the sequence are even.\");\n} else {\n    print(\"None of the elements in the sequence are even.\");\n}"]; }
+function __some_typescript() { return ["function some<I extends Iter<unknown>>(f: I, l: I, p: Predicate<ValueOf<I>>): boolean {\n    return !none(f, l, p);\n}","const d = sequence([1, 2, 3]);\nconst f = begin(d);\nconst l = end(d);\n\nconst result = some(f, l, even);\n\nif (result) {\n    print(\"Some of the elements in the sequence are even.\");\n} else {\n    print(\"None of the elements in the sequence are even.\");\n}"]; }
 
 function __some_references() { return ["Elements of Programming, ch. 6, p. 95, exercise 6.1 (companion implementation in eop.h)."]; }
 
 function __some_usage() {
-    const even = predicate(x => (x & 1) === 0);
     const d = sequence([1, 2, 3]);
     const f = begin(d);
     const l = end(d);
@@ -3466,12 +3438,11 @@ function __some_usage() {
 function __some_attributes() {
 }
 
-function __some_n_typescript() { return ["function some_n<I extends Iter<unknown>>(f: I, n: number, p: Predicate<ValueOf<I>>): boolean {\n    return !none_n(f, n, p);\n}","const even = predicate(x => (x & 1) === 0);\nconst d = sequence([1, 4, 5, 7]);\nconst result = some_n(begin(d), 3, even);\nprint(\"At least one of the first three elements is even: \" + result);"]; }
+function __some_n_typescript() { return ["function some_n<I extends Iter<unknown>>(f: I, n: number, p: Predicate<ValueOf<I>>): boolean {\n    return !none_n(f, n, p);\n}","const d = sequence([1, 4, 5, 7]);\nconst result = some_n(begin(d), 3, even);\nprint(\"At least one of the first three elements is even: \" + result);"]; }
 
 function __some_n_references() { return ["Elements of Programming, ch. 6, p. 99, exercise 6.3."]; }
 
 function __some_n_usage() {
-    const even = predicate(x => (x & 1) === 0);
     const d = sequence([1, 4, 5, 7]);
     const result = some_n(begin(d), 3, even);
     print("At least one of the first three elements is even: " + result);
@@ -3717,12 +3688,11 @@ function __for_each_n_usage() {
 function __for_each_n_attributes() {
 }
 
-function __count_if_typescript() { return ["function count_if<T>(f: Iter<T>, l: Iter<T>, p: Predicate<T>) {\n    const res = count_if_basis(f, l, p, 0);\n    return res;\n}","const even = predicate(x => (x & 1) === 0);\nconst d = sequence(array_random(), \"d\", even);\nconst f = begin(d);\nconst l = end(d);\n\nconst n = count_if(f, l, even);\n\nprint(\"Even numbers: \");\nprint(n);"]; }
+function __count_if_typescript() { return ["function count_if<T>(f: Iter<T>, l: Iter<T>, p: Predicate<T>) {\n    const res = count_if_basis(f, l, p, 0);\n    return res;\n}","const d = sequence(array_random(), \"d\", even);\nconst f = begin(d);\nconst l = end(d);\n\nconst n = count_if(f, l, even);\n\nprint(\"Even numbers: \");\nprint(n);"]; }
 
 function __count_if_references() { return ["Elements of Programming, ch. 6, p. 95 (count_if overloads)."]; }
 
 function __count_if_usage() {
-    const even = predicate(x => (x & 1) === 0);
     const d = sequence(array_random(), "d", even);
     const f = begin(d);
     const l = end(d);
@@ -3734,12 +3704,11 @@ function __count_if_usage() {
 function __count_if_attributes() {
 }
 
-function __count_if_basis_typescript() { return ["function count_if_basis<T, U extends number | Iter<unknown>>(f: Iter<T>, l: Iter<T>, p: Predicate<T>, j: U) {\n    while ( ! equal(f, l)) {\n        if (p(source(f))) {\n            j = successor(j);\n        }\n        f = successor(f);\n    }\n    return j;\n}","const even = predicate(x => (x & 1) === 0);\nconst d = sequence(array_random(), \"d\", even);\nconst c = sequence(array_ascending());\n\nconst f = begin(d);\nconst l = end(d);\n\nlet j = begin(c);\nj = count_if_basis(f, l, even, j);\n\nprint(\"Even numbers: \");\nconst offset = distance(begin(c), j);\nprint(offset);"]; }
+function __count_if_basis_typescript() { return ["function count_if_basis<T, U extends number | Iter<unknown>>(f: Iter<T>, l: Iter<T>, p: Predicate<T>, j: U) {\n    while ( ! equal(f, l)) {\n        if (p(source(f))) {\n            j = successor(j);\n        }\n        f = successor(f);\n    }\n    return j;\n}","const d = sequence(array_random(), \"d\", even);\nconst c = sequence(array_ascending());\n\nconst f = begin(d);\nconst l = end(d);\n\nlet j = begin(c);\nj = count_if_basis(f, l, even, j);\n\nprint(\"Even numbers: \");\nconst offset = distance(begin(c), j);\nprint(offset);"]; }
 
 function __count_if_basis_references() { return ["Elements of Programming, ch. 6, p. 95 (count_if overloads)."]; }
 
 function __count_if_basis_usage() {
-    const even = predicate(x => (x & 1) === 0);
     const d = sequence(array_random(), "d", even);
     const c = sequence(array_ascending());
     const f = begin(d);
@@ -3754,12 +3723,11 @@ function __count_if_basis_usage() {
 function __count_if_basis_attributes() {
 }
 
-function __count_if_for_each_typescript() { return ["function count_if_for_each<I extends Iter<unknown>>(\n    f: I, l: I, p: Predicate<ValueOf<I>>,\n): number {\n    let count = 0;\n    const tally = Object.assign(\n        (value: ValueOf<I>) => { if (p(value)) ++count; },\n        { total: () => count },\n    );\n    return for_each(f, l, tally).total();\n}","const even = predicate(x => (x & 1) === 0);\nconst d = sequence([2, 3, 4, 7, 8]);\nconst count = count_if_for_each(begin(d), end(d), even);\nprint(\"Even elements: \" + count);"]; }
+function __count_if_for_each_typescript() { return ["function count_if_for_each<I extends Iter<unknown>>(\n    f: I, l: I, p: Predicate<ValueOf<I>>,\n): number {\n    let count = 0;\n    const tally = Object.assign(\n        (value: ValueOf<I>) => { if (p(value)) ++count; },\n        { total: () => count },\n    );\n    return for_each(f, l, tally).total();\n}","const d = sequence([2, 3, 4, 7, 8]);\nconst count = count_if_for_each(begin(d), end(d), even);\nprint(\"Even elements: \" + count);"]; }
 
 function __count_if_for_each_references() { return ["Elements of Programming, ch. 6, p. 95, exercise 6.2."]; }
 
 function __count_if_for_each_usage() {
-    const even = predicate(x => (x & 1) === 0);
     const d = sequence([2, 3, 4, 7, 8]);
     const count = count_if_for_each(begin(d), end(d), even);
     print("Even elements: " + count);
@@ -3768,12 +3736,11 @@ function __count_if_for_each_usage() {
 function __count_if_for_each_attributes() {
 }
 
-function __count_if_not_typescript() { return ["function count_if_not<T>(f: Iter<T>, l: Iter<T>, p: Predicate<T>) {\n    const res = count_if_not_basis(f, l, p, 0);\n    return res;\n}","const even = predicate(x => (x & 1) === 0);\nconst d = sequence(array_random(), \"d\", even);\nconst f = begin(d);\nconst l = end(d);\n\nconst n = count_if_not(f, l, even);\n\nprint(\"Odd numbers: \");\nprint(n);"]; }
+function __count_if_not_typescript() { return ["function count_if_not<T>(f: Iter<T>, l: Iter<T>, p: Predicate<T>) {\n    const res = count_if_not_basis(f, l, p, 0);\n    return res;\n}","const d = sequence(array_random(), \"d\", even);\nconst f = begin(d);\nconst l = end(d);\n\nconst n = count_if_not(f, l, even);\n\nprint(\"Odd numbers: \");\nprint(n);"]; }
 
 function __count_if_not_references() { return ["Elements of Programming, ch. 6, p. 95 (negated count described in the text; implementation in eop.h)."]; }
 
 function __count_if_not_usage() {
-    const even = predicate(x => (x & 1) === 0);
     const d = sequence(array_random(), "d", even);
     const f = begin(d);
     const l = end(d);
@@ -3785,12 +3752,11 @@ function __count_if_not_usage() {
 function __count_if_not_attributes() {
 }
 
-function __count_if_not_basis_typescript() { return ["function count_if_not_basis<T, U extends number | Iter<unknown>>(f: Iter<T>, l: Iter<T>, p: Predicate<T>, j: U) {\n    while ( ! equal(f, l)) {\n        if ( ! p(source(f))) {\n            j = successor(j);\n        }\n        f = successor(f);\n    }\n    return j;\n}","const even = predicate(x => (x & 1) === 0);\nconst d = sequence(array_random(), \"d\", even);\nconst c = sequence(array_ascending());\n\nconst f = begin(d);\nconst l = end(d);\n\nlet j = begin(c);\nj = count_if_not_basis(f, l, even, j);\n\nprint(\"Odd numbers: \");\nconst offset = distance(begin(c), j);\nprint(offset);"]; }
+function __count_if_not_basis_typescript() { return ["function count_if_not_basis<T, U extends number | Iter<unknown>>(f: Iter<T>, l: Iter<T>, p: Predicate<T>, j: U) {\n    while ( ! equal(f, l)) {\n        if ( ! p(source(f))) {\n            j = successor(j);\n        }\n        f = successor(f);\n    }\n    return j;\n}","const d = sequence(array_random(), \"d\", even);\nconst c = sequence(array_ascending());\n\nconst f = begin(d);\nconst l = end(d);\n\nlet j = begin(c);\nj = count_if_not_basis(f, l, even, j);\n\nprint(\"Odd numbers: \");\nconst offset = distance(begin(c), j);\nprint(offset);"]; }
 
 function __count_if_not_basis_references() { return ["Elements of Programming, ch. 6, p. 95 (negated count described in the text; implementation in eop.h)."]; }
 
 function __count_if_not_basis_usage() {
-    const even = predicate(x => (x & 1) === 0);
     const d = sequence(array_random(), "d", even);
     const c = sequence(array_ascending());
     const f = begin(d);

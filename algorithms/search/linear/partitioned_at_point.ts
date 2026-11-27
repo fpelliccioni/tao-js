@@ -8,7 +8,6 @@ function partitioned_at_point<T>(f: Iter<T>, m: Iter<T>, l: Iter<T>, p: Predicat
 }
 
 function __partitioned_at_point_usage() {
-    const even = predicate(x => (x & 1) === 0);
     const d = sequence(array_random(), "d", even, undefined, true);
     const f = begin(d);
     const l = end(d);
