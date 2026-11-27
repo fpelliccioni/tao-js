@@ -2291,7 +2291,7 @@ function partition_stable_with_buffer_0(f, l, p, b) {
 }
 
 function __debug_lower_bound_n(f, n, a, r) {
-    const p = function (x) { return !r(x, a); };
+    const p = (x) => !r(x, a);
     return partition_point_n(f, n, p);
 }
 
@@ -2349,7 +2349,7 @@ function partition_point_n_forward(f, n, p) {
 }
 
 function __debug_upper_bound_n(f, n, a, r) {
-    const p = function (x) { return r(a, x); };
+    const p = (x) => r(a, x);
     return partition_point_n(f, n, p);
 }
 
@@ -3180,6 +3180,18 @@ function twice(n) {return n + n;}
 function remainder_native(a, b) {return a % b;}
 function even(x) { return (x & 1) == 0; }
 function odd(x) { return ! even(x); }
+
+function digitSum(value) {
+    if (!Number.isSafeInteger(value)) throw new RangeError("digitSum expects a safe integer.");
+
+    let remaining = Math.abs(value);
+    let sum = 0;
+    while (remaining > 0) {
+        sum += remaining % 10;
+        remaining = Math.floor(remaining / 10);
+    }
+    return sum;
+}
 var eq = relation(function eq(x, y) {return x == y;});
 var lt = relation(function lt(x, y) {return x < y;});
 var gt = relation(function gt(x, y) {return x > y;});
