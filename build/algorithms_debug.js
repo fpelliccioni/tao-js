@@ -2422,6 +2422,22 @@ function find_if(f, l, p) {
     return res;
 }
 
+function __debug_find_if_n(f, n, p) {
+    pre(() => Number.isSafeInteger(n) && n >= 0, "The count must be a nonnegative safe integer.");
+    while (n !== 0 && !p(source(f))) {
+        f = successor(f);
+        --n;
+    }
+    return [f, n];
+}
+
+function find_if_n(f, n, p) {
+    var _f_ = start_f('find_if_n', f, n, p);
+    var res = __debug_find_if_n(f, n, p);
+    end_f(_f_);
+    return res;
+}
+
 function __debug_find_if_not(f, l, p) {
     while (!equal(f, l) && p(source(f))) {
         f = successor(f);
@@ -2432,6 +2448,31 @@ function __debug_find_if_not(f, l, p) {
 function find_if_not(f, l, p) {
     var _f_ = start_f('find_if_not', f, l, p);
     var res = __debug_find_if_not(f, l, p);
+    end_f(_f_);
+    return res;
+}
+
+function __debug_find_n(f, n, x) {
+    return find_if_n(f, n, value => value === x);
+}
+
+function find_n(f, n, x) {
+    var _f_ = start_f('find_n', f, n, x);
+    var res = __debug_find_n(f, n, x);
+    end_f(_f_);
+    return res;
+}
+
+function __debug_find_not(f, l, x) {
+    while (!equal(f, l) && source(f) === x) {
+        f = successor(f);
+    }
+    return f;
+}
+
+function find_not(f, l, x) {
+    var _f_ = start_f('find_not', f, l, x);
+    var res = __debug_find_not(f, l, x);
     end_f(_f_);
     return res;
 }
