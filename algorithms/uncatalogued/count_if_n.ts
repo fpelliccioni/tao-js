@@ -1,15 +1,7 @@
 // Reference: Elements of Programming, ch. 6, p. 99, exercise 6.3.
 
 function count_if_n<I extends Iter<unknown>>(f: I, n: number, p: Predicate<ValueOf<I>>): number {
-    pre(() => Number.isSafeInteger(n) && n >= 0, "The count must be a nonnegative safe integer.");
-
-    let count = 0;
-    while (n !== 0) {
-        if (p(source(f))) ++count;
-        f = successor(f);
-        --n;
-    }
-    return count;
+    return count_if_n_basis(f, n, p, 0);
 }
 
 function __count_if_n_usage() {
