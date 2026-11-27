@@ -1,3 +1,33 @@
+function lexicographical_compare(f0, l0, f1, l1, r) {
+    while (true) {
+        if (equal(f1, l1))
+            return false;
+        if (equal(f0, l0))
+            return true;
+        const a = source(f0);
+        const b = source(f1);
+        if (r(a, b))
+            return true;
+        if (r(b, a))
+            return false;
+        f0 = successor(f0);
+        f1 = successor(f1);
+    }
+}
+
+function lexicographical_equal(f0, l0, f1, l1) {
+    return lexicographical_equivalent(f0, l0, f1, l1, eq);
+}
+
+function lexicographical_equivalent(f0, l0, f1, l1, r) {
+    const [a, b] = find_mismatch(f0, l0, f1, l1, r);
+    return equal(a, l0) && equal(b, l1);
+}
+
+function lexicographical_less(f0, l0, f1, l1) {
+    return lexicographical_compare(f0, l0, f1, l1, lt);
+}
+
 function copy(f, l, o) {
     while (!equal(f, l)) {
         sink(o, source(f));
