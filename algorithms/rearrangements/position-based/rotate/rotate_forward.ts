@@ -44,7 +44,6 @@ function __rotate_forward_usage() {
     }
 
     const s = sequence(array_random(), "s", undefined, "sll");
-    print(s);
     rotate_forward(begin(s), successor(begin(s), 3), end(s));
     print(s);
 }

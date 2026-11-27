@@ -27,7 +27,6 @@ function __multiply_group_usage() {
         }
 
         add(x: SquareMatrix) {
-            print("add() call")
             if (this.n != x.n) return undefined;
 
             const res = new SquareMatrix(this.n);

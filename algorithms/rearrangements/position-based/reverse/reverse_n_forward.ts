@@ -14,10 +14,8 @@ function reverse_n_forward<T>(f: Iter<T>, n: number): Iter<T> {
 
 function __reverse_n_forward_usage() {
     const s = sequence(array_random(), "s1");
-    print(s);
     const r = reverse_n_forward(begin(s), size(s));
     print(s);
-    print('...');
 }
 
 function __reverse_n_forward_attributes() {

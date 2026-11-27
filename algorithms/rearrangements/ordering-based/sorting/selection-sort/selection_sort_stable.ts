@@ -8,7 +8,6 @@ function selection_sort_stable<T>(f: Iter<T>, l: Iter<T>, r: Relation<T>) {
 
 function __selection_sort_stable_usage() {
     const s = sequence(array_random(), "s", lt);
-    print(s);
     selection_sort_stable(begin(s), end(s), lt);
     print(s);
 }

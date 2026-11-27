@@ -12,10 +12,8 @@ function reverse_n_indexed<T>(f: Iter<T>, n: number) {
 
 function __reverse_n_indexed_usage() {
     const s = sequence(array_random(), "s1");
-    print(s);
     reverse_n_indexed(begin(s), size(s));
     print(s);
-    print('...');
 }
 
 function __reverse_n_indexed_attributes() {

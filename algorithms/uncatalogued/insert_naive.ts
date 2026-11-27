@@ -18,11 +18,8 @@ function __insert_naive_usage() {
     let s = sequence(array_random(), "s");
     const i = sequence(array_random(5), "i");
 
-    print(s);
-    print(i);
     s = insert_naive(s, begin(s), begin(i), end(i));
     print(s);
-    print('...');
 }
 
 function __insert_naive_attributes() {

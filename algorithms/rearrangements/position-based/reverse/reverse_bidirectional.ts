@@ -12,10 +12,8 @@ function reverse_bidirectional<T>(f: Iter<T>, l: Iter<T>) {
 
 function __reverse_bidirectional_usage() {
     const s = sequence(array_random(), "s1");
-    print(s);
     reverse_bidirectional(begin(s), end(s));
     print(s);
-    print('...');
 }
 
 function __reverse_bidirectional_attributes() {

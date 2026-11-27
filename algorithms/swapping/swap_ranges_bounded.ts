@@ -17,8 +17,6 @@ function __swap_ranges_bounded_usage() {
     const r = swap_ranges_bounded(begin(s1), end(s1), begin(s2), end(s2));
     const f0 = r[0];
     const f1 = r[1];
-    print('...');
-
 }
 
 function __swap_ranges_bounded_attributes() {

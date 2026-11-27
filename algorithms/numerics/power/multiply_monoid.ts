@@ -25,7 +25,6 @@ function __multiply_monoid_usage() {
         }
 
         add(x: SquareMatrix) {
-            print("add() call")
             if (this.n != x.n) return undefined;
 
             const res = new SquareMatrix(this.n);

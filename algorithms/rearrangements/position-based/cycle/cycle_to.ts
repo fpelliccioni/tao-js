@@ -19,10 +19,8 @@ function __cycle_to_usage() {
     }
 
     const s = sequence(array_random(), "s");
-    print(s);
     cycle_to(begin(s), successorMod10);
     print(s);
-    print('...');
 }
 
 function __cycle_to_attributes() {
