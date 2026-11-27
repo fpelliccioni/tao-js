@@ -1545,6 +1545,12 @@ function reduce_balanced(f, l, op, z) {
     return result;
 }
 
+function reduce_n(f, n, op, z) {
+    if (n === 0)
+        return z;
+    return reduce_nonempty_n(f, n, op);
+}
+
 function reduce_nonempty(f, l, op) {
     pre(() => !equal(f, l), "The range must not be empty.");
     let result = source(f);
@@ -1552,6 +1558,17 @@ function reduce_nonempty(f, l, op) {
     while (!equal(f, l)) {
         result = op(result, source(f));
         f = successor(f);
+    }
+    return result;
+}
+
+function reduce_nonempty_n(f, n, op) {
+    pre(() => Number.isSafeInteger(n) && n > 0, "The count must be a positive safe integer.");
+    let result = source(f);
+    while (n > 1) {
+        f = successor(f);
+        result = op(result, source(f));
+        --n;
     }
     return result;
 }
@@ -1569,6 +1586,26 @@ function reduce_nonzeroes(f, l, op, z) {
         if (value !== z)
             result = op(result, value);
         f = successor(f);
+    }
+    return result;
+}
+
+function reduce_nonzeroes_n(f, n, op, z) {
+    pre(() => Number.isSafeInteger(n) && n >= 0, "The count must be a nonnegative safe integer.");
+    let result;
+    do {
+        if (n === 0)
+            return z;
+        result = source(f);
+        f = successor(f);
+        --n;
+    } while (result === z);
+    while (n !== 0) {
+        const value = source(f);
+        if (value !== z)
+            result = op(result, value);
+        f = successor(f);
+        --n;
     }
     return result;
 }
@@ -1725,7 +1762,9 @@ function find_if_not_n(f, n, p) {
 }
 
 function find_if_not_unguarded(f, p) {
-    // Precondition: an element reachable from f does not satisfy p.
+    // Precondition: there is a finite integer k >= 0 such that
+    // p(source(successor(f, k))) is false.
+    // Without an end iterator, this cannot be checked in general.
     while (p(source(f))) {
         f = successor(f);
     }
@@ -1733,7 +1772,9 @@ function find_if_not_unguarded(f, p) {
 }
 
 function find_if_unguarded(f, p) {
-    // Precondition: an element reachable from f satisfies p.
+    // Precondition: there is a finite integer k >= 0 such that
+    // p(source(successor(f, k))) is true.
+    // Without an end iterator, this cannot be checked in general.
     while (!p(source(f))) {
         f = successor(f);
     }
@@ -1788,6 +1829,10 @@ function find_not(f, l, x) {
         f = successor(f);
     }
     return f;
+}
+
+function find_not_n(f, n, x) {
+    return find_if_n(f, n, value => value !== x);
 }
 
 function find_subsequence_n_naive(f, fn, s, sn, r) {
@@ -2085,6 +2130,18 @@ function count_if_for_each(f, l, p) {
     return for_each(f, l, tally).total();
 }
 
+function count_if_n(f, n, p) {
+    pre(() => Number.isSafeInteger(n) && n >= 0, "The count must be a nonnegative safe integer.");
+    let count = 0;
+    while (n !== 0) {
+        if (p(source(f)))
+            ++count;
+        f = successor(f);
+        --n;
+    }
+    return count;
+}
+
 function count_if_not(f, l, p) {
     const res = count_if_not_basis(f, l, p, 0);
     return res;
@@ -2098,6 +2155,10 @@ function count_if_not_basis(f, l, p, j) {
         f = successor(f);
     }
     return j;
+}
+
+function count_if_not_n(f, n, p) {
+    return count_if_n(f, n, value => !p(value));
 }
 
 function equal_r(f, l, f2, r) {
