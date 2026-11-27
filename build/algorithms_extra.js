@@ -382,12 +382,12 @@ function __combine_copy_n_usage() {
 function __combine_copy_n_attributes() {
 }
 
-function __copy_if_typescript() { return ["function copy_if<T, U>(f: Iter<T>, l: Iter<T>, o: Iter<U>, p: Predicate<T>) {\n    const ps = predicate_source(p);\n    return copy_select(f, l, o, ps);\n}","const even = predicate((x: number) => (x & 1) === 0);\nconst s = sequence(array_random(), \"s\", even);\nconst z = sequence(array_all_equal(size(s), \"-\"), \"z\");\n\ncopy_if(begin(s), end(s), begin(z), even);\n\nprint(z);"]; }
+function __copy_if_typescript() { return ["function copy_if<T, U>(f: Iter<T>, l: Iter<T>, o: Iter<U>, p: Predicate<T>) {\n    const ps = predicate_source(p);\n    return copy_select(f, l, o, ps);\n}","const even = predicate(x => (x & 1) === 0);\nconst s = sequence(array_random(), \"s\", even);\nconst z = sequence(array_all_equal(size(s), \"-\"), \"z\");\n\ncopy_if(begin(s), end(s), begin(z), even);\n\nprint(z);"]; }
 
 function __copy_if_references() { return ["Elements of Programming, ch. 9, p. 156."]; }
 
 function __copy_if_usage() {
-    const even = predicate((x) => (x & 1) === 0);
+    const even = predicate(x => (x & 1) === 0);
     const s = sequence(array_random(), "s", even);
     const z = sequence(array_all_equal(size(s), "-"), "z");
     copy_if(begin(s), end(s), begin(z), even);
@@ -397,12 +397,12 @@ function __copy_if_usage() {
 function __copy_if_attributes() {
 }
 
-function __copy_if_n_typescript() { return ["function copy_if_n<T, U>(f: Iter<T>, n: number, o: Iter<U>, p: Predicate<T>) {\n    const ps = predicate_source(p);\n    return copy_select_n(f, n, o, ps);\n}","const even = predicate((x: number) => (x & 1) === 0);\nconst s = sequence(array_random(), \"s\", even);\nconst z = sequence(array_all_equal(size(s), \"-\"), \"z\");\n\ncopy_if_n(begin(s), size(s), begin(z), even);\n\nprint(z);"]; }
+function __copy_if_n_typescript() { return ["function copy_if_n<T, U>(f: Iter<T>, n: number, o: Iter<U>, p: Predicate<T>) {\n    const ps = predicate_source(p);\n    return copy_select_n(f, n, o, ps);\n}","const even = predicate(x => (x & 1) === 0);\nconst s = sequence(array_random(), \"s\", even);\nconst z = sequence(array_all_equal(size(s), \"-\"), \"z\");\n\ncopy_if_n(begin(s), size(s), begin(z), even);\n\nprint(z);"]; }
 
 function __copy_if_n_references() { return ["Elements of Programming, ch. 9, p. 156 (counted variant of copy_if)."]; }
 
 function __copy_if_n_usage() {
-    const even = predicate((x) => (x & 1) === 0);
+    const even = predicate(x => (x & 1) === 0);
     const s = sequence(array_random(), "s", even);
     const z = sequence(array_all_equal(size(s), "-"), "z");
     copy_if_n(begin(s), size(s), begin(z), even);
@@ -476,12 +476,12 @@ function __merge_copy_backward_usage() {
 function __merge_copy_backward_attributes() {
 }
 
-function __partition_copy_typescript() { return ["function partition_copy<T, U>(f: Iter<T>, l: Iter<T>, u: Iter<U>, t: Iter<U>, p: Predicate<T>) {\n    const ps = predicate_source(p);\n    return split_copy(f, l, u, t, ps);\n}","const pred = predicate((x: number) => (x & 1) === 0);\nconst s = sequence(array_random(), \"s\", pred);\nconst even = sequence(array_all_equal(size(s), \"-\"), \"even\");\nconst odd = sequence(array_all_equal(size(s), \"-\"), \"odd\");\n\npartition_copy(begin(s), end(s), begin(odd), begin(even), pred);\n\nprint(even);\nprint(odd);"]; }
+function __partition_copy_typescript() { return ["function partition_copy<T, U>(f: Iter<T>, l: Iter<T>, u: Iter<U>, t: Iter<U>, p: Predicate<T>) {\n    const ps = predicate_source(p);\n    return split_copy(f, l, u, t, ps);\n}","const pred = predicate(x => (x & 1) === 0);\nconst s = sequence(array_random(), \"s\", pred);\nconst even = sequence(array_all_equal(size(s), \"-\"), \"even\");\nconst odd = sequence(array_all_equal(size(s), \"-\"), \"odd\");\n\npartition_copy(begin(s), end(s), begin(odd), begin(even), pred);\n\nprint(even);\nprint(odd);"]; }
 
 function __partition_copy_references() { return ["Elements of Programming, ch. 9, p. 158."]; }
 
 function __partition_copy_usage() {
-    const pred = predicate((x) => (x & 1) === 0);
+    const pred = predicate(x => (x & 1) === 0);
     const s = sequence(array_random(), "s", pred);
     const even = sequence(array_all_equal(size(s), "-"), "even");
     const odd = sequence(array_all_equal(size(s), "-"), "odd");
@@ -493,12 +493,12 @@ function __partition_copy_usage() {
 function __partition_copy_attributes() {
 }
 
-function __partition_copy_n_typescript() { return ["function partition_copy_n<T, U>(f: Iter<T>, n: number, u: Iter<U>, t: Iter<U>, p: Predicate<T>) {\n    const ps = predicate_source(p);\n    return split_copy_n(f, n, u, t, ps);\n}","const pred = predicate((x: number) => (x & 1) === 0);\nconst s = sequence(array_random(), \"s\", pred);\nconst even = sequence(array_all_equal(size(s), \"-\"), \"even\");\nconst odd = sequence(array_all_equal(size(s), \"-\"), \"odd\");\n\npartition_copy_n(begin(s), size(s), begin(odd), begin(even), pred);\n\nprint(even);\nprint(odd);"]; }
+function __partition_copy_n_typescript() { return ["function partition_copy_n<T, U>(f: Iter<T>, n: number, u: Iter<U>, t: Iter<U>, p: Predicate<T>) {\n    const ps = predicate_source(p);\n    return split_copy_n(f, n, u, t, ps);\n}","const pred = predicate(x => (x & 1) === 0);\nconst s = sequence(array_random(), \"s\", pred);\nconst even = sequence(array_all_equal(size(s), \"-\"), \"even\");\nconst odd = sequence(array_all_equal(size(s), \"-\"), \"odd\");\n\npartition_copy_n(begin(s), size(s), begin(odd), begin(even), pred);\n\nprint(even);\nprint(odd);"]; }
 
 function __partition_copy_n_references() { return ["Elements of Programming, ch. 9, p. 158 (counted variant in eop.h)."]; }
 
 function __partition_copy_n_usage() {
-    const pred = predicate((x) => (x & 1) === 0);
+    const pred = predicate(x => (x & 1) === 0);
     const s = sequence(array_random(), "s", pred);
     const even = sequence(array_all_equal(size(s), "-"), "even");
     const odd = sequence(array_all_equal(size(s), "-"), "odd");
@@ -2446,12 +2446,12 @@ function __push_heap_n_usage() {
 function __push_heap_n_attributes() {
 }
 
-function __partition_semistable_typescript() { return ["function partition_semistable<T>(f: Iter<T>, l: Iter<T>, p: Predicate<T>) {\n    while (true) {\n        if (equal(f, l)) return f;\n        if (p(source(f))) break;\n        f = successor(f);\n    }\n\n    let j = f;\n    j = successor(j)\n\n    while ( ! equal(j, l)) {\n        if ( ! p(source(j))) {\n            iter_swap(f, j);\n            f = successor(f);\n        }\n        j = successor(j);\n    }\n    return f;\n}","const even = predicate((x: number) => (x & 1) === 0);\nconst d = sequence(array_random(), \"d\", even, undefined, true);\nconst f = begin(d);\nconst l = end(d);\n\nconst p = partition_semistable(f, l, even);\nif ( ! equal(p, l)) {\n    print('partition point: ' + source(p));\n}"]; }
+function __partition_semistable_typescript() { return ["function partition_semistable<T>(f: Iter<T>, l: Iter<T>, p: Predicate<T>) {\n    while (true) {\n        if (equal(f, l)) return f;\n        if (p(source(f))) break;\n        f = successor(f);\n    }\n\n    let j = f;\n    j = successor(j)\n\n    while ( ! equal(j, l)) {\n        if ( ! p(source(j))) {\n            iter_swap(f, j);\n            f = successor(f);\n        }\n        j = successor(j);\n    }\n    return f;\n}","const even = predicate(x => (x & 1) === 0);\nconst d = sequence(array_random(), \"d\", even, undefined, true);\nconst f = begin(d);\nconst l = end(d);\n\nconst p = partition_semistable(f, l, even);\nif ( ! equal(p, l)) {\n    print('partition point: ' + source(p));\n}"]; }
 
 function __partition_semistable_references() { return ["Elements of Programming, ch. 11, p. 190."]; }
 
 function __partition_semistable_usage() {
-    const even = predicate((x) => (x & 1) === 0);
+    const even = predicate(x => (x & 1) === 0);
     const d = sequence(array_random(), "d", even, undefined, true);
     const f = begin(d);
     const l = end(d);
@@ -2464,12 +2464,12 @@ function __partition_semistable_usage() {
 function __partition_semistable_attributes() {
 }
 
-function __partition_semistable_1_typescript() { return ["function partition_semistable_1<T>(f: Iter<T>, l: Iter<T>, p: Predicate<T>) {\n    f = find_if(f, l, p);\n    if (f == l) return f;\n\n    let j = f;\n    j = successor(j)\n\n    while ( ! equal(j, l)) {\n        if ( ! p(source(j))) {\n            iter_swap(f, j);\n            f = successor(f);\n        }\n        j = successor(j);\n    }\n    return f;\n}","const even = predicate((x: number) => (x & 1) === 0);\nconst d = sequence(array_random(), \"d\", even, undefined, true);\nconst f = begin(d);\nconst l = end(d);\n\nconst p = partition_semistable_1(f, l, even);\nif ( ! equal(p, l)) {\n    print('partition point: ' + source(p));\n}"]; }
+function __partition_semistable_1_typescript() { return ["function partition_semistable_1<T>(f: Iter<T>, l: Iter<T>, p: Predicate<T>) {\n    f = find_if(f, l, p);\n    if (f == l) return f;\n\n    let j = f;\n    j = successor(j)\n\n    while ( ! equal(j, l)) {\n        if ( ! p(source(j))) {\n            iter_swap(f, j);\n            f = successor(f);\n        }\n        j = successor(j);\n    }\n    return f;\n}","const even = predicate(x => (x & 1) === 0);\nconst d = sequence(array_random(), \"d\", even, undefined, true);\nconst f = begin(d);\nconst l = end(d);\n\nconst p = partition_semistable_1(f, l, even);\nif ( ! equal(p, l)) {\n    print('partition point: ' + source(p));\n}"]; }
 
 function __partition_semistable_1_references() { return ["Elements of Programming, ch. 11, pp. 190–191 (variant of partition_semistable)."]; }
 
 function __partition_semistable_1_usage() {
-    const even = predicate((x) => (x & 1) === 0);
+    const even = predicate(x => (x & 1) === 0);
     const d = sequence(array_random(), "d", even, undefined, true);
     const f = begin(d);
     const l = end(d);
@@ -2482,12 +2482,12 @@ function __partition_semistable_1_usage() {
 function __partition_semistable_1_attributes() {
 }
 
-function __partition_semistable_nonempty_typescript() { return ["function partition_semistable_nonempty<T>(f: Iter<T>, l: Iter<T>, p: Predicate<T>) {\n    //precondition: nonempty: ! equal(f, l)\n    while ( ! p(source(f))) {\n        f = successor(f);\n        if (equal(f, l)) return;\n    }\n\n    let j = f;\n    j = successor(j)\n    if (equal(j, l)) return;\n\n    while ( ! equal(successor(j), l)) {\n        if ( ! p(source(j))) {\n            iter_swap(f, j);\n            f = successor(f);\n        }\n        j = successor(j);\n    }\n    iter_swap(f, j);\n}","const even = predicate((x: number) => (x & 1) === 0);\nconst d = sequence(array_random(), \"d\", even, undefined, true);\nconst f = begin(d);\nconst l = end(d);\n\npartition_semistable_nonempty(f, l, even);"]; }
+function __partition_semistable_nonempty_typescript() { return ["function partition_semistable_nonempty<T>(f: Iter<T>, l: Iter<T>, p: Predicate<T>) {\n    //precondition: nonempty: ! equal(f, l)\n    while ( ! p(source(f))) {\n        f = successor(f);\n        if (equal(f, l)) return;\n    }\n\n    let j = f;\n    j = successor(j)\n    if (equal(j, l)) return;\n\n    while ( ! equal(successor(j), l)) {\n        if ( ! p(source(j))) {\n            iter_swap(f, j);\n            f = successor(f);\n        }\n        j = successor(j);\n    }\n    iter_swap(f, j);\n}","const even = predicate(x => (x & 1) === 0);\nconst d = sequence(array_random(), \"d\", even, undefined, true);\nconst f = begin(d);\nconst l = end(d);\n\npartition_semistable_nonempty(f, l, even);"]; }
 
 function __partition_semistable_nonempty_references() { return ["Elements of Programming, ch. 11, pp. 190–191 (variant of partition_semistable)."]; }
 
 function __partition_semistable_nonempty_usage() {
-    const even = predicate((x) => (x & 1) === 0);
+    const even = predicate(x => (x & 1) === 0);
     const d = sequence(array_random(), "d", even, undefined, true);
     const f = begin(d);
     const l = end(d);
@@ -2497,10 +2497,10 @@ function __partition_semistable_nonempty_usage() {
 function __partition_semistable_nonempty_attributes() {
 }
 
-function __partition_stable_forward_typescript() { return ["function partition_stable_forward<T>(f: Iter<T>, l: Iter<T>, p: Predicate<T>) {\n    while (true) {\n        if (equal(f, l)) return f;\n        if (p(source(f))) break;\n        f = successor(f);\n    }\n\n    let j = f;\n    j = successor(j)\n\n    while ( ! equal(j, l)) {\n        if ( ! p(source(j))) {\n            rotate_bidirectional(f, j, successor(j));     //TODO: refine rotate_bidirectional(...)\n            f = successor(f);\n        }\n        j = successor(j);\n    }\n    return f;\n}","const even = predicate((x: number) => (x & 1) === 0);\nconst d = sequence(array_random(), \"d\", even);\nconst f = begin(d);\nconst l = end(d);\n\nconst p = partition_stable_forward(f, l, even);\nif ( ! equal(p, l)) {\n    print('partition point: ' + source(p));\n}"]; }
+function __partition_stable_forward_typescript() { return ["function partition_stable_forward<T>(f: Iter<T>, l: Iter<T>, p: Predicate<T>) {\n    while (true) {\n        if (equal(f, l)) return f;\n        if (p(source(f))) break;\n        f = successor(f);\n    }\n\n    let j = f;\n    j = successor(j)\n\n    while ( ! equal(j, l)) {\n        if ( ! p(source(j))) {\n            rotate_bidirectional(f, j, successor(j));     //TODO: refine rotate_bidirectional(...)\n            f = successor(f);\n        }\n        j = successor(j);\n    }\n    return f;\n}","const even = predicate(x => (x & 1) === 0);\nconst d = sequence(array_random(), \"d\", even);\nconst f = begin(d);\nconst l = end(d);\n\nconst p = partition_stable_forward(f, l, even);\nif ( ! equal(p, l)) {\n    print('partition point: ' + source(p));\n}"]; }
 
 function __partition_stable_forward_usage() {
-    const even = predicate((x) => (x & 1) === 0);
+    const even = predicate(x => (x & 1) === 0);
     const d = sequence(array_random(), "d", even);
     const f = begin(d);
     const l = end(d);
@@ -2513,12 +2513,12 @@ function __partition_stable_forward_usage() {
 function __partition_stable_forward_attributes() {
 }
 
-function __partition_stable_with_buffer_0_typescript() { return ["function partition_stable_with_buffer_0<T>(f: Iter<T>, l: Iter<T>, p: Predicate<T>, b: Iter<T>) {\n    const tmp = partition_copy(f, l, f, b, p);\n    const tf = tmp[0];\n    const ts = tmp[1];\n    copy(b, ts, tf);\n    return tf;\n}","const even = predicate((x: number) => (x & 1) === 0);\nconst d = sequence(array_random(), \"d\", even);\nconst buf = sequence(array_all_equal(size(d), 0), \"buf\");\n\nconst p = partition_stable_with_buffer_0(begin(d), end(d), even, begin(buf));\nif ( ! equal(p, end(d))) {\n    print('partition point: ' + source(p));\n}"]; }
+function __partition_stable_with_buffer_0_typescript() { return ["function partition_stable_with_buffer_0<T>(f: Iter<T>, l: Iter<T>, p: Predicate<T>, b: Iter<T>) {\n    const tmp = partition_copy(f, l, f, b, p);\n    const tf = tmp[0];\n    const ts = tmp[1];\n    copy(b, ts, tf);\n    return tf;\n}","const even = predicate(x => (x & 1) === 0);\nconst d = sequence(array_random(), \"d\", even);\nconst buf = sequence(array_all_equal(size(d), 0), \"buf\");\n\nconst p = partition_stable_with_buffer_0(begin(d), end(d), even, begin(buf));\nif ( ! equal(p, end(d))) {\n    print('partition point: ' + source(p));\n}"]; }
 
 function __partition_stable_with_buffer_0_references() { return ["Elements of Programming, ch. 11, p. 193 (variant of partition_stable_with_buffer)."]; }
 
 function __partition_stable_with_buffer_0_usage() {
-    const even = predicate((x) => (x & 1) === 0);
+    const even = predicate(x => (x & 1) === 0);
     const d = sequence(array_random(), "d", even);
     const buf = sequence(array_all_equal(size(d), 0), "buf");
     const p = partition_stable_with_buffer_0(begin(d), end(d), even, begin(buf));
@@ -2530,7 +2530,7 @@ function __partition_stable_with_buffer_0_usage() {
 function __partition_stable_with_buffer_0_attributes() {
 }
 
-function __lower_bound_n_typescript() { return ["function lower_bound_n<T>(f: Iter<T>, n: number, a: T, r: Relation<T>) {\n    const below = (x: T) => r(x, a);\n    const p = (x: T) => !below(x);\n    pre(() => is_partitioned_n(f, n, p), \"The range must be partitioned around the search value.\");\n    const result = partition_point_n(f, n, p);\n    post(() => all(f, result, below), \"Every element before the result must compare less than the search value.\");\n    post(() => none(result, successor(f, n), below), \"No element from the result onward may compare less than the search value.\");\n    return result;\n}","const hasLowerDigitSum = relation((x: number, y) => digitSum(x) < digitSum(y));\n\nconst d = sequence([11, 22, 49, 58, 67]);\n\nconst lb = lower_bound_n(begin(d), size(d), 38, hasLowerDigitSum);\nprint('insertion point: ' + source(lb));"]; }
+function __lower_bound_n_typescript() { return ["function lower_bound_n<T>(f: Iter<T>, n: number, a: T, r: Relation<T>) {\n    const below = (x: T) => r(x, a);\n    const p = (x: T) => !below(x);\n    pre(() => is_partitioned_n(f, n, p), \"The range must be partitioned around the search value.\");\n    const result = partition_point_n(f, n, p);\n    post(() => all(f, result, below), \"Every element before the result must compare less than the search value.\");\n    post(() => none(result, successor(f, n), below), \"No element from the result onward may compare less than the search value.\");\n    return result;\n}","const hasLowerDigitSum = relation((x, y) => digitSum(x) < digitSum(y));\n\nconst d = sequence([11, 22, 49, 58, 67]);\n\nconst lb = lower_bound_n(begin(d), size(d), 38, hasLowerDigitSum);\nprint('insertion point: ' + source(lb));"]; }
 
 function __lower_bound_n_references() { return ["Elements of Programming, ch. 6, pp. 105–106 (adapted with explicit contracts)."]; }
 
@@ -2544,12 +2544,12 @@ function __lower_bound_n_usage() {
 function __lower_bound_n_attributes() {
 }
 
-function __partition_point_n_typescript() { return ["function partition_point_n<T>(f: Iter<T>, n: number, p: Predicate<T>) {\n    while (n != 0) {\n        const h = half(n);\n        const m = successor(f, h);\n\n        if (p(source(m))) {\n            n = h;\n        } else {\n            n -= h + 1;\n            f = successor(m);\n        }\n    }\n    return f;\n}","const even = predicate((x: number) => (x & 1) === 0);\n\nconst d = sequence([1, 5, 1, 1, 3, 3, 3, 7, 3, 2, 6, 4], \"d\", even);\n\nconst p = partition_point_n(begin(d), size(d), even);\nprint('partition point: ' + source(p));"]; }
+function __partition_point_n_typescript() { return ["function partition_point_n<T>(f: Iter<T>, n: number, p: Predicate<T>) {\n    while (n != 0) {\n        const h = half(n);\n        const m = successor(f, h);\n\n        if (p(source(m))) {\n            n = h;\n        } else {\n            n -= h + 1;\n            f = successor(m);\n        }\n    }\n    return f;\n}","const even = predicate(x => (x & 1) === 0);\n\nconst d = sequence([1, 5, 1, 1, 3, 3, 3, 7, 3, 2, 6, 4], \"d\", even);\n\nconst p = partition_point_n(begin(d), size(d), even);\nprint('partition point: ' + source(p));"]; }
 
 function __partition_point_n_references() { return ["Elements of Programming, ch. 6, p. 104.","From Mathematics to Generic Programming, ch. 10, p. 193 (ch10.h)."]; }
 
 function __partition_point_n_usage() {
-    const even = predicate((x) => (x & 1) === 0);
+    const even = predicate(x => (x & 1) === 0);
     const d = sequence([1, 5, 1, 1, 3, 3, 3, 7, 3, 2, 6, 4], "d", even);
     const p = partition_point_n(begin(d), size(d), even);
     print('partition point: ' + source(p));
@@ -2558,14 +2558,14 @@ function __partition_point_n_usage() {
 function __partition_point_n_attributes() {
 }
 
-function __partition_point_n_forward_typescript() { return ["function partition_point_n_forward<T>(f: Iter<T>, n: number, p: Predicate<T>): [Iter<T>, number] {\n    let t = n;\n    while (n != 0) {\n        const h = half(n);\n        const m = successor(f, h);\n\n        if (p(source(m))) {\n            n = h;\n        } else {\n            n -= h + 1;\n            t -= h + 1;\n            f = successor(m);\n        }\n    }\n    return [f, t];\n}","const eq3 = predicate((x: number) => x == 3);\nconst gt3 = predicate((x: number) => x > 3);\nconst gte3 = predicate((x: number) => x >= 3);\n\nconst d = sequence([1, 1, 1, 1, 3, 3, 3, 3, 3, 7, 8, 9], \"d\", eq3);\n\nconst lb = partition_point_n_forward(begin(d), size(d), gte3);\nconst ub = partition_point_n_forward(lb[0], lb[1], gt3);\n\nlet f = lb[0];\nconst l = ub[0];\n\nwhile ( ! equal(f, l)) {\n    print(source(f) + \", \");\n    f = successor(f);\n}"]; }
+function __partition_point_n_forward_typescript() { return ["function partition_point_n_forward<T>(f: Iter<T>, n: number, p: Predicate<T>): [Iter<T>, number] {\n    let t = n;\n    while (n != 0) {\n        const h = half(n);\n        const m = successor(f, h);\n\n        if (p(source(m))) {\n            n = h;\n        } else {\n            n -= h + 1;\n            t -= h + 1;\n            f = successor(m);\n        }\n    }\n    return [f, t];\n}","const eq3 = predicate(x => x == 3);\nconst gt3 = predicate(x => x > 3);\nconst gte3 = predicate(x => x >= 3);\n\nconst d = sequence([1, 1, 1, 1, 3, 3, 3, 3, 3, 7, 8, 9], \"d\", eq3);\n\nconst lb = partition_point_n_forward(begin(d), size(d), gte3);\nconst ub = partition_point_n_forward(lb[0], lb[1], gt3);\n\nlet f = lb[0];\nconst l = ub[0];\n\nwhile ( ! equal(f, l)) {\n    print(source(f) + \", \");\n    f = successor(f);\n}"]; }
 
 function __partition_point_n_forward_references() { return ["Elements of Programming, ch. 6, p. 104 (variant of partition_point_n that also returns a count)."]; }
 
 function __partition_point_n_forward_usage() {
-    const eq3 = predicate((x) => x == 3);
-    const gt3 = predicate((x) => x > 3);
-    const gte3 = predicate((x) => x >= 3);
+    const eq3 = predicate(x => x == 3);
+    const gt3 = predicate(x => x > 3);
+    const gte3 = predicate(x => x >= 3);
     const d = sequence([1, 1, 1, 1, 3, 3, 3, 3, 3, 7, 8, 9], "d", eq3);
     const lb = partition_point_n_forward(begin(d), size(d), gte3);
     const ub = partition_point_n_forward(lb[0], lb[1], gt3);
@@ -2580,7 +2580,7 @@ function __partition_point_n_forward_usage() {
 function __partition_point_n_forward_attributes() {
 }
 
-function __upper_bound_n_typescript() { return ["function upper_bound_n<T>(f: Iter<T>, n: number, a: T, r: Relation<T>) {\n    const p = (x: T) => r(a, x);\n    return partition_point_n(f, n, p);\n}","const hasLowerDigitSum = relation((x: number, y) => digitSum(x) < digitSum(y));\n\nconst d = sequence([11, 22, 49, 58, 67]);\n\nconst lb = upper_bound_n(begin(d), size(d), 38, hasLowerDigitSum);\nprint('insertion point: ' + source(lb));"]; }
+function __upper_bound_n_typescript() { return ["function upper_bound_n<T>(f: Iter<T>, n: number, a: T, r: Relation<T>) {\n    const p = (x: T) => r(a, x);\n    return partition_point_n(f, n, p);\n}","const hasLowerDigitSum = relation((x, y) => digitSum(x) < digitSum(y));\n\nconst d = sequence([11, 22, 49, 58, 67]);\n\nconst lb = upper_bound_n(begin(d), size(d), 38, hasLowerDigitSum);\nprint('insertion point: ' + source(lb));"]; }
 
 function __upper_bound_n_references() { return ["Elements of Programming, ch. 6, p. 106."]; }
 
@@ -2594,12 +2594,12 @@ function __upper_bound_n_usage() {
 function __upper_bound_n_attributes() {
 }
 
-function __all_typescript() { return ["function all<T>(f: Iter<T>, l: Iter<T>, p: Predicate<T>): boolean {\n    const np = find_if_not(f, l, p);\n    return equal(l, np);\n}","const even = predicate((x: number) => (x & 1) === 0);\nconst d = sequence(array_random(), \"d\");\nconst f = begin(d);\nconst l = end(d);\n\nif (all(f, l, even)) {\n    print(\"All the elements of the sequence are even.\");\n} else {\n    print(\"There is at least one item in the sequence that is not even.\");\n}"]; }
+function __all_typescript() { return ["function all<T>(f: Iter<T>, l: Iter<T>, p: Predicate<T>): boolean {\n    const np = find_if_not(f, l, p);\n    return equal(l, np);\n}","const even = predicate(x => (x & 1) === 0);\nconst d = sequence(array_random(), \"d\");\nconst f = begin(d);\nconst l = end(d);\n\nif (all(f, l, even)) {\n    print(\"All the elements of the sequence are even.\");\n} else {\n    print(\"There is at least one item in the sequence that is not even.\");\n}"]; }
 
 function __all_references() { return ["Elements of Programming, ch. 6, p. 95, exercise 6.1 (companion implementation in eop.h)."]; }
 
 function __all_usage() {
-    const even = predicate((x) => (x & 1) === 0);
+    const even = predicate(x => (x & 1) === 0);
     const d = sequence(array_random(), "d");
     const f = begin(d);
     const l = end(d);
@@ -2630,12 +2630,12 @@ function __find_usage() {
 function __find_attributes() {
 }
 
-function __find_backward_if_typescript() { return ["function find_backward_if<T>(f: Iter<T>, l: Iter<T>, p: Predicate<T>) {\n    while (true) {\n        if (equal(l, f)) return f;\n        l = predecessor(l);\n        if (p(source(l))) return successor(l);\n    }\n}","const even = predicate((x: number) => (x & 1) === 0);\nconst d = sequence(array_random(), \"d\");\nconst f = begin(d);\nconst l = end(d);\n\nconst it = find_backward_if(f, l, even);\nif ( ! equal(it, f)) {\n    print(source(predecessor(it)));\n}"]; }
+function __find_backward_if_typescript() { return ["function find_backward_if<T>(f: Iter<T>, l: Iter<T>, p: Predicate<T>) {\n    while (true) {\n        if (equal(l, f)) return f;\n        l = predecessor(l);\n        if (p(source(l))) return successor(l);\n    }\n}","const even = predicate(x => (x & 1) === 0);\nconst d = sequence(array_random(), \"d\");\nconst f = begin(d);\nconst l = end(d);\n\nconst it = find_backward_if(f, l, even);\nif ( ! equal(it, f)) {\n    print(source(predecessor(it)));\n}"]; }
 
 function __find_backward_if_references() { return ["Elements of Programming, ch. 6, p. 108."]; }
 
 function __find_backward_if_usage() {
-    const even = predicate((x) => (x & 1) === 0);
+    const even = predicate(x => (x & 1) === 0);
     const d = sequence(array_random(), "d");
     const f = begin(d);
     const l = end(d);
@@ -2648,12 +2648,12 @@ function __find_backward_if_usage() {
 function __find_backward_if_attributes() {
 }
 
-function __find_if_typescript() { return ["function find_if<T>(f: Iter<T>, l: Iter<T>, p: Predicate<T>) {\n    while ( ! equal(f, l) && ! p(source(f))) {\n        f = successor(f)\n    }\n    return f;\n}","const even = predicate((x: number) => (x & 1) === 0);\nconst d = sequence(array_random(), \"d\");\nconst f = begin(d);\nconst l = end(d);\n\nconst it = find_if(f, l, even);\nif ( ! equal(it, l)) {\n    print(source(it));\n}"]; }
+function __find_if_typescript() { return ["function find_if<T>(f: Iter<T>, l: Iter<T>, p: Predicate<T>) {\n    while ( ! equal(f, l) && ! p(source(f))) {\n        f = successor(f)\n    }\n    return f;\n}","const even = predicate(x => (x & 1) === 0);\nconst d = sequence(array_random(), \"d\");\nconst f = begin(d);\nconst l = end(d);\n\nconst it = find_if(f, l, even);\nif ( ! equal(it, l)) {\n    print(source(it));\n}"]; }
 
 function __find_if_references() { return ["Elements of Programming, ch. 6, pp. 94–95.","From Mathematics to Generic Programming, ch. 10, pp. 190–191 (ch10.h)."]; }
 
 function __find_if_usage() {
-    const even = predicate((x) => (x & 1) === 0);
+    const even = predicate(x => (x & 1) === 0);
     const d = sequence(array_random(), "d");
     const f = begin(d);
     const l = end(d);
@@ -2666,12 +2666,12 @@ function __find_if_usage() {
 function __find_if_attributes() {
 }
 
-function __find_if_not_typescript() { return ["function find_if_not<T>(f: Iter<T>, l: Iter<T>, p: Predicate<T>) {\n    while ( ! equal(f, l) && p(source(f))) {\n        f = successor(f)\n    }\n    return f;\n}","const even = predicate((x: number) => (x & 1) === 0);\nconst d = sequence(array_random(), \"d\");\nconst f = begin(d);\nconst l = end(d);\n\nconst it = find_if_not(f, l, even);\nif ( ! equal(it, l)) {\n    print(source(it));\n}"]; }
+function __find_if_not_typescript() { return ["function find_if_not<T>(f: Iter<T>, l: Iter<T>, p: Predicate<T>) {\n    while ( ! equal(f, l) && p(source(f))) {\n        f = successor(f)\n    }\n    return f;\n}","const even = predicate(x => (x & 1) === 0);\nconst d = sequence(array_random(), \"d\");\nconst f = begin(d);\nconst l = end(d);\n\nconst it = find_if_not(f, l, even);\nif ( ! equal(it, l)) {\n    print(source(it));\n}"]; }
 
 function __find_if_not_references() { return ["Elements of Programming, ch. 6, p. 95 (described in the text; implementation in eop.h)."]; }
 
 function __find_if_not_usage() {
-    const even = predicate((x) => (x & 1) === 0);
+    const even = predicate(x => (x & 1) === 0);
     const d = sequence(array_random(), "d");
     const f = begin(d);
     const l = end(d);
@@ -2783,12 +2783,12 @@ function __kmp_lps_attributes() {
 
 }
 
-function __none_typescript() { return ["function none<T>(f: Iter<T>, l: Iter<T>, p: Predicate<T>): boolean {\n    const it = find_if(f, l, p);\n    return equal(l, it);\n}","const even = predicate((x: number) => (x & 1) === 0);\nconst d = sequence(array_random(), \"d\");\nconst f = begin(d);\nconst l = end(d);\n\nif (none(f, l, even)) {\n    print(\"None of the elements in the sequence are even.\");\n} else {\n    print(\"There is at least one item in the sequence that is even.\");\n}"]; }
+function __none_typescript() { return ["function none<T>(f: Iter<T>, l: Iter<T>, p: Predicate<T>): boolean {\n    const it = find_if(f, l, p);\n    return equal(l, it);\n}","const even = predicate(x => (x & 1) === 0);\nconst d = sequence(array_random(), \"d\");\nconst f = begin(d);\nconst l = end(d);\n\nif (none(f, l, even)) {\n    print(\"None of the elements in the sequence are even.\");\n} else {\n    print(\"There is at least one item in the sequence that is even.\");\n}"]; }
 
 function __none_references() { return ["Elements of Programming, ch. 6, p. 95, exercise 6.1 (companion implementation in eop.h)."]; }
 
 function __none_usage() {
-    const even = predicate((x) => (x & 1) === 0);
+    const even = predicate(x => (x & 1) === 0);
     const d = sequence(array_random(), "d");
     const f = begin(d);
     const l = end(d);
@@ -2803,12 +2803,12 @@ function __none_usage() {
 function __none_attributes() {
 }
 
-function __not_all_typescript() { return ["function not_all<T>(f: Iter<T>, l: Iter<T>, p: Predicate<T>) {\n    return ! all(f, l, p);\n}","const even = predicate((x: number) => (x & 1) === 0);\nconst d = sequence(array_random(), \"d\");\nconst f = begin(d);\nconst l = end(d);\n\nif (not_all(f, l, even)) {\n    print(\"There is at least one item in the sequence that is not even.\");\n\n} else {\n    print(\"All the elements of the sequence are even.\");\n}"]; }
+function __not_all_typescript() { return ["function not_all<T>(f: Iter<T>, l: Iter<T>, p: Predicate<T>) {\n    return ! all(f, l, p);\n}","const even = predicate(x => (x & 1) === 0);\nconst d = sequence(array_random(), \"d\");\nconst f = begin(d);\nconst l = end(d);\n\nif (not_all(f, l, even)) {\n    print(\"There is at least one item in the sequence that is not even.\");\n\n} else {\n    print(\"All the elements of the sequence are even.\");\n}"]; }
 
 function __not_all_references() { return ["Elements of Programming, ch. 6, p. 95, exercise 6.1 (companion implementation in eop.h)."]; }
 
 function __not_all_usage() {
-    const even = predicate((x) => (x & 1) === 0);
+    const even = predicate(x => (x & 1) === 0);
     const d = sequence(array_random(), "d");
     const f = begin(d);
     const l = end(d);
@@ -2823,12 +2823,12 @@ function __not_all_usage() {
 function __not_all_attributes() {
 }
 
-function __partitioned_typescript() { return ["function partitioned<T>(f: Iter<T>, l: Iter<T>, p: Predicate<T>) {\n    const it0 = find_if(f, l, p);\n    const it1 = find_if_not(it0, l, p);\n    return equal(it1, l);\n}","const even = predicate((x: number) => (x & 1) === 0);\nconst d = sequence(array_random(), \"d\", even, undefined, true);\nconst f = begin(d);\nconst l = end(d);\n\nif (partitioned(f, l, even)) {\n    print('The sequence is already p-partitioned.');\n} else {\n    print('The sequence is not p-partitioned, partitioning...');\n\n    const p = partition_semistable(f, l, even);\n\n    if (partitioned(f, l, even)) {\n        print('Now the sequence is p-partitioned.');\n    } else {\n        print('Impossible, this line will never be executed.');\n    }\n}"]; }
+function __partitioned_typescript() { return ["function partitioned<T>(f: Iter<T>, l: Iter<T>, p: Predicate<T>) {\n    const it0 = find_if(f, l, p);\n    const it1 = find_if_not(it0, l, p);\n    return equal(it1, l);\n}","const even = predicate(x => (x & 1) === 0);\nconst d = sequence(array_random(), \"d\", even, undefined, true);\nconst f = begin(d);\nconst l = end(d);\n\nif (partitioned(f, l, even)) {\n    print('The sequence is already p-partitioned.');\n} else {\n    print('The sequence is not p-partitioned, partitioning...');\n\n    const p = partition_semistable(f, l, even);\n\n    if (partitioned(f, l, even)) {\n        print('Now the sequence is p-partitioned.');\n    } else {\n        print('Impossible, this line will never be executed.');\n    }\n}"]; }
 
 function __partitioned_references() { return ["Elements of Programming, ch. 6, p. 102."]; }
 
 function __partitioned_usage() {
-    const even = predicate((x) => (x & 1) === 0);
+    const even = predicate(x => (x & 1) === 0);
     const d = sequence(array_random(), "d", even, undefined, true);
     const f = begin(d);
     const l = end(d);
@@ -2850,12 +2850,12 @@ function __partitioned_usage() {
 function __partitioned_attributes() {
 }
 
-function __partitioned_at_point_typescript() { return ["function partitioned_at_point<T>(f: Iter<T>, m: Iter<T>, l: Iter<T>, p: Predicate<T>) {\n    // precondition: readable_bounded_range(f, l) && m belongs to [f, l)\n    const c0 = none(f, m, p);\n    const c1 = all(m, l, p);\n    return c0 && c1;\n}","const even = predicate((x: number) => (x & 1) === 0);\nconst d = sequence(array_random(), \"d\", even, undefined, true);\nconst f = begin(d);\nconst l = end(d);\nconst m = successor(f, 5);\n\nif (partitioned_at_point(f, m, l, even)) {\n    print('The sequence is already p-partitioned at m.');\n} else {\n    print('The sequence is not p-partitioned at m, partitioning...');\n\n    const m2 = partition_semistable(f, l, even);\n\n    if (partitioned_at_point(f, m2, l, even)) {\n        print('Now the sequence is p-partitioned at m2.');\n    } else {\n        print('Impossible, this line will never be executed.');\n    }\n}"]; }
+function __partitioned_at_point_typescript() { return ["function partitioned_at_point<T>(f: Iter<T>, m: Iter<T>, l: Iter<T>, p: Predicate<T>) {\n    // precondition: readable_bounded_range(f, l) && m belongs to [f, l)\n    const c0 = none(f, m, p);\n    const c1 = all(m, l, p);\n    return c0 && c1;\n}","const even = predicate(x => (x & 1) === 0);\nconst d = sequence(array_random(), \"d\", even, undefined, true);\nconst f = begin(d);\nconst l = end(d);\nconst m = successor(f, 5);\n\nif (partitioned_at_point(f, m, l, even)) {\n    print('The sequence is already p-partitioned at m.');\n} else {\n    print('The sequence is not p-partitioned at m, partitioning...');\n\n    const m2 = partition_semistable(f, l, even);\n\n    if (partitioned_at_point(f, m2, l, even)) {\n        print('Now the sequence is p-partitioned at m2.');\n    } else {\n        print('Impossible, this line will never be executed.');\n    }\n}"]; }
 
 function __partitioned_at_point_references() { return ["Elements of Programming, ch. 11, p. 189, exercise 11.1 (companion implementation in eop.h)."]; }
 
 function __partitioned_at_point_usage() {
-    const even = predicate((x) => (x & 1) === 0);
+    const even = predicate(x => (x & 1) === 0);
     const d = sequence(array_random(), "d", even, undefined, true);
     const f = begin(d);
     const l = end(d);
@@ -2878,12 +2878,12 @@ function __partitioned_at_point_usage() {
 function __partitioned_at_point_attributes() {
 }
 
-function __potential_partition_point_typescript() { return ["function potential_partition_point<T>(f: Iter<T>, l: Iter<T>, p: Predicate<T>) {\n    const res = count_if_not_basis(f, l, p, f);\n    return res;\n}","const even = predicate((x: number) => (x & 1) === 0);\nconst d = sequence(array_random(), \"d\", even);\nconst f = begin(d);\nconst l = end(d);\nconst m = potential_partition_point(f, l, even);\n\nprint(\"After p-partitioning the partition point would ocurr here:\");\nprint(distance(begin(d), m));\nprint(source(m));\n\nprint(\"Let's verify...\");\nconst p = partition_semistable(f, l, even);\nif (equal(m, p)) {\n    print(\"Yeah!\");\n} else {\n    print('Impossible, this line will never be executed.');\n}"]; }
+function __potential_partition_point_typescript() { return ["function potential_partition_point<T>(f: Iter<T>, l: Iter<T>, p: Predicate<T>) {\n    const res = count_if_not_basis(f, l, p, f);\n    return res;\n}","const even = predicate(x => (x & 1) === 0);\nconst d = sequence(array_random(), \"d\", even);\nconst f = begin(d);\nconst l = end(d);\nconst m = potential_partition_point(f, l, even);\n\nprint(\"After p-partitioning the partition point would ocurr here:\");\nprint(distance(begin(d), m));\nprint(source(m));\n\nprint(\"Let's verify...\");\nconst p = partition_semistable(f, l, even);\nif (equal(m, p)) {\n    print(\"Yeah!\");\n} else {\n    print('Impossible, this line will never be executed.');\n}"]; }
 
 function __potential_partition_point_references() { return ["Elements of Programming, ch. 11, p. 189, exercise 11.2 (companion implementation in eop.h)."]; }
 
 function __potential_partition_point_usage() {
-    const even = predicate((x) => (x & 1) === 0);
+    const even = predicate(x => (x & 1) === 0);
     const d = sequence(array_random(), "d", even);
     const f = begin(d);
     const l = end(d);
@@ -2904,12 +2904,12 @@ function __potential_partition_point_usage() {
 function __potential_partition_point_attributes() {
 }
 
-function __some_typescript() { return ["function some<T>(f: Iter<T>, l: Iter<T>, p: Predicate<T>) {\n    return ! none(f, l, p);\n}","const even = predicate((x: number) => (x & 1) === 0);\nconst d = sequence(array_random(), \"d\");\nconst f = begin(d);\nconst l = end(d);\n\nif (some(f, l, even)) {\n    print(\"Some of the elements in the sequence are even.\");\n} else {\n    print(\"None of the elements in the sequence are even.\");\n}"]; }
+function __some_typescript() { return ["function some<T>(f: Iter<T>, l: Iter<T>, p: Predicate<T>) {\n    return ! none(f, l, p);\n}","const even = predicate(x => (x & 1) === 0);\nconst d = sequence(array_random(), \"d\");\nconst f = begin(d);\nconst l = end(d);\n\nif (some(f, l, even)) {\n    print(\"Some of the elements in the sequence are even.\");\n} else {\n    print(\"None of the elements in the sequence are even.\");\n}"]; }
 
 function __some_references() { return ["Elements of Programming, ch. 6, p. 95, exercise 6.1 (companion implementation in eop.h)."]; }
 
 function __some_usage() {
-    const even = predicate((x) => (x & 1) === 0);
+    const even = predicate(x => (x & 1) === 0);
     const d = sequence(array_random(), "d");
     const f = begin(d);
     const l = end(d);
@@ -3127,12 +3127,12 @@ function __swap_ranges_n_usage() {
 function __swap_ranges_n_attributes() {
 }
 
-function __count_if_typescript() { return ["function count_if<T>(f: Iter<T>, l: Iter<T>, p: Predicate<T>) {\n    const res = count_if_basis(f, l, p, 0);\n    return res;\n}","const even = predicate((x: number) => (x & 1) === 0);\nconst d = sequence(array_random(), \"d\", even);\nconst f = begin(d);\nconst l = end(d);\n\nconst n = count_if(f, l, even);\n\nprint(\"Even numbers: \");\nprint(n);"]; }
+function __count_if_typescript() { return ["function count_if<T>(f: Iter<T>, l: Iter<T>, p: Predicate<T>) {\n    const res = count_if_basis(f, l, p, 0);\n    return res;\n}","const even = predicate(x => (x & 1) === 0);\nconst d = sequence(array_random(), \"d\", even);\nconst f = begin(d);\nconst l = end(d);\n\nconst n = count_if(f, l, even);\n\nprint(\"Even numbers: \");\nprint(n);"]; }
 
 function __count_if_references() { return ["Elements of Programming, ch. 6, p. 95 (count_if overloads)."]; }
 
 function __count_if_usage() {
-    const even = predicate((x) => (x & 1) === 0);
+    const even = predicate(x => (x & 1) === 0);
     const d = sequence(array_random(), "d", even);
     const f = begin(d);
     const l = end(d);
@@ -3144,12 +3144,12 @@ function __count_if_usage() {
 function __count_if_attributes() {
 }
 
-function __count_if_basis_typescript() { return ["function count_if_basis<T, U extends number | Iter<unknown>>(f: Iter<T>, l: Iter<T>, p: Predicate<T>, j: U) {\n    while ( ! equal(f, l)) {\n        if (p(source(f))) {\n            j = successor(j);\n        }\n        f = successor(f);\n    }\n    return j;\n}","const even = predicate((x: number) => (x & 1) === 0);\nconst d = sequence(array_random(), \"d\", even);\nconst c = sequence(array_ascending(), \"c\");\n\nconst f = begin(d);\nconst l = end(d);\n\nlet j = begin(c);\nj = count_if_basis(f, l, even, j);\n\nprint(\"Even numbers: \");\nprint(distance(begin(c), j));"]; }
+function __count_if_basis_typescript() { return ["function count_if_basis<T, U extends number | Iter<unknown>>(f: Iter<T>, l: Iter<T>, p: Predicate<T>, j: U) {\n    while ( ! equal(f, l)) {\n        if (p(source(f))) {\n            j = successor(j);\n        }\n        f = successor(f);\n    }\n    return j;\n}","const even = predicate(x => (x & 1) === 0);\nconst d = sequence(array_random(), \"d\", even);\nconst c = sequence(array_ascending(), \"c\");\n\nconst f = begin(d);\nconst l = end(d);\n\nlet j = begin(c);\nj = count_if_basis(f, l, even, j);\n\nprint(\"Even numbers: \");\nprint(distance(begin(c), j));"]; }
 
 function __count_if_basis_references() { return ["Elements of Programming, ch. 6, p. 95 (count_if overloads)."]; }
 
 function __count_if_basis_usage() {
-    const even = predicate((x) => (x & 1) === 0);
+    const even = predicate(x => (x & 1) === 0);
     const d = sequence(array_random(), "d", even);
     const c = sequence(array_ascending(), "c");
     const f = begin(d);
@@ -3163,12 +3163,12 @@ function __count_if_basis_usage() {
 function __count_if_basis_attributes() {
 }
 
-function __count_if_not_typescript() { return ["function count_if_not<T>(f: Iter<T>, l: Iter<T>, p: Predicate<T>) {\n    const res = count_if_not_basis(f, l, p, 0);\n    return res;\n}","const even = predicate((x: number) => (x & 1) === 0);\nconst d = sequence(array_random(), \"d\", even);\nconst f = begin(d);\nconst l = end(d);\n\nconst n = count_if_not(f, l, even);\n\nprint(\"Odd numbers: \");\nprint(n);"]; }
+function __count_if_not_typescript() { return ["function count_if_not<T>(f: Iter<T>, l: Iter<T>, p: Predicate<T>) {\n    const res = count_if_not_basis(f, l, p, 0);\n    return res;\n}","const even = predicate(x => (x & 1) === 0);\nconst d = sequence(array_random(), \"d\", even);\nconst f = begin(d);\nconst l = end(d);\n\nconst n = count_if_not(f, l, even);\n\nprint(\"Odd numbers: \");\nprint(n);"]; }
 
 function __count_if_not_references() { return ["Elements of Programming, ch. 6, p. 95 (negated count described in the text; implementation in eop.h)."]; }
 
 function __count_if_not_usage() {
-    const even = predicate((x) => (x & 1) === 0);
+    const even = predicate(x => (x & 1) === 0);
     const d = sequence(array_random(), "d", even);
     const f = begin(d);
     const l = end(d);
@@ -3180,12 +3180,12 @@ function __count_if_not_usage() {
 function __count_if_not_attributes() {
 }
 
-function __count_if_not_basis_typescript() { return ["function count_if_not_basis<T, U extends number | Iter<unknown>>(f: Iter<T>, l: Iter<T>, p: Predicate<T>, j: U) {\n    while ( ! equal(f, l)) {\n        if ( ! p(source(f))) {\n            j = successor(j);\n        }\n        f = successor(f);\n    }\n    return j;\n}","const even = predicate((x: number) => (x & 1) === 0);\nconst d = sequence(array_random(), \"d\", even);\nconst c = sequence(array_ascending(), \"c\");\n\nconst f = begin(d);\nconst l = end(d);\n\nlet j = begin(c);\nj = count_if_not_basis(f, l, even, j);\n\nprint(\"Odd numbers: \");\nprint(distance(begin(c), j));"]; }
+function __count_if_not_basis_typescript() { return ["function count_if_not_basis<T, U extends number | Iter<unknown>>(f: Iter<T>, l: Iter<T>, p: Predicate<T>, j: U) {\n    while ( ! equal(f, l)) {\n        if ( ! p(source(f))) {\n            j = successor(j);\n        }\n        f = successor(f);\n    }\n    return j;\n}","const even = predicate(x => (x & 1) === 0);\nconst d = sequence(array_random(), \"d\", even);\nconst c = sequence(array_ascending(), \"c\");\n\nconst f = begin(d);\nconst l = end(d);\n\nlet j = begin(c);\nj = count_if_not_basis(f, l, even, j);\n\nprint(\"Odd numbers: \");\nprint(distance(begin(c), j));"]; }
 
 function __count_if_not_basis_references() { return ["Elements of Programming, ch. 6, p. 95 (negated count described in the text; implementation in eop.h)."]; }
 
 function __count_if_not_basis_usage() {
-    const even = predicate((x) => (x & 1) === 0);
+    const even = predicate(x => (x & 1) === 0);
     const d = sequence(array_random(), "d", even);
     const c = sequence(array_ascending(), "c");
     const f = begin(d);

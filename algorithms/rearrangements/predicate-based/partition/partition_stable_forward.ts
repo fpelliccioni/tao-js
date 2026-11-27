@@ -19,7 +19,7 @@ function partition_stable_forward<T>(f: Iter<T>, l: Iter<T>, p: Predicate<T>) {
 }
 
 function __partition_stable_forward_usage() {
-    const even = predicate((x: number) => (x & 1) === 0);
+    const even = predicate(x => (x & 1) === 0);
     const d = sequence(array_random(), "d", even);
     const f = begin(d);
     const l = end(d);

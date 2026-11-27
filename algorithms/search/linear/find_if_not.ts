@@ -8,7 +8,7 @@ function find_if_not<T>(f: Iter<T>, l: Iter<T>, p: Predicate<T>) {
 }
 
 function __find_if_not_usage() {
-    const even = predicate((x: number) => (x & 1) === 0);
+    const even = predicate(x => (x & 1) === 0);
     const d = sequence(array_random(), "d");
     const f = begin(d);
     const l = end(d);
