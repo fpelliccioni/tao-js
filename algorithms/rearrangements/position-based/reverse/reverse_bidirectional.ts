@@ -1,0 +1,20 @@
+function reverse_bidirectional<T>(f: Iter<T>, l: Iter<T>) {
+    while (true) {
+        if (equal(f, l)) return;
+        l = predecessor(l);
+        if (equal(f, l)) return;
+        iter_swap(f, l);
+        f = successor(f);
+    }
+}
+
+function __reverse_bidirectional_usage() {
+    const s = sequence(array_random(), "s1");
+    print(s);
+    reverse_bidirectional(begin(s), end(s));
+    print(s);
+    print('...');
+}
+
+function __reverse_bidirectional_attributes() {
+}

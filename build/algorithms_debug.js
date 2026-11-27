@@ -1,5 +1,5 @@
 function __debug_copy(f, l, o) {
-    while ( ! equal(f, l)) {
+    while (!equal(f, l)) {
         sink(o, source(f));
         o = successor(o);
         f = successor(f);
@@ -15,7 +15,7 @@ function copy(f, l, o) {
 }
 
 function __debug_copy_backward(f, l, o) {
-    while ( ! equal(f, l)) {
+    while (!equal(f, l)) {
         l = predecessor(l);
         o = predecessor(o);
         sink(o, source(l));
@@ -48,7 +48,7 @@ function copy_backward_n(l, n, o) {
 }
 
 function __debug_copy_bounded(f, l, fo, lo) {
-    while ( ! equal(f, l) && ! equal(fo, lo)) {
+    while (!equal(f, l) && !equal(fo, lo)) {
         sink(fo, source(f));
         fo = successor(fo);
         f = successor(f);
@@ -81,7 +81,7 @@ function copy_n(f, n, o) {
 }
 
 function __debug_move_backward(f, l, o) {
-    while (! equal(f, l)) {
+    while (!equal(f, l)) {
         l = predecessor(l);
         o = predecessor(o);
         sink_move(o, source(l));
@@ -97,7 +97,7 @@ function move_backward(f, l, o) {
 }
 
 function __debug_reverse_copy(f, l, o) {
-    while ( ! equal(f, l)) {
+    while (!equal(f, l)) {
         l = predecessor(l);
         sink(o, source(l));
         o = successor(o);
@@ -113,7 +113,7 @@ function reverse_copy(f, l, o) {
 }
 
 function __debug_reverse_copy_backward(f, l, o) {
-    while ( ! equal(f, l)) {
+    while (!equal(f, l)) {
         o = predecessor(o);
         sink(o, source(f));
         f = successor(f);
@@ -163,11 +163,12 @@ function reverse_copy_n(l, n, o) {
 }
 
 function __debug_combine_copy(f, l, f2, l2, o, r) {
-    while ( ! equal(f, l) && ! equal(f2, l2)) {
+    while (!equal(f, l) && !equal(f2, l2)) {
         if (r(f2, f)) {
             sink(o, source(f2));
             f2 = successor(f2);
-        } else {
+        }
+        else {
             sink(o, source(f));
             f = successor(f);
         }
@@ -184,12 +185,13 @@ function combine_copy(f, l, f2, l2, o, r) {
 }
 
 function __debug_combine_copy_backward(f, l, f2, l2, o, r) {
-    while ( ! equal(f, l) && ! equal(f2, l2)) {
+    while (!equal(f, l) && !equal(f2, l2)) {
         o = predecessor(o);
         if (r(predecessor(l2), predecessor(l))) {
             l = predecessor(l);
             sink(o, source(l));
-        } else {
+        }
+        else {
             l2 = predecessor(l2);
             sink(o, source(l2));
         }
@@ -211,15 +213,16 @@ function __debug_combine_copy_backward_n(l, n, l2, n2, o, r) {
             l = predecessor(l);
             --n;
             sink(o, source(l));
-        } else {
+        }
+        else {
             l2 = predecessor(l2);
             --n2;
             sink(o, source(l2));
         }
     }
-    var res0 = copy_backward_n(l2, n2, o);
+    const res0 = copy_backward_n(l2, n2, o);
     o = res0[1];
-    var res1 = copy_backward_n(l, n, o);
+    const res1 = copy_backward_n(l, n, o);
     o = res1[1];
     return [res1[0], res0[0], o];
 }
@@ -237,16 +240,17 @@ function __debug_combine_copy_n(f, n, f2, n2, o, r) {
             sink(o, source(f2));
             f2 = successor(f2);
             --n2;
-        } else {
+        }
+        else {
             sink(o, source(f));
             f = successor(f);
             --n;
         }
         o = successor(o);
     }
-    var res0 = copy_n(f, n, o);
+    const res0 = copy_n(f, n, o);
     o = res0[1];
-    var res1 = copy_n(f2, n2, o);
+    const res1 = copy_n(f2, n2, o);
     o = res1[1];
     return [res0[0], res1[0], o];
 }
@@ -259,7 +263,7 @@ function combine_copy_n(f, n, f2, n2, o, r) {
 }
 
 function __debug_copy_if(f, l, o, p) {
-    var ps = predicate_source(p);
+    const ps = predicate_source(p);
     return copy_select(f, l, o, ps);
 }
 
@@ -271,8 +275,8 @@ function copy_if(f, l, o, p) {
 }
 
 function __debug_copy_if_n(f, n, o, p) {
-    var ps = predicate_source(p);
-    return copy_select(f, n, o, ps);
+    const ps = predicate_source(p);
+    return copy_select_n(f, n, o, ps);
 }
 
 function copy_if_n(f, n, o, p) {
@@ -283,7 +287,7 @@ function copy_if_n(f, n, o, p) {
 }
 
 function __debug_copy_select(f, l, o, p) {
-    while ( ! equal(f, l)) {
+    while (!equal(f, l)) {
         if (p(f)) {
             sink(o, source(f));
             o = successor(o);
@@ -320,7 +324,7 @@ function copy_select_n(f, n, o, p) {
 }
 
 function __debug_merge_copy(f, l, f2, l2, o, r) {
-    var rs = relation_source(r);
+    const rs = relation_source(r);
     return combine_copy(f, l, f2, l2, o, rs);
 }
 
@@ -332,7 +336,7 @@ function merge_copy(f, l, f2, l2, o, r) {
 }
 
 function __debug_merge_copy_backward(f, l, f2, l2, o, r) {
-    var rs = relation_source(r);
+    const rs = relation_source(r);
     return combine_copy_backward(f, l, f2, l2, o, rs);
 }
 
@@ -344,7 +348,7 @@ function merge_copy_backward(f, l, f2, l2, o, r) {
 }
 
 function __debug_partition_copy(f, l, u, t, p) {
-    var ps = predicate_source(p);
+    const ps = predicate_source(p);
     return split_copy(f, l, u, t, ps);
 }
 
@@ -355,24 +359,25 @@ function partition_copy(f, l, u, t, p) {
     return res;
 }
 
-function __debug_partition_copy_n(f, l, u, t, p) {
-    var ps = predicate_source(p);
+function __debug_partition_copy_n(f, n, u, t, p) {
+    const ps = predicate_source(p);
     return split_copy_n(f, n, u, t, ps);
 }
 
-function partition_copy_n(f, l, u, t, p) {
-    var _f_ = start_f('partition_copy_n', f, l, u, t, p);
-    var res = __debug_partition_copy_n(f, l, u, t, p);
+function partition_copy_n(f, n, u, t, p) {
+    var _f_ = start_f('partition_copy_n', f, n, u, t, p);
+    var res = __debug_partition_copy_n(f, n, u, t, p);
     end_f(_f_);
     return res;
 }
 
 function __debug_split_copy(f, l, u, t, p) {
-    while ( ! equal(f, l)) {
+    while (!equal(f, l)) {
         if (p(f)) {
             sink(t, source(f));
             t = successor(t);
-        } else {
+        }
+        else {
             sink(u, source(f));
             u = successor(u);
         }
@@ -393,7 +398,8 @@ function __debug_split_copy_n(f, n, u, t, p) {
         if (p(f)) {
             sink(t, source(f));
             t = successor(t);
-        } else {
+        }
+        else {
             sink(u, source(f));
             u = successor(u);
         }
@@ -412,7 +418,7 @@ function split_copy_n(f, n, u, t, p) {
 
 function __debug_gcd(a, b) {
     while (b != 0) {
-        var r = remainder(a, b);
+        const r = remainder(a, b);
         a = b;
         b = r;
     }
@@ -428,8 +434,10 @@ function gcd(a, b) {
 
 function __debug_gcd0(a, b) {
     while (a != b) {
-        if (b < a) a -= b;
-        else       b -= a;
+        if (b < a)
+            a -= b;
+        else
+            b -= a;
     }
     return a;
 }
@@ -443,9 +451,10 @@ function gcd0(a, b) {
 
 function __debug_gcd1(a, b) {
     while (a != b) {
-        while (b < a) a -= b;
+        while (b < a)
+            a -= b;
         //swap(a, b) not possible in ES5
-        var tmp = a;
+        const tmp = a;
         a = b;
         b = tmp;
     }
@@ -463,7 +472,7 @@ function __debug_gcd2(a, b) {
     while (a != b) {
         a = remainder_slow(a, b);
         //swap(a, b) not possible in ES5
-        var tmp = a;
+        const tmp = a;
         a = b;
         b = tmp;
     }
@@ -478,10 +487,9 @@ function gcd2(a, b) {
 }
 
 function __debug_gcd3(a, b) {
-    while (a != b) {
+    while (a !== b && b !== 0) {
         a = remainder(a, b);
-        //swap(a, b) not possible in ES5
-        var tmp = a;
+        const tmp = a;
         a = b;
         b = tmp;
     }
@@ -511,27 +519,23 @@ function __debug_integer_sqrt(n) {
     if (n < 2) {
         return n;
     }
-
     // Find the shift amount.
     // shift = ceil(log2(n) * 0.5) * 2
-    var shift = 2
+    let shift = 2;
     while ((n >> shift) != 0) {
         shift += 2;
     }
-
-
     // Unroll the bit-setting loop.
-    var result = 0
+    let result = 0;
     while (shift >= 0) {
         result = result << 1;
-        var large_cand = result ^ 1;
+        const large_cand = result ^ 1;
         // large_cand = result + 1;
         if (large_cand * large_cand <= n >> shift) {
             result = large_cand;
         }
         shift -= 2;
     }
-
     return result;
 }
 
@@ -547,15 +551,12 @@ function __debug_integer_sqrt_recursive(n) {
     if (n < 2) {
         return n;
     }
-
-    var tmp = n >> 2;
-    var small_cand = integer_sqrt_recursive(n >> 2);
-    var small_cand = small_cand << 1;
-    var large_cand = small_cand + 1
+    const tmp = n >> 2;
+    const small_cand = integer_sqrt_recursive(tmp) << 1;
+    const large_cand = small_cand + 1;
     if (large_cand * large_cand > n) {
         return small_cand;
     }
-
     return large_cand;
 }
 
@@ -568,9 +569,9 @@ function integer_sqrt_recursive(n) {
 
 function __debug_smallest_divisor(n) {
     //precondition: n > 0
-    if (even(n)) return 2;
-
-    for (var i = 3; i * i <= n; i += 2) {
+    if (even(n))
+        return 2;
+    for (let i = 3; i * i <= n; i += 2) {
         if (divides(i, n)) {
             return i;
         }
@@ -586,8 +587,9 @@ function smallest_divisor(n) {
 }
 
 function __debug_multiply0(n, a) {
-    if (n == 1) return a;
-    var product = multiply0(n - 1, a)
+    if (n == 1)
+        return a;
+    let product = multiply0(n - 1, a);
     product = add(product, a);
     return product;
 }
@@ -601,13 +603,13 @@ function multiply0(n, a) {
 
 function __debug_multiply1(n, a) {
     snapshot();
-    if (n == 1) return a;
-    var product = multiply1(half(n), add(a, a));
+    if (n == 1)
+        return a;
+    let product = multiply1(half(n), add(a, a));
     if (odd(n)) {
         product = add(product, a);
     }
     return product;
-
 }
 
 function multiply1(n, a) {
@@ -618,9 +620,9 @@ function multiply1(n, a) {
 }
 
 function __debug_multiply2(n, a) {
-    if (n == 1) return a;
+    if (n == 1)
+        return a;
     return multiply_accumulate4(a, n - 1, a);
-
 }
 
 function multiply2(n, a) {
@@ -635,9 +637,9 @@ function __debug_multiply3(n, a) {
         a = add(a, a);
         n = half(n);
     }
-    if (n == 1) return a;
+    if (n == 1)
+        return a;
     return multiply_accumulate4(a, n - 1, a);
-
 }
 
 function multiply3(n, a) {
@@ -652,10 +654,10 @@ function __debug_multiply4(n, a) {
         a = add(a, a);
         n = half(n);
     }
-    if (n == 1) return a;
+    if (n == 1)
+        return a;
     // even(n - 1) ==> n - 1 != 1
     return multiply_accumulate4(a, half(n - 1), add(a, a));
-
 }
 
 function multiply4(n, a) {
@@ -666,7 +668,8 @@ function multiply4(n, a) {
 }
 
 function __debug_multiply_accumulate0(r, n, a) {
-    if (n == 1) return add(r, a);
+    if (n == 1)
+        return add(r, a);
     if (odd(n)) {
         return multiply_accumulate0(add(r, a), half(n), add(a, a));
     }
@@ -681,7 +684,8 @@ function multiply_accumulate0(r, n, a) {
 }
 
 function __debug_multiply_accumulate1(r, n, a) {
-    if (n == 1) return add(r, a);
+    if (n == 1)
+        return add(r, a);
     if (odd(n)) {
         r = add(r, a);
     }
@@ -698,7 +702,8 @@ function multiply_accumulate1(r, n, a) {
 function __debug_multiply_accumulate2(r, n, a) {
     if (odd(n)) {
         r = add(r, a);
-        if (n == 1) return r;
+        if (n == 1)
+            return r;
     }
     return multiply_accumulate2(r, half(n), add(a, a));
 }
@@ -713,11 +718,12 @@ function multiply_accumulate2(r, n, a) {
 function __debug_multiply_accumulate3(r, n, a) {
     if (odd(n)) {
         r = add(r, a);
-        if (n == 1) return r;
+        if (n == 1)
+            return r;
     }
     n = half(n);
     a = add(a, a);
-    return multiply_accumulate3(r, n,  a);
+    return multiply_accumulate3(r, n, a);
 }
 
 function multiply_accumulate3(r, n, a) {
@@ -731,7 +737,8 @@ function __debug_multiply_accumulate4(r, n, a) {
     while (true) {
         if (odd(n)) {
             r = add(r, a);
-            if (n == 1) return r;
+            if (n == 1)
+                return r;
         }
         n = half(n);
         a = add(a, a);
@@ -747,11 +754,13 @@ function multiply_accumulate4(r, n, a) {
 
 function __debug_multiply_accumulate_semigroup(r, n, a) {
     // precondition: n >= 0
-    if (n == 0) return r;
+    if (n == 0)
+        return r;
     while (true) {
         if (odd(n)) {
             r = add(r, a);
-            if (n == 1) return r;
+            if (n == 1)
+                return r;
         }
         n = half(n);
         a = add(a, a);
@@ -782,7 +791,8 @@ function multiply_group(n, a) {
 
 function __debug_multiply_monoid(n, a) {
     // precondition: n >= 0
-    if (n == 0) return 0;  //TODO
+    if (n == 0)
+        return 0; //TODO
     return multiply_semigroup(n, a);
 }
 
@@ -799,10 +809,10 @@ function __debug_multiply_semigroup(n, a) {
         a = add(a, a);
         n = half(n);
     }
-    if (n == 1) return a;
+    if (n == 1)
+        return a;
     // even(n - 1) ==> n - 1 != 1
     return multiply_accumulate_semigroup(a, half(n - 1), add(a, a));
-
 }
 
 function multiply_semigroup(n, a) {
@@ -829,11 +839,13 @@ function power(a, n, op) {
 
 function __debug_power_accumulate_semigroup(r, a, n, op) {
     // precondition: n >= 0
-    if (n == 0) return r;
+    if (n == 0)
+        return r;
     while (true) {
         if (odd(n)) {
             r = op(r, a);
-            if (n == 1) return r;
+            if (n == 1)
+                return r;
         }
         n = half(n);
         a = op(a, a);
@@ -849,11 +861,13 @@ function power_accumulate_semigroup(r, a, n, op) {
 
 function __debug_power_accumulate_semigroup0(r, a, n) {
     // precondition: n >= 0
-    if (n == 0) return r;
+    if (n == 0)
+        return r;
     while (true) {
         if (odd(n)) {
             r = multiply(r, a);
-            if (n == 1) return r;
+            if (n == 1)
+                return r;
         }
         n = half(n);
         a = multiply(a, a);
@@ -899,7 +913,8 @@ function power_group0(a, n) {
 
 function __debug_power_monoid(a, n, op) {
     // precondition: n >= 0
-    if (n == 0) return identity_element(op, a);
+    if (n == 0)
+        return identity_element(op, a);
     return power_semigroup(a, n, op);
 }
 
@@ -912,7 +927,8 @@ function power_monoid(a, n, op) {
 
 function __debug_power_monoid0(a, n) {
     // precondition: n >= 0
-    if (n == 0) return multiplicative_identity(a);
+    if (n == 0)
+        return multiplicative_identity(a);
     return power_semigroup0(a, n);
 }
 
@@ -929,10 +945,10 @@ function __debug_power_semigroup(a, n, op) {
         a = op(a, a);
         n = half(n);
     }
-    if (n == 1) return a;
+    if (n == 1)
+        return a;
     // even(n - 1) ==> n - 1 != 1
     return power_accumulate_semigroup(a, op(a, a), half(n - 1), op);
-
 }
 
 function power_semigroup(a, n, op) {
@@ -948,10 +964,10 @@ function __debug_power_semigroup0(a, n) {
         a = multiply(a, a);
         n = half(n);
     }
-    if (n == 1) return a;
+    if (n == 1)
+        return a;
     // even(n - 1) ==> n - 1 != 1
     return power_accumulate_semigroup0(a, multiply(a, a), half(n - 1));
-
 }
 
 function power_semigroup0(a, n) {
@@ -963,7 +979,7 @@ function power_semigroup0(a, n) {
 
 function __debug_fermat_test(n, witness) {
     //precondition: witness > 0 && witness < n
-    var reminder = power_semigroup(witness, n - 1, modulo_multiply(n));
+    const reminder = power_semigroup(witness, n - 1, modulo_multiply(n));
     return reminder == 1;
 }
 
@@ -976,21 +992,19 @@ function fermat_test(n, witness) {
 
 function __debug_is_charmichael(n) {
     //precondition: n > 1 && n is composite
-
     if (even(n)) {
         return false; // from Korselt's Theorem (1899):
     }
-
-    var is_composite = false;
-
-    for (var b = 3; b <= n; b += 2) {
-        if ( ! is_composite && b * b > n){
+    let is_composite = false;
+    for (let b = 3; b <= n; b += 2) {
+        if (!is_composite && b * b > n) {
             return false;
         }
         if (are_coprime(b, n)) {
             is_composite = true;
-        } else {
-            var x = power_semigroup(b, n - 1, modulo_multiply(n));
+        }
+        else {
+            const x = power_semigroup(b, n - 1, modulo_multiply(n));
             if (x != 1) {
                 return false;
             }
@@ -1008,15 +1022,16 @@ function is_charmichael(n) {
 
 function __debug_is_charmichael0(n) {
     //precondition: n > 1 && n is composite
-    var is_composite = false;
-    for (var b = 2; b <= n; ++b) {
-        if ( ! is_composite && b * b > n){
+    let is_composite = false;
+    for (let b = 2; b <= n; ++b) {
+        if (!is_composite && b * b > n) {
             return false;
         }
         if (are_coprime(b, n)) {
             is_composite = true;
-        } else {
-            var x = power_semigroup(b, n - 1, modulo_multiply(n));
+        }
+        else {
+            const x = power_semigroup(b, n - 1, modulo_multiply(n));
             if (x != 1) {
                 return false;
             }
@@ -1034,20 +1049,19 @@ function is_charmichael0(n) {
 
 function __debug_is_charmichael1(n) {
     //precondition: n > 1 && n is composite
-
     if (even(n)) {
         return false; // from Korselt's Theorem (1899):
     }
-
-    var is_composite = false;
-    for (var b = 2; b <= n; ++b) {
-        if ( ! is_composite && b * b > n){
+    let is_composite = false;
+    for (let b = 2; b <= n; ++b) {
+        if (!is_composite && b * b > n) {
             return false;
         }
         if (are_coprime(b, n)) {
             is_composite = true;
-        } else {
-            var x = power_semigroup(b, n - 1, modulo_multiply(n));
+        }
+        else {
+            const x = power_semigroup(b, n - 1, modulo_multiply(n));
             if (x != 1) {
                 return false;
             }
@@ -1064,8 +1078,9 @@ function is_charmichael1(n) {
 }
 
 function __debug_is_prime(n) {
-    if (n <= 1) return false;
-    var sd = smallest_divisor(n);
+    if (n <= 1)
+        return false;
+    const sd = smallest_divisor(n);
     return sd == n;
 }
 
@@ -1079,14 +1094,12 @@ function is_prime(n) {
 function __debug_miller_rabin_test(n, q, k, w) {
     //returns true is n is probably prime, returns false if it definitely is not.
     //precondition: n > 1 && n - 1 = 2^k * q && q is odd
-
-    var mmult = modulo_multiply(n);
-    var x = power_semigroup(w, q, mmult);
+    const mmult = modulo_multiply(n);
+    let x = power_semigroup(w, q, mmult);
     if (x == 1 || x == n - 1) {
         return true;
     }
-
-    for (var i = 1; i < k; ++i) {
+    for (let i = 1; i < k; ++i) {
         //invariant: x = w^(2^(i-1)) * q
         x = mmult(x, x);
         if (x == n - 1) {
@@ -1120,7 +1133,8 @@ function multiplicative_inverse_fermat(a, p) {
 
 function __debug_largest_doubling(a, b) {
     // precondition: b != 0
-    while (a - b >= b) b += b;
+    while (a - b >= b)
+        b += b;
     return b;
 }
 
@@ -1133,9 +1147,10 @@ function largest_doubling(a, b) {
 
 function __debug_quotient(a, b) {
     // precondition: b > 0
-    if (a < b) return 0;
-    var c = largest_doubling(a, b);
-    var n = 1;
+    if (a < b)
+        return 0;
+    let c = largest_doubling(a, b);
+    let n = 1;
     a -= c;
     while (c != b) {
         c = half(c);
@@ -1157,9 +1172,10 @@ function quotient(a, b) {
 
 function __debug_quotient_remainder(a, b) {
     // precondition: b > 0
-    if (a < b) return [0, a];
-    var c = largest_doubling(a, b);
-    var n = 1;
+    if (a < b)
+        return [0, a];
+    let c = largest_doubling(a, b);
+    let n = 1;
     a -= c;
     while (c != b) {
         c = half(c);
@@ -1181,12 +1197,14 @@ function quotient_remainder(a, b) {
 
 function __debug_remainder(a, b) {
     // precondition: b != 0
-    if (a < b) return a;
-    var c = largest_doubling(a, b);
+    if (a < b)
+        return a;
+    let c = largest_doubling(a, b);
     a -= c;
     while (c != b) {
         c = half(c);
-        if (c <= a) a -= c;
+        if (c <= a)
+            a -= c;
     }
     return a;
 }
@@ -1199,11 +1217,14 @@ function remainder(a, b) {
 }
 
 function __debug_remainder_fast0(a, b) {
-    if (a <= b) return a;
-    if (a - b <= b) return a - b;
+    if (a <= b)
+        return a;
+    if (a - b <= b)
+        return a - b;
     a = remainder_fast0(a, b + b);
-    if (a <= b) return a;
-    return a - b
+    if (a <= b)
+        return a;
+    return a - b;
 }
 
 function remainder_fast0(a, b) {
@@ -1215,12 +1236,14 @@ function remainder_fast0(a, b) {
 
 function __debug_remainder_fast1(a, b) {
     // precondition: b != 0
-
-    if (a < b) return a;
-    if (a - b < b) return a - b;
+    if (a < b)
+        return a;
+    if (a - b < b)
+        return a - b;
     a = remainder_fast1(a, b + b);
-    if (a < b) return a;
-    return a - b
+    if (a < b)
+        return a;
+    return a - b;
 }
 
 function remainder_fast1(a, b) {
@@ -1232,16 +1255,18 @@ function remainder_fast1(a, b) {
 
 function __debug_remainder_fibonacci(a, b) {
     // precondition: b > 0
-    if (a < b) return a;
-    var c = b;
+    if (a < b)
+        return a;
+    let c = b;
     do {
-        var tmp = c;
+        const tmp = c;
         c += b;
         b = tmp;
     } while (a >= c);
     do {
-        if (a >= b) a -= b;
-        var tmp = c - b;
+        if (a >= b)
+            a -= b;
+        const tmp = c - b;
         c = b;
         b = tmp;
     } while (b < c);
@@ -1256,7 +1281,8 @@ function remainder_fibonacci(a, b) {
 }
 
 function __debug_remainder_slow(a, b) {
-    while (b < a) a -= b;
+    while (b < a)
+        a -= b;
     return a;
 }
 
@@ -1301,8 +1327,8 @@ function mark_sieve_n(f, n, factor) {
 }
 
 function __debug_print_sieve(f, n) {
-    var i = 0;
-    var out = "2";
+    let i = 0;
+    let out = "2";
     while (i < n) {
         if (source(f)) {
             out += " " + (2 * i + 3);
@@ -1322,14 +1348,13 @@ function print_sieve(f, n) {
 
 function __debug_sift(f, n) {
     fill_n(f, n, 1);
-    var i = 0;
-    var index_square = 3;
-    var factor = 3;
-    var current = f;
-    var last = successor(f, n);
+    let i = 0;
+    let index_square = 3;
+    let factor = 3;
+    let current = f;
+    const last = successor(f, n);
     while (index_square < n) {
         // invariant: index_square = 2i^2 + 6i + 3
-
         if (source(current)) {
             mark_sieve(successor(f, index_square), last, factor);
         }
@@ -1349,16 +1374,13 @@ function sift(f, n) {
 
 function __debug_sift0(f, n) {
     fill_n(f, n, 1);
-    var i = 0;
-    var index_square = 3;
-    var current = f;
+    let i = 0;
+    let index_square = 3;
+    let current = f;
     while (index_square < n) {
         // invariant: index_square = 2i^2 + 6i + 3
-
-        if (source(current)) {            // if current candidate is prime
-            mark_sieve(successor(f, index_square),
-                       successor(f, n),
-                       i + i + 3);
+        if (source(current)) { // if current candidate is prime
+            mark_sieve(successor(f, index_square), successor(f, n), i + i + 3);
         }
         ++i;
         current = successor(current);
@@ -1375,18 +1397,15 @@ function sift0(f, n) {
 
 function __debug_sift1(f, n) {
     fill_n(f, n, 1);
-    var i = 0;
-    var index_square = 3;
-    var factor = 3;
-    var current = f;
-    var last = successor(f, n);
+    let i = 0;
+    let index_square = 3;
+    let factor = 3;
+    let current = f;
+    const last = successor(f, n);
     while (index_square < n) {
         // invariant: index_square = 2i^2 + 6i + 3
-
-        if (source(current)) {            // if current candidate is prime
-            mark_sieve(successor(f, index_square),
-                       last,
-                       factor);
+        if (source(current)) { // if current candidate is prime
+            mark_sieve(successor(f, index_square), last, factor);
         }
         ++i;
         current = successor(current);
@@ -1403,13 +1422,14 @@ function sift1(f, n) {
 }
 
 function __debug_insertion_sort(f, l, r) {
-    if (equal(f, l)) return;
-    var c = successor(f);
-    if (equal(c, l)) return;
-
+    if (equal(f, l))
+        return;
+    const c = successor(f);
+    if (equal(c, l))
+        return;
     // create a sentinel
-    var min = min_element_nonempty(f, l, r);
-    if (! equal(min, f)) {
+    const min = min_element_nonempty(f, l, r);
+    if (!equal(min, f)) {
         rotate_right_by_one_nonempty(f, successor(min));
         increment_custom_stat("Misplaced elements");
         register_move_distance(distance(f, min));
@@ -1425,10 +1445,11 @@ function insertion_sort(f, l, r) {
 }
 
 function __debug_insertion_sort_backward(f, l, r) {
-    if (equal(f, l)) return;
+    if (equal(f, l))
+        return;
     l = predecessor(l);
-    var c = l;
-    while ( ! equal(c, f)) {
+    let c = l;
+    while (!equal(c, f)) {
         c = predecessor(c);
         linear_insert_backward(c, l, r);
     }
@@ -1442,9 +1463,10 @@ function insertion_sort_backward(f, l, r) {
 }
 
 function __debug_insertion_sort_classic(f, l, r) {
-    if (equal(f, l)) return;
-    var c = successor(f);
-    while ( ! equal(c, l)) {
+    if (equal(f, l))
+        return;
+    let c = successor(f);
+    while (!equal(c, l)) {
         linear_insert(f, c, r);
         c = successor(c);
     }
@@ -1458,10 +1480,11 @@ function insertion_sort_classic(f, l, r) {
 }
 
 function __debug_insertion_sort_classic_0(f, l, r) {
-    if (equal(f, l)) return; 
-    var c = successor(f);
-    while ( ! equal(c, l)) {
-        linear_insert(f, c, r);     
+    if (equal(f, l))
+        return;
+    let c = successor(f);
+    while (!equal(c, l)) {
+        linear_insert(f, c, r);
         c = successor(c);
     }
 }
@@ -1474,9 +1497,10 @@ function insertion_sort_classic_0(f, l, r) {
 }
 
 function __debug_insertion_sort_classic_1(f, l, r) {
-    if (equal(f, l)) return; 
-    var c = successor(f);
-    while ( ! equal(c, l)) {
+    if (equal(f, l))
+        return;
+    let c = successor(f);
+    while (!equal(c, l)) {
         linear_insert(f, c, r);
         c = successor(c);
     }
@@ -1490,9 +1514,10 @@ function insertion_sort_classic_1(f, l, r) {
 }
 
 function __debug_insertion_sort_classic_2(f, l, r) {
-    if (equal(f, l)) return; 
-    var c = successor(f);
-    while ( ! equal(c, l)) {
+    if (equal(f, l))
+        return;
+    let c = successor(f);
+    while (!equal(c, l)) {
         linear_insert(f, c, r);
         c = successor(c);
     }
@@ -1506,9 +1531,10 @@ function insertion_sort_classic_2(f, l, r) {
 }
 
 function __debug_insertion_sort_classic_3(f, l, r) {
-    if (equal(f, l)) return; 
-    var c = successor(f);
-    while ( ! equal(c, l)) {
+    if (equal(f, l))
+        return;
+    let c = successor(f);
+    while (!equal(c, l)) {
         linear_insert(f, c, r);
         c = successor(c);
     }
@@ -1523,8 +1549,8 @@ function insertion_sort_classic_3(f, l, r) {
 
 function __debug_insertion_sort_suffix_nonempty(f, l, r) {
     //precondition: ! equal(f, l)
-    var c = successor(f);
-    while ( ! equal(c, l)) {
+    let c = successor(f);
+    while (!equal(c, l)) {
         linear_insert_unguarded(c, r);
         c = successor(c);
     }
@@ -1538,12 +1564,11 @@ function insertion_sort_suffix_nonempty(f, l, r) {
 }
 
 function __debug_linear_insert_unguarded(c, r) {
-    if ( ! call(r, c, predecessor(c))) return c;
-
+    if (!call(r, c, predecessor(c)))
+        return c;
     increment_custom_stat("Misplaced elements");
-
-    var value = source_move(c);
-    var d = shift_right_while_unguarded(c, bind(r, value));
+    const value = source_move(c);
+    const d = shift_right_while_unguarded(c, bind(r, value));
     sink_move(d, value);
     register_move_distance(distance(d, c));
     return d;
@@ -1558,8 +1583,8 @@ function linear_insert_unguarded(c, r) {
 
 function __debug_selection_sort_classic(f, l, r) {
     // postcondition: is_sorted(f, l, r)
-    while ( ! equal(f, l)) {
-        var m = min_element(f, l, r);
+    while (!equal(f, l)) {
+        const m = min_element(f, l, r);
         iter_swap(f, m);
         f = successor(f);
     }
@@ -1573,8 +1598,8 @@ function selection_sort_classic(f, l, r) {
 }
 
 function __debug_selection_sort_stable(f, l, r) {
-    while (! equal(f, l)) {
-        var m = min_element(f, l, r);
+    while (!equal(f, l)) {
+        const m = min_element(f, l, r);
         rotate_right_by_one(f, successor(m));
         f = successor(f);
     }
@@ -1588,29 +1613,29 @@ function selection_sort_stable(f, l, r) {
 }
 
 function __debug_sort3(x, y, z, c) {
-    var r = 0;
-    if ( ! call(c, y, x)) {        // if x <= y
-        if ( ! call(c, z, y)) {    // if y <= z
-            return r;              // x <= y && y <= z
+    let r = 0;
+    if (!call(c, y, x)) { // if x <= y
+        if (!call(c, z, y)) { // if y <= z
+            return r; // x <= y && y <= z
         }
-                                   // x <= y && y > z
-        iter_swap(y, z);           // x <= z && y < z
+        // x <= y && y > z
+        iter_swap(y, z); // x <= z && y < z
         r = 1;
-        if (call(c, y, x)) {       // if x > y
-            iter_swap(x, y);       // x < y && y <= z
+        if (call(c, y, x)) { // if x > y
+            iter_swap(x, y); // x < y && y <= z
             r = 2;
         }
-        return r;                  // x <= y && y < z
+        return r; // x <= y && y < z
     }
-    if (call(c, z, y)) {           // x > y, if y > z
-        iter_swap(x, z);           // x < y && y < z
+    if (call(c, z, y)) { // x > y, if y > z
+        iter_swap(x, z); // x < y && y < z
         r = 1;
         return r;
     }
-    iter_swap(x, y);               // x > y && y <= z
-    r = 1;                         // x < y && x <= z
-    if (call(c, z, y)) {           // if y > z
-        iter_swap(y, z);           // x <= y && y < z
+    iter_swap(x, y); // x > y && y <= z
+    r = 1; // x < y && x <= z
+    if (call(c, z, y)) { // if y > z
+        iter_swap(y, z); // x <= y && y < z
         r = 2;
     }
     return r;
@@ -1624,10 +1649,10 @@ function sort3(x, y, z, c) {
 }
 
 function __debug_cycle_from(i, f) {
-    var tmp = source(i);
-    var j = i;
-    var k = f(i);
-    while ( ! equal(k, i)) {
+    const tmp = source(i);
+    let j = i;
+    let k = f(i);
+    while (!equal(k, i)) {
         sink(j, source(k));
         j = k;
         k = f(k);
@@ -1643,8 +1668,8 @@ function cycle_from(i, f) {
 }
 
 function __debug_cycle_to(i, f) {
-    var k = f(i);
-    while ( ! equal(k, i)) {
+    let k = f(i);
+    while (!equal(k, i)) {
         exchange_values(i, k);
         k = f(k);
     }
@@ -1658,29 +1683,24 @@ function cycle_to(i, f) {
 }
 
 function __debug_cycle_to_2n_1(i, f) {
-    var k = f(i);
-    if (equal(k, i)) return;
-
-    var buf = sequence(array_all_equal(1, "-"), "buf");
-    var b = begin(buf);
-    var b2 = i;
-
+    let k = f(i);
+    if (equal(k, i))
+        return;
+    const buf = sequence(array_all_equal(1, "-"), "buf");
+    let b = begin(buf);
+    let b2 = i;
     sink(b, source(k));
     sink(k, source(b2));
-
-    var res = swap_iters(b, b2);
-    b = res[0];
-    b2 = res[1];
-
+    const [nextBuffer, nextInput] = swap_iters(b, b2);
+    b = nextBuffer;
+    b2 = nextInput;
     k = f(k);
-    while ( ! equal(k, i)) {
+    while (!equal(k, i)) {
         sink(b, source(k));
         sink(k, source(b2));
-
-        var res = swap_iters(b, b2);
-        b = res[0];
-        b2 = res[1];
-
+        const [nextBuffer, nextInput] = swap_iters(b, b2);
+        b = nextBuffer;
+        b2 = nextInput;
         k = f(k);
     }
     sink(i, source(b2));
@@ -1694,11 +1714,11 @@ function cycle_to_2n_1(i, f) {
 }
 
 function __debug_cycle_to_recursive(i, f) {
-    var k = f(i);
-    if (equal(k, i)) return;
-
-    var buf = sequence(array_all_equal(1, "-"), "buf");
-    var b = begin(buf);
+    const k = f(i);
+    if (equal(k, i))
+        return;
+    const buf = sequence(array_all_equal(1, "-"), "buf");
+    const b = begin(buf);
     cycle_to_internal(i, k, f, b);
     sink(k, source(i));
     sink(i, source(b));
@@ -1713,11 +1733,13 @@ function cycle_to_recursive(i, f) {
 
 function __debug_reverse(f, l) {
     while (true) {
-        if (equal(f, l)) return;
+        if (equal(f, l))
+            return;
         l = predecessor(l);
-        if (equal(f, l)) return;
+        if (equal(f, l))
+            return;
         iter_swap(f, l);
-        f = successor(f);        
+        f = successor(f);
     }
 }
 
@@ -1730,11 +1752,13 @@ function reverse(f, l) {
 
 function __debug_reverse_bidirectional(f, l) {
     while (true) {
-        if (equal(f, l)) return;
+        if (equal(f, l))
+            return;
         l = predecessor(l);
-        if (equal(f, l)) return;
+        if (equal(f, l))
+            return;
         iter_swap(f, l);
-        f = successor(f);        
+        f = successor(f);
     }
 }
 
@@ -1746,14 +1770,14 @@ function reverse_bidirectional(f, l) {
 }
 
 function __debug_reverse_n_adaptive(f_i, n_i, f_b, n_b) {
-    if (n_i < 2) return successor(f_i, n_i);
-    if (n_i <= n_b) return reverse_n_with_buffer(f_i, n_i, f_b);
-
-    var h_i = half(n_i);
-    var n_mod_2 = n_i - twice(h_i);
-    var m_i = successor(reverse_n_adaptive(f_i, h_i, f_b, n_b), n_mod_2);
-    var l_i = reverse_n_adaptive(m_i, h_i, f_b, n_b);
-
+    if (n_i < 2)
+        return successor(f_i, n_i);
+    if (n_i <= n_b)
+        return reverse_n_with_buffer(f_i, n_i, f_b);
+    const h_i = half(n_i);
+    const n_mod_2 = n_i - twice(h_i);
+    const m_i = successor(reverse_n_adaptive(f_i, h_i, f_b, n_b), n_mod_2);
+    const l_i = reverse_n_adaptive(m_i, h_i, f_b, n_b);
     swap_ranges_n(f_i, m_i, h_i);
     return l_i;
 }
@@ -1766,13 +1790,12 @@ function reverse_n_adaptive(f_i, n_i, f_b, n_b) {
 }
 
 function __debug_reverse_n_forward(f, n) {
-    if (n < 2) return successor(f, n);
-    var h = half(n);
-    var n_mod_2 = n - twice(h);
-
-    var m = successor(reverse_n_forward(f, h), n_mod_2);
-    var l = reverse_n_forward(m, h);
-
+    if (n < 2)
+        return successor(f, n);
+    const h = half(n);
+    const n_mod_2 = n - twice(h);
+    const m = successor(reverse_n_forward(f, h), n_mod_2);
+    const l = reverse_n_forward(m, h);
     swap_ranges_n(f, m, h);
     return l;
 }
@@ -1785,13 +1808,13 @@ function reverse_n_forward(f, n) {
 }
 
 function __debug_reverse_n_indexed(f, n) {
-    var i = 0;
+    let i = 0;
     --n;
     while (i < n) {
-        iter_swap(successor(f, i), successor(f, n)); 
+        iter_swap(successor(f, i), successor(f, n));
         ++i;
         --n;
-    } 
+    }
 }
 
 function reverse_n_indexed(f, n) {
@@ -1826,10 +1849,9 @@ function rotate_bidirectional(f, m, l) {
 }
 
 function __debug_rotate_cycles(f, m, l, from) {
-    var m_l = distance(m, l);
-    var f_m = distance(f, m);
-    var d = gcd(f_m, m_l);
-
+    const m_l = distance(m, l);
+    const f_m = distance(f, m);
+    let d = gcd(f_m, m_l);
     while (d != 0) {
         cycle_from(successor(f, d), from);
         --d;
@@ -1846,14 +1868,13 @@ function rotate_cycles(f, m, l, from) {
 
 function __debug_rotate_forward(f, m, l) {
     // precondition: mutable_bounded_range(f, l) ∧ f ≺ m ≺ l
-
-    var ref = {f: f, m: m};
+    const ref = { f, m };
     rotate_forward_step(ref, l);
     f = ref.f;
     m = ref.m;
-    var m_prime = f;
-    while ( ! equal(m, l)) {
-        var ref = {f: f, m: m};
+    const m_prime = f;
+    while (!equal(m, l)) {
+        const ref = { f, m };
         rotate_forward_step(ref, l);
         f = ref.f;
         m = ref.m;
@@ -1869,7 +1890,7 @@ function rotate_forward(f, m, l) {
 }
 
 function __debug_rotate_random_access_nontrivial(f, m, l) {
-    var p = k_rotate_from_permutation_random_access(f, m, l);
+    const p = k_rotate_from_permutation_random_access(f, m, l);
     return rotate_cycles(f, m, l, p);
 }
 
@@ -1881,9 +1902,10 @@ function rotate_random_access_nontrivial(f, m, l) {
 }
 
 function __debug_rotate_right_by_one(f, l) {
-    if (equal(f, l)) return;
-    var butlast = predecessor(l);
-    var x = source_move(butlast);
+    if (equal(f, l))
+        return;
+    const butlast = predecessor(l);
+    const x = source_move(butlast);
     move_backward(f, butlast, l);
     sink_move(f, x);
 }
@@ -1896,8 +1918,8 @@ function rotate_right_by_one(f, l) {
 }
 
 function __debug_rotate_right_by_one_nonempty(f, l) {
-    var butlast = predecessor(l);
-    var x = source_move(butlast);
+    const butlast = predecessor(l);
+    const x = source_move(butlast);
     move_backward(f, butlast, l);
     sink_move(f, x);
 }
@@ -1910,7 +1932,8 @@ function rotate_right_by_one_nonempty(f, l) {
 }
 
 function __debug_shift_right_by_one(f, l) {
-    if (equal(f, l)) return;
+    if (equal(f, l))
+        return;
     copy_backward(f, predecessor(l), l);
 }
 
@@ -1922,7 +1945,7 @@ function shift_right_by_one(f, l) {
 }
 
 function __debug_shift_right_while(f, l, p) {
-    while ( ! equal(f, l) && p(source(predecessor(l)))) {
+    while (!equal(f, l) && p(source(predecessor(l)))) {
         sink_move(l, source_move(predecessor(l)));
         l = predecessor(l);
     }
@@ -1941,7 +1964,8 @@ function __debug_shift_right_while_nonempty(f, l, p) {
     while (p(source(predecessor(l)))) {
         sink_move(l, source_move(predecessor(l)));
         l = predecessor(l);
-        if (equal(f, l)) break;
+        if (equal(f, l))
+            break;
     }
     return l;
 }
@@ -1969,18 +1993,17 @@ function shift_right_while_unguarded(l, p) {
 }
 
 function __debug_is_heap_until_n(f, n, r) {
-    var p = f;
-    for (var ci = 1; ci < n; ++ci) {
-        var c = successor(f, ci);
+    let p = f;
+    for (let ci = 1; ci < n; ++ci) {
+        const c = successor(f, ci);
         if (r(source(p), source(c))) {
             return ci;
         }
-            
         if (even(ci)) {
             p = successor(p);
         }
     }
-    return n;    
+    return n;
 }
 
 function is_heap_until_n(f, n, r) {
@@ -1991,19 +2014,18 @@ function is_heap_until_n(f, n, r) {
 }
 
 function __debug_is_heap_until_n_0(f, n, r) {
-    var pi = 0;
-    for (var ci = 1; ci < n; ++ci) {
-        var c = successor(f, ci);
-        var p = successor(f, pi);
+    let pi = 0;
+    for (let ci = 1; ci < n; ++ci) {
+        const c = successor(f, ci);
+        const p = successor(f, pi);
         if (r(source(p), source(c))) {
             return ci;
         }
-            
         if (even(ci)) {
             ++pi;
         }
     }
-    return n;    
+    return n;
 }
 
 function is_heap_until_n_0(f, n, r) {
@@ -2015,22 +2037,22 @@ function is_heap_until_n_0(f, n, r) {
 
 function __debug_make_heap_n(f, n) {
     // assert(n > 2); //other sizes handled outside
-    var fpi = Math.floor((n - 3) / 2);
-    var fp = successor(f, fpi);    //firstParent
-    var frk = successor(f, (fpi + 1) * 2);  //firstRightKid
-
+    const fpi = Math.floor((n - 3) / 2);
+    let fp = successor(f, fpi); //firstParent
+    let frk = successor(f, (fpi + 1) * 2); //firstRightKid
     for (;; fp = predecessor(fp), frk = predecessor(frk, 2)) {
-        var lucifer = source(fp);
-        var parent = fp;
-        var rk = frk; //rightKid
+        const lucifer = source(fp);
+        let parent = fp;
+        let rk = frk; //rightKid
         for (;;) {
-            var jr = predecessor(rk, (source(predecessor(rk)) <= source(rk)));
-            var crt = source(jr);
-            if (lucifer <= crt) break;
+            const jr = predecessor(rk, Number(source(predecessor(rk)) <= source(rk)));
+            const crt = source(jr);
+            if (lucifer <= crt)
+                break;
             sink(parent, crt);
             parent = jr;
             // rk = (jr + 1) * 2;
-            var rki = (distance(f, jr) + 1) * 2;
+            const rki = (distance(f, jr) + 1) * 2;
             // if (rki >= n) goto write;
             if (rki >= n) {
                 sink(parent, lucifer);
@@ -2038,18 +2060,31 @@ function __debug_make_heap_n(f, n) {
             }
             rk = successor(f, rki);
         }
-
         // if (parent != fp) {
-        if ( ! equal(parent, fp)) {
-                sink(parent, lucifer);
+        if (!equal(parent, fp)) {
+            sink(parent, lucifer);
         }
-
         // if (fp == 0) break;
-        if (equal(fp, f)) break;
+        if (equal(fp, f))
+            break;
     }
-
-    if (n & 1) return;
-    push_heap_n(f, n);
+    if (n & 1)
+        return;
+    let childIndex = n - 1;
+    while (true) {
+        const parentIndex = Math.floor((childIndex - 1) / 2);
+        const child = successor(f, childIndex);
+        const parent = successor(f, parentIndex);
+        const childValue = source(child);
+        const parentValue = source(parent);
+        if (parentValue <= childValue)
+            break;
+        sink(parent, childValue);
+        sink(child, parentValue);
+        if (parentIndex === 0)
+            break;
+        childIndex = parentIndex;
+    }
 }
 
 function make_heap_n(f, n) {
@@ -2060,7 +2095,7 @@ function make_heap_n(f, n) {
 }
 
 function __debug_make_heap_n_naive_0(f, n) {
-    var i = Math.floor(n / 2) - 1;
+    let i = Math.floor(n / 2) - 1;
     for (; i >= 0; --i) {
         shift_down(f, i, n);
     }
@@ -2074,7 +2109,7 @@ function make_heap_n_naive_0(f, n) {
 }
 
 function __debug_make_heap_n_naive_1(f, n) {
-    var i = Math.floor(n / 2) - 1;
+    let i = Math.floor(n / 2) - 1;
     for (; i >= 0; --i) {
         shift_down(f, i, n);
     }
@@ -2089,9 +2124,8 @@ function make_heap_n_naive_1(f, n) {
 
 function __debug_push_heap_gnu_0(f, l, r) {
     //precondition: [f, l - 1) is a valid heap
-
     l = predecessor(l);
-    var value = source_move(l);
+    const value = source_move(l);
     push_heap_gnu_helper(f, distance(f, l), 0, move_obj(value), r);
 }
 
@@ -2104,9 +2138,8 @@ function push_heap_gnu_0(f, l, r) {
 
 function __debug_push_heap_gnu_1(f, l, r) {
     //precondition: [f, l - 1) is a valid heap
-
     l = predecessor(l);
-    var value = source_move(l);
+    const value = source_move(l);
     push_heap_gnu_helper(f, distance(f, l), 0, move_obj(value), r);
 }
 
@@ -2119,11 +2152,10 @@ function push_heap_gnu_1(f, l, r) {
 
 function __debug_push_heap_n(f, n, r) {
     while (n > 1) {
-        var l = successor(f, n - 1);
-        var pidx = parent(n - 1);
-        var p = successor(f, pidx);
-
-        if ( ! r(source(p), source(l))) {
+        const l = successor(f, n - 1);
+        const pidx = parent(n - 1);
+        const p = successor(f, pidx);
+        if (!r(source(p), source(l))) {
             return;
         }
         iter_swap(p, l);
@@ -2140,16 +2172,16 @@ function push_heap_n(f, n, r) {
 
 function __debug_partition_semistable(f, l, p) {
     while (true) {
-        if (equal(f, l)) return f;
-        if (p(source(f))) break;
+        if (equal(f, l))
+            return f;
+        if (p(source(f)))
+            break;
         f = successor(f);
     }
-
-    var j = f;
-    j = successor(j)
-
-    while ( ! equal(j, l)) {
-        if ( ! p(source(j))) {
+    let j = f;
+    j = successor(j);
+    while (!equal(j, l)) {
+        if (!p(source(j))) {
             iter_swap(f, j);
             f = successor(f);
         }
@@ -2167,13 +2199,12 @@ function partition_semistable(f, l, p) {
 
 function __debug_partition_semistable_1(f, l, p) {
     f = find_if(f, l, p);
-    if (f == l) return f;
-
-    var j = f;
-    j = successor(j)
-
-    while ( ! equal(j, l)) {
-        if ( ! p(source(j))) {
+    if (f == l)
+        return f;
+    let j = f;
+    j = successor(j);
+    while (!equal(j, l)) {
+        if (!p(source(j))) {
             iter_swap(f, j);
             f = successor(f);
         }
@@ -2191,17 +2222,17 @@ function partition_semistable_1(f, l, p) {
 
 function __debug_partition_semistable_nonempty(f, l, p) {
     //precondition: nonempty: ! equal(f, l)
-    while ( ! p(source(f))) {
+    while (!p(source(f))) {
         f = successor(f);
-        if (equal(f, l)) return;
+        if (equal(f, l))
+            return;
     }
-
-    var j = f;
-    j = successor(j)
-    if (equal(j, l)) return;
-
-    while ( ! equal(successor(j), l)) {
-        if ( ! p(source(j))) {
+    let j = f;
+    j = successor(j);
+    if (equal(j, l))
+        return;
+    while (!equal(successor(j), l)) {
+        if (!p(source(j))) {
             iter_swap(f, j);
             f = successor(f);
         }
@@ -2219,17 +2250,17 @@ function partition_semistable_nonempty(f, l, p) {
 
 function __debug_partition_stable_forward(f, l, p) {
     while (true) {
-        if (equal(f, l)) return f;
-        if (p(source(f))) break;
+        if (equal(f, l))
+            return f;
+        if (p(source(f)))
+            break;
         f = successor(f);
     }
-
-    var j = f;
-    j = successor(j)
-
-    while ( ! equal(j, l)) {
-        if ( ! p(source(j))) {
-            rotate(f, j, successor(j));     //TODO: refine rotate(...)
+    let j = f;
+    j = successor(j);
+    while (!equal(j, l)) {
+        if (!p(source(j))) {
+            rotate_bidirectional(f, j, successor(j)); //TODO: refine rotate_bidirectional(...)
             f = successor(f);
         }
         j = successor(j);
@@ -2245,9 +2276,9 @@ function partition_stable_forward(f, l, p) {
 }
 
 function __debug_partition_stable_with_buffer_0(f, l, p, b) {
-    var tmp = partition_copy(f, l, f, b, p);
-    var tf = tmp[0];
-    var ts = tmp[1];
+    const tmp = partition_copy(f, l, f, b, p);
+    const tf = tmp[0];
+    const ts = tmp[1];
     copy(b, ts, tf);
     return tf;
 }
@@ -2260,7 +2291,7 @@ function partition_stable_with_buffer_0(f, l, p, b) {
 }
 
 function __debug_lower_bound_n(f, n, a, r) {
-    var p = function(x) { return ! r(x, a); };
+    const p = function (x) { return !r(x, a); };
     return partition_point_n(f, n, p);
 }
 
@@ -2273,12 +2304,12 @@ function lower_bound_n(f, n, a, r) {
 
 function __debug_partition_point_n(f, n, p) {
     while (n != 0) {
-        var h = half(n);
-        var m = successor(f, h);
-
+        const h = half(n);
+        const m = successor(f, h);
         if (p(source(m))) {
             n = h;
-        } else {
+        }
+        else {
             n -= h + 1;
             f = successor(m);
         }
@@ -2294,14 +2325,14 @@ function partition_point_n(f, n, p) {
 }
 
 function __debug_partition_point_n_forward(f, n, p) {
-    var t = n;
+    let t = n;
     while (n != 0) {
-        var h = half(n);
-        var m = successor(f, h);
-
+        const h = half(n);
+        const m = successor(f, h);
         if (p(source(m))) {
             n = h;
-        } else {
+        }
+        else {
             n -= h + 1;
             t -= h + 1;
             f = successor(m);
@@ -2318,7 +2349,7 @@ function partition_point_n_forward(f, n, p) {
 }
 
 function __debug_upper_bound_n(f, n, a, r) {
-    var p = function(x) { return r(a, x); };
+    const p = function (x) { return r(a, x); };
     return partition_point_n(f, n, p);
 }
 
@@ -2342,8 +2373,8 @@ function all(f, l, p) {
 }
 
 function __debug_find(f, l, x) {
-    while ( ! equal(f, l) && ! source(f) != x) {
-        f = successor(f)
+    while (!equal(f, l) && !source(f) != x) {
+        f = successor(f);
     }
     return f;
 }
@@ -2357,10 +2388,12 @@ function find(f, l, x) {
 
 function __debug_find_backward_if(f, l, p) {
     while (true) {
-        if (equal(l, f)) return f;
+        if (equal(l, f))
+            return f;
         l = predecessor(l);
-        if (p(source(l))) return successor(l);
-    }    
+        if (p(source(l)))
+            return successor(l);
+    }
 }
 
 function find_backward_if(f, l, p) {
@@ -2371,8 +2404,8 @@ function find_backward_if(f, l, p) {
 }
 
 function __debug_find_if(f, l, p) {
-    while ( ! equal(f, l) && ! p(source(f))) {
-        f = successor(f)
+    while (!equal(f, l) && !p(source(f))) {
+        f = successor(f);
     }
     return f;
 }
@@ -2385,8 +2418,8 @@ function find_if(f, l, p) {
 }
 
 function __debug_find_if_not(f, l, p) {
-    while ( ! equal(f, l) && p(source(f))) {
-        f = successor(f)
+    while (!equal(f, l) && p(source(f))) {
+        f = successor(f);
     }
     return f;
 }
@@ -2399,17 +2432,19 @@ function find_if_not(f, l, p) {
 }
 
 function __debug_find_subsequence_n_naive(f, fn, s, sn, r) {
-    if (sn == 0) return [f, fn];
-
+    if (sn == 0)
+        return [f, fn];
     while (true) {
-        if (fn < sn) return [f, 0];
-
-        var tf = f;
-        var ts = s;
-        var n = sn;
+        if (fn < sn)
+            return [f, 0];
+        let tf = f;
+        let ts = s;
+        let n = sn;
         while (true) {
-            if (n == 0) return [f, fn];
-            if ( ! r(source(tf), source(ts))) break;
+            if (n == 0)
+                return [f, fn];
+            if (!r(source(tf), source(ts)))
+                break;
             --n;
             ts = successor(ts);
             tf = successor(tf);
@@ -2417,7 +2452,6 @@ function __debug_find_subsequence_n_naive(f, fn, s, sn, r) {
         --fn;
         f = successor(f);
     }
-
     return [f, fn];
 }
 
@@ -2429,26 +2463,27 @@ function find_subsequence_n_naive(f, fn, s, sn, r) {
 }
 
 function __debug_find_subsequence_n_naive_1(f, fn, s, sn, r) {
-    if (sn == 0) return [f, fn];
-
+    if (sn == 0)
+        return [f, fn];
     while (true) {
-        if (fn < sn) return [f, 0];
-
-        var tf = f;
-        var ts = s;
-        var n = sn;
+        if (fn < sn)
+            return [f, 0];
+        let tf = f;
+        let ts = s;
+        let n = sn;
         while (true) {
-            if (n == 0) return [f, fn];
-            if ( ! r(source(tf), source(ts))) break;
+            if (n == 0)
+                return [f, fn];
+            if (!r(source(tf), source(ts)))
+                break;
             --n;
             ts = successor(ts);
             tf = successor(tf);
         }
-        var skip = 1;
+        let skip = 1;
         if (n != sn) {
-            var eqf = predicate(function eqf(x) { return r(x, source(tf)); });
-            var it = find_if(s, ts, eqf);
-
+            const eqf = predicate(function eqf(x) { return r(x, source(tf)); });
+            const it = find_if(s, ts, eqf);
             if (equal(it, ts)) {
                 skip = sn - n;
             }
@@ -2456,7 +2491,6 @@ function __debug_find_subsequence_n_naive_1(f, fn, s, sn, r) {
         fn -= skip;
         f = successor(f, skip);
     }
-
     return [f, fn];
 }
 
@@ -2468,15 +2502,18 @@ function find_subsequence_n_naive_1(f, fn, s, sn, r) {
 }
 
 function __debug_find_subsequence_naive(f, l, sf, sl, r) {
-    if (equal(sf, sl)) return f;
-
+    if (equal(sf, sl))
+        return f;
     while (true) {
-        var tf = f;
-        var ts = sf;
+        let tf = f;
+        let ts = sf;
         while (true) {
-            if (equal(tf, l)) return l;
-            if (equal(ts, sl)) return f;
-            if ( ! r(source(tf), source(ts))) break;
+            if (equal(tf, l))
+                return l;
+            if (equal(ts, sl))
+                return f;
+            if (!r(source(tf), source(ts)))
+                break;
             ts = successor(ts);
             tf = successor(tf);
         }
@@ -2505,7 +2542,7 @@ function none(f, l, p) {
 }
 
 function __debug_not_all(f, l, p) {
-    return ! all(f, l, p);
+    return !all(f, l, p);
 }
 
 function not_all(f, l, p) {
@@ -2516,8 +2553,8 @@ function not_all(f, l, p) {
 }
 
 function __debug_partitioned(f, l, p) {
-    var it0 = find_if(f, l, p);
-    var it1 = find_if_not(it0, l, p);
+    const it0 = find_if(f, l, p);
+    const it1 = find_if_not(it0, l, p);
     return equal(it1, l);
 }
 
@@ -2530,8 +2567,8 @@ function partitioned(f, l, p) {
 
 function __debug_partitioned_at_point(f, m, l, p) {
     // precondition: readable_bounded_range(f, l) && m belongs to [f, l)
-    var c0 = none(f, m, p);
-    var c1 = all(m, l, p);
+    const c0 = none(f, m, p);
+    const c1 = all(m, l, p);
     return c0 && c1;
 }
 
@@ -2543,7 +2580,7 @@ function partitioned_at_point(f, m, l, p) {
 }
 
 function __debug_potential_partition_point(f, l, p) {
-    var res = count_if_not_basis(f, l, p, f);
+    const res = count_if_not_basis(f, l, p, f);
     return res;
 }
 
@@ -2555,7 +2592,7 @@ function potential_partition_point(f, l, p) {
 }
 
 function __debug_some(f, l, p) {
-    return ! none(f, l, p);
+    return !none(f, l, p);
 }
 
 function some(f, l, p) {
@@ -2566,13 +2603,12 @@ function some(f, l, p) {
 }
 
 function __debug_max_element(f, l, r) {
-    if (equal(f, l)) return l;
-
-    var m = f;
+    if (equal(f, l))
+        return l;
+    let m = f;
     f = successor(f);
-
-    while ( ! equal(f, l)) {
-        if ( ! r(source(f), source(m))) {
+    while (!equal(f, l)) {
+        if (!r(source(f), source(m))) {
             m = f;
         }
         f = successor(f);
@@ -2588,12 +2624,11 @@ function max_element(f, l, r) {
 }
 
 function __debug_min_element(f, l, r) {
-    if (equal(f, l)) return l;
-
-    var m = f;
+    if (equal(f, l))
+        return l;
+    let m = f;
     f = successor(f);
-
-    while ( ! equal(f, l)) {
+    while (!equal(f, l)) {
         if (r(source(f), source(m))) {
             m = f;
         }
@@ -2610,10 +2645,9 @@ function min_element(f, l, r) {
 }
 
 function __debug_min_element_nonempty(f, l, r) {
-    var m = f;
+    let m = f;
     f = successor(f);
-
-    while ( ! equal(f, l)) {
+    while (!equal(f, l)) {
         if (r(source(f), source(m))) {
             m = f;
         }
@@ -2631,11 +2665,9 @@ function min_element_nonempty(f, l, r) {
 
 function __debug_min_value(f, l, r) {
     //precondition: ! equal(f, l)) return l;
-
-    var m = f;
+    let m = f;
     f = successor(f);
-
-    while ( ! equal(f, l)) {
+    while (!equal(f, l)) {
         if (r(source(f), source(m))) {
             m = f;
         }
@@ -2663,9 +2695,9 @@ function select_1_2(a, b, r) {
 }
 
 function __debug_select_1_3(a, b, c, r) {
-    return r(b, a) ? 
-              select_1_3_ab(b, a, c, r) 
-            : select_1_3_ab(a, b, c, r);
+    return r(b, a) ?
+        select_1_3_ab(b, a, c, r)
+        : select_1_3_ab(a, b, c, r);
 }
 
 function select_1_3(a, b, c, r) {
@@ -2677,10 +2709,9 @@ function select_1_3(a, b, c, r) {
 
 function __debug_select_1_3_ab(a, b, c, r) {
     // precondition: a <= b
-    
-    return ! r(c, b) ? 
-                b :                  // a, b, c are sorted
-                select_1_2(a, c, r); // b is not the median
+    return !r(c, b) ?
+        b : // a, b, c are sorted
+        select_1_2(a, c, r); // b is not the median
 }
 
 function select_1_3_ab(a, b, c, r) {
@@ -2691,10 +2722,9 @@ function select_1_3_ab(a, b, c, r) {
 }
 
 function __debug_exchange_values_2(x, y) {
-    var t = source(x);
+    const t = source(x);
     sink(x, source(y));
     sink(y, t);
-
     increment_assignment_stat(); // we have to count 3 assignments
     increment_swap_stat(); // we need to count a swap
 }
@@ -2707,7 +2737,7 @@ function exchange_values_2(x, y) {
 }
 
 function __debug_swap_ranges(f, l, f1) {
-    while ( ! equal(f, l)) {
+    while (!equal(f, l)) {
         exchange_values(f, f1);
         f = successor(f);
         f1 = successor(f1);
@@ -2723,11 +2753,11 @@ function swap_ranges(f, l, f1) {
 }
 
 function __debug_swap_ranges_bounded(f0, l0, f1, l1) {
-    while ( ! equal(f0, l0) && ! equal(f1, l1)) {
+    while (!equal(f0, l0) && !equal(f1, l1)) {
         iter_swap(f0, f1);
         f0 = successor(f0);
         f1 = successor(f1);
-    } 
+    }
     return [f0, f1];
 }
 
@@ -2756,7 +2786,7 @@ function swap_ranges_n(f0, f1, n) {
 }
 
 function __debug_count_if(f, l, p) {
-    var res = count_if_basis(f, l, p, 0);
+    const res = count_if_basis(f, l, p, 0);
     return res;
 }
 
@@ -2768,7 +2798,7 @@ function count_if(f, l, p) {
 }
 
 function __debug_count_if_basis(f, l, p, j) {
-    while ( ! equal(f, l)) {
+    while (!equal(f, l)) {
         if (p(source(f))) {
             j = successor(j);
         }
@@ -2785,7 +2815,7 @@ function count_if_basis(f, l, p, j) {
 }
 
 function __debug_count_if_not(f, l, p) {
-    var res = count_if_not_basis(f, l, p, 0);
+    const res = count_if_not_basis(f, l, p, 0);
     return res;
 }
 
@@ -2797,8 +2827,8 @@ function count_if_not(f, l, p) {
 }
 
 function __debug_count_if_not_basis(f, l, p, j) {
-    while ( ! equal(f, l)) {
-        if ( ! p(source(f))) {
+    while (!equal(f, l)) {
+        if (!p(source(f))) {
             j = successor(j);
         }
         f = successor(f);
@@ -2814,11 +2844,10 @@ function count_if_not_basis(f, l, p, j) {
 }
 
 function __debug_equal_r(f, l, f2, r) {
-    while ( ! equal(f, l)) {
-        if ( ! r(source(f), source(f2))) {
+    while (!equal(f, l)) {
+        if (!r(source(f), source(f2))) {
             return false;
         }
-
         f = successor(f);
         f2 = successor(f2);
     }
@@ -2833,17 +2862,14 @@ function equal_r(f, l, f2, r) {
 }
 
 function __debug_insert(s, ip, f, l) {
-    var d = distance(begin(s), ip);
-    var ld = distance(ip, end(s));
-    
-    while ( ! equal(f, l)) {
+    let d = distance(begin(s), ip);
+    const ld = distance(ip, end(s));
+    while (!equal(f, l)) {
         s = push_back(s, source(f));
         f = successor(f);
         ++d;
     }
-
-    rotate(begin(s), successor(begin(s), ld), end(s));
-
+    rotate_bidirectional(begin(s), successor(begin(s), ld), end(s));
     return s;
 }
 
@@ -2855,18 +2881,16 @@ function insert(s, ip, f, l) {
 }
 
 function __debug_insert_naive(s, ip, f, l) {
-    var d = distance(begin(s), ip);
-    
-    while ( ! equal(f, l)) {
+    let d = distance(begin(s), ip);
+    while (!equal(f, l)) {
         // s = increase_capacity(s, 1)
         s = push_back(s, 0);
-        ip = successor(begin(s), d)
+        ip = successor(begin(s), d);
         shift_right_by_one(ip, end(s));
         sink(ip, source(f));
         f = successor(f);
         ++d;
     }
-
     return s;
 }
 
@@ -2878,10 +2902,11 @@ function insert_naive(s, ip, f, l) {
 }
 
 function __debug_iota(f, l, start, step) {
-    if ( ! start) start = 0;
-    if ( ! step) step = 1;
-
-    while ( ! equal(f, l)) {
+    if (!start)
+        start = 0;
+    if (!step)
+        step = 1;
+    while (!equal(f, l)) {
         sink(f, start);
         start += step;
         f = successor(f);
@@ -2898,13 +2923,14 @@ function iota(f, l, start, step) {
 
 function __debug_palindrome_bidirectional(f, l, r) {
     while (true) {
-        if (equal(f, l)) break;
+        if (equal(f, l))
+            break;
         l = predecessor(l);
-
-        if ( ! r(source(f), source(l))) return false;
-
+        if (!r(source(f), source(l)))
+            return false;
         f = successor(f);
-        if (equal(f, l)) break;
+        if (equal(f, l))
+            break;
     }
     return true;
 }
@@ -2917,16 +2943,13 @@ function palindrome_bidirectional(f, l, r) {
 }
 
 function __debug_palindrome_naive(seq_arr, r) {
-    var seq = sequence(seq_arr, "seq");
-    var seq_arr_rev = seq_arr.slice().reverse();
-    var seq_rev = sequence(seq_arr_rev, "seq_rev");
-
-    var f = begin(seq);
-    var l = end(seq);
-    var f2 = begin(seq_rev);
-
-    var res = equal_r(f, l, f2, r);
-
+    const seq = sequence(seq_arr, "seq");
+    const seq_arr_rev = seq_arr.slice().reverse();
+    const seq_rev = sequence(seq_arr_rev, "seq_rev");
+    const f = begin(seq);
+    const l = end(seq);
+    const f2 = begin(seq_rev);
+    const res = equal_r(f, l, f2, r);
     return res;
 }
 
@@ -2938,7 +2961,7 @@ function palindrome_naive(seq_arr, r) {
 }
 
 function __debug_fill(f, l, x) {
-    while ( ! equal(f, l)) {
+    while (!equal(f, l)) {
         sink(f, x);
         f = successor(f);
     }
@@ -3177,4 +3200,12 @@ function converse(r) {
 
 function complement_of_converse(r) {
     return complement(converse(r));
+}
+
+function predicate_source(p) {
+    return x => p(source(x));
+}
+
+function relation_source(r) {
+    return (x, y) => r(source(x), source(y));
 }

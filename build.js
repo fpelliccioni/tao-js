@@ -97,7 +97,8 @@ function process_file(path, filename) {
             ts.isFunctionDeclaration(node) && node.name?.text === algo_name
         );
         const usage = parsed.statements.find(node =>
-            ts.isFunctionDeclaration(node) && node.name?.text === 'usage'
+            ts.isFunctionDeclaration(node) &&
+            (node.name?.text === `__${algo_name}_usage` || node.name?.text === 'usage')
         );
         if (definition && usage?.body) {
             const example = source.slice(usage.body.getStart(parsed) + 1, usage.body.end - 1)
@@ -129,6 +130,8 @@ function process_file(path, filename) {
                 file_content_main += '\n\n';
                 file_content_debug += function_make_debuggable(code, value);
                 file_content_debug += '\n\n';
+            } else if (value.id.name === `__${algo_name}_usage` || value.id.name === `__${algo_name}_attributes`) {
+                file_content_extra += func_code + '\n\n';
             } else if (value.id.name == 'usage'|| value.id.name == 'attributes') {
                 const new_name = `__${algo_name}_${value.id.name}`;
                 const ren_code = function_extras_rename(func_code, value.id.name, new_name);

@@ -3,7 +3,7 @@ function none<T>(f: Iter<T>, l: Iter<T>, p: Predicate<T>): boolean {
     return equal(l, it);
 }
 
-function usage() {
+function __none_usage() {
     const even = predicate<number>(x => (x & 1) === 0);
     const d = sequence(array_random(), "d");
     const f = begin(d);
@@ -16,7 +16,5 @@ function usage() {
     }
 }
 
-function attributes() {
-
+function __none_attributes() {
 }
-
