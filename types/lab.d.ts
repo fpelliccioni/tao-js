@@ -6,6 +6,7 @@ type Iter<T> = { readonly [iteratorElement]: T };
 type Seq<T> = { readonly [sequenceElement]: T };
 type Predicate<T> = (value: T) => boolean;
 
+declare function find_if<T>(f: Iter<T>, l: Iter<T>, p: Predicate<T>): Iter<T>;
 declare function find_if_not<T>(f: Iter<T>, l: Iter<T>, p: Predicate<T>): Iter<T>;
 declare function equal<T>(f: Iter<T>, l: Iter<T>): boolean;
 

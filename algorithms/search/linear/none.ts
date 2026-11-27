@@ -1,15 +1,13 @@
-function none(f, l, p) {
-    var it = find_if(f, l, p);
+function none<T>(f: Iter<T>, l: Iter<T>, p: Predicate<T>): boolean {
+    const it = find_if(f, l, p);
     return equal(l, it);
 }
 
 function usage() {
-
-
-    var even = predicate(function even(x) { return (x & 1) == 0; });
-    var d = sequence(array_random(), "d");
-    var f = begin(d);
-    var l = end(d);
+    const even = predicate<number>(x => (x & 1) === 0);
+    const d = sequence(array_random(), "d");
+    const f = begin(d);
+    const l = end(d);
 
     if (none(f, l, even)) {
         print("None of the elements in the sequence are even.");
