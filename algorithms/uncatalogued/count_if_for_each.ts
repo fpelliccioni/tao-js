@@ -1,5 +1,7 @@
 // Reference: Elements of Programming, ch. 6, p. 95, exercise 6.2.
 
+// Doc (es): Cuenta los elementos de [f, l) que cumplen p usando el estado del procedimiento devuelto por for_each.
+// Doc (en): Counts the elements in [f, l) that satisfy p using the state of the procedure returned by for_each.
 function count_if_for_each<I extends Iter<unknown>>(
     f: I, l: I, p: Predicate<ValueOf<I>>,
 ): number {

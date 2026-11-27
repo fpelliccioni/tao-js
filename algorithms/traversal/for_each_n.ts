@@ -1,5 +1,7 @@
 // Reference: Elements of Programming, ch. 6, p. 98.
 
+// Doc (es): Aplica proc a los primeros n valores desde f. Devuelve el procedimiento y el iterador desde el que se puede retomar el recorrido.
+// Doc (en): Applies proc to the first n values from f. Returns the procedure and the iterator from which traversal can resume.
 function for_each_n<I extends Iter<unknown>, Proc extends (value: ValueOf<I>) => void>(
     f: I, n: number, proc: Proc,
 ): [Proc, I] {

@@ -1,5 +1,7 @@
 // Reference: Elements of Programming, ch. 6, p. 94.
 
+// Doc (es): Aplica proc a cada valor de [f, l), de izquierda a derecha. Devuelve el mismo procedimiento con el estado que haya acumulado.
+// Doc (en): Applies proc to each value in [f, l) from left to right. Returns the same procedure with any state it accumulated.
 function for_each<I extends Iter<unknown>, Proc extends (value: ValueOf<I>) => void>(
     f: I, l: I, proc: Proc,
 ): Proc {

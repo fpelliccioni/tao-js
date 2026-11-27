@@ -1,5 +1,7 @@
 // Reference: Elements of Programming, ch. 6, p. 99, exercise 6.3.
 
+// Doc (es): Cuenta cuántos de los primeros n elementos a partir de f cumplen p.
+// Doc (en): Counts how many of the first n elements from f satisfy p.
 function count_if_n<I extends Iter<unknown>>(f: I, n: number, p: Predicate<ValueOf<I>>): number {
     return count_if_n_basis(f, n, p, 0);
 }

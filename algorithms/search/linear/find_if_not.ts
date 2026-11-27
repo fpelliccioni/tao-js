@@ -1,5 +1,7 @@
 // Reference: Elements of Programming, ch. 6, p. 95 (described in the text; implementation in eop.h).
 
+// Doc (es): Devuelve el primer iterador de [f, l) cuyo elemento falla p. Si no hay ninguno, devuelve l.
+// Doc (en): Returns the first iterator in [f, l) whose element fails p. Returns l if there is none.
 function find_if_not<I extends Iter<unknown>>(f: I, l: I, p: Predicate<ValueOf<I>>): I {
     while (!equal(f, l) && p(source(f))) {
         f = successor(f);

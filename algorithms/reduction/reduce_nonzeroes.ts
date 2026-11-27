@@ -1,5 +1,7 @@
 // Reference: Elements of Programming, ch. 6, pp. 97–98 (value-based overload in eop.h).
 
+// Doc (es): Combina los elementos de [f, l) distintos de z. Si el rango está vacío o solo contiene z, devuelve z.
+// Doc (en): Combines elements in [f, l) that differ from z. Returns z when the range is empty or contains only z.
 function reduce_nonzeroes<I extends Iter<unknown>>(
     f: I, l: I, op: Operation<ValueOf<I>>, z: ValueOf<I>,
 ): ValueOf<I> {

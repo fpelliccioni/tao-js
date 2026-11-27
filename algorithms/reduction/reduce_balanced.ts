@@ -1,5 +1,7 @@
 // Reference: Elements of Programming, ch. 11, p. 198 (value-based overload in eop.h).
 
+// Doc (es): Combina bloques de tamaño parecido sin cambiar el orden de los elementos. Requiere una operación asociativa y usa z como identidad.
+// Doc (en): Combines similarly sized blocks while preserving element order. Requires an associative operation and uses z as its identity.
 function reduce_balanced<I extends Iter<unknown>>(
     f: I, l: I, op: Operation<ValueOf<I>>, z: ValueOf<I>,
 ): ValueOf<I> {

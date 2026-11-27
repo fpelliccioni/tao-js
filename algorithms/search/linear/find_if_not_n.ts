@@ -1,5 +1,7 @@
 // Reference: Elements of Programming, ch. 6, p. 99, exercise 6.3.
 
+// Doc (es): Busca el primer elemento que falla p entre los primeros n desde f. Devuelve la posición y la cantidad restante.
+// Doc (en): Finds the first element failing p among the first n from f. Returns the position and remaining count.
 function find_if_not_n<I extends Iter<unknown>>(
     f: I, n: number, p: Predicate<ValueOf<I>>,
 ): [I, number] {

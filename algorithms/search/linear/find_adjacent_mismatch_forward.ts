@@ -1,5 +1,7 @@
 // Reference: Elements of Programming, ch. 6, p. 103.
 
+// Doc (es): Devuelve el segundo iterador del primer par adyacente que falla r, o l si no lo hay. Esta variante requiere iteradores de avance multipasada.
+// Doc (en): Returns the second iterator of the first adjacent pair that fails r, or l if none does. This variant requires multipass forward iterators.
 function find_adjacent_mismatch_forward<I extends ForwardIterator>(
     f: I, l: I, r: Relation<ValueOf<I>>,
 ): I {

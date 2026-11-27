@@ -1,5 +1,7 @@
 // Reference: Elements of Programming, ch. 6, p. 102, exercise 6.6.
 
+// Doc (es): Comprueba que, en los primeros n elementos desde f, todos los que fallan p aparezcan antes de los que lo cumplen.
+// Doc (en): Checks that every element that fails p comes before those that satisfy it among the first n elements from f.
 function partitioned_n<I extends Iter<unknown>>(f: I, n: number, p: Predicate<ValueOf<I>>): boolean {
     const [middle, remaining] = find_if_n(f, n, p);
     if (remaining === 0) return true;

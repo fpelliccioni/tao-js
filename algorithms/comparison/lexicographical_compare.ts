@@ -1,5 +1,7 @@
 // Reference: Elements of Programming, ch. 7, p. 127.
 
+// Doc (es): Compara dos rangos usando la relación de orden r. Decide el primer par que difiere. Si uno es prefijo propio del otro, va primero el más corto.
+// Doc (en): Compares two ranges using the ordering relation r. The first differing pair decides. A proper prefix precedes the longer range.
 function lexicographical_compare<I extends Iter<unknown>, J extends Iter<ValueOf<I>>>(
     f0: I, l0: I, f1: J, l1: J, r: Relation<ValueOf<I>>,
 ): boolean {

@@ -1,5 +1,7 @@
 // Reference: Elements of Programming, ch. 6, p. 99, exercise 6.3.
 
+// Doc (es): Busca el primer elemento distinto de x entre los primeros n desde f. Devuelve la posición y la cantidad restante.
+// Doc (en): Finds the first element differing from x among the first n from f. Returns the position and remaining count.
 function find_not_n<I extends Iter<unknown>>(
     f: I, n: number, x: ValueOf<I>,
 ): [I, number] {

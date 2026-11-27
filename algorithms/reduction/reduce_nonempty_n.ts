@@ -1,5 +1,7 @@
 // Reference: Elements of Programming, ch. 6, p. 99, exercise 6.3.
 
+// Doc (es): Combina de izquierda a derecha los primeros n elementos desde f. Requiere un conteo positivo.
+// Doc (en): Combines the first n elements from f from left to right. Requires a positive count.
 function reduce_nonempty_n<I extends Iter<unknown>>(
     f: I, n: number, op: Operation<ValueOf<I>>,
 ): ValueOf<I> {

@@ -1,5 +1,7 @@
 // Reference: Elements of Programming, ch. 6, pp. 99–100 (bounded ranges; see exercise 6.5).
 
+// Doc (es): Avanza por dos rangos hasta el primer par que falla r o hasta el fin de uno de ellos. Devuelve las dos posiciones en las que se detuvo.
+// Doc (en): Advances through two ranges until the first pair that fails r or until one range ends. Returns both stopping positions.
 function find_mismatch<I extends Iter<unknown>, J extends Iter<ValueOf<I>>>(
     f0: I, l0: I, f1: J, l1: J, r: Relation<ValueOf<I>>,
 ): [I, J] {

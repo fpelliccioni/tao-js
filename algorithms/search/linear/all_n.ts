@@ -1,5 +1,7 @@
 // Reference: Elements of Programming, ch. 6, p. 99, exercise 6.3.
 
+// Doc (es): Comprueba si todos los elementos cumplen p entre los primeros n desde f.
+// Doc (en): Checks whether every element satisfies p among the first n from f.
 function all_n<I extends Iter<unknown>>(f: I, n: number, p: Predicate<ValueOf<I>>): boolean {
     const [, remaining] = find_if_not_n(f, n, p);
     return remaining === 0;
