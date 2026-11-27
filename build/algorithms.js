@@ -1436,6 +1436,85 @@ function partition_stable_with_buffer_0(f, l, p, b) {
     return tf;
 }
 
+function add_to_counter(f, l, op, x, z) {
+    if (x === z)
+        return z;
+    while (!equal(f, l)) {
+        const current = source(f);
+        if (current === z) {
+            sink(f, x);
+            return z;
+        }
+        x = op(current, x);
+        sink(f, z);
+        f = successor(f);
+    }
+    return x;
+}
+
+function reduce(f, l, op, z) {
+    if (equal(f, l))
+        return z;
+    return reduce_nonempty(f, l, op);
+}
+
+function reduce_balanced(f, l, op, z) {
+    const bins = [];
+    while (!equal(f, l)) {
+        let carry = source(f);
+        if (carry !== z) {
+            let i = 0;
+            while (i < bins.length && bins[i] !== z) {
+                carry = op(bins[i], carry);
+                bins[i] = z;
+                ++i;
+            }
+            if (i < bins.length || carry !== z)
+                bins[i] = carry;
+        }
+        f = successor(f);
+    }
+    let i = 0;
+    while (i < bins.length && bins[i] === z)
+        ++i;
+    if (i === bins.length)
+        return z;
+    let result = bins[i];
+    for (++i; i < bins.length; ++i) {
+        if (bins[i] !== z)
+            result = op(bins[i], result);
+    }
+    return result;
+}
+
+function reduce_nonempty(f, l, op) {
+    pre(() => !equal(f, l), "The range must not be empty.");
+    let result = source(f);
+    f = successor(f);
+    while (!equal(f, l)) {
+        result = op(result, source(f));
+        f = successor(f);
+    }
+    return result;
+}
+
+function reduce_nonzeroes(f, l, op, z) {
+    let result;
+    do {
+        if (equal(f, l))
+            return z;
+        result = source(f);
+        f = successor(f);
+    } while (result === z);
+    while (!equal(f, l)) {
+        const value = source(f);
+        if (value !== z)
+            result = op(result, value);
+        f = successor(f);
+    }
+    return result;
+}
+
 function lower_bound_n(f, n, a, r) {
     const below = (x) => r(x, a);
     const p = (x) => !below(x);
@@ -1786,6 +1865,24 @@ function swap_ranges_n(f0, f1, n) {
         --n;
     }
     return [f0, f1];
+}
+
+function for_each(f, l, proc) {
+    while (!equal(f, l)) {
+        proc(source(f));
+        f = successor(f);
+    }
+    return proc;
+}
+
+function for_each_n(f, n, proc) {
+    pre(() => Number.isSafeInteger(n) && n >= 0, "The count must be a nonnegative safe integer.");
+    while (n !== 0) {
+        proc(source(f));
+        f = successor(f);
+        --n;
+    }
+    return [proc, f];
 }
 
 function count_if(f, l, p) {
