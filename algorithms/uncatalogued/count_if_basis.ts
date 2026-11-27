@@ -11,7 +11,7 @@ function count_if_basis<T, U extends number | Iter<unknown>>(f: Iter<T>, l: Iter
 }
 
 function __count_if_basis_usage() {
-    const even = predicate<number>(x => (x & 1) === 0);
+    const even = predicate((x: number) => (x & 1) === 0);
     const d = sequence(array_random(), "d", even);
     const c = sequence(array_ascending(), "c");
 

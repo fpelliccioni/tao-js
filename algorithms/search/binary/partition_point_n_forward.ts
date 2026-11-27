@@ -18,9 +18,9 @@ function partition_point_n_forward<T>(f: Iter<T>, n: number, p: Predicate<T>): [
 }
 
 function __partition_point_n_forward_usage() {
-    const eq3 = predicate<number>(function eq3(x) {return x == 3;});
-    const gt3 = predicate<number>(function gt3(x) {return x > 3;});
-    const gte3 = predicate<number>(function gte3(x) {return x >= 3;});
+    const eq3 = predicate((x: number) => x == 3);
+    const gt3 = predicate((x: number) => x > 3);
+    const gte3 = predicate((x: number) => x >= 3);
 
     const d = sequence([1, 1, 1, 1, 3, 3, 3, 3, 3, 7, 8, 9], "d", eq3);
 

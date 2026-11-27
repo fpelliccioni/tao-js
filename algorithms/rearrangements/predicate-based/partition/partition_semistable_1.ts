@@ -18,7 +18,7 @@ function partition_semistable_1<T>(f: Iter<T>, l: Iter<T>, p: Predicate<T>) {
 }
 
 function __partition_semistable_1_usage() {
-    const even = predicate<number>(x => (x & 1) === 0);
+    const even = predicate((x: number) => (x & 1) === 0);
     const d = sequence(array_random(), "d", even, undefined, true);
     const f = begin(d);
     const l = end(d);
