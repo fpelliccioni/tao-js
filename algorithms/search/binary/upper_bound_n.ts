@@ -9,7 +9,7 @@ function __upper_bound_n_usage() {
     print("digitSum(38) = " + digitSum(38));
     print("digitSum(49) = " + digitSum(49));
 
-    const d = sequence([11, 22, 49, 58, 67], "d");
+    const d = sequence([11, 22, 49, 58, 67]);
 
     const lb = upper_bound_n(begin(d), size(d), 38, hasLowerDigitSum);
     print('insertion point: ' + source(lb));

@@ -19,7 +19,7 @@ declare function array_ascending(n?: number, from?: number): number[];
 declare function array_descending(n?: number, from?: number): number[];
 declare function array_from(value: string): string[];
 declare function random_int(from?: number, to?: number): number;
-declare function sequence<T>(values: readonly T[], name: string, color?: Relation<T> | Predicate<T>, type?: string, drawChart?: boolean, drawTree?: boolean): Seq<T>;
+declare function sequence<T>(values: readonly T[], name?: string, color?: Relation<T> | Predicate<T>, type?: string, drawChart?: boolean, drawTree?: boolean): Seq<T>;
 declare function begin<T>(data: Seq<T>): Iter<T>;
 declare function end<T>(data: Seq<T>): Iter<T>;
 declare function source<T>(it: Iter<T>): T;

@@ -2358,13 +2358,13 @@ function __partition_stable_with_buffer_0_usage() {
 function __partition_stable_with_buffer_0_attributes() {
 }
 
-function __lower_bound_n_typescript() { return ["function lower_bound_n<T>(f: Iter<T>, n: number, a: T, r: Relation<T>) {\n    const below = (x: T) => r(x, a);\n    const p = (x: T) => !below(x);\n    pre(() => is_partitioned_n(f, n, p), \"The range must be partitioned around the search value.\");\n    const result = partition_point_n(f, n, p);\n    post(() => all(f, result, below), \"Every element before the result must compare less than the search value.\");\n    post(() => none(result, successor(f, n), below), \"No element from the result onward may compare less than the search value.\");\n    return result;\n}","const hasLowerDigitSum = relation<number>((x, y) => digitSum(x) < digitSum(y));\n\nprint(\"digitSum(38) = \" + digitSum(38));\nprint(\"digitSum(49) = \" + digitSum(49));\n\nconst d = sequence([11, 22, 49, 58, 67], \"d\");\n\nconst lb = lower_bound_n(begin(d), size(d), 38, hasLowerDigitSum);\nprint('insertion point: ' + source(lb));"]; }
+function __lower_bound_n_typescript() { return ["function lower_bound_n<T>(f: Iter<T>, n: number, a: T, r: Relation<T>) {\n    const below = (x: T) => r(x, a);\n    const p = (x: T) => !below(x);\n    pre(() => is_partitioned_n(f, n, p), \"The range must be partitioned around the search value.\");\n    const result = partition_point_n(f, n, p);\n    post(() => all(f, result, below), \"Every element before the result must compare less than the search value.\");\n    post(() => none(result, successor(f, n), below), \"No element from the result onward may compare less than the search value.\");\n    return result;\n}","const hasLowerDigitSum = relation<number>((x, y) => digitSum(x) < digitSum(y));\n\nprint(\"digitSum(38) = \" + digitSum(38));\nprint(\"digitSum(49) = \" + digitSum(49));\n\nconst d = sequence([11, 22, 49, 58, 67]);\n\nconst lb = lower_bound_n(begin(d), size(d), 38, hasLowerDigitSum);\nprint('insertion point: ' + source(lb));"]; }
 
 function __lower_bound_n_usage() {
     const hasLowerDigitSum = relation((x, y) => digitSum(x) < digitSum(y));
     print("digitSum(38) = " + digitSum(38));
     print("digitSum(49) = " + digitSum(49));
-    const d = sequence([11, 22, 49, 58, 67], "d");
+    const d = sequence([11, 22, 49, 58, 67]);
     const lb = lower_bound_n(begin(d), size(d), 38, hasLowerDigitSum);
     print('insertion point: ' + source(lb));
 }
@@ -2404,13 +2404,13 @@ function __partition_point_n_forward_usage() {
 function __partition_point_n_forward_attributes() {
 }
 
-function __upper_bound_n_typescript() { return ["function upper_bound_n<T>(f: Iter<T>, n: number, a: T, r: Relation<T>) {\n    const p = (x: T) => r(a, x);\n    return partition_point_n(f, n, p);\n}","const hasLowerDigitSum = relation<number>((x, y) => digitSum(x) < digitSum(y));\n\nprint(\"digitSum(38) = \" + digitSum(38));\nprint(\"digitSum(49) = \" + digitSum(49));\n\nconst d = sequence([11, 22, 49, 58, 67], \"d\");\n\nconst lb = upper_bound_n(begin(d), size(d), 38, hasLowerDigitSum);\nprint('insertion point: ' + source(lb));"]; }
+function __upper_bound_n_typescript() { return ["function upper_bound_n<T>(f: Iter<T>, n: number, a: T, r: Relation<T>) {\n    const p = (x: T) => r(a, x);\n    return partition_point_n(f, n, p);\n}","const hasLowerDigitSum = relation<number>((x, y) => digitSum(x) < digitSum(y));\n\nprint(\"digitSum(38) = \" + digitSum(38));\nprint(\"digitSum(49) = \" + digitSum(49));\n\nconst d = sequence([11, 22, 49, 58, 67]);\n\nconst lb = upper_bound_n(begin(d), size(d), 38, hasLowerDigitSum);\nprint('insertion point: ' + source(lb));"]; }
 
 function __upper_bound_n_usage() {
     const hasLowerDigitSum = relation((x, y) => digitSum(x) < digitSum(y));
     print("digitSum(38) = " + digitSum(38));
     print("digitSum(49) = " + digitSum(49));
-    const d = sequence([11, 22, 49, 58, 67], "d");
+    const d = sequence([11, 22, 49, 58, 67]);
     const lb = upper_bound_n(begin(d), size(d), 38, hasLowerDigitSum);
     print('insertion point: ' + source(lb));
 }
