@@ -1,5 +1,7 @@
 // Reference: Elements of Programming, ch. 11, p. 192 (used by the sentinel partition in eop.h).
 
+// Doc (es): Retrocede desde l hasta el primer elemento que falla p. Debe existir uno a la izquierda de l.
+// Doc (en): Moves backward from l to the first element that fails p. Such an element must exist to the left of l.
 function find_backward_if_not_unguarded<I extends BidirectionalIterator>(
     l: I, p: Predicate<ValueOf<I>>,
 ): I {

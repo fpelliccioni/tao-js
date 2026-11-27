@@ -1,5 +1,7 @@
 // Reference: Elements of Programming, ch. 6, p. 99, exercise 6.3 (iterator projection).
 
+// Doc (es): Proyecta los primeros n iteradores y reduce los valores distintos de z. Devuelve z si todos coinciden con él o el rango está vacío.
+// Doc (en): Projects the first n iterators and reduces the values different from z. Returns z if all values equal it or the range is empty.
 function reduce_nonzeroes_n_projected<I extends Iter<unknown>, T>(
     f: I, n: number, op: Operation<T>, project: (it: I) => T, z: T,
 ): T {

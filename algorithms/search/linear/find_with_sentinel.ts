@@ -1,5 +1,7 @@
 // Reference: Elements of Programming, ch. 6, p. 99 (sentinel technique; lab adaptation).
 
+// Doc (es): Busca x usando la última celda como centinela temporal. Restaura la celda y devuelve l si x está ausente.
+// Doc (en): Finds x using the last cell as a temporary sentinel. Restores the cell and returns l if x is absent.
 function find_with_sentinel<I extends BidirectionalIterator>(f: I, l: I, x: ValueOf<I>): I {
     // Precondition: equality is reflexive for x.
     if (equal(f, l)) return l;

@@ -1,5 +1,7 @@
 // Reference: Elements of Programming, ch. 11, p. 192, exercise 11.8 (companion implementation in eop.h).
 
+// Doc (es): Particiona [f, l) de forma bidireccional. Usa elementos intercambiados como centinelas para las búsquedas internas.
+// Doc (en): Partitions [f, l) bidirectionally. Uses swapped elements as sentinels for the inner searches.
 function partition_sentinel<I extends MutableBidirectionalIterator>(
     f: I, l: NoInfer<I>, p: Predicate<ValueOf<I>>,
 ): I {

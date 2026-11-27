@@ -106,6 +106,13 @@ function process_file(path, filename) {
                 .replace(/^ {4}/gm, '').trim();
             const entry = [definition.getText(parsed), example];
             file_content_extra += `function __${algo_name}_typescript() { return ${JSON.stringify(entry)}; }\n\n`;
+            const descriptions = ['es', 'en'].map(language =>
+                source.match(new RegExp(`^// Doc \\(${language}\\): (.+)$`, 'm'))?.[1]
+            );
+            if (descriptions.every(Boolean) && definition.body) {
+                const signature = source.slice(definition.getStart(parsed), definition.body.getStart(parsed)).trim();
+                file_content_extra += `function __${algo_name}_documentation() { return ${JSON.stringify([...descriptions, signature])}; }\n\n`;
+            }
             const references = Array.from(source.matchAll(/^\/\/ Reference: (.+)$/gm), match => match[1]);
             if (references.length) {
                 file_content_extra += `function __${algo_name}_references() { return ${JSON.stringify(references)}; }\n\n`;
