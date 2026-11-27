@@ -1,3 +1,5 @@
+// Reference: From Mathematics to Generic Programming, ch. 13, p. 240 (ch13.h).
+
 function divides(i: number, n: number) {
     return n % i == 0;
 }

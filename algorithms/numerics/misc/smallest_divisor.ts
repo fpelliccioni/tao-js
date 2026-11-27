@@ -1,3 +1,5 @@
+// Reference: From Mathematics to Generic Programming, ch. 13, p. 240 (ch13.h).
+
 function smallest_divisor(n: number) {
     //precondition: n > 0
     if (even(n)) return 2;

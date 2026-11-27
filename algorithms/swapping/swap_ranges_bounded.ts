@@ -1,3 +1,6 @@
+// Reference: Elements of Programming, ch. 9, p. 163.
+// Reference: From Mathematics to Generic Programming, ch. 11, §11.2, pp. 201–203 (ch11.h).
+
 function swap_ranges_bounded<T>(f0: Iter<T>, l0: Iter<T>, f1: Iter<T>, l1: Iter<T>) {
     while ( ! equal(f0, l0) && ! equal(f1, l1)) {
         iter_swap(f0, f1);

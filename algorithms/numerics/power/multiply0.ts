@@ -1,3 +1,5 @@
+// Reference: From Mathematics to Generic Programming, ch. 2, §2.1, pp. 8–10 (ch02.h).
+
 function multiply0(n: number, a: number): number {
     if (n == 1) return a;
     let product = multiply0(n - 1, a)

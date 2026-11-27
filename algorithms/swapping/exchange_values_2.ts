@@ -1,3 +1,5 @@
+// Reference: Elements of Programming, ch. 9, p. 162 (instrumented variant of exchange_values).
+
 function exchange_values_2<T>(x: Iter<T>, y: Iter<T>) {
     const t = source(x);
     sink(x, source(y));

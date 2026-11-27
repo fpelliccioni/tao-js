@@ -1,3 +1,5 @@
+// Reference: Elements of Programming, ch. 6, p. 94.
+
 function find<T>(f: Iter<T>, l: Iter<T>, x: T) {
     while ( ! equal(f, l) && ! source(f) != x) {
         f = successor(f)

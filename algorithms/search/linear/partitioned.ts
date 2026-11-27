@@ -1,3 +1,5 @@
+// Reference: Elements of Programming, ch. 6, p. 102.
+
 function partitioned<T>(f: Iter<T>, l: Iter<T>, p: Predicate<T>) {
     const it0 = find_if(f, l, p);
     const it1 = find_if_not(it0, l, p);

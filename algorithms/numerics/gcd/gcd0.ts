@@ -1,3 +1,5 @@
+// Reference: Elements of Programming, ch. 5, p. 74 (subtractive_gcd_nonzero with the same positive-input precondition).
+
 // Euclid's algorithm
 
 function gcd0(a: number, b: number) {

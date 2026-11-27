@@ -1,3 +1,5 @@
+// Reference: Elements of Programming, ch. 11, pp. 190–191 (variant of partition_semistable).
+
 function partition_semistable_nonempty<T>(f: Iter<T>, l: Iter<T>, p: Predicate<T>) {
     //precondition: nonempty: ! equal(f, l)
     while ( ! p(source(f))) {

@@ -1,3 +1,5 @@
+// Reference: Elements of Programming, ch. 9, p. 161.
+
 function merge_copy<T, U>(f: Iter<T>, l: Iter<T>, f2: Iter<T>, l2: Iter<T>, o: Iter<U>, r: Relation<T>) {
     const rs = relation_source(r);
     return combine_copy(f, l, f2, l2, o, rs);

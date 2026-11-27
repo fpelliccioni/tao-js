@@ -1,3 +1,5 @@
+// Reference: From Mathematics to Generic Programming, ch. 13, p. 242 (ch13.h).
+
 function fermat_test(n: number, witness: number) {
     //precondition: witness > 0 && witness < n
     const reminder = power_semigroup(witness, n - 1, modulo_multiply(n));

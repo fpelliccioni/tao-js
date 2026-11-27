@@ -1,3 +1,5 @@
+// Reference: Elements of Programming, ch. 9, p. 153 (counted variant in eop.h).
+
 function copy_backward_n<T, U>(l: Iter<T>, n: number, o: Iter<U>): [Iter<T>, Iter<U>] {
     while (n != 0) {
         l = predecessor(l);

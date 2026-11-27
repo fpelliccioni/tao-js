@@ -1,3 +1,5 @@
+// Reference: From Mathematics to Generic Programming, ch. 2, §2.2, pp. 11–14 (mult_acc4 in ch02.h).
+
 function multiply_accumulate4(r: number, n: number, a: number) {
     while (true) {
         if (odd(n)) {

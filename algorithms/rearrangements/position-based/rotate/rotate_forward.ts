@@ -1,3 +1,5 @@
+// Reference: Elements of Programming, ch. 10, pp. 181–182 (rotate_forward_nontrivial).
+
 // Nontrivial rotate using forward iterators
 function rotate_forward<T>(f: Iter<T>, m: Iter<T>, l: Iter<T>) {
     // precondition: mutable_bounded_range(f, l) ∧ f ≺ m ≺ l

@@ -1,3 +1,5 @@
+// Reference: From Mathematics to Generic Programming, ch. 7, §7.4, pp. 118–119 (ch07.h).
+
 // n is an Integer.
 // a is a NonCommutativeAdditiveMonoid.
 

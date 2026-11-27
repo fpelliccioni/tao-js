@@ -1,3 +1,5 @@
+// Reference: Elements of Programming, ch. 6, p. 95 (negated count described in the text; implementation in eop.h).
+
 function count_if_not<T>(f: Iter<T>, l: Iter<T>, p: Predicate<T>) {
     const res = count_if_not_basis(f, l, p, 0);
     return res;

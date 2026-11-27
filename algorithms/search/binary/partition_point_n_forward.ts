@@ -1,3 +1,5 @@
+// Reference: Elements of Programming, ch. 6, p. 104 (variant of partition_point_n that also returns a count).
+
 function partition_point_n_forward<T>(f: Iter<T>, n: number, p: Predicate<T>): [Iter<T>, number] {
     let t = n;
     while (n != 0) {

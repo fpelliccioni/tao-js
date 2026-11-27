@@ -1,3 +1,5 @@
+// Reference: Elements of Programming, ch. 9, pp. 156–157 (counted variant in eop.h).
+
 //u from untrue
 function split_copy_n<T, U>(f: Iter<T>, n: number, u: Iter<U>, t: Iter<U>, p: Predicate<Iter<T>>) {
     while (n != 0) {

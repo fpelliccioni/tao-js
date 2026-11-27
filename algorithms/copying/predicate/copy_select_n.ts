@@ -1,3 +1,5 @@
+// Reference: Elements of Programming, ch. 9, pp. 155–156 (counted variant of copy_select).
+
 function copy_select_n<T, U>(f: Iter<T>, n: number, o: Iter<U>, p: Predicate<Iter<T>>): [Iter<T>, Iter<U>] {
     while (n != 0) {
         if (p(f)) {

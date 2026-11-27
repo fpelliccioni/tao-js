@@ -1,3 +1,5 @@
+// Reference: From Mathematics to Generic Programming, ch. 13, p. 241 (ch13.h).
+
 function multiplicative_inverse_fermat(a: number, p: number) {
     //precondition: p is prime && a > 0
     return power_monoid(a, p - 2, modulo_multiply_c(p));

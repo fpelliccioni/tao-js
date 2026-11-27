@@ -1,3 +1,5 @@
+// Reference: Elements of Programming, ch. 9, pp. 154–155 (counted variants described in the text).
+
 function reverse_copy_n<T, U>(l: Iter<T>, n: number, o: Iter<U>): [Iter<T>, Iter<U>] {
     while (n != 0) {
         l = predecessor(l);

@@ -1,3 +1,5 @@
+// Reference: Elements of Programming, ch. 6, pp. 105–106 (adapted with explicit contracts).
+
 function lower_bound_n<T>(f: Iter<T>, n: number, a: T, r: Relation<T>) {
     const below = (x: T) => r(x, a);
     const p = (x: T) => !below(x);

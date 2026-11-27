@@ -1,3 +1,5 @@
+// Reference: Elements of Programming, ch. 9, p. 158 (counted variant in eop.h).
+
 function partition_copy_n<T, U>(f: Iter<T>, n: number, u: Iter<U>, t: Iter<U>, p: Predicate<T>) {
     const ps = predicate_source(p);
     return split_copy_n(f, n, u, t, ps);

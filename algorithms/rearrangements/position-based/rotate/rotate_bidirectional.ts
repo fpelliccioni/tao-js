@@ -1,3 +1,5 @@
+// Reference: Elements of Programming, ch. 10, pp. 179–180 (three-reversal variant).
+
 function rotate_bidirectional<T>(f: Iter<T>, m: Iter<T>, l: Iter<T>) {
     reverse(f, m);
     reverse(m, l);

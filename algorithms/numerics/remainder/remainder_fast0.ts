@@ -1,3 +1,5 @@
+// Reference: From Mathematics to Generic Programming, ch. 4, §4.2, pp. 45–49 (fast_segment_remainder in ch04.h).
+
 // Greeks "had no notion of zero".
 function remainder_fast0(a: number, b: number) {
     if (a <= b) return a;

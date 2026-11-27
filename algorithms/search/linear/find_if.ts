@@ -1,3 +1,6 @@
+// Reference: Elements of Programming, ch. 6, pp. 94–95.
+// Reference: From Mathematics to Generic Programming, ch. 10, pp. 190–191 (ch10.h).
+
 function find_if<T>(f: Iter<T>, l: Iter<T>, p: Predicate<T>) {
     while ( ! equal(f, l) && ! p(source(f))) {
         f = successor(f)

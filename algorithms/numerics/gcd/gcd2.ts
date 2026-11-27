@@ -1,3 +1,5 @@
+// Reference: From Mathematics to Generic Programming, ch. 4, §4.2, pp. 45–49 (integer adaptations of gcm in ch04.h).
+
 function gcd2(a: number, b: number) {
     while (a != b) {
         a = remainder_slow(a, b);

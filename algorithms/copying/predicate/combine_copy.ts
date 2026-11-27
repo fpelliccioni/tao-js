@@ -1,3 +1,5 @@
+// Reference: Elements of Programming, ch. 9, pp. 158–159.
+
 function combine_copy<T, U>(f: Iter<T>, l: Iter<T>, f2: Iter<T>, l2: Iter<T>, o: Iter<U>, r: Relation<Iter<T>>) {
     while ( ! equal(f, l) && ! equal(f2, l2)) {
         if (r(f2, f)) {

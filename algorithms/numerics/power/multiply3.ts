@@ -1,3 +1,5 @@
+// Reference: From Mathematics to Generic Programming, ch. 2, §2.2, pp. 11–14 (ch02.h).
+
 function multiply3(n: number, a: number) {
     while (even(n)) {
         a = add(a, a);

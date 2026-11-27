@@ -1,3 +1,5 @@
+// Reference: Elements of Programming, ch. 11, p. 190.
+
 function partition_semistable<T>(f: Iter<T>, l: Iter<T>, p: Predicate<T>) {
     while (true) {
         if (equal(f, l)) return f;

@@ -1,3 +1,5 @@
+// Reference: Elements of Programming, ch. 11, p. 193 (variant of partition_stable_with_buffer).
+
 function partition_stable_with_buffer_0<T>(f: Iter<T>, l: Iter<T>, p: Predicate<T>, b: Iter<T>) {
     const tmp = partition_copy(f, l, f, b, p);
     const tf = tmp[0];

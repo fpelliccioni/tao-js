@@ -1,3 +1,5 @@
+// Reference: Elements of Programming, ch. 9, §9.2, pp. 150–155 (implementation in eop.h).
+
 function fill<T>(f: Iter<T>, l: Iter<T>, x: T) {
     while ( ! equal(f, l)) {
         sink(f, x);

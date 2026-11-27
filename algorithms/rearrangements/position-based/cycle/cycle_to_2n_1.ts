@@ -1,3 +1,5 @@
+// Reference: Elements of Programming, ch. 10, p. 171, exercise 10.3 (implementation of the exercise).
+
 function cycle_to_2n_1<T>(i: Iter<T>, f: IteratorPermutation<T>) {
     let k = f(i);
     if (equal(k, i)) return;

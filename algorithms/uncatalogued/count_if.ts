@@ -1,3 +1,5 @@
+// Reference: Elements of Programming, ch. 6, p. 95 (count_if overloads).
+
 function count_if<T>(f: Iter<T>, l: Iter<T>, p: Predicate<T>) {
     const res = count_if_basis(f, l, p, 0);
     return res;

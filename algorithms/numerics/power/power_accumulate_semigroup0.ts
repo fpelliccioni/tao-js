@@ -1,3 +1,5 @@
+// Reference: From Mathematics to Generic Programming, ch. 7, §7.5, pp. 119–121 (multiplicative overloads in ch07.h).
+
 // r is a MultiplicativeSemigroup.
 // n is an Integer.
 // a is a MultiplicativeSemigroup.

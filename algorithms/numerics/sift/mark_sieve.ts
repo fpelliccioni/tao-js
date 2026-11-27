@@ -1,3 +1,5 @@
+// Reference: From Mathematics to Generic Programming, ch. 3, p. 24 (ch03.h).
+
 function mark_sieve(f: Iter<number | string>, l: Iter<number | string>, factor: number) {
     // precondition: ! equal(f, l)
     sink(f, 0);

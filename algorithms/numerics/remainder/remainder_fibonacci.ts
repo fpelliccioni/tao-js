@@ -1,3 +1,5 @@
+// Reference: From Mathematics to Generic Programming, ch. 4, p. 58 (ch04.h).
+
 // Algorithm discovered by Robert Floyd and Donald Knuth
 function remainder_fibonacci(a: number, b: number) {
     // precondition: b > 0

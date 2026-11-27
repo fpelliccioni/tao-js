@@ -1,3 +1,5 @@
+// Reference: From Mathematics to Generic Programming, ch. 4, §4.5, pp. 53–56 (fast_segment_remainder1 in ch04.h).
+
 // Now we do have a notion of zero, so ...
 
 function remainder_fast1(a: number, b: number) {

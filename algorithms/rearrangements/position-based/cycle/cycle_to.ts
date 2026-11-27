@@ -1,3 +1,5 @@
+// Reference: Elements of Programming, ch. 10, p. 170.
+
 function cycle_to<T>(i: Iter<T>, f: IteratorPermutation<T>) {
     let k = f(i);
     while ( ! equal(k, i)) {

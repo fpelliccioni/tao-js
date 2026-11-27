@@ -1,3 +1,5 @@
+// Reference: Elements of Programming, ch. 6, p. 95, exercise 6.1 (companion implementation in eop.h).
+
 function some<T>(f: Iter<T>, l: Iter<T>, p: Predicate<T>) {
     return ! none(f, l, p);
 }

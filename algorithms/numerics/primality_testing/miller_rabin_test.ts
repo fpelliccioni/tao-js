@@ -1,3 +1,5 @@
+// Reference: From Mathematics to Generic Programming, ch. 13, p. 243 (ch13.h).
+
 function miller_rabin_test(n: number, q: number, k: number, w: number) {
     //returns true is n is probably prime, returns false if it definitely is not.
     //precondition: n > 1 && n - 1 = 2^k * q && q is odd

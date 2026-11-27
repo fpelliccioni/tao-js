@@ -1,3 +1,5 @@
+// Reference: From Mathematics to Generic Programming, ch. 7, §7.3, pp. 116–117 (ch07.h).
+
 // n is an Integer.
 // a is a NonCommutativeAdditiveSemigroup.
 

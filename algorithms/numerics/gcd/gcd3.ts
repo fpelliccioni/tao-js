@@ -1,3 +1,5 @@
+// Reference: From Mathematics to Generic Programming, ch. 4, §4.6, pp. 57–58 (variant of gcm_remainder in ch04.h).
+
 function gcd3(a: number, b: number) {
     while (a !== b && b !== 0) {
         a = remainder(a, b);
