@@ -95,3 +95,8 @@ declare function rotate_forward_step<T>(ref: {f: Iter<T>; m: Iter<T>}, l: Iter<T
 declare function k_rotate_from_permutation_random_access<T>(f: Iter<T>, m: Iter<T>, l: Iter<T>): IteratorPermutation<T>;
 declare function push_heap_gnu_helper<T>(f: Iter<T>, hole: number, top: number, value: T, r: Relation<T>): void;
 declare function parent(index: number): number;
+
+declare function pre(condition: () => boolean, message?: string): void;
+declare function post(condition: () => boolean, message?: string): void;
+declare function is_partitioned_n<T>(first: Iter<T>, count: number, test: Predicate<T>): boolean;
+declare function is_partition_point_n<T>(first: Iter<T>, count: number, test: Predicate<T>, result: Iter<T>): boolean;
