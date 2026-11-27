@@ -2391,6 +2391,47 @@ function find(f, l, x) {
     return res;
 }
 
+function __debug_find_adjacent_mismatch(f, l, r) {
+    if (equal(f, l))
+        return l;
+    let previous = source(f);
+    f = successor(f);
+    while (!equal(f, l)) {
+        const current = source(f);
+        if (!r(previous, current))
+            return f;
+        previous = current;
+        f = successor(f);
+    }
+    return l;
+}
+
+function find_adjacent_mismatch(f, l, r) {
+    var _f_ = start_f('find_adjacent_mismatch', f, l, r);
+    var res = __debug_find_adjacent_mismatch(f, l, r);
+    end_f(_f_);
+    return res;
+}
+
+function __debug_find_adjacent_mismatch_forward(f, l, r) {
+    if (equal(f, l))
+        return l;
+    let previous = f;
+    f = successor(f);
+    while (!equal(f, l) && r(source(previous), source(f))) {
+        previous = f;
+        f = successor(f);
+    }
+    return f;
+}
+
+function find_adjacent_mismatch_forward(f, l, r) {
+    var _f_ = start_f('find_adjacent_mismatch_forward', f, l, r);
+    var res = __debug_find_adjacent_mismatch_forward(f, l, r);
+    end_f(_f_);
+    return res;
+}
+
 function __debug_find_backward_if(f, l, p) {
     while (true) {
         if (equal(l, f))
@@ -2448,6 +2489,21 @@ function __debug_find_if_not(f, l, p) {
 function find_if_not(f, l, p) {
     var _f_ = start_f('find_if_not', f, l, p);
     var res = __debug_find_if_not(f, l, p);
+    end_f(_f_);
+    return res;
+}
+
+function __debug_find_mismatch(f0, l0, f1, l1, r) {
+    while (!equal(f0, l0) && !equal(f1, l1) && r(source(f0), source(f1))) {
+        f0 = successor(f0);
+        f1 = successor(f1);
+    }
+    return [f0, f1];
+}
+
+function find_mismatch(f0, l0, f1, l1, r) {
+    var _f_ = start_f('find_mismatch', f0, l0, f1, l1, r);
+    var res = __debug_find_mismatch(f0, l0, f1, l1, r);
     end_f(_f_);
     return res;
 }
