@@ -105,6 +105,10 @@ function process_file(path, filename) {
                 .replace(/^ {4}/gm, '').trim();
             const entry = [definition.getText(parsed), example];
             file_content_extra += `function __${algo_name}_typescript() { return ${JSON.stringify(entry)}; }\n\n`;
+            const references = Array.from(source.matchAll(/^\/\/ Reference: (.+)$/gm), match => match[1]);
+            if (references.length) {
+                file_content_extra += `function __${algo_name}_references() { return ${JSON.stringify(references)}; }\n\n`;
+            }
         }
 
     }
