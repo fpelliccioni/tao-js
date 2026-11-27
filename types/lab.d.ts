@@ -16,7 +16,8 @@ type Seq<T, K extends SequenceKind = SequenceKind> = {
 };
 type ForwardIterator<T = unknown> = Iter<T, Exclude<SequenceKind, "stream">>;
 type BidirectionalIterator<T = unknown> = Iter<T, "array" | "dll">;
-// All bidirectional sequences exposed by the lab support element assignment.
+// All multipass sequences exposed by the lab support element assignment.
+type MutableForwardIterator<T = unknown> = ForwardIterator<T>;
 type MutableBidirectionalIterator<T = unknown> = BidirectionalIterator<T>;
 type ValueOf<I extends Readable<unknown>> = I[typeof iteratorElement];
 type Predicate<T> = (value: T) => boolean;

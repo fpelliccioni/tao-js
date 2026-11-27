@@ -2302,6 +2302,35 @@ function partition_bidirectional(f, l, p) {
     return res;
 }
 
+function __debug_partition_forward(f, l, p) {
+    pre(() => is_bounded_range(f, l), "The iterators must delimit a valid range.");
+    let original;
+    pre(() => {
+        original = range_value_counts(f, l);
+        return true;
+    });
+    const point = potential_partition_point(f, l, p);
+    let first = f;
+    let next = find_if_not(point, l, p);
+    while (!equal(next, l)) {
+        first = find_if_unguarded(first, p);
+        exchange_values(first, next);
+        first = successor(first);
+        next = find_if_not(successor(next), l, p);
+    }
+    post(() => is_bounded_range(f, point) && is_bounded_range(point, l), "The partition point must belong to the range.");
+    post(() => partitioned_at_point(f, point, l, p), "The result must separate false and true elements.");
+    post(() => has_range_value_counts(f, l, original), "The output must be a permutation of the input.");
+    return point;
+}
+
+function partition_forward(f, l, p) {
+    var _f_ = start_f('partition_forward', f, l, p);
+    var res = __debug_partition_forward(f, l, p);
+    end_f(_f_);
+    return res;
+}
+
 function __debug_partition_semistable(f, l, p) {
     while (true) {
         if (equal(f, l))
@@ -2415,6 +2444,43 @@ function __debug_partition_sentinel(f, l, p) {
 function partition_sentinel(f, l, p) {
     var _f_ = start_f('partition_sentinel', f, l, p);
     var res = __debug_partition_sentinel(f, l, p);
+    end_f(_f_);
+    return res;
+}
+
+function __debug_partition_single_cycle(f, l, p) {
+    pre(() => is_bounded_range(f, l), "The iterators must delimit a valid range.");
+    let original;
+    pre(() => {
+        original = range_value_counts(f, l);
+        return true;
+    });
+    const point = potential_partition_point(f, l, p);
+    const misses = (value) => !p(value);
+    let first = find_if(f, point, p);
+    let last = l;
+    if (!equal(first, point)) {
+        const saved = source(first);
+        while (true) {
+            last = predecessor(find_backward_if(point, last, misses));
+            sink(first, source(last));
+            first = find_if(successor(first), point, p);
+            if (equal(first, point)) {
+                sink(last, saved);
+                break;
+            }
+            sink(last, source(first));
+        }
+    }
+    post(() => is_bounded_range(f, point) && is_bounded_range(point, l), "The partition point must belong to the range.");
+    post(() => partitioned_at_point(f, point, l, p), "The result must separate false and true elements.");
+    post(() => has_range_value_counts(f, l, original), "The output must be a permutation of the input.");
+    return point;
+}
+
+function partition_single_cycle(f, l, p) {
+    var _f_ = start_f('partition_single_cycle', f, l, p);
+    var res = __debug_partition_single_cycle(f, l, p);
     end_f(_f_);
     return res;
 }
@@ -3309,8 +3375,7 @@ function partitioned_n(f, n, p) {
 }
 
 function __debug_potential_partition_point(f, l, p) {
-    const res = count_if_not_basis(f, l, p, f);
-    return res;
+    return count_if_not_basis(f, l, p, f);
 }
 
 function potential_partition_point(f, l, p) {
