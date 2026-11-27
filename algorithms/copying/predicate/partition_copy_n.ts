@@ -6,15 +6,14 @@ function partition_copy_n<T, U>(f: Iter<T>, n: number, u: Iter<U>, t: Iter<U>, p
 }
 
 function __partition_copy_n_usage() {
-    const pred = predicate(x => (x & 1) === 0);
-    const s = sequence(array_random(), "s", pred);
-    const even = sequence(array_all_equal(size(s), "-"));
-    const odd = sequence(array_all_equal(size(s), "-"));
+    const s = sequence(array_random(), "s", even);
+    const evens = sequence(array_all_equal(size(s), "-"));
+    const odds = sequence(array_all_equal(size(s), "-"));
 
-    partition_copy_n(begin(s), size(s), begin(odd), begin(even), pred);
+    partition_copy_n(begin(s), size(s), begin(odds), begin(evens), even);
 
-    print(even);
-    print(odd);
+    print(evens);
+    print(odds);
 }
 
 function __partition_copy_n_attributes() {

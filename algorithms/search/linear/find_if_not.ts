@@ -8,7 +8,6 @@ function find_if_not<I extends Iter<unknown>>(f: I, l: I, p: Predicate<ValueOf<I
 }
 
 function __find_if_not_usage() {
-    const even = predicate(x => (x & 1) === 0);
     const d = sequence([2, 4, 7, 8]);
     const l = end(d);
     const result = find_if_not(begin(d), l, even);

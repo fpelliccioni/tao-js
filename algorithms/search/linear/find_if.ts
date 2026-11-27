@@ -9,7 +9,6 @@ function find_if<I extends Iter<unknown>>(f: I, l: I, p: Predicate<ValueOf<I>>):
 }
 
 function __find_if_usage() {
-    const even = predicate(x => (x & 1) === 0);
     const d = sequence([1, 3, 8, 5, 6]);
     const l = end(d);
     const result = find_if(begin(d), l, even);

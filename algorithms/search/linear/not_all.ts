@@ -5,7 +5,6 @@ function not_all<I extends Iter<unknown>>(f: I, l: I, p: Predicate<ValueOf<I>>):
 }
 
 function __not_all_usage() {
-    const even = predicate(x => (x & 1) === 0);
     const d = sequence([2, 3, 4]);
     const f = begin(d);
     const l = end(d);

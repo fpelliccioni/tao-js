@@ -7,7 +7,6 @@ function find_if_not_n<I extends Iter<unknown>>(
 }
 
 function __find_if_not_n_usage() {
-    const even = predicate(x => (x & 1) === 0);
     const d = sequence([2, 4, 7, 8]);
     const [result, remaining] = find_if_not_n(begin(d), size(d), even);
     if (remaining === 0) {

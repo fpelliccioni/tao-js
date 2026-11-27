@@ -6,7 +6,6 @@ function none<I extends Iter<unknown>>(f: I, l: I, p: Predicate<ValueOf<I>>): bo
 }
 
 function __none_usage() {
-    const even = predicate(x => (x & 1) === 0);
     const d = sequence([1, 3, 5]);
     const f = begin(d);
     const l = end(d);

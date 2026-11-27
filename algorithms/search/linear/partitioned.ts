@@ -7,7 +7,6 @@ function partitioned<T>(f: Iter<T>, l: Iter<T>, p: Predicate<T>) {
 }
 
 function __partitioned_usage() {
-    const even = predicate(x => (x & 1) === 0);
     const d = sequence(array_random(), "d", even, undefined, true);
     const f = begin(d);
     const l = end(d);

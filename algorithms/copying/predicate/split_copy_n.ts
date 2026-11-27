@@ -17,15 +17,15 @@ function split_copy_n<T, U>(f: Iter<T>, n: number, u: Iter<U>, t: Iter<U>, p: Pr
 }
 
 function __split_copy_n_usage() {
-    const pred = predicate<Iter<number>>(function even(x) { return (source(x) & 1) == 0; });
+    const evenAt = predicate_source(even);
     const s = sequence(array_random());
-    const even = sequence(array_all_equal(size(s), "-"));
-    const odd = sequence(array_all_equal(size(s), "-"));
+    const evens = sequence(array_all_equal(size(s), "-"));
+    const odds = sequence(array_all_equal(size(s), "-"));
 
-    split_copy_n(begin(s), size(s), begin(odd), begin(even), pred);
+    split_copy_n(begin(s), size(s), begin(odds), begin(evens), evenAt);
 
-    print(even);
-    print(odd);
+    print(evens);
+    print(odds);
 }
 
 function __split_copy_n_attributes() {

@@ -6,7 +6,6 @@ function all_n<I extends Iter<unknown>>(f: I, n: number, p: Predicate<ValueOf<I>
 }
 
 function __all_n_usage() {
-    const even = predicate(x => (x & 1) === 0);
     const d = sequence([2, 4, 6, 7]);
     const result = all_n(begin(d), 3, even);
     print("All of the first three elements are even: " + result);

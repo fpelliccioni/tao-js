@@ -9,7 +9,6 @@ function find_if_unguarded<I extends Iter<unknown>>(f: I, p: Predicate<ValueOf<I
 }
 
 function __find_if_unguarded_usage() {
-    const even = predicate(x => (x & 1) === 0);
     // The final element is the sentinel.
     const d = sequence([1, 3, 5, 8]);
     const result = find_if_unguarded(begin(d), even);
