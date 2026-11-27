@@ -1,4 +1,4 @@
-function min_value<T>(f: Iter<T>, l: Iter<T>, r: Relation<T>) {
+function min_value<I extends Iter<unknown>>(f: I, l: I, r: Relation<ValueOf<I>>): I {
     //precondition: ! equal(f, l)) return l;
 
     let m = f;

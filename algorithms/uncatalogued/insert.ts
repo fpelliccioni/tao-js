@@ -1,4 +1,4 @@
-function insert<T>(s: Seq<T>, ip: Iter<T>, f: Iter<T>, l: Iter<T>) {
+function insert<T, K extends SequenceKind>(s: Seq<T, K>, ip: Iter<T>, f: Iter<T>, l: Iter<T>) {
     let d = distance(begin(s), ip);
     const ld = distance(ip, end(s));
 

@@ -1,8 +1,10 @@
 // Reference: Elements of Programming, ch. 6, pp. 105–106 (adapted with explicit contracts).
 
-function lower_bound_n<T>(f: Iter<T>, n: number, a: T, r: Relation<T>) {
-    const below = (x: T) => r(x, a);
-    const p = (x: T) => !below(x);
+function lower_bound_n<I extends ForwardIterator>(
+    f: I, n: number, a: ValueOf<I>, r: Relation<ValueOf<I>>,
+): I {
+    const below = (x: ValueOf<I>) => r(x, a);
+    const p = (x: ValueOf<I>) => !below(x);
     pre(() => is_partitioned_n(f, n, p), "The range must be partitioned around the search value.");
     const result = partition_point_n(f, n, p);
     post(() => all(f, result, below), "Every element before the result must compare less than the search value.");

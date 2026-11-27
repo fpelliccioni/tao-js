@@ -1,9 +1,21 @@
 // Typed view of the opaque objects supplied by the lab runtime.
 declare const iteratorElement: unique symbol;
 declare const sequenceElement: unique symbol;
+declare const iteratorKind: unique symbol;
+declare const sequenceKind: unique symbol;
 
-type Iter<T> = { readonly [iteratorElement]: T };
-type Seq<T> = { readonly [sequenceElement]: T };
+type SequenceKind = "array" | "sll" | "dll" | "stream";
+type SequenceInputKind = SequenceKind | "list" | "double" | "buffer";
+type SequenceKindOf<K extends SequenceInputKind> =
+    K extends "list" ? "sll" : K extends "double" ? "dll" : K extends "buffer" ? "stream" : K;
+type Readable<T> = { readonly [iteratorElement]: T };
+type Iter<T, K extends SequenceKind = SequenceKind> = Readable<T> & { readonly [iteratorKind]: K };
+type Seq<T, K extends SequenceKind = SequenceKind> = {
+    readonly [sequenceElement]: T;
+    readonly [sequenceKind]: K;
+};
+type ForwardIterator<T = unknown> = Iter<T, Exclude<SequenceKind, "stream">>;
+type ValueOf<I extends Readable<unknown>> = I[typeof iteratorElement];
 type Predicate<T> = (value: T) => boolean;
 
 type Relation<T> = (left: T, right: T) => boolean;
@@ -20,12 +32,13 @@ declare function array_ascending(n?: number, from?: number): number[];
 declare function array_descending(n?: number, from?: number): number[];
 declare function array_from(value: string): string[];
 declare function random_int(from?: number, to?: number): number;
-declare function sequence<T>(values: readonly T[], name?: string, color?: Relation<T> | Predicate<T>, type?: string, drawChart?: boolean, drawTree?: boolean): Seq<T>;
-declare function begin<T>(data: Seq<T>): Iter<T>;
-declare function end<T>(data: Seq<T>): Iter<T>;
+declare function sequence<T>(values: readonly T[], name?: string, color?: Relation<T> | Predicate<T>, type?: undefined, drawChart?: boolean, drawTree?: boolean): Seq<T, "array">;
+declare function sequence<T, K extends SequenceInputKind>(values: readonly T[], name: string | undefined, color: Relation<T> | Predicate<T> | undefined, type: K, drawChart?: boolean, drawTree?: boolean): Seq<T, SequenceKindOf<K>>;
+declare function begin<T, K extends SequenceKind>(data: Seq<T, K>): Iter<T, K>;
+declare function end<T, K extends SequenceKind>(data: Seq<T, K>): Iter<T, K>;
 declare function source<T>(it: Iter<T>): T;
 declare function sink<T, U>(it: Iter<T>, value: U): void;
-declare function successor<T>(it: Iter<T>, n?: number): Iter<T>;
+declare function successor<I extends Iter<unknown>>(it: I, n?: number): I;
 declare function successor<T extends number | Iter<unknown>>(it: T, n?: number): T;
 declare function predecessor<T>(it: Iter<T>, n?: number): Iter<T>;
 declare function distance<T, U>(f: Iter<T>, l: Iter<U>): number;
@@ -54,7 +67,7 @@ declare function source_move<T>(it: Iter<T>): T;
 declare function sink_move<T, U>(it: Iter<T>, value: U): void;
 declare function sink_move_from_it<T, U>(target: Iter<T>, source: Iter<U>): void;
 declare function move_obj<T>(value: T): T;
-declare function push_back<T>(seq: Seq<T>, value: NoInfer<T>): Seq<T>;
+declare function push_back<T, K extends SequenceKind>(seq: Seq<T, K>, value: NoInfer<T>): Seq<T, K>;
 declare function swap_iters<T, U>(a: Iter<T>, b: Iter<U>): [Iter<U>, Iter<T>];
 declare function register_move_distance(distance: number): void;
 declare function register_custom_stat(name: string): void;
@@ -64,6 +77,7 @@ declare function increment_assignment_stat(): void;
 declare function track_variable<T>(value: T, name: string | number): void;
 declare function snapshot(): void;
 declare const sequenceTree: typeof sequence;
+declare const sequenceChart: typeof sequence;
 
 declare function binary_operation<T>(op: Operation<T>): Operation<T>;
 declare function unary_operation<T>(op: (value: T) => T): (value: T) => T;
