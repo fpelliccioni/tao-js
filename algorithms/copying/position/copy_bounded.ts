@@ -10,8 +10,8 @@ function copy_bounded<T, U>(f: Iter<T>, l: Iter<T>, fo: Iter<U>, lo: Iter<U>): [
 }
 
 function __copy_bounded_usage() {
-    const s = sequence(array_ascending(), "s");
-    const z = sequence(array_descending(), "z");
+    const s = sequence(array_ascending());
+    const z = sequence(array_descending());
 
     const res = copy_bounded(successor(begin(s), 5), end(s), begin(z), end(z));
     const f1 = res[0];

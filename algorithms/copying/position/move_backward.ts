@@ -8,8 +8,8 @@ function move_backward<T, U>(f: Iter<T>, l: Iter<T>, o: Iter<U>) {
 }
 
 function __move_backward_usage() {
-    const s = sequence(array_ascending(), "s");
-    const z = sequence(array_descending(), "z");
+    const s = sequence(array_ascending());
+    const z = sequence(array_descending());
 
     move_backward(successor(begin(s), 5), end(s), end(z));
 

@@ -31,9 +31,9 @@ function find_subsequence_n_naive_1<T>(f: Iter<T>, fn: number, s: Iter<T>, sn: n
 }
 
 function __find_subsequence_n_naive_1_usage() {
-    const seq = sequence(array_from("Until death it is all life"), "seq");
+    const seq = sequence(array_from("Until death it is all life"));
     //var seq = sequence(array_from("Until dedead it is all life"), "seq");
-    const sub = sequence(array_from("dead"), "sub");
+    const sub = sequence(array_from("dead"));
 
     const r = find_subsequence_n_naive_1(begin(seq), size(seq), begin(sub), size(sub), eq);
     const it = r[0];

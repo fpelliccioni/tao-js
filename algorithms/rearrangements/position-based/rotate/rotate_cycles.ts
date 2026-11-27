@@ -39,7 +39,7 @@ function __rotate_cycles_usage() {
         }
     }
 
-    const s = sequence(array_random(), "s");
+    const s = sequence(array_random());
 
     const f = begin(s);
     const m = successor(begin(s), 3);

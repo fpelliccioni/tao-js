@@ -17,7 +17,7 @@ function reverse_n_adaptive<T, U>(f_i: Iter<T>, n_i: number, f_b: Iter<U>, n_b: 
 function __reverse_n_adaptive_usage() {
     const s = sequence(array_random(16), "s", undefined, "sll"); // singly-linked list
     //var b = sequence(array_all_equal(size(s), '-'), "b");
-    const b = sequence(array_all_equal(4, '-'), "b");
+    const b = sequence(array_all_equal(4, '-'));
     print(s);
     const r = reverse_n_adaptive(begin(s), size(s), begin(b), size(b));
     print(s);

@@ -22,8 +22,8 @@ function find_subsequence_n_naive<T>(f: Iter<T>, fn: number, s: Iter<T>, sn: num
 }
 
 function __find_subsequence_n_naive_usage() {
-    const seq = sequence(array_from("Hello, World!"), "seq");
-    const sub = sequence(array_from("????"), "sub");
+    const seq = sequence(array_from("Hello, World!"));
+    const sub = sequence(array_from("????"));
 
     const r = find_subsequence_n_naive(begin(seq), size(seq), begin(sub), size(sub), eq);
     const it = r[0];

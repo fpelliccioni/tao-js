@@ -9,7 +9,7 @@ function fill_n<T>(f: Iter<T>, n: number, x: T) {
 }
 
 function __fill_n_usage() {
-    const s = sequence(array_all_equal(10, "-"), "s");
+    const s = sequence(array_all_equal(10, "-"));
     fill_n(begin(s), size(s), '?');
     print(s);
 }

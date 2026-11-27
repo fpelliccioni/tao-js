@@ -14,7 +14,7 @@ function palindrome_bidirectional<T>(f: Iter<T>, l: Iter<T>, r: Relation<T>) {
 function __palindrome_bidirectional_usage() {
     //var word = sequence(['e', 'v', 'i', 't', 'a', 't', 'i', 'v', 'e'], "word");
     //var word = sequence(['e', 'v', 'i', 'x', 'a', 't', 'i', 'v', 'e'], "word");
-    const word = sequence(['e', 'v', 'i', 't', 't', 'i', 'v', 'e'], "word");
+    const word = sequence(['e', 'v', 'i', 't', 't', 'i', 'v', 'e']);
 
     const f = begin(word);
     const l = end(word);

@@ -11,8 +11,8 @@ function copy_backward_n<T, U>(l: Iter<T>, n: number, o: Iter<U>): [Iter<T>, Ite
 }
 
 function __copy_backward_n_usage() {
-    const s = sequence(array_ascending(), "s");
-    const z = sequence(array_descending(), "z");
+    const s = sequence(array_ascending());
+    const z = sequence(array_descending());
 
     copy_backward_n(end(s), 5, end(z));
 

@@ -17,8 +17,8 @@ function __swap_ranges_usage() {
         sink(y, t);
     }
 
-    const s = sequence(array_ascending(), "s");
-    const z = sequence(array_all_equal(size(s), '-'), "z");
+    const s = sequence(array_ascending());
+    const z = sequence(array_all_equal(size(s), '-'));
 
     swap_ranges(successor(begin(s), 5), end(s), begin(z));
 

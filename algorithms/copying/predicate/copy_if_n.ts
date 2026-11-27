@@ -8,7 +8,7 @@ function copy_if_n<T, U>(f: Iter<T>, n: number, o: Iter<U>, p: Predicate<T>) {
 function __copy_if_n_usage() {
     const even = predicate(x => (x & 1) === 0);
     const s = sequence(array_random(), "s", even);
-    const z = sequence(array_all_equal(size(s), "-"), "z");
+    const z = sequence(array_all_equal(size(s), "-"));
 
     copy_if_n(begin(s), size(s), begin(z), even);
 

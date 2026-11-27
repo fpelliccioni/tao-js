@@ -24,12 +24,12 @@ function combine_copy_n<T, U>(f: Iter<T>, n: number, f2: Iter<T>, n2: number, o:
 function __combine_copy_n_usage() {
     const lti = relation<Iter<number>>(function lt(x, y) {return source(x) < source(y);});
 
-    const a1 = sequence(array_random(8), "a1");
-    const a2 = sequence(array_random(5), "a2");
+    const a1 = sequence(array_random(8));
+    const a2 = sequence(array_random(5));
     insertion_sort(begin(a1), end(a1), lt);
     insertion_sort(begin(a2), end(a2), lt);
 
-    const r = sequence(array_all_equal(size(a1) + size(a2), '-'), "r");
+    const r = sequence(array_all_equal(size(a1) + size(a2), '-'));
 
     const res = combine_copy_n(begin(a1), size(a1) - 3, begin(a2), size(a2) - 2, begin(r), lti);
     const f = res[0];

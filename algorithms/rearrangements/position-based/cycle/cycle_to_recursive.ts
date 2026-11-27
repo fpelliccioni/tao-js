@@ -29,7 +29,7 @@ function __cycle_to_recursive_usage() {
         return ret;
     }
 
-    const s = sequence(array_random(5), "s");
+    const s = sequence(array_random(5));
     cycle_to_recursive(begin(s), successorMod10);
     print(s);
 }

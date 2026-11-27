@@ -240,13 +240,13 @@ function __lexicographical_less_usage() {
 function __lexicographical_less_attributes() {
 }
 
-function __copy_typescript() { return ["function copy<T, U>(f: Iter<T>, l: Iter<T>, o: Iter<U>) {\n    while ( ! equal(f, l)) {\n        sink(o, source(f));\n        o = successor(o);\n        f = successor(f);\n    }\n    return o;\n}","const s = sequence(array_ascending(), \"s\");\nconst z = sequence(array_descending(), \"z\");\n\ncopy(successor(begin(s), 5), end(s), begin(z));\n\nprint(z);"]; }
+function __copy_typescript() { return ["function copy<T, U>(f: Iter<T>, l: Iter<T>, o: Iter<U>) {\n    while ( ! equal(f, l)) {\n        sink(o, source(f));\n        o = successor(o);\n        f = successor(f);\n    }\n    return o;\n}","const s = sequence(array_ascending());\nconst z = sequence(array_descending());\n\ncopy(successor(begin(s), 5), end(s), begin(z));\n\nprint(z);"]; }
 
 function __copy_references() { return ["Elements of Programming, ch. 9, p. 150."]; }
 
 function __copy_usage() {
-    const s = sequence(array_ascending(), "s");
-    const z = sequence(array_descending(), "z");
+    const s = sequence(array_ascending());
+    const z = sequence(array_descending());
     copy(successor(begin(s), 5), end(s), begin(z));
     print(z);
 }
@@ -254,13 +254,13 @@ function __copy_usage() {
 function __copy_attributes() {
 }
 
-function __copy_backward_typescript() { return ["function copy_backward<T, U>(f: Iter<T>, l: Iter<T>, o: Iter<U>) {\n    while ( ! equal(f, l)) {\n        l = predecessor(l);\n        o = predecessor(o);\n        sink(o, source(l));\n    }\n    return o;\n}","const s = sequence(array_ascending(), \"s\");\nconst z = sequence(array_descending(), \"z\");\n\ncopy_backward(successor(begin(s), 5), end(s), end(z));\n\nprint(z);"]; }
+function __copy_backward_typescript() { return ["function copy_backward<T, U>(f: Iter<T>, l: Iter<T>, o: Iter<U>) {\n    while ( ! equal(f, l)) {\n        l = predecessor(l);\n        o = predecessor(o);\n        sink(o, source(l));\n    }\n    return o;\n}","const s = sequence(array_ascending());\nconst z = sequence(array_descending());\n\ncopy_backward(successor(begin(s), 5), end(s), end(z));\n\nprint(z);"]; }
 
 function __copy_backward_references() { return ["Elements of Programming, ch. 9, p. 153."]; }
 
 function __copy_backward_usage() {
-    const s = sequence(array_ascending(), "s");
-    const z = sequence(array_descending(), "z");
+    const s = sequence(array_ascending());
+    const z = sequence(array_descending());
     copy_backward(successor(begin(s), 5), end(s), end(z));
     print(z);
 }
@@ -268,13 +268,13 @@ function __copy_backward_usage() {
 function __copy_backward_attributes() {
 }
 
-function __copy_backward_n_typescript() { return ["function copy_backward_n<T, U>(l: Iter<T>, n: number, o: Iter<U>): [Iter<T>, Iter<U>] {\n    while (n != 0) {\n        l = predecessor(l);\n        o = predecessor(o);\n        --n;\n        sink(o, source(l));\n    }\n    return [l, o];\n}","const s = sequence(array_ascending(), \"s\");\nconst z = sequence(array_descending(), \"z\");\n\ncopy_backward_n(end(s), 5, end(z));\n\nprint(z);"]; }
+function __copy_backward_n_typescript() { return ["function copy_backward_n<T, U>(l: Iter<T>, n: number, o: Iter<U>): [Iter<T>, Iter<U>] {\n    while (n != 0) {\n        l = predecessor(l);\n        o = predecessor(o);\n        --n;\n        sink(o, source(l));\n    }\n    return [l, o];\n}","const s = sequence(array_ascending());\nconst z = sequence(array_descending());\n\ncopy_backward_n(end(s), 5, end(z));\n\nprint(z);"]; }
 
 function __copy_backward_n_references() { return ["Elements of Programming, ch. 9, p. 153 (counted variant in eop.h)."]; }
 
 function __copy_backward_n_usage() {
-    const s = sequence(array_ascending(), "s");
-    const z = sequence(array_descending(), "z");
+    const s = sequence(array_ascending());
+    const z = sequence(array_descending());
     copy_backward_n(end(s), 5, end(z));
     print(z);
 }
@@ -282,13 +282,13 @@ function __copy_backward_n_usage() {
 function __copy_backward_n_attributes() {
 }
 
-function __copy_bounded_typescript() { return ["function copy_bounded<T, U>(f: Iter<T>, l: Iter<T>, fo: Iter<U>, lo: Iter<U>): [Iter<T>, Iter<U>] {\n    while ( ! equal(f, l) && ! equal(fo, lo)) {\n        sink(fo, source(f));\n        fo = successor(fo);\n        f = successor(f);\n    }\n    return [f, fo];\n}","const s = sequence(array_ascending(), \"s\");\nconst z = sequence(array_descending(), \"z\");\n\nconst res = copy_bounded(successor(begin(s), 5), end(s), begin(z), end(z));\nconst f1 = res[0];\nconst f2 = res[1];\n\nprint(z);"]; }
+function __copy_bounded_typescript() { return ["function copy_bounded<T, U>(f: Iter<T>, l: Iter<T>, fo: Iter<U>, lo: Iter<U>): [Iter<T>, Iter<U>] {\n    while ( ! equal(f, l) && ! equal(fo, lo)) {\n        sink(fo, source(f));\n        fo = successor(fo);\n        f = successor(f);\n    }\n    return [f, fo];\n}","const s = sequence(array_ascending());\nconst z = sequence(array_descending());\n\nconst res = copy_bounded(successor(begin(s), 5), end(s), begin(z), end(z));\nconst f1 = res[0];\nconst f2 = res[1];\n\nprint(z);"]; }
 
 function __copy_bounded_references() { return ["Elements of Programming, ch. 9, p. 151."]; }
 
 function __copy_bounded_usage() {
-    const s = sequence(array_ascending(), "s");
-    const z = sequence(array_descending(), "z");
+    const s = sequence(array_ascending());
+    const z = sequence(array_descending());
     const res = copy_bounded(successor(begin(s), 5), end(s), begin(z), end(z));
     const f1 = res[0];
     const f2 = res[1];
@@ -298,13 +298,13 @@ function __copy_bounded_usage() {
 function __copy_bounded_attributes() {
 }
 
-function __copy_n_typescript() { return ["function copy_n<T, U>(f: Iter<T>, n: number, o: Iter<U>): [Iter<T>, Iter<U>] {\n    while (n != 0) {\n        sink(o, source(f));\n        f = successor(f);\n        o = successor(o);\n        --n;\n    }\n    return [f, o];\n}","const s = sequence(array_ascending(), \"s\");\nconst z = sequence(array_descending(), \"z\");\n\ncopy_n(begin(s), 5, begin(z));\n\nprint(z);"]; }
+function __copy_n_typescript() { return ["function copy_n<T, U>(f: Iter<T>, n: number, o: Iter<U>): [Iter<T>, Iter<U>] {\n    while (n != 0) {\n        sink(o, source(f));\n        f = successor(f);\n        o = successor(o);\n        --n;\n    }\n    return [f, o];\n}","const s = sequence(array_ascending());\nconst z = sequence(array_descending());\n\ncopy_n(begin(s), 5, begin(z));\n\nprint(z);"]; }
 
 function __copy_n_references() { return ["Elements of Programming, ch. 9, p. 152."]; }
 
 function __copy_n_usage() {
-    const s = sequence(array_ascending(), "s");
-    const z = sequence(array_descending(), "z");
+    const s = sequence(array_ascending());
+    const z = sequence(array_descending());
     copy_n(begin(s), 5, begin(z));
     print(z);
 }
@@ -312,11 +312,11 @@ function __copy_n_usage() {
 function __copy_n_attributes() {
 }
 
-function __move_backward_typescript() { return ["function move_backward<T, U>(f: Iter<T>, l: Iter<T>, o: Iter<U>) {\n    while (! equal(f, l)) {\n        l = predecessor(l);\n        o = predecessor(o);\n        sink_move(o, source(l));\n    }\n    return o;\n}","const s = sequence(array_ascending(), \"s\");\nconst z = sequence(array_descending(), \"z\");\n\nmove_backward(successor(begin(s), 5), end(s), end(z));\n\nprint(z);"]; }
+function __move_backward_typescript() { return ["function move_backward<T, U>(f: Iter<T>, l: Iter<T>, o: Iter<U>) {\n    while (! equal(f, l)) {\n        l = predecessor(l);\n        o = predecessor(o);\n        sink_move(o, source(l));\n    }\n    return o;\n}","const s = sequence(array_ascending());\nconst z = sequence(array_descending());\n\nmove_backward(successor(begin(s), 5), end(s), end(z));\n\nprint(z);"]; }
 
 function __move_backward_usage() {
-    const s = sequence(array_ascending(), "s");
-    const z = sequence(array_descending(), "z");
+    const s = sequence(array_ascending());
+    const z = sequence(array_descending());
     move_backward(successor(begin(s), 5), end(s), end(z));
     print(z);
 }
@@ -324,13 +324,13 @@ function __move_backward_usage() {
 function __move_backward_attributes() {
 }
 
-function __reverse_copy_typescript() { return ["function reverse_copy<T, U>(f: Iter<T>, l: Iter<T>, o: Iter<U>) {\n    while ( ! equal(f, l)) {\n        l = predecessor(l);\n        sink(o, source(l));\n        o = successor(o);\n    }\n    return o;\n}","const s = sequence(array_ascending(), \"s\");\nconst z = sequence(array_descending(), \"z\");\n\nreverse_copy(successor(begin(s), 5), end(s), begin(z));\n\nprint(z);"]; }
+function __reverse_copy_typescript() { return ["function reverse_copy<T, U>(f: Iter<T>, l: Iter<T>, o: Iter<U>) {\n    while ( ! equal(f, l)) {\n        l = predecessor(l);\n        sink(o, source(l));\n        o = successor(o);\n    }\n    return o;\n}","const s = sequence(array_ascending());\nconst z = sequence(array_descending());\n\nreverse_copy(successor(begin(s), 5), end(s), begin(z));\n\nprint(z);"]; }
 
 function __reverse_copy_references() { return ["Elements of Programming, ch. 9, p. 154.","From Mathematics to Generic Programming, ch. 11, p. 216 (ch11.h)."]; }
 
 function __reverse_copy_usage() {
-    const s = sequence(array_ascending(), "s");
-    const z = sequence(array_descending(), "z");
+    const s = sequence(array_ascending());
+    const z = sequence(array_descending());
     reverse_copy(successor(begin(s), 5), end(s), begin(z));
     print(z);
 }
@@ -338,13 +338,13 @@ function __reverse_copy_usage() {
 function __reverse_copy_attributes() {
 }
 
-function __reverse_copy_backward_typescript() { return ["function reverse_copy_backward<T, U>(f: Iter<T>, l: Iter<T>, o: Iter<U>) {\n    while ( ! equal(f, l)) {\n        o = predecessor(o);\n        sink(o, source(f));\n        f = successor(f);\n    }\n    return o;\n}","const s = sequence(array_ascending(), \"s\");\nconst z = sequence(array_descending(), \"z\");\n\nreverse_copy_backward(successor(begin(s), 5), end(s), end(z));\n\nprint(z);"]; }
+function __reverse_copy_backward_typescript() { return ["function reverse_copy_backward<T, U>(f: Iter<T>, l: Iter<T>, o: Iter<U>) {\n    while ( ! equal(f, l)) {\n        o = predecessor(o);\n        sink(o, source(f));\n        f = successor(f);\n    }\n    return o;\n}","const s = sequence(array_ascending());\nconst z = sequence(array_descending());\n\nreverse_copy_backward(successor(begin(s), 5), end(s), end(z));\n\nprint(z);"]; }
 
 function __reverse_copy_backward_references() { return ["Elements of Programming, ch. 9, p. 154."]; }
 
 function __reverse_copy_backward_usage() {
-    const s = sequence(array_ascending(), "s");
-    const z = sequence(array_descending(), "z");
+    const s = sequence(array_ascending());
+    const z = sequence(array_descending());
     reverse_copy_backward(successor(begin(s), 5), end(s), end(z));
     print(z);
 }
@@ -352,13 +352,13 @@ function __reverse_copy_backward_usage() {
 function __reverse_copy_backward_attributes() {
 }
 
-function __reverse_copy_backward_n_typescript() { return ["function reverse_copy_backward_n<T, U>(f: Iter<T>, n: number, o: Iter<U>): [Iter<T>, Iter<U>] {\n    while (n != 0) {\n        o = predecessor(o);\n        sink(o, source(f));\n        f = successor(f);\n        --n;\n    }\n    return [f, o];\n}","const s = sequence(array_ascending(), \"s\");\nconst z = sequence(array_descending(), \"z\");\n\nreverse_copy_backward_n(successor(begin(s), 5), 5, end(z));\n\nprint(z);"]; }
+function __reverse_copy_backward_n_typescript() { return ["function reverse_copy_backward_n<T, U>(f: Iter<T>, n: number, o: Iter<U>): [Iter<T>, Iter<U>] {\n    while (n != 0) {\n        o = predecessor(o);\n        sink(o, source(f));\n        f = successor(f);\n        --n;\n    }\n    return [f, o];\n}","const s = sequence(array_ascending());\nconst z = sequence(array_descending());\n\nreverse_copy_backward_n(successor(begin(s), 5), 5, end(z));\n\nprint(z);"]; }
 
 function __reverse_copy_backward_n_references() { return ["Elements of Programming, ch. 9, pp. 154–155 (counted variants described in the text)."]; }
 
 function __reverse_copy_backward_n_usage() {
-    const s = sequence(array_ascending(), "s");
-    const z = sequence(array_descending(), "z");
+    const s = sequence(array_ascending());
+    const z = sequence(array_descending());
     reverse_copy_backward_n(successor(begin(s), 5), 5, end(z));
     print(z);
 }
@@ -366,13 +366,13 @@ function __reverse_copy_backward_n_usage() {
 function __reverse_copy_backward_n_attributes() {
 }
 
-function __reverse_copy_n_typescript() { return ["function reverse_copy_n<T, U>(l: Iter<T>, n: number, o: Iter<U>): [Iter<T>, Iter<U>] {\n    while (n != 0) {\n        l = predecessor(l);\n        sink(o, source(l));\n        o = successor(o);\n        --n;\n    }\n    return [l, o];\n}","const s = sequence(array_ascending(), \"s\");\nconst z = sequence(array_descending(), \"z\");\n\nreverse_copy_n(successor(begin(s), 5), 5, begin(z));\n\nprint(z);"]; }
+function __reverse_copy_n_typescript() { return ["function reverse_copy_n<T, U>(l: Iter<T>, n: number, o: Iter<U>): [Iter<T>, Iter<U>] {\n    while (n != 0) {\n        l = predecessor(l);\n        sink(o, source(l));\n        o = successor(o);\n        --n;\n    }\n    return [l, o];\n}","const s = sequence(array_ascending());\nconst z = sequence(array_descending());\n\nreverse_copy_n(successor(begin(s), 5), 5, begin(z));\n\nprint(z);"]; }
 
 function __reverse_copy_n_references() { return ["Elements of Programming, ch. 9, pp. 154–155 (counted variants described in the text)."]; }
 
 function __reverse_copy_n_usage() {
-    const s = sequence(array_ascending(), "s");
-    const z = sequence(array_descending(), "z");
+    const s = sequence(array_ascending());
+    const z = sequence(array_descending());
     reverse_copy_n(successor(begin(s), 5), 5, begin(z));
     print(z);
 }
@@ -380,17 +380,17 @@ function __reverse_copy_n_usage() {
 function __reverse_copy_n_attributes() {
 }
 
-function __combine_copy_typescript() { return ["function combine_copy<T, U>(f: Iter<T>, l: Iter<T>, f2: Iter<T>, l2: Iter<T>, o: Iter<U>, r: Relation<Iter<T>>) {\n    while ( ! equal(f, l) && ! equal(f2, l2)) {\n        if (r(f2, f)) {\n            sink(o, source(f2));\n            f2 = successor(f2);\n        } else {\n            sink(o, source(f));\n            f = successor(f);\n        }\n        o = successor(o);\n    }\n    return copy(f2, l2, copy(f, l, o));\n}","const lti = relation<Iter<number>>(function lt(x, y) {return source(x) < source(y);});\n\nconst a1 = sequence(array_random(8), \"a1\");\nconst a2 = sequence(array_random(5), \"a2\");\ninsertion_sort(begin(a1), end(a1), lt);\ninsertion_sort(begin(a2), end(a2), lt);\n\nconst r = sequence(array_all_equal(size(a1) + size(a2), '-'), \"r\");\n\ncombine_copy(begin(a1), end(a1), begin(a2), end(a2), begin(r), lti);\n\nprint(r);"]; }
+function __combine_copy_typescript() { return ["function combine_copy<T, U>(f: Iter<T>, l: Iter<T>, f2: Iter<T>, l2: Iter<T>, o: Iter<U>, r: Relation<Iter<T>>) {\n    while ( ! equal(f, l) && ! equal(f2, l2)) {\n        if (r(f2, f)) {\n            sink(o, source(f2));\n            f2 = successor(f2);\n        } else {\n            sink(o, source(f));\n            f = successor(f);\n        }\n        o = successor(o);\n    }\n    return copy(f2, l2, copy(f, l, o));\n}","const lti = relation<Iter<number>>(function lt(x, y) {return source(x) < source(y);});\n\nconst a1 = sequence(array_random(8));\nconst a2 = sequence(array_random(5));\ninsertion_sort(begin(a1), end(a1), lt);\ninsertion_sort(begin(a2), end(a2), lt);\n\nconst r = sequence(array_all_equal(size(a1) + size(a2), '-'));\n\ncombine_copy(begin(a1), end(a1), begin(a2), end(a2), begin(r), lti);\n\nprint(r);"]; }
 
 function __combine_copy_references() { return ["Elements of Programming, ch. 9, pp. 158–159."]; }
 
 function __combine_copy_usage() {
     const lti = relation(function lt(x, y) { return source(x) < source(y); });
-    const a1 = sequence(array_random(8), "a1");
-    const a2 = sequence(array_random(5), "a2");
+    const a1 = sequence(array_random(8));
+    const a2 = sequence(array_random(5));
     insertion_sort(begin(a1), end(a1), lt);
     insertion_sort(begin(a2), end(a2), lt);
-    const r = sequence(array_all_equal(size(a1) + size(a2), '-'), "r");
+    const r = sequence(array_all_equal(size(a1) + size(a2), '-'));
     combine_copy(begin(a1), end(a1), begin(a2), end(a2), begin(r), lti);
     print(r);
 }
@@ -398,17 +398,17 @@ function __combine_copy_usage() {
 function __combine_copy_attributes() {
 }
 
-function __combine_copy_backward_typescript() { return ["function combine_copy_backward<T, U>(f: Iter<T>, l: Iter<T>, f2: Iter<T>, l2: Iter<T>, o: Iter<U>, r: Relation<Iter<T>>) {\n    while ( ! equal(f, l) && ! equal(f2, l2)) {\n        o = predecessor(o);\n        if (r(predecessor(l2), predecessor(l))) {\n            l = predecessor(l);\n            sink(o, source(l));\n        } else {\n            l2 = predecessor(l2);\n            sink(o, source(l2));\n        }\n    }\n    return copy_backward(f, l, copy_backward(f2, l2, o));\n}","const lti = relation<Iter<number>>(function lt(x, y) {return source(x) < source(y);});\n\nconst a1 = sequence(array_random(8), \"a1\");\nconst a2 = sequence(array_random(5), \"a2\");\ninsertion_sort(begin(a1), end(a1), gt);\ninsertion_sort(begin(a2), end(a2), gt);\n\nconst r = sequence(array_all_equal(size(a1) + size(a2), '-'), \"r\");\n\ncombine_copy_backward(begin(a1), end(a1), begin(a2), end(a2), end(r), lti);\n\nprint(r);"]; }
+function __combine_copy_backward_typescript() { return ["function combine_copy_backward<T, U>(f: Iter<T>, l: Iter<T>, f2: Iter<T>, l2: Iter<T>, o: Iter<U>, r: Relation<Iter<T>>) {\n    while ( ! equal(f, l) && ! equal(f2, l2)) {\n        o = predecessor(o);\n        if (r(predecessor(l2), predecessor(l))) {\n            l = predecessor(l);\n            sink(o, source(l));\n        } else {\n            l2 = predecessor(l2);\n            sink(o, source(l2));\n        }\n    }\n    return copy_backward(f, l, copy_backward(f2, l2, o));\n}","const lti = relation<Iter<number>>(function lt(x, y) {return source(x) < source(y);});\n\nconst a1 = sequence(array_random(8));\nconst a2 = sequence(array_random(5));\ninsertion_sort(begin(a1), end(a1), gt);\ninsertion_sort(begin(a2), end(a2), gt);\n\nconst r = sequence(array_all_equal(size(a1) + size(a2), '-'));\n\ncombine_copy_backward(begin(a1), end(a1), begin(a2), end(a2), end(r), lti);\n\nprint(r);"]; }
 
 function __combine_copy_backward_references() { return ["Elements of Programming, ch. 9, p. 160."]; }
 
 function __combine_copy_backward_usage() {
     const lti = relation(function lt(x, y) { return source(x) < source(y); });
-    const a1 = sequence(array_random(8), "a1");
-    const a2 = sequence(array_random(5), "a2");
+    const a1 = sequence(array_random(8));
+    const a2 = sequence(array_random(5));
     insertion_sort(begin(a1), end(a1), gt);
     insertion_sort(begin(a2), end(a2), gt);
-    const r = sequence(array_all_equal(size(a1) + size(a2), '-'), "r");
+    const r = sequence(array_all_equal(size(a1) + size(a2), '-'));
     combine_copy_backward(begin(a1), end(a1), begin(a2), end(a2), end(r), lti);
     print(r);
 }
@@ -416,17 +416,17 @@ function __combine_copy_backward_usage() {
 function __combine_copy_backward_attributes() {
 }
 
-function __combine_copy_backward_n_typescript() { return ["function combine_copy_backward_n<T, U>(l: Iter<T>, n: number, l2: Iter<T>, n2: number, o: Iter<U>, r: Relation<Iter<T>>) {\n    while (n != 0 && n2 != 0) {\n        o = predecessor(o);\n        if (r(predecessor(l2), predecessor(l))) {\n            l = predecessor(l);\n            --n;\n            sink(o, source(l));\n        } else {\n            l2 = predecessor(l2);\n            --n2;\n            sink(o, source(l2));\n        }\n    }\n    const res0 = copy_backward_n(l2, n2, o);\n    o = res0[1];\n    const res1 = copy_backward_n(l, n, o);\n    o = res1[1];\n    return [res1[0], res0[0], o];\n}","const lti = relation<Iter<number>>(function lt(x, y) {return source(x) < source(y);});\n\nconst a1 = sequence(array_random(8), \"a1\");\nconst a2 = sequence(array_random(5), \"a2\");\ninsertion_sort(begin(a1), end(a1), gt);\ninsertion_sort(begin(a2), end(a2), gt);\n\nconst r = sequence(array_all_equal(size(a1) + size(a2), '-'), \"r\");\n\nconst res = combine_copy_backward_n(end(a1), size(a1) - 3, end(a2), size(a2) - 2, end(r), lti);\nconst l = res[0];\nconst l2 = res[1];\nconst o = res[2];\n\nprint(r);"]; }
+function __combine_copy_backward_n_typescript() { return ["function combine_copy_backward_n<T, U>(l: Iter<T>, n: number, l2: Iter<T>, n2: number, o: Iter<U>, r: Relation<Iter<T>>) {\n    while (n != 0 && n2 != 0) {\n        o = predecessor(o);\n        if (r(predecessor(l2), predecessor(l))) {\n            l = predecessor(l);\n            --n;\n            sink(o, source(l));\n        } else {\n            l2 = predecessor(l2);\n            --n2;\n            sink(o, source(l2));\n        }\n    }\n    const res0 = copy_backward_n(l2, n2, o);\n    o = res0[1];\n    const res1 = copy_backward_n(l, n, o);\n    o = res1[1];\n    return [res1[0], res0[0], o];\n}","const lti = relation<Iter<number>>(function lt(x, y) {return source(x) < source(y);});\n\nconst a1 = sequence(array_random(8));\nconst a2 = sequence(array_random(5));\ninsertion_sort(begin(a1), end(a1), gt);\ninsertion_sort(begin(a2), end(a2), gt);\n\nconst r = sequence(array_all_equal(size(a1) + size(a2), '-'));\n\nconst res = combine_copy_backward_n(end(a1), size(a1) - 3, end(a2), size(a2) - 2, end(r), lti);\nconst l = res[0];\nconst l2 = res[1];\nconst o = res[2];\n\nprint(r);"]; }
 
 function __combine_copy_backward_n_references() { return ["Elements of Programming, ch. 9, p. 161, exercise 9.5 (companion implementation in eop.h)."]; }
 
 function __combine_copy_backward_n_usage() {
     const lti = relation(function lt(x, y) { return source(x) < source(y); });
-    const a1 = sequence(array_random(8), "a1");
-    const a2 = sequence(array_random(5), "a2");
+    const a1 = sequence(array_random(8));
+    const a2 = sequence(array_random(5));
     insertion_sort(begin(a1), end(a1), gt);
     insertion_sort(begin(a2), end(a2), gt);
-    const r = sequence(array_all_equal(size(a1) + size(a2), '-'), "r");
+    const r = sequence(array_all_equal(size(a1) + size(a2), '-'));
     const res = combine_copy_backward_n(end(a1), size(a1) - 3, end(a2), size(a2) - 2, end(r), lti);
     const l = res[0];
     const l2 = res[1];
@@ -437,17 +437,17 @@ function __combine_copy_backward_n_usage() {
 function __combine_copy_backward_n_attributes() {
 }
 
-function __combine_copy_n_typescript() { return ["function combine_copy_n<T, U>(f: Iter<T>, n: number, f2: Iter<T>, n2: number, o: Iter<U>, r: Relation<Iter<T>>) {\n    while (n != 0 && n2 != 0) {\n        if (r(f2, f)) {\n            sink(o, source(f2));\n            f2 = successor(f2);\n            --n2;\n        } else {\n            sink(o, source(f));\n            f = successor(f);\n            --n;\n        }\n        o = successor(o);\n    }\n    const res0 = copy_n(f, n, o);\n    o = res0[1];\n    const res1 = copy_n(f2, n2, o);\n    o = res1[1];\n    return [res0[0], res1[0], o];\n}","const lti = relation<Iter<number>>(function lt(x, y) {return source(x) < source(y);});\n\nconst a1 = sequence(array_random(8), \"a1\");\nconst a2 = sequence(array_random(5), \"a2\");\ninsertion_sort(begin(a1), end(a1), lt);\ninsertion_sort(begin(a2), end(a2), lt);\n\nconst r = sequence(array_all_equal(size(a1) + size(a2), '-'), \"r\");\n\nconst res = combine_copy_n(begin(a1), size(a1) - 3, begin(a2), size(a2) - 2, begin(r), lti);\nconst f = res[0];\nconst f2 = res[1];\nconst o = res[2];\n\nprint(r);"]; }
+function __combine_copy_n_typescript() { return ["function combine_copy_n<T, U>(f: Iter<T>, n: number, f2: Iter<T>, n2: number, o: Iter<U>, r: Relation<Iter<T>>) {\n    while (n != 0 && n2 != 0) {\n        if (r(f2, f)) {\n            sink(o, source(f2));\n            f2 = successor(f2);\n            --n2;\n        } else {\n            sink(o, source(f));\n            f = successor(f);\n            --n;\n        }\n        o = successor(o);\n    }\n    const res0 = copy_n(f, n, o);\n    o = res0[1];\n    const res1 = copy_n(f2, n2, o);\n    o = res1[1];\n    return [res0[0], res1[0], o];\n}","const lti = relation<Iter<number>>(function lt(x, y) {return source(x) < source(y);});\n\nconst a1 = sequence(array_random(8));\nconst a2 = sequence(array_random(5));\ninsertion_sort(begin(a1), end(a1), lt);\ninsertion_sort(begin(a2), end(a2), lt);\n\nconst r = sequence(array_all_equal(size(a1) + size(a2), '-'));\n\nconst res = combine_copy_n(begin(a1), size(a1) - 3, begin(a2), size(a2) - 2, begin(r), lti);\nconst f = res[0];\nconst f2 = res[1];\nconst o = res[2];\n\nprint(r);"]; }
 
 function __combine_copy_n_references() { return ["Elements of Programming, ch. 9, p. 161, exercise 9.5 (companion implementation in eop.h)."]; }
 
 function __combine_copy_n_usage() {
     const lti = relation(function lt(x, y) { return source(x) < source(y); });
-    const a1 = sequence(array_random(8), "a1");
-    const a2 = sequence(array_random(5), "a2");
+    const a1 = sequence(array_random(8));
+    const a2 = sequence(array_random(5));
     insertion_sort(begin(a1), end(a1), lt);
     insertion_sort(begin(a2), end(a2), lt);
-    const r = sequence(array_all_equal(size(a1) + size(a2), '-'), "r");
+    const r = sequence(array_all_equal(size(a1) + size(a2), '-'));
     const res = combine_copy_n(begin(a1), size(a1) - 3, begin(a2), size(a2) - 2, begin(r), lti);
     const f = res[0];
     const f2 = res[1];
@@ -458,14 +458,14 @@ function __combine_copy_n_usage() {
 function __combine_copy_n_attributes() {
 }
 
-function __copy_if_typescript() { return ["function copy_if<T, U>(f: Iter<T>, l: Iter<T>, o: Iter<U>, p: Predicate<T>) {\n    const ps = predicate_source(p);\n    return copy_select(f, l, o, ps);\n}","const even = predicate(x => (x & 1) === 0);\nconst s = sequence(array_random(), \"s\", even);\nconst z = sequence(array_all_equal(size(s), \"-\"), \"z\");\n\ncopy_if(begin(s), end(s), begin(z), even);\n\nprint(z);"]; }
+function __copy_if_typescript() { return ["function copy_if<T, U>(f: Iter<T>, l: Iter<T>, o: Iter<U>, p: Predicate<T>) {\n    const ps = predicate_source(p);\n    return copy_select(f, l, o, ps);\n}","const even = predicate(x => (x & 1) === 0);\nconst s = sequence(array_random(), \"s\", even);\nconst z = sequence(array_all_equal(size(s), \"-\"));\n\ncopy_if(begin(s), end(s), begin(z), even);\n\nprint(z);"]; }
 
 function __copy_if_references() { return ["Elements of Programming, ch. 9, p. 156."]; }
 
 function __copy_if_usage() {
     const even = predicate(x => (x & 1) === 0);
     const s = sequence(array_random(), "s", even);
-    const z = sequence(array_all_equal(size(s), "-"), "z");
+    const z = sequence(array_all_equal(size(s), "-"));
     copy_if(begin(s), end(s), begin(z), even);
     print(z);
 }
@@ -473,14 +473,14 @@ function __copy_if_usage() {
 function __copy_if_attributes() {
 }
 
-function __copy_if_n_typescript() { return ["function copy_if_n<T, U>(f: Iter<T>, n: number, o: Iter<U>, p: Predicate<T>) {\n    const ps = predicate_source(p);\n    return copy_select_n(f, n, o, ps);\n}","const even = predicate(x => (x & 1) === 0);\nconst s = sequence(array_random(), \"s\", even);\nconst z = sequence(array_all_equal(size(s), \"-\"), \"z\");\n\ncopy_if_n(begin(s), size(s), begin(z), even);\n\nprint(z);"]; }
+function __copy_if_n_typescript() { return ["function copy_if_n<T, U>(f: Iter<T>, n: number, o: Iter<U>, p: Predicate<T>) {\n    const ps = predicate_source(p);\n    return copy_select_n(f, n, o, ps);\n}","const even = predicate(x => (x & 1) === 0);\nconst s = sequence(array_random(), \"s\", even);\nconst z = sequence(array_all_equal(size(s), \"-\"));\n\ncopy_if_n(begin(s), size(s), begin(z), even);\n\nprint(z);"]; }
 
 function __copy_if_n_references() { return ["Elements of Programming, ch. 9, p. 156 (counted variant of copy_if)."]; }
 
 function __copy_if_n_usage() {
     const even = predicate(x => (x & 1) === 0);
     const s = sequence(array_random(), "s", even);
-    const z = sequence(array_all_equal(size(s), "-"), "z");
+    const z = sequence(array_all_equal(size(s), "-"));
     copy_if_n(begin(s), size(s), begin(z), even);
     print(z);
 }
@@ -488,14 +488,14 @@ function __copy_if_n_usage() {
 function __copy_if_n_attributes() {
 }
 
-function __copy_select_typescript() { return ["function copy_select<T, U>(f: Iter<T>, l: Iter<T>, o: Iter<U>, p: Predicate<Iter<T>>) {\n    while ( ! equal(f, l)) {\n        if (p(f)) {\n            sink(o, source(f));\n            o = successor(o);\n        }\n        f = successor(f);\n    }\n    return o;\n}","const even = predicate<Iter<number>>(function even(x) { return (source(x) & 1) == 0; });\nconst s = sequence(array_random(), \"s\");\nconst z = sequence(array_all_equal(size(s), \"-\"), \"z\");\n\ncopy_select(begin(s), end(s), begin(z), even);\n\nprint(z);"]; }
+function __copy_select_typescript() { return ["function copy_select<T, U>(f: Iter<T>, l: Iter<T>, o: Iter<U>, p: Predicate<Iter<T>>) {\n    while ( ! equal(f, l)) {\n        if (p(f)) {\n            sink(o, source(f));\n            o = successor(o);\n        }\n        f = successor(f);\n    }\n    return o;\n}","const even = predicate<Iter<number>>(function even(x) { return (source(x) & 1) == 0; });\nconst s = sequence(array_random());\nconst z = sequence(array_all_equal(size(s), \"-\"));\n\ncopy_select(begin(s), end(s), begin(z), even);\n\nprint(z);"]; }
 
 function __copy_select_references() { return ["Elements of Programming, ch. 9, pp. 155–156."]; }
 
 function __copy_select_usage() {
     const even = predicate(function even(x) { return (source(x) & 1) == 0; });
-    const s = sequence(array_random(), "s");
-    const z = sequence(array_all_equal(size(s), "-"), "z");
+    const s = sequence(array_random());
+    const z = sequence(array_all_equal(size(s), "-"));
     copy_select(begin(s), end(s), begin(z), even);
     print(z);
 }
@@ -503,14 +503,14 @@ function __copy_select_usage() {
 function __copy_select_attributes() {
 }
 
-function __copy_select_n_typescript() { return ["function copy_select_n<T, U>(f: Iter<T>, n: number, o: Iter<U>, p: Predicate<Iter<T>>): [Iter<T>, Iter<U>] {\n    while (n != 0) {\n        if (p(f)) {\n            sink(o, source(f));\n            o = successor(o);\n        }\n        f = successor(f);\n        --n;\n    }\n    return [f, o];\n}","const even = predicate<Iter<number>>(function even(x) { return (source(x) & 1) == 0; });\nconst s = sequence(array_random(), \"s\");\nconst z = sequence(array_all_equal(size(s), \"-\"), \"z\");\n\ncopy_select_n(begin(s), size(s), begin(z), even);\n\nprint(z);"]; }
+function __copy_select_n_typescript() { return ["function copy_select_n<T, U>(f: Iter<T>, n: number, o: Iter<U>, p: Predicate<Iter<T>>): [Iter<T>, Iter<U>] {\n    while (n != 0) {\n        if (p(f)) {\n            sink(o, source(f));\n            o = successor(o);\n        }\n        f = successor(f);\n        --n;\n    }\n    return [f, o];\n}","const even = predicate<Iter<number>>(function even(x) { return (source(x) & 1) == 0; });\nconst s = sequence(array_random());\nconst z = sequence(array_all_equal(size(s), \"-\"));\n\ncopy_select_n(begin(s), size(s), begin(z), even);\n\nprint(z);"]; }
 
 function __copy_select_n_references() { return ["Elements of Programming, ch. 9, pp. 155–156 (counted variant of copy_select)."]; }
 
 function __copy_select_n_usage() {
     const even = predicate(function even(x) { return (source(x) & 1) == 0; });
-    const s = sequence(array_random(), "s");
-    const z = sequence(array_all_equal(size(s), "-"), "z");
+    const s = sequence(array_random());
+    const z = sequence(array_all_equal(size(s), "-"));
     copy_select_n(begin(s), size(s), begin(z), even);
     print(z);
 }
@@ -518,16 +518,16 @@ function __copy_select_n_usage() {
 function __copy_select_n_attributes() {
 }
 
-function __merge_copy_typescript() { return ["function merge_copy<T, U>(f: Iter<T>, l: Iter<T>, f2: Iter<T>, l2: Iter<T>, o: Iter<U>, r: Relation<T>) {\n    const rs = relation_source(r);\n    return combine_copy(f, l, f2, l2, o, rs);\n}","const a1 = sequence(array_random(8), \"a1\");\nconst a2 = sequence(array_random(5), \"a2\");\ninsertion_sort(begin(a1), end(a1), lt);\ninsertion_sort(begin(a2), end(a2), lt);\n\nconst r = sequence(array_all_equal(size(a1) + size(a2), '-'), \"r\");\n\nmerge_copy(begin(a1), end(a1), begin(a2), end(a2), begin(r), lt);\n\nprint(r);"]; }
+function __merge_copy_typescript() { return ["function merge_copy<T, U>(f: Iter<T>, l: Iter<T>, f2: Iter<T>, l2: Iter<T>, o: Iter<U>, r: Relation<T>) {\n    const rs = relation_source(r);\n    return combine_copy(f, l, f2, l2, o, rs);\n}","const a1 = sequence(array_random(8));\nconst a2 = sequence(array_random(5));\ninsertion_sort(begin(a1), end(a1), lt);\ninsertion_sort(begin(a2), end(a2), lt);\n\nconst r = sequence(array_all_equal(size(a1) + size(a2), '-'));\n\nmerge_copy(begin(a1), end(a1), begin(a2), end(a2), begin(r), lt);\n\nprint(r);"]; }
 
 function __merge_copy_references() { return ["Elements of Programming, ch. 9, p. 161."]; }
 
 function __merge_copy_usage() {
-    const a1 = sequence(array_random(8), "a1");
-    const a2 = sequence(array_random(5), "a2");
+    const a1 = sequence(array_random(8));
+    const a2 = sequence(array_random(5));
     insertion_sort(begin(a1), end(a1), lt);
     insertion_sort(begin(a2), end(a2), lt);
-    const r = sequence(array_all_equal(size(a1) + size(a2), '-'), "r");
+    const r = sequence(array_all_equal(size(a1) + size(a2), '-'));
     merge_copy(begin(a1), end(a1), begin(a2), end(a2), begin(r), lt);
     print(r);
 }
@@ -535,16 +535,16 @@ function __merge_copy_usage() {
 function __merge_copy_attributes() {
 }
 
-function __merge_copy_backward_typescript() { return ["function merge_copy_backward<T, U>(f: Iter<T>, l: Iter<T>, f2: Iter<T>, l2: Iter<T>, o: Iter<U>, r: Relation<T>) {\n    const rs = relation_source(r);\n    return combine_copy_backward(f, l, f2, l2, o, rs);\n}","const a1 = sequence(array_random(8), \"a1\");\nconst a2 = sequence(array_random(5), \"a2\");\ninsertion_sort(begin(a1), end(a1), gt);\ninsertion_sort(begin(a2), end(a2), gt);\n\nconst r = sequence(array_all_equal(size(a1) + size(a2), '-'), \"r\");\n\nmerge_copy_backward(begin(a1), end(a1), begin(a2), end(a2), end(r), lt);\n\nprint(r);"]; }
+function __merge_copy_backward_typescript() { return ["function merge_copy_backward<T, U>(f: Iter<T>, l: Iter<T>, f2: Iter<T>, l2: Iter<T>, o: Iter<U>, r: Relation<T>) {\n    const rs = relation_source(r);\n    return combine_copy_backward(f, l, f2, l2, o, rs);\n}","const a1 = sequence(array_random(8));\nconst a2 = sequence(array_random(5));\ninsertion_sort(begin(a1), end(a1), gt);\ninsertion_sort(begin(a2), end(a2), gt);\n\nconst r = sequence(array_all_equal(size(a1) + size(a2), '-'));\n\nmerge_copy_backward(begin(a1), end(a1), begin(a2), end(a2), end(r), lt);\n\nprint(r);"]; }
 
 function __merge_copy_backward_references() { return ["Elements of Programming, ch. 9, p. 161."]; }
 
 function __merge_copy_backward_usage() {
-    const a1 = sequence(array_random(8), "a1");
-    const a2 = sequence(array_random(5), "a2");
+    const a1 = sequence(array_random(8));
+    const a2 = sequence(array_random(5));
     insertion_sort(begin(a1), end(a1), gt);
     insertion_sort(begin(a2), end(a2), gt);
-    const r = sequence(array_all_equal(size(a1) + size(a2), '-'), "r");
+    const r = sequence(array_all_equal(size(a1) + size(a2), '-'));
     merge_copy_backward(begin(a1), end(a1), begin(a2), end(a2), end(r), lt);
     print(r);
 }
@@ -552,15 +552,15 @@ function __merge_copy_backward_usage() {
 function __merge_copy_backward_attributes() {
 }
 
-function __partition_copy_typescript() { return ["function partition_copy<T, U>(f: Iter<T>, l: Iter<T>, u: Iter<U>, t: Iter<U>, p: Predicate<T>) {\n    const ps = predicate_source(p);\n    return split_copy(f, l, u, t, ps);\n}","const pred = predicate(x => (x & 1) === 0);\nconst s = sequence(array_random(), \"s\", pred);\nconst even = sequence(array_all_equal(size(s), \"-\"), \"even\");\nconst odd = sequence(array_all_equal(size(s), \"-\"), \"odd\");\n\npartition_copy(begin(s), end(s), begin(odd), begin(even), pred);\n\nprint(even);\nprint(odd);"]; }
+function __partition_copy_typescript() { return ["function partition_copy<T, U>(f: Iter<T>, l: Iter<T>, u: Iter<U>, t: Iter<U>, p: Predicate<T>) {\n    const ps = predicate_source(p);\n    return split_copy(f, l, u, t, ps);\n}","const pred = predicate(x => (x & 1) === 0);\nconst s = sequence(array_random(), \"s\", pred);\nconst even = sequence(array_all_equal(size(s), \"-\"));\nconst odd = sequence(array_all_equal(size(s), \"-\"));\n\npartition_copy(begin(s), end(s), begin(odd), begin(even), pred);\n\nprint(even);\nprint(odd);"]; }
 
 function __partition_copy_references() { return ["Elements of Programming, ch. 9, p. 158."]; }
 
 function __partition_copy_usage() {
     const pred = predicate(x => (x & 1) === 0);
     const s = sequence(array_random(), "s", pred);
-    const even = sequence(array_all_equal(size(s), "-"), "even");
-    const odd = sequence(array_all_equal(size(s), "-"), "odd");
+    const even = sequence(array_all_equal(size(s), "-"));
+    const odd = sequence(array_all_equal(size(s), "-"));
     partition_copy(begin(s), end(s), begin(odd), begin(even), pred);
     print(even);
     print(odd);
@@ -569,15 +569,15 @@ function __partition_copy_usage() {
 function __partition_copy_attributes() {
 }
 
-function __partition_copy_n_typescript() { return ["function partition_copy_n<T, U>(f: Iter<T>, n: number, u: Iter<U>, t: Iter<U>, p: Predicate<T>) {\n    const ps = predicate_source(p);\n    return split_copy_n(f, n, u, t, ps);\n}","const pred = predicate(x => (x & 1) === 0);\nconst s = sequence(array_random(), \"s\", pred);\nconst even = sequence(array_all_equal(size(s), \"-\"), \"even\");\nconst odd = sequence(array_all_equal(size(s), \"-\"), \"odd\");\n\npartition_copy_n(begin(s), size(s), begin(odd), begin(even), pred);\n\nprint(even);\nprint(odd);"]; }
+function __partition_copy_n_typescript() { return ["function partition_copy_n<T, U>(f: Iter<T>, n: number, u: Iter<U>, t: Iter<U>, p: Predicate<T>) {\n    const ps = predicate_source(p);\n    return split_copy_n(f, n, u, t, ps);\n}","const pred = predicate(x => (x & 1) === 0);\nconst s = sequence(array_random(), \"s\", pred);\nconst even = sequence(array_all_equal(size(s), \"-\"));\nconst odd = sequence(array_all_equal(size(s), \"-\"));\n\npartition_copy_n(begin(s), size(s), begin(odd), begin(even), pred);\n\nprint(even);\nprint(odd);"]; }
 
 function __partition_copy_n_references() { return ["Elements of Programming, ch. 9, p. 158 (counted variant in eop.h)."]; }
 
 function __partition_copy_n_usage() {
     const pred = predicate(x => (x & 1) === 0);
     const s = sequence(array_random(), "s", pred);
-    const even = sequence(array_all_equal(size(s), "-"), "even");
-    const odd = sequence(array_all_equal(size(s), "-"), "odd");
+    const even = sequence(array_all_equal(size(s), "-"));
+    const odd = sequence(array_all_equal(size(s), "-"));
     partition_copy_n(begin(s), size(s), begin(odd), begin(even), pred);
     print(even);
     print(odd);
@@ -586,15 +586,15 @@ function __partition_copy_n_usage() {
 function __partition_copy_n_attributes() {
 }
 
-function __split_copy_typescript() { return ["function split_copy<T, U>(f: Iter<T>, l: Iter<T>, u: Iter<U>, t: Iter<U>, p: Predicate<Iter<T>>) {\n    while ( ! equal(f, l)) {\n        if (p(f)) {\n            sink(t, source(f));\n            t = successor(t);\n        } else {\n            sink(u, source(f));\n            u = successor(u);\n        }\n        f = successor(f);\n    }\n    return [u, t];\n}","const pred = predicate<Iter<number>>(function even(x) { return (source(x) & 1) == 0; });\nconst s = sequence(array_random(), \"s\");\nconst even = sequence(array_all_equal(size(s), \"-\"), \"even\");\nconst odd = sequence(array_all_equal(size(s), \"-\"), \"odd\");\n\nsplit_copy(begin(s), end(s), begin(odd), begin(even), pred);\n\nprint(even);\nprint(odd);"]; }
+function __split_copy_typescript() { return ["function split_copy<T, U>(f: Iter<T>, l: Iter<T>, u: Iter<U>, t: Iter<U>, p: Predicate<Iter<T>>) {\n    while ( ! equal(f, l)) {\n        if (p(f)) {\n            sink(t, source(f));\n            t = successor(t);\n        } else {\n            sink(u, source(f));\n            u = successor(u);\n        }\n        f = successor(f);\n    }\n    return [u, t];\n}","const pred = predicate<Iter<number>>(function even(x) { return (source(x) & 1) == 0; });\nconst s = sequence(array_random());\nconst even = sequence(array_all_equal(size(s), \"-\"));\nconst odd = sequence(array_all_equal(size(s), \"-\"));\n\nsplit_copy(begin(s), end(s), begin(odd), begin(even), pred);\n\nprint(even);\nprint(odd);"]; }
 
 function __split_copy_references() { return ["Elements of Programming, ch. 9, pp. 156–157."]; }
 
 function __split_copy_usage() {
     const pred = predicate(function even(x) { return (source(x) & 1) == 0; });
-    const s = sequence(array_random(), "s");
-    const even = sequence(array_all_equal(size(s), "-"), "even");
-    const odd = sequence(array_all_equal(size(s), "-"), "odd");
+    const s = sequence(array_random());
+    const even = sequence(array_all_equal(size(s), "-"));
+    const odd = sequence(array_all_equal(size(s), "-"));
     split_copy(begin(s), end(s), begin(odd), begin(even), pred);
     print(even);
     print(odd);
@@ -603,15 +603,15 @@ function __split_copy_usage() {
 function __split_copy_attributes() {
 }
 
-function __split_copy_n_typescript() { return ["function split_copy_n<T, U>(f: Iter<T>, n: number, u: Iter<U>, t: Iter<U>, p: Predicate<Iter<T>>) {\n    while (n != 0) {\n        if (p(f)) {\n            sink(t, source(f));\n            t = successor(t);\n        } else {\n            sink(u, source(f));\n            u = successor(u);\n        }\n        f = successor(f);\n        --n;\n    }\n    return [f, u, t];\n}","const pred = predicate<Iter<number>>(function even(x) { return (source(x) & 1) == 0; });\nconst s = sequence(array_random(), \"s\");\nconst even = sequence(array_all_equal(size(s), \"-\"), \"even\");\nconst odd = sequence(array_all_equal(size(s), \"-\"), \"odd\");\n\nsplit_copy_n(begin(s), size(s), begin(odd), begin(even), pred);\n\nprint(even);\nprint(odd);"]; }
+function __split_copy_n_typescript() { return ["function split_copy_n<T, U>(f: Iter<T>, n: number, u: Iter<U>, t: Iter<U>, p: Predicate<Iter<T>>) {\n    while (n != 0) {\n        if (p(f)) {\n            sink(t, source(f));\n            t = successor(t);\n        } else {\n            sink(u, source(f));\n            u = successor(u);\n        }\n        f = successor(f);\n        --n;\n    }\n    return [f, u, t];\n}","const pred = predicate<Iter<number>>(function even(x) { return (source(x) & 1) == 0; });\nconst s = sequence(array_random());\nconst even = sequence(array_all_equal(size(s), \"-\"));\nconst odd = sequence(array_all_equal(size(s), \"-\"));\n\nsplit_copy_n(begin(s), size(s), begin(odd), begin(even), pred);\n\nprint(even);\nprint(odd);"]; }
 
 function __split_copy_n_references() { return ["Elements of Programming, ch. 9, pp. 156–157 (counted variant in eop.h)."]; }
 
 function __split_copy_n_usage() {
     const pred = predicate(function even(x) { return (source(x) & 1) == 0; });
-    const s = sequence(array_random(), "s");
-    const even = sequence(array_all_equal(size(s), "-"), "even");
-    const odd = sequence(array_all_equal(size(s), "-"), "odd");
+    const s = sequence(array_random());
+    const even = sequence(array_all_equal(size(s), "-"));
+    const odd = sequence(array_all_equal(size(s), "-"));
     split_copy_n(begin(s), size(s), begin(odd), begin(even), pred);
     print(even);
     print(odd);
@@ -1613,12 +1613,12 @@ function __remainder_slow_usage() {
 function __remainder_slow_attributes() {
 }
 
-function __mark_sieve_typescript() { return ["function mark_sieve(f: Iter<number | string>, l: Iter<number | string>, factor: number) {\n    // precondition: ! equal(f, l)\n    sink(f, 0);\n    while (distance(f, l) > factor) {\n        f = successor(f, factor);\n        sink(f, 0);\n    }\n}","const v = sequence(array_all_equal(20, '0'), \"v\");\nmark_sieve(begin(v), end(v), 3);\nprint_sieve(begin(v), size(v));"]; }
+function __mark_sieve_typescript() { return ["function mark_sieve(f: Iter<number | string>, l: Iter<number | string>, factor: number) {\n    // precondition: ! equal(f, l)\n    sink(f, 0);\n    while (distance(f, l) > factor) {\n        f = successor(f, factor);\n        sink(f, 0);\n    }\n}","const v = sequence(array_all_equal(20, '0'));\nmark_sieve(begin(v), end(v), 3);\nprint_sieve(begin(v), size(v));"]; }
 
 function __mark_sieve_references() { return ["From Mathematics to Generic Programming, ch. 3, p. 24 (ch03.h)."]; }
 
 function __mark_sieve_usage() {
-    const v = sequence(array_all_equal(20, '0'), "v");
+    const v = sequence(array_all_equal(20, '0'));
     mark_sieve(begin(v), end(v), 3);
     print_sieve(begin(v), size(v));
 }
@@ -1626,10 +1626,10 @@ function __mark_sieve_usage() {
 function __mark_sieve_attributes() {
 }
 
-function __mark_sieve_n_typescript() { return ["function mark_sieve_n(f: Iter<number | string>, n: number, factor: number) {\n    // precondition: n > 0\n    sink(f, 0);\n    while (n > factor) {\n        f = successor(f, factor);\n        n -= factor;\n        sink(f, 0);\n    }\n}","const v = sequence(array_all_equal(20, '0'), \"v\");\nmark_sieve_n(begin(v), size(v), 3);\nprint_sieve(begin(v), size(v));"]; }
+function __mark_sieve_n_typescript() { return ["function mark_sieve_n(f: Iter<number | string>, n: number, factor: number) {\n    // precondition: n > 0\n    sink(f, 0);\n    while (n > factor) {\n        f = successor(f, factor);\n        n -= factor;\n        sink(f, 0);\n    }\n}","const v = sequence(array_all_equal(20, '0'));\nmark_sieve_n(begin(v), size(v), 3);\nprint_sieve(begin(v), size(v));"]; }
 
 function __mark_sieve_n_usage() {
-    const v = sequence(array_all_equal(20, '0'), "v");
+    const v = sequence(array_all_equal(20, '0'));
     mark_sieve_n(begin(v), size(v), 3);
     print_sieve(begin(v), size(v));
 }
@@ -1637,22 +1637,22 @@ function __mark_sieve_n_usage() {
 function __mark_sieve_n_attributes() {
 }
 
-function __print_sieve_typescript() { return ["function print_sieve(f: Iter<number | string>, n: number) {\n    let i = 0;\n    let out = \"2\";\n    while (i < n) {\n        if (source(f)) {\n            out += \" \" + (2 * i + 3);\n        }\n        f = successor(f);\n        ++i;\n    }\n    print(out);\n}","const v = sequence([1, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1, 0, 0, 1, 1, 0, 0, 1, 0, 1], \"v\");\nprint_sieve(begin(v), size(v));"]; }
+function __print_sieve_typescript() { return ["function print_sieve(f: Iter<number | string>, n: number) {\n    let i = 0;\n    let out = \"2\";\n    while (i < n) {\n        if (source(f)) {\n            out += \" \" + (2 * i + 3);\n        }\n        f = successor(f);\n        ++i;\n    }\n    print(out);\n}","const v = sequence([1, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1, 0, 0, 1, 1, 0, 0, 1, 0, 1]);\nprint_sieve(begin(v), size(v));"]; }
 
 function __print_sieve_usage() {
-    const v = sequence([1, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1, 0, 0, 1, 1, 0, 0, 1, 0, 1], "v");
+    const v = sequence([1, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1, 0, 0, 1, 1, 0, 0, 1, 0, 1]);
     print_sieve(begin(v), size(v));
 }
 
 function __print_sieve_attributes() {
 }
 
-function __sift_typescript() { return ["function sift(f: Iter<number | string>, n: number) {\n    fill_n(f, n, 1);\n    let i = 0;\n    let index_square = 3;\n    let factor = 3;\n    let current = f;\n    const last = successor(f, n);\n    while (index_square < n) {\n        // invariant: index_square = 2i^2 + 6i + 3\n\n        if (source(current)) {\n            mark_sieve(successor(f, index_square), last, factor);\n        }\n        ++i;\n        current = successor(current);\n        factor = i + i + 3;\n        index_square = 2 * i * (i + 3) + 3;\n    }\n}","const v = sequence(array_all_equal(20, '0'), \"v\");\nsift(begin(v), size(v));\nprint_sieve(begin(v), size(v));"]; }
+function __sift_typescript() { return ["function sift(f: Iter<number | string>, n: number) {\n    fill_n(f, n, 1);\n    let i = 0;\n    let index_square = 3;\n    let factor = 3;\n    let current = f;\n    const last = successor(f, n);\n    while (index_square < n) {\n        // invariant: index_square = 2i^2 + 6i + 3\n\n        if (source(current)) {\n            mark_sieve(successor(f, index_square), last, factor);\n        }\n        ++i;\n        current = successor(current);\n        factor = i + i + 3;\n        index_square = 2 * i * (i + 3) + 3;\n    }\n}","const v = sequence(array_all_equal(20, '0'));\nsift(begin(v), size(v));\nprint_sieve(begin(v), size(v));"]; }
 
 function __sift_references() { return ["From Mathematics to Generic Programming, ch. 3, p. 27 (ch03.h)."]; }
 
 function __sift_usage() {
-    const v = sequence(array_all_equal(20, '0'), "v");
+    const v = sequence(array_all_equal(20, '0'));
     sift(begin(v), size(v));
     print_sieve(begin(v), size(v));
 }
@@ -1660,7 +1660,7 @@ function __sift_usage() {
 function __sift_attributes() {
 }
 
-function __sift0_typescript() { return ["function sift0(f: Iter<number | string>, n: number) {\n    fill_n(f, n, 1);\n    let i = 0;\n    let index_square = 3;\n    let current = f;\n    while (index_square < n) {\n        // invariant: index_square = 2i^2 + 6i + 3\n\n        if (source(current)) {            // if current candidate is prime\n            mark_sieve(successor(f, index_square),\n                       successor(f, n),\n                       i + i + 3);\n        }\n        ++i;\n        current = successor(current);\n        index_square = 2 * i * (i + 3) + 3;\n    }\n}","function mark_sieve(f: Iter<number | string>, l: Iter<number | string>, factor: number) {\n    // precondition: ! equal(f, l)\n\n    sink(f, 0);\n    while (distance(f, l) > factor) {\n        f = successor(f, factor);\n        sink(f, 0);\n    }\n}\n\nfunction print_sieve(f: Iter<number | string>, n: number) {\n    let i = 0;\n    let out = \"2\";\n    while (i < n) {\n        if (source(f)) {\n            out += \" \" + (2 * i + 3);\n        }\n        f = successor(f);\n        ++i;\n    }\n    print(out);\n}\n\nconst v = sequence(array_all_equal(20, '0'), \"v\");\nsift0(begin(v), size(v));\nprint_sieve(begin(v), size(v));"]; }
+function __sift0_typescript() { return ["function sift0(f: Iter<number | string>, n: number) {\n    fill_n(f, n, 1);\n    let i = 0;\n    let index_square = 3;\n    let current = f;\n    while (index_square < n) {\n        // invariant: index_square = 2i^2 + 6i + 3\n\n        if (source(current)) {            // if current candidate is prime\n            mark_sieve(successor(f, index_square),\n                       successor(f, n),\n                       i + i + 3);\n        }\n        ++i;\n        current = successor(current);\n        index_square = 2 * i * (i + 3) + 3;\n    }\n}","function mark_sieve(f: Iter<number | string>, l: Iter<number | string>, factor: number) {\n    // precondition: ! equal(f, l)\n\n    sink(f, 0);\n    while (distance(f, l) > factor) {\n        f = successor(f, factor);\n        sink(f, 0);\n    }\n}\n\nfunction print_sieve(f: Iter<number | string>, n: number) {\n    let i = 0;\n    let out = \"2\";\n    while (i < n) {\n        if (source(f)) {\n            out += \" \" + (2 * i + 3);\n        }\n        f = successor(f);\n        ++i;\n    }\n    print(out);\n}\n\nconst v = sequence(array_all_equal(20, '0'));\nsift0(begin(v), size(v));\nprint_sieve(begin(v), size(v));"]; }
 
 function __sift0_references() { return ["From Mathematics to Generic Programming, ch. 3, p. 25 (ch03.h)."]; }
 
@@ -1685,7 +1685,7 @@ function __sift0_usage() {
         }
         print(out);
     }
-    const v = sequence(array_all_equal(20, '0'), "v");
+    const v = sequence(array_all_equal(20, '0'));
     sift0(begin(v), size(v));
     print_sieve(begin(v), size(v));
 }
@@ -1693,7 +1693,7 @@ function __sift0_usage() {
 function __sift0_attributes() {
 }
 
-function __sift1_typescript() { return ["function sift1(f: Iter<number | string>, n: number) {\n    fill_n(f, n, 1);\n    let i = 0;\n    let index_square = 3;\n    let factor = 3;\n    let current = f;\n    const last = successor(f, n);\n    while (index_square < n) {\n        // invariant: index_square = 2i^2 + 6i + 3\n\n        if (source(current)) {            // if current candidate is prime\n            mark_sieve(successor(f, index_square),\n                       last,\n                       factor);\n        }\n        ++i;\n        current = successor(current);\n        factor = i + i + 3;\n        index_square = 2 * i * (i + 3) + 3;\n    }\n}","function mark_sieve(f: Iter<number | string>, l: Iter<number | string>, factor: number) {\n    // precondition: ! equal(f, l)\n\n    sink(f, 0);\n    while (distance(f, l) > factor) {\n        f = successor(f, factor);\n        sink(f, 0);\n    }\n}\n\nfunction print_sieve(f: Iter<number | string>, n: number) {\n    let i = 0;\n    let out = \"2\";\n    while (i < n) {\n        if (source(f)) {\n            out += \" \" + (2 * i + 3);\n        }\n        f = successor(f);\n        ++i;\n    }\n    print(out);\n}\n\nconst v = sequence(array_all_equal(20, '0'), \"v\");\nsift1(begin(v), size(v));\nprint_sieve(begin(v), size(v));"]; }
+function __sift1_typescript() { return ["function sift1(f: Iter<number | string>, n: number) {\n    fill_n(f, n, 1);\n    let i = 0;\n    let index_square = 3;\n    let factor = 3;\n    let current = f;\n    const last = successor(f, n);\n    while (index_square < n) {\n        // invariant: index_square = 2i^2 + 6i + 3\n\n        if (source(current)) {            // if current candidate is prime\n            mark_sieve(successor(f, index_square),\n                       last,\n                       factor);\n        }\n        ++i;\n        current = successor(current);\n        factor = i + i + 3;\n        index_square = 2 * i * (i + 3) + 3;\n    }\n}","function mark_sieve(f: Iter<number | string>, l: Iter<number | string>, factor: number) {\n    // precondition: ! equal(f, l)\n\n    sink(f, 0);\n    while (distance(f, l) > factor) {\n        f = successor(f, factor);\n        sink(f, 0);\n    }\n}\n\nfunction print_sieve(f: Iter<number | string>, n: number) {\n    let i = 0;\n    let out = \"2\";\n    while (i < n) {\n        if (source(f)) {\n            out += \" \" + (2 * i + 3);\n        }\n        f = successor(f);\n        ++i;\n    }\n    print(out);\n}\n\nconst v = sequence(array_all_equal(20, '0'));\nsift1(begin(v), size(v));\nprint_sieve(begin(v), size(v));"]; }
 
 function __sift1_references() { return ["From Mathematics to Generic Programming, ch. 3, p. 26 (ch03.h)."]; }
 
@@ -1718,7 +1718,7 @@ function __sift1_usage() {
         }
         print(out);
     }
-    const v = sequence(array_all_equal(20, '0'), "v");
+    const v = sequence(array_all_equal(20, '0'));
     sift1(begin(v), size(v));
     print_sieve(begin(v), size(v));
 }
@@ -1959,7 +1959,7 @@ function __sort3_usage() {
 function __sort3_attributes() {
 }
 
-function __cycle_from_typescript() { return ["function cycle_from<T>(i: Iter<T>, f: IteratorPermutation<T>) {\n    const tmp = source(i);\n    let j = i;\n    let k = f(i);\n    while ( ! equal(k, i)) {\n        sink(j, source(k));\n        j = k;\n        k = f(k);\n    }\n    sink(j, tmp);\n}","function successorMod10(i: Iter<number>) {\n    const f = begin(s);\n    let index = distance(begin(s), i);\n    ++index;\n    index = index % 10;\n    const ret = successor(f, index);\n    return ret;\n}\n\nconst s = sequence(array_random(), \"s\");\ncycle_from(begin(s), successorMod10);\nprint(s);"]; }
+function __cycle_from_typescript() { return ["function cycle_from<T>(i: Iter<T>, f: IteratorPermutation<T>) {\n    const tmp = source(i);\n    let j = i;\n    let k = f(i);\n    while ( ! equal(k, i)) {\n        sink(j, source(k));\n        j = k;\n        k = f(k);\n    }\n    sink(j, tmp);\n}","function successorMod10(i: Iter<number>) {\n    const f = begin(s);\n    let index = distance(begin(s), i);\n    ++index;\n    index = index % 10;\n    const ret = successor(f, index);\n    return ret;\n}\n\nconst s = sequence(array_random());\ncycle_from(begin(s), successorMod10);\nprint(s);"]; }
 
 function __cycle_from_references() { return ["Elements of Programming, ch. 10, p. 171."]; }
 
@@ -1972,7 +1972,7 @@ function __cycle_from_usage() {
         const ret = successor(f, index);
         return ret;
     }
-    const s = sequence(array_random(), "s");
+    const s = sequence(array_random());
     cycle_from(begin(s), successorMod10);
     print(s);
 }
@@ -1980,7 +1980,7 @@ function __cycle_from_usage() {
 function __cycle_from_attributes() {
 }
 
-function __cycle_to_typescript() { return ["function cycle_to<T>(i: Iter<T>, f: IteratorPermutation<T>) {\n    let k = f(i);\n    while ( ! equal(k, i)) {\n        exchange_values(i, k);\n        k = f(k);\n    }\n}","function successorMod10(i: Iter<number>) {\n    const f = begin(s);\n    let index = distance(begin(s), i);\n    ++index;\n    index = index % 10;\n    const ret = successor(f, index);\n    return ret;\n}\n\nconst s = sequence(array_random(), \"s\");\ncycle_to(begin(s), successorMod10);\nprint(s);"]; }
+function __cycle_to_typescript() { return ["function cycle_to<T>(i: Iter<T>, f: IteratorPermutation<T>) {\n    let k = f(i);\n    while ( ! equal(k, i)) {\n        exchange_values(i, k);\n        k = f(k);\n    }\n}","function successorMod10(i: Iter<number>) {\n    const f = begin(s);\n    let index = distance(begin(s), i);\n    ++index;\n    index = index % 10;\n    const ret = successor(f, index);\n    return ret;\n}\n\nconst s = sequence(array_random());\ncycle_to(begin(s), successorMod10);\nprint(s);"]; }
 
 function __cycle_to_references() { return ["Elements of Programming, ch. 10, p. 170."]; }
 
@@ -1993,7 +1993,7 @@ function __cycle_to_usage() {
         const ret = successor(f, index);
         return ret;
     }
-    const s = sequence(array_random(), "s");
+    const s = sequence(array_random());
     cycle_to(begin(s), successorMod10);
     print(s);
 }
@@ -2001,7 +2001,7 @@ function __cycle_to_usage() {
 function __cycle_to_attributes() {
 }
 
-function __cycle_to_2n_1_typescript() { return ["function cycle_to_2n_1<T>(i: Iter<T>, f: IteratorPermutation<T>) {\n    let k = f(i);\n    if (equal(k, i)) return;\n\n    const buf = sequence(array_all_equal(1, \"-\"), \"buf\");\n    let b: Iter<T | string> = begin(buf);\n    let b2: Iter<T | string> = i;\n\n    sink(b, source(k));\n    sink(k, source(b2));\n\n    const [nextBuffer, nextInput] = swap_iters(b, b2);\n    b = nextBuffer;\n    b2 = nextInput;\n\n    k = f(k);\n    while ( ! equal(k, i)) {\n        sink(b, source(k));\n        sink(k, source(b2));\n\n        const [nextBuffer, nextInput] = swap_iters(b, b2);\n        b = nextBuffer;\n        b2 = nextInput;\n\n        k = f(k);\n    }\n    sink(i, source(b2));\n}","function swap_iters<A, B>(a: A, b: B): [B, A] {\n    return [b, a];\n}\n\nfunction successorMod10(i: Iter<number>) {\n    const f = begin(s);\n    let index = distance(begin(s), i);\n    ++index;\n    index = index % 10;\n    const ret = successor(f, index);\n    return ret;\n}\n\nconst s = sequence(array_random(), \"s\");\ncycle_to_2n_1(begin(s), successorMod10);\nprint(s);"]; }
+function __cycle_to_2n_1_typescript() { return ["function cycle_to_2n_1<T>(i: Iter<T>, f: IteratorPermutation<T>) {\n    let k = f(i);\n    if (equal(k, i)) return;\n\n    const buf = sequence(array_all_equal(1, \"-\"), \"buf\");\n    let b: Iter<T | string> = begin(buf);\n    let b2: Iter<T | string> = i;\n\n    sink(b, source(k));\n    sink(k, source(b2));\n\n    const [nextBuffer, nextInput] = swap_iters(b, b2);\n    b = nextBuffer;\n    b2 = nextInput;\n\n    k = f(k);\n    while ( ! equal(k, i)) {\n        sink(b, source(k));\n        sink(k, source(b2));\n\n        const [nextBuffer, nextInput] = swap_iters(b, b2);\n        b = nextBuffer;\n        b2 = nextInput;\n\n        k = f(k);\n    }\n    sink(i, source(b2));\n}","function swap_iters<A, B>(a: A, b: B): [B, A] {\n    return [b, a];\n}\n\nfunction successorMod10(i: Iter<number>) {\n    const f = begin(s);\n    let index = distance(begin(s), i);\n    ++index;\n    index = index % 10;\n    const ret = successor(f, index);\n    return ret;\n}\n\nconst s = sequence(array_random());\ncycle_to_2n_1(begin(s), successorMod10);\nprint(s);"]; }
 
 function __cycle_to_2n_1_references() { return ["Elements of Programming, ch. 10, p. 171, exercise 10.3 (implementation of the exercise)."]; }
 
@@ -2017,7 +2017,7 @@ function __cycle_to_2n_1_usage() {
         const ret = successor(f, index);
         return ret;
     }
-    const s = sequence(array_random(), "s");
+    const s = sequence(array_random());
     cycle_to_2n_1(begin(s), successorMod10);
     print(s);
 }
@@ -2025,7 +2025,7 @@ function __cycle_to_2n_1_usage() {
 function __cycle_to_2n_1_attributes() {
 }
 
-function __cycle_to_recursive_typescript() { return ["function cycle_to_recursive<T>(i: Iter<T>, f: IteratorPermutation<T>) {\n    const k = f(i);\n    if (equal(k, i)) return;\n\n    const buf = sequence(array_all_equal(1, \"-\"), \"buf\");\n    const b = begin(buf);\n    cycle_to_internal(i, k, f, b);\n    sink(k, source(i));\n    sink(i, source(b));\n}","function cycle_to_internal<T>(i: Iter<T>, k: Iter<T>, f: IteratorPermutation<T>, b: Iter<T | string>) {\n    const n = f(k);\n    if (equal(n, i)) {\n        sink(b, source(k));\n        return;\n    }\n    cycle_to_internal(i, n, f, b);\n    sink(n, source(k));\n}\n\nfunction successorMod10(i: Iter<number>) {\n    const f = begin(s);\n    let index = distance(begin(s), i);\n    ++index;\n    index = index % 5;\n    const ret = successor(f, index);\n    return ret;\n}\n\nconst s = sequence(array_random(5), \"s\");\ncycle_to_recursive(begin(s), successorMod10);\nprint(s);"]; }
+function __cycle_to_recursive_typescript() { return ["function cycle_to_recursive<T>(i: Iter<T>, f: IteratorPermutation<T>) {\n    const k = f(i);\n    if (equal(k, i)) return;\n\n    const buf = sequence(array_all_equal(1, \"-\"), \"buf\");\n    const b = begin(buf);\n    cycle_to_internal(i, k, f, b);\n    sink(k, source(i));\n    sink(i, source(b));\n}","function cycle_to_internal<T>(i: Iter<T>, k: Iter<T>, f: IteratorPermutation<T>, b: Iter<T | string>) {\n    const n = f(k);\n    if (equal(n, i)) {\n        sink(b, source(k));\n        return;\n    }\n    cycle_to_internal(i, n, f, b);\n    sink(n, source(k));\n}\n\nfunction successorMod10(i: Iter<number>) {\n    const f = begin(s);\n    let index = distance(begin(s), i);\n    ++index;\n    index = index % 5;\n    const ret = successor(f, index);\n    return ret;\n}\n\nconst s = sequence(array_random(5));\ncycle_to_recursive(begin(s), successorMod10);\nprint(s);"]; }
 
 function __cycle_to_recursive_usage() {
     function cycle_to_internal(i, k, f, b) {
@@ -2045,7 +2045,7 @@ function __cycle_to_recursive_usage() {
         const ret = successor(f, index);
         return ret;
     }
-    const s = sequence(array_random(5), "s");
+    const s = sequence(array_random(5));
     cycle_to_recursive(begin(s), successorMod10);
     print(s);
 }
@@ -2079,14 +2079,14 @@ function __reverse_bidirectional_usage() {
 function __reverse_bidirectional_attributes() {
 }
 
-function __reverse_n_adaptive_typescript() { return ["function reverse_n_adaptive<T, U>(f_i: Iter<T>, n_i: number, f_b: Iter<U>, n_b: number): Iter<T> {\n    if (n_i < 2) return successor(f_i, n_i);\n    if (n_i <= n_b) return reverse_n_with_buffer(f_i, n_i, f_b);\n\n    const h_i = half(n_i);\n    const n_mod_2 = n_i - twice(h_i);\n    const m_i = successor(reverse_n_adaptive(f_i, h_i, f_b, n_b), n_mod_2);\n    const l_i = reverse_n_adaptive(m_i, h_i, f_b, n_b);\n\n    swap_ranges_n(f_i, m_i, h_i);\n    return l_i;\n}","const s = sequence(array_random(16), \"s\", undefined, \"sll\"); // singly-linked list\n//var b = sequence(array_all_equal(size(s), '-'), \"b\");\nconst b = sequence(array_all_equal(4, '-'), \"b\");\nprint(s);\nconst r = reverse_n_adaptive(begin(s), size(s), begin(b), size(b));\nprint(s);"]; }
+function __reverse_n_adaptive_typescript() { return ["function reverse_n_adaptive<T, U>(f_i: Iter<T>, n_i: number, f_b: Iter<U>, n_b: number): Iter<T> {\n    if (n_i < 2) return successor(f_i, n_i);\n    if (n_i <= n_b) return reverse_n_with_buffer(f_i, n_i, f_b);\n\n    const h_i = half(n_i);\n    const n_mod_2 = n_i - twice(h_i);\n    const m_i = successor(reverse_n_adaptive(f_i, h_i, f_b, n_b), n_mod_2);\n    const l_i = reverse_n_adaptive(m_i, h_i, f_b, n_b);\n\n    swap_ranges_n(f_i, m_i, h_i);\n    return l_i;\n}","const s = sequence(array_random(16), \"s\", undefined, \"sll\"); // singly-linked list\n//var b = sequence(array_all_equal(size(s), '-'), \"b\");\nconst b = sequence(array_all_equal(4, '-'));\nprint(s);\nconst r = reverse_n_adaptive(begin(s), size(s), begin(b), size(b));\nprint(s);"]; }
 
 function __reverse_n_adaptive_references() { return ["Elements of Programming, ch. 10, p. 175.","From Mathematics to Generic Programming, ch. 11, p. 217 (ch11.h)."]; }
 
 function __reverse_n_adaptive_usage() {
     const s = sequence(array_random(16), "s", undefined, "sll"); // singly-linked list
     //var b = sequence(array_all_equal(size(s), '-'), "b");
-    const b = sequence(array_all_equal(4, '-'), "b");
+    const b = sequence(array_all_equal(4, '-'));
     print(s);
     const r = reverse_n_adaptive(begin(s), size(s), begin(b), size(b));
     print(s);
@@ -2121,13 +2121,13 @@ function __reverse_n_indexed_usage() {
 function __reverse_n_indexed_attributes() {
 }
 
-function __reverse_n_with_buffer_typescript() { return ["function reverse_n_with_buffer<T, U>(f_i: Iter<T>, n: number, f_b: Iter<U>) {\n    return reverse_copy(f_b, copy_n(f_i, n, f_b)[1], f_i);\n}","const s = sequence(array_random(), \"s\", undefined, \"sll\"); // singly-linked list\nconst b = sequence(array_all_equal(size(s), '-'), \"b\");\nprint(s);\nconst r = reverse_n_with_buffer(begin(s), size(s), begin(b));\nprint(s);"]; }
+function __reverse_n_with_buffer_typescript() { return ["function reverse_n_with_buffer<T, U>(f_i: Iter<T>, n: number, f_b: Iter<U>) {\n    return reverse_copy(f_b, copy_n(f_i, n, f_b)[1], f_i);\n}","const s = sequence(array_random(), \"s\", undefined, \"sll\"); // singly-linked list\nconst b = sequence(array_all_equal(size(s), '-'));\nprint(s);\nconst r = reverse_n_with_buffer(begin(s), size(s), begin(b));\nprint(s);"]; }
 
 function __reverse_n_with_buffer_references() { return ["Elements of Programming, ch. 10, p. 174.","From Mathematics to Generic Programming, ch. 11, p. 216 (ch11.h)."]; }
 
 function __reverse_n_with_buffer_usage() {
     const s = sequence(array_random(), "s", undefined, "sll"); // singly-linked list
-    const b = sequence(array_all_equal(size(s), '-'), "b");
+    const b = sequence(array_all_equal(size(s), '-'));
     print(s);
     const r = reverse_n_with_buffer(begin(s), size(s), begin(b));
     print(s);
@@ -2136,12 +2136,12 @@ function __reverse_n_with_buffer_usage() {
 function __reverse_n_with_buffer_attributes() {
 }
 
-function __rotate_bidirectional_typescript() { return ["function rotate_bidirectional<T>(f: Iter<T>, m: Iter<T>, l: Iter<T>) {\n    reverse(f, m);\n    reverse(m, l);\n    reverse(f, l);\n}","const s = sequence(array_random(), \"s\");\nrotate_bidirectional(begin(s), successor(begin(s), 3), end(s));\nprint(s);"]; }
+function __rotate_bidirectional_typescript() { return ["function rotate_bidirectional<T>(f: Iter<T>, m: Iter<T>, l: Iter<T>) {\n    reverse(f, m);\n    reverse(m, l);\n    reverse(f, l);\n}","const s = sequence(array_random());\nrotate_bidirectional(begin(s), successor(begin(s), 3), end(s));\nprint(s);"]; }
 
 function __rotate_bidirectional_references() { return ["Elements of Programming, ch. 10, pp. 179–180 (three-reversal variant)."]; }
 
 function __rotate_bidirectional_usage() {
-    const s = sequence(array_random(), "s");
+    const s = sequence(array_random());
     rotate_bidirectional(begin(s), successor(begin(s), 3), end(s));
     print(s);
 }
@@ -2149,7 +2149,7 @@ function __rotate_bidirectional_usage() {
 function __rotate_bidirectional_attributes() {
 }
 
-function __rotate_cycles_typescript() { return ["function rotate_cycles<T>(f: Iter<T>, m: Iter<T>, l: Iter<T>, from: IteratorPermutation<T>) {\n    const m_l = distance(m, l);\n    const f_m = distance(f, m);\n    let d = gcd(f_m, m_l);\n\n    while (d != 0) {\n        cycle_from(successor(f, d), from);\n        --d;\n    }\n    return successor(f, m_l);\n}","function k_rotate_from_permutation_random_access<T>(f: Iter<T>, m: Iter<T>, l: Iter<T>) {\n    const k = distance(m, l);\n    const n_minus_k = distance(f, m);\n    const m_prime = successor(f, k);\n\n    return function (x: Iter<T>) {\n        if (x < m_prime) {\n            return successor(x, n_minus_k);\n        }\n        return predecessor(x, k);\n    }\n}\n\nfunction k_rotate_from_permutation_indexed<T>(f: Iter<T>, m: Iter<T>, l: Iter<T>) {\n    const k = distance(m, l);\n    const n_minus_k = distance(f, m);\n\n    return function (x: Iter<T>) {\n        const i = distance(f, x);\n        if (i < k) {\n            return successor(x, n_minus_k);\n        }\n        return successor(f, i - k);\n    }\n}\n\nconst s = sequence(array_random(), \"s\");\n\nconst f = begin(s);\nconst m = successor(begin(s), 3);\nconst l = end(s);\nconst from = k_rotate_from_permutation_indexed(f, m, l);\nrotate_cycles(f, m, l, from);\nprint(s);"]; }
+function __rotate_cycles_typescript() { return ["function rotate_cycles<T>(f: Iter<T>, m: Iter<T>, l: Iter<T>, from: IteratorPermutation<T>) {\n    const m_l = distance(m, l);\n    const f_m = distance(f, m);\n    let d = gcd(f_m, m_l);\n\n    while (d != 0) {\n        cycle_from(successor(f, d), from);\n        --d;\n    }\n    return successor(f, m_l);\n}","function k_rotate_from_permutation_random_access<T>(f: Iter<T>, m: Iter<T>, l: Iter<T>) {\n    const k = distance(m, l);\n    const n_minus_k = distance(f, m);\n    const m_prime = successor(f, k);\n\n    return function (x: Iter<T>) {\n        if (x < m_prime) {\n            return successor(x, n_minus_k);\n        }\n        return predecessor(x, k);\n    }\n}\n\nfunction k_rotate_from_permutation_indexed<T>(f: Iter<T>, m: Iter<T>, l: Iter<T>) {\n    const k = distance(m, l);\n    const n_minus_k = distance(f, m);\n\n    return function (x: Iter<T>) {\n        const i = distance(f, x);\n        if (i < k) {\n            return successor(x, n_minus_k);\n        }\n        return successor(f, i - k);\n    }\n}\n\nconst s = sequence(array_random());\n\nconst f = begin(s);\nconst m = successor(begin(s), 3);\nconst l = end(s);\nconst from = k_rotate_from_permutation_indexed(f, m, l);\nrotate_cycles(f, m, l, from);\nprint(s);"]; }
 
 function __rotate_cycles_references() { return ["Elements of Programming, ch. 10, pp. 178–179 (variant)."]; }
 
@@ -2176,7 +2176,7 @@ function __rotate_cycles_usage() {
             return successor(f, i - k);
         };
     }
-    const s = sequence(array_random(), "s");
+    const s = sequence(array_random());
     const f = begin(s);
     const m = successor(begin(s), 3);
     const l = end(s);
@@ -2222,7 +2222,7 @@ function __rotate_forward_usage() {
 function __rotate_forward_attributes() {
 }
 
-function __rotate_random_access_nontrivial_typescript() { return ["function rotate_random_access_nontrivial<T>(f: Iter<T>, m: Iter<T>, l: Iter<T>) {\n    const p = k_rotate_from_permutation_random_access(f, m, l);\n    return rotate_cycles(f, m, l, p);\n}","function cycle_from<T>(i: Iter<T>, f: IteratorPermutation<T>) {\n    const tmp = source(i);\n    let j = i;\n    let k = f(i);\n    while ( ! equal(k, i)) {\n        sink(j, source(k));\n        j = k;\n        k = f(k);\n    }\n    sink(j, tmp);\n}\n\nfunction rotate_cycles<T>(f: Iter<T>, m: Iter<T>, l: Iter<T>, from: IteratorPermutation<T>) {\n    let d = gcd(distance(f, m), distance(m, l));\n\n    while (d != 0) {\n        --d;\n        cycle_from(successor(f, d), from);\n    }\n    return successor(f, distance(m, l));\n}\n\nfunction k_rotate_from_permutation_random_access<T>(f: Iter<T>, m: Iter<T>, l: Iter<T>) {\n    const k = distance(m, l);\n    const n_minus_k = distance(f, m);\n    const m_prime = successor(f, distance(m, l));\n\n    return function(x: Iter<T>) {\n        if ( distance(x, m_prime) > 0) return successor(x, n_minus_k);\n        return predecessor(x, k);\n    };\n}\n\nconst s = sequence(array_random(12), \"s\");\nrotate_random_access_nontrivial(begin(s), successor(begin(s), 3), end(s));\nprint(s);"]; }
+function __rotate_random_access_nontrivial_typescript() { return ["function rotate_random_access_nontrivial<T>(f: Iter<T>, m: Iter<T>, l: Iter<T>) {\n    const p = k_rotate_from_permutation_random_access(f, m, l);\n    return rotate_cycles(f, m, l, p);\n}","function cycle_from<T>(i: Iter<T>, f: IteratorPermutation<T>) {\n    const tmp = source(i);\n    let j = i;\n    let k = f(i);\n    while ( ! equal(k, i)) {\n        sink(j, source(k));\n        j = k;\n        k = f(k);\n    }\n    sink(j, tmp);\n}\n\nfunction rotate_cycles<T>(f: Iter<T>, m: Iter<T>, l: Iter<T>, from: IteratorPermutation<T>) {\n    let d = gcd(distance(f, m), distance(m, l));\n\n    while (d != 0) {\n        --d;\n        cycle_from(successor(f, d), from);\n    }\n    return successor(f, distance(m, l));\n}\n\nfunction k_rotate_from_permutation_random_access<T>(f: Iter<T>, m: Iter<T>, l: Iter<T>) {\n    const k = distance(m, l);\n    const n_minus_k = distance(f, m);\n    const m_prime = successor(f, distance(m, l));\n\n    return function(x: Iter<T>) {\n        if ( distance(x, m_prime) > 0) return successor(x, n_minus_k);\n        return predecessor(x, k);\n    };\n}\n\nconst s = sequence(array_random(12));\nrotate_random_access_nontrivial(begin(s), successor(begin(s), 3), end(s));\nprint(s);"]; }
 
 function __rotate_random_access_nontrivial_references() { return ["Elements of Programming, ch. 10, p. 179."]; }
 
@@ -2256,7 +2256,7 @@ function __rotate_random_access_nontrivial_usage() {
             return predecessor(x, k);
         };
     }
-    const s = sequence(array_random(12), "s");
+    const s = sequence(array_random(12));
     rotate_random_access_nontrivial(begin(s), successor(begin(s), 3), end(s));
     print(s);
 }
@@ -2359,11 +2359,11 @@ function __is_heap_until_n_0_usage() {
 function __is_heap_until_n_0_attributes() {
 }
 
-function __make_heap_n_typescript() { return ["function make_heap_n<T>(f: Iter<T>, n: number) {\n    // assert(n > 2); //other sizes handled outside\n    const fpi = Math.floor((n - 3) / 2);\n    let fp = successor(f, fpi);    //firstParent\n    let frk = successor(f, (fpi + 1) * 2);  //firstRightKid\n\n    for (;; fp = predecessor(fp), frk = predecessor(frk, 2)) {\n        const lucifer = source(fp);\n        let parent = fp;\n        let rk = frk; //rightKid\n        for (;;) {\n            const jr = predecessor(rk, Number(source(predecessor(rk)) <= source(rk)));\n            const crt = source(jr);\n            if (lucifer <= crt) break;\n            sink(parent, crt);\n            parent = jr;\n            // rk = (jr + 1) * 2;\n            const rki = (distance(f, jr) + 1) * 2;\n            // if (rki >= n) goto write;\n            if (rki >= n) {\n                sink(parent, lucifer);\n                break;\n            }\n            rk = successor(f, rki);\n        }\n\n        // if (parent != fp) {\n        if ( ! equal(parent, fp)) {\n                sink(parent, lucifer);\n        }\n\n        // if (fp == 0) break;\n        if (equal(fp, f)) break;\n    }\n\n    if (n & 1) return;\n    let childIndex = n - 1;\n    while (true) {\n        const parentIndex = Math.floor((childIndex - 1) / 2);\n        const child = successor(f, childIndex);\n        const parent = successor(f, parentIndex);\n        const childValue = source(child);\n        const parentValue = source(parent);\n\n        if (parentValue <= childValue) break;\n        sink(parent, childValue);\n        sink(child, parentValue);\n\n        if (parentIndex === 0) break;\n        childIndex = parentIndex;\n    }\n}","// const s = sequence(array_random(), \"s\");\nconst s = sequence([24, 88, 59, 31, 91, 0, 87, 91, 40, 52], \"s\");\n\nmake_heap_n(begin(s), size(s));\nprint(s);"]; }
+function __make_heap_n_typescript() { return ["function make_heap_n<T>(f: Iter<T>, n: number) {\n    // assert(n > 2); //other sizes handled outside\n    const fpi = Math.floor((n - 3) / 2);\n    let fp = successor(f, fpi);    //firstParent\n    let frk = successor(f, (fpi + 1) * 2);  //firstRightKid\n\n    for (;; fp = predecessor(fp), frk = predecessor(frk, 2)) {\n        const lucifer = source(fp);\n        let parent = fp;\n        let rk = frk; //rightKid\n        for (;;) {\n            const jr = predecessor(rk, Number(source(predecessor(rk)) <= source(rk)));\n            const crt = source(jr);\n            if (lucifer <= crt) break;\n            sink(parent, crt);\n            parent = jr;\n            // rk = (jr + 1) * 2;\n            const rki = (distance(f, jr) + 1) * 2;\n            // if (rki >= n) goto write;\n            if (rki >= n) {\n                sink(parent, lucifer);\n                break;\n            }\n            rk = successor(f, rki);\n        }\n\n        // if (parent != fp) {\n        if ( ! equal(parent, fp)) {\n                sink(parent, lucifer);\n        }\n\n        // if (fp == 0) break;\n        if (equal(fp, f)) break;\n    }\n\n    if (n & 1) return;\n    let childIndex = n - 1;\n    while (true) {\n        const parentIndex = Math.floor((childIndex - 1) / 2);\n        const child = successor(f, childIndex);\n        const parent = successor(f, parentIndex);\n        const childValue = source(child);\n        const parentValue = source(parent);\n\n        if (parentValue <= childValue) break;\n        sink(parent, childValue);\n        sink(child, parentValue);\n\n        if (parentIndex === 0) break;\n        childIndex = parentIndex;\n    }\n}","// const s = sequence(array_random(), \"s\");\nconst s = sequence([24, 88, 59, 31, 91, 0, 87, 91, 40, 52]);\n\nmake_heap_n(begin(s), size(s));\nprint(s);"]; }
 
 function __make_heap_n_usage() {
     // const s = sequence(array_random(), "s");
-    const s = sequence([24, 88, 59, 31, 91, 0, 87, 91, 40, 52], "s");
+    const s = sequence([24, 88, 59, 31, 91, 0, 87, 91, 40, 52]);
     make_heap_n(begin(s), size(s));
     print(s);
 }
@@ -2371,7 +2371,7 @@ function __make_heap_n_usage() {
 function __make_heap_n_attributes() {
 }
 
-function __make_heap_n_naive_0_typescript() { return ["function make_heap_n_naive_0<T>(f: Iter<T>, n: number) {\n    let i = Math.floor(n / 2) - 1;\n    for (; i >= 0; --i) {\n        shift_down(f, i, n);\n    }\n}","function source_i<T>(f: Iter<T>, i: number) {\n    return source(successor(f, i));\n}\n\nfunction shift_down<T>(f: Iter<T>, i: number, n: number) {\n    while (i < n) {\n        let i_big = i;\n        const c1 = 2 * i + 1;\n        const c2 = c1 + 1;\n\n        if (c1 < n && source_i(f, c1) > source_i(f, i_big)) {\n            i_big = c1;\n        }\n\n        if (c2 < n && source_i(f, c2) > source_i(f, i_big)) {\n            i_big = c2;\n        }\n\n        if (i_big == i) {\n            return;\n        }\n\n        iter_swap(successor(f, i), successor(f, i_big));\n        i = i_big;\n    }\n}\n\nconst s = sequence(array_random(), \"s\");\n// var s = sequence([24, 88, 59, 31, 91, 0, 87, 91, 40, 52], \"s\");\n\nprint(s);\nmake_heap_n_naive_0(begin(s), size(s));\nprint(s);"]; }
+function __make_heap_n_naive_0_typescript() { return ["function make_heap_n_naive_0<T>(f: Iter<T>, n: number) {\n    let i = Math.floor(n / 2) - 1;\n    for (; i >= 0; --i) {\n        shift_down(f, i, n);\n    }\n}","function source_i<T>(f: Iter<T>, i: number) {\n    return source(successor(f, i));\n}\n\nfunction shift_down<T>(f: Iter<T>, i: number, n: number) {\n    while (i < n) {\n        let i_big = i;\n        const c1 = 2 * i + 1;\n        const c2 = c1 + 1;\n\n        if (c1 < n && source_i(f, c1) > source_i(f, i_big)) {\n            i_big = c1;\n        }\n\n        if (c2 < n && source_i(f, c2) > source_i(f, i_big)) {\n            i_big = c2;\n        }\n\n        if (i_big == i) {\n            return;\n        }\n\n        iter_swap(successor(f, i), successor(f, i_big));\n        i = i_big;\n    }\n}\n\nconst s = sequence(array_random());\n// var s = sequence([24, 88, 59, 31, 91, 0, 87, 91, 40, 52], \"s\");\n\nprint(s);\nmake_heap_n_naive_0(begin(s), size(s));\nprint(s);"]; }
 
 function __make_heap_n_naive_0_usage() {
     function source_i(f, i) {
@@ -2395,7 +2395,7 @@ function __make_heap_n_naive_0_usage() {
             i = i_big;
         }
     }
-    const s = sequence(array_random(), "s");
+    const s = sequence(array_random());
     // var s = sequence([24, 88, 59, 31, 91, 0, 87, 91, 40, 52], "s");
     print(s);
     make_heap_n_naive_0(begin(s), size(s));
@@ -2405,7 +2405,7 @@ function __make_heap_n_naive_0_usage() {
 function __make_heap_n_naive_0_attributes() {
 }
 
-function __make_heap_n_naive_1_typescript() { return ["function make_heap_n_naive_1<T>(f: Iter<T>, n: number) {\n    let i = Math.floor(n / 2) - 1;\n    for (; i >= 0; --i) {\n        shift_down(f, i, n);\n    }\n}","function source_i<T>(f: Iter<T>, i: number) {\n    return source(successor(f, i));\n}\n\nfunction shift_down<T>(f: Iter<T>, i: number, n: number) {\n    while (i < n) {\n        let i_big = i;\n        const c1 = 2 * i + 1;\n        const c2 = c1 + 1;\n\n        if (c1 < n && source_i(f, c1) > source_i(f, i_big)) {\n            i_big = c1;\n        }\n\n        if (c2 < n && source_i(f, c2) > source_i(f, i_big)) {\n            i_big = c2;\n        }\n\n        if (i_big == i) {\n            return;\n        }\n\n        iter_swap(successor(f, i), successor(f, i_big));\n        i = i_big;\n    }\n}\n\nconst s = sequence(array_random(), \"s\");\n// var s = sequence([24, 88, 59, 31, 91, 0, 87, 91, 40, 52], \"s\");\n\nprint(s);\nmake_heap_n_naive_1(begin(s), size(s));\nprint(s);"]; }
+function __make_heap_n_naive_1_typescript() { return ["function make_heap_n_naive_1<T>(f: Iter<T>, n: number) {\n    let i = Math.floor(n / 2) - 1;\n    for (; i >= 0; --i) {\n        shift_down(f, i, n);\n    }\n}","function source_i<T>(f: Iter<T>, i: number) {\n    return source(successor(f, i));\n}\n\nfunction shift_down<T>(f: Iter<T>, i: number, n: number) {\n    while (i < n) {\n        let i_big = i;\n        const c1 = 2 * i + 1;\n        const c2 = c1 + 1;\n\n        if (c1 < n && source_i(f, c1) > source_i(f, i_big)) {\n            i_big = c1;\n        }\n\n        if (c2 < n && source_i(f, c2) > source_i(f, i_big)) {\n            i_big = c2;\n        }\n\n        if (i_big == i) {\n            return;\n        }\n\n        iter_swap(successor(f, i), successor(f, i_big));\n        i = i_big;\n    }\n}\n\nconst s = sequence(array_random());\n// var s = sequence([24, 88, 59, 31, 91, 0, 87, 91, 40, 52], \"s\");\n\nprint(s);\nmake_heap_n_naive_1(begin(s), size(s));\nprint(s);"]; }
 
 function __make_heap_n_naive_1_usage() {
     function source_i(f, i) {
@@ -2429,7 +2429,7 @@ function __make_heap_n_naive_1_usage() {
             i = i_big;
         }
     }
-    const s = sequence(array_random(), "s");
+    const s = sequence(array_random());
     // var s = sequence([24, 88, 59, 31, 91, 0, 87, 91, 40, 52], "s");
     print(s);
     make_heap_n_naive_1(begin(s), size(s));
@@ -2589,14 +2589,14 @@ function __partition_stable_forward_usage() {
 function __partition_stable_forward_attributes() {
 }
 
-function __partition_stable_with_buffer_0_typescript() { return ["function partition_stable_with_buffer_0<T>(f: Iter<T>, l: Iter<T>, p: Predicate<T>, b: Iter<T>) {\n    const tmp = partition_copy(f, l, f, b, p);\n    const tf = tmp[0];\n    const ts = tmp[1];\n    copy(b, ts, tf);\n    return tf;\n}","const even = predicate(x => (x & 1) === 0);\nconst d = sequence(array_random(), \"d\", even);\nconst buf = sequence(array_all_equal(size(d), 0), \"buf\");\n\nconst p = partition_stable_with_buffer_0(begin(d), end(d), even, begin(buf));\nif ( ! equal(p, end(d))) {\n    const partitionValue = source(p);\n    print('partition point: ' + partitionValue);\n}"]; }
+function __partition_stable_with_buffer_0_typescript() { return ["function partition_stable_with_buffer_0<T>(f: Iter<T>, l: Iter<T>, p: Predicate<T>, b: Iter<T>) {\n    const tmp = partition_copy(f, l, f, b, p);\n    const tf = tmp[0];\n    const ts = tmp[1];\n    copy(b, ts, tf);\n    return tf;\n}","const even = predicate(x => (x & 1) === 0);\nconst d = sequence(array_random(), \"d\", even);\nconst buf = sequence(array_all_equal(size(d), 0));\n\nconst p = partition_stable_with_buffer_0(begin(d), end(d), even, begin(buf));\nif ( ! equal(p, end(d))) {\n    const partitionValue = source(p);\n    print('partition point: ' + partitionValue);\n}"]; }
 
 function __partition_stable_with_buffer_0_references() { return ["Elements of Programming, ch. 11, p. 193 (variant of partition_stable_with_buffer)."]; }
 
 function __partition_stable_with_buffer_0_usage() {
     const even = predicate(x => (x & 1) === 0);
     const d = sequence(array_random(), "d", even);
-    const buf = sequence(array_all_equal(size(d), 0), "buf");
+    const buf = sequence(array_all_equal(size(d), 0));
     const p = partition_stable_with_buffer_0(begin(d), end(d), even, begin(buf));
     if (!equal(p, end(d))) {
         const partitionValue = source(p);
@@ -2989,11 +2989,11 @@ function __find_subsequence_n_kmp_attributes() {
 
 }
 
-function __find_subsequence_n_naive_typescript() { return ["function find_subsequence_n_naive<T>(f: Iter<T>, fn: number, s: Iter<T>, sn: number, r: Relation<T>): [Iter<T>, number] {\n    if (sn == 0) return [f, fn];\n\n    while (true) {\n        if (fn < sn) return [f, 0];\n\n        let tf = f;\n        let ts = s;\n        let n = sn;\n        while (true) {\n            if (n == 0) return [f, fn];\n            if ( ! r(source(tf), source(ts))) break;\n            --n;\n            ts = successor(ts);\n            tf = successor(tf);\n        }\n        --fn;\n        f = successor(f);\n    }\n\n    return [f, fn];\n}","const seq = sequence(array_from(\"Hello, World!\"), \"seq\");\nconst sub = sequence(array_from(\"????\"), \"sub\");\n\nconst r = find_subsequence_n_naive(begin(seq), size(seq), begin(sub), size(sub), eq);\nconst it = r[0];\nconst n = r[1];\n\nif (n == 0) {\n    print(\"Subsequence not found\");\n} else {\n    print(\"Subsequence found at: \");\n    const offset = distance(begin(seq), it);\n    print(offset);\n}"]; }
+function __find_subsequence_n_naive_typescript() { return ["function find_subsequence_n_naive<T>(f: Iter<T>, fn: number, s: Iter<T>, sn: number, r: Relation<T>): [Iter<T>, number] {\n    if (sn == 0) return [f, fn];\n\n    while (true) {\n        if (fn < sn) return [f, 0];\n\n        let tf = f;\n        let ts = s;\n        let n = sn;\n        while (true) {\n            if (n == 0) return [f, fn];\n            if ( ! r(source(tf), source(ts))) break;\n            --n;\n            ts = successor(ts);\n            tf = successor(tf);\n        }\n        --fn;\n        f = successor(f);\n    }\n\n    return [f, fn];\n}","const seq = sequence(array_from(\"Hello, World!\"));\nconst sub = sequence(array_from(\"????\"));\n\nconst r = find_subsequence_n_naive(begin(seq), size(seq), begin(sub), size(sub), eq);\nconst it = r[0];\nconst n = r[1];\n\nif (n == 0) {\n    print(\"Subsequence not found\");\n} else {\n    print(\"Subsequence found at: \");\n    const offset = distance(begin(seq), it);\n    print(offset);\n}"]; }
 
 function __find_subsequence_n_naive_usage() {
-    const seq = sequence(array_from("Hello, World!"), "seq");
-    const sub = sequence(array_from("????"), "sub");
+    const seq = sequence(array_from("Hello, World!"));
+    const sub = sequence(array_from("????"));
     const r = find_subsequence_n_naive(begin(seq), size(seq), begin(sub), size(sub), eq);
     const it = r[0];
     const n = r[1];
@@ -3010,12 +3010,12 @@ function __find_subsequence_n_naive_usage() {
 function __find_subsequence_n_naive_attributes() {
 }
 
-function __find_subsequence_n_naive_1_typescript() { return ["function find_subsequence_n_naive_1<T>(f: Iter<T>, fn: number, s: Iter<T>, sn: number, r: Relation<T>): [Iter<T>, number] {\n    if (sn == 0) return [f, fn];\n\n    while (true) {\n        if (fn < sn) return [f, 0];\n\n        let tf = f;\n        let ts = s;\n        let n = sn;\n        while (true) {\n            if (n == 0) return [f, fn];\n            if ( ! r(source(tf), source(ts))) break;\n            --n;\n            ts = successor(ts);\n            tf = successor(tf);\n        }\n        let skip = 1;\n        if (n != sn) {\n            const eqf = predicate<T>(function eqf(x) { return r(x, source(tf)); });\n            const it = find_if(s, ts, eqf);\n\n            if (equal(it, ts)) {\n                skip = sn - n;\n            }\n        }\n        fn -= skip;\n        f = successor(f, skip);\n    }\n\n    return [f, fn];\n}","const seq = sequence(array_from(\"Until death it is all life\"), \"seq\");\n//var seq = sequence(array_from(\"Until dedead it is all life\"), \"seq\");\nconst sub = sequence(array_from(\"dead\"), \"sub\");\n\nconst r = find_subsequence_n_naive_1(begin(seq), size(seq), begin(sub), size(sub), eq);\nconst it = r[0];\nconst n = r[1];\n\nif (n == 0) {\n    print(\"Subsequence not found\");\n} else {\n    print(\"Subsequence found at: \");\n    const offset = distance(begin(seq), it);\n    print(offset);\n}"]; }
+function __find_subsequence_n_naive_1_typescript() { return ["function find_subsequence_n_naive_1<T>(f: Iter<T>, fn: number, s: Iter<T>, sn: number, r: Relation<T>): [Iter<T>, number] {\n    if (sn == 0) return [f, fn];\n\n    while (true) {\n        if (fn < sn) return [f, 0];\n\n        let tf = f;\n        let ts = s;\n        let n = sn;\n        while (true) {\n            if (n == 0) return [f, fn];\n            if ( ! r(source(tf), source(ts))) break;\n            --n;\n            ts = successor(ts);\n            tf = successor(tf);\n        }\n        let skip = 1;\n        if (n != sn) {\n            const eqf = predicate<T>(function eqf(x) { return r(x, source(tf)); });\n            const it = find_if(s, ts, eqf);\n\n            if (equal(it, ts)) {\n                skip = sn - n;\n            }\n        }\n        fn -= skip;\n        f = successor(f, skip);\n    }\n\n    return [f, fn];\n}","const seq = sequence(array_from(\"Until death it is all life\"));\n//var seq = sequence(array_from(\"Until dedead it is all life\"), \"seq\");\nconst sub = sequence(array_from(\"dead\"));\n\nconst r = find_subsequence_n_naive_1(begin(seq), size(seq), begin(sub), size(sub), eq);\nconst it = r[0];\nconst n = r[1];\n\nif (n == 0) {\n    print(\"Subsequence not found\");\n} else {\n    print(\"Subsequence found at: \");\n    const offset = distance(begin(seq), it);\n    print(offset);\n}"]; }
 
 function __find_subsequence_n_naive_1_usage() {
-    const seq = sequence(array_from("Until death it is all life"), "seq");
+    const seq = sequence(array_from("Until death it is all life"));
     //var seq = sequence(array_from("Until dedead it is all life"), "seq");
-    const sub = sequence(array_from("dead"), "sub");
+    const sub = sequence(array_from("dead"));
     const r = find_subsequence_n_naive_1(begin(seq), size(seq), begin(sub), size(sub), eq);
     const it = r[0];
     const n = r[1];
@@ -3215,10 +3215,10 @@ function __some_usage() {
 function __some_attributes() {
 }
 
-function __max_element_typescript() { return ["function max_element<T>(f: Iter<T>, l: Iter<T>, r: Relation<T>) {\n    if (equal(f, l)) return l;\n\n    let m = f;\n    f = successor(f);\n\n    while ( ! equal(f, l)) {\n        if ( ! r(source(f), source(m))) {\n            m = f;\n        }\n        f = successor(f);\n    }\n    return m;\n}","const s = sequence(array_random(), \"s\");\n\nconst l = end(s);\n\nconst m = max_element(begin(s), l, lt);\nif ( ! equal(m, l)) {\n    const maximum = source(m);\n    print(\"The max element is: \" + maximum);\n} else {\n    print(\"An empty sequence has no max element\");\n}"]; }
+function __max_element_typescript() { return ["function max_element<T>(f: Iter<T>, l: Iter<T>, r: Relation<T>) {\n    if (equal(f, l)) return l;\n\n    let m = f;\n    f = successor(f);\n\n    while ( ! equal(f, l)) {\n        if ( ! r(source(f), source(m))) {\n            m = f;\n        }\n        f = successor(f);\n    }\n    return m;\n}","const s = sequence(array_random());\n\nconst l = end(s);\n\nconst m = max_element(begin(s), l, lt);\nif ( ! equal(m, l)) {\n    const maximum = source(m);\n    print(\"The max element is: \" + maximum);\n} else {\n    print(\"An empty sequence has no max element\");\n}"]; }
 
 function __max_element_usage() {
-    const s = sequence(array_random(), "s");
+    const s = sequence(array_random());
     const l = end(s);
     const m = max_element(begin(s), l, lt);
     if (!equal(m, l)) {
@@ -3243,10 +3243,10 @@ function __max_element_attributes() {
     };
 }
 
-function __min_element_typescript() { return ["function min_element<T>(f: Iter<T>, l: Iter<T>, r: Relation<T>) {\n    if (equal(f, l)) return l;\n\n    let m = f;\n    f = successor(f);\n\n    while ( ! equal(f, l)) {\n        if (r(source(f), source(m))) {\n            m = f;\n        }\n        f = successor(f);\n    }\n    return m;\n}","const s = sequence(array_random(), \"s\");\nconst l = end(s);\n\nconst m = min_element(begin(s), l, lt);\nif ( ! equal(m, l)) {\n    const minimum = source(m);\n    print(\"The min element is: \" + minimum);\n} else {\n    print(\"An empty sequence has no min element\");\n}"]; }
+function __min_element_typescript() { return ["function min_element<T>(f: Iter<T>, l: Iter<T>, r: Relation<T>) {\n    if (equal(f, l)) return l;\n\n    let m = f;\n    f = successor(f);\n\n    while ( ! equal(f, l)) {\n        if (r(source(f), source(m))) {\n            m = f;\n        }\n        f = successor(f);\n    }\n    return m;\n}","const s = sequence(array_random());\nconst l = end(s);\n\nconst m = min_element(begin(s), l, lt);\nif ( ! equal(m, l)) {\n    const minimum = source(m);\n    print(\"The min element is: \" + minimum);\n} else {\n    print(\"An empty sequence has no min element\");\n}"]; }
 
 function __min_element_usage() {
-    const s = sequence(array_random(), "s");
+    const s = sequence(array_random());
     const l = end(s);
     const m = min_element(begin(s), l, lt);
     if (!equal(m, l)) {
@@ -3271,10 +3271,10 @@ function __min_element_attributes() {
     };
 }
 
-function __min_element_nonempty_typescript() { return ["function min_element_nonempty<T>(f: Iter<T>, l: Iter<T>, r: Relation<T>) {\n    let m = f;\n    f = successor(f);\n\n    while ( ! equal(f, l)) {\n        if (r(source(f), source(m))) {\n            m = f;\n        }\n        f = successor(f);\n    }\n    return m;\n}","const s = sequence(array_random(), \"s\");\nconst l = end(s);\n\nconst m = min_element_nonempty(begin(s), l, lt);\nif ( ! equal(m, l)) {\n    const minimum = source(m);\n    print(\"The min element is: \" + minimum);\n}"]; }
+function __min_element_nonempty_typescript() { return ["function min_element_nonempty<T>(f: Iter<T>, l: Iter<T>, r: Relation<T>) {\n    let m = f;\n    f = successor(f);\n\n    while ( ! equal(f, l)) {\n        if (r(source(f), source(m))) {\n            m = f;\n        }\n        f = successor(f);\n    }\n    return m;\n}","const s = sequence(array_random());\nconst l = end(s);\n\nconst m = min_element_nonempty(begin(s), l, lt);\nif ( ! equal(m, l)) {\n    const minimum = source(m);\n    print(\"The min element is: \" + minimum);\n}"]; }
 
 function __min_element_nonempty_usage() {
-    const s = sequence(array_random(), "s");
+    const s = sequence(array_random());
     const l = end(s);
     const m = min_element_nonempty(begin(s), l, lt);
     if (!equal(m, l)) {
@@ -3296,10 +3296,10 @@ function __min_element_nonempty_attributes() {
     };
 }
 
-function __min_value_typescript() { return ["function min_value<I extends Iter<unknown>>(f: I, l: I, r: Relation<ValueOf<I>>): I {\n    //precondition: ! equal(f, l)) return l;\n\n    let m = f;\n    f = successor(f);\n\n    while ( ! equal(f, l)) {\n        if (r(source(f), source(m))) {\n            m = f;\n        }\n        f = successor(f);\n    }\n    return m;\n}","const d = sequence(array_random(), \"d\");\n\nlet f = begin(d);\nconst l = end(d);\n\nf = min_value(f, l, lt);\nif ( ! equal(f, l)) {\n    const minimum = source(f);\n    print(\"The min element is: \" + minimum);\n}"]; }
+function __min_value_typescript() { return ["function min_value<I extends Iter<unknown>>(f: I, l: I, r: Relation<ValueOf<I>>): I {\n    //precondition: ! equal(f, l)) return l;\n\n    let m = f;\n    f = successor(f);\n\n    while ( ! equal(f, l)) {\n        if (r(source(f), source(m))) {\n            m = f;\n        }\n        f = successor(f);\n    }\n    return m;\n}","const d = sequence(array_random());\n\nlet f = begin(d);\nconst l = end(d);\n\nf = min_value(f, l, lt);\nif ( ! equal(f, l)) {\n    const minimum = source(f);\n    print(\"The min element is: \" + minimum);\n}"]; }
 
 function __min_value_usage() {
-    const d = sequence(array_random(), "d");
+    const d = sequence(array_random());
     let f = begin(d);
     const l = end(d);
     f = min_value(f, l, lt);
@@ -3358,12 +3358,12 @@ function __select_1_3_ab_usage() {
 function __select_1_3_ab_attributes() {
 }
 
-function __exchange_values_2_typescript() { return ["function exchange_values_2<T>(x: Iter<T>, y: Iter<T>) {\n    const t = source(x);\n    sink(x, source(y));\n    sink(y, t);\n\n    increment_assignment_stat(); // we have to count 3 assignments\n    increment_swap_stat(); // we need to count a swap\n}","const s = sequence(array_ascending(), \"s\");\n\nexchange_values_2(begin(s), successor(begin(s), 5));\n\nprint(s);"]; }
+function __exchange_values_2_typescript() { return ["function exchange_values_2<T>(x: Iter<T>, y: Iter<T>) {\n    const t = source(x);\n    sink(x, source(y));\n    sink(y, t);\n\n    increment_assignment_stat(); // we have to count 3 assignments\n    increment_swap_stat(); // we need to count a swap\n}","const s = sequence(array_ascending());\n\nexchange_values_2(begin(s), successor(begin(s), 5));\n\nprint(s);"]; }
 
 function __exchange_values_2_references() { return ["Elements of Programming, ch. 9, p. 162 (instrumented variant of exchange_values)."]; }
 
 function __exchange_values_2_usage() {
-    const s = sequence(array_ascending(), "s");
+    const s = sequence(array_ascending());
     exchange_values_2(begin(s), successor(begin(s), 5));
     print(s);
 }
@@ -3371,7 +3371,7 @@ function __exchange_values_2_usage() {
 function __exchange_values_2_attributes() {
 }
 
-function __swap_ranges_typescript() { return ["function swap_ranges<T, U>(f: Iter<T>, l: Iter<T>, f1: Iter<U>) {\n    while ( ! equal(f, l)) {\n        exchange_values(f, f1);\n        f = successor(f);\n        f1 = successor(f1);\n    }\n    return f1;\n}","function exchange_values<T, U>(x: Iter<T>, y: Iter<U>) {\n    const t = source(x);\n    sink(x, source(y));\n    sink(y, t);\n}\n\nconst s = sequence(array_ascending(), \"s\");\nconst z = sequence(array_all_equal(size(s), '-'), \"z\");\n\nswap_ranges(successor(begin(s), 5), end(s), begin(z));\n\nprint(z);"]; }
+function __swap_ranges_typescript() { return ["function swap_ranges<T, U>(f: Iter<T>, l: Iter<T>, f1: Iter<U>) {\n    while ( ! equal(f, l)) {\n        exchange_values(f, f1);\n        f = successor(f);\n        f1 = successor(f1);\n    }\n    return f1;\n}","function exchange_values<T, U>(x: Iter<T>, y: Iter<U>) {\n    const t = source(x);\n    sink(x, source(y));\n    sink(y, t);\n}\n\nconst s = sequence(array_ascending());\nconst z = sequence(array_all_equal(size(s), '-'));\n\nswap_ranges(successor(begin(s), 5), end(s), begin(z));\n\nprint(z);"]; }
 
 function __swap_ranges_references() { return ["Elements of Programming, ch. 9, p. 163.","From Mathematics to Generic Programming, ch. 11, §11.2, pp. 201–203 (ch11.h)."]; }
 
@@ -3381,8 +3381,8 @@ function __swap_ranges_usage() {
         sink(x, source(y));
         sink(y, t);
     }
-    const s = sequence(array_ascending(), "s");
-    const z = sequence(array_all_equal(size(s), '-'), "z");
+    const s = sequence(array_ascending());
+    const z = sequence(array_all_equal(size(s), '-'));
     swap_ranges(successor(begin(s), 5), end(s), begin(z));
     print(z);
 }
@@ -3390,13 +3390,13 @@ function __swap_ranges_usage() {
 function __swap_ranges_attributes() {
 }
 
-function __swap_ranges_bounded_typescript() { return ["function swap_ranges_bounded<T>(f0: Iter<T>, l0: Iter<T>, f1: Iter<T>, l1: Iter<T>) {\n    while ( ! equal(f0, l0) && ! equal(f1, l1)) {\n        iter_swap(f0, f1);\n        f0 = successor(f0);\n        f1 = successor(f1);\n    }\n    return [f0, f1];\n}","const s1 = sequence(array_random(), \"s1\");\nconst s2 = sequence(array_random(5), \"s2\");\n\nconst r = swap_ranges_bounded(begin(s1), end(s1), begin(s2), end(s2));\nconst f0 = r[0];\nconst f1 = r[1];"]; }
+function __swap_ranges_bounded_typescript() { return ["function swap_ranges_bounded<T>(f0: Iter<T>, l0: Iter<T>, f1: Iter<T>, l1: Iter<T>) {\n    while ( ! equal(f0, l0) && ! equal(f1, l1)) {\n        iter_swap(f0, f1);\n        f0 = successor(f0);\n        f1 = successor(f1);\n    }\n    return [f0, f1];\n}","const s1 = sequence(array_random());\nconst s2 = sequence(array_random(5));\n\nconst r = swap_ranges_bounded(begin(s1), end(s1), begin(s2), end(s2));\nconst f0 = r[0];\nconst f1 = r[1];"]; }
 
 function __swap_ranges_bounded_references() { return ["Elements of Programming, ch. 9, p. 163.","From Mathematics to Generic Programming, ch. 11, §11.2, pp. 201–203 (ch11.h)."]; }
 
 function __swap_ranges_bounded_usage() {
-    const s1 = sequence(array_random(), "s1");
-    const s2 = sequence(array_random(5), "s2");
+    const s1 = sequence(array_random());
+    const s2 = sequence(array_random(5));
     const r = swap_ranges_bounded(begin(s1), end(s1), begin(s2), end(s2));
     const f0 = r[0];
     const f1 = r[1];
@@ -3405,13 +3405,13 @@ function __swap_ranges_bounded_usage() {
 function __swap_ranges_bounded_attributes() {
 }
 
-function __swap_ranges_n_typescript() { return ["function swap_ranges_n<T>(f0: Iter<T>, f1: Iter<T>, n: number) {\n    while (n != 0) {\n        iter_swap(f0, f1);\n        f0 = successor(f0);\n        f1 = successor(f1);\n        --n;\n    }\n    return [f0, f1];\n}","const s1 = sequence(array_random(), \"s1\");\nconst s2 = sequence(array_random(5), \"s2\");\n\nconst r = swap_ranges_n(begin(s1), begin(s2), 5);\nconst f0 = r[0];\nconst f1 = r[1];"]; }
+function __swap_ranges_n_typescript() { return ["function swap_ranges_n<T>(f0: Iter<T>, f1: Iter<T>, n: number) {\n    while (n != 0) {\n        iter_swap(f0, f1);\n        f0 = successor(f0);\n        f1 = successor(f1);\n        --n;\n    }\n    return [f0, f1];\n}","const s1 = sequence(array_random());\nconst s2 = sequence(array_random(5));\n\nconst r = swap_ranges_n(begin(s1), begin(s2), 5);\nconst f0 = r[0];\nconst f1 = r[1];"]; }
 
 function __swap_ranges_n_references() { return ["Elements of Programming, ch. 9, p. 164.","From Mathematics to Generic Programming, ch. 11, §11.2, pp. 201–203 (ch11.h)."]; }
 
 function __swap_ranges_n_usage() {
-    const s1 = sequence(array_random(), "s1");
-    const s2 = sequence(array_random(5), "s2");
+    const s1 = sequence(array_random());
+    const s2 = sequence(array_random(5));
     const r = swap_ranges_n(begin(s1), begin(s2), 5);
     const f0 = r[0];
     const f1 = r[1];
@@ -3469,14 +3469,14 @@ function __count_if_usage() {
 function __count_if_attributes() {
 }
 
-function __count_if_basis_typescript() { return ["function count_if_basis<T, U extends number | Iter<unknown>>(f: Iter<T>, l: Iter<T>, p: Predicate<T>, j: U) {\n    while ( ! equal(f, l)) {\n        if (p(source(f))) {\n            j = successor(j);\n        }\n        f = successor(f);\n    }\n    return j;\n}","const even = predicate(x => (x & 1) === 0);\nconst d = sequence(array_random(), \"d\", even);\nconst c = sequence(array_ascending(), \"c\");\n\nconst f = begin(d);\nconst l = end(d);\n\nlet j = begin(c);\nj = count_if_basis(f, l, even, j);\n\nprint(\"Even numbers: \");\nconst offset = distance(begin(c), j);\nprint(offset);"]; }
+function __count_if_basis_typescript() { return ["function count_if_basis<T, U extends number | Iter<unknown>>(f: Iter<T>, l: Iter<T>, p: Predicate<T>, j: U) {\n    while ( ! equal(f, l)) {\n        if (p(source(f))) {\n            j = successor(j);\n        }\n        f = successor(f);\n    }\n    return j;\n}","const even = predicate(x => (x & 1) === 0);\nconst d = sequence(array_random(), \"d\", even);\nconst c = sequence(array_ascending());\n\nconst f = begin(d);\nconst l = end(d);\n\nlet j = begin(c);\nj = count_if_basis(f, l, even, j);\n\nprint(\"Even numbers: \");\nconst offset = distance(begin(c), j);\nprint(offset);"]; }
 
 function __count_if_basis_references() { return ["Elements of Programming, ch. 6, p. 95 (count_if overloads)."]; }
 
 function __count_if_basis_usage() {
     const even = predicate(x => (x & 1) === 0);
     const d = sequence(array_random(), "d", even);
-    const c = sequence(array_ascending(), "c");
+    const c = sequence(array_ascending());
     const f = begin(d);
     const l = end(d);
     let j = begin(c);
@@ -3506,14 +3506,14 @@ function __count_if_not_usage() {
 function __count_if_not_attributes() {
 }
 
-function __count_if_not_basis_typescript() { return ["function count_if_not_basis<T, U extends number | Iter<unknown>>(f: Iter<T>, l: Iter<T>, p: Predicate<T>, j: U) {\n    while ( ! equal(f, l)) {\n        if ( ! p(source(f))) {\n            j = successor(j);\n        }\n        f = successor(f);\n    }\n    return j;\n}","const even = predicate(x => (x & 1) === 0);\nconst d = sequence(array_random(), \"d\", even);\nconst c = sequence(array_ascending(), \"c\");\n\nconst f = begin(d);\nconst l = end(d);\n\nlet j = begin(c);\nj = count_if_not_basis(f, l, even, j);\n\nprint(\"Odd numbers: \");\nconst offset = distance(begin(c), j);\nprint(offset);"]; }
+function __count_if_not_basis_typescript() { return ["function count_if_not_basis<T, U extends number | Iter<unknown>>(f: Iter<T>, l: Iter<T>, p: Predicate<T>, j: U) {\n    while ( ! equal(f, l)) {\n        if ( ! p(source(f))) {\n            j = successor(j);\n        }\n        f = successor(f);\n    }\n    return j;\n}","const even = predicate(x => (x & 1) === 0);\nconst d = sequence(array_random(), \"d\", even);\nconst c = sequence(array_ascending());\n\nconst f = begin(d);\nconst l = end(d);\n\nlet j = begin(c);\nj = count_if_not_basis(f, l, even, j);\n\nprint(\"Odd numbers: \");\nconst offset = distance(begin(c), j);\nprint(offset);"]; }
 
 function __count_if_not_basis_references() { return ["Elements of Programming, ch. 6, p. 95 (negated count described in the text; implementation in eop.h)."]; }
 
 function __count_if_not_basis_usage() {
     const even = predicate(x => (x & 1) === 0);
     const d = sequence(array_random(), "d", even);
-    const c = sequence(array_ascending(), "c");
+    const c = sequence(array_ascending());
     const f = begin(d);
     const l = end(d);
     let j = begin(c);
@@ -3526,13 +3526,13 @@ function __count_if_not_basis_usage() {
 function __count_if_not_basis_attributes() {
 }
 
-function __equal_r_typescript() { return ["function equal_r<T>(f: Iter<T>, l: Iter<T>, f2: Iter<T>, r: Relation<T>) {\n    while ( ! equal(f, l)) {\n        if ( ! r(source(f), source(f2))) {\n            return false;\n        }\n\n        f = successor(f);\n        f2 = successor(f2);\n    }\n    return true;\n}","const d1_raw = ['e', 'v', 'i', 't', 'a', 't', 'i', 'v', 'e'];\nconst d2_raw = ['e', 'v', 'i', 't', 'x', 't', 'i', 'v', 'e'];\n\nconst d1 = sequence(d1_raw, \"d1\");\nconst d2 = sequence(d2_raw, \"d2\");\n\nconst f = begin(d1);\nconst l = end(d1);\nconst f2 = begin(d2);\n\nconst res = equal_r(f, l, f2, eq);\nprint(res);"]; }
+function __equal_r_typescript() { return ["function equal_r<T>(f: Iter<T>, l: Iter<T>, f2: Iter<T>, r: Relation<T>) {\n    while ( ! equal(f, l)) {\n        if ( ! r(source(f), source(f2))) {\n            return false;\n        }\n\n        f = successor(f);\n        f2 = successor(f2);\n    }\n    return true;\n}","const d1_raw = ['e', 'v', 'i', 't', 'a', 't', 'i', 'v', 'e'];\nconst d2_raw = ['e', 'v', 'i', 't', 'x', 't', 'i', 'v', 'e'];\n\nconst d1 = sequence(d1_raw);\nconst d2 = sequence(d2_raw);\n\nconst f = begin(d1);\nconst l = end(d1);\nconst f2 = begin(d2);\n\nconst res = equal_r(f, l, f2, eq);\nprint(res);"]; }
 
 function __equal_r_usage() {
     const d1_raw = ['e', 'v', 'i', 't', 'a', 't', 'i', 'v', 'e'];
     const d2_raw = ['e', 'v', 'i', 't', 'x', 't', 'i', 'v', 'e'];
-    const d1 = sequence(d1_raw, "d1");
-    const d2 = sequence(d2_raw, "d2");
+    const d1 = sequence(d1_raw);
+    const d2 = sequence(d2_raw);
     const f = begin(d1);
     const l = end(d1);
     const f2 = begin(d2);
@@ -3543,11 +3543,11 @@ function __equal_r_usage() {
 function __equal_r_attributes() {
 }
 
-function __insert_typescript() { return ["function insert<T, K extends SequenceKind>(s: Seq<T, K>, ip: Iter<T>, f: Iter<T>, l: Iter<T>) {\n    let d = distance(begin(s), ip);\n    const ld = distance(ip, end(s));\n\n    while ( ! equal(f, l)) {\n        s = push_back(s, source(f));\n        f = successor(f);\n        ++d;\n    }\n\n    rotate_bidirectional(begin(s), successor(begin(s), ld), end(s));\n\n    return s;\n}","let s = sequence(array_random(), \"s\");\nconst i = sequence(array_random(5), \"i\");\n\ns = insert(s, begin(s), begin(i), end(i));\nprint(s);"]; }
+function __insert_typescript() { return ["function insert<T, K extends SequenceKind>(s: Seq<T, K>, ip: Iter<T>, f: Iter<T>, l: Iter<T>) {\n    let d = distance(begin(s), ip);\n    const ld = distance(ip, end(s));\n\n    while ( ! equal(f, l)) {\n        s = push_back(s, source(f));\n        f = successor(f);\n        ++d;\n    }\n\n    rotate_bidirectional(begin(s), successor(begin(s), ld), end(s));\n\n    return s;\n}","let s = sequence(array_random());\nconst i = sequence(array_random(5));\n\ns = insert(s, begin(s), begin(i), end(i));\nprint(s);"]; }
 
 function __insert_usage() {
-    let s = sequence(array_random(), "s");
-    const i = sequence(array_random(5), "i");
+    let s = sequence(array_random());
+    const i = sequence(array_random(5));
     s = insert(s, begin(s), begin(i), end(i));
     print(s);
 }
@@ -3555,11 +3555,11 @@ function __insert_usage() {
 function __insert_attributes() {
 }
 
-function __insert_naive_typescript() { return ["function insert_naive<T, K extends SequenceKind>(s: Seq<T | number, K>, ip: Iter<T | number>, f: Iter<T>, l: Iter<T>) {\n    let d = distance(begin(s), ip);\n\n    while ( ! equal(f, l)) {\n        // s = increase_capacity(s, 1)\n        s = push_back(s, 0);\n        ip = successor(begin(s), d)\n        shift_right_by_one(ip, end(s));\n        sink(ip, source(f));\n        f = successor(f);\n        ++d;\n    }\n\n    return s;\n}","let s = sequence(array_random(), \"s\");\nconst i = sequence(array_random(5), \"i\");\n\ns = insert_naive(s, begin(s), begin(i), end(i));\nprint(s);"]; }
+function __insert_naive_typescript() { return ["function insert_naive<T, K extends SequenceKind>(s: Seq<T | number, K>, ip: Iter<T | number>, f: Iter<T>, l: Iter<T>) {\n    let d = distance(begin(s), ip);\n\n    while ( ! equal(f, l)) {\n        // s = increase_capacity(s, 1)\n        s = push_back(s, 0);\n        ip = successor(begin(s), d)\n        shift_right_by_one(ip, end(s));\n        sink(ip, source(f));\n        f = successor(f);\n        ++d;\n    }\n\n    return s;\n}","let s = sequence(array_random());\nconst i = sequence(array_random(5));\n\ns = insert_naive(s, begin(s), begin(i), end(i));\nprint(s);"]; }
 
 function __insert_naive_usage() {
-    let s = sequence(array_random(), "s");
-    const i = sequence(array_random(5), "i");
+    let s = sequence(array_random());
+    const i = sequence(array_random(5));
     s = insert_naive(s, begin(s), begin(i), end(i));
     print(s);
 }
@@ -3567,13 +3567,13 @@ function __insert_naive_usage() {
 function __insert_naive_attributes() {
 }
 
-function __iota_typescript() { return ["function iota(f: Iter<number>, l: Iter<number>, start?: number, step?: number) {\n    if ( ! start) start = 0;\n    if ( ! step) step = 1;\n\n    while ( ! equal(f, l)) {\n        sink(f, start);\n        start += step;\n        f = successor(f);\n    }\n    return start;\n}","const d1 = sequence(array_all_equal(8, 0), \"d1\");\nconst d2 = sequence(array_all_equal(5, 0), \"d2\");\n\nlet f = successor(begin(d1));\nlet l = predecessor(end(d1));\n\nlet r = iota(f, l);\nprint(r);\n\nf = begin(d2);\nl = end(d2);\n\n\nr = iota(f, l, r);\nprint(r);"]; }
+function __iota_typescript() { return ["function iota(f: Iter<number>, l: Iter<number>, start?: number, step?: number) {\n    if ( ! start) start = 0;\n    if ( ! step) step = 1;\n\n    while ( ! equal(f, l)) {\n        sink(f, start);\n        start += step;\n        f = successor(f);\n    }\n    return start;\n}","const d1 = sequence(array_all_equal(8, 0));\nconst d2 = sequence(array_all_equal(5, 0));\n\nlet f = successor(begin(d1));\nlet l = predecessor(end(d1));\n\nlet r = iota(f, l);\nprint(r);\n\nf = begin(d2);\nl = end(d2);\n\n\nr = iota(f, l, r);\nprint(r);"]; }
 
 function __iota_references() { return ["Elements of Programming, ch. 9, §9.2, pp. 150–155 (implementation in eop.h)."]; }
 
 function __iota_usage() {
-    const d1 = sequence(array_all_equal(8, 0), "d1");
-    const d2 = sequence(array_all_equal(5, 0), "d2");
+    const d1 = sequence(array_all_equal(8, 0));
+    const d2 = sequence(array_all_equal(5, 0));
     let f = successor(begin(d1));
     let l = predecessor(end(d1));
     let r = iota(f, l);
@@ -3587,12 +3587,12 @@ function __iota_usage() {
 function __iota_attributes() {
 }
 
-function __palindrome_bidirectional_typescript() { return ["function palindrome_bidirectional<T>(f: Iter<T>, l: Iter<T>, r: Relation<T>) {\n    while (true) {\n        if (equal(f, l)) break;\n        l = predecessor(l);\n\n        if ( ! r(source(f), source(l))) return false;\n\n        f = successor(f);\n        if (equal(f, l)) break;\n    }\n    return true;\n}","//var word = sequence(['e', 'v', 'i', 't', 'a', 't', 'i', 'v', 'e'], \"word\");\n//var word = sequence(['e', 'v', 'i', 'x', 'a', 't', 'i', 'v', 'e'], \"word\");\nconst word = sequence(['e', 'v', 'i', 't', 't', 'i', 'v', 'e'], \"word\");\n\nconst f = begin(word);\nconst l = end(word);\n\nconst res = palindrome_bidirectional(f, l, eq);\n\nif (res) {\n    print('the word is palindrome');\n} else {\n    print('the word not is palindrome');\n};"]; }
+function __palindrome_bidirectional_typescript() { return ["function palindrome_bidirectional<T>(f: Iter<T>, l: Iter<T>, r: Relation<T>) {\n    while (true) {\n        if (equal(f, l)) break;\n        l = predecessor(l);\n\n        if ( ! r(source(f), source(l))) return false;\n\n        f = successor(f);\n        if (equal(f, l)) break;\n    }\n    return true;\n}","//var word = sequence(['e', 'v', 'i', 't', 'a', 't', 'i', 'v', 'e'], \"word\");\n//var word = sequence(['e', 'v', 'i', 'x', 'a', 't', 'i', 'v', 'e'], \"word\");\nconst word = sequence(['e', 'v', 'i', 't', 't', 'i', 'v', 'e']);\n\nconst f = begin(word);\nconst l = end(word);\n\nconst res = palindrome_bidirectional(f, l, eq);\n\nif (res) {\n    print('the word is palindrome');\n} else {\n    print('the word not is palindrome');\n};"]; }
 
 function __palindrome_bidirectional_usage() {
     //var word = sequence(['e', 'v', 'i', 't', 'a', 't', 'i', 'v', 'e'], "word");
     //var word = sequence(['e', 'v', 'i', 'x', 'a', 't', 'i', 'v', 'e'], "word");
-    const word = sequence(['e', 'v', 'i', 't', 't', 'i', 'v', 'e'], "word");
+    const word = sequence(['e', 'v', 'i', 't', 't', 'i', 'v', 'e']);
     const f = begin(word);
     const l = end(word);
     const res = palindrome_bidirectional(f, l, eq);
@@ -3662,12 +3662,12 @@ function __palindrome_naive_usage() {
 function __palindrome_naive_attributes() {
 }
 
-function __fill_typescript() { return ["function fill<T>(f: Iter<T>, l: Iter<T>, x: T) {\n    while ( ! equal(f, l)) {\n        sink(f, x);\n        f = successor(f);\n    }\n}","const s = sequence(array_all_equal(10, \"-\"), \"s\");\nfill(begin(s), end(s), '?');\nprint(s);"]; }
+function __fill_typescript() { return ["function fill<T>(f: Iter<T>, l: Iter<T>, x: T) {\n    while ( ! equal(f, l)) {\n        sink(f, x);\n        f = successor(f);\n    }\n}","const s = sequence(array_all_equal(10, \"-\"));\nfill(begin(s), end(s), '?');\nprint(s);"]; }
 
 function __fill_references() { return ["Elements of Programming, ch. 9, §9.2, pp. 150–155 (implementation in eop.h)."]; }
 
 function __fill_usage() {
-    const s = sequence(array_all_equal(10, "-"), "s");
+    const s = sequence(array_all_equal(10, "-"));
     fill(begin(s), end(s), '?');
     print(s);
 }
@@ -3675,12 +3675,12 @@ function __fill_usage() {
 function __fill_attributes() {
 }
 
-function __fill_n_typescript() { return ["function fill_n<T>(f: Iter<T>, n: number, x: T) {\n    while (n != 0) {\n        sink(f, x);\n        f = successor(f);\n        --n;\n    }\n}","const s = sequence(array_all_equal(10, \"-\"), \"s\");\nfill_n(begin(s), size(s), '?');\nprint(s);"]; }
+function __fill_n_typescript() { return ["function fill_n<T>(f: Iter<T>, n: number, x: T) {\n    while (n != 0) {\n        sink(f, x);\n        f = successor(f);\n        --n;\n    }\n}","const s = sequence(array_all_equal(10, \"-\"));\nfill_n(begin(s), size(s), '?');\nprint(s);"]; }
 
 function __fill_n_references() { return ["Elements of Programming, ch. 9, §9.2, pp. 150–155 (adapted from the counted implementation in eop.h)."]; }
 
 function __fill_n_usage() {
-    const s = sequence(array_all_equal(10, "-"), "s");
+    const s = sequence(array_all_equal(10, "-"));
     fill_n(begin(s), size(s), '?');
     print(s);
 }
