@@ -215,6 +215,8 @@ function __lab_types_declarations() { return ["// Typed view of the opaque objec
 
 function __lexicographical_compare_typescript() { return ["function lexicographical_compare<I extends Iter<unknown>, J extends Iter<ValueOf<I>>>(\n    f0: I, l0: I, f1: J, l1: J, r: Relation<ValueOf<I>>,\n): boolean {\n    while (true) {\n        if (equal(f1, l1)) return false;\n        if (equal(f0, l0)) return true;\n\n        const a = source(f0);\n        const b = source(f1);\n        if (r(a, b)) return true;\n        if (r(b, a)) return false;\n\n        f0 = successor(f0);\n        f1 = successor(f1);\n    }\n}","const left = sequence([9, 7, 1]);\nconst right = sequence([9, 5, 8]);\nconst before = lexicographical_compare(begin(left), end(left), begin(right), end(right), gt);\nprint(\"Left comes first in descending order: \" + before);"]; }
 
+function __lexicographical_compare_documentation() { return ["Compara dos rangos usando la relación de orden r. Decide el primer par que difiere. Si uno es prefijo propio del otro, va primero el más corto.","Compares two ranges using the ordering relation r. The first differing pair decides. A proper prefix precedes the longer range.","function lexicographical_compare<I extends Iter<unknown>, J extends Iter<ValueOf<I>>>(\n    f0: I, l0: I, f1: J, l1: J, r: Relation<ValueOf<I>>,\n): boolean"]; }
+
 function __lexicographical_compare_references() { return ["Elements of Programming, ch. 7, p. 127."]; }
 
 function __lexicographical_compare_usage() {
@@ -228,6 +230,8 @@ function __lexicographical_compare_attributes() {
 }
 
 function __lexicographical_equal_typescript() { return ["function lexicographical_equal<I extends Iter<unknown>, J extends Iter<ValueOf<I>>>(\n    f0: I, l0: I, f1: J, l1: J,\n): boolean {\n    return lexicographical_equivalent(f0, l0, f1, l1, eq);\n}","const left = sequence([\"a\", \"b\"]);\nconst right = sequence([\"a\", \"b\", \"c\"]);\nconst same = lexicographical_equal(begin(left), end(left), begin(right), end(right));\nprint(\"Equal ranges: \" + same);"]; }
+
+function __lexicographical_equal_documentation() { return ["Comprueba que ambos rangos tengan la misma longitud y elementos iguales en cada posición correspondiente.","Checks that the ranges have the same length and equal elements at every corresponding position.","function lexicographical_equal<I extends Iter<unknown>, J extends Iter<ValueOf<I>>>(\n    f0: I, l0: I, f1: J, l1: J,\n): boolean"]; }
 
 function __lexicographical_equal_references() { return ["Elements of Programming, ch. 7, p. 125."]; }
 
@@ -243,6 +247,8 @@ function __lexicographical_equal_attributes() {
 
 function __lexicographical_equivalent_typescript() { return ["function lexicographical_equivalent<I extends Iter<unknown>, J extends Iter<ValueOf<I>>>(\n    f0: I, l0: I, f1: J, l1: J, r: Relation<ValueOf<I>>,\n): boolean {\n    const [a, b] = find_mismatch(f0, l0, f1, l1, r);\n    return equal(a, l0) && equal(b, l1);\n}","const sameDigitSum = relation<number>((a, b) => digitSum(a) === digitSum(b));\nconst left = sequence([12, 23]);\nconst right = sequence([21, 32], \"right\", undefined, \"stream\");\nconst equivalent = lexicographical_equivalent(\n    begin(left), end(left), begin(right), end(right), sameDigitSum,\n);\nprint(\"Equivalent by digit sum: \" + equivalent);"]; }
 
+function __lexicographical_equivalent_documentation() { return ["Comprueba que ambos rangos tengan la misma longitud y que r considere equivalentes todos los pares correspondientes.","Checks that the ranges have the same length and r considers every corresponding pair equivalent.","function lexicographical_equivalent<I extends Iter<unknown>, J extends Iter<ValueOf<I>>>(\n    f0: I, l0: I, f1: J, l1: J, r: Relation<ValueOf<I>>,\n): boolean"]; }
+
 function __lexicographical_equivalent_references() { return ["Elements of Programming, ch. 7, p. 124."]; }
 
 function __lexicographical_equivalent_usage() {
@@ -257,6 +263,8 @@ function __lexicographical_equivalent_attributes() {
 }
 
 function __lexicographical_less_typescript() { return ["function lexicographical_less<I extends Iter<unknown>, J extends Iter<ValueOf<I>>>(\n    f0: I, l0: I, f1: J, l1: J,\n): boolean {\n    return lexicographical_compare(f0, l0, f1, l1, lt);\n}","const left = sequence([\"a\", \"b\"]);\nconst right = sequence([\"a\", \"b\", \"c\"]);\nconst before = lexicographical_less(begin(left), end(left), begin(right), end(right));\nprint(\"The shorter prefix comes first: \" + before);"]; }
+
+function __lexicographical_less_documentation() { return ["Comprueba si el primer rango precede al segundo en orden lexicográfico, usando el orden de los elementos del lab.","Checks whether the first range precedes the second lexicographically, using the lab’s element ordering.","function lexicographical_less<I extends Iter<unknown>, J extends Iter<ValueOf<I>>>(\n    f0: I, l0: I, f1: J, l1: J,\n): boolean"]; }
 
 function __lexicographical_less_references() { return ["Elements of Programming, ch. 7, p. 128."]; }
 
@@ -2690,6 +2698,8 @@ function __partition_stable_with_buffer_0_attributes() {
 
 function __add_to_counter_typescript() { return ["function add_to_counter<I extends ForwardIterator>(\n    f: I, l: I, op: Operation<ValueOf<I>>, x: ValueOf<I>, z: ValueOf<I>,\n): ValueOf<I> {\n    if (x === z) return z;\n\n    while (!equal(f, l)) {\n        const current = source(f);\n        if (current === z) {\n            sink(f, x);\n            return z;\n        }\n        x = op(current, x);\n        sink(f, z);\n        f = successor(f);\n    }\n    return x;\n}","const slots = sequence([1, 5, 0]);\nadd_to_counter(begin(slots), end(slots), add, 4, 0);\nprint(slots);"]; }
 
+function __add_to_counter_documentation() { return ["Incorpora x al contador binario. Combina las posiciones ocupadas y devuelve el acarreo si todas estaban ocupadas, o z si no queda acarreo.","Inserts x into the binary counter. Combines occupied slots and returns the carry if all slots were occupied, or z if no carry remains.","function add_to_counter<I extends ForwardIterator>(\n    f: I, l: I, op: Operation<ValueOf<I>>, x: ValueOf<I>, z: ValueOf<I>,\n): ValueOf<I>"]; }
+
 function __add_to_counter_references() { return ["Elements of Programming, ch. 11, p. 196."]; }
 
 function __add_to_counter_usage() {
@@ -2702,6 +2712,8 @@ function __add_to_counter_attributes() {
 }
 
 function __reduce_typescript() { return ["function reduce<I extends Iter<unknown>>(\n    f: I, l: I, op: Operation<ValueOf<I>>, z: ValueOf<I>,\n): ValueOf<I> {\n    if (equal(f, l)) return z;\n    return reduce_nonempty(f, l, op);\n}","const d = sequence([2, 3, 4]);\nconst result = reduce(begin(d), end(d), multiply, 1);\nconst empty = reduce(begin(d), begin(d), multiply, 1);\nprint(\"Product: \" + result + \". Empty range: \" + empty + \".\");"]; }
+
+function __reduce_documentation() { return ["Combina [f, l) de izquierda a derecha con op. Usa z como resultado del rango vacío.","Combines [f, l) from left to right using op. Returns z for an empty range.","function reduce<I extends Iter<unknown>>(\n    f: I, l: I, op: Operation<ValueOf<I>>, z: ValueOf<I>,\n): ValueOf<I>"]; }
 
 function __reduce_references() { return ["Elements of Programming, ch. 6, p. 97 (value-based overload in eop.h)."]; }
 
@@ -2716,6 +2728,8 @@ function __reduce_attributes() {
 }
 
 function __reduce_balanced_typescript() { return ["function reduce_balanced<I extends Iter<unknown>>(\n    f: I, l: I, op: Operation<ValueOf<I>>, z: ValueOf<I>,\n): ValueOf<I> {\n    const bins: ValueOf<I>[] = [];\n    while (!equal(f, l)) {\n        let carry = source(f);\n        if (carry !== z) {\n            let i = 0;\n            while (i < bins.length && bins[i] !== z) {\n                carry = op(bins[i], carry);\n                bins[i] = z;\n                ++i;\n            }\n            if (i < bins.length || carry !== z) bins[i] = carry;\n        }\n        f = successor(f);\n    }\n\n    let i = 0;\n    while (i < bins.length && bins[i] === z) ++i;\n    if (i === bins.length) return z;\n\n    let result = bins[i];\n    for (++i; i < bins.length; ++i) {\n        if (bins[i] !== z) result = op(bins[i], result);\n    }\n    return result;\n}","const concatenate = binary_operation(function concatenate(left: string, right: string) {\n    return left + right;\n});\nconst d = sequence([\"a\", \"b\", \"c\", \"d\", \"e\"]);\nconst concatenated = reduce_balanced(begin(d), end(d), concatenate, \"\");\nprint(\"Concatenation: \" + concatenated);"]; }
+
+function __reduce_balanced_documentation() { return ["Combina bloques de tamaño parecido sin cambiar el orden de los elementos. Requiere una operación asociativa y usa z como identidad.","Combines similarly sized blocks while preserving element order. Requires an associative operation and uses z as its identity.","function reduce_balanced<I extends Iter<unknown>>(\n    f: I, l: I, op: Operation<ValueOf<I>>, z: ValueOf<I>,\n): ValueOf<I>"]; }
 
 function __reduce_balanced_references() { return ["Elements of Programming, ch. 11, p. 198 (value-based overload in eop.h)."]; }
 
@@ -2732,6 +2746,8 @@ function __reduce_balanced_attributes() {
 }
 
 function __reduce_n_typescript() { return ["function reduce_n<I extends Iter<unknown>>(\n    f: I, n: number, op: Operation<ValueOf<I>>, z: ValueOf<I>,\n): ValueOf<I> {\n    if (n === 0) return z;\n    return reduce_nonempty_n(f, n, op);\n}","const d = sequence([2, 3, 4, 7]);\nconst product = reduce_n(begin(d), 3, multiply, 1);\nconst empty = reduce_n(begin(d), 0, multiply, 1);\nprint(\"Product: \" + product + \". Empty range: \" + empty + \".\");"]; }
+
+function __reduce_n_documentation() { return ["Combina los primeros n elementos desde f con op. Usa z como resultado cuando n es cero.","Combines the first n elements from f using op. Returns z when n is zero.","function reduce_n<I extends Iter<unknown>>(\n    f: I, n: number, op: Operation<ValueOf<I>>, z: ValueOf<I>,\n): ValueOf<I>"]; }
 
 function __reduce_n_references() { return ["Elements of Programming, ch. 6, p. 99, exercise 6.3."]; }
 
@@ -2778,6 +2794,8 @@ function __reduce_nonempty_attributes() {
 
 function __reduce_nonempty_n_typescript() { return ["function reduce_nonempty_n<I extends Iter<unknown>>(\n    f: I, n: number, op: Operation<ValueOf<I>>,\n): ValueOf<I> {\n    pre(() => Number.isSafeInteger(n) && n > 0, \"The count must be a positive safe integer.\");\n\n    let result = source(f);\n    while (n > 1) {\n        f = successor(f);\n        result = op(result, source(f));\n        --n;\n    }\n    return result;\n}","const d = sequence([2, 3, 4, 7], \"d\", undefined, \"stream\");\nconst product = reduce_nonempty_n(begin(d), 3, multiply);\nprint(\"Product of the first three elements: \" + product);"]; }
 
+function __reduce_nonempty_n_documentation() { return ["Combina de izquierda a derecha los primeros n elementos desde f. Requiere un conteo positivo.","Combines the first n elements from f from left to right. Requires a positive count.","function reduce_nonempty_n<I extends Iter<unknown>>(\n    f: I, n: number, op: Operation<ValueOf<I>>,\n): ValueOf<I>"]; }
+
 function __reduce_nonempty_n_references() { return ["Elements of Programming, ch. 6, p. 99, exercise 6.3."]; }
 
 function __reduce_nonempty_n_usage() {
@@ -2807,6 +2825,8 @@ function __reduce_nonempty_n_projected_attributes() {
 
 function __reduce_nonzeroes_typescript() { return ["function reduce_nonzeroes<I extends Iter<unknown>>(\n    f: I, l: I, op: Operation<ValueOf<I>>, z: ValueOf<I>,\n): ValueOf<I> {\n    let result;\n    do {\n        if (equal(f, l)) return z;\n        result = source(f);\n        f = successor(f);\n    } while (result === z);\n\n    while (!equal(f, l)) {\n        const value = source(f);\n        if (value !== z) result = op(result, value);\n        f = successor(f);\n    }\n    return result;\n}","const d = sequence([0, 2, 0, 4, 0, 8]);\nconst sum = reduce_nonzeroes(begin(d), end(d), add, 0);\nprint(\"Sum after skipping zeroes: \" + sum);"]; }
 
+function __reduce_nonzeroes_documentation() { return ["Combina los elementos de [f, l) distintos de z. Si el rango está vacío o solo contiene z, devuelve z.","Combines elements in [f, l) that differ from z. Returns z when the range is empty or contains only z.","function reduce_nonzeroes<I extends Iter<unknown>>(\n    f: I, l: I, op: Operation<ValueOf<I>>, z: ValueOf<I>,\n): ValueOf<I>"]; }
+
 function __reduce_nonzeroes_references() { return ["Elements of Programming, ch. 6, pp. 97–98 (value-based overload in eop.h)."]; }
 
 function __reduce_nonzeroes_usage() {
@@ -2819,6 +2839,8 @@ function __reduce_nonzeroes_attributes() {
 }
 
 function __reduce_nonzeroes_n_typescript() { return ["function reduce_nonzeroes_n<I extends Iter<unknown>>(\n    f: I, n: number, op: Operation<ValueOf<I>>, z: ValueOf<I>,\n): ValueOf<I> {\n    pre(() => Number.isSafeInteger(n) && n >= 0, \"The count must be a nonnegative safe integer.\");\n\n    let result;\n    do {\n        if (n === 0) return z;\n        result = source(f);\n        f = successor(f);\n        --n;\n    } while (result === z);\n\n    while (n !== 0) {\n        const value = source(f);\n        if (value !== z) result = op(result, value);\n        f = successor(f);\n        --n;\n    }\n    return result;\n}","const d = sequence([0, 2, 0, 4, 0, 8]);\nconst sum = reduce_nonzeroes_n(begin(d), 5, add, 0);\nprint(\"Sum of the first five elements after skipping zeroes: \" + sum);"]; }
+
+function __reduce_nonzeroes_n_documentation() { return ["Combina los primeros n elementos desde f que sean distintos de z. Devuelve z si no hay ninguno.","Combines the first n elements from f that differ from z. Returns z if there are none.","function reduce_nonzeroes_n<I extends Iter<unknown>>(\n    f: I, n: number, op: Operation<ValueOf<I>>, z: ValueOf<I>,\n): ValueOf<I>"]; }
 
 function __reduce_nonzeroes_n_references() { return ["Elements of Programming, ch. 6, p. 99, exercise 6.3."]; }
 
@@ -2848,6 +2870,8 @@ function __reduce_nonzeroes_n_projected_attributes() {
 }
 
 function __equal_range_typescript() { return ["function equal_range<I extends ForwardIterator>(\n    f: I, n: number, a: ValueOf<I>, r: Relation<ValueOf<I>>,\n): [I, I] {\n    // Precondition: the counted range is sorted according to r.\n    pre(() => Number.isSafeInteger(n) && n >= 0, \"The count must be a nonnegative safe integer.\");\n\n    while (n !== 0) {\n        const h = half(n);\n        const m = successor(f, h);\n        const value = source(m);\n        if (r(value, a)) {\n            f = successor(m);\n            n -= h + 1;\n        } else if (r(a, value)) {\n            n = h;\n        } else {\n            const first = lower_bound_n(f, h, a, r);\n            const last = upper_bound_n(successor(m), n - h - 1, a, r);\n            return [first, last];\n        }\n    }\n    return [f, f];\n}","const d = sequence([1, 2, 2, 2, 4, 7]);\nconst f = begin(d);\nconst [first, last] = equal_range(f, size(d), 2, lt);\nconst from = distance(f, first);\nconst to = distance(f, last);\nprint(\"Matching indices: [\" + from + \", \" + to + \")\");"]; }
+
+function __equal_range_documentation() { return ["Devuelve los límites del subrango equivalente a x según r. Requiere un rango contado ordenado por r.","Returns the bounds of the subrange equivalent to the search value under r. Requires a counted range sorted by r.","function equal_range<I extends ForwardIterator>(\n    f: I, n: number, a: ValueOf<I>, r: Relation<ValueOf<I>>,\n): [I, I]"]; }
 
 function __equal_range_references() { return ["Elements of Programming, ch. 6, p. 106, exercise 6.7."]; }
 
@@ -2932,6 +2956,8 @@ function __upper_bound_n_attributes() {
 
 function __all_typescript() { return ["function all<I extends Iter<unknown>>(f: I, l: I, p: Predicate<ValueOf<I>>): boolean {\n    const np = find_if_not(f, l, p);\n    return equal(l, np);\n}","const d = sequence([2, 4, 6]);\nconst f = begin(d);\nconst l = end(d);\n\nconst result = all(f, l, even);\n\nif (result) {\n    print(\"All the elements of the sequence are even.\");\n} else {\n    print(\"There is at least one item in the sequence that is not even.\");\n}"]; }
 
+function __all_documentation() { return ["Comprueba si todos los elementos cumplen p en [f, l).","Checks whether every element satisfies p in [f, l).","function all<I extends Iter<unknown>>(f: I, l: I, p: Predicate<ValueOf<I>>): boolean"]; }
+
 function __all_references() { return ["Elements of Programming, ch. 6, p. 95, exercise 6.1 (companion implementation in eop.h)."]; }
 
 function __all_usage() {
@@ -2951,6 +2977,8 @@ function __all_attributes() {
 }
 
 function __all_n_typescript() { return ["function all_n<I extends Iter<unknown>>(f: I, n: number, p: Predicate<ValueOf<I>>): boolean {\n    const [, remaining] = find_if_not_n(f, n, p);\n    return remaining === 0;\n}","const d = sequence([2, 4, 6, 7]);\nconst result = all_n(begin(d), 3, even);\nprint(\"All of the first three elements are even: \" + result);"]; }
+
+function __all_n_documentation() { return ["Comprueba si todos los elementos cumplen p entre los primeros n desde f.","Checks whether every element satisfies p among the first n from f.","function all_n<I extends Iter<unknown>>(f: I, n: number, p: Predicate<ValueOf<I>>): boolean"]; }
 
 function __all_n_references() { return ["Elements of Programming, ch. 6, p. 99, exercise 6.3."]; }
 
@@ -2988,6 +3016,8 @@ function __find_attributes() {
 
 function __find_adjacent_mismatch_typescript() { return ["function find_adjacent_mismatch<I extends Iter<unknown>>(\n    f: I, l: I, r: Relation<ValueOf<I>>,\n): I {\n    if (equal(f, l)) return l;\n\n    let previous = source(f);\n    f = successor(f);\n    while (!equal(f, l)) {\n        const current = source(f);\n        if (!r(previous, current)) return f;\n        previous = current;\n        f = successor(f);\n    }\n    return l;\n}","const d = sequence([1, 4, 3, 8], \"d\", undefined, \"stream\");\nconst result = find_adjacent_mismatch(begin(d), end(d), lt);\n\nif (equal(result, end(d))) {\n    print(\"All adjacent pairs are strictly increasing.\");\n} else {\n    const value = source(result);\n    print(\"First element that breaks the ordering: \" + value);\n}"]; }
 
+function __find_adjacent_mismatch_documentation() { return ["Devuelve el segundo iterador del primer par adyacente que falla r. Si todos los pares cumplen r, devuelve l.","Returns the second iterator of the first adjacent pair that fails r. Returns l if every pair satisfies r.","function find_adjacent_mismatch<I extends Iter<unknown>>(\n    f: I, l: I, r: Relation<ValueOf<I>>,\n): I"]; }
+
 function __find_adjacent_mismatch_references() { return ["Elements of Programming, ch. 6, p. 100."]; }
 
 function __find_adjacent_mismatch_usage() {
@@ -3007,6 +3037,8 @@ function __find_adjacent_mismatch_attributes() {
 
 function __find_adjacent_mismatch_forward_typescript() { return ["function find_adjacent_mismatch_forward<I extends ForwardIterator>(\n    f: I, l: I, r: Relation<ValueOf<I>>,\n): I {\n    if (equal(f, l)) return l;\n\n    let previous = f;\n    f = successor(f);\n    while (!equal(f, l) && r(source(previous), source(f))) {\n        previous = f;\n        f = successor(f);\n    }\n    return f;\n}","const d = sequence([1, 4, 3, 8], \"d\", undefined, \"sll\");\nconst result = find_adjacent_mismatch_forward(begin(d), end(d), lt);\n\nif (equal(result, end(d))) {\n    print(\"All adjacent pairs are strictly increasing.\");\n} else {\n    const value = source(result);\n    print(\"First element that breaks the ordering: \" + value);\n}"]; }
 
+function __find_adjacent_mismatch_forward_documentation() { return ["Devuelve el segundo iterador del primer par adyacente que falla r, o l si no lo hay. Esta variante requiere iteradores de avance multipasada.","Returns the second iterator of the first adjacent pair that fails r, or l if none does. This variant requires multipass forward iterators.","function find_adjacent_mismatch_forward<I extends ForwardIterator>(\n    f: I, l: I, r: Relation<ValueOf<I>>,\n): I"]; }
+
 function __find_adjacent_mismatch_forward_references() { return ["Elements of Programming, ch. 6, p. 103."]; }
 
 function __find_adjacent_mismatch_forward_usage() {
@@ -3025,6 +3057,8 @@ function __find_adjacent_mismatch_forward_attributes() {
 }
 
 function __find_backward_if_typescript() { return ["function find_backward_if<I extends BidirectionalIterator>(\n    f: I, l: I, p: Predicate<ValueOf<I>>,\n): I {\n    while (true) {\n        if (equal(l, f)) return f;\n        l = predecessor(l);\n        if (p(source(l))) return successor(l);\n    }\n}","const d = sequence([2, 3, 4, 7]);\nconst f = begin(d);\nconst result = find_backward_if(f, end(d), even);\n\nif (equal(result, f)) {\n    print(\"No matching element.\");\n} else {\n    const value = source(predecessor(result));\n    print(\"Last even element: \" + value);\n}"]; }
+
+function __find_backward_if_documentation() { return ["Busca desde el final. Devuelve el iterador inmediatamente posterior al último elemento que cumple p, o f si ninguno lo cumple. Requiere iteradores bidireccionales.","Searches from the end. Returns the iterator just after the last element satisfying p, or f if none do. Requires bidirectional iterators.","function find_backward_if<I extends BidirectionalIterator>(\n    f: I, l: I, p: Predicate<ValueOf<I>>,\n): I"]; }
 
 function __find_backward_if_references() { return ["Elements of Programming, ch. 6, pp. 108–109 (exercise 6.8)."]; }
 
@@ -3084,6 +3118,8 @@ function __find_if_attributes() {
 
 function __find_if_n_typescript() { return ["function find_if_n<I extends Iter<unknown>>(\n    f: I, n: number, p: Predicate<ValueOf<I>>,\n): [I, number] {\n    pre(() => Number.isSafeInteger(n) && n >= 0, \"The count must be a nonnegative safe integer.\");\n\n    while (n !== 0 && !p(source(f))) {\n        f = successor(f);\n        --n;\n    }\n    return [f, n];\n}","const d = sequence([1, 3, 8, 5, 6]);\nconst [result, remaining] = find_if_n(begin(d), size(d), even);\n\nif (remaining === 0) {\n    print(\"No matching element.\");\n} else {\n    const value = source(result);\n    print(\"Found \" + value + \" with \" + remaining + \" elements remaining.\");\n}"]; }
 
+function __find_if_n_documentation() { return ["Busca el primer elemento que cumple p entre los primeros n desde f. Devuelve la posición y la cantidad restante.","Finds the first element satisfying p among the first n from f. Returns the position and remaining count.","function find_if_n<I extends Iter<unknown>>(\n    f: I, n: number, p: Predicate<ValueOf<I>>,\n): [I, number]"]; }
+
 function __find_if_n_references() { return ["From Mathematics to Generic Programming, ch. 10, p. 191 (ch10.h)."]; }
 
 function __find_if_n_usage() {
@@ -3102,6 +3138,8 @@ function __find_if_n_attributes() {
 }
 
 function __find_if_not_typescript() { return ["function find_if_not<I extends Iter<unknown>>(f: I, l: I, p: Predicate<ValueOf<I>>): I {\n    while (!equal(f, l) && p(source(f))) {\n        f = successor(f);\n    }\n    return f;\n}","const d = sequence([2, 4, 7, 8]);\nconst l = end(d);\nconst result = find_if_not(begin(d), l, even);\n\nif (equal(result, l)) {\n    print(\"No matching element.\");\n} else {\n    const value = source(result);\n    print(\"First element that is not even: \" + value);\n}"]; }
+
+function __find_if_not_documentation() { return ["Devuelve el primer iterador de [f, l) cuyo elemento falla p. Si no hay ninguno, devuelve l.","Returns the first iterator in [f, l) whose element fails p. Returns l if there is none.","function find_if_not<I extends Iter<unknown>>(f: I, l: I, p: Predicate<ValueOf<I>>): I"]; }
 
 function __find_if_not_references() { return ["Elements of Programming, ch. 6, p. 95 (described in the text; implementation in eop.h)."]; }
 
@@ -3122,6 +3160,8 @@ function __find_if_not_attributes() {
 }
 
 function __find_if_not_n_typescript() { return ["function find_if_not_n<I extends Iter<unknown>>(\n    f: I, n: number, p: Predicate<ValueOf<I>>,\n): [I, number] {\n    return find_if_n(f, n, value => !p(value));\n}","const d = sequence([2, 4, 7, 8]);\nconst [result, remaining] = find_if_not_n(begin(d), size(d), even);\nif (remaining === 0) {\n    print(\"No odd element.\");\n} else {\n    const value = source(result);\n    print(\"First odd element: \" + value);\n}"]; }
+
+function __find_if_not_n_documentation() { return ["Busca el primer elemento que falla p entre los primeros n desde f. Devuelve la posición y la cantidad restante.","Finds the first element failing p among the first n from f. Returns the position and remaining count.","function find_if_not_n<I extends Iter<unknown>>(\n    f: I, n: number, p: Predicate<ValueOf<I>>,\n): [I, number]"]; }
 
 function __find_if_not_n_references() { return ["Elements of Programming, ch. 6, p. 99, exercise 6.3."]; }
 
@@ -3176,6 +3216,8 @@ function __find_if_unguarded_attributes() {
 
 function __find_mismatch_typescript() { return ["function find_mismatch<I extends Iter<unknown>, J extends Iter<ValueOf<I>>>(\n    f0: I, l0: I, f1: J, l1: J, r: Relation<ValueOf<I>>,\n): [I, J] {\n    while (!equal(f0, l0) && !equal(f1, l1) && r(source(f0), source(f1))) {\n        f0 = successor(f0);\n        f1 = successor(f1);\n    }\n    return [f0, f1];\n}","const left = sequence([2, 4, 6, 8]);\nconst right = sequence([2, 4, 7, 8]);\nconst [a, b] = find_mismatch(begin(left), end(left), begin(right), end(right), eq);\n\nif (equal(a, end(left)) || equal(b, end(right))) {\n    print(\"No mismatch in the common prefix.\");\n} else {\n    const leftValue = source(a);\n    const rightValue = source(b);\n    print(\"First mismatch: \" + leftValue + \" and \" + rightValue);\n}"]; }
 
+function __find_mismatch_documentation() { return ["Avanza por dos rangos hasta el primer par que falla r o hasta el fin de uno de ellos. Devuelve las dos posiciones en las que se detuvo.","Advances through two ranges until the first pair that fails r or until one range ends. Returns both stopping positions.","function find_mismatch<I extends Iter<unknown>, J extends Iter<ValueOf<I>>>(\n    f0: I, l0: I, f1: J, l1: J, r: Relation<ValueOf<I>>,\n): [I, J]"]; }
+
 function __find_mismatch_references() { return ["Elements of Programming, ch. 6, pp. 99–100 (bounded ranges; see exercise 6.5)."]; }
 
 function __find_mismatch_usage() {
@@ -3196,6 +3238,8 @@ function __find_mismatch_attributes() {
 }
 
 function __find_mismatch_bounded_n_typescript() { return ["function find_mismatch_bounded_n<I extends Iter<unknown>, J extends Iter<ValueOf<I>>>(\n    f0: I, l0: I, f1: J, n1: number, r: Relation<ValueOf<I>>,\n): [left: I, right: J, remainingRight: number] {\n    pre(() => Number.isSafeInteger(n1) && n1 >= 0, \"Counts must be nonnegative safe integers.\");\n\n    while (!equal(f0, l0) && n1 !== 0 && r(source(f0), source(f1))) {\n        f0 = successor(f0);\n        f1 = successor(f1);\n        --n1;\n    }\n    return [f0, f1, n1];\n}","const left = sequence([2, 4, 6, 8]);\nconst right = sequence([2, 4, 7]);\n// Compare only the first two elements of the right range.\nconst [a, b, remainingRight] = find_mismatch_bounded_n(begin(left), end(left), begin(right), 2, eq);\n\nif (equal(a, end(left)) || remainingRight === 0) {\n    print(\"No mismatch in the common prefix.\");\n} else {\n    const leftValue = source(a);\n    const rightValue = source(b);\n    print(\"First mismatch: \" + leftValue + \" and \" + rightValue);\n}"]; }
+
+function __find_mismatch_bounded_n_documentation() { return ["Compara un rango con fin explícito y otro contado. Devuelve las dos posiciones al detenerse y el conteo restante del segundo rango.","Compares a bounded range with a counted range. Returns both stopping positions and the remaining count of the second range.","function find_mismatch_bounded_n<I extends Iter<unknown>, J extends Iter<ValueOf<I>>>(\n    f0: I, l0: I, f1: J, n1: number, r: Relation<ValueOf<I>>,\n): [left: I, right: J, remainingRight: number]"]; }
 
 function __find_mismatch_bounded_n_references() { return ["Elements of Programming, ch. 6, p. 100, exercise 6.5."]; }
 
@@ -3219,6 +3263,8 @@ function __find_mismatch_bounded_n_attributes() {
 
 function __find_mismatch_n_typescript() { return ["function find_mismatch_n<I extends Iter<unknown>, J extends Iter<ValueOf<I>>>(\n    f0: I, n0: number, f1: J, n1: number, r: Relation<ValueOf<I>>,\n): [left: I, right: J, remainingLeft: number, remainingRight: number] {\n    pre(() => Number.isSafeInteger(n0) && n0 >= 0 && Number.isSafeInteger(n1) && n1 >= 0, \"Counts must be nonnegative safe integers.\");\n\n    while (n0 !== 0 && n1 !== 0 && r(source(f0), source(f1))) {\n        f0 = successor(f0);\n        f1 = successor(f1);\n        --n0;\n        --n1;\n    }\n    return [f0, f1, n0, n1];\n}","const left = sequence([2, 4, 6, 8]);\nconst right = sequence([2, 4, 7]);\nconst [a, b, remainingLeft, remainingRight] = find_mismatch_n(begin(left), size(left), begin(right), size(right), eq);\n\nif (remainingLeft === 0 || remainingRight === 0) {\n    print(\"No mismatch in the common prefix.\");\n} else {\n    const leftValue = source(a);\n    const rightValue = source(b);\n    print(\"First mismatch: \" + leftValue + \" and \" + rightValue);\n    print(\"Elements remaining (left, right): \" + remainingLeft + \", \" + remainingRight);\n}"]; }
 
+function __find_mismatch_n_documentation() { return ["Compara dos rangos contados hasta que falle r o se agote uno de ellos. Devuelve ambos iteradores y los dos conteos restantes.","Compares two counted ranges until r fails or a range is exhausted. Returns both iterators and both remaining counts.","function find_mismatch_n<I extends Iter<unknown>, J extends Iter<ValueOf<I>>>(\n    f0: I, n0: number, f1: J, n1: number, r: Relation<ValueOf<I>>,\n): [left: I, right: J, remainingLeft: number, remainingRight: number]"]; }
+
 function __find_mismatch_n_references() { return ["Elements of Programming, ch. 6, p. 100, exercise 6.5."]; }
 
 function __find_mismatch_n_usage() {
@@ -3241,6 +3287,8 @@ function __find_mismatch_n_attributes() {
 
 function __find_mismatch_n_bounded_typescript() { return ["function find_mismatch_n_bounded<I extends Iter<unknown>, J extends Iter<ValueOf<I>>>(\n    f0: I, n0: number, f1: J, l1: J, r: Relation<ValueOf<I>>,\n): [left: I, right: J, remainingLeft: number] {\n    pre(() => Number.isSafeInteger(n0) && n0 >= 0, \"Counts must be nonnegative safe integers.\");\n\n    while (n0 !== 0 && !equal(f1, l1) && r(source(f0), source(f1))) {\n        f0 = successor(f0);\n        f1 = successor(f1);\n        --n0;\n    }\n    return [f0, f1, n0];\n}","const left = sequence([2, 4, 6, 8]);\nconst right = sequence([2, 4, 7]);\nconst [a, b, remainingLeft] = find_mismatch_n_bounded(begin(left), size(left), begin(right), end(right), eq);\n\nif (remainingLeft === 0 || equal(b, end(right))) {\n    print(\"No mismatch in the common prefix.\");\n} else {\n    const leftValue = source(a);\n    const rightValue = source(b);\n    print(\"First mismatch: \" + leftValue + \" and \" + rightValue);\n}"]; }
 
+function __find_mismatch_n_bounded_documentation() { return ["Compara un rango contado y otro con fin explícito. Devuelve las dos posiciones al detenerse y el conteo restante del primer rango.","Compares a counted range with a bounded range. Returns both stopping positions and the remaining count of the first range.","function find_mismatch_n_bounded<I extends Iter<unknown>, J extends Iter<ValueOf<I>>>(\n    f0: I, n0: number, f1: J, l1: J, r: Relation<ValueOf<I>>,\n): [left: I, right: J, remainingLeft: number]"]; }
+
 function __find_mismatch_n_bounded_references() { return ["Elements of Programming, ch. 6, p. 100, exercise 6.5."]; }
 
 function __find_mismatch_n_bounded_usage() {
@@ -3262,6 +3310,8 @@ function __find_mismatch_n_bounded_attributes() {
 
 function __find_n_typescript() { return ["function find_n<I extends Iter<unknown>>(\n    f: I, n: number, x: ValueOf<I>,\n): [I, number] {\n    return find_if_n(f, n, value => value === x);\n}","const d = sequence([3, 7, 11, 7, 13]);\nconst [result, remaining] = find_n(begin(d), size(d), 7);\n\nif (remaining === 0) {\n    print(\"No matching element.\");\n} else {\n    const value = source(result);\n    print(\"Found \" + value + \" with \" + remaining + \" elements remaining.\");\n}"]; }
 
+function __find_n_documentation() { return ["Busca x en los primeros n elementos desde f. Devuelve la posición y la cantidad restante, que es cero si x está ausente.","Finds x among the first n elements from f. Returns the position and remaining count, which is zero if x is absent.","function find_n<I extends Iter<unknown>>(\n    f: I, n: number, x: ValueOf<I>,\n): [I, number]"]; }
+
 function __find_n_references() { return ["Elements of Programming, ch. 6, pp. 98–99 (adapted using find_if_n)."]; }
 
 function __find_n_usage() {
@@ -3281,6 +3331,8 @@ function __find_n_attributes() {
 
 function __find_not_typescript() { return ["function find_not<I extends Iter<unknown>>(f: I, l: I, x: ValueOf<I>): I {\n    while (!equal(f, l) && source(f) === x) {\n        f = successor(f);\n    }\n    return f;\n}","const d = sequence([7, 7, 11, 7]);\nconst result = find_not(begin(d), end(d), 7);\n\nif (equal(result, end(d))) {\n    print(\"No differing element.\");\n} else {\n    const value = source(result);\n    print(\"First differing element: \" + value);\n}"]; }
 
+function __find_not_documentation() { return ["Busca el primer elemento de [f, l) distinto de x. Si todos son iguales a x, devuelve l.","Finds the first element in [f, l) that differs from x. Returns l if all elements equal x.","function find_not<I extends Iter<unknown>>(f: I, l: I, x: ValueOf<I>): I"]; }
+
 function __find_not_references() { return ["Elements of Programming, ch. 6, p. 94 (companion implementation in eop.h)."]; }
 
 function __find_not_usage() {
@@ -3299,6 +3351,8 @@ function __find_not_attributes() {
 }
 
 function __find_not_n_typescript() { return ["function find_not_n<I extends Iter<unknown>>(\n    f: I, n: number, x: ValueOf<I>,\n): [I, number] {\n    return find_if_n(f, n, value => value !== x);\n}","const d = sequence([7, 7, 11, 7]);\nconst [result, remaining] = find_not_n(begin(d), 3, 7);\nif (remaining === 0) {\n    print(\"The first three elements are all 7.\");\n} else {\n    const value = source(result);\n    print(\"First differing element: \" + value);\n}"]; }
+
+function __find_not_n_documentation() { return ["Busca el primer elemento distinto de x entre los primeros n desde f. Devuelve la posición y la cantidad restante.","Finds the first element differing from x among the first n from f. Returns the position and remaining count.","function find_not_n<I extends Iter<unknown>>(\n    f: I, n: number, x: ValueOf<I>,\n): [I, number]"]; }
 
 function __find_not_n_references() { return ["Elements of Programming, ch. 6, p. 99, exercise 6.3."]; }
 
@@ -3444,6 +3498,8 @@ function __kmp_lps_attributes() {
 
 function __none_typescript() { return ["function none<I extends Iter<unknown>>(f: I, l: I, p: Predicate<ValueOf<I>>): boolean {\n    const it = find_if(f, l, p);\n    return equal(l, it);\n}","const d = sequence([1, 3, 5]);\nconst f = begin(d);\nconst l = end(d);\n\nconst result = none(f, l, even);\n\nif (result) {\n    print(\"None of the elements in the sequence are even.\");\n} else {\n    print(\"There is at least one item in the sequence that is even.\");\n}"]; }
 
+function __none_documentation() { return ["Comprueba si ningún elemento cumple p en [f, l).","Checks whether no element satisfies p in [f, l).","function none<I extends Iter<unknown>>(f: I, l: I, p: Predicate<ValueOf<I>>): boolean"]; }
+
 function __none_references() { return ["Elements of Programming, ch. 6, p. 95, exercise 6.1 (companion implementation in eop.h)."]; }
 
 function __none_usage() {
@@ -3464,6 +3520,8 @@ function __none_attributes() {
 
 function __none_n_typescript() { return ["function none_n<I extends Iter<unknown>>(f: I, n: number, p: Predicate<ValueOf<I>>): boolean {\n    const [, remaining] = find_if_n(f, n, p);\n    return remaining === 0;\n}","const d = sequence([1, 3, 5, 8]);\nconst result = none_n(begin(d), 3, even);\nprint(\"None of the first three elements are even: \" + result);"]; }
 
+function __none_n_documentation() { return ["Comprueba si ningún elemento cumple p entre los primeros n desde f.","Checks whether no element satisfies p among the first n from f.","function none_n<I extends Iter<unknown>>(f: I, n: number, p: Predicate<ValueOf<I>>): boolean"]; }
+
 function __none_n_references() { return ["Elements of Programming, ch. 6, p. 99, exercise 6.3."]; }
 
 function __none_n_usage() {
@@ -3476,6 +3534,8 @@ function __none_n_attributes() {
 }
 
 function __not_all_typescript() { return ["function not_all<I extends Iter<unknown>>(f: I, l: I, p: Predicate<ValueOf<I>>): boolean {\n    return !all(f, l, p);\n}","const d = sequence([2, 3, 4]);\nconst f = begin(d);\nconst l = end(d);\n\nconst result = not_all(f, l, even);\n\nif (result) {\n    print(\"There is at least one item in the sequence that is not even.\");\n} else {\n    print(\"All the elements of the sequence are even.\");\n}"]; }
+
+function __not_all_documentation() { return ["Comprueba si al menos un elemento falla p en [f, l).","Checks whether at least one element fails p in [f, l).","function not_all<I extends Iter<unknown>>(f: I, l: I, p: Predicate<ValueOf<I>>): boolean"]; }
 
 function __not_all_references() { return ["Elements of Programming, ch. 6, p. 95, exercise 6.1 (companion implementation in eop.h)."]; }
 
@@ -3496,6 +3556,8 @@ function __not_all_attributes() {
 }
 
 function __not_all_n_typescript() { return ["function not_all_n<I extends Iter<unknown>>(f: I, n: number, p: Predicate<ValueOf<I>>): boolean {\n    return !all_n(f, n, p);\n}","const d = sequence([2, 3, 6, 8]);\nconst result = not_all_n(begin(d), 3, even);\nprint(\"At least one of the first three elements is odd: \" + result);"]; }
+
+function __not_all_n_documentation() { return ["Comprueba si al menos un elemento falla p entre los primeros n desde f.","Checks whether at least one element fails p among the first n from f.","function not_all_n<I extends Iter<unknown>>(f: I, n: number, p: Predicate<ValueOf<I>>): boolean"]; }
 
 function __not_all_n_references() { return ["Elements of Programming, ch. 6, p. 99, exercise 6.3."]; }
 
@@ -3563,6 +3625,8 @@ function __partitioned_at_point_attributes() {
 
 function __partitioned_n_typescript() { return ["function partitioned_n<I extends Iter<unknown>>(f: I, n: number, p: Predicate<ValueOf<I>>): boolean {\n    const [middle, remaining] = find_if_n(f, n, p);\n    if (remaining === 0) return true;\n\n    const [, untested] = find_if_n(successor(middle), remaining - 1, value => !p(value));\n    return untested === 0;\n}","const d = sequence([1, 3, 2, 4, 7]);\nconst prefix = partitioned_n(begin(d), 4, even);\nconst full = partitioned_n(begin(d), size(d), even);\nprint(\"First four elements are partitioned: \" + prefix);\nprint(\"Full range is partitioned: \" + full);"]; }
 
+function __partitioned_n_documentation() { return ["Comprueba que, en los primeros n elementos desde f, todos los que fallan p aparezcan antes de los que lo cumplen.","Checks that every element that fails p comes before those that satisfy it among the first n elements from f.","function partitioned_n<I extends Iter<unknown>>(f: I, n: number, p: Predicate<ValueOf<I>>): boolean"]; }
+
 function __partitioned_n_references() { return ["Elements of Programming, ch. 6, p. 102, exercise 6.6."]; }
 
 function __partitioned_n_usage() {
@@ -3605,6 +3669,8 @@ function __potential_partition_point_attributes() {
 
 function __some_typescript() { return ["function some<I extends Iter<unknown>>(f: I, l: I, p: Predicate<ValueOf<I>>): boolean {\n    return !none(f, l, p);\n}","const d = sequence([1, 2, 3]);\nconst f = begin(d);\nconst l = end(d);\n\nconst result = some(f, l, even);\n\nif (result) {\n    print(\"Some of the elements in the sequence are even.\");\n} else {\n    print(\"None of the elements in the sequence are even.\");\n}"]; }
 
+function __some_documentation() { return ["Comprueba si al menos un elemento cumple p en [f, l).","Checks whether at least one element satisfies p in [f, l).","function some<I extends Iter<unknown>>(f: I, l: I, p: Predicate<ValueOf<I>>): boolean"]; }
+
 function __some_references() { return ["Elements of Programming, ch. 6, p. 95, exercise 6.1 (companion implementation in eop.h)."]; }
 
 function __some_usage() {
@@ -3624,6 +3690,8 @@ function __some_attributes() {
 }
 
 function __some_n_typescript() { return ["function some_n<I extends Iter<unknown>>(f: I, n: number, p: Predicate<ValueOf<I>>): boolean {\n    return !none_n(f, n, p);\n}","const d = sequence([1, 4, 5, 7]);\nconst result = some_n(begin(d), 3, even);\nprint(\"At least one of the first three elements is even: \" + result);"]; }
+
+function __some_n_documentation() { return ["Comprueba si al menos un elemento cumple p entre los primeros n desde f.","Checks whether at least one element satisfies p among the first n from f.","function some_n<I extends Iter<unknown>>(f: I, n: number, p: Predicate<ValueOf<I>>): boolean"]; }
 
 function __some_n_references() { return ["Elements of Programming, ch. 6, p. 99, exercise 6.3."]; }
 
@@ -3843,6 +3911,8 @@ function __swap_ranges_n_attributes() {
 
 function __for_each_typescript() { return ["function for_each<I extends Iter<unknown>, Proc extends (value: ValueOf<I>) => void>(\n    f: I, l: I, proc: Proc,\n): Proc {\n    while (!equal(f, l)) {\n        proc(source(f));\n        f = successor(f);\n    }\n    return proc;\n}","const d = sequence([2, 4, 6]);\nlet total = 0;\nconst accumulate = for_each(begin(d), end(d), x => { total = add(total, x); });\nprint(\"Sum: \" + total);\naccumulate(8);\nprint(\"Sum after reusing the procedure: \" + total);"]; }
 
+function __for_each_documentation() { return ["Aplica proc a cada valor de [f, l), de izquierda a derecha. Devuelve el mismo procedimiento con el estado que haya acumulado.","Applies proc to each value in [f, l) from left to right. Returns the same procedure with any state it accumulated.","function for_each<I extends Iter<unknown>, Proc extends (value: ValueOf<I>) => void>(\n    f: I, l: I, proc: Proc,\n): Proc"]; }
+
 function __for_each_references() { return ["Elements of Programming, ch. 6, p. 94."]; }
 
 function __for_each_usage() {
@@ -3858,6 +3928,8 @@ function __for_each_attributes() {
 }
 
 function __for_each_n_typescript() { return ["function for_each_n<I extends Iter<unknown>, Proc extends (value: ValueOf<I>) => void>(\n    f: I, n: number, proc: Proc,\n): [Proc, I] {\n    pre(() => Number.isSafeInteger(n) && n >= 0, \"The count must be a nonnegative safe integer.\");\n\n    while (n !== 0) {\n        proc(source(f));\n        f = successor(f);\n        --n;\n    }\n    return [proc, f];\n}","const d = sequence([2, 4, 6, 8], \"d\", undefined, \"stream\");\nlet total = 0;\nconst [accumulate, next] = for_each_n(begin(d), 2, x => { total = add(total, x); });\n\nprint(\"First two elements sum to \" + total + \".\");\nfor_each(next, end(d), accumulate);\nprint(\"Sum after resuming: \" + total);"]; }
+
+function __for_each_n_documentation() { return ["Aplica proc a los primeros n valores desde f. Devuelve el procedimiento y el iterador desde el que se puede retomar el recorrido.","Applies proc to the first n values from f. Returns the procedure and the iterator from which traversal can resume.","function for_each_n<I extends Iter<unknown>, Proc extends (value: ValueOf<I>) => void>(\n    f: I, n: number, proc: Proc,\n): [Proc, I]"]; }
 
 function __for_each_n_references() { return ["Elements of Programming, ch. 6, p. 98."]; }
 
@@ -3910,6 +3982,8 @@ function __count_if_basis_attributes() {
 
 function __count_if_for_each_typescript() { return ["function count_if_for_each<I extends Iter<unknown>>(\n    f: I, l: I, p: Predicate<ValueOf<I>>,\n): number {\n    let count = 0;\n    const tally = Object.assign(\n        (value: ValueOf<I>) => { if (p(value)) ++count; },\n        { total: () => count },\n    );\n    return for_each(f, l, tally).total();\n}","const d = sequence([2, 3, 4, 7, 8]);\nconst count = count_if_for_each(begin(d), end(d), even);\nprint(\"Even elements: \" + count);"]; }
 
+function __count_if_for_each_documentation() { return ["Cuenta los elementos de [f, l) que cumplen p usando el estado del procedimiento devuelto por for_each.","Counts the elements in [f, l) that satisfy p using the state of the procedure returned by for_each.","function count_if_for_each<I extends Iter<unknown>>(\n    f: I, l: I, p: Predicate<ValueOf<I>>,\n): number"]; }
+
 function __count_if_for_each_references() { return ["Elements of Programming, ch. 6, p. 95, exercise 6.2."]; }
 
 function __count_if_for_each_usage() {
@@ -3922,6 +3996,8 @@ function __count_if_for_each_attributes() {
 }
 
 function __count_if_n_typescript() { return ["function count_if_n<I extends Iter<unknown>>(f: I, n: number, p: Predicate<ValueOf<I>>): number {\n    return count_if_n_basis(f, n, p, 0);\n}","const d = sequence([2, 3, 4, 7, 8]);\nconst count = count_if_n(begin(d), 4, even);\nprint(\"Even elements among the first four: \" + count);"]; }
+
+function __count_if_n_documentation() { return ["Cuenta cuántos de los primeros n elementos a partir de f cumplen p.","Counts how many of the first n elements from f satisfy p.","function count_if_n<I extends Iter<unknown>>(f: I, n: number, p: Predicate<ValueOf<I>>): number"]; }
 
 function __count_if_n_references() { return ["Elements of Programming, ch. 6, p. 99, exercise 6.3."]; }
 
@@ -3988,6 +4064,8 @@ function __count_if_not_basis_attributes() {
 }
 
 function __count_if_not_n_typescript() { return ["function count_if_not_n<I extends Iter<unknown>>(f: I, n: number, p: Predicate<ValueOf<I>>): number {\n    return count_if_not_n_basis(f, n, p, 0);\n}","const d = sequence([2, 3, 4, 7, 9]);\nconst count = count_if_not_n(begin(d), 4, even);\nprint(\"Odd elements among the first four: \" + count);"]; }
+
+function __count_if_not_n_documentation() { return ["Cuenta cuántos de los primeros n elementos a partir de f fallan p.","Counts how many of the first n elements from f fail p.","function count_if_not_n<I extends Iter<unknown>>(f: I, n: number, p: Predicate<ValueOf<I>>): number"]; }
 
 function __count_if_not_n_references() { return ["Elements of Programming, ch. 6, p. 99, exercise 6.3."]; }
 
@@ -4080,6 +4158,8 @@ function __iota_attributes() {
 }
 
 function __palindrome_bidirectional_typescript() { return ["function palindrome_bidirectional<I extends BidirectionalIterator>(\n    f: I, l: I, r: Relation<ValueOf<I>>,\n): boolean {\n    while (!equal(f, l)) {\n        l = predecessor(l);\n        if (equal(f, l)) return true;\n        if (!r(source(f), source(l))) return false;\n        f = successor(f);\n    }\n    return true;\n}","const word = sequence(array_from(\"level\"));\nconst palindrome = palindrome_bidirectional(begin(word), end(word), eq);\nprint(\"Is a palindrome: \" + palindrome);"]; }
+
+function __palindrome_bidirectional_documentation() { return ["Compara los elementos desde los extremos hacia el centro para determinar si el rango es un palíndromo según r.","Compares elements from the ends toward the middle to decide whether the range is a palindrome under r.","function palindrome_bidirectional<I extends BidirectionalIterator>(\n    f: I, l: I, r: Relation<ValueOf<I>>,\n): boolean"]; }
 
 function __palindrome_bidirectional_references() { return ["Elements of Programming, ch. 6, p. 109, exercise 6.9."]; }
 

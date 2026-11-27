@@ -1,5 +1,7 @@
 // Reference: Elements of Programming, ch. 6, p. 100, exercise 6.5.
 
+// Doc (es): Compara un rango contado y otro con fin explícito. Devuelve las dos posiciones al detenerse y el conteo restante del primer rango.
+// Doc (en): Compares a counted range with a bounded range. Returns both stopping positions and the remaining count of the first range.
 function find_mismatch_n_bounded<I extends Iter<unknown>, J extends Iter<ValueOf<I>>>(
     f0: I, n0: number, f1: J, l1: J, r: Relation<ValueOf<I>>,
 ): [left: I, right: J, remainingLeft: number] {

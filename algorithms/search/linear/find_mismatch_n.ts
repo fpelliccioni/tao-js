@@ -1,5 +1,7 @@
 // Reference: Elements of Programming, ch. 6, p. 100, exercise 6.5.
 
+// Doc (es): Compara dos rangos contados hasta que falle r o se agote uno de ellos. Devuelve ambos iteradores y los dos conteos restantes.
+// Doc (en): Compares two counted ranges until r fails or a range is exhausted. Returns both iterators and both remaining counts.
 function find_mismatch_n<I extends Iter<unknown>, J extends Iter<ValueOf<I>>>(
     f0: I, n0: number, f1: J, n1: number, r: Relation<ValueOf<I>>,
 ): [left: I, right: J, remainingLeft: number, remainingRight: number] {

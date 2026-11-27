@@ -1,5 +1,7 @@
 // Reference: Elements of Programming, ch. 6, p. 106, exercise 6.7.
 
+// Doc (es): Devuelve los límites del subrango equivalente a x según r. Requiere un rango contado ordenado por r.
+// Doc (en): Returns the bounds of the subrange equivalent to the search value under r. Requires a counted range sorted by r.
 function equal_range<I extends ForwardIterator>(
     f: I, n: number, a: ValueOf<I>, r: Relation<ValueOf<I>>,
 ): [I, I] {

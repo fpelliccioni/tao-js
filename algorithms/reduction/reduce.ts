@@ -1,5 +1,7 @@
 // Reference: Elements of Programming, ch. 6, p. 97 (value-based overload in eop.h).
 
+// Doc (es): Combina [f, l) de izquierda a derecha con op. Usa z como resultado del rango vacío.
+// Doc (en): Combines [f, l) from left to right using op. Returns z for an empty range.
 function reduce<I extends Iter<unknown>>(
     f: I, l: I, op: Operation<ValueOf<I>>, z: ValueOf<I>,
 ): ValueOf<I> {

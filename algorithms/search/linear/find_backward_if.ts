@@ -1,5 +1,7 @@
 // Reference: Elements of Programming, ch. 6, pp. 108–109 (exercise 6.8).
 
+// Doc (es): Busca desde el final. Devuelve el iterador inmediatamente posterior al último elemento que cumple p, o f si ninguno lo cumple. Requiere iteradores bidireccionales.
+// Doc (en): Searches from the end. Returns the iterator just after the last element satisfying p, or f if none do. Requires bidirectional iterators.
 function find_backward_if<I extends BidirectionalIterator>(
     f: I, l: I, p: Predicate<ValueOf<I>>,
 ): I {

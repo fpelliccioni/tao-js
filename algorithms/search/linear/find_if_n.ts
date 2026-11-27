@@ -1,5 +1,7 @@
 // Reference: From Mathematics to Generic Programming, ch. 10, p. 191 (ch10.h).
 
+// Doc (es): Busca el primer elemento que cumple p entre los primeros n desde f. Devuelve la posición y la cantidad restante.
+// Doc (en): Finds the first element satisfying p among the first n from f. Returns the position and remaining count.
 function find_if_n<I extends Iter<unknown>>(
     f: I, n: number, p: Predicate<ValueOf<I>>,
 ): [I, number] {

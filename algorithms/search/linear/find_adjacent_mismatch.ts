@@ -1,5 +1,7 @@
 // Reference: Elements of Programming, ch. 6, p. 100.
 
+// Doc (es): Devuelve el segundo iterador del primer par adyacente que falla r. Si todos los pares cumplen r, devuelve l.
+// Doc (en): Returns the second iterator of the first adjacent pair that fails r. Returns l if every pair satisfies r.
 function find_adjacent_mismatch<I extends Iter<unknown>>(
     f: I, l: I, r: Relation<ValueOf<I>>,
 ): I {

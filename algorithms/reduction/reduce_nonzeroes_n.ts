@@ -1,5 +1,7 @@
 // Reference: Elements of Programming, ch. 6, p. 99, exercise 6.3.
 
+// Doc (es): Combina los primeros n elementos desde f que sean distintos de z. Devuelve z si no hay ninguno.
+// Doc (en): Combines the first n elements from f that differ from z. Returns z if there are none.
 function reduce_nonzeroes_n<I extends Iter<unknown>>(
     f: I, n: number, op: Operation<ValueOf<I>>, z: ValueOf<I>,
 ): ValueOf<I> {

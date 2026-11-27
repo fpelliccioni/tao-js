@@ -1,5 +1,7 @@
 // Reference: Elements of Programming, ch. 7, p. 128.
 
+// Doc (es): Comprueba si el primer rango precede al segundo en orden lexicográfico, usando el orden de los elementos del lab.
+// Doc (en): Checks whether the first range precedes the second lexicographically, using the lab’s element ordering.
 function lexicographical_less<I extends Iter<unknown>, J extends Iter<ValueOf<I>>>(
     f0: I, l0: I, f1: J, l1: J,
 ): boolean {

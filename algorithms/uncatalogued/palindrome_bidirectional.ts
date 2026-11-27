@@ -1,5 +1,7 @@
 // Reference: Elements of Programming, ch. 6, p. 109, exercise 6.9.
 
+// Doc (es): Compara los elementos desde los extremos hacia el centro para determinar si el rango es un palíndromo según r.
+// Doc (en): Compares elements from the ends toward the middle to decide whether the range is a palindrome under r.
 function palindrome_bidirectional<I extends BidirectionalIterator>(
     f: I, l: I, r: Relation<ValueOf<I>>,
 ): boolean {

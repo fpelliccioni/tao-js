@@ -1,5 +1,7 @@
 // Reference: Elements of Programming, ch. 11, p. 196.
 
+// Doc (es): Incorpora x al contador binario. Combina las posiciones ocupadas y devuelve el acarreo si todas estaban ocupadas, o z si no queda acarreo.
+// Doc (en): Inserts x into the binary counter. Combines occupied slots and returns the carry if all slots were occupied, or z if no carry remains.
 function add_to_counter<I extends ForwardIterator>(
     f: I, l: I, op: Operation<ValueOf<I>>, x: ValueOf<I>, z: ValueOf<I>,
 ): ValueOf<I> {
