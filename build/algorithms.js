@@ -1448,7 +1448,7 @@ function upper_bound_n(f, n, a, r) {
 }
 
 function all(f, l, p) {
-    var np = find_if_not(f, l, p);
+    const np = find_if_not(f, l, p);
     return equal(l, np);
 }
 
