@@ -15,6 +15,7 @@ type Seq<T, K extends SequenceKind = SequenceKind> = {
     readonly [sequenceKind]: K;
 };
 type ForwardIterator<T = unknown> = Iter<T, Exclude<SequenceKind, "stream">>;
+type BidirectionalIterator<T = unknown> = Iter<T, "array" | "dll">;
 type ValueOf<I extends Readable<unknown>> = I[typeof iteratorElement];
 type Predicate<T> = (value: T) => boolean;
 
@@ -40,6 +41,7 @@ declare function source<T>(it: Iter<T>): T;
 declare function sink<T, U>(it: Iter<T>, value: U): void;
 declare function successor<I extends Iter<unknown>>(it: I, n?: number): I;
 declare function successor<T extends number | Iter<unknown>>(it: T, n?: number): T;
+declare function predecessor<I extends Iter<unknown>>(it: I, n?: number): I;
 declare function predecessor<T>(it: Iter<T>, n?: number): Iter<T>;
 declare function distance<T, U>(f: Iter<T>, l: Iter<U>): number;
 declare function size<T>(data: Seq<T>): number;

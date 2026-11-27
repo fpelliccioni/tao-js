@@ -1,23 +1,24 @@
 // Reference: Elements of Programming, ch. 6, p. 94.
 
-function find<T>(f: Iter<T>, l: Iter<T>, x: T) {
-    while ( ! equal(f, l) && ! source(f) != x) {
-        f = successor(f)
+function find<I extends Iter<unknown>>(f: I, l: I, x: ValueOf<I>): I {
+    while (!equal(f, l) && source(f) !== x) {
+        f = successor(f);
     }
     return f;
 }
 
 function __find_usage() {
-    const characters = array_from("Hello, World!");
-    print(characters);
-    const s = sequence(array_from("Hello, World!"), "s");
+    const s = sequence(array_from("Hello, World!"));
+    const l = end(s);
+    const target = "W";
+    const result = find(begin(s), l, target);
 
-    const it = find(begin(s), end(s), 'x');
-    if ( ! equal(it, end(s))) {
-        const value = source(it);
-        print(value);
+    if (equal(result, l)) {
+        print("No matching character.");
+    } else {
+        const value = source(result);
+        print("Found: " + value);
     }
-
 }
 
 function __find_attributes() {

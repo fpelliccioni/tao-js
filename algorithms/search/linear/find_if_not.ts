@@ -1,24 +1,24 @@
 // Reference: Elements of Programming, ch. 6, p. 95 (described in the text; implementation in eop.h).
 
-function find_if_not<T>(f: Iter<T>, l: Iter<T>, p: Predicate<T>) {
-    while ( ! equal(f, l) && p(source(f))) {
-        f = successor(f)
+function find_if_not<I extends Iter<unknown>>(f: I, l: I, p: Predicate<ValueOf<I>>): I {
+    while (!equal(f, l) && p(source(f))) {
+        f = successor(f);
     }
     return f;
 }
 
 function __find_if_not_usage() {
     const even = predicate(x => (x & 1) === 0);
-    const d = sequence(array_random(), "d");
-    const f = begin(d);
+    const d = sequence([2, 4, 7, 8]);
     const l = end(d);
+    const result = find_if_not(begin(d), l, even);
 
-    const it = find_if_not(f, l, even);
-    if ( ! equal(it, l)) {
-        const value = source(it);
-        print(value);
+    if (equal(result, l)) {
+        print("No matching element.");
+    } else {
+        const value = source(result);
+        print("First element that is not even: " + value);
     }
-
 }
 
 function __find_if_not_attributes() {
