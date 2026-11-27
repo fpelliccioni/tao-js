@@ -1,3 +1,6 @@
+// Reference: Elements of Programming, ch. 9, p. 164.
+// Reference: From Mathematics to Generic Programming, ch. 11, §11.2, pp. 201–203 (ch11.h).
+
 function swap_ranges_n<T>(f0: Iter<T>, f1: Iter<T>, n: number) {
     while (n != 0) {
         iter_swap(f0, f1);

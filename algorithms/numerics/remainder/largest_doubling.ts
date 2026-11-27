@@ -1,3 +1,6 @@
+// Reference: Elements of Programming, ch. 5, p. 73.
+// Reference: From Mathematics to Generic Programming, ch. 4, pp. 54–55 (ch04.h).
+
 function largest_doubling(a: number, b: number) {
     // precondition: b != 0
     while (a - b >= b) b += b;

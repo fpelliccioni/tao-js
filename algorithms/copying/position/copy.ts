@@ -1,3 +1,5 @@
+// Reference: Elements of Programming, ch. 9, p. 150.
+
 function copy<T, U>(f: Iter<T>, l: Iter<T>, o: Iter<U>) {
     while ( ! equal(f, l)) {
         sink(o, source(f));

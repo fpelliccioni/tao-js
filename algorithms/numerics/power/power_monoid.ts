@@ -1,3 +1,5 @@
+// Reference: From Mathematics to Generic Programming, ch. 7, p. 122 (operation-parameterized overload in ch07.h).
+
 // n is an Integer.
 // a is a Regular.
 // op is MonoidOperation

@@ -1,3 +1,5 @@
+// Reference: From Mathematics to Generic Programming, ch. 7, p. 121 (operation-parameterized overload in ch07.h).
+
 // r is a Regular.
 // n is an Integer.
 // a is a Regular.

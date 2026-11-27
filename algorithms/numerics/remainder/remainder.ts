@@ -1,3 +1,5 @@
+// Reference: From Mathematics to Generic Programming, ch. 4, pp. 54–55 (ch04.h).
+
 function remainder(a: number, b: number) {
     // precondition: b != 0
     if (a < b) return a;

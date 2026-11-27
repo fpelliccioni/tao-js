@@ -1,3 +1,5 @@
+// Reference: Elements of Programming, ch. 4, p. 51.
+
 function select_1_2<T>(a: T, b: T, r: Relation<T>) {
     return r(b, a) ? a : b;
 }

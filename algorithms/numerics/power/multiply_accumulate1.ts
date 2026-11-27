@@ -1,3 +1,5 @@
+// Reference: From Mathematics to Generic Programming, ch. 2, §2.2, pp. 11–14 (mult_acc1 in ch02.h).
+
 function multiply_accumulate1(r: number, n: number, a: number) {
     if (n == 1) return add(r, a);
     if (odd(n)) {

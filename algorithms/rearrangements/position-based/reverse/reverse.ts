@@ -1,3 +1,5 @@
+// Reference: Elements of Programming, ch. 10, p. 173 (bidirectional implementation).
+
 function reverse<T>(f: Iter<T>, l: Iter<T>) {
     while (true) {
         if (equal(f, l)) return;

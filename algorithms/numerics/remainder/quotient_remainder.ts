@@ -1,3 +1,5 @@
+// Reference: From Mathematics to Generic Programming, ch. 4, p. 57 (ch04.h).
+
 function quotient_remainder(a: number, b: number) {
     // precondition: b > 0
     if (a < b) return [0, a];

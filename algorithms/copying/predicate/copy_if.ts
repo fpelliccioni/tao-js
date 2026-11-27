@@ -1,3 +1,5 @@
+// Reference: Elements of Programming, ch. 9, p. 156.
+
 function copy_if<T, U>(f: Iter<T>, l: Iter<T>, o: Iter<U>, p: Predicate<T>) {
     const ps = predicate_source(p);
     return copy_select(f, l, o, ps);

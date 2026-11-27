@@ -1,3 +1,5 @@
+// Reference: Elements of Programming, ch. 10, p. 171.
+
 function cycle_from<T>(i: Iter<T>, f: IteratorPermutation<T>) {
     const tmp = source(i);
     let j = i;

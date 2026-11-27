@@ -1,3 +1,6 @@
+// Reference: Elements of Programming, ch. 9, p. 154.
+// Reference: From Mathematics to Generic Programming, ch. 11, p. 216 (ch11.h).
+
 function reverse_copy<T, U>(f: Iter<T>, l: Iter<T>, o: Iter<U>) {
     while ( ! equal(f, l)) {
         l = predecessor(l);

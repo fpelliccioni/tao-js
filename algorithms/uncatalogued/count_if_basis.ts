@@ -1,3 +1,5 @@
+// Reference: Elements of Programming, ch. 6, p. 95 (count_if overloads).
+
 function count_if_basis<T, U extends number | Iter<unknown>>(f: Iter<T>, l: Iter<T>, p: Predicate<T>, j: U) {
     while ( ! equal(f, l)) {
         if (p(source(f))) {

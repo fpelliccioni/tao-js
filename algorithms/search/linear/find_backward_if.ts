@@ -1,3 +1,5 @@
+// Reference: Elements of Programming, ch. 6, p. 108.
+
 function find_backward_if<T>(f: Iter<T>, l: Iter<T>, p: Predicate<T>) {
     while (true) {
         if (equal(l, f)) return f;

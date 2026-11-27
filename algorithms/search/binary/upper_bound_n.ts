@@ -1,3 +1,5 @@
+// Reference: Elements of Programming, ch. 6, p. 106.
+
 function upper_bound_n<T>(f: Iter<T>, n: number, a: T, r: Relation<T>) {
     const p = (x: T) => r(a, x);
     return partition_point_n(f, n, p);

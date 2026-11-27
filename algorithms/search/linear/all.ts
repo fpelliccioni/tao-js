@@ -1,3 +1,5 @@
+// Reference: Elements of Programming, ch. 6, p. 95, exercise 6.1 (companion implementation in eop.h).
+
 function all<T>(f: Iter<T>, l: Iter<T>, p: Predicate<T>): boolean {
     const np = find_if_not(f, l, p);
     return equal(l, np);

@@ -1,3 +1,5 @@
+// Reference: Elements of Programming, ch. 10, p. 174.
+
 function reverse_n_forward<T>(f: Iter<T>, n: number): Iter<T> {
     if (n < 2) return successor(f, n);
     const h = half(n);

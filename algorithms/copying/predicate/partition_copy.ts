@@ -1,3 +1,5 @@
+// Reference: Elements of Programming, ch. 9, p. 158.
+
 function partition_copy<T, U>(f: Iter<T>, l: Iter<T>, u: Iter<U>, t: Iter<U>, p: Predicate<T>) {
     const ps = predicate_source(p);
     return split_copy(f, l, u, t, ps);

@@ -1,3 +1,5 @@
+// Reference: Elements of Programming, ch. 9, p. 160.
+
 function combine_copy_backward<T, U>(f: Iter<T>, l: Iter<T>, f2: Iter<T>, l2: Iter<T>, o: Iter<U>, r: Relation<Iter<T>>) {
     while ( ! equal(f, l) && ! equal(f2, l2)) {
         o = predecessor(o);

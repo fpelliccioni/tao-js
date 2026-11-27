@@ -1,3 +1,5 @@
+// Reference: Elements of Programming, ch. 9, §9.2, pp. 150–155 (adapted from the counted implementation in eop.h).
+
 function fill_n<T>(f: Iter<T>, n: number, x: T) {
     while (n != 0) {
         sink(f, x);

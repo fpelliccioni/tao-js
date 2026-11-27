@@ -1,3 +1,5 @@
+// Reference: Elements of Programming, ch. 9, p. 161, exercise 9.5 (companion implementation in eop.h).
+
 function combine_copy_backward_n<T, U>(l: Iter<T>, n: number, l2: Iter<T>, n2: number, o: Iter<U>, r: Relation<Iter<T>>) {
     while (n != 0 && n2 != 0) {
         o = predecessor(o);

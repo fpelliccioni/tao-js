@@ -1,3 +1,6 @@
+// Reference: Elements of Programming, ch. 10, p. 175.
+// Reference: From Mathematics to Generic Programming, ch. 11, p. 217 (ch11.h).
+
 function reverse_n_adaptive<T, U>(f_i: Iter<T>, n_i: number, f_b: Iter<U>, n_b: number): Iter<T> {
     if (n_i < 2) return successor(f_i, n_i);
     if (n_i <= n_b) return reverse_n_with_buffer(f_i, n_i, f_b);

@@ -1,3 +1,5 @@
+// Reference: From Mathematics to Generic Programming, ch. 4, §4.2, pp. 45–49 (segment_remainder in ch04.h).
+
 function remainder_slow(a: number, b: number) {
     while (b < a) a -= b;
     return a;

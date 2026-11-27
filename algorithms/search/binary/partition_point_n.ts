@@ -1,3 +1,6 @@
+// Reference: Elements of Programming, ch. 6, p. 104.
+// Reference: From Mathematics to Generic Programming, ch. 10, p. 193 (ch10.h).
+
 function partition_point_n<T>(f: Iter<T>, n: number, p: Predicate<T>) {
     while (n != 0) {
         const h = half(n);

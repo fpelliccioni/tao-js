@@ -1,3 +1,5 @@
+// Reference: Elements of Programming, ch. 9, p. 152.
+
 function copy_n<T, U>(f: Iter<T>, n: number, o: Iter<U>): [Iter<T>, Iter<U>] {
     while (n != 0) {
         sink(o, source(f));

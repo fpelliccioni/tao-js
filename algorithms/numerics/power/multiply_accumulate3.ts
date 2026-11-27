@@ -1,3 +1,5 @@
+// Reference: From Mathematics to Generic Programming, ch. 2, §2.2, pp. 11–14 (mult_acc3 in ch02.h).
+
 function multiply_accumulate3(r: number, n: number, a: number) {
     if (odd(n)) {
         r = add(r, a);

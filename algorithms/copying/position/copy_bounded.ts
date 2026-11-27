@@ -1,3 +1,5 @@
+// Reference: Elements of Programming, ch. 9, p. 151.
+
 function copy_bounded<T, U>(f: Iter<T>, l: Iter<T>, fo: Iter<U>, lo: Iter<U>): [Iter<T>, Iter<U>] {
     while ( ! equal(f, l) && ! equal(fo, lo)) {
         sink(fo, source(f));

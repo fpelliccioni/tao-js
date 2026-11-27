@@ -1,3 +1,5 @@
+// Reference: Elements of Programming, ch. 6, p. 95 (described in the text; implementation in eop.h).
+
 function find_if_not<T>(f: Iter<T>, l: Iter<T>, p: Predicate<T>) {
     while ( ! equal(f, l) && p(source(f))) {
         f = successor(f)

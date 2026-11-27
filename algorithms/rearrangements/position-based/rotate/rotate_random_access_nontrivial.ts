@@ -1,3 +1,5 @@
+// Reference: Elements of Programming, ch. 10, p. 179.
+
 function rotate_random_access_nontrivial<T>(f: Iter<T>, m: Iter<T>, l: Iter<T>) {
     const p = k_rotate_from_permutation_random_access(f, m, l);
     return rotate_cycles(f, m, l, p);

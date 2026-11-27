@@ -1,3 +1,5 @@
+// Reference: From Mathematics to Generic Programming, ch. 4, §4.2, pp. 45–49 (integer adaptations of gcm1 in ch04.h).
+
 function gcd1(a: number, b: number) {
     while (a != b) {
         while (b < a) a -= b;

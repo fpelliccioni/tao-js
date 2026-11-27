@@ -1,3 +1,5 @@
+// Reference: Elements of Programming, ch. 9, §9.2, pp. 150–155 (implementation in eop.h).
+
 function iota(f: Iter<number>, l: Iter<number>, start?: number, step?: number) {
     if ( ! start) start = 0;
     if ( ! step) step = 1;

@@ -1,3 +1,5 @@
+// Reference: Elements of Programming, ch. 9, pp. 156–157.
+
 //u from untrue
 function split_copy<T, U>(f: Iter<T>, l: Iter<T>, u: Iter<U>, t: Iter<U>, p: Predicate<Iter<T>>) {
     while ( ! equal(f, l)) {

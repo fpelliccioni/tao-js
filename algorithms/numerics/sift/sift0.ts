@@ -1,3 +1,5 @@
+// Reference: From Mathematics to Generic Programming, ch. 3, p. 25 (ch03.h).
+
 function sift0(f: Iter<number | string>, n: number) {
     fill_n(f, n, 1);
     let i = 0;

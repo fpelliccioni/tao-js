@@ -1,3 +1,5 @@
+// Reference: Elements of Programming, ch. 11, p. 189, exercise 11.1 (companion implementation in eop.h).
+
 function partitioned_at_point<T>(f: Iter<T>, m: Iter<T>, l: Iter<T>, p: Predicate<T>) {
     // precondition: readable_bounded_range(f, l) && m belongs to [f, l)
     const c0 = none(f, m, p);

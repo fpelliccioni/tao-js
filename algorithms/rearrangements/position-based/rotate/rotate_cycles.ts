@@ -1,3 +1,5 @@
+// Reference: Elements of Programming, ch. 10, pp. 178–179 (variant).
+
 function rotate_cycles<T>(f: Iter<T>, m: Iter<T>, l: Iter<T>, from: IteratorPermutation<T>) {
     const m_l = distance(m, l);
     const f_m = distance(f, m);

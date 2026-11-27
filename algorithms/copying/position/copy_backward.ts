@@ -1,3 +1,5 @@
+// Reference: Elements of Programming, ch. 9, p. 153.
+
 function copy_backward<T, U>(f: Iter<T>, l: Iter<T>, o: Iter<U>) {
     while ( ! equal(f, l)) {
         l = predecessor(l);

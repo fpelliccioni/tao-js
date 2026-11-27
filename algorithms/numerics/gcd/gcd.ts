@@ -1,3 +1,5 @@
+// Reference: From Mathematics to Generic Programming, ch. 4, §4.6, pp. 57–58 (ch04.h).
+
 function gcd(a: number, b: number) {
     while (b != 0) {
         const r = remainder(a, b);
