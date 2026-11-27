@@ -18,7 +18,7 @@ function __cycle_to_usage() {
         return ret;
     }
 
-    const s = sequence(array_random(), "s");
+    const s = sequence(array_random());
     cycle_to(begin(s), successorMod10);
     print(s);
 }

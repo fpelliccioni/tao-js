@@ -7,7 +7,7 @@ function reverse_n_with_buffer<T, U>(f_i: Iter<T>, n: number, f_b: Iter<U>) {
 
 function __reverse_n_with_buffer_usage() {
     const s = sequence(array_random(), "s", undefined, "sll"); // singly-linked list
-    const b = sequence(array_all_equal(size(s), '-'), "b");
+    const b = sequence(array_all_equal(size(s), '-'));
     print(s);
     const r = reverse_n_with_buffer(begin(s), size(s), begin(b));
     print(s);

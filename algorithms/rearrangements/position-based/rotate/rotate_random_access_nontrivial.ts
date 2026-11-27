@@ -39,7 +39,7 @@ function __rotate_random_access_nontrivial_usage() {
         };
     }
 
-    const s = sequence(array_random(12), "s");
+    const s = sequence(array_random(12));
     rotate_random_access_nontrivial(begin(s), successor(begin(s), 3), end(s));
     print(s);
 }

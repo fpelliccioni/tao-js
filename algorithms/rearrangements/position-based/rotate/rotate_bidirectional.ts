@@ -7,7 +7,7 @@ function rotate_bidirectional<T>(f: Iter<T>, m: Iter<T>, l: Iter<T>) {
 }
 
 function __rotate_bidirectional_usage() {
-    const s = sequence(array_random(), "s");
+    const s = sequence(array_random());
     rotate_bidirectional(begin(s), successor(begin(s), 3), end(s));
     print(s);
 }

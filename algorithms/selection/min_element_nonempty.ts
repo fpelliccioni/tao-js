@@ -12,7 +12,7 @@ function min_element_nonempty<T>(f: Iter<T>, l: Iter<T>, r: Relation<T>) {
 }
 
 function __min_element_nonempty_usage() {
-    const s = sequence(array_random(), "s");
+    const s = sequence(array_random());
     const l = end(s);
 
     const m = min_element_nonempty(begin(s), l, lt);

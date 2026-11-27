@@ -11,8 +11,8 @@ function swap_ranges_bounded<T>(f0: Iter<T>, l0: Iter<T>, f1: Iter<T>, l1: Iter<
 }
 
 function __swap_ranges_bounded_usage() {
-    const s1 = sequence(array_random(), "s1");
-    const s2 = sequence(array_random(5), "s2");
+    const s1 = sequence(array_random());
+    const s2 = sequence(array_random(5));
 
     const r = swap_ranges_bounded(begin(s1), end(s1), begin(s2), end(s2));
     const f0 = r[0];

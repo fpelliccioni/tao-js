@@ -11,8 +11,8 @@ function reverse_copy_n<T, U>(l: Iter<T>, n: number, o: Iter<U>): [Iter<T>, Iter
 }
 
 function __reverse_copy_n_usage() {
-    const s = sequence(array_ascending(), "s");
-    const z = sequence(array_descending(), "z");
+    const s = sequence(array_ascending());
+    const z = sequence(array_descending());
 
     reverse_copy_n(successor(begin(s), 5), 5, begin(z));
 

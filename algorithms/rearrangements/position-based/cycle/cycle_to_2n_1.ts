@@ -43,7 +43,7 @@ function __cycle_to_2n_1_usage() {
         return ret;
     }
 
-    const s = sequence(array_random(), "s");
+    const s = sequence(array_random());
     cycle_to_2n_1(begin(s), successorMod10);
     print(s);
 }

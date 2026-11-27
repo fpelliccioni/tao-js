@@ -14,7 +14,7 @@ function min_value<I extends Iter<unknown>>(f: I, l: I, r: Relation<ValueOf<I>>)
 }
 
 function __min_value_usage() {
-    const d = sequence(array_random(), "d");
+    const d = sequence(array_random());
 
     let f = begin(d);
     const l = end(d);

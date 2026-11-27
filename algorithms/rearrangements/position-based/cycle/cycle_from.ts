@@ -22,7 +22,7 @@ function __cycle_from_usage() {
         return ret;
     }
 
-    const s = sequence(array_random(), "s");
+    const s = sequence(array_random());
     cycle_from(begin(s), successorMod10);
     print(s);
 }

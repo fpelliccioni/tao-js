@@ -14,7 +14,7 @@ function max_element<T>(f: Iter<T>, l: Iter<T>, r: Relation<T>) {
 }
 
 function __max_element_usage() {
-    const s = sequence(array_random(), "s");
+    const s = sequence(array_random());
 
     const l = end(s);
 

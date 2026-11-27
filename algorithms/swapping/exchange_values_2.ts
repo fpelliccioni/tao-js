@@ -10,7 +10,7 @@ function exchange_values_2<T>(x: Iter<T>, y: Iter<T>) {
 }
 
 function __exchange_values_2_usage() {
-    const s = sequence(array_ascending(), "s");
+    const s = sequence(array_ascending());
 
     exchange_values_2(begin(s), successor(begin(s), 5));
 
