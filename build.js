@@ -1,6 +1,7 @@
 const acorn = require('acorn');
 const ts = require('typescript');
 const fs = require('fs');
+const path = require('node:path');
 
 
 const user_def = 'fpelliccioni';
@@ -207,6 +208,31 @@ function process_dir_helpers(path) {
 }
 
 
+function buildTypeDeclarations() {
+    const config = ts.readConfigFile('tsconfig.json', ts.sys.readFile);
+    if (config.error) throw new Error(ts.flattenDiagnosticMessageText(config.error.messageText, '\n'));
+    const project = ts.parseJsonConfigFileContent(config.config, ts.sys, process.cwd());
+    const compiler = ts.createProgram(project.fileNames, {
+        ...project.options,
+        noEmit: false,
+        declaration: true,
+        emitDeclarationOnly: true,
+    });
+    const signatures = [];
+    const emitted = compiler.emit(undefined, (filename, text) => {
+        const name = path.basename(filename, '.d.ts');
+        if (!Object.hasOwn(catalog, name)) return;
+        const source = ts.createSourceFile(filename, text, ts.ScriptTarget.ES2020, true);
+        for (const declaration of source.statements) {
+            if (ts.isFunctionDeclaration(declaration) && declaration.name?.text === name) {
+                signatures.push(declaration.getText(source));
+            }
+        }
+    });
+    if (emitted.emitSkipped) throw new Error('Could not generate lab type declarations.');
+    return [fs.readFileSync('types/lab.d.ts', 'utf8'), ...signatures].join('\n');
+}
+
 async function main(user, repo) {
     fs.mkdir('./build/', { recursive: true }, (err) => {
         if (err) throw err;
@@ -224,6 +250,8 @@ async function main(user, repo) {
     // console.log(catalog_str);
 
 
+    const typeDeclarations = `function __lab_types_declarations() { return [${JSON.stringify(buildTypeDeclarations())}]; }\n\n`;
+
     fs.writeFile("./build/algorithms.js", res[0], function(err) {
         if(err) {
             return console.log(err);
@@ -238,7 +266,7 @@ async function main(user, repo) {
         console.log("./build/algorithms_debug.js was saved!");
     });
 
-    fs.writeFile("./build/algorithms_extra.js", catalog_str + res[2], function(err) {
+    fs.writeFile("./build/algorithms_extra.js", catalog_str + typeDeclarations + res[2], function(err) {
         if(err) {
             return console.log(err);
         }
@@ -252,7 +280,8 @@ async function main(user, repo) {
         var text = await main(user_def, repo_def);
         // console.log(text);
     } catch (e) {
-        console.log(e);
+        console.error(e);
+        process.exitCode = 1;
         process.exitCode = 1;
     }
 })();

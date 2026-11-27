@@ -1,4 +1,4 @@
-function insert_naive<T>(s: Seq<T | number>, ip: Iter<T | number>, f: Iter<T>, l: Iter<T>) {
+function insert_naive<T, K extends SequenceKind>(s: Seq<T | number, K>, ip: Iter<T | number>, f: Iter<T>, l: Iter<T>) {
     let d = distance(begin(s), ip);
 
     while ( ! equal(f, l)) {
