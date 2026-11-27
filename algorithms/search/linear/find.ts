@@ -8,12 +8,14 @@ function find<T>(f: Iter<T>, l: Iter<T>, x: T) {
 }
 
 function __find_usage() {
-    print(array_from("Hello, World!"))
+    const characters = array_from("Hello, World!");
+    print(characters);
     const s = sequence(array_from("Hello, World!"), "s");
 
     const it = find(begin(s), end(s), 'x');
     if ( ! equal(it, end(s))) {
-        print(source(it));
+        const value = source(it);
+        print(value);
     }
 
 }

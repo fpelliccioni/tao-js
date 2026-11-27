@@ -7,11 +7,13 @@ function divides(i: number, n: number) {
 function __divides_usage() {
     let i = random_int();
     let n = random_int();
-    print(divides(i, n));
+    const divisible = divides(i, n);
+    print(divisible);
 
     i = 5;
     n = 15;
-    print(divides(i, n));
+    const nextDivisible = divides(i, n);
+    print(nextDivisible);
 }
 
 function __divides_attributes() {

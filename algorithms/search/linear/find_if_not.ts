@@ -15,7 +15,8 @@ function __find_if_not_usage() {
 
     const it = find_if_not(f, l, even);
     if ( ! equal(it, l)) {
-        print(source(it));
+        const value = source(it);
+        print(value);
     }
 
 }

@@ -11,8 +11,12 @@ function __find_not_usage() {
     const d = sequence([7, 7, 11, 7]);
     const result = find_not(begin(d), end(d), 7);
 
-    if (equal(result, end(d))) print("No differing element.");
-    else print("First differing element: " + source(result));
+    if (equal(result, end(d))) {
+        print("No differing element.");
+    } else {
+        const value = source(result);
+        print("First differing element: " + value);
+    }
 }
 
 function __find_not_attributes() {

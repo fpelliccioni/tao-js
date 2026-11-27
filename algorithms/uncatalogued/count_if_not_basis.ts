@@ -22,7 +22,8 @@ function __count_if_not_basis_usage() {
     j = count_if_not_basis(f, l, even, j);
 
     print("Odd numbers: ");
-    print(distance(begin(c), j));
+    const offset = distance(begin(c), j);
+    print(offset);
 }
 
 function __count_if_not_basis_attributes() {

@@ -26,7 +26,8 @@ function __partition_stable_forward_usage() {
 
     const p = partition_stable_forward(f, l, even);
     if ( ! equal(p, l)) {
-        print('partition point: ' + source(p));
+        const partitionValue = source(p);
+        print('partition point: ' + partitionValue);
     }
 
 }

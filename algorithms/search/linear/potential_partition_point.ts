@@ -13,8 +13,10 @@ function __potential_partition_point_usage() {
     const m = potential_partition_point(f, l, even);
 
     print("After p-partitioning the partition point would ocurr here:");
-    print(distance(begin(d), m));
-    print(source(m));
+    const offset = distance(begin(d), m);
+    print(offset);
+    const partitionValue = source(m);
+    print(partitionValue);
 
     print("Let's verify...");
     const p = partition_semistable(f, l, even);

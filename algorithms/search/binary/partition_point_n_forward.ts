@@ -31,7 +31,8 @@ function __partition_point_n_forward_usage() {
     const l = ub[0];
 
     while ( ! equal(f, l)) {
-        print(source(f) + ", ");
+        const partitionValue = source(f);
+        print(partitionValue + ", ");
         f = successor(f);
     }
 }

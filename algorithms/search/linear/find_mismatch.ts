@@ -15,8 +15,13 @@ function __find_mismatch_usage() {
     const right = sequence([2, 4, 7, 8]);
     const [a, b] = find_mismatch(begin(left), end(left), begin(right), end(right), eq);
 
-    if (equal(a, end(left)) || equal(b, end(right))) print("No mismatch in the common prefix.");
-    else print("First mismatch: " + source(a) + " and " + source(b));
+    if (equal(a, end(left)) || equal(b, end(right))) {
+        print("No mismatch in the common prefix.");
+    } else {
+        const leftValue = source(a);
+        const rightValue = source(b);
+        print("First mismatch: " + leftValue + " and " + rightValue);
+    }
 }
 
 function __find_mismatch_attributes() {

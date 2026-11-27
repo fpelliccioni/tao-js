@@ -28,7 +28,8 @@ function __partition_semistable_usage() {
 
     const p = partition_semistable(f, l, even);
     if ( ! equal(p, l)) {
-        print('partition point: ' + source(p));
+        const partitionValue = source(p);
+        print('partition point: ' + partitionValue);
     }
 
 }

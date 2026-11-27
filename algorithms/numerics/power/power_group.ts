@@ -21,16 +21,20 @@ function __power_group_usage() {
     print(p);
 
     const m1 = new SquareMatrix(2, [2, 1, 5, 3]); //invertible matrix
-    print(m1.str());
-    print(m1.multiplicative_inverse()?.str());
+    const m1Text = m1.str();
+    print(m1Text);
+    const inverseText = m1.multiplicative_inverse()?.str();
+    print(inverseText);
 
     const m2 = power_group(m1, -5, multiply);
-    print(m2.str());
+    const m2Text = m2.str();
+    print(m2Text);
 
     const m3 = new SquareMatrix(2, [3, 6, 1, 2]); //non-invertible matrix
     print("The singular matrix has no multiplicative inverse.");
     const m4 = power_group(m3, 5, multiply);
-    print(m4.str());
+    const m4Text = m4.str();
+    print(m4Text);
 
     // - GroupOperation is a associative binary operation on which the following is defined:
     //        operation:                    x ° y

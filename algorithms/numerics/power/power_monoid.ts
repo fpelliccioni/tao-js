@@ -19,10 +19,12 @@ function __power_monoid_usage() {
     print(p);
 
     const m1 = new SquareMatrix(2, [1, 3, 7, 5]);
-    print(m1.str());
+    const m1Text = m1.str();
+    print(m1Text);
 
     const m2 = power_monoid(m1, 5, multiply);
-    print(m2.str());
+    const m2Text = m2.str();
+    print(m2Text);
 
     // - MonoidOperation is a associative binary operation on which the following is defined:
     //        operation:                    x ° y

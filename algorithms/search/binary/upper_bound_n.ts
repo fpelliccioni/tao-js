@@ -11,7 +11,8 @@ function __upper_bound_n_usage() {
     const d = sequence([11, 22, 49, 58, 67]);
 
     const lb = upper_bound_n(begin(d), size(d), 38, hasLowerDigitSum);
-    print('insertion point: ' + source(lb));
+    const insertionValue = source(lb);
+    print('insertion point: ' + insertionValue);
 
 }
 

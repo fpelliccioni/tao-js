@@ -26,7 +26,8 @@ function __find_subsequence_naive_usage() {
         print("Subsequence not found");
     } else {
         print("Subsequence found at: ");
-        print(distance(begin(seq), it));
+        const offset = distance(begin(seq), it);
+        print(offset);
     }
 }
 

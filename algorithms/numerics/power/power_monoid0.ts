@@ -17,10 +17,12 @@ function __power_monoid0_usage() {
     print(p);
 
     const m1 = new SquareMatrix(2, [1, 3, 7, 5]);
-    print(m1.str());
+    const m1Text = m1.str();
+    print(m1Text);
 
     const m2 = power_monoid0(m1, 5);
-    print(m2.str());
+    const m2Text = m2.str();
+    print(m2Text);
 
     // - MultiplicativeMonoid: is a Monoid where the associative binary operation is * and the identity element is 1
     // - Monoid is a set on which the following is defined:

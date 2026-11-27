@@ -17,7 +17,8 @@ function __min_element_nonempty_usage() {
 
     const m = min_element_nonempty(begin(s), l, lt);
     if ( ! equal(m, l)) {
-        print("The min element is: " + source(m));
+        const minimum = source(m);
+        print("The min element is: " + minimum);
     }
 }
 

@@ -16,7 +16,8 @@ function __find_if_usage() {
 
     const it = find_if(f, l, even);
     if ( ! equal(it, l)) {
-        print(source(it));
+        const value = source(it);
+        print(value);
     }
 
 }

@@ -19,7 +19,8 @@ function __integer_sqrt_recursive_usage() {
     // var n = 53;
     const i = integer_sqrt_recursive(n);
     print(i);
-    print(Math.floor(Math.sqrt(n)));
+    const expected = Math.floor(Math.sqrt(n));
+    print(expected);
 }
 
 function __integer_sqrt_recursive_attributes() {

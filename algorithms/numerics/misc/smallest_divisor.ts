@@ -14,10 +14,12 @@ function smallest_divisor(n: number) {
 
 function __smallest_divisor_usage() {
     let n = random_int();
-    print(smallest_divisor(n));
+    const divisor = smallest_divisor(n);
+    print(divisor);
 
     n = 15;
-    print(smallest_divisor(n));
+    const nextDivisor = smallest_divisor(n);
+    print(nextDivisor);
 }
 
 function __smallest_divisor_attributes() {

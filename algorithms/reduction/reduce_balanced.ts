@@ -34,7 +34,8 @@ function __reduce_balanced_usage() {
         return left + right;
     });
     const d = sequence(["a", "b", "c", "d", "e"]);
-    print("Concatenation: " + reduce_balanced(begin(d), end(d), concatenate, ""));
+    const concatenated = reduce_balanced(begin(d), end(d), concatenate, "");
+    print("Concatenation: " + concatenated);
 }
 
 function __reduce_balanced_attributes() {
