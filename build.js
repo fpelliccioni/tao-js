@@ -92,6 +92,20 @@ function process_file(path, filename) {
             }));
         }
         code = result.outputText;
+        const parsed = ts.createSourceFile(filename, source, ts.ScriptTarget.ES2020, true);
+        const definition = parsed.statements.find(node =>
+            ts.isFunctionDeclaration(node) && node.name?.text === algo_name
+        );
+        const usage = parsed.statements.find(node =>
+            ts.isFunctionDeclaration(node) && node.name?.text === 'usage'
+        );
+        if (definition && usage?.body) {
+            const example = source.slice(usage.body.getStart(parsed) + 1, usage.body.end - 1)
+                .replace(/^ {4}/gm, '').trim();
+            const entry = [definition.getText(parsed), example];
+            file_content_extra += `function __${algo_name}_typescript() { return ${JSON.stringify(entry)}; }\n\n`;
+        }
+
     }
 
     var p = acorn.parse(code, { ecmaVersion: 2020 });
