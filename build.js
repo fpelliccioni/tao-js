@@ -80,8 +80,7 @@ function process_file(path, filename) {
     const code = fs.readFileSync(path, 'utf8');
     // console.log(code)
 
-    const comments = [];
-    var p = acorn.parse(code, { ecmaVersion: 2020, onComment: comments });
+    var p = acorn.parse(code);
     // console.log(p);
     // console.log(p.body);
 
@@ -98,14 +97,7 @@ function process_file(path, filename) {
             const func_code = function_content(code, value.start, value.end);
             if (value.id.name == algo_name) {
                 catalog[algo_name] = [path_to_catalog(path, filename), html_url(path)];
-                let start = value.start;
-                for (const comment of comments.slice().reverse()) {
-                    if (comment.end > start) continue;
-                    if (comment.type !== 'Block' || !comment.value.startsWith('*') ||
-                        code.slice(comment.end, start).trim()) break;
-                    start = comment.start;
-                }
-                file_content_main += function_content(code, start, value.end);
+                file_content_main += func_code;
                 file_content_main += '\n\n';
                 file_content_debug += function_make_debuggable(code, value);
                 file_content_debug += '\n\n';
