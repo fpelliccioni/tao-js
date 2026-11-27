@@ -1,23 +1,17 @@
 // Reference: Elements of Programming, ch. 6, p. 99 (sentinel technique; lab adaptation).
 
-
 function find_with_sentinel<I extends BidirectionalIterator>(f: I, l: I, x: ValueOf<I>): I {
-    // NaN never matches under strict equality, so it cannot serve as a sentinel.
-    if (equal(f, l) || x !== x) return l;
+    // Precondition: equality is reflexive for x.
+    if (equal(f, l)) return l;
 
     const last = predecessor(l);
     const saved = source(last);
     sink(last, x);
-    try {
-        while (source(f) !== x) {
-            f = successor(f);
-        }
-    } finally {
-        sink(last, saved);
-    }
+    const result = find_if_unguarded(f, value => value === x);
+    sink(last, saved);
 
-    if (equal(f, last) && saved !== x) return l;
-    return f;
+    if (equal(result, last) && saved !== x) return l;
+    return result;
 }
 
 function __find_with_sentinel_usage() {

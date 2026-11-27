@@ -1913,23 +1913,17 @@ function find_subsequence_naive(f, l, sf, sl, r) {
 }
 
 function find_with_sentinel(f, l, x) {
-    // NaN never matches under strict equality, so it cannot serve as a sentinel.
-    if (equal(f, l) || x !== x)
+    // Precondition: equality is reflexive for x.
+    if (equal(f, l))
         return l;
     const last = predecessor(l);
     const saved = source(last);
     sink(last, x);
-    try {
-        while (source(f) !== x) {
-            f = successor(f);
-        }
-    }
-    finally {
-        sink(last, saved);
-    }
-    if (equal(f, last) && saved !== x)
+    const result = find_if_unguarded(f, value => value === x);
+    sink(last, saved);
+    if (equal(result, last) && saved !== x)
         return l;
-    return f;
+    return result;
 }
 
 function none(f, l, p) {
