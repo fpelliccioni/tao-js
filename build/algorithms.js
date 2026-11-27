@@ -1648,6 +1648,11 @@ function all(f, l, p) {
     return equal(l, np);
 }
 
+function all_n(f, n, p) {
+    const [, remaining] = find_if_not_n(f, n, p);
+    return remaining === 0;
+}
+
 function find(f, l, x) {
     while (!equal(f, l) && source(f) !== x) {
         f = successor(f);
@@ -1715,6 +1720,10 @@ function find_if_not(f, l, p) {
     return f;
 }
 
+function find_if_not_n(f, n, p) {
+    return find_if_n(f, n, value => !p(value));
+}
+
 function find_if_not_unguarded(f, p) {
     // Precondition: an element reachable from f does not satisfy p.
     while (p(source(f))) {
@@ -1737,6 +1746,37 @@ function find_mismatch(f0, l0, f1, l1, r) {
         f1 = successor(f1);
     }
     return [f0, f1];
+}
+
+function find_mismatch_bounded_n(f0, l0, f1, n1, r) {
+    pre(() => Number.isSafeInteger(n1) && n1 >= 0, "Counts must be nonnegative safe integers.");
+    while (!equal(f0, l0) && n1 !== 0 && r(source(f0), source(f1))) {
+        f0 = successor(f0);
+        f1 = successor(f1);
+        --n1;
+    }
+    return [f0, f1, n1];
+}
+
+function find_mismatch_n(f0, n0, f1, n1, r) {
+    pre(() => Number.isSafeInteger(n0) && n0 >= 0 && Number.isSafeInteger(n1) && n1 >= 0, "Counts must be nonnegative safe integers.");
+    while (n0 !== 0 && n1 !== 0 && r(source(f0), source(f1))) {
+        f0 = successor(f0);
+        f1 = successor(f1);
+        --n0;
+        --n1;
+    }
+    return [f0, f1, n0, n1];
+}
+
+function find_mismatch_n_bounded(f0, n0, f1, l1, r) {
+    pre(() => Number.isSafeInteger(n0) && n0 >= 0, "Counts must be nonnegative safe integers.");
+    while (n0 !== 0 && !equal(f1, l1) && r(source(f0), source(f1))) {
+        f0 = successor(f0);
+        f1 = successor(f1);
+        --n0;
+    }
+    return [f0, f1, n0];
 }
 
 function find_n(f, n, x) {
@@ -1832,8 +1872,17 @@ function none(f, l, p) {
     return equal(l, it);
 }
 
+function none_n(f, n, p) {
+    const [, remaining] = find_if_n(f, n, p);
+    return remaining === 0;
+}
+
 function not_all(f, l, p) {
     return !all(f, l, p);
+}
+
+function not_all_n(f, n, p) {
+    return !all_n(f, n, p);
 }
 
 function partitioned(f, l, p) {
@@ -1864,6 +1913,10 @@ function potential_partition_point(f, l, p) {
 
 function some(f, l, p) {
     return !none(f, l, p);
+}
+
+function some_n(f, n, p) {
+    return !none_n(f, n, p);
 }
 
 function max_element(f, l, r) {
