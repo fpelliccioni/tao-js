@@ -1,32 +1,21 @@
-function palindrome_bidirectional<T>(f: Iter<T>, l: Iter<T>, r: Relation<T>) {
-    while (true) {
-        if (equal(f, l)) break;
+// Reference: Elements of Programming, ch. 6, p. 109, exercise 6.9.
+
+function palindrome_bidirectional<I extends BidirectionalIterator>(
+    f: I, l: I, r: Relation<ValueOf<I>>,
+): boolean {
+    while (!equal(f, l)) {
         l = predecessor(l);
-
-        if ( ! r(source(f), source(l))) return false;
-
+        if (equal(f, l)) return true;
+        if (!r(source(f), source(l))) return false;
         f = successor(f);
-        if (equal(f, l)) break;
     }
     return true;
 }
 
 function __palindrome_bidirectional_usage() {
-    //var word = sequence(['e', 'v', 'i', 't', 'a', 't', 'i', 'v', 'e'], "word");
-    //var word = sequence(['e', 'v', 'i', 'x', 'a', 't', 'i', 'v', 'e'], "word");
-    const word = sequence(['e', 'v', 'i', 't', 't', 'i', 'v', 'e']);
-
-    const f = begin(word);
-    const l = end(word);
-
-    const res = palindrome_bidirectional(f, l, eq);
-
-    if (res) {
-        print('the word is palindrome');
-    } else {
-        print('the word not is palindrome');
-    };
-
+    const word = sequence(array_from("level"));
+    const palindrome = palindrome_bidirectional(begin(word), end(word), eq);
+    print("Is a palindrome: " + palindrome);
 }
 
 function __palindrome_bidirectional_attributes() {

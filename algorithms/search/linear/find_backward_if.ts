@@ -1,4 +1,4 @@
-// Reference: Elements of Programming, ch. 6, p. 108.
+// Reference: Elements of Programming, ch. 6, pp. 108–109 (exercise 6.8).
 
 function find_backward_if<I extends BidirectionalIterator>(
     f: I, l: I, p: Predicate<ValueOf<I>>,
