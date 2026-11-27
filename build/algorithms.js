@@ -1437,7 +1437,7 @@ function partition_stable_with_buffer_0(f, l, p, b) {
 }
 
 function lower_bound_n(f, n, a, r) {
-    const p = function (x) { return !r(x, a); };
+    const p = (x) => !r(x, a);
     return partition_point_n(f, n, p);
 }
 
@@ -1474,7 +1474,7 @@ function partition_point_n_forward(f, n, p) {
 }
 
 function upper_bound_n(f, n, a, r) {
-    const p = function (x) { return r(a, x); };
+    const p = (x) => r(a, x);
     return partition_point_n(f, n, p);
 }
 

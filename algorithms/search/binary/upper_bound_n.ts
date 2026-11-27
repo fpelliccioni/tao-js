@@ -1,18 +1,13 @@
 function upper_bound_n<T>(f: Iter<T>, n: number, a: T, r: Relation<T>) {
-    const p = function(x: T) { return r(a, x); };
+    const p = (x: T) => r(a, x);
     return partition_point_n(f, n, p);
 }
 
 function __upper_bound_n_usage() {
-    function digitSum(num: number) {
-        return num.toString().split('').reduce(function(sum, digit) {
-            return sum + parseInt(digit);
-        }, 0);
-    }
+    const hasLowerDigitSum = relation<number>((x, y) => digitSum(x) < digitSum(y));
 
-    const hasLowerDigitSum = relation<number>(function hasLowerDigitSum(x, y) {
-        return digitSum(x) < digitSum(y);
-    });
+    print("digitSum(38) = " + digitSum(38));
+    print("digitSum(49) = " + digitSum(49));
 
     const d = sequence([11, 22, 49, 58, 67], "d");
 

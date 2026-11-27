@@ -2358,17 +2358,12 @@ function __partition_stable_with_buffer_0_usage() {
 function __partition_stable_with_buffer_0_attributes() {
 }
 
-function __lower_bound_n_typescript() { return ["function lower_bound_n<T>(f: Iter<T>, n: number, a: T, r: Relation<T>) {\n    const p = function(x: T) { return ! r(x, a); };\n    return partition_point_n(f, n, p);\n}","function digitSum(num: number) {\n    return num.toString().split('').reduce(function(sum, digit) {\n        return sum + parseInt(digit);\n    }, 0);\n}\n\nconst hasLowerDigitSum = relation<number>(function hasLowerDigitSum(x, y) {\n    return digitSum(x) < digitSum(y);\n});\n\nconst d = sequence([11, 22, 49, 58, 67], \"d\");\n\nconst lb = lower_bound_n(begin(d), size(d), 38, hasLowerDigitSum);\nprint('insertion point: ' + source(lb));"]; }
+function __lower_bound_n_typescript() { return ["function lower_bound_n<T>(f: Iter<T>, n: number, a: T, r: Relation<T>) {\n    const p = (x: T) => !r(x, a);\n    return partition_point_n(f, n, p);\n}","const hasLowerDigitSum = relation<number>((x, y) => digitSum(x) < digitSum(y));\n\nprint(\"digitSum(38) = \" + digitSum(38));\nprint(\"digitSum(49) = \" + digitSum(49));\n\nconst d = sequence([11, 22, 49, 58, 67], \"d\");\n\nconst lb = lower_bound_n(begin(d), size(d), 38, hasLowerDigitSum);\nprint('insertion point: ' + source(lb));"]; }
 
 function __lower_bound_n_usage() {
-    function digitSum(num) {
-        return num.toString().split('').reduce(function (sum, digit) {
-            return sum + parseInt(digit);
-        }, 0);
-    }
-    const hasLowerDigitSum = relation(function hasLowerDigitSum(x, y) {
-        return digitSum(x) < digitSum(y);
-    });
+    const hasLowerDigitSum = relation((x, y) => digitSum(x) < digitSum(y));
+    print("digitSum(38) = " + digitSum(38));
+    print("digitSum(49) = " + digitSum(49));
     const d = sequence([11, 22, 49, 58, 67], "d");
     const lb = lower_bound_n(begin(d), size(d), 38, hasLowerDigitSum);
     print('insertion point: ' + source(lb));
@@ -2409,17 +2404,12 @@ function __partition_point_n_forward_usage() {
 function __partition_point_n_forward_attributes() {
 }
 
-function __upper_bound_n_typescript() { return ["function upper_bound_n<T>(f: Iter<T>, n: number, a: T, r: Relation<T>) {\n    const p = function(x: T) { return r(a, x); };\n    return partition_point_n(f, n, p);\n}","function digitSum(num: number) {\n    return num.toString().split('').reduce(function(sum, digit) {\n        return sum + parseInt(digit);\n    }, 0);\n}\n\nconst hasLowerDigitSum = relation<number>(function hasLowerDigitSum(x, y) {\n    return digitSum(x) < digitSum(y);\n});\n\nconst d = sequence([11, 22, 49, 58, 67], \"d\");\n\nconst lb = upper_bound_n(begin(d), size(d), 38, hasLowerDigitSum);\nprint('insertion point: ' + source(lb));"]; }
+function __upper_bound_n_typescript() { return ["function upper_bound_n<T>(f: Iter<T>, n: number, a: T, r: Relation<T>) {\n    const p = (x: T) => r(a, x);\n    return partition_point_n(f, n, p);\n}","const hasLowerDigitSum = relation<number>((x, y) => digitSum(x) < digitSum(y));\n\nprint(\"digitSum(38) = \" + digitSum(38));\nprint(\"digitSum(49) = \" + digitSum(49));\n\nconst d = sequence([11, 22, 49, 58, 67], \"d\");\n\nconst lb = upper_bound_n(begin(d), size(d), 38, hasLowerDigitSum);\nprint('insertion point: ' + source(lb));"]; }
 
 function __upper_bound_n_usage() {
-    function digitSum(num) {
-        return num.toString().split('').reduce(function (sum, digit) {
-            return sum + parseInt(digit);
-        }, 0);
-    }
-    const hasLowerDigitSum = relation(function hasLowerDigitSum(x, y) {
-        return digitSum(x) < digitSum(y);
-    });
+    const hasLowerDigitSum = relation((x, y) => digitSum(x) < digitSum(y));
+    print("digitSum(38) = " + digitSum(38));
+    print("digitSum(49) = " + digitSum(49));
     const d = sequence([11, 22, 49, 58, 67], "d");
     const lb = upper_bound_n(begin(d), size(d), 38, hasLowerDigitSum);
     print('insertion point: ' + source(lb));

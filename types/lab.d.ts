@@ -40,6 +40,7 @@ declare function lt<T>(a: T, b: T): boolean;
 declare function gt<T>(a: T, b: T): boolean;
 declare function lte<T>(a: T, b: T): boolean;
 declare function gte<T>(a: T, b: T): boolean;
+declare function digitSum(value: number): number;
 declare function half(n: number): number;
 declare function half_nonnegative(n: number): number;
 declare function twice(n: number): number;
