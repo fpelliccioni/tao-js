@@ -2627,6 +2627,8 @@ function __upper_bound_n_attributes() {
 
 }
 
+function __all_typescript() { return ["function all<T>(f: Iter<T>, l: Iter<T>, p: Predicate<T>): boolean {\n    const np = find_if_not(f, l, p);\n    return equal(l, np);\n}","const even = predicate<number>(x => (x & 1) === 0);\nconst d = sequence(array_random(), \"d\");\nconst f = begin(d);\nconst l = end(d);\n\nif (all(f, l, even)) {\n    print(\"All the elements of the sequence are even.\");\n} else {\n    print(\"There is at least one item in the sequence that is not even.\");\n}"]; }
+
 function __all_usage() {
     const even = predicate(x => (x & 1) === 0);
     const d = sequence(array_random(), "d");
