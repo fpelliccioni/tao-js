@@ -1409,6 +1409,31 @@ function push_heap_n(f, n, r) {
     }
 }
 
+function partition_bidirectional(f, l, p) {
+    pre(() => is_bounded_range(f, l), "The iterators must delimit a valid range.");
+    let original;
+    pre(() => {
+        original = range_value_counts(f, l);
+        return true;
+    });
+    const misses = (value) => !p(value);
+    let first = f;
+    let last = l;
+    while (true) {
+        first = find_if(first, last, p);
+        last = find_backward_if(first, last, misses);
+        if (equal(first, last))
+            break;
+        last = predecessor(last);
+        exchange_values(first, last);
+        first = successor(first);
+    }
+    post(() => is_bounded_range(f, first) && is_bounded_range(first, l), "The partition point must belong to the range.");
+    post(() => partitioned_at_point(f, first, l, p), "The result must separate false and true elements.");
+    post(() => has_range_value_counts(f, l, original), "The output must be a permutation of the input.");
+    return first;
+}
+
 function partition_semistable(f, l, p) {
     while (true) {
         if (equal(f, l))
@@ -1464,6 +1489,38 @@ function partition_semistable_nonempty(f, l, p) {
         j = successor(j);
     }
     iter_swap(f, j);
+}
+
+function partition_sentinel(f, l, p) {
+    pre(() => is_bounded_range(f, l), "The iterators must delimit a valid range.");
+    let original;
+    pre(() => {
+        original = range_value_counts(f, l);
+        return true;
+    });
+    const misses = (value) => !p(value);
+    let first = f;
+    let last = l;
+    first = find_if(first, last, p);
+    last = find_backward_if(first, last, misses);
+    if (!equal(first, last)) {
+        // The first exchange puts one sentinel on each side.
+        last = predecessor(last);
+        exchange_values(first, last);
+        first = successor(first);
+        while (true) {
+            first = find_if_unguarded(first, p);
+            last = find_backward_if_not_unguarded(last, p);
+            if (equal(successor(last), first))
+                break;
+            exchange_values(first, last);
+            first = successor(first);
+        }
+    }
+    post(() => is_bounded_range(f, first) && is_bounded_range(first, l), "The partition point must belong to the range.");
+    post(() => partitioned_at_point(f, first, l, p), "The result must separate false and true elements.");
+    post(() => has_range_value_counts(f, l, original), "The output must be a permutation of the input.");
+    return first;
 }
 
 function partition_stable_forward(f, l, p) {
@@ -1769,6 +1826,16 @@ function find_backward_if(f, l, p) {
         if (p(source(l)))
             return successor(l);
     }
+}
+
+function find_backward_if_not_unguarded(l, p) {
+    // Precondition: there is a finite integer k > 0 such that
+    // p(source(predecessor(l, k))) is false.
+    do {
+        l = predecessor(l);
+    } while (p(source(l)));
+    post(() => !p(source(l)), "The result must point to an element that fails the predicate.");
+    return l;
 }
 
 function find_if(f, l, p) {
