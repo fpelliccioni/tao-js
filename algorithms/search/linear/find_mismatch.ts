@@ -1,4 +1,4 @@
-// Reference: Elements of Programming, ch. 6, pp. 99–100.
+// Reference: Elements of Programming, ch. 6, pp. 99–100 (bounded ranges; see exercise 6.5).
 
 function find_mismatch<I extends Iter<unknown>, J extends Iter<ValueOf<I>>>(
     f0: I, l0: I, f1: J, l1: J, r: Relation<ValueOf<I>>,

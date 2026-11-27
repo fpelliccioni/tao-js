@@ -2621,6 +2621,18 @@ function all(f, l, p) {
     return res;
 }
 
+function __debug_all_n(f, n, p) {
+    const [, remaining] = find_if_not_n(f, n, p);
+    return remaining === 0;
+}
+
+function all_n(f, n, p) {
+    var _f_ = start_f('all_n', f, n, p);
+    var res = __debug_all_n(f, n, p);
+    end_f(_f_);
+    return res;
+}
+
 function __debug_find(f, l, x) {
     while (!equal(f, l) && source(f) !== x) {
         f = successor(f);
@@ -2737,6 +2749,17 @@ function find_if_not(f, l, p) {
     return res;
 }
 
+function __debug_find_if_not_n(f, n, p) {
+    return find_if_n(f, n, value => !p(value));
+}
+
+function find_if_not_n(f, n, p) {
+    var _f_ = start_f('find_if_not_n', f, n, p);
+    var res = __debug_find_if_not_n(f, n, p);
+    end_f(_f_);
+    return res;
+}
+
 function __debug_find_if_not_unguarded(f, p) {
     // Precondition: an element reachable from f does not satisfy p.
     while (p(source(f))) {
@@ -2778,6 +2801,58 @@ function __debug_find_mismatch(f0, l0, f1, l1, r) {
 function find_mismatch(f0, l0, f1, l1, r) {
     var _f_ = start_f('find_mismatch', f0, l0, f1, l1, r);
     var res = __debug_find_mismatch(f0, l0, f1, l1, r);
+    end_f(_f_);
+    return res;
+}
+
+function __debug_find_mismatch_bounded_n(f0, l0, f1, n1, r) {
+    pre(() => Number.isSafeInteger(n1) && n1 >= 0, "Counts must be nonnegative safe integers.");
+    while (!equal(f0, l0) && n1 !== 0 && r(source(f0), source(f1))) {
+        f0 = successor(f0);
+        f1 = successor(f1);
+        --n1;
+    }
+    return [f0, f1, n1];
+}
+
+function find_mismatch_bounded_n(f0, l0, f1, n1, r) {
+    var _f_ = start_f('find_mismatch_bounded_n', f0, l0, f1, n1, r);
+    var res = __debug_find_mismatch_bounded_n(f0, l0, f1, n1, r);
+    end_f(_f_);
+    return res;
+}
+
+function __debug_find_mismatch_n(f0, n0, f1, n1, r) {
+    pre(() => Number.isSafeInteger(n0) && n0 >= 0 && Number.isSafeInteger(n1) && n1 >= 0, "Counts must be nonnegative safe integers.");
+    while (n0 !== 0 && n1 !== 0 && r(source(f0), source(f1))) {
+        f0 = successor(f0);
+        f1 = successor(f1);
+        --n0;
+        --n1;
+    }
+    return [f0, f1, n0, n1];
+}
+
+function find_mismatch_n(f0, n0, f1, n1, r) {
+    var _f_ = start_f('find_mismatch_n', f0, n0, f1, n1, r);
+    var res = __debug_find_mismatch_n(f0, n0, f1, n1, r);
+    end_f(_f_);
+    return res;
+}
+
+function __debug_find_mismatch_n_bounded(f0, n0, f1, l1, r) {
+    pre(() => Number.isSafeInteger(n0) && n0 >= 0, "Counts must be nonnegative safe integers.");
+    while (n0 !== 0 && !equal(f1, l1) && r(source(f0), source(f1))) {
+        f0 = successor(f0);
+        f1 = successor(f1);
+        --n0;
+    }
+    return [f0, f1, n0];
+}
+
+function find_mismatch_n_bounded(f0, n0, f1, l1, r) {
+    var _f_ = start_f('find_mismatch_n_bounded', f0, n0, f1, l1, r);
+    var res = __debug_find_mismatch_n_bounded(f0, n0, f1, l1, r);
     end_f(_f_);
     return res;
 }
@@ -2917,6 +2992,18 @@ function none(f, l, p) {
     return res;
 }
 
+function __debug_none_n(f, n, p) {
+    const [, remaining] = find_if_n(f, n, p);
+    return remaining === 0;
+}
+
+function none_n(f, n, p) {
+    var _f_ = start_f('none_n', f, n, p);
+    var res = __debug_none_n(f, n, p);
+    end_f(_f_);
+    return res;
+}
+
 function __debug_not_all(f, l, p) {
     return !all(f, l, p);
 }
@@ -2924,6 +3011,17 @@ function __debug_not_all(f, l, p) {
 function not_all(f, l, p) {
     var _f_ = start_f('not_all', f, l, p);
     var res = __debug_not_all(f, l, p);
+    end_f(_f_);
+    return res;
+}
+
+function __debug_not_all_n(f, n, p) {
+    return !all_n(f, n, p);
+}
+
+function not_all_n(f, n, p) {
+    var _f_ = start_f('not_all_n', f, n, p);
+    var res = __debug_not_all_n(f, n, p);
     end_f(_f_);
     return res;
 }
@@ -2989,6 +3087,17 @@ function __debug_some(f, l, p) {
 function some(f, l, p) {
     var _f_ = start_f('some', f, l, p);
     var res = __debug_some(f, l, p);
+    end_f(_f_);
+    return res;
+}
+
+function __debug_some_n(f, n, p) {
+    return !none_n(f, n, p);
+}
+
+function some_n(f, n, p) {
+    var _f_ = start_f('some_n', f, n, p);
+    var res = __debug_some_n(f, n, p);
     end_f(_f_);
     return res;
 }
