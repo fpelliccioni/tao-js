@@ -133,7 +133,7 @@ find_if_not: [ 'search/linear', 'https://github.com/fpelliccioni/tao-js/blob/mas
 find_subsequence_n_naive: [ 'search/linear', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/search/linear/find_subsequence_n_naive.js' ],
 find_subsequence_n_naive_1: [ 'search/linear', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/search/linear/find_subsequence_n_naive_1.js' ],
 find_subsequence_naive: [ 'search/linear', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/search/linear/find_subsequence_naive.js' ],
-none: [ 'search/linear', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/search/linear/none.js' ],
+none: [ 'search/linear', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/search/linear/none.ts' ],
 not_all: [ 'search/linear', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/search/linear/not_all.js' ],
 partitioned: [ 'search/linear', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/search/linear/partitioned.js' ],
 partitioned_at_point: [ 'search/linear', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/search/linear/partitioned_at_point.js' ],
@@ -2825,23 +2825,22 @@ function __kmp_lps_attributes() {
 
 }
 
+function __none_typescript() { return ["function none<T>(f: Iter<T>, l: Iter<T>, p: Predicate<T>): boolean {\n    const it = find_if(f, l, p);\n    return equal(l, it);\n}","const even = predicate<number>(x => (x & 1) === 0);\nconst d = sequence(array_random(), \"d\");\nconst f = begin(d);\nconst l = end(d);\n\nif (none(f, l, even)) {\n    print(\"None of the elements in the sequence are even.\");\n} else {\n    print(\"There is at least one item in the sequence that is even.\");\n}"]; }
+
 function __none_usage() {
-
-
-    var even = predicate(function even(x) { return (x & 1) == 0; });
-    var d = sequence(array_random(), "d");
-    var f = begin(d);
-    var l = end(d);
-
+    const even = predicate(x => (x & 1) === 0);
+    const d = sequence(array_random(), "d");
+    const f = begin(d);
+    const l = end(d);
     if (none(f, l, even)) {
         print("None of the elements in the sequence are even.");
-    } else {
+    }
+    else {
         print("There is at least one item in the sequence that is even.");
     }
 }
 
 function __none_attributes() {
-
 }
 
 function __not_all_usage() {

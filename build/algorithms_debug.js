@@ -2493,7 +2493,7 @@ function find_subsequence_naive(f, l, sf, sl, r) {
 }
 
 function __debug_none(f, l, p) {
-    var it = find_if(f, l, p);
+    const it = find_if(f, l, p);
     return equal(l, it);
 }
 
