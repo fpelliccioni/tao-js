@@ -1,5 +1,7 @@
 // Reference: Elements of Programming, ch. 6, pp. 96–97 (value-based overload in eop.h).
 
+// Doc (es): Combina los elementos de un rango no vacío de izquierda a derecha con op.
+// Doc (en): Combines elements of a nonempty range from left to right using op.
 function reduce_nonempty<I extends Iter<unknown>>(
     f: I, l: I, op: Operation<ValueOf<I>>,
 ): ValueOf<I> {

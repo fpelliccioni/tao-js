@@ -1,5 +1,7 @@
 // Reference: Elements of Programming, ch. 6, p. 99, exercise 6.3 (iterator projection).
 
+// Doc (es): Proyecta los primeros n iteradores y reduce sus valores de izquierda a derecha. Si n es cero, devuelve z.
+// Doc (en): Projects the first n iterators and reduces their values from left to right. If n is zero, returns z.
 function reduce_n_projected<I extends Iter<unknown>, T>(
     f: I, n: number, op: Operation<T>, project: (it: I) => T, z: T,
 ): T {

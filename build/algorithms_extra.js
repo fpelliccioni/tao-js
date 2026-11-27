@@ -272,6 +272,8 @@ function __lexicographical_less_attributes() {
 
 function __copy_typescript() { return ["function copy<T, U>(f: Iter<T>, l: Iter<T>, o: Iter<U>) {\n    while ( ! equal(f, l)) {\n        sink(o, source(f));\n        o = successor(o);\n        f = successor(f);\n    }\n    return o;\n}","const s = sequence(array_ascending());\nconst z = sequence(array_descending());\n\ncopy(successor(begin(s), 5), end(s), begin(z));\n\nprint(z);"]; }
 
+function __copy_documentation() { return ["Copia [f, l) a partir de o y devuelve el iterador que sigue al último elemento escrito. El destino debe tener espacio suficiente.","Copies [f, l) starting at o and returns the iterator just past the last written element. The destination must have enough space.","function copy<T, U>(f: Iter<T>, l: Iter<T>, o: Iter<U>)"]; }
+
 function __copy_references() { return ["Elements of Programming, ch. 9, p. 150."]; }
 
 function __copy_usage() {
@@ -2571,6 +2573,8 @@ function __push_heap_n_attributes() {
 
 function __partition_bidirectional_typescript() { return ["function partition_bidirectional<I extends MutableBidirectionalIterator>(\n    f: I, l: NoInfer<I>, p: Predicate<ValueOf<I>>,\n): I {\n    pre(() => is_bounded_range(f, l), \"The iterators must delimit a valid range.\");\n    let original!: Map<ValueOf<I>, number>;\n    pre(() => {\n        original = range_value_counts(f, l);\n        return true;\n    });\n\n    const misses = (value: ValueOf<I>) => !p(value);\n    let first = f;\n    let last: I = l;\n    while (true) {\n        first = find_if(first, last, p);\n        last = find_backward_if(first, last, misses);\n        if (equal(first, last)) break;\n        last = predecessor(last);\n        exchange_values(first, last);\n        first = successor(first);\n    }\n\n    post(() => is_bounded_range(f, first) && is_bounded_range(first, l), \"The partition point must belong to the range.\");\n    post(() => partitioned_at_point(f, first, l, p), \"The result must separate false and true elements.\");\n    post(() => has_range_value_counts(f, l, original), \"The output must be a permutation of the input.\");\n    return first;\n}","const d = sequence([2, 7, 4, 1, 6, 3]);\nconst f = begin(d);\nconst point = partition_bidirectional(f, end(d), even);\nconst index = distance(f, point);\nprint(\"Partition starts at index: \" + index);"]; }
 
+function __partition_bidirectional_documentation() { return ["Reordena [f, l) con los elementos que fallan p primero. Devuelve el inicio del grupo que cumple p.","Reorders [f, l) with the elements that fail p first. Returns the start of the group that satisfies p.","function partition_bidirectional<I extends MutableBidirectionalIterator>(\n    f: I, l: NoInfer<I>, p: Predicate<ValueOf<I>>,\n): I"]; }
+
 function __partition_bidirectional_references() { return ["Elements of Programming, ch. 11, pp. 191–192."]; }
 
 function __partition_bidirectional_usage() {
@@ -2635,6 +2639,8 @@ function __partition_semistable_nonempty_attributes() {
 }
 
 function __partition_sentinel_typescript() { return ["function partition_sentinel<I extends MutableBidirectionalIterator>(\n    f: I, l: NoInfer<I>, p: Predicate<ValueOf<I>>,\n): I {\n    pre(() => is_bounded_range(f, l), \"The iterators must delimit a valid range.\");\n    let original!: Map<ValueOf<I>, number>;\n    pre(() => {\n        original = range_value_counts(f, l);\n        return true;\n    });\n\n    const misses = (value: ValueOf<I>) => !p(value);\n    let first = f;\n    let last: I = l;\n    first = find_if(first, last, p);\n    last = find_backward_if(first, last, misses);\n    if (!equal(first, last)) {\n        // The first exchange puts one sentinel on each side.\n        last = predecessor(last);\n        exchange_values(first, last);\n        first = successor(first);\n\n        while (true) {\n            first = find_if_unguarded(first, p);\n            last = find_backward_if_not_unguarded(last, p);\n            if (equal(successor(last), first)) break;\n            exchange_values(first, last);\n            first = successor(first);\n        }\n    }\n\n    post(() => is_bounded_range(f, first) && is_bounded_range(first, l), \"The partition point must belong to the range.\");\n    post(() => partitioned_at_point(f, first, l, p), \"The result must separate false and true elements.\");\n    post(() => has_range_value_counts(f, l, original), \"The output must be a permutation of the input.\");\n    return first;\n}","const d = sequence([2, 7, 4, 1, 6, 3]);\nconst f = begin(d);\nconst point = partition_sentinel(f, end(d), even);\nconst index = distance(f, point);\nprint(\"Partition starts at index: \" + index);"]; }
+
+function __partition_sentinel_documentation() { return ["Particiona [f, l) de forma bidireccional. Usa elementos intercambiados como centinelas para las búsquedas internas.","Partitions [f, l) bidirectionally. Uses swapped elements as sentinels for the inner searches.","function partition_sentinel<I extends MutableBidirectionalIterator>(\n    f: I, l: NoInfer<I>, p: Predicate<ValueOf<I>>,\n): I"]; }
 
 function __partition_sentinel_references() { return ["Elements of Programming, ch. 11, p. 192, exercise 11.8 (companion implementation in eop.h)."]; }
 
@@ -2741,6 +2747,8 @@ function __reduce_n_attributes() {
 
 function __reduce_n_projected_typescript() { return ["function reduce_n_projected<I extends Iter<unknown>, T>(\n    f: I, n: number, op: Operation<T>, project: (it: I) => T, z: T,\n): T {\n    if (n === 0) return z;\n    return reduce_nonempty_n_projected(f, n, op, project);\n}","const d = sequence([11, 22, 33, 44]);\nconst project = (it: Iter<number>) => digitSum(source(it));\nconst result = reduce_n_projected(begin(d), 3, add, project, 0);\nprint(\"Sum of the first three digit sums: \" + result);"]; }
 
+function __reduce_n_projected_documentation() { return ["Proyecta los primeros n iteradores y reduce sus valores de izquierda a derecha. Si n es cero, devuelve z.","Projects the first n iterators and reduces their values from left to right. If n is zero, returns z.","function reduce_n_projected<I extends Iter<unknown>, T>(\n    f: I, n: number, op: Operation<T>, project: (it: I) => T, z: T,\n): T"]; }
+
 function __reduce_n_projected_references() { return ["Elements of Programming, ch. 6, p. 99, exercise 6.3 (iterator projection)."]; }
 
 function __reduce_n_projected_usage() {
@@ -2754,6 +2762,8 @@ function __reduce_n_projected_attributes() {
 }
 
 function __reduce_nonempty_typescript() { return ["function reduce_nonempty<I extends Iter<unknown>>(\n    f: I, l: I, op: Operation<ValueOf<I>>,\n): ValueOf<I> {\n    pre(() => !equal(f, l), \"The range must not be empty.\");\n\n    let result = source(f);\n    f = successor(f);\n    while (!equal(f, l)) {\n        result = op(result, source(f));\n        f = successor(f);\n    }\n    return result;\n}","const d = sequence([2, 3, 4], \"d\", undefined, \"stream\");\nconst product = reduce_nonempty(begin(d), end(d), multiply);\nprint(\"Product: \" + product);"]; }
+
+function __reduce_nonempty_documentation() { return ["Combina los elementos de un rango no vacío de izquierda a derecha con op.","Combines elements of a nonempty range from left to right using op.","function reduce_nonempty<I extends Iter<unknown>>(\n    f: I, l: I, op: Operation<ValueOf<I>>,\n): ValueOf<I>"]; }
 
 function __reduce_nonempty_references() { return ["Elements of Programming, ch. 6, pp. 96–97 (value-based overload in eop.h)."]; }
 
@@ -2780,6 +2790,8 @@ function __reduce_nonempty_n_attributes() {
 }
 
 function __reduce_nonempty_n_projected_typescript() { return ["function reduce_nonempty_n_projected<I extends Iter<unknown>, T>(\n    f: I, n: number, op: Operation<T>, project: (it: I) => T,\n): T {\n    pre(() => Number.isSafeInteger(n) && n > 0, \"The count must be a positive safe integer.\");\n\n    let result = project(f);\n    while (n > 1) {\n        f = successor(f);\n        result = op(result, project(f));\n        --n;\n    }\n    return result;\n}","const d = sequence([\"one\", \"two\", \"three\", \"four\"]);\nconst project = (it: Iter<string>) => source(it).length;\nconst result = reduce_nonempty_n_projected(begin(d), 3, add, project);\nprint(\"Characters in the first three words: \" + result);"]; }
+
+function __reduce_nonempty_n_projected_documentation() { return ["Proyecta los primeros n iteradores y combina los valores. Requiere al menos un elemento.","Projects the first n iterators and combines the resulting values. Requires at least one element.","function reduce_nonempty_n_projected<I extends Iter<unknown>, T>(\n    f: I, n: number, op: Operation<T>, project: (it: I) => T,\n): T"]; }
 
 function __reduce_nonempty_n_projected_references() { return ["Elements of Programming, ch. 6, p. 99, exercise 6.3 (iterator projection)."]; }
 
@@ -2820,6 +2832,8 @@ function __reduce_nonzeroes_n_attributes() {
 }
 
 function __reduce_nonzeroes_n_projected_typescript() { return ["function reduce_nonzeroes_n_projected<I extends Iter<unknown>, T>(\n    f: I, n: number, op: Operation<T>, project: (it: I) => T, z: T,\n): T {\n    pre(() => Number.isSafeInteger(n) && n >= 0, \"The count must be a nonnegative safe integer.\");\n\n    let result;\n    do {\n        if (n === 0) return z;\n        result = project(f);\n        f = successor(f);\n        --n;\n    } while (result === z);\n\n    while (n !== 0) {\n        const value = project(f);\n        if (value !== z) result = op(result, value);\n        f = successor(f);\n        --n;\n    }\n    return result;\n}","const d = sequence([10, 12, 20, 21, 11]);\nconst project = (it: Iter<number>) => source(it) % 10;\nconst result = reduce_nonzeroes_n_projected(begin(d), 4, add, project, 0);\nprint(\"Sum of last digits, skipping zeroes: \" + result);"]; }
+
+function __reduce_nonzeroes_n_projected_documentation() { return ["Proyecta los primeros n iteradores y reduce los valores distintos de z. Devuelve z si todos coinciden con él o el rango está vacío.","Projects the first n iterators and reduces the values different from z. Returns z if all values equal it or the range is empty.","function reduce_nonzeroes_n_projected<I extends Iter<unknown>, T>(\n    f: I, n: number, op: Operation<T>, project: (it: I) => T, z: T,\n): T"]; }
 
 function __reduce_nonzeroes_n_projected_references() { return ["Elements of Programming, ch. 6, p. 99, exercise 6.3 (iterator projection)."]; }
 
@@ -2951,6 +2965,8 @@ function __all_n_attributes() {
 
 function __find_typescript() { return ["function find<I extends Iter<unknown>>(f: I, l: I, x: ValueOf<I>): I {\n    while (!equal(f, l) && source(f) !== x) {\n        f = successor(f);\n    }\n    return f;\n}","const s = sequence(array_from(\"Hello, World!\"));\nconst l = end(s);\nconst target = \"W\";\nconst result = find(begin(s), l, target);\n\nif (equal(result, l)) {\n    print(\"No matching character.\");\n} else {\n    const value = source(result);\n    print(\"Found: \" + value);\n}"]; }
 
+function __find_documentation() { return ["Busca la primera aparición de x en [f, l). Devuelve l si x está ausente.","Finds the first occurrence of x in [f, l). Returns l if x is absent.","function find<I extends Iter<unknown>>(f: I, l: I, x: ValueOf<I>): I"]; }
+
 function __find_references() { return ["Elements of Programming, ch. 6, p. 94."]; }
 
 function __find_usage() {
@@ -3030,6 +3046,8 @@ function __find_backward_if_attributes() {
 
 function __find_backward_if_not_unguarded_typescript() { return ["function find_backward_if_not_unguarded<I extends BidirectionalIterator>(\n    l: I, p: Predicate<ValueOf<I>>,\n): I {\n    // Precondition: there is a finite integer k > 0 such that\n    // p(source(predecessor(l, k))) is false.\n    do {\n        l = predecessor(l);\n    } while (p(source(l)));\n\n    post(() => !p(source(l)), \"The result must point to an element that fails the predicate.\");\n    return l;\n}","const d = sequence([1, 7, 4, 8]);\nconst result = find_backward_if_not_unguarded(end(d), even);\nconst value = source(result);\nprint(\"Last odd element: \" + value);"]; }
 
+function __find_backward_if_not_unguarded_documentation() { return ["Retrocede desde l hasta el primer elemento que falla p. Debe existir uno a la izquierda de l.","Moves backward from l to the first element that fails p. Such an element must exist to the left of l.","function find_backward_if_not_unguarded<I extends BidirectionalIterator>(\n    l: I, p: Predicate<ValueOf<I>>,\n): I"]; }
+
 function __find_backward_if_not_unguarded_references() { return ["Elements of Programming, ch. 11, p. 192 (used by the sentinel partition in eop.h)."]; }
 
 function __find_backward_if_not_unguarded_usage() {
@@ -3043,6 +3061,8 @@ function __find_backward_if_not_unguarded_attributes() {
 }
 
 function __find_if_typescript() { return ["function find_if<I extends Iter<unknown>>(f: I, l: I, p: Predicate<ValueOf<I>>): I {\n    while (!equal(f, l) && !p(source(f))) {\n        f = successor(f);\n    }\n    return f;\n}","const d = sequence([1, 3, 8, 5, 6]);\nconst l = end(d);\nconst result = find_if(begin(d), l, even);\n\nif (equal(result, l)) {\n    print(\"No matching element.\");\n} else {\n    const value = source(result);\n    print(\"First even element: \" + value);\n}"]; }
+
+function __find_if_documentation() { return ["Devuelve el primer iterador en [f, l) cuyo elemento cumple p, o l si ninguno lo cumple.","Returns the first iterator in [f, l) whose element satisfies p, or l if none does.","function find_if<I extends Iter<unknown>>(f: I, l: I, p: Predicate<ValueOf<I>>): I"]; }
 
 function __find_if_references() { return ["Elements of Programming, ch. 6, pp. 94–95.","From Mathematics to Generic Programming, ch. 10, pp. 190–191 (ch10.h)."]; }
 
@@ -3122,6 +3142,8 @@ function __find_if_not_n_attributes() {
 
 function __find_if_not_unguarded_typescript() { return ["function find_if_not_unguarded<I extends Iter<unknown>>(f: I, p: Predicate<ValueOf<I>>): I {\n    // Precondition: there is a finite integer k >= 0 such that\n    // p(source(successor(f, k))) is false.\n    // Without an end iterator, this cannot be checked in general.\n    while (p(source(f))) {\n        f = successor(f);\n    }\n    return f;\n}","// The final element is the sentinel.\nconst d = sequence([2, 4, 8, 7]);\nconst result = find_if_not_unguarded(begin(d), even);\nconst value = source(result);\nprint(\"First odd element: \" + value);"]; }
 
+function __find_if_not_unguarded_documentation() { return ["Avanza hasta el primer elemento que falla p. Debe existir uno alcanzable desde f.","Advances to the first element that fails p. Such an element must be reachable from f.","function find_if_not_unguarded<I extends Iter<unknown>>(f: I, p: Predicate<ValueOf<I>>): I"]; }
+
 function __find_if_not_unguarded_references() { return ["Elements of Programming, ch. 6, p. 99."]; }
 
 function __find_if_not_unguarded_usage() {
@@ -3136,6 +3158,8 @@ function __find_if_not_unguarded_attributes() {
 }
 
 function __find_if_unguarded_typescript() { return ["function find_if_unguarded<I extends Iter<unknown>>(f: I, p: Predicate<ValueOf<I>>): I {\n    // Precondition: there is a finite integer k >= 0 such that\n    // p(source(successor(f, k))) is true.\n    // Without an end iterator, this cannot be checked in general.\n    while (!p(source(f))) {\n        f = successor(f);\n    }\n    return f;\n}","// The final element is the sentinel.\nconst d = sequence([1, 3, 5, 8]);\nconst result = find_if_unguarded(begin(d), even);\nconst value = source(result);\nprint(\"First even element: \" + value);"]; }
+
+function __find_if_unguarded_documentation() { return ["Avanza hasta el primer elemento que cumple p. Debe existir una coincidencia alcanzable desde f.","Advances to the first element that satisfies p. A match must be reachable from f.","function find_if_unguarded<I extends Iter<unknown>>(f: I, p: Predicate<ValueOf<I>>): I"]; }
 
 function __find_if_unguarded_references() { return ["Elements of Programming, ch. 6, p. 99."]; }
 
@@ -3379,6 +3403,8 @@ function __find_subsequence_naive_attributes() {
 }
 
 function __find_with_sentinel_typescript() { return ["function find_with_sentinel<I extends BidirectionalIterator>(f: I, l: I, x: ValueOf<I>): I {\n    // Precondition: equality is reflexive for x.\n    if (equal(f, l)) return l;\n\n    const last = predecessor(l);\n    const saved = source(last);\n    sink(last, x);\n    const result = find_if_unguarded(f, value => value === x);\n    sink(last, saved);\n\n    if (equal(result, last) && saved !== x) return l;\n    return result;\n}","const d = sequence([3, 7, 4, 9]);\nconst f = begin(d);\nconst l = end(d);\nconst target = 7;\nconst found = find_with_sentinel(f, l, target);\nconst missing = find_with_sentinel(f, l, 5);\nconst index = distance(f, found);\nconst notFound = equal(missing, l);\n\nprint(\"Index of 7: \" + index);\nprint(\"5 is absent: \" + notFound);"]; }
+
+function __find_with_sentinel_documentation() { return ["Busca x usando la última celda como centinela temporal. Restaura la celda y devuelve l si x está ausente.","Finds x using the last cell as a temporary sentinel. Restores the cell and returns l if x is absent.","function find_with_sentinel<I extends BidirectionalIterator>(f: I, l: I, x: ValueOf<I>): I"]; }
 
 function __find_with_sentinel_references() { return ["Elements of Programming, ch. 6, p. 99 (sentinel technique; lab adaptation)."]; }
 
@@ -3910,6 +3936,8 @@ function __count_if_n_attributes() {
 
 function __count_if_n_basis_typescript() { return ["function count_if_n_basis<I extends Iter<unknown>, J extends number | Iter<unknown>>(\n    f: I, n: number, p: Predicate<ValueOf<I>>, j: J,\n): J {\n    pre(() => Number.isSafeInteger(n) && n >= 0, \"The count must be a nonnegative safe integer.\");\n\n    while (n !== 0) {\n        if (p(source(f))) j = successor(j);\n        f = successor(f);\n        --n;\n    }\n    return j;\n}","const d = sequence([2, 4, 7, 8, 9]);\nconst positions = sequence([0, 1, 2, 3, 4]);\nconst start = begin(positions);\nconst result = count_if_n_basis(begin(d), 4, even, start);\nconst count = distance(start, result);\nprint(\"Even elements among the first four: \" + count);"]; }
 
+function __count_if_n_basis_documentation() { return ["Avanza el acumulador j una posición por cada elemento que cumple p en los primeros n. Devuelve j actualizado.","Advances the accumulator j once per element satisfying p among the first n. Returns the updated accumulator.","function count_if_n_basis<I extends Iter<unknown>, J extends number | Iter<unknown>>(\n    f: I, n: number, p: Predicate<ValueOf<I>>, j: J,\n): J"]; }
+
 function __count_if_n_basis_references() { return ["Elements of Programming, ch. 6, p. 99, exercise 6.3 (explicit accumulator)."]; }
 
 function __count_if_n_basis_usage() {
@@ -3973,6 +4001,8 @@ function __count_if_not_n_attributes() {
 }
 
 function __count_if_not_n_basis_typescript() { return ["function count_if_not_n_basis<I extends Iter<unknown>, J extends number | Iter<unknown>>(\n    f: I, n: number, p: Predicate<ValueOf<I>>, j: J,\n): J {\n    return count_if_n_basis(f, n, value => !p(value), j);\n}","const d = sequence([2, 4, 7, 8, 9]);\nconst positions = sequence([0, 1, 2, 3, 4]);\nconst start = begin(positions);\nconst result = count_if_not_n_basis(begin(d), 4, even, start);\nconst count = distance(start, result);\nprint(\"Odd elements among the first four: \" + count);"]; }
+
+function __count_if_not_n_basis_documentation() { return ["Avanza el acumulador j una posición por cada elemento que falla p en los primeros n. Devuelve j actualizado.","Advances the accumulator j once per element failing p among the first n. Returns the updated accumulator.","function count_if_not_n_basis<I extends Iter<unknown>, J extends number | Iter<unknown>>(\n    f: I, n: number, p: Predicate<ValueOf<I>>, j: J,\n): J"]; }
 
 function __count_if_not_n_basis_references() { return ["Elements of Programming, ch. 6, p. 99, exercise 6.3 (explicit accumulator)."]; }
 

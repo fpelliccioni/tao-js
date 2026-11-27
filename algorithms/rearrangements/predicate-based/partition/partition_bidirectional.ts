@@ -1,5 +1,7 @@
 // Reference: Elements of Programming, ch. 11, pp. 191–192.
 
+// Doc (es): Reordena [f, l) con los elementos que fallan p primero. Devuelve el inicio del grupo que cumple p.
+// Doc (en): Reorders [f, l) with the elements that fail p first. Returns the start of the group that satisfies p.
 function partition_bidirectional<I extends MutableBidirectionalIterator>(
     f: I, l: NoInfer<I>, p: Predicate<ValueOf<I>>,
 ): I {

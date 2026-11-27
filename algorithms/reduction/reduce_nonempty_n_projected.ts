@@ -1,5 +1,7 @@
 // Reference: Elements of Programming, ch. 6, p. 99, exercise 6.3 (iterator projection).
 
+// Doc (es): Proyecta los primeros n iteradores y combina los valores. Requiere al menos un elemento.
+// Doc (en): Projects the first n iterators and combines the resulting values. Requires at least one element.
 function reduce_nonempty_n_projected<I extends Iter<unknown>, T>(
     f: I, n: number, op: Operation<T>, project: (it: I) => T,
 ): T {

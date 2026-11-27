@@ -1,5 +1,7 @@
 // Reference: Elements of Programming, ch. 6, p. 99, exercise 6.3 (explicit accumulator).
 
+// Doc (es): Avanza el acumulador j una posición por cada elemento que falla p en los primeros n. Devuelve j actualizado.
+// Doc (en): Advances the accumulator j once per element failing p among the first n. Returns the updated accumulator.
 function count_if_not_n_basis<I extends Iter<unknown>, J extends number | Iter<unknown>>(
     f: I, n: number, p: Predicate<ValueOf<I>>, j: J,
 ): J {
