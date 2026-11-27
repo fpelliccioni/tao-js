@@ -561,6 +561,48 @@ function gcd3(a, b) {
     return res;
 }
 
+function __debug_stein_gcd(a, b) {
+    return stein_gcd_nonnegative(Math.abs(a), Math.abs(b));
+}
+
+function stein_gcd(a, b) {
+    var _f_ = start_f('stein_gcd', a, b);
+    var res = __debug_stein_gcd(a, b);
+    end_f(_f_);
+    return res;
+}
+
+function __debug_stein_gcd_nonnegative(a, b) {
+    pre(() => Number.isSafeInteger(a) && Number.isSafeInteger(b) && a >= 0 && b >= 0 && (a !== 0 || b !== 0), "Inputs must be nonnegative safe integers and at least one must be nonzero.");
+    if (a === 0)
+        return b;
+    if (b === 0)
+        return a;
+    let scale = 1;
+    while (a % 2 === 0 && b % 2 === 0) {
+        a /= 2;
+        b /= 2;
+        scale *= 2;
+    }
+    while (a % 2 === 0)
+        a /= 2;
+    while (b !== 0) {
+        while (b % 2 === 0)
+            b /= 2;
+        if (b < a)
+            [a, b] = [b, a];
+        b -= a;
+    }
+    return scale * a;
+}
+
+function stein_gcd_nonnegative(a, b) {
+    var _f_ = start_f('stein_gcd_nonnegative', a, b);
+    var res = __debug_stein_gcd_nonnegative(a, b);
+    end_f(_f_);
+    return res;
+}
+
 function __debug_divides(i, n) {
     return n % i == 0;
 }
@@ -2462,6 +2504,36 @@ function reduce_nonzeroes(f, l, op, z) {
     return res;
 }
 
+function __debug_equal_range(f, n, a, r) {
+    // Precondition: the counted range is sorted according to r.
+    pre(() => Number.isSafeInteger(n) && n >= 0, "The count must be a nonnegative safe integer.");
+    while (n !== 0) {
+        const h = half(n);
+        const m = successor(f, h);
+        const value = source(m);
+        if (r(value, a)) {
+            f = successor(m);
+            n -= h + 1;
+        }
+        else if (r(a, value)) {
+            n = h;
+        }
+        else {
+            const first = lower_bound_n(f, h, a, r);
+            const last = upper_bound_n(successor(m), n - h - 1, a, r);
+            return [first, last];
+        }
+    }
+    return [f, f];
+}
+
+function equal_range(f, n, a, r) {
+    var _f_ = start_f('equal_range', f, n, a, r);
+    var res = __debug_equal_range(f, n, a, r);
+    end_f(_f_);
+    return res;
+}
+
 function __debug_lower_bound_n(f, n, a, r) {
     const below = (x) => r(x, a);
     const p = (x) => !below(x);
@@ -2665,6 +2737,36 @@ function find_if_not(f, l, p) {
     return res;
 }
 
+function __debug_find_if_not_unguarded(f, p) {
+    // Precondition: an element reachable from f does not satisfy p.
+    while (p(source(f))) {
+        f = successor(f);
+    }
+    return f;
+}
+
+function find_if_not_unguarded(f, p) {
+    var _f_ = start_f('find_if_not_unguarded', f, p);
+    var res = __debug_find_if_not_unguarded(f, p);
+    end_f(_f_);
+    return res;
+}
+
+function __debug_find_if_unguarded(f, p) {
+    // Precondition: an element reachable from f satisfies p.
+    while (!p(source(f))) {
+        f = successor(f);
+    }
+    return f;
+}
+
+function find_if_unguarded(f, p) {
+    var _f_ = start_f('find_if_unguarded', f, p);
+    var res = __debug_find_if_unguarded(f, p);
+    end_f(_f_);
+    return res;
+}
+
 function __debug_find_mismatch(f0, l0, f1, l1, r) {
     while (!equal(f0, l0) && !equal(f1, l1) && r(source(f0), source(f1))) {
         f0 = successor(f0);
@@ -2849,6 +2951,21 @@ function __debug_partitioned_at_point(f, m, l, p) {
 function partitioned_at_point(f, m, l, p) {
     var _f_ = start_f('partitioned_at_point', f, m, l, p);
     var res = __debug_partitioned_at_point(f, m, l, p);
+    end_f(_f_);
+    return res;
+}
+
+function __debug_partitioned_n(f, n, p) {
+    const [middle, remaining] = find_if_n(f, n, p);
+    if (remaining === 0)
+        return true;
+    const [, untested] = find_if_n(successor(middle), remaining - 1, value => !p(value));
+    return untested === 0;
+}
+
+function partitioned_n(f, n, p) {
+    var _f_ = start_f('partitioned_n', f, n, p);
+    var res = __debug_partitioned_n(f, n, p);
     end_f(_f_);
     return res;
 }
@@ -3120,6 +3237,20 @@ function count_if_basis(f, l, p, j) {
     return res;
 }
 
+function __debug_count_if_for_each(f, l, p) {
+    let count = 0;
+    const tally = Object.assign((value) => { if (p(value))
+        ++count; }, { total: () => count });
+    return for_each(f, l, tally).total();
+}
+
+function count_if_for_each(f, l, p) {
+    var _f_ = start_f('count_if_for_each', f, l, p);
+    var res = __debug_count_if_for_each(f, l, p);
+    end_f(_f_);
+    return res;
+}
+
 function __debug_count_if_not(f, l, p) {
     const res = count_if_not_basis(f, l, p, 0);
     return res;
@@ -3228,15 +3359,13 @@ function iota(f, l, start, step) {
 }
 
 function __debug_palindrome_bidirectional(f, l, r) {
-    while (true) {
-        if (equal(f, l))
-            break;
+    while (!equal(f, l)) {
         l = predecessor(l);
+        if (equal(f, l))
+            return true;
         if (!r(source(f), source(l)))
             return false;
         f = successor(f);
-        if (equal(f, l))
-            break;
     }
     return true;
 }
