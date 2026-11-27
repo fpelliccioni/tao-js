@@ -1,4 +1,4 @@
-function all(f, l, p) {
+function all<T>(f: Iter<T>, l: Iter<T>, p: Predicate<T>): boolean {
     const np = find_if_not(f, l, p);
     return equal(l, np);
 }
@@ -6,7 +6,7 @@ function all(f, l, p) {
 function usage() {
 
 
-    const even = predicate(x => (x & 1) === 0);
+    const even = predicate<number>(x => (x & 1) === 0);
     const d = sequence(array_random(), "d");
     const f = begin(d);
     const l = end(d);

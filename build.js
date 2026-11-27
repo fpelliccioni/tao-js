@@ -1,9 +1,5 @@
-// npm install acorn@8.4.1
-// npm install node-fetch@2.6.1
-
-const acorn = require("acorn")
-// const walk = require("acorn-walk")
-const fetch = require("node-fetch");
+const acorn = require('acorn');
+const ts = require('typescript');
 const fs = require('fs');
 
 
@@ -77,10 +73,28 @@ function process_file(path, filename) {
 
 
     const algo_name = algorithm_name(filename)
-    const code = fs.readFileSync(path, 'utf8');
-    // console.log(code)
+    const source = fs.readFileSync(path, 'utf8');
+    let code = source;
+    if (filename.endsWith('.ts')) {
+        const result = ts.transpileModule(source, {
+            fileName: filename,
+            compilerOptions: { target: ts.ScriptTarget.ES2020 },
+            reportDiagnostics: true,
+        });
+        const errors = result.diagnostics.filter(diagnostic =>
+            diagnostic.category === ts.DiagnosticCategory.Error
+        );
+        if (errors.length) {
+            throw new Error(ts.formatDiagnosticsWithColorAndContext(errors, {
+                getCurrentDirectory: () => process.cwd(),
+                getCanonicalFileName: name => name,
+                getNewLine: () => '\n',
+            }));
+        }
+        code = result.outputText;
+    }
 
-    var p = acorn.parse(code);
+    var p = acorn.parse(code, { ecmaVersion: 2020 });
     // console.log(p);
     // console.log(p.body);
 
@@ -129,8 +143,10 @@ function process_dir(path) {
 
         if (stat && stat.isDirectory()) {
             var res = process_dir(file);
-        } else {
+        } else if (/\.(js|ts)$/.test(f) && !f.endsWith('.d.ts')) {
             var res = process_file(file, f);
+        } else {
+            return;
         }
 
         file_content_main  += res[0];
@@ -216,7 +232,7 @@ async function main(user, repo) {
         // console.log(text);
     } catch (e) {
         console.log(e);
-        // Deal with the fact the chain failed
+        process.exitCode = 1;
     }
 })();
 

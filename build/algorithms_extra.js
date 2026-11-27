@@ -125,7 +125,7 @@ lower_bound_n: [ 'search/binary', 'https://github.com/fpelliccioni/tao-js/blob/m
 partition_point_n: [ 'search/binary', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/search/binary/partition_point_n.js' ],
 partition_point_n_forward: [ 'search/binary', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/search/binary/partition_point_n_forward.js' ],
 upper_bound_n: [ 'search/binary', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/search/binary/upper_bound_n.js' ],
-all: [ 'search/linear', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/search/linear/all.js' ],
+all: [ 'search/linear', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/search/linear/all.ts' ],
 find: [ 'search/linear', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/search/linear/find.js' ],
 find_backward_if: [ 'search/linear', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/search/linear/find_backward_if.js' ],
 find_if: [ 'search/linear', 'https://github.com/fpelliccioni/tao-js/blob/master/algorithms/search/linear/find_if.js' ],
@@ -2628,22 +2628,19 @@ function __upper_bound_n_attributes() {
 }
 
 function __all_usage() {
-
-
     const even = predicate(x => (x & 1) === 0);
     const d = sequence(array_random(), "d");
     const f = begin(d);
     const l = end(d);
-
     if (all(f, l, even)) {
         print("All the elements of the sequence are even.");
-    } else {
+    }
+    else {
         print("There is at least one item in the sequence that is not even.");
     }
 }
 
 function __all_attributes() {
-
 }
 
 function __find_usage() {

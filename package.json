@@ -1,0 +1,12 @@
+{
+  "name": "tao-js",
+  "private": true,
+  "scripts": {
+    "check": "tsc --project tsconfig.json",
+    "build": "npm run check && node build.js"
+  },
+  "devDependencies": {
+    "acorn": "8.1.1",
+    "typescript": "5.9.3"
+  }
+}
