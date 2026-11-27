@@ -16,7 +16,6 @@ function __insertion_sort_classic_1_usage() {
     }
 
     const s = sequence(array_random(), "s", lt);
-    print(s);
     insertion_sort_classic_1(begin(s), end(s), lt);
     print(s);
 }

@@ -953,7 +953,7 @@ function __multiply_accumulate_semigroup_usage() {
 function __multiply_accumulate_semigroup_attributes() {
 }
 
-function __multiply_group_typescript() { return ["function multiply_group<T>(n: number, a: T) {\n    if (n < 0) {\n        n = -n;\n        a = negate(a);\n    }\n    return multiply_monoid(n, a);\n}","const n = 41;\nconst a = 59;\n\nconst p = multiply_group(n, a);\nprint(p);\n\nclass SquareMatrix {\n    data: number[];\n\n    constructor(readonly n: number, data?: number[]) {\n\n        this.data = data === undefined || data.length % n !== 0 ? new Array<number>(n * n) : data;\n    }\n\n    add(x: SquareMatrix) {\n        print(\"add() call\")\n        if (this.n != x.n) return undefined;\n\n        const res = new SquareMatrix(this.n);\n        for (let i = 0; i < this.data.length; ++i) {\n            res.data[i] = this.data[i] + x.data[i];\n        }\n        return res;\n    }\n\n    negate() {\n        const res = new SquareMatrix(this.n);\n        for (let i = 0; i < this.data.length; ++i) {\n            res.data[i] = -this.data[i];\n        }\n        return res;\n    }\n\n    str() {\n        let res = \"| \";\n        for (let i = 0; i < this.data.length; ++i) {\n            res += this.data[i] + \" \";\n            if (i % this.n) res += \"| \";\n        }\n        return res;\n    }\n}\n\nconst m1 = new SquareMatrix(2, [1, 3, 7, 5]);\nconst m1Text = m1.str();\nprint(m1Text);\n\nconst m2 = multiply_group(-5, m1);\nif (typeof m2 !== \"number\") {\n    const m2Text = m2.str();\n    print(m2Text);\n}\n\n\n\n// - NonCommutativeAdditiveGroup: is a Group where the associative binary operation is + and the identity element is 0\n//     commutativity is not required but could be present.\n// - Group is a set on which the following is defined:\n//        operation:                    x ° y\n//        operation:                    x^-1\n//        constant / identity element:  e\n//   and on which the following axiom holds:\n//        x ° (y ° z) = (x ° y) ° z       associativity\n//        x ° e = e ° x = x               identity\n//        x ° x^-1 = x^-1 ° x = e         cancellation\n// - commutativity (not required): x ° y = y ° x"]; }
+function __multiply_group_typescript() { return ["function multiply_group<T>(n: number, a: T) {\n    if (n < 0) {\n        n = -n;\n        a = negate(a);\n    }\n    return multiply_monoid(n, a);\n}","const n = 41;\nconst a = 59;\n\nconst p = multiply_group(n, a);\nprint(p);\n\nclass SquareMatrix {\n    data: number[];\n\n    constructor(readonly n: number, data?: number[]) {\n\n        this.data = data === undefined || data.length % n !== 0 ? new Array<number>(n * n) : data;\n    }\n\n    add(x: SquareMatrix) {\n        if (this.n != x.n) return undefined;\n\n        const res = new SquareMatrix(this.n);\n        for (let i = 0; i < this.data.length; ++i) {\n            res.data[i] = this.data[i] + x.data[i];\n        }\n        return res;\n    }\n\n    negate() {\n        const res = new SquareMatrix(this.n);\n        for (let i = 0; i < this.data.length; ++i) {\n            res.data[i] = -this.data[i];\n        }\n        return res;\n    }\n\n    str() {\n        let res = \"| \";\n        for (let i = 0; i < this.data.length; ++i) {\n            res += this.data[i] + \" \";\n            if (i % this.n) res += \"| \";\n        }\n        return res;\n    }\n}\n\nconst m1 = new SquareMatrix(2, [1, 3, 7, 5]);\nconst m1Text = m1.str();\nprint(m1Text);\n\nconst m2 = multiply_group(-5, m1);\nif (typeof m2 !== \"number\") {\n    const m2Text = m2.str();\n    print(m2Text);\n}\n\n\n\n// - NonCommutativeAdditiveGroup: is a Group where the associative binary operation is + and the identity element is 0\n//     commutativity is not required but could be present.\n// - Group is a set on which the following is defined:\n//        operation:                    x ° y\n//        operation:                    x^-1\n//        constant / identity element:  e\n//   and on which the following axiom holds:\n//        x ° (y ° z) = (x ° y) ° z       associativity\n//        x ° e = e ° x = x               identity\n//        x ° x^-1 = x^-1 ° x = e         cancellation\n// - commutativity (not required): x ° y = y ° x"]; }
 
 function __multiply_group_references() { return ["From Mathematics to Generic Programming, ch. 7, §7.4, pp. 118–119 (ch07.h)."]; }
 
@@ -968,7 +968,6 @@ function __multiply_group_usage() {
             this.data = data === undefined || data.length % n !== 0 ? new Array(n * n) : data;
         }
         add(x) {
-            print("add() call");
             if (this.n != x.n)
                 return undefined;
             const res = new SquareMatrix(this.n);
@@ -1018,7 +1017,7 @@ function __multiply_group_usage() {
 function __multiply_group_attributes() {
 }
 
-function __multiply_monoid_typescript() { return ["function multiply_monoid<T>(n: number, a: T) {\n    // precondition: n >= 0\n    if (n == 0) return 0;  //TODO\n    return multiply_semigroup(n, a);\n}","const n = 41;\nconst a = 59;\n\nconst p = multiply_monoid(n, a);\nprint(p);\n\nclass SquareMatrix {\n    data: number[];\n\n    constructor(readonly n: number, data?: number[]) {\n\n        this.data = data === undefined || data.length % n !== 0 ? new Array<number>(n * n) : data;\n    }\n\n    add(x: SquareMatrix) {\n        print(\"add() call\")\n        if (this.n != x.n) return undefined;\n\n        const res = new SquareMatrix(this.n);\n        for (let i = 0; i < this.data.length; ++i) {\n            res.data[i] = this.data[i] + x.data[i];\n        }\n        return res;\n    }\n\n    str() {\n        let res = \"| \";\n        for (let i = 0; i < this.data.length; ++i) {\n            res += this.data[i] + \" \";\n            if (i % this.n) res += \"| \";\n        }\n        return res;\n    }\n}\n\nconst m1 = new SquareMatrix(2, [1, 3, 7, 5]);\nconst m1Text = m1.str();\nprint(m1Text);\n\nconst m2 = multiply_monoid(5, m1);\nif (typeof m2 !== \"number\") {\n    const m2Text = m2.str();\n    print(m2Text);\n}\n\n\n\n// - NonCommutativeAdditiveMonoid: is a Monoid where the associative binary operation is + and the identity element is 0\n//     commutativity is not required but could be present.\n// - Monoid is a set on which the following is defined:\n//        operation:                    x ° y\n//        constant / identity element:  e\n//   and on which the following axiom holds:\n//        x ° (y ° z) = (x ° y) ° z       associativity\n//        x ° e = e ° x = x               identity\n// - commutativity (not required): x ° y = y ° x"]; }
+function __multiply_monoid_typescript() { return ["function multiply_monoid<T>(n: number, a: T) {\n    // precondition: n >= 0\n    if (n == 0) return 0;  //TODO\n    return multiply_semigroup(n, a);\n}","const n = 41;\nconst a = 59;\n\nconst p = multiply_monoid(n, a);\nprint(p);\n\nclass SquareMatrix {\n    data: number[];\n\n    constructor(readonly n: number, data?: number[]) {\n\n        this.data = data === undefined || data.length % n !== 0 ? new Array<number>(n * n) : data;\n    }\n\n    add(x: SquareMatrix) {\n        if (this.n != x.n) return undefined;\n\n        const res = new SquareMatrix(this.n);\n        for (let i = 0; i < this.data.length; ++i) {\n            res.data[i] = this.data[i] + x.data[i];\n        }\n        return res;\n    }\n\n    str() {\n        let res = \"| \";\n        for (let i = 0; i < this.data.length; ++i) {\n            res += this.data[i] + \" \";\n            if (i % this.n) res += \"| \";\n        }\n        return res;\n    }\n}\n\nconst m1 = new SquareMatrix(2, [1, 3, 7, 5]);\nconst m1Text = m1.str();\nprint(m1Text);\n\nconst m2 = multiply_monoid(5, m1);\nif (typeof m2 !== \"number\") {\n    const m2Text = m2.str();\n    print(m2Text);\n}\n\n\n\n// - NonCommutativeAdditiveMonoid: is a Monoid where the associative binary operation is + and the identity element is 0\n//     commutativity is not required but could be present.\n// - Monoid is a set on which the following is defined:\n//        operation:                    x ° y\n//        constant / identity element:  e\n//   and on which the following axiom holds:\n//        x ° (y ° z) = (x ° y) ° z       associativity\n//        x ° e = e ° x = x               identity\n// - commutativity (not required): x ° y = y ° x"]; }
 
 function __multiply_monoid_references() { return ["From Mathematics to Generic Programming, ch. 7, §7.4, pp. 118–119 (ch07.h)."]; }
 
@@ -1033,7 +1032,6 @@ function __multiply_monoid_usage() {
             this.data = data === undefined || data.length % n !== 0 ? new Array(n * n) : data;
         }
         add(x) {
-            print("add() call");
             if (this.n != x.n)
                 return undefined;
             const res = new SquareMatrix(this.n);
@@ -1728,7 +1726,7 @@ function __sift1_usage() {
 function __sift1_attributes() {
 }
 
-function __insertion_sort_typescript() { return ["function insertion_sort<T>(f: Iter<T>, l: Iter<T>, r: Relation<T>) {\n    if (equal(f, l)) return;\n    const c = successor(f);\n    if (equal(c, l)) return;\n\n    // create a sentinel\n    const min = min_element_nonempty(f, l, r);\n    if (! equal(min, f)) {\n        rotate_right_by_one_nonempty(f, successor(min));\n        increment_custom_stat(\"Misplaced elements\");\n        register_move_distance(distance(f, min));\n    }\n    insertion_sort_suffix_nonempty(c, l, r);\n}","function linear_insert_unguarded<T>(c: Iter<T>, r: Relation<T>) {\n    if ( ! call(r, c, predecessor(c))) return c;\n\n    increment_custom_stat(\"Misplaced elements\");\n\n    const value = source_move(c);\n    const d = shift_right_while_unguarded(c, bind(r, value));\n    sink_move(d, value);\n    register_move_distance(distance(d, c));\n    return d;\n}\n\nfunction insertion_sort_suffix_nonempty<T>(f: Iter<T>, l: Iter<T>, r: Relation<T>) {\n    //precondition: ! equal(f, l)\n    let c = successor(f);\n    while ( ! equal(c, l)) {\n        linear_insert_unguarded(c, r);\n        c = successor(c);\n    }\n}\n\n\nregister_custom_stat(\"Misplaced elements\");\n\n// var s = sequence([1, 2, 3, 4, 5], \"s\", lt);\n// var s = sequence([1, 2], \"s\", lt);\n\n// const s = sequence(array_random(), \"s\", lt);\n// var s = sequence(array_all_equal(), \"s\", lt);\n// var s = sequence(array_ascending(), \"s\", lt);\nconst s = sequence(array_descending(), \"s\", lt);\n\nprint(s);\ninsertion_sort(begin(s), end(s), lt);\nprint(s);"]; }
+function __insertion_sort_typescript() { return ["function insertion_sort<T>(f: Iter<T>, l: Iter<T>, r: Relation<T>) {\n    if (equal(f, l)) return;\n    const c = successor(f);\n    if (equal(c, l)) return;\n\n    // create a sentinel\n    const min = min_element_nonempty(f, l, r);\n    if (! equal(min, f)) {\n        rotate_right_by_one_nonempty(f, successor(min));\n        increment_custom_stat(\"Misplaced elements\");\n        register_move_distance(distance(f, min));\n    }\n    insertion_sort_suffix_nonempty(c, l, r);\n}","function linear_insert_unguarded<T>(c: Iter<T>, r: Relation<T>) {\n    if ( ! call(r, c, predecessor(c))) return c;\n\n    increment_custom_stat(\"Misplaced elements\");\n\n    const value = source_move(c);\n    const d = shift_right_while_unguarded(c, bind(r, value));\n    sink_move(d, value);\n    register_move_distance(distance(d, c));\n    return d;\n}\n\nfunction insertion_sort_suffix_nonempty<T>(f: Iter<T>, l: Iter<T>, r: Relation<T>) {\n    //precondition: ! equal(f, l)\n    let c = successor(f);\n    while ( ! equal(c, l)) {\n        linear_insert_unguarded(c, r);\n        c = successor(c);\n    }\n}\n\n\nregister_custom_stat(\"Misplaced elements\");\n\n// var s = sequence([1, 2, 3, 4, 5], \"s\", lt);\n// var s = sequence([1, 2], \"s\", lt);\n\n// const s = sequence(array_random(), \"s\", lt);\n// var s = sequence(array_all_equal(), \"s\", lt);\n// var s = sequence(array_ascending(), \"s\", lt);\nconst s = sequence(array_descending(), \"s\", lt);\n\ninsertion_sort(begin(s), end(s), lt);\nprint(s);"]; }
 
 function __insertion_sort_usage() {
     function linear_insert_unguarded(c, r) {
@@ -1756,7 +1754,6 @@ function __insertion_sort_usage() {
     // var s = sequence(array_all_equal(), "s", lt);
     // var s = sequence(array_ascending(), "s", lt);
     const s = sequence(array_descending(), "s", lt);
-    print(s);
     insertion_sort(begin(s), end(s), lt);
     print(s);
 }
@@ -1786,7 +1783,7 @@ function __insertion_sort_backward_usage() {
 function __insertion_sort_backward_attributes() {
 }
 
-function __insertion_sort_classic_typescript() { return ["function insertion_sort_classic<T>(f: Iter<T>, l: Iter<T>, r: Relation<T>) {\n    if (equal(f, l)) return;\n    let c = successor(f);\n    while ( ! equal(c, l)) {\n        linear_insert(f, c, r);\n        c = successor(c);\n    }\n}","function linear_insert<T>(f: Iter<T>, c: Iter<T>, r: Relation<T>) {\n    if ( ! call(r, c, predecessor(c))) return c;\n\n    increment_custom_stat(\"Misplaced elements\");\n\n    const value = source_move(c);\n    sink_move(c, source(predecessor(c)));\n    const d = shift_right_while(f, predecessor(c), bind(r, value));\n    sink_move(d, value);\n\n    register_move_distance(distance(d, c));\n    return d;\n}\n\nregister_custom_stat(\"Misplaced elements\");\n\n// const s = sequence(array_random(), \"s\", lt);\nconst s = sequence(array_descending(), \"s\", lt);\n\nprint(s);\ninsertion_sort_classic(begin(s), end(s), lt);\nprint(s);"]; }
+function __insertion_sort_classic_typescript() { return ["function insertion_sort_classic<T>(f: Iter<T>, l: Iter<T>, r: Relation<T>) {\n    if (equal(f, l)) return;\n    let c = successor(f);\n    while ( ! equal(c, l)) {\n        linear_insert(f, c, r);\n        c = successor(c);\n    }\n}","function linear_insert<T>(f: Iter<T>, c: Iter<T>, r: Relation<T>) {\n    if ( ! call(r, c, predecessor(c))) return c;\n\n    increment_custom_stat(\"Misplaced elements\");\n\n    const value = source_move(c);\n    sink_move(c, source(predecessor(c)));\n    const d = shift_right_while(f, predecessor(c), bind(r, value));\n    sink_move(d, value);\n\n    register_move_distance(distance(d, c));\n    return d;\n}\n\nregister_custom_stat(\"Misplaced elements\");\n\n// const s = sequence(array_random(), \"s\", lt);\nconst s = sequence(array_descending(), \"s\", lt);\n\ninsertion_sort_classic(begin(s), end(s), lt);\nprint(s);"]; }
 
 function __insertion_sort_classic_usage() {
     function linear_insert(f, c, r) {
@@ -1803,7 +1800,6 @@ function __insertion_sort_classic_usage() {
     register_custom_stat("Misplaced elements");
     // const s = sequence(array_random(), "s", lt);
     const s = sequence(array_descending(), "s", lt);
-    print(s);
     insertion_sort_classic(begin(s), end(s), lt);
     print(s);
 }
@@ -1811,7 +1807,7 @@ function __insertion_sort_classic_usage() {
 function __insertion_sort_classic_attributes() {
 }
 
-function __insertion_sort_classic_0_typescript() { return ["function insertion_sort_classic_0<T>(f: Iter<T>, l: Iter<T>, r: Relation<T>) {\n    if (equal(f, l)) return;\n    let c = successor(f);\n    while ( ! equal(c, l)) {\n        linear_insert(f, c, r);\n        c = successor(c);\n    }\n}","function linear_insert<T>(f: Iter<T>, c: Iter<T>, r: Relation<T>) {\n    const value = source(c);\n    while ( ! equal(f, c) && r(value, source(predecessor(c)))) {\n      sink(c, source(predecessor(c)));\n      c = predecessor(c);\n    }\n    sink(c, value);\n    return c;\n}\n\n//const s = sequence(array_random(), \"s\", lt);\nconst s = sequence([34, 5], \"s\", lt);\nprint(s);\ninsertion_sort_classic_0(begin(s), end(s), lt);\nprint(s);"]; }
+function __insertion_sort_classic_0_typescript() { return ["function insertion_sort_classic_0<T>(f: Iter<T>, l: Iter<T>, r: Relation<T>) {\n    if (equal(f, l)) return;\n    let c = successor(f);\n    while ( ! equal(c, l)) {\n        linear_insert(f, c, r);\n        c = successor(c);\n    }\n}","function linear_insert<T>(f: Iter<T>, c: Iter<T>, r: Relation<T>) {\n    const value = source(c);\n    while ( ! equal(f, c) && r(value, source(predecessor(c)))) {\n      sink(c, source(predecessor(c)));\n      c = predecessor(c);\n    }\n    sink(c, value);\n    return c;\n}\n\n//const s = sequence(array_random(), \"s\", lt);\nconst s = sequence([34, 5], \"s\", lt);\ninsertion_sort_classic_0(begin(s), end(s), lt);\nprint(s);"]; }
 
 function __insertion_sort_classic_0_usage() {
     function linear_insert(f, c, r) {
@@ -1825,7 +1821,6 @@ function __insertion_sort_classic_0_usage() {
     }
     //const s = sequence(array_random(), "s", lt);
     const s = sequence([34, 5], "s", lt);
-    print(s);
     insertion_sort_classic_0(begin(s), end(s), lt);
     print(s);
 }
@@ -1833,7 +1828,7 @@ function __insertion_sort_classic_0_usage() {
 function __insertion_sort_classic_0_attributes() {
 }
 
-function __insertion_sort_classic_1_typescript() { return ["function insertion_sort_classic_1<T>(f: Iter<T>, l: Iter<T>, r: Relation<T>) {\n    if (equal(f, l)) return;\n    let c = successor(f);\n    while ( ! equal(c, l)) {\n        linear_insert(f, c, r);\n        c = successor(c);\n    }\n}","function linear_insert<T>(f: Iter<T>, c: Iter<T>, r: Relation<T>) {\n    const value = source_move(c);\n    c = shift_right_while(f, c, bind(r, value));\n    sink_move(c, value);\n    return c;\n}\n\nconst s = sequence(array_random(), \"s\", lt);\nprint(s);\ninsertion_sort_classic_1(begin(s), end(s), lt);\nprint(s);"]; }
+function __insertion_sort_classic_1_typescript() { return ["function insertion_sort_classic_1<T>(f: Iter<T>, l: Iter<T>, r: Relation<T>) {\n    if (equal(f, l)) return;\n    let c = successor(f);\n    while ( ! equal(c, l)) {\n        linear_insert(f, c, r);\n        c = successor(c);\n    }\n}","function linear_insert<T>(f: Iter<T>, c: Iter<T>, r: Relation<T>) {\n    const value = source_move(c);\n    c = shift_right_while(f, c, bind(r, value));\n    sink_move(c, value);\n    return c;\n}\n\nconst s = sequence(array_random(), \"s\", lt);\ninsertion_sort_classic_1(begin(s), end(s), lt);\nprint(s);"]; }
 
 function __insertion_sort_classic_1_usage() {
     function linear_insert(f, c, r) {
@@ -1843,7 +1838,6 @@ function __insertion_sort_classic_1_usage() {
         return c;
     }
     const s = sequence(array_random(), "s", lt);
-    print(s);
     insertion_sort_classic_1(begin(s), end(s), lt);
     print(s);
 }
@@ -1851,7 +1845,7 @@ function __insertion_sort_classic_1_usage() {
 function __insertion_sort_classic_1_attributes() {
 }
 
-function __insertion_sort_classic_2_typescript() { return ["function insertion_sort_classic_2<T>(f: Iter<T>, l: Iter<T>, r: Relation<T>) {\n    if (equal(f, l)) return;\n    let c = successor(f);\n    while ( ! equal(c, l)) {\n        linear_insert(f, c, r);\n        c = successor(c);\n    }\n}","function linear_insert<T>(f: Iter<T>, c: Iter<T>, r: Relation<T>) {\n    const value = source_move(c);\n    c = shift_right_while_nonempty(f, c, bind(r, value));\n    sink_move(c, value);\n    return c;\n}\n\nconst s = sequence(array_random(), \"s\", lt);\nprint(s);\ninsertion_sort_classic_2(begin(s), end(s), lt);\nprint(s);"]; }
+function __insertion_sort_classic_2_typescript() { return ["function insertion_sort_classic_2<T>(f: Iter<T>, l: Iter<T>, r: Relation<T>) {\n    if (equal(f, l)) return;\n    let c = successor(f);\n    while ( ! equal(c, l)) {\n        linear_insert(f, c, r);\n        c = successor(c);\n    }\n}","function linear_insert<T>(f: Iter<T>, c: Iter<T>, r: Relation<T>) {\n    const value = source_move(c);\n    c = shift_right_while_nonempty(f, c, bind(r, value));\n    sink_move(c, value);\n    return c;\n}\n\nconst s = sequence(array_random(), \"s\", lt);\ninsertion_sort_classic_2(begin(s), end(s), lt);\nprint(s);"]; }
 
 function __insertion_sort_classic_2_usage() {
     function linear_insert(f, c, r) {
@@ -1861,7 +1855,6 @@ function __insertion_sort_classic_2_usage() {
         return c;
     }
     const s = sequence(array_random(), "s", lt);
-    print(s);
     insertion_sort_classic_2(begin(s), end(s), lt);
     print(s);
 }
@@ -1869,7 +1862,7 @@ function __insertion_sort_classic_2_usage() {
 function __insertion_sort_classic_2_attributes() {
 }
 
-function __insertion_sort_classic_3_typescript() { return ["function insertion_sort_classic_3<T>(f: Iter<T>, l: Iter<T>, r: Relation<T>) {\n    if (equal(f, l)) return;\n    let c = successor(f);\n    while ( ! equal(c, l)) {\n        linear_insert(f, c, r);\n        c = successor(c);\n    }\n}","function linear_insert<T>(f: Iter<T>, c: Iter<T>, r: Relation<T>) {\n    if ( ! r(source(c), source(predecessor(c)))) return c;\n\n    const value = source_move(c);\n    while (true) {\n        sink_move(c, source(predecessor(c)));\n        c = predecessor(c);\n\n        if (equal(f, c)) break;\n        if ( ! r(value, source(predecessor(c)))) break;\n    }\n    sink_move(c, value);\n    return c;\n}\n\nconst s = sequence(array_random(), \"s\", lt);\nprint(s);\ninsertion_sort_classic_3(begin(s), end(s), lt);\nprint(s);"]; }
+function __insertion_sort_classic_3_typescript() { return ["function insertion_sort_classic_3<T>(f: Iter<T>, l: Iter<T>, r: Relation<T>) {\n    if (equal(f, l)) return;\n    let c = successor(f);\n    while ( ! equal(c, l)) {\n        linear_insert(f, c, r);\n        c = successor(c);\n    }\n}","function linear_insert<T>(f: Iter<T>, c: Iter<T>, r: Relation<T>) {\n    if ( ! r(source(c), source(predecessor(c)))) return c;\n\n    const value = source_move(c);\n    while (true) {\n        sink_move(c, source(predecessor(c)));\n        c = predecessor(c);\n\n        if (equal(f, c)) break;\n        if ( ! r(value, source(predecessor(c)))) break;\n    }\n    sink_move(c, value);\n    return c;\n}\n\nconst s = sequence(array_random(), \"s\", lt);\ninsertion_sort_classic_3(begin(s), end(s), lt);\nprint(s);"]; }
 
 function __insertion_sort_classic_3_usage() {
     function linear_insert(f, c, r) {
@@ -1888,7 +1881,6 @@ function __insertion_sort_classic_3_usage() {
         return c;
     }
     const s = sequence(array_random(), "s", lt);
-    print(s);
     insertion_sort_classic_3(begin(s), end(s), lt);
     print(s);
 }
@@ -1913,11 +1905,10 @@ function __linear_insert_unguarded_usage() {
 function __linear_insert_unguarded_attributes() {
 }
 
-function __selection_sort_classic_typescript() { return ["function selection_sort_classic<T>(f: Iter<T>, l: Iter<T>, r: Relation<T>) {\n    // postcondition: is_sorted(f, l, r)\n    while ( ! equal(f, l)) {\n        const m = min_element(f, l, r);\n        iter_swap(f, m);\n        f = successor(f);\n    }\n}","const s = sequence(array_random(), \"s\", lt);\n\nprint(s);\nselection_sort_classic(begin(s), end(s), lt);\nprint(s);\nfunction is_sorted<T>(f: Iter<T>, l: Iter<T>, r: Relation<T>) {\n    if (equal(f, l)) return true;\n    let next = successor(f);\n    while (!equal(next, l)) {\n        if (r(source(next), source(f))) return false;\n        f = next;\n        next = successor(next);\n    }\n    return true;\n}\nconst sorted = is_sorted(begin(s), end(s), lt);\nprint(sorted);"]; }
+function __selection_sort_classic_typescript() { return ["function selection_sort_classic<T>(f: Iter<T>, l: Iter<T>, r: Relation<T>) {\n    // postcondition: is_sorted(f, l, r)\n    while ( ! equal(f, l)) {\n        const m = min_element(f, l, r);\n        iter_swap(f, m);\n        f = successor(f);\n    }\n}","const s = sequence(array_random(), \"s\", lt);\n\nselection_sort_classic(begin(s), end(s), lt);\nprint(s);\nfunction is_sorted<T>(f: Iter<T>, l: Iter<T>, r: Relation<T>) {\n    if (equal(f, l)) return true;\n    let next = successor(f);\n    while (!equal(next, l)) {\n        if (r(source(next), source(f))) return false;\n        f = next;\n        next = successor(next);\n    }\n    return true;\n}\nconst sorted = is_sorted(begin(s), end(s), lt);\nprint(sorted);"]; }
 
 function __selection_sort_classic_usage() {
     const s = sequence(array_random(), "s", lt);
-    print(s);
     selection_sort_classic(begin(s), end(s), lt);
     print(s);
     function is_sorted(f, l, r) {
@@ -1939,11 +1930,10 @@ function __selection_sort_classic_usage() {
 function __selection_sort_classic_attributes() {
 }
 
-function __selection_sort_stable_typescript() { return ["function selection_sort_stable<T>(f: Iter<T>, l: Iter<T>, r: Relation<T>) {\n    while (! equal(f, l)) {\n        const m = min_element(f, l, r);\n        rotate_right_by_one(f, successor(m));\n        f = successor(f);\n    }\n}","const s = sequence(array_random(), \"s\", lt);\nprint(s);\nselection_sort_stable(begin(s), end(s), lt);\nprint(s);"]; }
+function __selection_sort_stable_typescript() { return ["function selection_sort_stable<T>(f: Iter<T>, l: Iter<T>, r: Relation<T>) {\n    while (! equal(f, l)) {\n        const m = min_element(f, l, r);\n        rotate_right_by_one(f, successor(m));\n        f = successor(f);\n    }\n}","const s = sequence(array_random(), \"s\", lt);\nselection_sort_stable(begin(s), end(s), lt);\nprint(s);"]; }
 
 function __selection_sort_stable_usage() {
     const s = sequence(array_random(), "s", lt);
-    print(s);
     selection_sort_stable(begin(s), end(s), lt);
     print(s);
 }
@@ -1969,7 +1959,7 @@ function __sort3_usage() {
 function __sort3_attributes() {
 }
 
-function __cycle_from_typescript() { return ["function cycle_from<T>(i: Iter<T>, f: IteratorPermutation<T>) {\n    const tmp = source(i);\n    let j = i;\n    let k = f(i);\n    while ( ! equal(k, i)) {\n        sink(j, source(k));\n        j = k;\n        k = f(k);\n    }\n    sink(j, tmp);\n}","function successorMod10(i: Iter<number>) {\n    const f = begin(s);\n    let index = distance(begin(s), i);\n    ++index;\n    index = index % 10;\n    const ret = successor(f, index);\n    return ret;\n}\n\nconst s = sequence(array_random(), \"s\");\nprint(s);\ncycle_from(begin(s), successorMod10);\nprint(s);\nprint('...');"]; }
+function __cycle_from_typescript() { return ["function cycle_from<T>(i: Iter<T>, f: IteratorPermutation<T>) {\n    const tmp = source(i);\n    let j = i;\n    let k = f(i);\n    while ( ! equal(k, i)) {\n        sink(j, source(k));\n        j = k;\n        k = f(k);\n    }\n    sink(j, tmp);\n}","function successorMod10(i: Iter<number>) {\n    const f = begin(s);\n    let index = distance(begin(s), i);\n    ++index;\n    index = index % 10;\n    const ret = successor(f, index);\n    return ret;\n}\n\nconst s = sequence(array_random(), \"s\");\ncycle_from(begin(s), successorMod10);\nprint(s);"]; }
 
 function __cycle_from_references() { return ["Elements of Programming, ch. 10, p. 171."]; }
 
@@ -1983,16 +1973,14 @@ function __cycle_from_usage() {
         return ret;
     }
     const s = sequence(array_random(), "s");
-    print(s);
     cycle_from(begin(s), successorMod10);
     print(s);
-    print('...');
 }
 
 function __cycle_from_attributes() {
 }
 
-function __cycle_to_typescript() { return ["function cycle_to<T>(i: Iter<T>, f: IteratorPermutation<T>) {\n    let k = f(i);\n    while ( ! equal(k, i)) {\n        exchange_values(i, k);\n        k = f(k);\n    }\n}","function successorMod10(i: Iter<number>) {\n    const f = begin(s);\n    let index = distance(begin(s), i);\n    ++index;\n    index = index % 10;\n    const ret = successor(f, index);\n    return ret;\n}\n\nconst s = sequence(array_random(), \"s\");\nprint(s);\ncycle_to(begin(s), successorMod10);\nprint(s);\nprint('...');"]; }
+function __cycle_to_typescript() { return ["function cycle_to<T>(i: Iter<T>, f: IteratorPermutation<T>) {\n    let k = f(i);\n    while ( ! equal(k, i)) {\n        exchange_values(i, k);\n        k = f(k);\n    }\n}","function successorMod10(i: Iter<number>) {\n    const f = begin(s);\n    let index = distance(begin(s), i);\n    ++index;\n    index = index % 10;\n    const ret = successor(f, index);\n    return ret;\n}\n\nconst s = sequence(array_random(), \"s\");\ncycle_to(begin(s), successorMod10);\nprint(s);"]; }
 
 function __cycle_to_references() { return ["Elements of Programming, ch. 10, p. 170."]; }
 
@@ -2006,16 +1994,14 @@ function __cycle_to_usage() {
         return ret;
     }
     const s = sequence(array_random(), "s");
-    print(s);
     cycle_to(begin(s), successorMod10);
     print(s);
-    print('...');
 }
 
 function __cycle_to_attributes() {
 }
 
-function __cycle_to_2n_1_typescript() { return ["function cycle_to_2n_1<T>(i: Iter<T>, f: IteratorPermutation<T>) {\n    let k = f(i);\n    if (equal(k, i)) return;\n\n    const buf = sequence(array_all_equal(1, \"-\"), \"buf\");\n    let b: Iter<T | string> = begin(buf);\n    let b2: Iter<T | string> = i;\n\n    sink(b, source(k));\n    sink(k, source(b2));\n\n    const [nextBuffer, nextInput] = swap_iters(b, b2);\n    b = nextBuffer;\n    b2 = nextInput;\n\n    k = f(k);\n    while ( ! equal(k, i)) {\n        sink(b, source(k));\n        sink(k, source(b2));\n\n        const [nextBuffer, nextInput] = swap_iters(b, b2);\n        b = nextBuffer;\n        b2 = nextInput;\n\n        k = f(k);\n    }\n    sink(i, source(b2));\n}","function swap_iters<A, B>(a: A, b: B): [B, A] {\n    return [b, a];\n}\n\nfunction successorMod10(i: Iter<number>) {\n    const f = begin(s);\n    let index = distance(begin(s), i);\n    ++index;\n    index = index % 10;\n    const ret = successor(f, index);\n    return ret;\n}\n\nconst s = sequence(array_random(), \"s\");\nprint(s);\ncycle_to_2n_1(begin(s), successorMod10);\nprint(s);\nprint('...');"]; }
+function __cycle_to_2n_1_typescript() { return ["function cycle_to_2n_1<T>(i: Iter<T>, f: IteratorPermutation<T>) {\n    let k = f(i);\n    if (equal(k, i)) return;\n\n    const buf = sequence(array_all_equal(1, \"-\"), \"buf\");\n    let b: Iter<T | string> = begin(buf);\n    let b2: Iter<T | string> = i;\n\n    sink(b, source(k));\n    sink(k, source(b2));\n\n    const [nextBuffer, nextInput] = swap_iters(b, b2);\n    b = nextBuffer;\n    b2 = nextInput;\n\n    k = f(k);\n    while ( ! equal(k, i)) {\n        sink(b, source(k));\n        sink(k, source(b2));\n\n        const [nextBuffer, nextInput] = swap_iters(b, b2);\n        b = nextBuffer;\n        b2 = nextInput;\n\n        k = f(k);\n    }\n    sink(i, source(b2));\n}","function swap_iters<A, B>(a: A, b: B): [B, A] {\n    return [b, a];\n}\n\nfunction successorMod10(i: Iter<number>) {\n    const f = begin(s);\n    let index = distance(begin(s), i);\n    ++index;\n    index = index % 10;\n    const ret = successor(f, index);\n    return ret;\n}\n\nconst s = sequence(array_random(), \"s\");\ncycle_to_2n_1(begin(s), successorMod10);\nprint(s);"]; }
 
 function __cycle_to_2n_1_references() { return ["Elements of Programming, ch. 10, p. 171, exercise 10.3 (implementation of the exercise)."]; }
 
@@ -2032,16 +2018,14 @@ function __cycle_to_2n_1_usage() {
         return ret;
     }
     const s = sequence(array_random(), "s");
-    print(s);
     cycle_to_2n_1(begin(s), successorMod10);
     print(s);
-    print('...');
 }
 
 function __cycle_to_2n_1_attributes() {
 }
 
-function __cycle_to_recursive_typescript() { return ["function cycle_to_recursive<T>(i: Iter<T>, f: IteratorPermutation<T>) {\n    const k = f(i);\n    if (equal(k, i)) return;\n\n    const buf = sequence(array_all_equal(1, \"-\"), \"buf\");\n    const b = begin(buf);\n    cycle_to_internal(i, k, f, b);\n    sink(k, source(i));\n    sink(i, source(b));\n}","function cycle_to_internal<T>(i: Iter<T>, k: Iter<T>, f: IteratorPermutation<T>, b: Iter<T | string>) {\n    const n = f(k);\n    if (equal(n, i)) {\n        sink(b, source(k));\n        return;\n    }\n    cycle_to_internal(i, n, f, b);\n    sink(n, source(k));\n}\n\nfunction successorMod10(i: Iter<number>) {\n    const f = begin(s);\n    let index = distance(begin(s), i);\n    ++index;\n    index = index % 5;\n    const ret = successor(f, index);\n    return ret;\n}\n\nconst s = sequence(array_random(5), \"s\");\nprint(s);\ncycle_to_recursive(begin(s), successorMod10);\nprint(s);\nprint('...');"]; }
+function __cycle_to_recursive_typescript() { return ["function cycle_to_recursive<T>(i: Iter<T>, f: IteratorPermutation<T>) {\n    const k = f(i);\n    if (equal(k, i)) return;\n\n    const buf = sequence(array_all_equal(1, \"-\"), \"buf\");\n    const b = begin(buf);\n    cycle_to_internal(i, k, f, b);\n    sink(k, source(i));\n    sink(i, source(b));\n}","function cycle_to_internal<T>(i: Iter<T>, k: Iter<T>, f: IteratorPermutation<T>, b: Iter<T | string>) {\n    const n = f(k);\n    if (equal(n, i)) {\n        sink(b, source(k));\n        return;\n    }\n    cycle_to_internal(i, n, f, b);\n    sink(n, source(k));\n}\n\nfunction successorMod10(i: Iter<number>) {\n    const f = begin(s);\n    let index = distance(begin(s), i);\n    ++index;\n    index = index % 5;\n    const ret = successor(f, index);\n    return ret;\n}\n\nconst s = sequence(array_random(5), \"s\");\ncycle_to_recursive(begin(s), successorMod10);\nprint(s);"]; }
 
 function __cycle_to_recursive_usage() {
     function cycle_to_internal(i, k, f, b) {
@@ -2062,40 +2046,34 @@ function __cycle_to_recursive_usage() {
         return ret;
     }
     const s = sequence(array_random(5), "s");
-    print(s);
     cycle_to_recursive(begin(s), successorMod10);
     print(s);
-    print('...');
 }
 
 function __cycle_to_recursive_attributes() {
 }
 
-function __reverse_typescript() { return ["function reverse<T>(f: Iter<T>, l: Iter<T>) {\n    while (true) {\n        if (equal(f, l)) return;\n        l = predecessor(l);\n        if (equal(f, l)) return;\n        iter_swap(f, l);\n        f = successor(f);\n    }\n}","const s = sequence(array_random(), \"s1\");\nprint(s);\nreverse(begin(s), end(s));\nprint(s);\nprint('...');"]; }
+function __reverse_typescript() { return ["function reverse<T>(f: Iter<T>, l: Iter<T>) {\n    while (true) {\n        if (equal(f, l)) return;\n        l = predecessor(l);\n        if (equal(f, l)) return;\n        iter_swap(f, l);\n        f = successor(f);\n    }\n}","const s = sequence(array_random(), \"s1\");\nreverse(begin(s), end(s));\nprint(s);"]; }
 
 function __reverse_references() { return ["Elements of Programming, ch. 10, p. 173 (bidirectional implementation)."]; }
 
 function __reverse_usage() {
     const s = sequence(array_random(), "s1");
-    print(s);
     reverse(begin(s), end(s));
     print(s);
-    print('...');
 }
 
 function __reverse_attributes() {
 }
 
-function __reverse_bidirectional_typescript() { return ["function reverse_bidirectional<T>(f: Iter<T>, l: Iter<T>) {\n    while (true) {\n        if (equal(f, l)) return;\n        l = predecessor(l);\n        if (equal(f, l)) return;\n        iter_swap(f, l);\n        f = successor(f);\n    }\n}","const s = sequence(array_random(), \"s1\");\nprint(s);\nreverse_bidirectional(begin(s), end(s));\nprint(s);\nprint('...');"]; }
+function __reverse_bidirectional_typescript() { return ["function reverse_bidirectional<T>(f: Iter<T>, l: Iter<T>) {\n    while (true) {\n        if (equal(f, l)) return;\n        l = predecessor(l);\n        if (equal(f, l)) return;\n        iter_swap(f, l);\n        f = successor(f);\n    }\n}","const s = sequence(array_random(), \"s1\");\nreverse_bidirectional(begin(s), end(s));\nprint(s);"]; }
 
 function __reverse_bidirectional_references() { return ["Elements of Programming, ch. 10, p. 173 (bidirectional implementation)."]; }
 
 function __reverse_bidirectional_usage() {
     const s = sequence(array_random(), "s1");
-    print(s);
     reverse_bidirectional(begin(s), end(s));
     print(s);
-    print('...');
 }
 
 function __reverse_bidirectional_attributes() {
@@ -2117,31 +2095,27 @@ function __reverse_n_adaptive_usage() {
 function __reverse_n_adaptive_attributes() {
 }
 
-function __reverse_n_forward_typescript() { return ["function reverse_n_forward<T>(f: Iter<T>, n: number): Iter<T> {\n    if (n < 2) return successor(f, n);\n    const h = half(n);\n    const n_mod_2 = n - twice(h);\n\n    const m = successor(reverse_n_forward(f, h), n_mod_2);\n    const l = reverse_n_forward(m, h);\n\n    swap_ranges_n(f, m, h);\n    return l;\n}","const s = sequence(array_random(), \"s1\");\nprint(s);\nconst r = reverse_n_forward(begin(s), size(s));\nprint(s);\nprint('...');"]; }
+function __reverse_n_forward_typescript() { return ["function reverse_n_forward<T>(f: Iter<T>, n: number): Iter<T> {\n    if (n < 2) return successor(f, n);\n    const h = half(n);\n    const n_mod_2 = n - twice(h);\n\n    const m = successor(reverse_n_forward(f, h), n_mod_2);\n    const l = reverse_n_forward(m, h);\n\n    swap_ranges_n(f, m, h);\n    return l;\n}","const s = sequence(array_random(), \"s1\");\nconst r = reverse_n_forward(begin(s), size(s));\nprint(s);"]; }
 
 function __reverse_n_forward_references() { return ["Elements of Programming, ch. 10, p. 174."]; }
 
 function __reverse_n_forward_usage() {
     const s = sequence(array_random(), "s1");
-    print(s);
     const r = reverse_n_forward(begin(s), size(s));
     print(s);
-    print('...');
 }
 
 function __reverse_n_forward_attributes() {
 }
 
-function __reverse_n_indexed_typescript() { return ["function reverse_n_indexed<T>(f: Iter<T>, n: number) {\n    let i = 0;\n    --n;\n    while (i < n) {\n        iter_swap(successor(f, i), successor(f, n));\n        ++i;\n        --n;\n    }\n}","const s = sequence(array_random(), \"s1\");\nprint(s);\nreverse_n_indexed(begin(s), size(s));\nprint(s);\nprint('...');"]; }
+function __reverse_n_indexed_typescript() { return ["function reverse_n_indexed<T>(f: Iter<T>, n: number) {\n    let i = 0;\n    --n;\n    while (i < n) {\n        iter_swap(successor(f, i), successor(f, n));\n        ++i;\n        --n;\n    }\n}","const s = sequence(array_random(), \"s1\");\nreverse_n_indexed(begin(s), size(s));\nprint(s);"]; }
 
 function __reverse_n_indexed_references() { return ["Elements of Programming, ch. 10, p. 172."]; }
 
 function __reverse_n_indexed_usage() {
     const s = sequence(array_random(), "s1");
-    print(s);
     reverse_n_indexed(begin(s), size(s));
     print(s);
-    print('...');
 }
 
 function __reverse_n_indexed_attributes() {
@@ -2162,22 +2136,20 @@ function __reverse_n_with_buffer_usage() {
 function __reverse_n_with_buffer_attributes() {
 }
 
-function __rotate_bidirectional_typescript() { return ["function rotate_bidirectional<T>(f: Iter<T>, m: Iter<T>, l: Iter<T>) {\n    reverse(f, m);\n    reverse(m, l);\n    reverse(f, l);\n}","const s = sequence(array_random(), \"s\");\nprint(s);\nrotate_bidirectional(begin(s), successor(begin(s), 3), end(s));\nprint(s);\nprint('...');"]; }
+function __rotate_bidirectional_typescript() { return ["function rotate_bidirectional<T>(f: Iter<T>, m: Iter<T>, l: Iter<T>) {\n    reverse(f, m);\n    reverse(m, l);\n    reverse(f, l);\n}","const s = sequence(array_random(), \"s\");\nrotate_bidirectional(begin(s), successor(begin(s), 3), end(s));\nprint(s);"]; }
 
 function __rotate_bidirectional_references() { return ["Elements of Programming, ch. 10, pp. 179–180 (three-reversal variant)."]; }
 
 function __rotate_bidirectional_usage() {
     const s = sequence(array_random(), "s");
-    print(s);
     rotate_bidirectional(begin(s), successor(begin(s), 3), end(s));
     print(s);
-    print('...');
 }
 
 function __rotate_bidirectional_attributes() {
 }
 
-function __rotate_cycles_typescript() { return ["function rotate_cycles<T>(f: Iter<T>, m: Iter<T>, l: Iter<T>, from: IteratorPermutation<T>) {\n    const m_l = distance(m, l);\n    const f_m = distance(f, m);\n    let d = gcd(f_m, m_l);\n\n    while (d != 0) {\n        cycle_from(successor(f, d), from);\n        --d;\n    }\n    return successor(f, m_l);\n}","function k_rotate_from_permutation_random_access<T>(f: Iter<T>, m: Iter<T>, l: Iter<T>) {\n    const k = distance(m, l);\n    const n_minus_k = distance(f, m);\n    const m_prime = successor(f, k);\n\n    return function (x: Iter<T>) {\n        if (x < m_prime) {\n            return successor(x, n_minus_k);\n        }\n        return predecessor(x, k);\n    }\n}\n\nfunction k_rotate_from_permutation_indexed<T>(f: Iter<T>, m: Iter<T>, l: Iter<T>) {\n    const k = distance(m, l);\n    const n_minus_k = distance(f, m);\n\n    return function (x: Iter<T>) {\n        const i = distance(f, x);\n        if (i < k) {\n            return successor(x, n_minus_k);\n        }\n        return successor(f, i - k);\n    }\n}\n\nconst s = sequence(array_random(), \"s\");\nprint(s);\n\nconst f = begin(s);\nconst m = successor(begin(s), 3);\nconst l = end(s);\nconst from = k_rotate_from_permutation_indexed(f, m, l);\nrotate_cycles(f, m, l, from);\nprint(s);\nprint('...');"]; }
+function __rotate_cycles_typescript() { return ["function rotate_cycles<T>(f: Iter<T>, m: Iter<T>, l: Iter<T>, from: IteratorPermutation<T>) {\n    const m_l = distance(m, l);\n    const f_m = distance(f, m);\n    let d = gcd(f_m, m_l);\n\n    while (d != 0) {\n        cycle_from(successor(f, d), from);\n        --d;\n    }\n    return successor(f, m_l);\n}","function k_rotate_from_permutation_random_access<T>(f: Iter<T>, m: Iter<T>, l: Iter<T>) {\n    const k = distance(m, l);\n    const n_minus_k = distance(f, m);\n    const m_prime = successor(f, k);\n\n    return function (x: Iter<T>) {\n        if (x < m_prime) {\n            return successor(x, n_minus_k);\n        }\n        return predecessor(x, k);\n    }\n}\n\nfunction k_rotate_from_permutation_indexed<T>(f: Iter<T>, m: Iter<T>, l: Iter<T>) {\n    const k = distance(m, l);\n    const n_minus_k = distance(f, m);\n\n    return function (x: Iter<T>) {\n        const i = distance(f, x);\n        if (i < k) {\n            return successor(x, n_minus_k);\n        }\n        return successor(f, i - k);\n    }\n}\n\nconst s = sequence(array_random(), \"s\");\n\nconst f = begin(s);\nconst m = successor(begin(s), 3);\nconst l = end(s);\nconst from = k_rotate_from_permutation_indexed(f, m, l);\nrotate_cycles(f, m, l, from);\nprint(s);"]; }
 
 function __rotate_cycles_references() { return ["Elements of Programming, ch. 10, pp. 178–179 (variant)."]; }
 
@@ -2205,20 +2177,18 @@ function __rotate_cycles_usage() {
         };
     }
     const s = sequence(array_random(), "s");
-    print(s);
     const f = begin(s);
     const m = successor(begin(s), 3);
     const l = end(s);
     const from = k_rotate_from_permutation_indexed(f, m, l);
     rotate_cycles(f, m, l, from);
     print(s);
-    print('...');
 }
 
 function __rotate_cycles_attributes() {
 }
 
-function __rotate_forward_typescript() { return ["function rotate_forward<T>(f: Iter<T>, m: Iter<T>, l: Iter<T>) {\n    // precondition: mutable_bounded_range(f, l) ∧ f ≺ m ≺ l\n\n    const ref = { f, m };\n    rotate_forward_step(ref, l);\n    f = ref.f;\n    m = ref.m;\n    const m_prime = f;\n    while ( ! equal(m, l)) {\n        const ref = { f, m };\n        rotate_forward_step(ref, l);\n        f = ref.f;\n        m = ref.m;\n    }\n    return m_prime;\n}","function exchange_values<T, U>(x: Iter<T>, y: Iter<U>) {\n    const t = source(x);\n    sink(x, source(y));\n    sink(y, t);\n}\n\nfunction rotate_forward_step<T>(ref: { f: Iter<T>; m: Iter<T> }, l: Iter<T>) {\n    // precondition: mutable_bounded_range(ref.f, l) ∧ ref.f ≺ ref.m ≺ l\n    let f = ref.f;\n    let m = ref.m;\n    let c = m;\n    do {\n        exchange_values(f, c);\n        f = successor(f);\n        c = successor(c);\n\n        if (equal(f, m)) {\n            m = c;\n        }\n    } while ( ! equal(c, l));\n    ref.f = f;\n    ref.m = m;\n}\n\nconst s = sequence(array_random(), \"s\", undefined, \"sll\");\nprint(s);\nrotate_forward(begin(s), successor(begin(s), 3), end(s));\nprint(s);"]; }
+function __rotate_forward_typescript() { return ["function rotate_forward<T>(f: Iter<T>, m: Iter<T>, l: Iter<T>) {\n    // precondition: mutable_bounded_range(f, l) ∧ f ≺ m ≺ l\n\n    const ref = { f, m };\n    rotate_forward_step(ref, l);\n    f = ref.f;\n    m = ref.m;\n    const m_prime = f;\n    while ( ! equal(m, l)) {\n        const ref = { f, m };\n        rotate_forward_step(ref, l);\n        f = ref.f;\n        m = ref.m;\n    }\n    return m_prime;\n}","function exchange_values<T, U>(x: Iter<T>, y: Iter<U>) {\n    const t = source(x);\n    sink(x, source(y));\n    sink(y, t);\n}\n\nfunction rotate_forward_step<T>(ref: { f: Iter<T>; m: Iter<T> }, l: Iter<T>) {\n    // precondition: mutable_bounded_range(ref.f, l) ∧ ref.f ≺ ref.m ≺ l\n    let f = ref.f;\n    let m = ref.m;\n    let c = m;\n    do {\n        exchange_values(f, c);\n        f = successor(f);\n        c = successor(c);\n\n        if (equal(f, m)) {\n            m = c;\n        }\n    } while ( ! equal(c, l));\n    ref.f = f;\n    ref.m = m;\n}\n\nconst s = sequence(array_random(), \"s\", undefined, \"sll\");\nrotate_forward(begin(s), successor(begin(s), 3), end(s));\nprint(s);"]; }
 
 function __rotate_forward_references() { return ["Elements of Programming, ch. 10, pp. 181–182 (rotate_forward_nontrivial)."]; }
 
@@ -2245,7 +2215,6 @@ function __rotate_forward_usage() {
         ref.m = m;
     }
     const s = sequence(array_random(), "s", undefined, "sll");
-    print(s);
     rotate_forward(begin(s), successor(begin(s), 3), end(s));
     print(s);
 }
@@ -2253,7 +2222,7 @@ function __rotate_forward_usage() {
 function __rotate_forward_attributes() {
 }
 
-function __rotate_random_access_nontrivial_typescript() { return ["function rotate_random_access_nontrivial<T>(f: Iter<T>, m: Iter<T>, l: Iter<T>) {\n    const p = k_rotate_from_permutation_random_access(f, m, l);\n    return rotate_cycles(f, m, l, p);\n}","function cycle_from<T>(i: Iter<T>, f: IteratorPermutation<T>) {\n    const tmp = source(i);\n    let j = i;\n    let k = f(i);\n    while ( ! equal(k, i)) {\n        sink(j, source(k));\n        j = k;\n        k = f(k);\n    }\n    sink(j, tmp);\n}\n\nfunction rotate_cycles<T>(f: Iter<T>, m: Iter<T>, l: Iter<T>, from: IteratorPermutation<T>) {\n    let d = gcd(distance(f, m), distance(m, l));\n\n    while (d != 0) {\n        --d;\n        cycle_from(successor(f, d), from);\n    }\n    return successor(f, distance(m, l));\n}\n\nfunction k_rotate_from_permutation_random_access<T>(f: Iter<T>, m: Iter<T>, l: Iter<T>) {\n    const k = distance(m, l);\n    const n_minus_k = distance(f, m);\n    const m_prime = successor(f, distance(m, l));\n\n    return function(x: Iter<T>) {\n        if ( distance(x, m_prime) > 0) return successor(x, n_minus_k);\n        return predecessor(x, k);\n    };\n}\n\nconst s = sequence(array_random(12), \"s\");\nprint(s);\nrotate_random_access_nontrivial(begin(s), successor(begin(s), 3), end(s));\nprint(s);\nprint('...');"]; }
+function __rotate_random_access_nontrivial_typescript() { return ["function rotate_random_access_nontrivial<T>(f: Iter<T>, m: Iter<T>, l: Iter<T>) {\n    const p = k_rotate_from_permutation_random_access(f, m, l);\n    return rotate_cycles(f, m, l, p);\n}","function cycle_from<T>(i: Iter<T>, f: IteratorPermutation<T>) {\n    const tmp = source(i);\n    let j = i;\n    let k = f(i);\n    while ( ! equal(k, i)) {\n        sink(j, source(k));\n        j = k;\n        k = f(k);\n    }\n    sink(j, tmp);\n}\n\nfunction rotate_cycles<T>(f: Iter<T>, m: Iter<T>, l: Iter<T>, from: IteratorPermutation<T>) {\n    let d = gcd(distance(f, m), distance(m, l));\n\n    while (d != 0) {\n        --d;\n        cycle_from(successor(f, d), from);\n    }\n    return successor(f, distance(m, l));\n}\n\nfunction k_rotate_from_permutation_random_access<T>(f: Iter<T>, m: Iter<T>, l: Iter<T>) {\n    const k = distance(m, l);\n    const n_minus_k = distance(f, m);\n    const m_prime = successor(f, distance(m, l));\n\n    return function(x: Iter<T>) {\n        if ( distance(x, m_prime) > 0) return successor(x, n_minus_k);\n        return predecessor(x, k);\n    };\n}\n\nconst s = sequence(array_random(12), \"s\");\nrotate_random_access_nontrivial(begin(s), successor(begin(s), 3), end(s));\nprint(s);"]; }
 
 function __rotate_random_access_nontrivial_references() { return ["Elements of Programming, ch. 10, p. 179."]; }
 
@@ -2288,10 +2257,8 @@ function __rotate_random_access_nontrivial_usage() {
         };
     }
     const s = sequence(array_random(12), "s");
-    print(s);
     rotate_random_access_nontrivial(begin(s), successor(begin(s), 3), end(s));
     print(s);
-    print('...');
 }
 
 function __rotate_random_access_nontrivial_attributes() {
@@ -2392,12 +2359,11 @@ function __is_heap_until_n_0_usage() {
 function __is_heap_until_n_0_attributes() {
 }
 
-function __make_heap_n_typescript() { return ["function make_heap_n<T>(f: Iter<T>, n: number) {\n    // assert(n > 2); //other sizes handled outside\n    const fpi = Math.floor((n - 3) / 2);\n    let fp = successor(f, fpi);    //firstParent\n    let frk = successor(f, (fpi + 1) * 2);  //firstRightKid\n\n    for (;; fp = predecessor(fp), frk = predecessor(frk, 2)) {\n        const lucifer = source(fp);\n        let parent = fp;\n        let rk = frk; //rightKid\n        for (;;) {\n            const jr = predecessor(rk, Number(source(predecessor(rk)) <= source(rk)));\n            const crt = source(jr);\n            if (lucifer <= crt) break;\n            sink(parent, crt);\n            parent = jr;\n            // rk = (jr + 1) * 2;\n            const rki = (distance(f, jr) + 1) * 2;\n            // if (rki >= n) goto write;\n            if (rki >= n) {\n                sink(parent, lucifer);\n                break;\n            }\n            rk = successor(f, rki);\n        }\n\n        // if (parent != fp) {\n        if ( ! equal(parent, fp)) {\n                sink(parent, lucifer);\n        }\n\n        // if (fp == 0) break;\n        if (equal(fp, f)) break;\n    }\n\n    if (n & 1) return;\n    let childIndex = n - 1;\n    while (true) {\n        const parentIndex = Math.floor((childIndex - 1) / 2);\n        const child = successor(f, childIndex);\n        const parent = successor(f, parentIndex);\n        const childValue = source(child);\n        const parentValue = source(parent);\n\n        if (parentValue <= childValue) break;\n        sink(parent, childValue);\n        sink(child, parentValue);\n\n        if (parentIndex === 0) break;\n        childIndex = parentIndex;\n    }\n}","// const s = sequence(array_random(), \"s\");\nconst s = sequence([24, 88, 59, 31, 91, 0, 87, 91, 40, 52], \"s\");\n\nprint(s);\nmake_heap_n(begin(s), size(s));\nprint(s);"]; }
+function __make_heap_n_typescript() { return ["function make_heap_n<T>(f: Iter<T>, n: number) {\n    // assert(n > 2); //other sizes handled outside\n    const fpi = Math.floor((n - 3) / 2);\n    let fp = successor(f, fpi);    //firstParent\n    let frk = successor(f, (fpi + 1) * 2);  //firstRightKid\n\n    for (;; fp = predecessor(fp), frk = predecessor(frk, 2)) {\n        const lucifer = source(fp);\n        let parent = fp;\n        let rk = frk; //rightKid\n        for (;;) {\n            const jr = predecessor(rk, Number(source(predecessor(rk)) <= source(rk)));\n            const crt = source(jr);\n            if (lucifer <= crt) break;\n            sink(parent, crt);\n            parent = jr;\n            // rk = (jr + 1) * 2;\n            const rki = (distance(f, jr) + 1) * 2;\n            // if (rki >= n) goto write;\n            if (rki >= n) {\n                sink(parent, lucifer);\n                break;\n            }\n            rk = successor(f, rki);\n        }\n\n        // if (parent != fp) {\n        if ( ! equal(parent, fp)) {\n                sink(parent, lucifer);\n        }\n\n        // if (fp == 0) break;\n        if (equal(fp, f)) break;\n    }\n\n    if (n & 1) return;\n    let childIndex = n - 1;\n    while (true) {\n        const parentIndex = Math.floor((childIndex - 1) / 2);\n        const child = successor(f, childIndex);\n        const parent = successor(f, parentIndex);\n        const childValue = source(child);\n        const parentValue = source(parent);\n\n        if (parentValue <= childValue) break;\n        sink(parent, childValue);\n        sink(child, parentValue);\n\n        if (parentIndex === 0) break;\n        childIndex = parentIndex;\n    }\n}","// const s = sequence(array_random(), \"s\");\nconst s = sequence([24, 88, 59, 31, 91, 0, 87, 91, 40, 52], \"s\");\n\nmake_heap_n(begin(s), size(s));\nprint(s);"]; }
 
 function __make_heap_n_usage() {
     // const s = sequence(array_random(), "s");
     const s = sequence([24, 88, 59, 31, 91, 0, 87, 91, 40, 52], "s");
-    print(s);
     make_heap_n(begin(s), size(s));
     print(s);
 }
@@ -3424,7 +3390,7 @@ function __swap_ranges_usage() {
 function __swap_ranges_attributes() {
 }
 
-function __swap_ranges_bounded_typescript() { return ["function swap_ranges_bounded<T>(f0: Iter<T>, l0: Iter<T>, f1: Iter<T>, l1: Iter<T>) {\n    while ( ! equal(f0, l0) && ! equal(f1, l1)) {\n        iter_swap(f0, f1);\n        f0 = successor(f0);\n        f1 = successor(f1);\n    }\n    return [f0, f1];\n}","const s1 = sequence(array_random(), \"s1\");\nconst s2 = sequence(array_random(5), \"s2\");\n\nconst r = swap_ranges_bounded(begin(s1), end(s1), begin(s2), end(s2));\nconst f0 = r[0];\nconst f1 = r[1];\nprint('...');"]; }
+function __swap_ranges_bounded_typescript() { return ["function swap_ranges_bounded<T>(f0: Iter<T>, l0: Iter<T>, f1: Iter<T>, l1: Iter<T>) {\n    while ( ! equal(f0, l0) && ! equal(f1, l1)) {\n        iter_swap(f0, f1);\n        f0 = successor(f0);\n        f1 = successor(f1);\n    }\n    return [f0, f1];\n}","const s1 = sequence(array_random(), \"s1\");\nconst s2 = sequence(array_random(5), \"s2\");\n\nconst r = swap_ranges_bounded(begin(s1), end(s1), begin(s2), end(s2));\nconst f0 = r[0];\nconst f1 = r[1];"]; }
 
 function __swap_ranges_bounded_references() { return ["Elements of Programming, ch. 9, p. 163.","From Mathematics to Generic Programming, ch. 11, §11.2, pp. 201–203 (ch11.h)."]; }
 
@@ -3434,13 +3400,12 @@ function __swap_ranges_bounded_usage() {
     const r = swap_ranges_bounded(begin(s1), end(s1), begin(s2), end(s2));
     const f0 = r[0];
     const f1 = r[1];
-    print('...');
 }
 
 function __swap_ranges_bounded_attributes() {
 }
 
-function __swap_ranges_n_typescript() { return ["function swap_ranges_n<T>(f0: Iter<T>, f1: Iter<T>, n: number) {\n    while (n != 0) {\n        iter_swap(f0, f1);\n        f0 = successor(f0);\n        f1 = successor(f1);\n        --n;\n    }\n    return [f0, f1];\n}","const s1 = sequence(array_random(), \"s1\");\nconst s2 = sequence(array_random(5), \"s2\");\n\nconst r = swap_ranges_n(begin(s1), begin(s2), 5);\nconst f0 = r[0];\nconst f1 = r[1];\nprint('...');"]; }
+function __swap_ranges_n_typescript() { return ["function swap_ranges_n<T>(f0: Iter<T>, f1: Iter<T>, n: number) {\n    while (n != 0) {\n        iter_swap(f0, f1);\n        f0 = successor(f0);\n        f1 = successor(f1);\n        --n;\n    }\n    return [f0, f1];\n}","const s1 = sequence(array_random(), \"s1\");\nconst s2 = sequence(array_random(5), \"s2\");\n\nconst r = swap_ranges_n(begin(s1), begin(s2), 5);\nconst f0 = r[0];\nconst f1 = r[1];"]; }
 
 function __swap_ranges_n_references() { return ["Elements of Programming, ch. 9, p. 164.","From Mathematics to Generic Programming, ch. 11, §11.2, pp. 201–203 (ch11.h)."]; }
 
@@ -3450,7 +3415,6 @@ function __swap_ranges_n_usage() {
     const r = swap_ranges_n(begin(s1), begin(s2), 5);
     const f0 = r[0];
     const f1 = r[1];
-    print('...');
 }
 
 function __swap_ranges_n_attributes() {
@@ -3579,31 +3543,25 @@ function __equal_r_usage() {
 function __equal_r_attributes() {
 }
 
-function __insert_typescript() { return ["function insert<T, K extends SequenceKind>(s: Seq<T, K>, ip: Iter<T>, f: Iter<T>, l: Iter<T>) {\n    let d = distance(begin(s), ip);\n    const ld = distance(ip, end(s));\n\n    while ( ! equal(f, l)) {\n        s = push_back(s, source(f));\n        f = successor(f);\n        ++d;\n    }\n\n    rotate_bidirectional(begin(s), successor(begin(s), ld), end(s));\n\n    return s;\n}","let s = sequence(array_random(), \"s\");\nconst i = sequence(array_random(5), \"i\");\n\nprint(s);\nprint(i);\ns = insert(s, begin(s), begin(i), end(i));\nprint(s);\nprint('...');"]; }
+function __insert_typescript() { return ["function insert<T, K extends SequenceKind>(s: Seq<T, K>, ip: Iter<T>, f: Iter<T>, l: Iter<T>) {\n    let d = distance(begin(s), ip);\n    const ld = distance(ip, end(s));\n\n    while ( ! equal(f, l)) {\n        s = push_back(s, source(f));\n        f = successor(f);\n        ++d;\n    }\n\n    rotate_bidirectional(begin(s), successor(begin(s), ld), end(s));\n\n    return s;\n}","let s = sequence(array_random(), \"s\");\nconst i = sequence(array_random(5), \"i\");\n\ns = insert(s, begin(s), begin(i), end(i));\nprint(s);"]; }
 
 function __insert_usage() {
     let s = sequence(array_random(), "s");
     const i = sequence(array_random(5), "i");
-    print(s);
-    print(i);
     s = insert(s, begin(s), begin(i), end(i));
     print(s);
-    print('...');
 }
 
 function __insert_attributes() {
 }
 
-function __insert_naive_typescript() { return ["function insert_naive<T, K extends SequenceKind>(s: Seq<T | number, K>, ip: Iter<T | number>, f: Iter<T>, l: Iter<T>) {\n    let d = distance(begin(s), ip);\n\n    while ( ! equal(f, l)) {\n        // s = increase_capacity(s, 1)\n        s = push_back(s, 0);\n        ip = successor(begin(s), d)\n        shift_right_by_one(ip, end(s));\n        sink(ip, source(f));\n        f = successor(f);\n        ++d;\n    }\n\n    return s;\n}","let s = sequence(array_random(), \"s\");\nconst i = sequence(array_random(5), \"i\");\n\nprint(s);\nprint(i);\ns = insert_naive(s, begin(s), begin(i), end(i));\nprint(s);\nprint('...');"]; }
+function __insert_naive_typescript() { return ["function insert_naive<T, K extends SequenceKind>(s: Seq<T | number, K>, ip: Iter<T | number>, f: Iter<T>, l: Iter<T>) {\n    let d = distance(begin(s), ip);\n\n    while ( ! equal(f, l)) {\n        // s = increase_capacity(s, 1)\n        s = push_back(s, 0);\n        ip = successor(begin(s), d)\n        shift_right_by_one(ip, end(s));\n        sink(ip, source(f));\n        f = successor(f);\n        ++d;\n    }\n\n    return s;\n}","let s = sequence(array_random(), \"s\");\nconst i = sequence(array_random(5), \"i\");\n\ns = insert_naive(s, begin(s), begin(i), end(i));\nprint(s);"]; }
 
 function __insert_naive_usage() {
     let s = sequence(array_random(), "s");
     const i = sequence(array_random(5), "i");
-    print(s);
-    print(i);
     s = insert_naive(s, begin(s), begin(i), end(i));
     print(s);
-    print('...');
 }
 
 function __insert_naive_attributes() {

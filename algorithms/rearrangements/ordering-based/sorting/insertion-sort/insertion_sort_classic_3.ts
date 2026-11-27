@@ -24,7 +24,6 @@ function __insertion_sort_classic_3_usage() {
     }
 
     const s = sequence(array_random(), "s", lt);
-    print(s);
     insertion_sort_classic_3(begin(s), end(s), lt);
     print(s);
 

@@ -30,10 +30,8 @@ function __cycle_to_recursive_usage() {
     }
 
     const s = sequence(array_random(5), "s");
-    print(s);
     cycle_to_recursive(begin(s), successorMod10);
     print(s);
-    print('...');
 }
 
 function __cycle_to_recursive_attributes() {

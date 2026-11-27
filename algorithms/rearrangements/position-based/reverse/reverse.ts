@@ -12,10 +12,8 @@ function reverse<T>(f: Iter<T>, l: Iter<T>) {
 
 function __reverse_usage() {
     const s = sequence(array_random(), "s1");
-    print(s);
     reverse(begin(s), end(s));
     print(s);
-    print('...');
 }
 
 function __reverse_attributes() {

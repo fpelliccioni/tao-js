@@ -40,7 +40,6 @@ function __rotate_cycles_usage() {
     }
 
     const s = sequence(array_random(), "s");
-    print(s);
 
     const f = begin(s);
     const m = successor(begin(s), 3);
@@ -48,7 +47,6 @@ function __rotate_cycles_usage() {
     const from = k_rotate_from_permutation_indexed(f, m, l);
     rotate_cycles(f, m, l, from);
     print(s);
-    print('...');
 }
 
 function __rotate_cycles_attributes() {

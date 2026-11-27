@@ -18,7 +18,6 @@ function __swap_ranges_n_usage() {
     const r = swap_ranges_n(begin(s1), begin(s2), 5);
     const f0 = r[0];
     const f1 = r[1];
-    print('...');
 }
 
 function __swap_ranges_n_attributes() {

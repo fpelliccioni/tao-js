@@ -10,7 +10,6 @@ function selection_sort_classic<T>(f: Iter<T>, l: Iter<T>, r: Relation<T>) {
 function __selection_sort_classic_usage() {
     const s = sequence(array_random(), "s", lt);
 
-    print(s);
     selection_sort_classic(begin(s), end(s), lt);
     print(s);
     function is_sorted<T>(f: Iter<T>, l: Iter<T>, r: Relation<T>) {

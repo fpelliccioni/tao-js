@@ -44,10 +44,8 @@ function __cycle_to_2n_1_usage() {
     }
 
     const s = sequence(array_random(), "s");
-    print(s);
     cycle_to_2n_1(begin(s), successorMod10);
     print(s);
-    print('...');
 }
 
 function __cycle_to_2n_1_attributes() {

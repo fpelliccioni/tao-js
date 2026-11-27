@@ -55,7 +55,6 @@ function __make_heap_n_usage() {
     // const s = sequence(array_random(), "s");
     const s = sequence([24, 88, 59, 31, 91, 0, 87, 91, 40, 52], "s");
 
-    print(s);
     make_heap_n(begin(s), size(s));
     print(s);
 
