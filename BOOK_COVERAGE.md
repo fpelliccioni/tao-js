@@ -2,7 +2,7 @@
 
 The references in the TypeScript files identify the published algorithm or the closest documented variant. Page numbers use the authors’ edition of *Elements of Programming* and the printed Addison-Wesley edition of *From Mathematics to Generic Programming*. A section or page range points to the surrounding discussion when an exact listing page is unavailable. Exercises and companion-only implementations are marked in the source comments.
 
-The catalog snapshot has **202 algorithms**, with a book reference in **155** source files. 110 cite *Elements of Programming* and 54 cite *From Mathematics to Generic Programming*. Some cite both.
+The catalog snapshot has **207 algorithms**, with a book reference in **160** source files. 115 cite *Elements of Programming* and 54 cite *From Mathematics to Generic Programming*. Some cite both.
 
 ## Elements of Programming
 
@@ -36,7 +36,7 @@ The book supplies the exercise statements. The companion header mixes complete i
 | 3. Associative operations | Existing numeric and power algorithms cover parts of the material | 3.2 integral specializations and 3.3 accumulate-based rewrites still need a variant-by-variant comparison |
 | 4. Linear orderings | — | 4.4 stable `select_2_4`, 4.5 median of five with fewer comparisons, 4.8 three-way comparison variants |
 | 5. Ordered algebraic structures | 5.3 `stein_gcd` and `stein_gcd_nonnegative` | — |
-| 6. Iterators | 6.1 quantifiers, 6.2 `count_if_for_each`, 6.3 four counted searches, four counted quantifiers, `count_if_n`, `count_if_not_n`, `reduce_n`, `reduce_nonempty_n`, and `reduce_nonzeroes_n`, 6.5 all four `find_mismatch` combinations, 6.6 `partitioned_n`, 6.7 `equal_range`, 6.8 `find_backward_if`, 6.9 `palindrome_bidirectional` | 6.3 counted counting overloads with an explicit accumulator and reductions with iterator projections |
+| 6. Iterators | 6.1 quantifiers, 6.2 `count_if_for_each`, 6.3 counted searches, quantifiers, counts (including explicit accumulators), and value and iterator-projection reductions, 6.5 all four `find_mismatch` combinations, 6.6 `partitioned_n`, 6.7 `equal_range`, 6.8 `find_backward_if`, 6.9 `palindrome_bidirectional` | — |
 | 7. Coordinate structures | — | 7.2 weight by visit kind, 7.3 DAG check, 7.6 nonempty tree comparison |
 | 8. Coordinates with mutable successors | — | 8.2 linked combination including empty inputs, 8.4 stable linked `unique` |
 | 9. Copying algorithms | 9.5 `combine_copy_n` and `combine_copy_backward_n` | — |

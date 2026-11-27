@@ -2475,6 +2475,19 @@ function reduce_n(f, n, op, z) {
     return res;
 }
 
+function __debug_reduce_n_projected(f, n, op, project, z) {
+    if (n === 0)
+        return z;
+    return reduce_nonempty_n_projected(f, n, op, project);
+}
+
+function reduce_n_projected(f, n, op, project, z) {
+    var _f_ = start_f('reduce_n_projected', f, n, op, project, z);
+    var res = __debug_reduce_n_projected(f, n, op, project, z);
+    end_f(_f_);
+    return res;
+}
+
 function __debug_reduce_nonempty(f, l, op) {
     pre(() => !equal(f, l), "The range must not be empty.");
     let result = source(f);
@@ -2507,6 +2520,24 @@ function __debug_reduce_nonempty_n(f, n, op) {
 function reduce_nonempty_n(f, n, op) {
     var _f_ = start_f('reduce_nonempty_n', f, n, op);
     var res = __debug_reduce_nonempty_n(f, n, op);
+    end_f(_f_);
+    return res;
+}
+
+function __debug_reduce_nonempty_n_projected(f, n, op, project) {
+    pre(() => Number.isSafeInteger(n) && n > 0, "The count must be a positive safe integer.");
+    let result = project(f);
+    while (n > 1) {
+        f = successor(f);
+        result = op(result, project(f));
+        --n;
+    }
+    return result;
+}
+
+function reduce_nonempty_n_projected(f, n, op, project) {
+    var _f_ = start_f('reduce_nonempty_n_projected', f, n, op, project);
+    var res = __debug_reduce_nonempty_n_projected(f, n, op, project);
     end_f(_f_);
     return res;
 }
@@ -2558,6 +2589,33 @@ function __debug_reduce_nonzeroes_n(f, n, op, z) {
 function reduce_nonzeroes_n(f, n, op, z) {
     var _f_ = start_f('reduce_nonzeroes_n', f, n, op, z);
     var res = __debug_reduce_nonzeroes_n(f, n, op, z);
+    end_f(_f_);
+    return res;
+}
+
+function __debug_reduce_nonzeroes_n_projected(f, n, op, project, z) {
+    pre(() => Number.isSafeInteger(n) && n >= 0, "The count must be a nonnegative safe integer.");
+    let result;
+    do {
+        if (n === 0)
+            return z;
+        result = project(f);
+        f = successor(f);
+        --n;
+    } while (result === z);
+    while (n !== 0) {
+        const value = project(f);
+        if (value !== z)
+            result = op(result, value);
+        f = successor(f);
+        --n;
+    }
+    return result;
+}
+
+function reduce_nonzeroes_n_projected(f, n, op, project, z) {
+    var _f_ = start_f('reduce_nonzeroes_n_projected', f, n, op, project, z);
+    var res = __debug_reduce_nonzeroes_n_projected(f, n, op, project, z);
     end_f(_f_);
     return res;
 }
@@ -3455,20 +3513,30 @@ function count_if_for_each(f, l, p) {
 }
 
 function __debug_count_if_n(f, n, p) {
-    pre(() => Number.isSafeInteger(n) && n >= 0, "The count must be a nonnegative safe integer.");
-    let count = 0;
-    while (n !== 0) {
-        if (p(source(f)))
-            ++count;
-        f = successor(f);
-        --n;
-    }
-    return count;
+    return count_if_n_basis(f, n, p, 0);
 }
 
 function count_if_n(f, n, p) {
     var _f_ = start_f('count_if_n', f, n, p);
     var res = __debug_count_if_n(f, n, p);
+    end_f(_f_);
+    return res;
+}
+
+function __debug_count_if_n_basis(f, n, p, j) {
+    pre(() => Number.isSafeInteger(n) && n >= 0, "The count must be a nonnegative safe integer.");
+    while (n !== 0) {
+        if (p(source(f)))
+            j = successor(j);
+        f = successor(f);
+        --n;
+    }
+    return j;
+}
+
+function count_if_n_basis(f, n, p, j) {
+    var _f_ = start_f('count_if_n_basis', f, n, p, j);
+    var res = __debug_count_if_n_basis(f, n, p, j);
     end_f(_f_);
     return res;
 }
@@ -3503,12 +3571,23 @@ function count_if_not_basis(f, l, p, j) {
 }
 
 function __debug_count_if_not_n(f, n, p) {
-    return count_if_n(f, n, value => !p(value));
+    return count_if_not_n_basis(f, n, p, 0);
 }
 
 function count_if_not_n(f, n, p) {
     var _f_ = start_f('count_if_not_n', f, n, p);
     var res = __debug_count_if_not_n(f, n, p);
+    end_f(_f_);
+    return res;
+}
+
+function __debug_count_if_not_n_basis(f, n, p, j) {
+    return count_if_n_basis(f, n, value => !p(value), j);
+}
+
+function count_if_not_n_basis(f, n, p, j) {
+    var _f_ = start_f('count_if_not_n_basis', f, n, p, j);
+    var res = __debug_count_if_not_n_basis(f, n, p, j);
     end_f(_f_);
     return res;
 }

@@ -1551,6 +1551,12 @@ function reduce_n(f, n, op, z) {
     return reduce_nonempty_n(f, n, op);
 }
 
+function reduce_n_projected(f, n, op, project, z) {
+    if (n === 0)
+        return z;
+    return reduce_nonempty_n_projected(f, n, op, project);
+}
+
 function reduce_nonempty(f, l, op) {
     pre(() => !equal(f, l), "The range must not be empty.");
     let result = source(f);
@@ -1568,6 +1574,17 @@ function reduce_nonempty_n(f, n, op) {
     while (n > 1) {
         f = successor(f);
         result = op(result, source(f));
+        --n;
+    }
+    return result;
+}
+
+function reduce_nonempty_n_projected(f, n, op, project) {
+    pre(() => Number.isSafeInteger(n) && n > 0, "The count must be a positive safe integer.");
+    let result = project(f);
+    while (n > 1) {
+        f = successor(f);
+        result = op(result, project(f));
         --n;
     }
     return result;
@@ -1602,6 +1619,26 @@ function reduce_nonzeroes_n(f, n, op, z) {
     } while (result === z);
     while (n !== 0) {
         const value = source(f);
+        if (value !== z)
+            result = op(result, value);
+        f = successor(f);
+        --n;
+    }
+    return result;
+}
+
+function reduce_nonzeroes_n_projected(f, n, op, project, z) {
+    pre(() => Number.isSafeInteger(n) && n >= 0, "The count must be a nonnegative safe integer.");
+    let result;
+    do {
+        if (n === 0)
+            return z;
+        result = project(f);
+        f = successor(f);
+        --n;
+    } while (result === z);
+    while (n !== 0) {
+        const value = project(f);
         if (value !== z)
             result = op(result, value);
         f = successor(f);
@@ -2125,15 +2162,18 @@ function count_if_for_each(f, l, p) {
 }
 
 function count_if_n(f, n, p) {
+    return count_if_n_basis(f, n, p, 0);
+}
+
+function count_if_n_basis(f, n, p, j) {
     pre(() => Number.isSafeInteger(n) && n >= 0, "The count must be a nonnegative safe integer.");
-    let count = 0;
     while (n !== 0) {
         if (p(source(f)))
-            ++count;
+            j = successor(j);
         f = successor(f);
         --n;
     }
-    return count;
+    return j;
 }
 
 function count_if_not(f, l, p) {
@@ -2152,7 +2192,11 @@ function count_if_not_basis(f, l, p, j) {
 }
 
 function count_if_not_n(f, n, p) {
-    return count_if_n(f, n, value => !p(value));
+    return count_if_not_n_basis(f, n, p, 0);
+}
+
+function count_if_not_n_basis(f, n, p, j) {
+    return count_if_n_basis(f, n, value => !p(value), j);
 }
 
 function equal_r(f, l, f2, r) {
