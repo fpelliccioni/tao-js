@@ -1,7 +1,9 @@
 // Reference: Elements of Programming, ch. 6, p. 99.
 
 function find_if_not_unguarded<I extends Iter<unknown>>(f: I, p: Predicate<ValueOf<I>>): I {
-    // Precondition: an element reachable from f does not satisfy p.
+    // Precondition: there is a finite integer k >= 0 such that
+    // p(source(successor(f, k))) is false.
+    // Without an end iterator, this cannot be checked in general.
     while (p(source(f))) {
         f = successor(f);
     }
