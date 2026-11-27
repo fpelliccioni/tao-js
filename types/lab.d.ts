@@ -11,8 +11,9 @@ type Operation<T> = (left: T, right: T) => T;
 type IteratorPermutation<T> = (iterator: Iter<T>) => Iter<T>;
 
 declare function equal<T, U>(f: Iter<T>, l: Iter<U>): boolean;
-declare function predicate<T>(fn: Predicate<T>): Predicate<T>;
-declare function relation<T>(fn: Relation<T>): Relation<T>;
+// Unannotated lambdas in numeric examples default to number. Typed callbacks infer T.
+declare function predicate<T = number>(fn: Predicate<T>): Predicate<T>;
+declare function relation<T = number>(fn: Relation<T>): Relation<T>;
 declare function array_random(n?: number, from?: number, to?: number): number[];
 declare function array_all_equal<T = number>(n?: number, value?: T): T[];
 declare function array_ascending(n?: number, from?: number): number[];

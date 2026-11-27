@@ -5,7 +5,7 @@ function not_all<T>(f: Iter<T>, l: Iter<T>, p: Predicate<T>) {
 }
 
 function __not_all_usage() {
-    const even = predicate((x: number) => (x & 1) === 0);
+    const even = predicate(x => (x & 1) === 0);
     const d = sequence(array_random(), "d");
     const f = begin(d);
     const l = end(d);
