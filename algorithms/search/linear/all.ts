@@ -3,9 +3,7 @@ function all<T>(f: Iter<T>, l: Iter<T>, p: Predicate<T>): boolean {
     return equal(l, np);
 }
 
-function usage() {
-
-
+function __all_usage() {
     const even = predicate<number>(x => (x & 1) === 0);
     const d = sequence(array_random(), "d");
     const f = begin(d);
@@ -18,7 +16,5 @@ function usage() {
     }
 }
 
-function attributes() {
-
+function __all_attributes() {
 }
-

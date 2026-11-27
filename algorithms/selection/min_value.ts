@@ -1,0 +1,30 @@
+function min_value<T>(f: Iter<T>, l: Iter<T>, r: Relation<T>) {
+    //precondition: ! equal(f, l)) return l;
+
+    let m = f;
+    f = successor(f);
+
+    while ( ! equal(f, l)) {
+        if (r(source(f), source(m))) {
+            m = f;
+        }
+        f = successor(f);
+    }
+    return m;
+}
+
+function __min_value_usage() {
+    const d = sequence(array_random(), "d");
+
+    let f = begin(d);
+    const l = end(d);
+
+    f = min_value(f, l, lt);
+    if ( ! equal(f, l)) {
+        print("The min element is: " + source(f));
+    }
+
+}
+
+function __min_value_attributes() {
+}

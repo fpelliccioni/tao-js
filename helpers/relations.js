@@ -19,3 +19,11 @@ function converse(r) {
 function complement_of_converse(r) {
     return complement(converse(r));
 }
+
+function predicate_source(p) {
+    return x => p(source(x));
+}
+
+function relation_source(r) {
+    return (x, y) => r(source(x), source(y));
+}
