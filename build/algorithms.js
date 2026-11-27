@@ -1495,6 +1495,33 @@ function find(f, l, x) {
     return f;
 }
 
+function find_adjacent_mismatch(f, l, r) {
+    if (equal(f, l))
+        return l;
+    let previous = source(f);
+    f = successor(f);
+    while (!equal(f, l)) {
+        const current = source(f);
+        if (!r(previous, current))
+            return f;
+        previous = current;
+        f = successor(f);
+    }
+    return l;
+}
+
+function find_adjacent_mismatch_forward(f, l, r) {
+    if (equal(f, l))
+        return l;
+    let previous = f;
+    f = successor(f);
+    while (!equal(f, l) && r(source(previous), source(f))) {
+        previous = f;
+        f = successor(f);
+    }
+    return f;
+}
+
 function find_backward_if(f, l, p) {
     while (true) {
         if (equal(l, f))
@@ -1526,6 +1553,14 @@ function find_if_not(f, l, p) {
         f = successor(f);
     }
     return f;
+}
+
+function find_mismatch(f0, l0, f1, l1, r) {
+    while (!equal(f0, l0) && !equal(f1, l1) && r(source(f0), source(f1))) {
+        f0 = successor(f0);
+        f1 = successor(f1);
+    }
+    return [f0, f1];
 }
 
 function find_n(f, n, x) {
