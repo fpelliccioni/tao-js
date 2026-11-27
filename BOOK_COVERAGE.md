@@ -2,7 +2,7 @@
 
 The references in the TypeScript files identify the published algorithm or the closest documented variant. Page numbers use the authors’ edition of *Elements of Programming* and the printed Addison-Wesley edition of *From Mathematics to Generic Programming*. A section or page range points to the surrounding discussion when an exact listing page is unavailable. Exercises and companion-only implementations are marked in the source comments.
 
-The catalog snapshot has **195 algorithms**, with a book reference in **148** source files. 103 cite *Elements of Programming* and 54 cite *From Mathematics to Generic Programming*. Some cite both.
+The catalog snapshot has **196 algorithms**, with a book reference in **149** source files. 104 cite *Elements of Programming* and 54 cite *From Mathematics to Generic Programming*. Some cite both.
 
 ## Elements of Programming
 

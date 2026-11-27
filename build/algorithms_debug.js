@@ -2980,6 +2980,33 @@ function find_subsequence_naive(f, l, sf, sl, r) {
     return res;
 }
 
+function __debug_find_with_sentinel(f, l, x) {
+    // NaN never matches under strict equality, so it cannot serve as a sentinel.
+    if (equal(f, l) || x !== x)
+        return l;
+    const last = predecessor(l);
+    const saved = source(last);
+    sink(last, x);
+    try {
+        while (source(f) !== x) {
+            f = successor(f);
+        }
+    }
+    finally {
+        sink(last, saved);
+    }
+    if (equal(f, last) && saved !== x)
+        return l;
+    return f;
+}
+
+function find_with_sentinel(f, l, x) {
+    var _f_ = start_f('find_with_sentinel', f, l, x);
+    var res = __debug_find_with_sentinel(f, l, x);
+    end_f(_f_);
+    return res;
+}
+
 function __debug_none(f, l, p) {
     const it = find_if(f, l, p);
     return equal(l, it);
