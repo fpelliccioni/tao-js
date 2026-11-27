@@ -11,10 +11,7 @@ function lower_bound_n<T>(f: Iter<T>, n: number, a: T, r: Relation<T>) {
 }
 
 function __lower_bound_n_usage() {
-    const hasLowerDigitSum = relation<number>((x, y) => digitSum(x) < digitSum(y));
-
-    print("digitSum(38) = " + digitSum(38));
-    print("digitSum(49) = " + digitSum(49));
+    const hasLowerDigitSum = relation((x: number, y) => digitSum(x) < digitSum(y));
 
     const d = sequence([11, 22, 49, 58, 67]);
 

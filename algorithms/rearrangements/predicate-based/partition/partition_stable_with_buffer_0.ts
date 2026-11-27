@@ -9,7 +9,7 @@ function partition_stable_with_buffer_0<T>(f: Iter<T>, l: Iter<T>, p: Predicate<
 }
 
 function __partition_stable_with_buffer_0_usage() {
-    const even = predicate<number>(x => (x & 1) === 0);
+    const even = predicate((x: number) => (x & 1) === 0);
     const d = sequence(array_random(), "d", even);
     const buf = sequence(array_all_equal(size(d), 0), "buf");
 

@@ -6,7 +6,7 @@ function copy_if<T, U>(f: Iter<T>, l: Iter<T>, o: Iter<U>, p: Predicate<T>) {
 }
 
 function __copy_if_usage() {
-    const even = predicate<number>(x => (x & 1) === 0);
+    const even = predicate((x: number) => (x & 1) === 0);
     const s = sequence(array_random(), "s", even);
     const z = sequence(array_all_equal(size(s), "-"), "z");
 
