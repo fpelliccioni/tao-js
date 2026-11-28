@@ -2332,23 +2332,26 @@ function partition_forward(f, l, p) {
 }
 
 function __debug_partition_semistable(f, l, p) {
-    while (true) {
-        if (equal(f, l))
-            return f;
-        if (p(source(f)))
-            break;
-        f = successor(f);
-    }
-    let j = f;
-    j = successor(j);
-    while (!equal(j, l)) {
-        if (!p(source(j))) {
-            iter_swap(f, j);
-            f = successor(f);
+    pre(() => is_bounded_range(f, l), "The iterators must delimit a valid range.");
+    let original;
+    pre(() => {
+        original = range_value_counts(f, l);
+        return true;
+    });
+    let point = find_if(f, l, p);
+    if (!equal(point, l)) {
+        let current = successor(point);
+        while (!equal(current, l)) {
+            if (!p(source(current))) {
+                exchange_values(point, current);
+                point = successor(point);
+            }
+            current = successor(current);
         }
-        j = successor(j);
     }
-    return f;
+    post(() => partitioned_at_point(f, point, l, p), "The result must separate false and true elements.");
+    post(() => has_range_value_counts(f, l, original), "The output must be a permutation of the input.");
+    return point;
 }
 
 function partition_semistable(f, l, p) {
@@ -2382,24 +2385,30 @@ function partition_semistable_1(f, l, p) {
 }
 
 function __debug_partition_semistable_nonempty(f, l, p) {
-    //precondition: nonempty: ! equal(f, l)
-    while (!p(source(f))) {
-        f = successor(f);
-        if (equal(f, l))
-            return;
-    }
-    let j = f;
-    j = successor(j);
-    if (equal(j, l))
-        return;
-    while (!equal(successor(j), l)) {
-        if (!p(source(j))) {
-            iter_swap(f, j);
-            f = successor(f);
+    pre(() => is_bounded_range(f, l), "The iterators must delimit a valid range.");
+    pre(() => !equal(f, l), "The range must not be empty.");
+    let original;
+    pre(() => {
+        original = range_value_counts(f, l);
+        return true;
+    });
+    let point = f;
+    let current = f;
+    let next = successor(current);
+    while (!equal(next, l)) {
+        if (!p(source(current))) {
+            if (!equal(point, current))
+                exchange_values(point, current);
+            point = successor(point);
         }
-        j = successor(j);
+        current = next;
+        next = successor(current);
     }
-    iter_swap(f, j);
+    // Either value can occupy the first position of the true group.
+    if (!equal(point, current))
+        exchange_values(point, current);
+    post(() => partitioned(f, l, p), "False elements must precede true elements.");
+    post(() => has_range_value_counts(f, l, original), "The output must be a permutation of the input.");
 }
 
 function partition_semistable_nonempty(f, l, p) {

@@ -1,33 +1,42 @@
-// Reference: Elements of Programming, ch. 11, pp. 190–191 (variant of partition_semistable).
+// Reference: Elements of Programming, ch. 11, p. 191, exercise 11.5.
 
-function partition_semistable_nonempty<T>(f: Iter<T>, l: Iter<T>, p: Predicate<T>) {
-    //precondition: nonempty: ! equal(f, l)
-    while ( ! p(source(f))) {
-        f = successor(f);
-        if (equal(f, l)) return;
-    }
+// Doc (es): Particiona un rango no vacío con n − 1 evaluaciones de p durante el algoritmo. Conserva el orden de los elementos que fallan p.
+// Doc (en): Partitions a nonempty range with n − 1 calls to p in the algorithm. Preserves the order of elements failing p.
+function partition_semistable_nonempty<I extends MutableForwardIterator>(
+    f: I, l: NoInfer<I>, p: Predicate<ValueOf<I>>,
+): void {
+    pre(() => is_bounded_range(f, l), "The iterators must delimit a valid range.");
+    pre(() => !equal(f, l), "The range must not be empty.");
+    let original!: Map<ValueOf<I>, number>;
+    pre(() => {
+        original = range_value_counts(f, l);
+        return true;
+    });
 
-    let j = f;
-    j = successor(j)
-    if (equal(j, l)) return;
-
-    while ( ! equal(successor(j), l)) {
-        if ( ! p(source(j))) {
-            iter_swap(f, j);
-            f = successor(f);
+    let point = f;
+    let current = f;
+    let next = successor(current);
+    while (!equal(next, l)) {
+        if (!p(source(current))) {
+            if (!equal(point, current)) exchange_values(point, current);
+            point = successor(point);
         }
-        j = successor(j);
+        current = next;
+        next = successor(current);
     }
-    iter_swap(f, j);
+
+    // Either value can occupy the first position of the true group.
+    if (!equal(point, current)) exchange_values(point, current);
+
+    post(() => partitioned(f, l, p), "False elements must precede true elements.");
+    post(() => has_range_value_counts(f, l, original), "The output must be a permutation of the input.");
 }
 
 function __partition_semistable_nonempty_usage() {
-    const d = sequence(array_random(), "d", even, undefined, true);
+    const d = sequence([2, 7, 4, 1, 6, 3]);
     const f = begin(d);
-    const l = end(d);
-
-    partition_semistable_nonempty(f, l, even);
-
+    partition_semistable_nonempty(f, end(d), even);
+    print(d);
 }
 
 function __partition_semistable_nonempty_attributes() {
