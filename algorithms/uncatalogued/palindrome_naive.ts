@@ -3,8 +3,7 @@ function palindrome_naive<T>(seq_arr: T[], r: Relation<T>) {
     const seq_arr_rev = seq_arr.slice().reverse();
     const seq_rev = seq(seq_arr_rev, "seq_rev");
 
-    const f = begin(haystack);
-    const l = end(haystack);
+    const [f, l] = rng(haystack);
     const f2 = begin(seq_rev);
 
     const res = equal_r(f, l, f2, r);

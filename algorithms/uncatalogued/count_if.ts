@@ -7,8 +7,7 @@ function count_if<T>(f: Iter<T>, l: Iter<T>, p: Predicate<T>) {
 
 function __count_if_usage() {
     const d = seq(array_random(), even);
-    const f = begin(d);
-    const l = end(d);
+    const [f, l] = rng(d);
 
     const n = count_if(f, l, even);
 

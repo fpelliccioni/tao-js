@@ -20,8 +20,7 @@ function partition_stable_forward<T>(f: Iter<T>, l: Iter<T>, p: Predicate<T>) {
 
 function __partition_stable_forward_usage() {
     const d = seq(array_random(), even);
-    const f = begin(d);
-    const l = end(d);
+    const [f, l] = rng(d);
 
     const p = partition_stable_forward(f, l, even);
     if ( ! equal(p, l)) {

@@ -8,8 +8,7 @@ function partitioned<T>(f: Iter<T>, l: Iter<T>, p: Predicate<T>) {
 
 function __partitioned_usage() {
     const d = seq(array_random(), "d", even, undefined, true);
-    const f = begin(d);
-    const l = end(d);
+    const [f, l] = rng(d);
 
     if (partitioned(f, l, even)) {
         print('The sequence is already p-partitioned.');

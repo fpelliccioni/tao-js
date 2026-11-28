@@ -18,8 +18,7 @@ function find_with_sentinel<I extends BidirectionalIterator>(f: I, l: I, x: Valu
 
 function __find_with_sentinel_usage() {
     const d = seq([3, 7, 4, 9]);
-    const f = begin(d);
-    const l = end(d);
+    const [f, l] = rng(d);
     const target = 7;
     const found = find_with_sentinel(f, l, target);
     const missing = find_with_sentinel(f, l, 5);

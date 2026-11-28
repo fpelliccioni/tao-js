@@ -14,8 +14,7 @@ function __count_if_not_basis_usage() {
     const d = seq(array_random(), even);
     const c = seq(array_ascending());
 
-    const f = begin(d);
-    const l = end(d);
+    const [f, l] = rng(d);
 
     let j = begin(c);
     j = count_if_not_basis(f, l, even, j);
