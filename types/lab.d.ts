@@ -162,3 +162,18 @@ declare function selection_rank<T>(entries: readonly SelectionEntry<T>[], rank: 
 declare function valid_selection_indices<T>(entries: readonly SelectionEntry<T>[]): boolean;
 type MutableRandomAccessIterator<T = unknown> = Iter<T, "array">;
 declare function range_snapshot<I extends Iter<unknown>>(f: I, l: I): ValueOf<I>[];
+
+type CancellableMonoid<T> = {
+    zero: T;
+    contains: Predicate<T>;
+    less: Relation<T>;
+    subtract: Operation<T>;
+};
+type ArchimedeanMonoid<T> = CancellableMonoid<T> & { add: Operation<T> };
+type HalvableMonoid<T> = ArchimedeanMonoid<T> & { half: (value: T) => T };
+
+declare const integer_monoid: HalvableMonoid<number>;
+declare function monoid_equal<T>(a: T, b: T, monoid: CancellableMonoid<T>): boolean;
+declare function monoid_largest_doubling<T>(a: T, b: T, monoid: ArchimedeanMonoid<T>): T;
+declare function division_matches<T>(a: T, b: T, q: number, r: T, monoid: ArchimedeanMonoid<T>): boolean;
+declare function gcd_matches<T>(a: T, b: T, value: T, monoid: ArchimedeanMonoid<T>): boolean;
