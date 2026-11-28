@@ -23,8 +23,8 @@ function __k_rotate_from_permutation_random_access_usage() {
     const d = seq([1, 2, 3, 4, 5]);
     const [f, l] = rng(d);
     const m = successor(f, 2);
-    const from = k_rotate_from_permutation_random_access(f, m, l);
-    const origin = from(f);
+    const sourceFor = k_rotate_from_permutation_random_access(f, m, l);
+    const origin = sourceFor(f);
     const value = source(origin);
     print("Source of the first position: " + value);
 }

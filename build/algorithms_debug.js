@@ -2799,7 +2799,7 @@ function rotate_bidirectional(f, m, l) {
     return res;
 }
 
-function __debug_rotate_cycles(f, m, l, from) {
+function __debug_rotate_cycles(f, m, l, sourceFor) {
     let expected;
     pre(() => {
         if (!is_bounded_range(f, m) || !is_bounded_range(m, l))
@@ -2807,17 +2807,17 @@ function __debug_rotate_cycles(f, m, l, from) {
         const left = distance(f, m);
         const n = distance(f, l);
         for (let i = 0; i < n; ++i) {
-            if (!equal(from(successor(f, i)), successor(f, (i + left) % n)))
+            if (!equal(sourceFor(successor(f, i)), successor(f, (i + left) % n)))
                 return false;
         }
         expected = range_snapshot(m, l).concat(range_snapshot(f, m));
         return true;
-    }, "The range must be valid and from must be its rotation permutation.");
+    }, "The range must be valid and the source mapping must describe its rotation.");
     const left = distance(f, m);
     const right = distance(m, l);
     if (left !== 0 && right !== 0) {
         for (let d = gcd(left, right); d > 0; --d) {
-            cycle_from(successor(f, d - 1), from);
+            cycle_from(successor(f, d - 1), sourceFor);
         }
     }
     const result = successor(f, right);
@@ -2825,9 +2825,9 @@ function __debug_rotate_cycles(f, m, l, from) {
     return result;
 }
 
-function rotate_cycles(f, m, l, from) {
-    var _f_ = start_f('rotate_cycles', f, m, l, from);
-    var res = __debug_rotate_cycles(f, m, l, from);
+function rotate_cycles(f, m, l, sourceFor) {
+    var _f_ = start_f('rotate_cycles', f, m, l, sourceFor);
+    var res = __debug_rotate_cycles(f, m, l, sourceFor);
     end_f(_f_);
     return res;
 }
@@ -2934,8 +2934,8 @@ function rotate_forward_step(f, m, l) {
 function __debug_rotate_indexed_nontrivial(f, m, l) {
     pre(() => is_bounded_range(f, m) && is_bounded_range(m, l)
         && !equal(f, m) && !equal(m, l), "Both parts must be nonempty and belong to the same range.");
-    const from = k_rotate_from_permutation_indexed(f, m, l);
-    return rotate_cycles(f, m, l, from);
+    const sourceFor = k_rotate_from_permutation_indexed(f, m, l);
+    return rotate_cycles(f, m, l, sourceFor);
 }
 
 function rotate_indexed_nontrivial(f, m, l) {
@@ -2971,8 +2971,8 @@ function rotate_partial_nontrivial(f, m, l) {
 function __debug_rotate_random_access_nontrivial(f, m, l) {
     pre(() => is_bounded_range(f, m) && is_bounded_range(m, l)
         && !equal(f, m) && !equal(m, l), "Both parts must be nonempty and belong to the same range.");
-    const from = k_rotate_from_permutation_random_access(f, m, l);
-    return rotate_cycles(f, m, l, from);
+    const sourceFor = k_rotate_from_permutation_random_access(f, m, l);
+    return rotate_cycles(f, m, l, sourceFor);
 }
 
 function rotate_random_access_nontrivial(f, m, l) {

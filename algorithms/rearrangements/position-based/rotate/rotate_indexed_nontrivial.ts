@@ -5,8 +5,8 @@
 function rotate_indexed_nontrivial<I extends MutableRandomAccessIterator>(f: I, m: I, l: I): I {
     pre(() => is_bounded_range(f, m) && is_bounded_range(m, l)
         && !equal(f, m) && !equal(m, l), "Both parts must be nonempty and belong to the same range.");
-    const from = k_rotate_from_permutation_indexed(f, m, l);
-    return rotate_cycles(f, m, l, from);
+    const sourceFor = k_rotate_from_permutation_indexed(f, m, l);
+    return rotate_cycles(f, m, l, sourceFor);
 }
 
 function __rotate_indexed_nontrivial_usage() {
