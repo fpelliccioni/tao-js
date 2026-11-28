@@ -42,6 +42,7 @@ declare function sequence<T, K extends SequenceInputKind>(values: readonly T[], 
 declare const seq: typeof sequence;
 declare function begin<T, K extends SequenceKind>(data: Seq<T, K>): Iter<T, K>;
 declare function end<T, K extends SequenceKind>(data: Seq<T, K>): Iter<T, K>;
+declare function rng<T, K extends SequenceKind>(data: Seq<T, K>): [Iter<T, K>, Iter<T, K>];
 declare function source<T>(it: Iter<T>): T;
 declare function sink<T, U>(it: Iter<T>, value: U): void;
 declare function successor<I extends Iter<unknown>>(it: I, n?: number): I;

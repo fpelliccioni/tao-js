@@ -19,8 +19,7 @@ function partition_semistable_1<T>(f: Iter<T>, l: Iter<T>, p: Predicate<T>) {
 
 function __partition_semistable_1_usage() {
     const d = seq(array_random(), "d", even, undefined, true);
-    const f = begin(d);
-    const l = end(d);
+    const [f, l] = rng(d);
 
     const p = partition_semistable_1(f, l, even);
     if ( ! equal(p, l)) {

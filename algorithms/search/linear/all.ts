@@ -9,8 +9,7 @@ function all<I extends Iter<unknown>>(f: I, l: I, p: Predicate<ValueOf<I>>): boo
 
 function __all_usage() {
     const d = seq([2, 4, 6]);
-    const f = begin(d);
-    const l = end(d);
+    const [f, l] = rng(d);
 
     const result = all(f, l, even);
 

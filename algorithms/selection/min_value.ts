@@ -16,12 +16,11 @@ function min_value<I extends Iter<unknown>>(f: I, l: I, r: Relation<ValueOf<I>>)
 function __min_value_usage() {
     const d = seq(array_random());
 
-    let f = begin(d);
-    const l = end(d);
+    const [f, l] = rng(d);
 
-    f = min_value(f, l, lt);
-    if ( ! equal(f, l)) {
-        const minimum = source(f);
+    const result = min_value(f, l, lt);
+    if ( ! equal(result, l)) {
+        const minimum = source(result);
         print("The min element is: " + minimum);
     }
 

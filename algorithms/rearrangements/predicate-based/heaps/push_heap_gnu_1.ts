@@ -32,8 +32,7 @@ function __push_heap_gnu_1_usage() {
     const s = sequenceTree([10, 8, 6, 4, 5, 3, 7], "s");
     //var s = sequenceTree([10, 8, 6, 4, 5, 3, 11], "s");
 
-    const f = begin(s);
-    const l = end(s);
+    const [f, l] = rng(s);
 
     print(s);
     push_heap_gnu_1(f, l, lt);

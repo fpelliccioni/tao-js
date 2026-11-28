@@ -17,8 +17,7 @@ function __equal_r_usage() {
     const d1 = seq(d1_raw);
     const d2 = seq(d2_raw);
 
-    const f = begin(d1);
-    const l = end(d1);
+    const [f, l] = rng(d1);
     const f2 = begin(d2);
 
     const res = equal_r(f, l, f2, eq);

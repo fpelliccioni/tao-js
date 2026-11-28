@@ -9,8 +9,7 @@ function partitioned_at_point<T>(f: Iter<T>, m: Iter<T>, l: Iter<T>, p: Predicat
 
 function __partitioned_at_point_usage() {
     const d = seq(array_random(), "d", even, undefined, true);
-    const f = begin(d);
-    const l = end(d);
+    const [f, l] = rng(d);
     const m = successor(f, 5);
 
     if (partitioned_at_point(f, m, l, even)) {
