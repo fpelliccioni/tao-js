@@ -483,6 +483,19 @@ function abs(x) {
     return result;
 }
 
+function addition_defined_int32(a, b) {
+    const min = -2147483648;
+    const max = 2147483647;
+    const operandsFit = Number.isInteger(a) && a >= min && a <= max
+        && Number.isInteger(b) && b >= min && b <= max;
+    const result = operandsFit && (b > 0 ? a <= max - b : a >= min - b);
+    post(() => {
+        // A number represents the widened sum of any two signed 32-bit integers exactly.
+        return result === (operandsFit && a + b >= min && a + b <= max);
+    }, "The predicate must agree with whether the signed 32-bit addition is defined.");
+    return result;
+}
+
 function divides(i, n) {
     return n % i == 0;
 }

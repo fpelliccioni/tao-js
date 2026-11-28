@@ -2,7 +2,7 @@
 
 The references in the TypeScript files identify the published algorithm or the closest documented variant. Page numbers use the authors’ edition of *Elements of Programming* and the printed Addison-Wesley edition of *From Mathematics to Generic Programming*. A section or page range points to the surrounding discussion when an exact listing page is unavailable. Exercises and companion-only implementations are marked in the source comments.
 
-The catalog snapshot has **290 algorithms**, with a book reference in **243** source files. 185 cite *Elements of Programming* and 72 cite *From Mathematics to Generic Programming*. Some cite both.
+The catalog snapshot has **291 algorithms**, with a book reference in **244** source files. 186 cite *Elements of Programming* and 72 cite *From Mathematics to Generic Programming*. Some cite both.
 
 ## Elements of Programming
 
@@ -34,7 +34,7 @@ The book supplies the exercise statements. The companion header mixes complete i
 
 | Chapter | Covered in the catalog | Remaining programming exercises |
 | --- | --- | --- |
-| 2. Transformations and their orbits | 2.2 `orbits_intersect`, 2.3 `convergent_point_guarded` | 2.1 checked 32-bit addition domain, 2.6 action-based rewrites |
+| 2. Transformations and their orbits | 2.1 `addition_defined_int32`, 2.2 `orbits_intersect`, 2.3 `convergent_point_guarded` | 2.6 action-based rewrites |
 | 3. Associative operations | Existing numeric and power algorithms cover parts of the material | 3.2 integral specializations and 3.3 accumulate-based rewrites still need a variant-by-variant comparison |
 | 4. Linear orderings | 4.4 stable `select_2_4`, 4.5 `median_5_adaptive`, 4.7 exhaustive stability checks for the selection procedures | 4.8 three-way comparison variants |
 | 5. Ordered algebraic structures | 5.3 `stein_gcd` and `stein_gcd_nonnegative` | — |
