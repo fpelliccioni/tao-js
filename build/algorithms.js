@@ -476,8 +476,39 @@ function subtractive_gcd(a, b, monoid) {
     return result;
 }
 
+function abs(x) {
+    pre(() => Number.isSafeInteger(x), "The argument must be a safe integer.");
+    const result = x < 0 ? -x : x;
+    post(() => result >= 0 && (result === x || result === -x), "The result must be the nonnegative magnitude.");
+    return result;
+}
+
 function divides(i, n) {
     return n % i == 0;
+}
+
+function euclidean_norm(x, y) {
+    pre(() => [x, y].every(Number.isFinite), "All coordinates must be finite.");
+    const squaredLength = x * x + y * y;
+    const result = Math.sqrt(squaredLength);
+    post(() => {
+        const squared = result * result;
+        return result >= 0 && (squared === squaredLength
+            || Math.abs((squared - squaredLength) / squaredLength) <= 2 * Number.EPSILON);
+    }, "The result must be the nonnegative square root of the sum of squares.");
+    return result;
+}
+
+function euclidean_norm_3(x, y, z) {
+    pre(() => [x, y, z].every(Number.isFinite), "All coordinates must be finite.");
+    const squaredLength = x * x + y * y + z * z;
+    const result = Math.sqrt(squaredLength);
+    post(() => {
+        const squared = result * result;
+        return result >= 0 && (squared === squaredLength
+            || Math.abs((squared - squaredLength) / squaredLength) <= 2 * Number.EPSILON);
+    }, "The result must be the nonnegative square root of the sum of squares.");
+    return result;
 }
 
 function integer_sqrt(n) {
