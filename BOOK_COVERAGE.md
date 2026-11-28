@@ -41,7 +41,7 @@ The book supplies the exercise statements. The companion header mixes complete i
 | 8. Coordinates with mutable successors | — | 8.2 linked combination including empty inputs, 8.4 stable linked `unique` |
 | 9. Copying algorithms | 9.5 `combine_copy_n` and `combine_copy_backward_n` | — |
 | 10. Rearrangements | 10.3 `cycle_to_2n_1` | 10.4 and 10.5 arbitrary rearrangement with marking and with constant storage |
-| 11. Partition and merging | 11.1 `partitioned_at_point`, 11.2 `potential_partition_point`, 11.6 `partition_forward`, 11.7 `partition_single_cycle`, 11.8 `partition_sentinel` | 11.3 inline semistable search, 11.5 and 11.9 partition variants, 11.10 adaptive stable partition, 11.11–11.13 iterative algorithms using balanced reduction |
+| 11. Partition and merging | 11.1 `partitioned_at_point`, 11.2 `potential_partition_point`, 11.3 `partition_semistable`, 11.5 `partition_semistable_nonempty`, 11.6 `partition_forward`, 11.7 `partition_single_cycle`, 11.8 `partition_sentinel` | 11.9 single-cycle sentinel partition, 11.10 adaptive stable partition, 11.11–11.13 iterative algorithms using balanced reduction |
 | 12. Composite objects | — | 12.1–12.6 pair, triple, fixed-size array and projection exercises, 12.8 deque capacity interface, 12.9 iterator adapter |
 
 The table focuses on exercises that request an implementation, rewrite, or programming interface. References for listed examples are included in the lab.
