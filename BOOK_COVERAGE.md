@@ -2,7 +2,7 @@
 
 The references in the TypeScript files identify the published algorithm or the closest documented variant. Page numbers use the authors’ edition of *Elements of Programming* and the printed Addison-Wesley edition of *From Mathematics to Generic Programming*. A section or page range points to the surrounding discussion when an exact listing page is unavailable. Exercises and companion-only implementations are marked in the source comments.
 
-The catalog snapshot has **225 algorithms**, with a book reference in **178** source files. 130 cite *Elements of Programming* and 57 cite *From Mathematics to Generic Programming*. Some cite both.
+The catalog snapshot has **227 algorithms**, with a book reference in **180** source files. 130 cite *Elements of Programming* and 59 cite *From Mathematics to Generic Programming*. Some cite both.
 
 ## Elements of Programming
 
@@ -58,10 +58,10 @@ The table lists named free functions in each header, grouping overloads under a 
 | [3](https://www.fm2gp.com/code/ch03.h) | `mark_sieve`, `sift`, `sift0`, `sift1` | `gcm` |
 | [4](https://www.fm2gp.com/code/ch04.h) | `gcd`, `largest_doubling`, `quotient`, `quotient_remainder`, `remainder`, `remainder_fibonacci` | `fast_segment_gcm`, `fast_segment_remainder`, `fast_segment_remainder1`, `gcm`, `gcm0`, `gcm1`, `gcm_remainder`, `half`, `odd`, `segment_remainder` |
 | [7](https://www.fm2gp.com/code/ch07.h) | `multiply_accumulate0`, `multiply_accumulate_semigroup`, `multiply_group`, `multiply_monoid`, `multiply_semigroup`, `power_accumulate_semigroup`, `power_group`, `power_monoid`, `power_semigroup` | `fib0`, `fibonacci_iterative`, `half`, `identity_element`, `inverse_operation`, `mult_acc4`, `multiplicative_inverse`, `multiply_accumulate`, `odd` |
-| [8](https://www.fm2gp.com/code/ch08.h) | — | `polynomial_value` |
+| [8](https://www.fm2gp.com/code/ch08.h) | `polynomial_value` | — |
 | [10](https://www.fm2gp.com/code/ch10.h) | `find_if`, `find_if_n`, `lower_bound`, `partition_point`, `partition_point_n`, `upper_bound` | `advance`, `distance` |
 | [11](https://www.fm2gp.com/code/ch11.h) | `gcd`, `reverse`, `reverse_copy`, `reverse_n_adaptive`, `reverse_n_with_buffer`, `swap_ranges`, `swap_ranges_n` | `gries_mills_rotate`, `half`, `odd`, `reverse_n`, `reverse_recursive`, `reverse_until`, `rotate`, `rotate_cycle_from`, `rotate_unguarded`, `swap`, `three_reverse_rotate` |
-| [12](https://www.fm2gp.com/code/ch12.h) | `gcd`, `quotient_remainder`, `stein_gcd` | `even`, `extended_gcd` |
+| [12](https://www.fm2gp.com/code/ch12.h) | `extended_gcd`, `gcd`, `quotient_remainder`, `stein_gcd` | `even` |
 | [13](https://www.fm2gp.com/code/ch13.h) | `divides`, `fermat_test`, `is_prime`, `miller_rabin_test`, `multiplicative_inverse_fermat`, `smallest_divisor` | `identity_element`, `multiplicative_inverse` |
 
 The `mult_acc*` variants appear in the lab as `multiply_accumulate*`. The `gcm*` and segment-remainder examples have numeric adaptations in the GCD and remainder categories. The multiplicative overloads of `power_*` appear with a `0` suffix in the lab.

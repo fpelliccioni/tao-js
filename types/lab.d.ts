@@ -142,3 +142,11 @@ declare function combine_partition_blocks<I extends MutableForwardIterator>(left
 declare function rotate_forward_range<I extends MutableForwardIterator>(f: I, m: I, l: I): I;
 declare function is_sorted_range<I extends ForwardIterator>(f: I, l: I, r: Relation<ValueOf<I>>): boolean;
 declare function stable_sort_snapshot<I extends ForwardIterator>(f: I, l: I, r: Relation<ValueOf<I>>): ValueOf<I>[];
+
+type Semiring<T> = {
+    zero: T;
+    one: T;
+    add: Operation<T>;
+    multiply: Operation<T>;
+    equal: Relation<T>;
+};
