@@ -1037,6 +1037,83 @@ function linear_insert_unguarded(c, r) {
     return d;
 }
 
+function sort_linked_nonempty_n_iterative(f, n, r, link) {
+    // Precondition: r is a strict weak ordering over the values.
+    pre(() => Number.isSafeInteger(n) && n > 0, "The count must be a positive safe integer.");
+    let original;
+    let suffix = null;
+    pre(() => {
+        original = new Map();
+        let node = f;
+        for (let i = 0; i < n; ++i) {
+            if (node === null || original.has(node))
+                return false;
+            original.set(node, { index: i, value: link.value(node) });
+            node = link.next(node);
+        }
+        if (node !== null && original.has(node))
+            return false;
+        suffix = node;
+        return true;
+    }, "The range must contain n distinct linked nodes.");
+    function* runs() {
+        let node = f;
+        for (let i = 0; i < n && node !== null; ++i) {
+            const current = node;
+            node = link.next(current);
+            link.setNext(current, null);
+            yield { first: current, last: current };
+        }
+    }
+    const merge = (a, b) => {
+        if (a === null || b === null)
+            return a ?? b;
+        let left = a.first;
+        let right = b.first;
+        function take() {
+            if (left === null || (right !== null && r(link.value(right), link.value(left)))) {
+                const node = right;
+                right = link.next(node);
+                return node;
+            }
+            const node = left;
+            left = link.next(node);
+            return node;
+        }
+        const first = take();
+        let last = first;
+        while (left !== null && right !== null) {
+            const node = take();
+            link.setNext(last, node);
+            last = node;
+        }
+        link.setNext(last, left ?? right);
+        return { first, last: left === null ? b.last : a.last };
+    };
+    const result = reduce_balanced_iterable(runs(), merge, null);
+    link.setNext(result.last, suffix);
+    post(() => {
+        let node = result.first;
+        let previous;
+        const seen = new Set();
+        for (let i = 0; i < n; ++i) {
+            if (node === null || seen.has(node))
+                return false;
+            const entry = original.get(node);
+            if (!entry || !Object.is(entry.value, link.value(node)))
+                return false;
+            if (previous && (r(entry.value, previous.value) ||
+                (!r(previous.value, entry.value) && previous.index > entry.index)))
+                return false;
+            seen.add(node);
+            previous = entry;
+            node = link.next(node);
+        }
+        return node === suffix;
+    }, "The same nodes and values must be stably sorted and linked to the original end.");
+    return [result.first, suffix];
+}
+
 function selection_sort_classic(f, l, r) {
     // postcondition: is_sorted(f, l, r)
     while (!equal(f, l)) {
@@ -1659,6 +1736,37 @@ function partition_single_cycle(f, l, p) {
     return point;
 }
 
+function partition_single_cycle_sentinel(f, l, p) {
+    pre(() => is_bounded_range(f, l), "The iterators must delimit a valid range.");
+    let original;
+    pre(() => {
+        original = range_value_counts(f, l);
+        return true;
+    });
+    const point = potential_partition_point(f, l, p);
+    let remaining = count_if(f, point, p);
+    if (remaining > 0) {
+        let first = find_if_unguarded(f, p);
+        let last = l;
+        const saved = source(first);
+        while (remaining > 0) {
+            last = find_backward_if_not_unguarded(last, p);
+            sink(first, source(last));
+            --remaining;
+            if (remaining === 0) {
+                sink(last, saved);
+            }
+            else {
+                first = find_if_unguarded(successor(first), p);
+                sink(last, source(first));
+            }
+        }
+    }
+    post(() => partitioned_at_point(f, point, l, p), "The result must separate false and true elements.");
+    post(() => has_range_value_counts(f, l, original), "The output must be a permutation of the input.");
+    return point;
+}
+
 function partition_stable_forward(f, l, p) {
     while (true) {
         if (equal(f, l))
@@ -1677,6 +1785,80 @@ function partition_stable_forward(f, l, p) {
         j = successor(j);
     }
     return f;
+}
+
+function partition_stable_n_adaptive(f, n, buffer, capacity, p) {
+    pre(() => Number.isSafeInteger(n) && n >= 0 && Number.isSafeInteger(capacity) && capacity >= 0, "The length and buffer capacity must be nonnegative safe integers.");
+    let expected;
+    pre(() => {
+        const last = successor(f, n);
+        successor(buffer, capacity);
+        expected = stable_partition_snapshot(f, last, p);
+        return true;
+    }, "The input and buffer must have enough elements.");
+    pre(() => disjoint_counted_ranges(f, n, buffer, capacity), "The input and buffer must not overlap.");
+    function leaf(first, count) {
+        if (count === 0)
+            return { point: first, last: first };
+        const last = successor(first, count);
+        const point = count === 1
+            ? (p(source(first)) ? first : last)
+            : partition_buffered_block(first, last, buffer, p);
+        return { point, last };
+    }
+    function divide(first, count) {
+        if (count <= Math.max(1, capacity))
+            return leaf(first, count);
+        const half = Math.floor(count / 2);
+        const left = divide(first, half);
+        const right = divide(left.last, count - half);
+        return combine_partition_blocks(left, right);
+    }
+    const result = divide(f, n);
+    post(() => equal(result.last, successor(f, n)), "The result must include the end of the counted range.");
+    post(() => is_bounded_range(f, result.point) && is_bounded_range(result.point, result.last), "The partition point must belong to the range.");
+    post(() => partitioned_at_point(f, result.point, result.last, p), "The point must separate false and true elements.");
+    post(() => range_matches_snapshot(f, result.last, expected), "The order of each group must be preserved.");
+    return [result.point, result.last];
+}
+
+function partition_stable_n_iterative(f, n, buffer, capacity, p) {
+    pre(() => Number.isSafeInteger(n) && n >= 0 && Number.isSafeInteger(capacity) && capacity >= 0, "The length and buffer capacity must be nonnegative safe integers.");
+    let expected;
+    pre(() => {
+        const last = successor(f, n);
+        successor(buffer, capacity);
+        expected = stable_partition_snapshot(f, last, p);
+        return true;
+    }, "The input and buffer must have enough elements.");
+    pre(() => disjoint_counted_ranges(f, n, buffer, capacity), "The input and buffer must not overlap.");
+    function leaf(first, count) {
+        if (count === 0)
+            return { point: first, last: first };
+        const last = successor(first, count);
+        const point = count === 1
+            ? (p(source(first)) ? first : last)
+            : partition_buffered_block(first, last, buffer, p);
+        return { point, last };
+    }
+    function* blocks() {
+        let first = f;
+        let remaining = n;
+        while (remaining > 0) {
+            const width = Math.min(remaining, Math.max(1, capacity));
+            const block = leaf(first, width);
+            yield block;
+            first = block.last;
+            remaining -= width;
+        }
+    }
+    const combine = (left, right) => left && right ? combine_partition_blocks(left, right) : left ?? right;
+    const result = reduce_balanced_iterable(blocks(), combine, null) ?? { point: f, last: f };
+    post(() => equal(result.last, successor(f, n)), "The result must include the end of the counted range.");
+    post(() => is_bounded_range(f, result.point) && is_bounded_range(result.point, result.last), "The partition point must belong to the range.");
+    post(() => partitioned_at_point(f, result.point, result.last, p), "The point must separate false and true elements.");
+    post(() => range_matches_snapshot(f, result.last, expected), "The order of each group must be preserved.");
+    return [result.point, result.last];
 }
 
 function partition_stable_with_buffer_0(f, l, p, b) {

@@ -123,3 +123,16 @@ declare function is_partitioned_n<T>(first: Iter<T>, count: number, test: Predic
 declare function is_bounded_range<I extends Iter<unknown>>(first: I, last: I): boolean;
 declare function range_value_counts<I extends Iter<unknown>>(first: I, last: I): Map<ValueOf<I>, number>;
 declare function has_range_value_counts<I extends Iter<unknown>>(first: I, last: I, counts: Map<ValueOf<I>, number>): boolean;
+
+type PartitionBlock<I extends MutableForwardIterator> = { point: I; last: I };
+type ForwardLinker<I, T> = {
+    next(node: I): I | null;
+    setNext(node: I, next: I | null): void;
+    value(node: I): T;
+};
+
+declare function disjoint_counted_ranges(f: Iter<unknown>, n: number, b: Iter<unknown>, capacity: number): boolean;
+declare function stable_partition_snapshot<I extends Iter<unknown>>(f: I, l: I, p: Predicate<ValueOf<I>>): ValueOf<I>[];
+declare function range_matches_snapshot<I extends Iter<unknown>>(f: I, l: I, expected: readonly ValueOf<I>[]): boolean;
+declare function partition_buffered_block<I extends MutableForwardIterator>(f: I, l: I, buffer: MutableForwardIterator<ValueOf<I>>, p: Predicate<ValueOf<I>>): I;
+declare function combine_partition_blocks<I extends MutableForwardIterator>(left: PartitionBlock<I>, right: PartitionBlock<I>): PartitionBlock<I>;
