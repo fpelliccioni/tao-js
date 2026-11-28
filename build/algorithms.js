@@ -1175,6 +1175,81 @@ function reverse_n_adaptive(f_i, n_i, f_b, n_b) {
     return l_i;
 }
 
+function reverse_n_adaptive_iterative(f, n, buffer, capacity) {
+    pre(() => Number.isSafeInteger(n) && n >= 0 && Number.isSafeInteger(capacity) && capacity >= 0, "The length and buffer capacity must be nonnegative safe integers.");
+    let original;
+    pre(() => {
+        const l = successor(f, n);
+        successor(buffer, capacity);
+        original = [];
+        for (let it = f; !equal(it, l); it = successor(it))
+            original.push(source(it));
+        return true;
+    }, "The input and buffer must have enough elements.");
+    pre(() => {
+        if (n === 0 || capacity === 0)
+            return true;
+        const offset = distance(f, buffer);
+        if (offset >= n || offset <= -capacity)
+            return true;
+        return offset >= 0
+            ? !equal(successor(f, offset), buffer)
+            : !equal(f, successor(buffer, -offset));
+    }, "The input and buffer must not overlap.");
+    function* blocks() {
+        let first = f;
+        let remaining = n;
+        const width = Math.max(1, capacity);
+        while (remaining !== 0) {
+            const count = Math.min(width, remaining);
+            const last = successor(first, count);
+            if (count > 1)
+                reverse_n_with_buffer(first, count, buffer);
+            yield { first, last };
+            first = last;
+            remaining -= count;
+        }
+    }
+    const combine = (a, b) => {
+        if (a === null || b === null)
+            return a ?? b;
+        let first = a.first;
+        let middle = b.first;
+        let right = middle;
+        do {
+            exchange_values(first, right);
+            first = successor(first);
+            right = successor(right);
+            if (equal(first, middle))
+                middle = right;
+        } while (!equal(right, b.last));
+        right = middle;
+        while (!equal(right, b.last)) {
+            exchange_values(first, right);
+            first = successor(first);
+            right = successor(right);
+            if (equal(first, middle))
+                middle = right;
+            else if (equal(right, b.last))
+                right = middle;
+        }
+        return { first: a.first, last: b.last };
+    };
+    const result = reduce_balanced_iterable(blocks(), combine, null);
+    const last = result?.last ?? f;
+    post(() => equal(last, successor(f, n)), "The result must be just past the reversed range.");
+    post(() => {
+        let it = f;
+        for (let i = n - 1; i >= 0; --i) {
+            if (!Object.is(source(it), original[i]))
+                return false;
+            it = successor(it);
+        }
+        return true;
+    }, "The output must equal the input in reverse order.");
+    return last;
+}
+
 function reverse_n_forward(f, n) {
     if (n < 2)
         return successor(f, n);
@@ -1649,6 +1724,35 @@ function reduce_balanced(f, l, op, z) {
                 bins[i] = carry;
         }
         f = successor(f);
+    }
+    let i = 0;
+    while (i < bins.length && bins[i] === z)
+        ++i;
+    if (i === bins.length)
+        return z;
+    let result = bins[i];
+    for (++i; i < bins.length; ++i) {
+        if (bins[i] !== z)
+            result = op(bins[i], result);
+    }
+    return result;
+}
+
+function reduce_balanced_iterable(values, op, z) {
+    // Precondition: the traversal is finite, op is partially associative,
+    // and z can be skipped as the neutral value.
+    const bins = [];
+    for (let carry of values) {
+        if (carry === z)
+            continue;
+        let i = 0;
+        while (i < bins.length && bins[i] !== z) {
+            carry = op(bins[i], carry);
+            bins[i] = z;
+            ++i;
+        }
+        if (i < bins.length || carry !== z)
+            bins[i] = carry;
     }
     let i = 0;
     while (i < bins.length && bins[i] === z)
