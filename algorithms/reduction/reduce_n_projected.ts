@@ -10,7 +10,7 @@ function reduce_n_projected<I extends Iter<unknown>, T>(
 }
 
 function __reduce_n_projected_usage() {
-    const d = sequence([11, 22, 33, 44]);
+    const d = seq([11, 22, 33, 44]);
     const project = (it: Iter<number>) => digitSum(source(it));
     const result = reduce_n_projected(begin(d), 3, add, project, 0);
     print("Sum of the first three digit sums: " + result);

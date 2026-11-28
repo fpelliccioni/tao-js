@@ -13,8 +13,8 @@ function copy_select<T, U>(f: Iter<T>, l: Iter<T>, o: Iter<U>, p: Predicate<Iter
 
 function __copy_select_usage() {
     const evenAt = predicate_source(even);
-    const s = sequence(array_random());
-    const z = sequence(array_all_equal(size(s), "-"));
+    const s = seq(array_random());
+    const z = seq(array_all_equal(size(s), "-"));
 
     copy_select(begin(s), end(s), begin(z), evenAt);
 

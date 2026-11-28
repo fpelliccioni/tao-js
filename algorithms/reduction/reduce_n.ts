@@ -10,7 +10,7 @@ function reduce_n<I extends Iter<unknown>>(
 }
 
 function __reduce_n_usage() {
-    const d = sequence([2, 3, 4, 7]);
+    const d = seq([2, 3, 4, 7]);
     const product = reduce_n(begin(d), 3, multiply, 1);
     const empty = reduce_n(begin(d), 0, multiply, 1);
     print("Product: " + product + ". Empty range: " + empty + ".");

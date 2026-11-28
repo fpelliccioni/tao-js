@@ -23,7 +23,7 @@ function __insertion_sort_classic_3_usage() {
         return c;
     }
 
-    const s = sequence(array_random(), lt);
+    const s = seq(array_random(), lt);
     insertion_sort_classic_3(begin(s), end(s), lt);
     print(s);
 

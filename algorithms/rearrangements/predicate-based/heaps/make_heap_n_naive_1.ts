@@ -33,8 +33,8 @@ function __make_heap_n_naive_1_usage() {
         }
     }
 
-    const s = sequence(array_random());
-    // var s = sequence([24, 88, 59, 31, 91, 0, 87, 91, 40, 52], "s");
+    const s = seq(array_random());
+    // var s = seq([24, 88, 59, 31, 91, 0, 87, 91, 40, 52], "s");
 
     print(s);
     make_heap_n_naive_1(begin(s), size(s));

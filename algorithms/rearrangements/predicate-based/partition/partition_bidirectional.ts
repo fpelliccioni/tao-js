@@ -31,7 +31,7 @@ function partition_bidirectional<I extends MutableBidirectionalIterator>(
 }
 
 function __partition_bidirectional_usage() {
-    const d = sequence([2, 7, 4, 1, 6, 3]);
+    const d = seq([2, 7, 4, 1, 6, 3]);
     const f = begin(d);
     const point = partition_bidirectional(f, end(d), even);
     const index = distance(f, point);

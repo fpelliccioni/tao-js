@@ -13,7 +13,7 @@ function find_backward_if<I extends BidirectionalIterator>(
 }
 
 function __find_backward_if_usage() {
-    const d = sequence([2, 3, 4, 7]);
+    const d = seq([2, 3, 4, 7]);
     const f = begin(d);
     const result = find_backward_if(f, end(d), even);
 

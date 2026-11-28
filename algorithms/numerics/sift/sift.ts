@@ -21,7 +21,7 @@ function sift(f: Iter<number | string>, n: number) {
 }
 
 function __sift_usage() {
-    const v = sequence(array_all_equal(20, '0'));
+    const v = seq(array_all_equal(20, '0'));
     sift(begin(v), size(v));
     print_sieve(begin(v), size(v));
   }

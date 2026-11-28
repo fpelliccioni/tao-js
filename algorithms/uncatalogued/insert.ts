@@ -14,8 +14,8 @@ function insert<T, K extends SequenceKind>(s: Seq<T, K>, ip: Iter<T>, f: Iter<T>
 }
 
 function __insert_usage() {
-    let s = sequence(array_random());
-    const i = sequence(array_random(5));
+    let s = seq(array_random());
+    const i = seq(array_random(5));
 
     s = insert(s, begin(s), begin(i), end(i));
     print(s);

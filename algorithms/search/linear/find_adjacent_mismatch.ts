@@ -19,7 +19,7 @@ function find_adjacent_mismatch<I extends Iter<unknown>>(
 }
 
 function __find_adjacent_mismatch_usage() {
-    const d = sequence([1, 4, 3, 8], "d", undefined, "stream");
+    const d = seq([1, 4, 3, 8], "d", undefined, "stream");
     const result = find_adjacent_mismatch(begin(d), end(d), lt);
 
     if (equal(result, end(d))) {

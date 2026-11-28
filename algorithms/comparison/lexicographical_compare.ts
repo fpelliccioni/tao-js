@@ -20,8 +20,8 @@ function lexicographical_compare<I extends Iter<unknown>, J extends Iter<ValueOf
 }
 
 function __lexicographical_compare_usage() {
-    const left = sequence([9, 7, 1]);
-    const right = sequence([9, 5, 8]);
+    const left = seq([9, 7, 1]);
+    const right = seq([9, 5, 8]);
     const before = lexicographical_compare(begin(left), end(left), begin(right), end(right), gt);
     print("Left comes first in descending order: " + before);
 }

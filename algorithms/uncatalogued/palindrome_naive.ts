@@ -1,10 +1,10 @@
 function palindrome_naive<T>(seq_arr: T[], r: Relation<T>) {
-    const seq = sequence(seq_arr, "seq");
+    const haystack = seq(seq_arr, "seq");
     const seq_arr_rev = seq_arr.slice().reverse();
-    const seq_rev = sequence(seq_arr_rev, "seq_rev");
+    const seq_rev = seq(seq_arr_rev, "seq_rev");
 
-    const f = begin(seq);
-    const l = end(seq);
+    const f = begin(haystack);
+    const l = end(haystack);
     const f2 = begin(seq_rev);
 
     const res = equal_r(f, l, f2, r);

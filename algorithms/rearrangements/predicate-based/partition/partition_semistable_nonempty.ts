@@ -33,7 +33,7 @@ function partition_semistable_nonempty<I extends MutableForwardIterator>(
 }
 
 function __partition_semistable_nonempty_usage() {
-    const d = sequence([2, 7, 4, 1, 6, 3]);
+    const d = seq([2, 7, 4, 1, 6, 3]);
     const f = begin(d);
     partition_semistable_nonempty(f, end(d), even);
     print(d);

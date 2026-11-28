@@ -7,7 +7,7 @@ function not_all<I extends Iter<unknown>>(f: I, l: I, p: Predicate<ValueOf<I>>):
 }
 
 function __not_all_usage() {
-    const d = sequence([2, 3, 4]);
+    const d = seq([2, 3, 4]);
     const f = begin(d);
     const l = end(d);
 

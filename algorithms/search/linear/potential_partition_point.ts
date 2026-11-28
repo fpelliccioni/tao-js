@@ -7,7 +7,7 @@ function potential_partition_point<I extends ForwardIterator>(f: I, l: I, p: Pre
 }
 
 function __potential_partition_point_usage() {
-    const d = sequence(array_random(), even);
+    const d = seq(array_random(), even);
     const f = begin(d);
     const l = end(d);
     const m = potential_partition_point(f, l, even);

@@ -8,7 +8,7 @@ function fill<T>(f: Iter<T>, l: Iter<T>, x: T) {
 }
 
 function __fill_usage() {
-    const s = sequence(array_all_equal(10, "-"));
+    const s = seq(array_all_equal(10, "-"));
     fill(begin(s), end(s), '?');
     print(s);
 }

@@ -11,8 +11,8 @@ function copy_n<T, U>(f: Iter<T>, n: number, o: Iter<U>): [Iter<T>, Iter<U>] {
 }
 
 function __copy_n_usage() {
-    const s = sequence(array_ascending());
-    const z = sequence(array_descending());
+    const s = seq(array_ascending());
+    const z = seq(array_descending());
 
     copy_n(begin(s), 5, begin(z));
 

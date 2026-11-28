@@ -30,7 +30,7 @@ function partition_semistable<I extends MutableForwardIterator>(
 }
 
 function __partition_semistable_usage() {
-    const d = sequence([2, 7, 4, 1, 6, 3]);
+    const d = seq([2, 7, 4, 1, 6, 3]);
     const f = begin(d);
     const point = partition_semistable(f, end(d), even);
     const index = distance(f, point);

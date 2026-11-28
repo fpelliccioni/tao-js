@@ -10,8 +10,8 @@ function copy_backward<T, U>(f: Iter<T>, l: Iter<T>, o: Iter<U>) {
 }
 
 function __copy_backward_usage() {
-    const s = sequence(array_ascending());
-    const z = sequence(array_descending());
+    const s = seq(array_ascending());
+    const z = seq(array_descending());
 
     copy_backward(successor(begin(s), 5), end(s), end(z));
 

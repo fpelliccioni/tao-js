@@ -15,7 +15,7 @@ function palindrome_bidirectional<I extends BidirectionalIterator>(
 }
 
 function __palindrome_bidirectional_usage() {
-    const word = sequence(array_from("level"));
+    const word = seq(array_from("level"));
     const palindrome = palindrome_bidirectional(begin(word), end(word), eq);
     print("Is a palindrome: " + palindrome);
 }

@@ -18,8 +18,8 @@ function __insertion_sort_classic_0_usage() {
         return c;
     }
 
-    //const s = sequence(array_random(), "s", lt);
-    const s = sequence([34, 5], lt);
+    //const s = seq(array_random(), "s", lt);
+    const s = seq([34, 5], lt);
     insertion_sort_classic_0(begin(s), end(s), lt);
     print(s);
 }

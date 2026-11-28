@@ -9,8 +9,8 @@ function lexicographical_less<I extends Iter<unknown>, J extends Iter<ValueOf<I>
 }
 
 function __lexicographical_less_usage() {
-    const left = sequence(["a", "b"]);
-    const right = sequence(["a", "b", "c"]);
+    const left = seq(["a", "b"]);
+    const right = seq(["a", "b", "c"]);
     const before = lexicographical_less(begin(left), end(left), begin(right), end(right));
     print("The shorter prefix comes first: " + before);
 }

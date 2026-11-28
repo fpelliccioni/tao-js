@@ -24,8 +24,8 @@ function __insertion_sort_classic_usage() {
 
     register_custom_stat("Misplaced elements");
 
-    // const s = sequence(array_random(), "s", lt);
-    const s = sequence(array_descending(), lt);
+    // const s = seq(array_random(), "s", lt);
+    const s = seq(array_descending(), lt);
 
     insertion_sort_classic(begin(s), end(s), lt);
     print(s);

@@ -46,7 +46,7 @@ function __sift1_usage() {
         print(out);
     }
 
-    const v = sequence(array_all_equal(20, '0'));
+    const v = seq(array_all_equal(20, '0'));
     sift1(begin(v), size(v));
     print_sieve(begin(v), size(v));
   }

@@ -38,13 +38,13 @@ function __insertion_sort_usage() {
 
     register_custom_stat("Misplaced elements");
 
-    // var s = sequence([1, 2, 3, 4, 5], "s", lt);
-    // var s = sequence([1, 2], "s", lt);
+    // var s = seq([1, 2, 3, 4, 5], "s", lt);
+    // var s = seq([1, 2], "s", lt);
 
-    // const s = sequence(array_random(), "s", lt);
-    // var s = sequence(array_all_equal(), "s", lt);
-    // var s = sequence(array_ascending(), "s", lt);
-    const s = sequence(array_descending(), lt);
+    // const s = seq(array_random(), "s", lt);
+    // var s = seq(array_all_equal(), "s", lt);
+    // var s = seq(array_ascending(), "s", lt);
+    const s = seq(array_descending(), lt);
 
     insertion_sort(begin(s), end(s), lt);
     print(s);

@@ -14,8 +14,8 @@ function __equal_r_usage() {
     const d1_raw = ['e', 'v', 'i', 't', 'a', 't', 'i', 'v', 'e'];
     const d2_raw = ['e', 'v', 'i', 't', 'x', 't', 'i', 'v', 'e'];
 
-    const d1 = sequence(d1_raw);
-    const d2 = sequence(d2_raw);
+    const d1 = seq(d1_raw);
+    const d2 = seq(d2_raw);
 
     const f = begin(d1);
     const l = end(d1);

@@ -17,8 +17,8 @@ function usage() {
         return [true, successor(f2)];
     }    
     
-    var word = sequence(['e', 'v', 'i', 't', 'a', 't', 'i', 'v', 'e'], "word");
-    // var word = sequence(['e', 'v', 'i', 'x', 'a', 't', 'i', 'v', 'e'], "word");
+    var word = seq(['e', 'v', 'i', 't', 'a', 't', 'i', 'v', 'e'], "word");
+    // var word = seq(['e', 'v', 'i', 'x', 'a', 't', 'i', 'v', 'e'], "word");
     
     var f = begin(word);
     var n = size(word);

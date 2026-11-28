@@ -21,7 +21,7 @@ function reduce_nonzeroes<I extends Iter<unknown>>(
 }
 
 function __reduce_nonzeroes_usage() {
-    const d = sequence([0, 2, 0, 4, 0, 8]);
+    const d = seq([0, 2, 0, 4, 0, 8]);
     const sum = reduce_nonzeroes(begin(d), end(d), add, 0);
     print("Sum after skipping zeroes: " + sum);
 }

@@ -43,7 +43,7 @@ function __rotate_forward_usage() {
         ref.m = m;
     }
 
-    const s = sequence(array_random(), "s", undefined, "sll");
+    const s = seq(array_random(), "s", undefined, "sll");
     rotate_forward(begin(s), successor(begin(s), 3), end(s));
     print(s);
 }

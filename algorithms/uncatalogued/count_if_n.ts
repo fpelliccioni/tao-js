@@ -7,7 +7,7 @@ function count_if_n<I extends Iter<unknown>>(f: I, n: number, p: Predicate<Value
 }
 
 function __count_if_n_usage() {
-    const d = sequence([2, 3, 4, 7, 8]);
+    const d = seq([2, 3, 4, 7, 8]);
     const count = count_if_n(begin(d), 4, even);
     print("Even elements among the first four: " + count);
 }

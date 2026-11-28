@@ -10,7 +10,7 @@ function find_not<I extends Iter<unknown>>(f: I, l: I, x: ValueOf<I>): I {
 }
 
 function __find_not_usage() {
-    const d = sequence([7, 7, 11, 7]);
+    const d = seq([7, 7, 11, 7]);
     const result = find_not(begin(d), end(d), 7);
 
     if (equal(result, end(d))) {

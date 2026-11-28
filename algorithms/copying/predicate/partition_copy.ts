@@ -6,9 +6,9 @@ function partition_copy<T, U>(f: Iter<T>, l: Iter<T>, u: Iter<U>, t: Iter<U>, p:
 }
 
 function __partition_copy_usage() {
-    const s = sequence(array_random(), even);
-    const evens = sequence(array_all_equal(size(s), "-"));
-    const odds = sequence(array_all_equal(size(s), "-"));
+    const s = seq(array_random(), even);
+    const evens = seq(array_all_equal(size(s), "-"));
+    const odds = seq(array_all_equal(size(s), "-"));
 
     partition_copy(begin(s), end(s), begin(odds), begin(evens), even);
 

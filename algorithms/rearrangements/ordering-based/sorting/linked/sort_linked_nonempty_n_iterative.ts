@@ -85,8 +85,8 @@ function sort_linked_nonempty_n_iterative<I extends {}, T>(
 }
 
 function __sort_linked_nonempty_n_iterative_usage() {
-    const values = sequence([4, 1, 3, 1, 2]);
-    const links = sequence([1, 2, 3, 4, -1]);
+    const values = seq([4, 1, 3, 1, 2]);
+    const links = seq([1, 2, 3, 4, -1]);
     const linker: ForwardLinker<number, number> = {
         next(i) {
             const next = source(successor(begin(links), i));

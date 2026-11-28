@@ -11,8 +11,8 @@ function lexicographical_equivalent<I extends Iter<unknown>, J extends Iter<Valu
 
 function __lexicographical_equivalent_usage() {
     const sameDigitSum = relation<number>((a, b) => digitSum(a) === digitSum(b));
-    const left = sequence([12, 23]);
-    const right = sequence([21, 32], "right", undefined, "stream");
+    const left = seq([12, 23]);
+    const right = seq([21, 32], "right", undefined, "stream");
     const equivalent = lexicographical_equivalent(
         begin(left), end(left), begin(right), end(right), sameDigitSum,
     );

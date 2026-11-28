@@ -9,7 +9,7 @@ function mark_sieve_n(f: Iter<number | string>, n: number, factor: number) {
 }
 
 function __mark_sieve_n_usage() {
-    const v = sequence(array_all_equal(20, '0'));
+    const v = seq(array_all_equal(20, '0'));
     mark_sieve_n(begin(v), size(v), 3);
     print_sieve(begin(v), size(v));
   }

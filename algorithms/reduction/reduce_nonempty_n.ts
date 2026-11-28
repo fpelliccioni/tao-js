@@ -17,7 +17,7 @@ function reduce_nonempty_n<I extends Iter<unknown>>(
 }
 
 function __reduce_nonempty_n_usage() {
-    const d = sequence([2, 3, 4, 7], "d", undefined, "stream");
+    const d = seq([2, 3, 4, 7], "d", undefined, "stream");
     const product = reduce_nonempty_n(begin(d), 3, multiply);
     print("Product of the first three elements: " + product);
 }

@@ -16,8 +16,8 @@ function find_mismatch_n_bounded<I extends Iter<unknown>, J extends Iter<ValueOf
 }
 
 function __find_mismatch_n_bounded_usage() {
-    const left = sequence([2, 4, 6, 8]);
-    const right = sequence([2, 4, 7]);
+    const left = seq([2, 4, 6, 8]);
+    const right = seq([2, 4, 7]);
     const [a, b, remainingLeft] = find_mismatch_n_bounded(begin(left), size(left), begin(right), end(right), eq);
 
     if (remainingLeft === 0 || equal(b, end(right))) {

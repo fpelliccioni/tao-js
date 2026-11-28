@@ -7,7 +7,7 @@ function not_all_n<I extends Iter<unknown>>(f: I, n: number, p: Predicate<ValueO
 }
 
 function __not_all_n_usage() {
-    const d = sequence([2, 3, 6, 8]);
+    const d = seq([2, 3, 6, 8]);
     const result = not_all_n(begin(d), 3, even);
     print("At least one of the first three elements is odd: " + result);
 }

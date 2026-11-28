@@ -25,7 +25,7 @@ function reduce_nonzeroes_n_projected<I extends Iter<unknown>, T>(
 }
 
 function __reduce_nonzeroes_n_projected_usage() {
-    const d = sequence([10, 12, 20, 21, 11]);
+    const d = seq([10, 12, 20, 21, 11]);
     const project = (it: Iter<number>) => source(it) % 10;
     const result = reduce_nonzeroes_n_projected(begin(d), 4, add, project, 0);
     print("Sum of last digits, skipping zeroes: " + result);

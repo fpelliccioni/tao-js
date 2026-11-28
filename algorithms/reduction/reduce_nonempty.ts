@@ -17,7 +17,7 @@ function reduce_nonempty<I extends Iter<unknown>>(
 }
 
 function __reduce_nonempty_usage() {
-    const d = sequence([2, 3, 4], "d", undefined, "stream");
+    const d = seq([2, 3, 4], "d", undefined, "stream");
     const product = reduce_nonempty(begin(d), end(d), multiply);
     print("Product: " + product);
 }

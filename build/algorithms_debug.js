@@ -1870,7 +1870,7 @@ function __debug_cycle_to_2n_1(i, f) {
     let k = f(i);
     if (equal(k, i))
         return;
-    const buf = sequence(array_all_equal(1, "-"), "buf");
+    const buf = seq(array_all_equal(1, "-"), "buf");
     let b = begin(buf);
     let b2 = i;
     sink(b, source(k));
@@ -1901,7 +1901,7 @@ function __debug_cycle_to_recursive(i, f) {
     const k = f(i);
     if (equal(k, i))
         return;
-    const buf = sequence(array_all_equal(1, "-"), "buf");
+    const buf = seq(array_all_equal(1, "-"), "buf");
     const b = begin(buf);
     cycle_to_internal(i, k, f, b);
     sink(k, source(i));
@@ -4180,11 +4180,11 @@ function palindrome_bidirectional(f, l, r) {
 }
 
 function __debug_palindrome_naive(seq_arr, r) {
-    const seq = sequence(seq_arr, "seq");
+    const haystack = seq(seq_arr, "seq");
     const seq_arr_rev = seq_arr.slice().reverse();
-    const seq_rev = sequence(seq_arr_rev, "seq_rev");
-    const f = begin(seq);
-    const l = end(seq);
+    const seq_rev = seq(seq_arr_rev, "seq_rev");
+    const f = begin(haystack);
+    const l = end(haystack);
     const f2 = begin(seq_rev);
     const res = equal_r(f, l, f2, r);
     return res;

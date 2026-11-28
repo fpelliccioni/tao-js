@@ -13,8 +13,8 @@ function iota(f: Iter<number>, l: Iter<number>, start?: number, step?: number) {
 }
 
 function __iota_usage() {
-    const d1 = sequence(array_all_equal(8, 0));
-    const d2 = sequence(array_all_equal(5, 0));
+    const d1 = seq(array_all_equal(8, 0));
+    const d2 = seq(array_all_equal(5, 0));
 
     let f = successor(begin(d1));
     let l = predecessor(end(d1));

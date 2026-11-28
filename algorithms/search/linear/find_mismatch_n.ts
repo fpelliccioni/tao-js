@@ -17,8 +17,8 @@ function find_mismatch_n<I extends Iter<unknown>, J extends Iter<ValueOf<I>>>(
 }
 
 function __find_mismatch_n_usage() {
-    const left = sequence([2, 4, 6, 8]);
-    const right = sequence([2, 4, 7]);
+    const left = seq([2, 4, 6, 8]);
+    const right = seq([2, 4, 7]);
     const [a, b, remainingLeft, remainingRight] = find_mismatch_n(begin(left), size(left), begin(right), size(right), eq);
 
     if (remainingLeft === 0 || remainingRight === 0) {
