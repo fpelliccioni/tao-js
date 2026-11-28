@@ -4228,6 +4228,105 @@ function swap_ranges_n(f0, f1, n) {
     return res;
 }
 
+function __debug_collision_point(x, f, defined) {
+    // Precondition: f is pure, the orbit has finitely many distinct states, and defined marks where f can be applied.
+    let slow = x;
+    let fast = x;
+    if (defined(fast)) {
+        fast = f(fast);
+        while (fast !== slow) {
+            slow = f(slow);
+            if (!defined(fast))
+                break;
+            fast = f(fast);
+            if (!defined(fast))
+                break;
+            fast = f(fast);
+        }
+    }
+    post(() => fast === orbit_reference(x, f, defined).collision, "The result must be the first collision or the terminal state.");
+    return fast;
+}
+
+function collision_point(x, f, defined) {
+    var _f_ = start_f('collision_point', x, f, defined);
+    var res = __debug_collision_point(x, f, defined);
+    end_f(_f_);
+    return res;
+}
+
+function __debug_collision_point_nonterminating_orbit(x, f) {
+    // Precondition: f is pure and defined along an eventually periodic orbit.
+    let slow = x;
+    let fast = f(x);
+    while (slow !== fast) {
+        slow = f(slow);
+        fast = f(f(fast));
+    }
+    post(() => fast === orbit_reference(x, f).collision, "The result must be the first collision.");
+    return fast;
+}
+
+function collision_point_nonterminating_orbit(x, f) {
+    var _f_ = start_f('collision_point_nonterminating_orbit', x, f);
+    var res = __debug_collision_point_nonterminating_orbit(x, f);
+    end_f(_f_);
+    return res;
+}
+
+function __debug_connection_point(x, f, defined) {
+    // Precondition: f is pure, the orbit has finitely many distinct states, and defined marks where f can be applied.
+    const collision = collision_point(x, f, defined);
+    const result = defined(collision) ? convergent_point(x, f(collision), f) : collision;
+    post(() => result === orbit_reference(x, f, defined).connection, "The result must be the first state in the cycle or the terminal state.");
+    return result;
+}
+
+function connection_point(x, f, defined) {
+    var _f_ = start_f('connection_point', x, f, defined);
+    var res = __debug_connection_point(x, f, defined);
+    end_f(_f_);
+    return res;
+}
+
+function __debug_connection_point_nonterminating_orbit(x, f) {
+    // Precondition: f is pure and defined along an eventually periodic orbit.
+    const collision = collision_point_nonterminating_orbit(x, f);
+    const result = convergent_point(x, f(collision), f);
+    post(() => result === orbit_reference(x, f).connection, "The result must be the first state in the cycle.");
+    return result;
+}
+
+function connection_point_nonterminating_orbit(x, f) {
+    var _f_ = start_f('connection_point_nonterminating_orbit', x, f);
+    var res = __debug_connection_point_nonterminating_orbit(x, f);
+    end_f(_f_);
+    return res;
+}
+
+function __debug_convergent_point(x, y, f) {
+    // Precondition: f is pure and defined along both orbits, each with finitely many distinct states.
+    let expected;
+    pre(() => {
+        const reference = convergence_reference(x, y, f);
+        expected = reference.point;
+        return reference.converges;
+    }, "The two states must meet after the same number of steps.");
+    while (x !== y) {
+        x = f(x);
+        y = f(y);
+    }
+    post(() => x === expected, "The result must be the first synchronous meeting point.");
+    return x;
+}
+
+function convergent_point(x, y, f) {
+    var _f_ = start_f('convergent_point', x, y, f);
+    var res = __debug_convergent_point(x, y, f);
+    end_f(_f_);
+    return res;
+}
+
 function __debug_for_each(f, l, proc) {
     while (!equal(f, l)) {
         proc(source(f));
@@ -4657,6 +4756,40 @@ function fibonacci_matches(n, result) {
         [a, b] = [b, a + b];
     }
     return Number.isSafeInteger(result) && BigInt(result) === a;
+}
+
+function orbit_reference(x, f, defined = () => true) {
+    const indices = new Map();
+    const states = [];
+    let current = x;
+    while (!indices.has(current) && defined(current)) {
+        indices.set(current, states.length);
+        states.push(current);
+        current = f(current);
+    }
+    const entryIndex = indices.get(current);
+    if (entryIndex === undefined) return { collision: current, connection: current };
+
+    const period = states.length - entryIndex;
+    // At a collision, the fast traversal is n + 1 steps ahead of the slow one.
+    const offset = (period - (entryIndex + 1) % period) % period;
+    return { collision: states[entryIndex + offset], connection: current };
+}
+
+function convergence_reference(x, y, f) {
+    const seen = new Map();
+    while (x !== y) {
+        let partners = seen.get(x);
+        if (!partners) {
+            partners = new Set();
+            seen.set(x, partners);
+        }
+        if (partners.has(y)) return { converges: false, point: x };
+        partners.add(y);
+        x = f(x);
+        y = f(y);
+    }
+    return { converges: true, point: x };
 }
 if ( ! Number.prototype.add) {
     Number.prototype.add = function (x) {

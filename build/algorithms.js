@@ -2758,6 +2758,70 @@ function swap_ranges_n(f0, f1, n) {
     return [f0, f1];
 }
 
+function collision_point(x, f, defined) {
+    // Precondition: f is pure, the orbit has finitely many distinct states, and defined marks where f can be applied.
+    let slow = x;
+    let fast = x;
+    if (defined(fast)) {
+        fast = f(fast);
+        while (fast !== slow) {
+            slow = f(slow);
+            if (!defined(fast))
+                break;
+            fast = f(fast);
+            if (!defined(fast))
+                break;
+            fast = f(fast);
+        }
+    }
+    post(() => fast === orbit_reference(x, f, defined).collision, "The result must be the first collision or the terminal state.");
+    return fast;
+}
+
+function collision_point_nonterminating_orbit(x, f) {
+    // Precondition: f is pure and defined along an eventually periodic orbit.
+    let slow = x;
+    let fast = f(x);
+    while (slow !== fast) {
+        slow = f(slow);
+        fast = f(f(fast));
+    }
+    post(() => fast === orbit_reference(x, f).collision, "The result must be the first collision.");
+    return fast;
+}
+
+function connection_point(x, f, defined) {
+    // Precondition: f is pure, the orbit has finitely many distinct states, and defined marks where f can be applied.
+    const collision = collision_point(x, f, defined);
+    const result = defined(collision) ? convergent_point(x, f(collision), f) : collision;
+    post(() => result === orbit_reference(x, f, defined).connection, "The result must be the first state in the cycle or the terminal state.");
+    return result;
+}
+
+function connection_point_nonterminating_orbit(x, f) {
+    // Precondition: f is pure and defined along an eventually periodic orbit.
+    const collision = collision_point_nonterminating_orbit(x, f);
+    const result = convergent_point(x, f(collision), f);
+    post(() => result === orbit_reference(x, f).connection, "The result must be the first state in the cycle.");
+    return result;
+}
+
+function convergent_point(x, y, f) {
+    // Precondition: f is pure and defined along both orbits, each with finitely many distinct states.
+    let expected;
+    pre(() => {
+        const reference = convergence_reference(x, y, f);
+        expected = reference.point;
+        return reference.converges;
+    }, "The two states must meet after the same number of steps.");
+    while (x !== y) {
+        x = f(x);
+        y = f(y);
+    }
+    post(() => x === expected, "The result must be the first synchronous meeting point.");
+    return x;
+}
+
 function for_each(f, l, proc) {
     while (!equal(f, l)) {
         proc(source(f));

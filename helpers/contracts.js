@@ -43,3 +43,37 @@ function fibonacci_matches(n, result) {
     }
     return Number.isSafeInteger(result) && BigInt(result) === a;
 }
+
+function orbit_reference(x, f, defined = () => true) {
+    const indices = new Map();
+    const states = [];
+    let current = x;
+    while (!indices.has(current) && defined(current)) {
+        indices.set(current, states.length);
+        states.push(current);
+        current = f(current);
+    }
+    const entryIndex = indices.get(current);
+    if (entryIndex === undefined) return { collision: current, connection: current };
+
+    const period = states.length - entryIndex;
+    // At a collision, the fast traversal is n + 1 steps ahead of the slow one.
+    const offset = (period - (entryIndex + 1) % period) % period;
+    return { collision: states[entryIndex + offset], connection: current };
+}
+
+function convergence_reference(x, y, f) {
+    const seen = new Map();
+    while (x !== y) {
+        let partners = seen.get(x);
+        if (!partners) {
+            partners = new Set();
+            seen.set(x, partners);
+        }
+        if (partners.has(y)) return { converges: false, point: x };
+        partners.add(y);
+        x = f(x);
+        y = f(y);
+    }
+    return { converges: true, point: x };
+}
