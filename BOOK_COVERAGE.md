@@ -2,15 +2,17 @@
 
 The references in the TypeScript files identify the published algorithm or the closest documented variant. Page numbers use the authors’ edition of *Elements of Programming* and the printed Addison-Wesley edition of *From Mathematics to Generic Programming*. A section or page range points to the surrounding discussion when an exact listing page is unavailable. Exercises and companion-only implementations are marked in the source comments.
 
-The catalog snapshot has **287 algorithms**, with a book reference in **240** source files. 182 cite *Elements of Programming* and 72 cite *From Mathematics to Generic Programming*. Some cite both.
+The catalog snapshot has **290 algorithms**, with a book reference in **243** source files. 185 cite *Elements of Programming* and 72 cite *From Mathematics to Generic Programming*. Some cite both.
 
 ## Elements of Programming
 
 The [official source index](https://elementsofprogramming.com/code.html#algorithms) points to [`eop.h`](https://elementsofprogramming.com/code/eop.h), including variants and exercises. [`eop.cpp`](https://elementsofprogramming.com/code/eop.cpp) drives tests and interactive examples. The [book PDF](https://elementsofprogramming.com/eop.pdf) supplies printed page numbers.
 
-Of the 186 identifiers in the official algorithm index, 119 have an exact name in the lab catalog. The index also includes runtime primitives and helper operations. The inventory below tracks names, so an unmatched name may have a related implementation.
+Of the 186 identifiers in the official algorithm index, 121 have an exact name in the lab catalog. The index also includes runtime primitives and helper operations. The inventory below tracks names, so an unmatched name may have a related implementation.
 
 **Documented variants under another name**
+
+- The ternary overload of `euclidean_norm` → `euclidean_norm_3`
 
 - `subtractive_gcd_nonzero` → `gcd0`
 - `exchange_values` → `exchange_values_2`
@@ -20,7 +22,7 @@ Of the 186 identifiers in the official algorithm index, 119 have an exact name i
 
 **Indexed names without a matching catalog entry or one of the aliases above**
 
-`abs`, `bifurcate_compare`, `bifurcate_compare_nonempty`, `bifurcate_equivalent`, `bifurcate_equivalent_nonempty`, `bifurcate_similar`, `bifurcate_similar_nonempty`, `combine_linked_nonempty`, `combine_ranges`, `empty`, `euclidean_norm`, `fibonacci`, `find_last`, `height`, `height_recursive`, `increment`, `is_left_successor`, `is_right_successor`, `less`, `lower_bound_predicate`, `merge_linked_nonempty`, `partition_linked`, `partition_stable_iterative`, `partition_stable_n`, `partition_stable_n_nonempty`, `partition_stable_singleton`, `partition_trivial`, `phased_applicator`, `power_accumulate`, `power_accumulate_positive`, `power_left_associated`, `power_right_associated`, `reachable`, `reachable_nonempty`, `reverse_append`, `reverse_with_temporary_buffer`, `rotate_nontrivial`, `sort_linked_nonempty_n`, `sort_n`, `split_linked`, `swap`, `swap_basic`, `transpose_operation`, `traverse`, `traverse_nonempty`, `traverse_phased_rotating`, `traverse_rotating`, `underlying_ref`, `upper_bound_predicate`, `weight`, `weight_recursive`, `weight_rotating`.
+`bifurcate_compare`, `bifurcate_compare_nonempty`, `bifurcate_equivalent`, `bifurcate_equivalent_nonempty`, `bifurcate_similar`, `bifurcate_similar_nonempty`, `combine_linked_nonempty`, `combine_ranges`, `empty`, `fibonacci`, `find_last`, `height`, `height_recursive`, `increment`, `is_left_successor`, `is_right_successor`, `less`, `lower_bound_predicate`, `merge_linked_nonempty`, `partition_linked`, `partition_stable_iterative`, `partition_stable_n`, `partition_stable_n_nonempty`, `partition_stable_singleton`, `partition_trivial`, `phased_applicator`, `power_accumulate`, `power_accumulate_positive`, `power_left_associated`, `power_right_associated`, `reachable`, `reachable_nonempty`, `reverse_append`, `reverse_with_temporary_buffer`, `rotate_nontrivial`, `sort_linked_nonempty_n`, `sort_n`, `split_linked`, `swap`, `swap_basic`, `transpose_operation`, `traverse`, `traverse_nonempty`, `traverse_phased_rotating`, `traverse_rotating`, `underlying_ref`, `upper_bound_predicate`, `weight`, `weight_recursive`, `weight_rotating`.
 
 **Indexed names available as lab primitives or helpers**
 

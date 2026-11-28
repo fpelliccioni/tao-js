@@ -770,6 +770,20 @@ function subtractive_gcd(a, b, monoid) {
     return res;
 }
 
+function __debug_abs(x) {
+    pre(() => Number.isSafeInteger(x), "The argument must be a safe integer.");
+    const result = x < 0 ? -x : x;
+    post(() => result >= 0 && (result === x || result === -x), "The result must be the nonnegative magnitude.");
+    return result;
+}
+
+function abs(x) {
+    var _f_ = start_f('abs', x);
+    var res = __debug_abs(x);
+    end_f(_f_);
+    return res;
+}
+
 function __debug_divides(i, n) {
     return n % i == 0;
 }
@@ -777,6 +791,44 @@ function __debug_divides(i, n) {
 function divides(i, n) {
     var _f_ = start_f('divides', i, n);
     var res = __debug_divides(i, n);
+    end_f(_f_);
+    return res;
+}
+
+function __debug_euclidean_norm(x, y) {
+    pre(() => [x, y].every(Number.isFinite), "All coordinates must be finite.");
+    const squaredLength = x * x + y * y;
+    const result = Math.sqrt(squaredLength);
+    post(() => {
+        const squared = result * result;
+        return result >= 0 && (squared === squaredLength
+            || Math.abs((squared - squaredLength) / squaredLength) <= 2 * Number.EPSILON);
+    }, "The result must be the nonnegative square root of the sum of squares.");
+    return result;
+}
+
+function euclidean_norm(x, y) {
+    var _f_ = start_f('euclidean_norm', x, y);
+    var res = __debug_euclidean_norm(x, y);
+    end_f(_f_);
+    return res;
+}
+
+function __debug_euclidean_norm_3(x, y, z) {
+    pre(() => [x, y, z].every(Number.isFinite), "All coordinates must be finite.");
+    const squaredLength = x * x + y * y + z * z;
+    const result = Math.sqrt(squaredLength);
+    post(() => {
+        const squared = result * result;
+        return result >= 0 && (squared === squaredLength
+            || Math.abs((squared - squaredLength) / squaredLength) <= 2 * Number.EPSILON);
+    }, "The result must be the nonnegative square root of the sum of squares.");
+    return result;
+}
+
+function euclidean_norm_3(x, y, z) {
+    var _f_ = start_f('euclidean_norm_3', x, y, z);
+    var res = __debug_euclidean_norm_3(x, y, z);
     end_f(_f_);
     return res;
 }
