@@ -2758,6 +2758,25 @@ function swap_ranges_n(f0, f1, n) {
     return [f0, f1];
 }
 
+function circular(x, f, defined) {
+    // Precondition: f is pure and each orbit has finitely many distinct states.
+    const point = collision_point(x, f, defined);
+    const result = defined(point) && f(point) === x;
+    post(() => {
+        const orbit = orbit_reference(x, f, defined);
+        return result === (orbit.cycleLength > 0 && orbit.connection === x);
+    }, "The orbit is circular exactly when its cycle begins at the starting state.");
+    return result;
+}
+
+function circular_nonterminating_orbit(x, f) {
+    // Precondition: f is pure and each orbit has finitely many distinct states.
+    const point = collision_point_nonterminating_orbit(x, f);
+    const result = f(point) === x;
+    post(() => result === (orbit_reference(x, f).connection === x), "The orbit is circular exactly when its cycle begins at the starting state.");
+    return result;
+}
+
 function collision_point(x, f, defined) {
     // Precondition: f is pure, the orbit has finitely many distinct states, and defined marks where f can be applied.
     let slow = x;
@@ -2820,6 +2839,108 @@ function convergent_point(x, y, f) {
     }
     post(() => x === expected, "The result must be the first synchronous meeting point.");
     return x;
+}
+
+function convergent_point_guarded(x, y, shared, f, defined = () => true) {
+    // Precondition: f is pure and each orbit has finitely many distinct states.
+    pre(() => orbit_reference(x, f, defined).states.includes(shared)
+        && orbit_reference(y, f, defined).states.includes(shared), "The shared state must be reachable from both starting states.");
+    const dx = orbit_distance(x, shared, f);
+    const dy = orbit_distance(y, shared, f);
+    const first = dx > dy ? power_unary(x, dx - dy, f, defined) : x;
+    const second = dy > dx ? power_unary(y, dy - dx, f, defined) : y;
+    return convergent_point(first, second, f);
+}
+
+function orbit_reachable(x, y, f, defined) {
+    // Precondition: f is pure and each orbit has finitely many distinct states.
+    const point = connection_point(x, f, defined);
+    let current = x;
+    while (current !== y && current !== point)
+        current = f(current);
+    if (current !== y && defined(point)) {
+        current = f(point);
+        while (current !== y && current !== point)
+            current = f(current);
+    }
+    const result = current === y;
+    post(() => result === orbit_reference(x, f, defined).states.includes(y), "The result must agree with membership in the orbit.");
+    return result;
+}
+
+function orbit_reachable_nonempty(x, y, f, defined) {
+    // Precondition: f is pure and each orbit has finitely many distinct states.
+    const result = defined(x) && orbit_reachable(f(x), y, f, defined);
+    post(() => {
+        const orbit = orbit_reference(x, f, defined);
+        return result === (orbit.states.slice(1).includes(y) || (orbit.cycleLength > 0 && orbit.connection === y));
+    }, "The result must agree with membership after at least one step.");
+    return result;
+}
+
+function orbit_structure(x, f, defined) {
+    // Precondition: f is pure and each orbit has finitely many distinct states.
+    const point = connection_point(x, f, defined);
+    const distance = orbit_distance(x, point, f);
+    const cycleSteps = defined(point) ? orbit_distance(f(point), point, f) : 0;
+    post(() => {
+        const orbit = orbit_reference(x, f, defined);
+        return point === orbit.connection && distance === orbit.states.indexOf(point)
+            && cycleSteps === Math.max(0, orbit.cycleLength - 1);
+    }, "The result must give the connection and the orbit distances.");
+    return [distance, cycleSteps, point];
+}
+
+function orbit_structure_nonterminating_orbit(x, f) {
+    // Precondition: f is pure and defined along an eventually periodic orbit.
+    const point = connection_point_nonterminating_orbit(x, f);
+    const distance = orbit_distance(x, point, f);
+    const cycleSteps = orbit_distance(f(point), point, f);
+    post(() => {
+        const orbit = orbit_reference(x, f);
+        return point === orbit.connection && distance === orbit.states.indexOf(point)
+            && cycleSteps === orbit.cycleLength - 1;
+    }, "The result must give the cycle entry and the orbit distances.");
+    return [distance, cycleSteps, point];
+}
+
+function orbits_intersect(x, y, f, defined) {
+    // Precondition: f is pure and each orbit has finitely many distinct states.
+    const first = connection_point(x, f, defined);
+    const second = connection_point(y, f, defined);
+    const result = first === second || (defined(first) && defined(second) && orbit_reachable(first, second, f, defined));
+    post(() => {
+        const states = new Set(orbit_reference(x, f, defined).states);
+        return result === orbit_reference(y, f, defined).states.some(state => states.has(state));
+    }, "The result must agree with whether the two orbits share a state.");
+    return result;
+}
+
+function power_unary(x, n, f, defined = () => true) {
+    // Precondition: f and defined are pure, and defined identifies the domain of f.
+    pre(() => Number.isSafeInteger(n) && n >= 0, "The step count must be a nonnegative safe integer.");
+    let expected = x;
+    pre(() => {
+        for (let i = 0; i < n; ++i) {
+            if (!defined(expected))
+                return false;
+            expected = f(expected);
+        }
+        return true;
+    }, "The transformation must be defined at every step.");
+    let result = x;
+    for (let i = 0; i < n; ++i)
+        result = f(result);
+    post(() => result === expected, "The result must be the state after n applications.");
+    return result;
+}
+
+function terminating(x, f, defined) {
+    // Precondition: f is pure and each orbit has finitely many distinct states.
+    const point = collision_point(x, f, defined);
+    const result = !defined(point);
+    post(() => result === (orbit_reference(x, f, defined).cycleLength === 0), "The orbit terminates exactly when it has no cycle.");
+    return result;
 }
 
 function for_each(f, l, proc) {

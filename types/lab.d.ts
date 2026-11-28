@@ -153,5 +153,7 @@ type Semiring<T> = {
 declare function fibonacci_matches(n: number, result: number): boolean;
 
 type Transformation<T> = (value: T) => T;
-declare function orbit_reference<T>(x: T, f: Transformation<T>, defined?: Predicate<T>): { collision: T; connection: T };
+declare function orbit_reference<T>(x: T, f: Transformation<T>, defined?: Predicate<T>): { collision: T; connection: T; states: T[]; cycleLength: number };
 declare function convergence_reference<T>(x: T, y: T, f: Transformation<T>): { converges: boolean; point: T };
+type OrbitStructure<T> = [distanceToConnection: number, cycleLengthMinusOne: number, connection: T];
+declare function orbit_distance<T>(x: T, y: T, f: Transformation<T>): number;

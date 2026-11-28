@@ -54,12 +54,12 @@ function orbit_reference(x, f, defined = () => true) {
         current = f(current);
     }
     const entryIndex = indices.get(current);
-    if (entryIndex === undefined) return { collision: current, connection: current };
+    if (entryIndex === undefined) return { collision: current, connection: current, states: [...states, current], cycleLength: 0 };
 
     const period = states.length - entryIndex;
     // At a collision, the fast traversal is n + 1 steps ahead of the slow one.
     const offset = (period - (entryIndex + 1) % period) % period;
-    return { collision: states[entryIndex + offset], connection: current };
+    return { collision: states[entryIndex + offset], connection: current, states, cycleLength: period };
 }
 
 function convergence_reference(x, y, f) {
