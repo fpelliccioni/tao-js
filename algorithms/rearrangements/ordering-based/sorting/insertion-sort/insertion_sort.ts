@@ -44,7 +44,7 @@ function __insertion_sort_usage() {
     // const s = sequence(array_random(), "s", lt);
     // var s = sequence(array_all_equal(), "s", lt);
     // var s = sequence(array_ascending(), "s", lt);
-    const s = sequence(array_descending(), "s", lt);
+    const s = sequence(array_descending(), lt);
 
     insertion_sort(begin(s), end(s), lt);
     print(s);

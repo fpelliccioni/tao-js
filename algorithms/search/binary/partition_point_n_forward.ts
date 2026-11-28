@@ -22,7 +22,7 @@ function __partition_point_n_forward_usage() {
     const gt3 = predicate(x => x > 3);
     const gte3 = predicate(x => x >= 3);
 
-    const d = sequence([1, 1, 1, 1, 3, 3, 3, 3, 3, 7, 8, 9], "d", eq3);
+    const d = sequence([1, 1, 1, 1, 3, 3, 3, 3, 3, 7, 8, 9], eq3);
 
     const lb = partition_point_n_forward(begin(d), size(d), gte3);
     const ub = partition_point_n_forward(lb[0], lb[1], gt3);

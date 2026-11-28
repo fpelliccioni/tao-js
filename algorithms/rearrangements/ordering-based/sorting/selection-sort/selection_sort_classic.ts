@@ -8,7 +8,7 @@ function selection_sort_classic<T>(f: Iter<T>, l: Iter<T>, r: Relation<T>) {
 }
 
 function __selection_sort_classic_usage() {
-    const s = sequence(array_random(), "s", lt);
+    const s = sequence(array_random(), lt);
 
     selection_sort_classic(begin(s), end(s), lt);
     print(s);
