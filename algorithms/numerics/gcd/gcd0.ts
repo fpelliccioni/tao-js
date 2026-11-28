@@ -1,4 +1,5 @@
 // Reference: Elements of Programming, ch. 5, p. 74 (subtractive_gcd_nonzero with the same positive-input precondition).
+// Reference: From Mathematics to Generic Programming, ch. 4, §4.2, pp. 45–49 (gcm0 in ch04.h).
 
 // Euclid's algorithm
 

@@ -329,6 +329,37 @@ function extended_gcd(a, b) {
     return [x, g];
 }
 
+function fast_segment_gcm(a, b) {
+    pre(() => Number.isSafeInteger(a) && Number.isSafeInteger(b) && a > 0 && b > 0, "Both segment lengths must be positive safe integers.");
+    const first = a;
+    const second = b;
+    while (a !== b) {
+        const remainder = remainder_fast0(a, b);
+        a = b;
+        b = remainder;
+    }
+    post(() => gcd_matches(first, second, a, integer_monoid), "The result must be the greatest common measure.");
+    return a;
+}
+
+function fast_subtractive_gcd(a, b, monoid) {
+    // Precondition: monoid is Archimedean, with pure operations.
+    pre(() => monoid.contains(a) && monoid.contains(b)
+        && !monoid.less(a, monoid.zero) && !monoid.less(b, monoid.zero)
+        && (!monoid_equal(a, monoid.zero, monoid) || !monoid_equal(b, monoid.zero, monoid)), "The operands must be nonnegative and at least one must be positive.");
+    const first = a;
+    const second = b;
+    while (!monoid_equal(b, monoid.zero, monoid)) {
+        a = remainder_nonnegative(a, b, monoid);
+        if (monoid_equal(a, monoid.zero, monoid))
+            break;
+        b = remainder_nonnegative(b, a, monoid);
+    }
+    const result = monoid_equal(a, monoid.zero, monoid) ? b : a;
+    post(() => gcd_matches(first, second, result, monoid), "The result must be the greatest common divisor.");
+    return result;
+}
+
 function gcd(a, b) {
     while (b != 0) {
         const r = remainder(a, b);
@@ -381,6 +412,22 @@ function gcd3(a, b) {
     return a;
 }
 
+function gcm_recursive(a, b, monoid) {
+    // Precondition: monoid is Archimedean, with pure operations.
+    pre(() => monoid.contains(a) && monoid.contains(b)
+        && monoid.less(monoid.zero, a) && monoid.less(monoid.zero, b), "Both segment lengths must be positive.");
+    function measure(x, y) {
+        if (monoid.less(y, x))
+            return measure(monoid.subtract(x, y), y);
+        if (monoid.less(x, y))
+            return measure(x, monoid.subtract(y, x));
+        return x;
+    }
+    const result = measure(a, b);
+    post(() => gcd_matches(a, b, result, monoid), "The result must be the greatest common measure.");
+    return result;
+}
+
 function stein_gcd(a, b) {
     return stein_gcd_nonnegative(Math.abs(a), Math.abs(b));
 }
@@ -407,6 +454,26 @@ function stein_gcd_nonnegative(a, b) {
         b -= a;
     }
     return scale * a;
+}
+
+function subtractive_gcd(a, b, monoid) {
+    // Precondition: monoid is Archimedean, with pure operations.
+    pre(() => monoid.contains(a) && monoid.contains(b)
+        && !monoid.less(a, monoid.zero) && !monoid.less(b, monoid.zero)
+        && (!monoid_equal(a, monoid.zero, monoid) || !monoid_equal(b, monoid.zero, monoid)), "The operands must be nonnegative and at least one must be positive.");
+    const first = a;
+    const second = b;
+    while (!monoid_equal(b, monoid.zero, monoid)) {
+        while (!monoid.less(a, b))
+            a = monoid.subtract(a, b);
+        if (monoid_equal(a, monoid.zero, monoid))
+            break;
+        while (!monoid.less(b, a))
+            b = monoid.subtract(b, a);
+    }
+    const result = monoid_equal(a, monoid.zero, monoid) ? b : a;
+    post(() => gcd_matches(first, second, result, monoid), "The result must be the greatest common divisor.");
+    return result;
 }
 
 function divides(i, n) {
@@ -874,6 +941,49 @@ function quotient_remainder(a, b) {
     return [n, a];
 }
 
+function quotient_remainder_nonnegative(a, b, monoid) {
+    // Precondition: monoid models the indicated concept, with pure operations.
+    pre(() => monoid.contains(a) && monoid.contains(b)
+        && !monoid.less(a, monoid.zero) && monoid.less(monoid.zero, b), "The dividend must be nonnegative and the divisor must be positive.");
+    function divide(divisor) {
+        if (monoid.less(a, divisor))
+            return [0, a];
+        const difference = monoid.subtract(a, divisor);
+        if (monoid.less(difference, divisor))
+            return [1, difference];
+        const [q, r] = divide(monoid.add(divisor, divisor));
+        if (monoid.less(r, divisor))
+            return [2 * q, r];
+        return [2 * q + 1, monoid.subtract(r, divisor)];
+    }
+    const result = divide(b);
+    post(() => division_matches(a, b, result[0], result[1], monoid), "The quotient and remainder must reconstruct the dividend.");
+    return result;
+}
+
+function quotient_remainder_nonnegative_iterative(a, b, monoid) {
+    // Precondition: monoid models the indicated concept, with pure operations.
+    pre(() => monoid.contains(a) && monoid.contains(b)
+        && !monoid.less(a, monoid.zero) && monoid.less(monoid.zero, b), "The dividend must be nonnegative and the divisor must be positive.");
+    let result = [0, a];
+    if (!monoid.less(a, b)) {
+        let chunk = monoid_largest_doubling(a, b, monoid);
+        let remainder = monoid.subtract(a, chunk);
+        let quotient = 1;
+        while (!monoid_equal(chunk, b, monoid)) {
+            chunk = monoid.half(chunk);
+            quotient *= 2;
+            if (!monoid.less(remainder, chunk)) {
+                remainder = monoid.subtract(remainder, chunk);
+                ++quotient;
+            }
+        }
+        result = [quotient, remainder];
+    }
+    post(() => division_matches(a, b, result[0], result[1], monoid), "The quotient and remainder must reconstruct the dividend.");
+    return result;
+}
+
 function remainder(a, b) {
     // precondition: b != 0
     if (a < b)
@@ -931,10 +1041,84 @@ function remainder_fibonacci(a, b) {
     return a;
 }
 
+function remainder_nonnegative(a, b, monoid) {
+    // Precondition: monoid models the indicated concept, with pure operations.
+    pre(() => monoid.contains(a) && monoid.contains(b)
+        && !monoid.less(a, monoid.zero) && monoid.less(monoid.zero, b), "The dividend must be nonnegative and the divisor must be positive.");
+    function remaining(divisor) {
+        if (monoid.less(a, divisor))
+            return a;
+        const difference = monoid.subtract(a, divisor);
+        if (monoid.less(difference, divisor))
+            return difference;
+        const result = remaining(monoid.add(divisor, divisor));
+        return monoid.less(result, divisor) ? result : monoid.subtract(result, divisor);
+    }
+    const result = remaining(b);
+    post(() => {
+        const [, expected] = quotient_remainder_nonnegative(a, b, monoid);
+        return monoid_equal(result, expected, monoid);
+    }, "The result must be the nonnegative remainder.");
+    return result;
+}
+
+function remainder_nonnegative_iterative(a, b, monoid) {
+    // Precondition: monoid models the indicated concept, with pure operations.
+    pre(() => monoid.contains(a) && monoid.contains(b)
+        && !monoid.less(a, monoid.zero) && monoid.less(monoid.zero, b), "The dividend must be nonnegative and the divisor must be positive.");
+    let result = a;
+    if (!monoid.less(a, b)) {
+        let chunk = monoid_largest_doubling(a, b, monoid);
+        result = monoid.subtract(result, chunk);
+        while (!monoid_equal(chunk, b, monoid)) {
+            chunk = monoid.half(chunk);
+            if (!monoid.less(result, chunk))
+                result = monoid.subtract(result, chunk);
+        }
+    }
+    post(() => {
+        const [, expected] = quotient_remainder_nonnegative(a, b, monoid);
+        return monoid_equal(result, expected, monoid);
+    }, "The result must be the nonnegative remainder.");
+    return result;
+}
+
 function remainder_slow(a, b) {
     while (b < a)
         a -= b;
     return a;
+}
+
+function slow_quotient(a, b, monoid) {
+    // Precondition: monoid models the indicated concept, with pure operations.
+    pre(() => monoid.contains(a) && monoid.contains(b)
+        && !monoid.less(a, monoid.zero) && monoid.less(monoid.zero, b), "The dividend must be nonnegative and the divisor must be positive.");
+    let remainder = a;
+    let result = 0;
+    while (!monoid.less(remainder, b)) {
+        remainder = monoid.subtract(remainder, b);
+        ++result;
+    }
+    post(() => division_matches(a, b, result, remainder, monoid), "The quotient and remainder must reconstruct the dividend.");
+    return result;
+}
+
+function slow_remainder(a, b, monoid) {
+    // Precondition: monoid models the indicated concept, with pure operations.
+    pre(() => monoid.contains(a) && monoid.contains(b)
+        && !monoid.less(a, monoid.zero) && monoid.less(monoid.zero, b), "The dividend must be nonnegative and the divisor must be positive.");
+    let result = a;
+    while (!monoid.less(result, b))
+        result = monoid.subtract(result, b);
+    post(() => {
+        if (monoid.less(result, monoid.zero) || !monoid.less(result, b))
+            return false;
+        let difference = a;
+        while (monoid.less(result, difference))
+            difference = monoid.subtract(difference, b);
+        return monoid_equal(difference, result, monoid);
+    }, "The remainder must be reachable by subtraction and lie below the divisor.");
+    return result;
 }
 
 function mark_sieve(f, l, factor) {
