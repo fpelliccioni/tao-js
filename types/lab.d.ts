@@ -157,3 +157,8 @@ declare function orbit_reference<T>(x: T, f: Transformation<T>, defined?: Predic
 declare function convergence_reference<T>(x: T, y: T, f: Transformation<T>): { converges: boolean; point: T };
 type OrbitStructure<T> = [distanceToConnection: number, cycleLengthMinusOne: number, connection: T];
 declare function orbit_distance<T>(x: T, y: T, f: Transformation<T>): number;
+
+type SelectionEntry<T> = readonly [value: T, originalIndex: number];
+declare function selection_before<T>(x: SelectionEntry<T>, y: SelectionEntry<T>, r: Relation<T>): boolean;
+declare function selection_rank<T>(entries: readonly SelectionEntry<T>[], rank: number, r: Relation<T>): SelectionEntry<T>;
+declare function valid_selection_indices<T>(entries: readonly SelectionEntry<T>[]): boolean;

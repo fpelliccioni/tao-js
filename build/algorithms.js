@@ -2652,6 +2652,13 @@ function some_n(f, n, p) {
     return !none_n(f, n, p);
 }
 
+function compare_strict_or_reflexive(a, b, strict, r) {
+    // Precondition: r is a pure strict weak ordering.
+    const result = strict ? r(a, b) : !r(b, a);
+    post(() => result === (r(a, b) || (!strict && !r(b, a))), "Only the reflexive comparison may accept equivalent values.");
+    return result;
+}
+
 function max_element(f, l, r) {
     if (equal(f, l))
         return l;
@@ -2664,6 +2671,43 @@ function max_element(f, l, r) {
         f = successor(f);
     }
     return m;
+}
+
+function median_5(a, b, c, d, e, r) {
+    // Precondition: r is a pure strict weak ordering.
+    const entries = [[a, 0], [b, 1], [c, 2], [d, 3], [e, 4]];
+    const result = select_2_5(a, b, c, d, e, r);
+    post(() => Object.is(result, selection_rank(entries, 2, r)[0]), "The result must have the requested stable rank.");
+    return result;
+}
+
+function median_5_adaptive(a, b, c, d, e, r) {
+    // Precondition: r is a pure strict weak ordering.
+    const entries = [[a, 0], [b, 1], [c, 2], [d, 3], [e, 4]];
+    let [first, middle, last] = entries;
+    const fourth = entries[3];
+    const fifth = entries[4];
+    if (selection_before(middle, first, r))
+        [first, middle] = [middle, first];
+    if (selection_before(last, middle, r)) {
+        [middle, last] = [last, middle];
+        if (selection_before(middle, first, r))
+            [first, middle] = [middle, first];
+    }
+    const fourthBefore = selection_before(fourth, middle, r);
+    const fifthBefore = selection_before(fifth, middle, r);
+    let candidate = middle;
+    if (fourthBefore && fifthBefore) {
+        const later = selection_before(fourth, fifth, r) ? fifth : fourth;
+        candidate = selection_before(first, later, r) ? later : first;
+    }
+    else if (!fourthBefore && !fifthBefore) {
+        const earlier = selection_before(fourth, fifth, r) ? fourth : fifth;
+        candidate = selection_before(last, earlier, r) ? last : earlier;
+    }
+    const [result] = candidate;
+    post(() => Object.is(result, selection_rank(entries, 2, r)[0]), "The result must have the requested stable rank.");
+    return result;
 }
 
 function min_element(f, l, r) {
@@ -2705,6 +2749,22 @@ function min_value(f, l, r) {
     return m;
 }
 
+function select_0_2(a, b, r) {
+    // Precondition: r is a pure strict weak ordering.
+    const entries = [[a, 0], [b, 1]];
+    const result = r(b, a) ? b : a;
+    post(() => Object.is(result, selection_rank(entries, 0, r)[0]), "The result must have the requested stable rank.");
+    return result;
+}
+
+function select_0_3(a, b, c, r) {
+    // Precondition: r is a pure strict weak ordering.
+    const entries = [[a, 0], [b, 1], [c, 2]];
+    const result = select_0_2(select_0_2(a, b, r), c, r);
+    post(() => Object.is(result, selection_rank(entries, 0, r)[0]), "The result must have the requested stable rank.");
+    return result;
+}
+
 function select_1_2(a, b, r) {
     return r(b, a) ? a : b;
 }
@@ -2720,6 +2780,91 @@ function select_1_3_ab(a, b, c, r) {
     return !r(c, b) ?
         b : // a, b, c are sorted
         select_1_2(a, c, r); // b is not the median
+}
+
+function select_1_4(a, b, c, d, r) {
+    // Precondition: r is a pure strict weak ordering.
+    const entries = [[a, 0], [b, 1], [c, 2], [d, 3]];
+    const [first, second] = selection_before(entries[1], entries[0], r)
+        ? [entries[1], entries[0]] : [entries[0], entries[1]];
+    const [value] = select_1_4_ab(first, second, entries[2], entries[3], r);
+    const result = value;
+    post(() => Object.is(result, selection_rank(entries, 1, r)[0]), "The result must have the requested stable rank.");
+    return result;
+}
+
+function select_1_4_ab(a, b, c, d, r) {
+    // Precondition: r is a pure strict weak ordering.
+    const entries = [a, b, c, d];
+    pre(() => valid_selection_indices(entries), "Original indices must be distinct nonnegative integers.");
+    pre(() => !selection_before(b, a, r), "The first pair must already be in stable order.");
+    const [first, second] = selection_before(d, c, r) ? [d, c] : [c, d];
+    const result = select_1_4_ab_cd(a, b, first, second, r);
+    post(() => Object.is(result, selection_rank(entries, 1, r)), "The result must have the requested stable rank.");
+    return result;
+}
+
+function select_1_4_ab_cd(a, b, c, d, r) {
+    // Precondition: r is a pure strict weak ordering.
+    const entries = [a, b, c, d];
+    pre(() => valid_selection_indices(entries), "Original indices must be distinct nonnegative integers.");
+    pre(() => !selection_before(b, a, r) && !selection_before(d, c, r), "Each pair must already be in stable order.");
+    const [x, y] = selection_before(c, a, r) ? [a, d] : [b, c];
+    const result = selection_before(y, x, r) ? y : x;
+    post(() => Object.is(result, selection_rank(entries, 1, r)), "The result must have the requested stable rank.");
+    return result;
+}
+
+function select_2_3(a, b, c, r) {
+    // Precondition: r is a pure strict weak ordering.
+    const entries = [[a, 0], [b, 1], [c, 2]];
+    const result = select_1_2(select_1_2(a, b, r), c, r);
+    post(() => Object.is(result, selection_rank(entries, 2, r)[0]), "The result must have the requested stable rank.");
+    return result;
+}
+
+function select_2_4(a, b, c, d, r) {
+    // Precondition: r is a pure strict weak ordering.
+    const entries = [[a, 0], [b, 1], [c, 2], [d, 3]];
+    const [p, q] = r(b, a) ? [entries[1], entries[0]] : [entries[0], entries[1]];
+    const [s, t] = r(d, c) ? [entries[3], entries[2]] : [entries[2], entries[3]];
+    const [x, y] = selection_before(t, q, r) ? [p, t] : [q, s];
+    const [result] = selection_before(x, y, r) ? y : x;
+    post(() => Object.is(result, selection_rank(entries, 2, r)[0]), "The result must have the requested stable rank.");
+    return result;
+}
+
+function select_2_5(a, b, c, d, e, r) {
+    // Precondition: r is a pure strict weak ordering.
+    const entries = [[a, 0], [b, 1], [c, 2], [d, 3], [e, 4]];
+    const [first, second] = selection_before(entries[1], entries[0], r)
+        ? [entries[1], entries[0]] : [entries[0], entries[1]];
+    const [result] = select_2_5_ab(first, second, entries[2], entries[3], entries[4], r);
+    post(() => Object.is(result, selection_rank(entries, 2, r)[0]), "The result must have the requested stable rank.");
+    return result;
+}
+
+function select_2_5_ab(a, b, c, d, e, r) {
+    // Precondition: r is a pure strict weak ordering.
+    const entries = [a, b, c, d, e];
+    pre(() => valid_selection_indices(entries), "Original indices must be distinct nonnegative integers.");
+    pre(() => !selection_before(b, a, r), "The first pair must already be in stable order.");
+    const [first, second] = selection_before(d, c, r) ? [d, c] : [c, d];
+    const result = select_2_5_ab_cd(a, b, first, second, e, r);
+    post(() => Object.is(result, selection_rank(entries, 2, r)), "The result must have the requested stable rank.");
+    return result;
+}
+
+function select_2_5_ab_cd(a, b, c, d, e, r) {
+    // Precondition: r is a pure strict weak ordering.
+    const entries = [a, b, c, d, e];
+    pre(() => valid_selection_indices(entries), "Original indices must be distinct nonnegative integers.");
+    pre(() => !selection_before(b, a, r) && !selection_before(d, c, r), "Each pair must already be in stable order.");
+    const result = selection_before(c, a, r)
+        ? select_1_4_ab(a, b, d, e, r)
+        : select_1_4_ab(c, d, b, e, r);
+    post(() => Object.is(result, selection_rank(entries, 2, r)), "The result must have the requested stable rank.");
+    return result;
 }
 
 function exchange_values_2(x, y) {
