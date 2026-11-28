@@ -34,12 +34,13 @@ function partition_buffered_block(f, l, buffer, p) {
 }
 
 function combine_partition_blocks(left, right) {
-    // Rotate the left true group past the right false group.
-    let f = left.point;
-    let m = left.last;
-    const l = right.point;
-    if (equal(f, m)) return { point: l, last: right.last };
-    if (equal(m, l)) return { point: f, last: right.last };
+    const point = rotate_forward_range(left.point, left.last, right.point);
+    return { point, last: right.last };
+}
+
+function rotate_forward_range(f, m, l) {
+    if (equal(f, m)) return l;
+    if (equal(m, l)) return f;
 
     let i = m;
     do {
@@ -58,5 +59,27 @@ function combine_partition_blocks(left, right) {
         if (equal(f, m)) m = i;
         else if (equal(i, l)) i = m;
     }
-    return { point, last: right.last };
+    return point;
+}
+
+function is_sorted_range(f, l, r) {
+    if (equal(f, l)) return true;
+    let previous = source(f);
+    f = successor(f);
+    while (!equal(f, l)) {
+        const current = source(f);
+        if (r(current, previous)) return false;
+        previous = current;
+        f = successor(f);
+    }
+    return true;
+}
+
+function stable_sort_snapshot(f, l, r) {
+    const values = [];
+    while (!equal(f, l)) {
+        values.push(source(f));
+        f = successor(f);
+    }
+    return values.sort((a, b) => r(a, b) ? -1 : r(b, a) ? 1 : 0);
 }

@@ -139,3 +139,6 @@ declare function stable_partition_snapshot<I extends Iter<unknown>>(f: I, l: I, 
 declare function range_matches_snapshot<I extends Iter<unknown>>(f: I, l: I, expected: readonly ValueOf<I>[]): boolean;
 declare function partition_buffered_block<I extends MutableForwardIterator>(f: I, l: I, buffer: MutableForwardIterator<ValueOf<I>>, p: Predicate<ValueOf<I>>): I;
 declare function combine_partition_blocks<I extends MutableForwardIterator>(left: PartitionBlock<I>, right: PartitionBlock<I>): PartitionBlock<I>;
+declare function rotate_forward_range<I extends MutableForwardIterator>(f: I, m: I, l: I): I;
+declare function is_sorted_range<I extends ForwardIterator>(f: I, l: I, r: Relation<ValueOf<I>>): boolean;
+declare function stable_sort_snapshot<I extends ForwardIterator>(f: I, l: I, r: Relation<ValueOf<I>>): ValueOf<I>[];

@@ -1,6 +1,6 @@
 // Reference: Elements of Programming, ch. 9, p. 152.
 
-function copy_n<T, U>(f: Iter<T>, n: number, o: Iter<U>): [Iter<T>, Iter<U>] {
+function copy_n<I extends Iter<unknown>, O extends Iter<unknown>>(f: I, n: number, o: O): [I, O] {
     while (n != 0) {
         sink(o, source(f));
         f = successor(f);
