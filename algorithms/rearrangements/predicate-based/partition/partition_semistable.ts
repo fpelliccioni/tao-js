@@ -1,7 +1,7 @@
 // Reference: Elements of Programming, ch. 11, p. 191, exercise 11.3.
 
-// Doc (es): Particiona [f, l) conservando el orden de los elementos que fallan p. Devuelve la primera posición del grupo que cumple p.
-// Doc (en): Partitions [f, l) while preserving the order of elements failing p. Returns the start of the group satisfying p.
+// Doc (es): Reordena [f, l) para que los elementos que dan false con p queden primero, conservando su orden relativo. Requiere un rango válido de iteradores de avance mutables. Devuelve el primer iterador del grupo true, o l si todos dan false.
+// Doc (en): Reorders [f, l) so elements for which p is false come first, preserving their relative order. Requires a valid range of mutable forward iterators. Returns the first iterator of the true group, or l if all elements give false.
 function partition_semistable<I extends MutableForwardIterator>(
     f: I, l: NoInfer<I>, p: Predicate<ValueOf<I>>,
 ): I {
