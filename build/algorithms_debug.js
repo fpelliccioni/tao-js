@@ -474,6 +474,43 @@ function split_copy_n(f, n, u, t, p) {
     return res;
 }
 
+function __debug_fib0(n) {
+    pre(() => Number.isInteger(n) && n >= 0 && n <= 78, "The index must be an integer from 0 to 78.");
+    function fib(i) {
+        if (i < 2)
+            return i;
+        return fib(i - 1) + fib(i - 2);
+    }
+    const result = fib(n);
+    post(() => fibonacci_matches(n, result), "The result must equal the nth Fibonacci number.");
+    return result;
+}
+
+function fib0(n) {
+    var _f_ = start_f('fib0', n);
+    var res = __debug_fib0(n);
+    end_f(_f_);
+    return res;
+}
+
+function __debug_fibonacci_iterative(n) {
+    pre(() => Number.isInteger(n) && n >= 0 && n <= 78, "The index must be an integer from 0 to 78.");
+    let previous = 0;
+    let current = n === 0 ? 0 : 1;
+    for (let i = 1; i < n; ++i) {
+        [previous, current] = [current, previous + current];
+    }
+    post(() => fibonacci_matches(n, current), "The result must equal the nth Fibonacci number.");
+    return current;
+}
+
+function fibonacci_iterative(n) {
+    var _f_ = start_f('fibonacci_iterative', n);
+    var res = __debug_fibonacci_iterative(n);
+    end_f(_f_);
+    return res;
+}
+
 function __debug_extended_gcd(a, b) {
     pre(() => Number.isSafeInteger(a) && Number.isSafeInteger(b), "Both operands must be safe integers.");
     let u = Math.abs(a);
@@ -4611,6 +4648,15 @@ function has_range_value_counts(first, last, expected) {
         if (actual.get(value) !== count) return false;
     }
     return true;
+}
+
+function fibonacci_matches(n, result) {
+    let a = 0n;
+    let b = 1n;
+    for (let i = 0; i < n; ++i) {
+        [a, b] = [b, a + b];
+    }
+    return Number.isSafeInteger(result) && BigInt(result) === a;
 }
 if ( ! Number.prototype.add) {
     Number.prototype.add = function (x) {

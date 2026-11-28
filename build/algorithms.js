@@ -278,6 +278,29 @@ function split_copy_n(f, n, u, t, p) {
     return [f, u, t];
 }
 
+function fib0(n) {
+    pre(() => Number.isInteger(n) && n >= 0 && n <= 78, "The index must be an integer from 0 to 78.");
+    function fib(i) {
+        if (i < 2)
+            return i;
+        return fib(i - 1) + fib(i - 2);
+    }
+    const result = fib(n);
+    post(() => fibonacci_matches(n, result), "The result must equal the nth Fibonacci number.");
+    return result;
+}
+
+function fibonacci_iterative(n) {
+    pre(() => Number.isInteger(n) && n >= 0 && n <= 78, "The index must be an integer from 0 to 78.");
+    let previous = 0;
+    let current = n === 0 ? 0 : 1;
+    for (let i = 1; i < n; ++i) {
+        [previous, current] = [current, previous + current];
+    }
+    post(() => fibonacci_matches(n, current), "The result must equal the nth Fibonacci number.");
+    return current;
+}
+
 function extended_gcd(a, b) {
     pre(() => Number.isSafeInteger(a) && Number.isSafeInteger(b), "Both operands must be safe integers.");
     let u = Math.abs(a);
