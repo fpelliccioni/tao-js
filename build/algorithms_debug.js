@@ -1521,6 +1521,89 @@ function sift1(f, n) {
     return res;
 }
 
+function __debug_merge_n_adaptive(f0, n0, f1, n1, buffer, capacity, r) {
+    // Precondition: r is a strict weak ordering.
+    pre(() => [n0, n1, capacity].every(n => Number.isSafeInteger(n) && n >= 0), "Lengths must be nonnegative safe integers.");
+    pre(() => equal(successor(f0, n0), f1), "The two ranges must be adjacent.");
+    let expected;
+    pre(() => {
+        const last = successor(f1, n1);
+        successor(buffer, capacity);
+        if (!is_sorted_range(f0, f1, r) || !is_sorted_range(f1, last, r))
+            return false;
+        expected = stable_sort_snapshot(f0, last, r);
+        return true;
+    }, "Both ranges must be sorted and the buffer must have enough space.");
+    pre(() => disjoint_counted_ranges(f0, n0 + n1, buffer, capacity), "The buffer must not overlap the input.");
+    function merge(first, left, middle, right) {
+        if (left === 0 || right === 0)
+            return successor(middle, right);
+        if (left <= capacity)
+            return merge_n_with_buffer(first, left, middle, right, buffer, r);
+        if (left === 1 && right === 1) {
+            if (r(source(middle), source(first)))
+                iter_swap(first, middle);
+            return successor(middle);
+        }
+        let leftCut;
+        let rightCut;
+        if (left > right) {
+            leftCut = successor(first, Math.floor(left / 2));
+            const pivot = source(leftCut);
+            rightCut = lower_bound_n(middle, right, pivot, r);
+        }
+        else {
+            rightCut = successor(middle, Math.floor(right / 2));
+            const pivot = source(rightCut);
+            leftCut = upper_bound_n(first, left, pivot, r);
+        }
+        const leftPrefix = distance(first, leftCut);
+        const rightPrefix = distance(middle, rightCut);
+        const newMiddle = rotate_forward_range(leftCut, middle, rightCut);
+        merge(first, leftPrefix, leftCut, rightPrefix);
+        return merge(newMiddle, left - leftPrefix, rightCut, right - rightPrefix);
+    }
+    const result = merge(f0, n0, f1, n1);
+    post(() => equal(result, successor(f0, n0 + n1)), "The result must be the end of the merged range.");
+    post(() => range_matches_snapshot(f0, result, expected), "The merge must preserve the order of equivalent elements.");
+    return result;
+}
+
+function merge_n_adaptive(f0, n0, f1, n1, buffer, capacity, r) {
+    var _f_ = start_f('merge_n_adaptive', f0, n0, f1, n1, buffer, capacity, r);
+    var res = __debug_merge_n_adaptive(f0, n0, f1, n1, buffer, capacity, r);
+    end_f(_f_);
+    return res;
+}
+
+function __debug_merge_n_with_buffer(f0, n0, f1, n1, buffer, r) {
+    // Precondition: r is a strict weak ordering.
+    pre(() => [n0, n1].every(n => Number.isSafeInteger(n) && n >= 0), "Lengths must be nonnegative safe integers.");
+    pre(() => equal(successor(f0, n0), f1), "The two ranges must be adjacent.");
+    let expected;
+    pre(() => {
+        const last = successor(f1, n1);
+        successor(buffer, n0);
+        if (!is_sorted_range(f0, f1, r) || !is_sorted_range(f1, last, r))
+            return false;
+        expected = stable_sort_snapshot(f0, last, r);
+        return true;
+    }, "Both ranges must be sorted and the buffer must have enough space.");
+    pre(() => disjoint_counted_ranges(f0, n0 + n1, buffer, n0), "The buffer must not overlap the input.");
+    copy_n(f0, n0, buffer);
+    const [, , result] = combine_copy_n(buffer, n0, f1, n1, f0, relation_source(r));
+    post(() => equal(result, successor(f0, n0 + n1)), "The result must be the end of the merged range.");
+    post(() => range_matches_snapshot(f0, result, expected), "The merge must preserve the order of equivalent elements.");
+    return result;
+}
+
+function merge_n_with_buffer(f0, n0, f1, n1, buffer, r) {
+    var _f_ = start_f('merge_n_with_buffer', f0, n0, f1, n1, buffer, r);
+    var res = __debug_merge_n_with_buffer(f0, n0, f1, n1, buffer, r);
+    end_f(_f_);
+    return res;
+}
+
 function __debug_insertion_sort(f, l, r) {
     if (equal(f, l))
         return;
@@ -1761,6 +1844,71 @@ function __debug_sort_linked_nonempty_n_iterative(f, n, r, link) {
 function sort_linked_nonempty_n_iterative(f, n, r, link) {
     var _f_ = start_f('sort_linked_nonempty_n_iterative', f, n, r, link);
     var res = __debug_sort_linked_nonempty_n_iterative(f, n, r, link);
+    end_f(_f_);
+    return res;
+}
+
+function __debug_sort_n_adaptive(f, n, buffer, capacity, r) {
+    // Precondition: r is a strict weak ordering.
+    pre(() => [n, capacity].every(count => Number.isSafeInteger(count) && count >= 0), "Lengths must be nonnegative safe integers.");
+    let expected;
+    pre(() => {
+        const last = successor(f, n);
+        successor(buffer, capacity);
+        expected = stable_sort_snapshot(f, last, r);
+        return true;
+    }, "The input and buffer must have enough elements.");
+    pre(() => disjoint_counted_ranges(f, n, buffer, capacity), "The buffer must not overlap the input.");
+    function sort(first, count) {
+        if (count < 2)
+            return successor(first, count);
+        const half = Math.floor(count / 2);
+        const middle = sort(first, half);
+        sort(middle, count - half);
+        return merge_n_adaptive(first, half, middle, count - half, buffer, capacity, r);
+    }
+    const result = sort(f, n);
+    post(() => equal(result, successor(f, n)), "The result must be the end of the sorted range.");
+    post(() => range_matches_snapshot(f, result, expected), "The sort must preserve the order of equivalent elements.");
+    return result;
+}
+
+function sort_n_adaptive(f, n, buffer, capacity, r) {
+    var _f_ = start_f('sort_n_adaptive', f, n, buffer, capacity, r);
+    var res = __debug_sort_n_adaptive(f, n, buffer, capacity, r);
+    end_f(_f_);
+    return res;
+}
+
+function __debug_sort_n_with_buffer(f, n, buffer, r) {
+    // Precondition: r is a strict weak ordering.
+    pre(() => Number.isSafeInteger(n) && n >= 0, "Lengths must be nonnegative safe integers.");
+    const capacity = Math.ceil(n / 2);
+    let expected;
+    pre(() => {
+        const last = successor(f, n);
+        successor(buffer, capacity);
+        expected = stable_sort_snapshot(f, last, r);
+        return true;
+    }, "The input and buffer must have enough elements.");
+    pre(() => disjoint_counted_ranges(f, n, buffer, capacity), "The buffer must not overlap the input.");
+    function sort(first, count) {
+        if (count < 2)
+            return successor(first, count);
+        const half = Math.floor(count / 2);
+        const middle = sort(first, half);
+        sort(middle, count - half);
+        return merge_n_with_buffer(first, half, middle, count - half, buffer, r);
+    }
+    const result = sort(f, n);
+    post(() => equal(result, successor(f, n)), "The result must be the end of the sorted range.");
+    post(() => range_matches_snapshot(f, result, expected), "The sort must preserve the order of equivalent elements.");
+    return result;
+}
+
+function sort_n_with_buffer(f, n, buffer, r) {
+    var _f_ = start_f('sort_n_with_buffer', f, n, buffer, r);
+    var res = __debug_sort_n_with_buffer(f, n, buffer, r);
     end_f(_f_);
     return res;
 }
@@ -3124,6 +3272,18 @@ function equal_range(f, n, a, r) {
     return res;
 }
 
+function __debug_lower_bound(f, l, a, r) {
+    // The delegated search checks the partition and the returned boundary.
+    return partition_point(f, l, (x) => r(x, a));
+}
+
+function lower_bound(f, l, a, r) {
+    var _f_ = start_f('lower_bound', f, l, a, r);
+    var res = __debug_lower_bound(f, l, a, r);
+    end_f(_f_);
+    return res;
+}
+
 function __debug_lower_bound_n(f, n, a, r) {
     const below = (x) => r(x, a);
     const p = (x) => !below(x);
@@ -3137,6 +3297,24 @@ function __debug_lower_bound_n(f, n, a, r) {
 function lower_bound_n(f, n, a, r) {
     var _f_ = start_f('lower_bound_n', f, n, a, r);
     var res = __debug_lower_bound_n(f, n, a, r);
+    end_f(_f_);
+    return res;
+}
+
+function __debug_partition_point(f, l, p) {
+    pre(() => is_bounded_range(f, l), "The iterators must delimit a valid range.");
+    const n = distance(f, l);
+    const fails = (x) => !p(x);
+    pre(() => is_partitioned_n(f, n, fails), "The predicate must be true before it is false.");
+    const result = partition_point_n(f, n, fails);
+    post(() => all(f, result, p), "Every element before the result must satisfy the predicate.");
+    post(() => none(result, l, p), "No element from the result onward may satisfy the predicate.");
+    return result;
+}
+
+function partition_point(f, l, p) {
+    var _f_ = start_f('partition_point', f, l, p);
+    var res = __debug_partition_point(f, l, p);
     end_f(_f_);
     return res;
 }
@@ -3183,6 +3361,18 @@ function __debug_partition_point_n_forward(f, n, p) {
 function partition_point_n_forward(f, n, p) {
     var _f_ = start_f('partition_point_n_forward', f, n, p);
     var res = __debug_partition_point_n_forward(f, n, p);
+    end_f(_f_);
+    return res;
+}
+
+function __debug_upper_bound(f, l, a, r) {
+    // The delegated search checks the partition and the returned boundary.
+    return partition_point(f, l, (x) => !r(a, x));
+}
+
+function upper_bound(f, l, a, r) {
+    var _f_ = start_f('upper_bound', f, l, a, r);
+    var res = __debug_upper_bound(f, l, a, r);
     end_f(_f_);
     return res;
 }
@@ -4263,12 +4453,13 @@ function partition_buffered_block(f, l, buffer, p) {
 }
 
 function combine_partition_blocks(left, right) {
-    // Rotate the left true group past the right false group.
-    let f = left.point;
-    let m = left.last;
-    const l = right.point;
-    if (equal(f, m)) return { point: l, last: right.last };
-    if (equal(m, l)) return { point: f, last: right.last };
+    const point = rotate_forward_range(left.point, left.last, right.point);
+    return { point, last: right.last };
+}
+
+function rotate_forward_range(f, m, l) {
+    if (equal(f, m)) return l;
+    if (equal(m, l)) return f;
 
     let i = m;
     do {
@@ -4287,7 +4478,29 @@ function combine_partition_blocks(left, right) {
         if (equal(f, m)) m = i;
         else if (equal(i, l)) i = m;
     }
-    return { point, last: right.last };
+    return point;
+}
+
+function is_sorted_range(f, l, r) {
+    if (equal(f, l)) return true;
+    let previous = source(f);
+    f = successor(f);
+    while (!equal(f, l)) {
+        const current = source(f);
+        if (r(current, previous)) return false;
+        previous = current;
+        f = successor(f);
+    }
+    return true;
+}
+
+function stable_sort_snapshot(f, l, r) {
+    const values = [];
+    while (!equal(f, l)) {
+        values.push(source(f));
+        f = successor(f);
+    }
+    return values.sort((a, b) => r(a, b) ? -1 : r(b, a) ? 1 : 0);
 }
 function is_partitioned_n(first, count, test) {
     if (!Number.isSafeInteger(count) || count < 0) return false;

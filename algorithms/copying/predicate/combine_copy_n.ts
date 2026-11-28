@@ -1,6 +1,8 @@
 // Reference: Elements of Programming, ch. 9, p. 161, exercise 9.5 (companion implementation in eop.h).
 
-function combine_copy_n<T, U>(f: Iter<T>, n: number, f2: Iter<T>, n2: number, o: Iter<U>, r: Relation<Iter<T>>) {
+function combine_copy_n<I extends Iter<unknown>, J extends Iter<unknown>, O extends Iter<unknown>>(
+    f: I, n: number, f2: J, n2: number, o: O, r: Relation<I | J>,
+): [I, J, O] {
     while (n != 0 && n2 != 0) {
         if (r(f2, f)) {
             sink(o, source(f2));
