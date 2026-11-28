@@ -34,3 +34,12 @@ function has_range_value_counts(first, last, expected) {
     }
     return true;
 }
+
+function fibonacci_matches(n, result) {
+    let a = 0n;
+    let b = 1n;
+    for (let i = 0; i < n; ++i) {
+        [a, b] = [b, a + b];
+    }
+    return Number.isSafeInteger(result) && BigInt(result) === a;
+}

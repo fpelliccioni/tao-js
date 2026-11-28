@@ -150,3 +150,4 @@ type Semiring<T> = {
     multiply: Operation<T>;
     equal: Relation<T>;
 };
+declare function fibonacci_matches(n: number, result: number): boolean;
