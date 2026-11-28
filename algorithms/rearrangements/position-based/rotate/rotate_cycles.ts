@@ -1,52 +1,39 @@
-// Reference: Elements of Programming, ch. 10, pp. 178–179 (variant).
+// Reference: Elements of Programming, ch. 10, pp. 178–179.
 
-function rotate_cycles<T>(f: Iter<T>, m: Iter<T>, l: Iter<T>, from: IteratorPermutation<T>) {
-    const m_l = distance(m, l);
-    const f_m = distance(f, m);
-    let d = gcd(f_m, m_l);
+// Doc (es): Rota un rango por ciclos disjuntos. El máximo común divisor de los tamaños de los bloques determina cuántos ciclos recorrer.
+// Doc (en): Rotates a range through disjoint cycles. The greatest common divisor of the block lengths determines how many cycles to traverse.
+function rotate_cycles<I extends MutableRandomAccessIterator>(f: I, m: I, l: I, from: Transformation<I>): I {
+    let expected!: ValueOf<I>[];
+    pre(() => {
+        if (!is_bounded_range(f, m) || !is_bounded_range(m, l)) return false;
+        const left = distance(f, m);
+        const n = distance(f, l);
+        for (let i = 0; i < n; ++i) {
+            if (!equal(from(successor(f, i)), successor(f, (i + left) % n))) return false;
+        }
+        expected = range_snapshot(m, l).concat(range_snapshot(f, m));
+        return true;
+    }, "The range must be valid and from must be its rotation permutation.");
 
-    while (d != 0) {
-        cycle_from(successor(f, d), from);
-        --d;
+    const left = distance(f, m);
+    const right = distance(m, l);
+    if (left !== 0 && right !== 0) {
+        for (let d = gcd(left, right); d > 0; --d) {
+            cycle_from(successor(f, d - 1), from);
+        }
     }
-    return successor(f, m_l);
+    const result = successor(f, right);
+    post(() => range_matches_snapshot(f, l, expected), "The suffix must precede the original prefix.");
+    return result;
 }
 
 function __rotate_cycles_usage() {
-    function k_rotate_from_permutation_random_access<T>(f: Iter<T>, m: Iter<T>, l: Iter<T>) {
-        const k = distance(m, l);
-        const n_minus_k = distance(f, m);
-        const m_prime = successor(f, k);
-
-        return function (x: Iter<T>) {
-            if (x < m_prime) {
-                return successor(x, n_minus_k);
-            }
-            return predecessor(x, k);
-        }
-    }
-
-    function k_rotate_from_permutation_indexed<T>(f: Iter<T>, m: Iter<T>, l: Iter<T>) {
-        const k = distance(m, l);
-        const n_minus_k = distance(f, m);
-
-        return function (x: Iter<T>) {
-            const i = distance(f, x);
-            if (i < k) {
-                return successor(x, n_minus_k);
-            }
-            return successor(f, i - k);
-        }
-    }
-
-    const s = seq(array_random());
-
-    const f = begin(s);
-    const m = successor(begin(s), 3);
-    const l = end(s);
+    const d = seq([1, 2, 3, 4, 5, 6]);
+    const [f, l] = rng(d);
+    const m = successor(f, 2);
     const from = k_rotate_from_permutation_indexed(f, m, l);
     rotate_cycles(f, m, l, from);
-    print(s);
+    print(d);
 }
 
 function __rotate_cycles_attributes() {

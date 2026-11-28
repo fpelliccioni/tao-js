@@ -1,7 +1,7 @@
 // Reference: Elements of Programming, ch. 9, p. 163.
 // Reference: From Mathematics to Generic Programming, ch. 11, §11.2, pp. 201–203 (ch11.h).
 
-function swap_ranges<T, U>(f: Iter<T>, l: Iter<T>, f1: Iter<U>) {
+function swap_ranges<I extends Iter<unknown>, O extends Iter<unknown>>(f: I, l: I, f1: O): O {
     while ( ! equal(f, l)) {
         exchange_values(f, f1);
         f = successor(f);

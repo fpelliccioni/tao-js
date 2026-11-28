@@ -1,6 +1,6 @@
 // Reference: Elements of Programming, ch. 9, p. 153.
 
-function copy_backward<T, U>(f: Iter<T>, l: Iter<T>, o: Iter<U>) {
+function copy_backward<I extends Iter<unknown>, O extends Iter<unknown>>(f: I, l: I, o: O): O {
     while ( ! equal(f, l)) {
         l = predecessor(l);
         o = predecessor(o);

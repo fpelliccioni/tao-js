@@ -1,47 +1,20 @@
 // Reference: Elements of Programming, ch. 10, p. 179.
 
-function rotate_random_access_nontrivial<T>(f: Iter<T>, m: Iter<T>, l: Iter<T>) {
-    const p = k_rotate_from_permutation_random_access(f, m, l);
-    return rotate_cycles(f, m, l, p);
+// Doc (es): Rota un rango de acceso aleatorio por ciclos usando desplazamientos desde la posición actual.
+// Doc (en): Rotates a random-access range by cycles, using offsets from the current position.
+function rotate_random_access_nontrivial<I extends MutableRandomAccessIterator>(f: I, m: I, l: I): I {
+    pre(() => is_bounded_range(f, m) && is_bounded_range(m, l)
+        && !equal(f, m) && !equal(m, l), "Both parts must be nonempty and belong to the same range.");
+    const from = k_rotate_from_permutation_random_access(f, m, l);
+    return rotate_cycles(f, m, l, from);
 }
 
 function __rotate_random_access_nontrivial_usage() {
-    function cycle_from<T>(i: Iter<T>, f: IteratorPermutation<T>) {
-        const tmp = source(i);
-        let j = i;
-        let k = f(i);
-        while ( ! equal(k, i)) {
-            sink(j, source(k));
-            j = k;
-            k = f(k);
-        }
-        sink(j, tmp);
-    }
-
-    function rotate_cycles<T>(f: Iter<T>, m: Iter<T>, l: Iter<T>, from: IteratorPermutation<T>) {
-        let d = gcd(distance(f, m), distance(m, l));
-
-        while (d != 0) {
-            --d;
-            cycle_from(successor(f, d), from);
-        }
-        return successor(f, distance(m, l));
-    }
-
-    function k_rotate_from_permutation_random_access<T>(f: Iter<T>, m: Iter<T>, l: Iter<T>) {
-        const k = distance(m, l);
-        const n_minus_k = distance(f, m);
-        const m_prime = successor(f, distance(m, l));
-
-        return function(x: Iter<T>) {
-            if ( distance(x, m_prime) > 0) return successor(x, n_minus_k);
-            return predecessor(x, k);
-        };
-    }
-
-    const s = seq(array_random(12));
-    rotate_random_access_nontrivial(begin(s), successor(begin(s), 3), end(s));
-    print(s);
+    const d = seq([1, 2, 3, 4, 5]);
+    const [f, l] = rng(d);
+    const m = successor(f, 2);
+    rotate_random_access_nontrivial(f, m, l);
+    print(d);
 }
 
 function __rotate_random_access_nontrivial_attributes() {
