@@ -11,8 +11,8 @@ function count_if_not_basis<T, U extends number | Iter<unknown>>(f: Iter<T>, l: 
 }
 
 function __count_if_not_basis_usage() {
-    const d = sequence(array_random(), even);
-    const c = sequence(array_ascending());
+    const d = seq(array_random(), even);
+    const c = seq(array_ascending());
 
     const f = begin(d);
     const l = end(d);

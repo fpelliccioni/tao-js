@@ -8,7 +8,7 @@ function none<I extends Iter<unknown>>(f: I, l: I, p: Predicate<ValueOf<I>>): bo
 }
 
 function __none_usage() {
-    const d = sequence([1, 3, 5]);
+    const d = seq([1, 3, 5]);
     const f = begin(d);
     const l = end(d);
 

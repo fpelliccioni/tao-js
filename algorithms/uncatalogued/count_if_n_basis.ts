@@ -16,8 +16,8 @@ function count_if_n_basis<I extends Iter<unknown>, J extends number | Iter<unkno
 }
 
 function __count_if_n_basis_usage() {
-    const d = sequence([2, 4, 7, 8, 9]);
-    const positions = sequence([0, 1, 2, 3, 4]);
+    const d = seq([2, 4, 7, 8, 9]);
+    const positions = seq([0, 1, 2, 3, 4]);
     const start = begin(positions);
     const result = count_if_n_basis(begin(d), 4, even, start);
     const count = distance(start, result);

@@ -14,7 +14,7 @@ function find_if_not_unguarded<I extends Iter<unknown>>(f: I, p: Predicate<Value
 
 function __find_if_not_unguarded_usage() {
     // The final element is the sentinel.
-    const d = sequence([2, 4, 8, 7]);
+    const d = seq([2, 4, 8, 7]);
     const result = find_if_not_unguarded(begin(d), even);
     const value = source(result);
     print("First odd element: " + value);

@@ -2,7 +2,7 @@ function cycle_to_recursive<T>(i: Iter<T>, f: IteratorPermutation<T>) {
     const k = f(i);
     if (equal(k, i)) return;
 
-    const buf = sequence(array_all_equal(1, "-"), "buf");
+    const buf = seq(array_all_equal(1, "-"), "buf");
     const b = begin(buf);
     cycle_to_internal(i, k, f, b);
     sink(k, source(i));
@@ -29,7 +29,7 @@ function __cycle_to_recursive_usage() {
         return ret;
     }
 
-    const s = sequence(array_random(5));
+    const s = seq(array_random(5));
     cycle_to_recursive(begin(s), successorMod10);
     print(s);
 }

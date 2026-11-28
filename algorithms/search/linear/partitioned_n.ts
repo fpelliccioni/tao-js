@@ -11,7 +11,7 @@ function partitioned_n<I extends Iter<unknown>>(f: I, n: number, p: Predicate<Va
 }
 
 function __partitioned_n_usage() {
-    const d = sequence([1, 3, 2, 4, 7]);
+    const d = seq([1, 3, 2, 4, 7]);
     const prefix = partitioned_n(begin(d), 4, even);
     const full = partitioned_n(begin(d), size(d), even);
     print("First four elements are partitioned: " + prefix);

@@ -17,7 +17,7 @@ function find_adjacent_mismatch_forward<I extends ForwardIterator>(
 }
 
 function __find_adjacent_mismatch_forward_usage() {
-    const d = sequence([1, 4, 3, 8], "d", undefined, "sll");
+    const d = seq([1, 4, 3, 8], "d", undefined, "sll");
     const result = find_adjacent_mismatch_forward(begin(d), end(d), lt);
 
     if (equal(result, end(d))) {

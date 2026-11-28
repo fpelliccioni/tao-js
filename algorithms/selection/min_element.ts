@@ -14,7 +14,7 @@ function min_element<T>(f: Iter<T>, l: Iter<T>, r: Relation<T>) {
 }
 
 function __min_element_usage() {
-    const s = sequence(array_random());
+    const s = seq(array_random());
     const l = end(s);
 
     const m = min_element(begin(s), l, lt);

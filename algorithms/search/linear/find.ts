@@ -10,7 +10,7 @@ function find<I extends Iter<unknown>>(f: I, l: I, x: ValueOf<I>): I {
 }
 
 function __find_usage() {
-    const s = sequence(array_from("Hello, World!"));
+    const s = seq(array_from("Hello, World!"));
     const l = end(s);
     const target = "W";
     const result = find(begin(s), l, target);

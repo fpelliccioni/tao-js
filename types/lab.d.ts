@@ -39,6 +39,7 @@ declare function random_int(from?: number, to?: number): number;
 declare function sequence<T>(values: readonly T[], color: Relation<T> | Predicate<T>): Seq<T, "array">;
 declare function sequence<T>(values: readonly T[], name?: string, color?: Relation<T> | Predicate<T>, type?: undefined, drawChart?: boolean, drawTree?: boolean): Seq<T, "array">;
 declare function sequence<T, K extends SequenceInputKind>(values: readonly T[], name: string | undefined, color: Relation<T> | Predicate<T> | undefined, type: K, drawChart?: boolean, drawTree?: boolean): Seq<T, SequenceKindOf<K>>;
+declare const seq: typeof sequence;
 declare function begin<T, K extends SequenceKind>(data: Seq<T, K>): Iter<T, K>;
 declare function end<T, K extends SequenceKind>(data: Seq<T, K>): Iter<T, K>;
 declare function source<T>(it: Iter<T>): T;

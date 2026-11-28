@@ -15,7 +15,7 @@ function find_if_n<I extends Iter<unknown>>(
 }
 
 function __find_if_n_usage() {
-    const d = sequence([1, 3, 8, 5, 6]);
+    const d = seq([1, 3, 8, 5, 6]);
     const [result, remaining] = find_if_n(begin(d), size(d), even);
 
     if (remaining === 0) {

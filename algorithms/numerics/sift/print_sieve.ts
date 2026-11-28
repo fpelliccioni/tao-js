@@ -12,7 +12,7 @@ function print_sieve(f: Iter<number | string>, n: number) {
 }
 
 function __print_sieve_usage() {
-    const v = sequence([1, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1, 0, 0, 1, 1, 0, 0, 1, 0, 1]);
+    const v = seq([1, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1, 0, 0, 1, 1, 0, 0, 1, 0, 1]);
     print_sieve(begin(v), size(v));
   }
 

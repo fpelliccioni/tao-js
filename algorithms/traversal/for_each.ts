@@ -13,7 +13,7 @@ function for_each<I extends Iter<unknown>, Proc extends (value: ValueOf<I>) => v
 }
 
 function __for_each_usage() {
-    const d = sequence([2, 4, 6]);
+    const d = seq([2, 4, 6]);
     let total = 0;
     const accumulate = for_each(begin(d), end(d), x => { total = add(total, x); });
     print("Sum: " + total);

@@ -1,5 +1,5 @@
 function lps(f, n, r) {
-    var t = sequence(array_all_equal(n + 1, "0"), "t");
+    var t = seq(array_all_equal(n + 1, "0"), "t");
     sink(begin(t), -1);
     if (n == 1) return t;
 
@@ -24,7 +24,7 @@ function lps(f, n, r) {
 
 
 function lps(f, n, r) {
-    var t = sequence(array_all_equal(n, "0"), "t");
+    var t = seq(array_all_equal(n, "0"), "t");
     if (n == 1) return t;
 
     var i = 0;
@@ -55,13 +55,13 @@ function lps(f, n, r) {
     return t;
 }
 
-// var sub = sequence(array_from("dsgwadsgz"), "sub");
-// var sub = sequence(array_from("abcdabeabf"), "sub");
-// var sub = sequence(array_from("abcdeabfabc"), "sub");
-// var sub = sequence(array_from("aabcadaabe"), "sub");
-// var sub = sequence(array_from("aaaabaacd"), "sub");
-// var sub = sequence(array_from("abcabcabc"), "sub");
-var sub = sequence(array_from("abcxabcabc"), "sub");
+// var sub = seq(array_from("dsgwadsgz"), "sub");
+// var sub = seq(array_from("abcdabeabf"), "sub");
+// var sub = seq(array_from("abcdeabfabc"), "sub");
+// var sub = seq(array_from("aabcadaabe"), "sub");
+// var sub = seq(array_from("aaaabaacd"), "sub");
+// var sub = seq(array_from("abcabcabc"), "sub");
+var sub = seq(array_from("abcxabcabc"), "sub");
 var t = lps(begin(sub), size(sub), eq);
 print(t);
 
@@ -95,10 +95,10 @@ function find_subsequence_n_naive(f, fn, s, sn, r) {
 function usage() {
 
 
-    var seq = sequence(array_from("Hello, World!"), "seq");
-    var sub = sequence(array_from("????"), "sub");
+    var haystack = seq(array_from("Hello, World!"), "seq");
+    var sub = seq(array_from("????"), "sub");
 
-    var r = find_subsequence_n_naive(begin(seq), size(seq), begin(sub), size(sub), eq);
+    var r = find_subsequence_n_naive(begin(haystack), size(haystack), begin(sub), size(sub), eq);
     var it = r[0];
     var n = r[1];
 
@@ -106,7 +106,7 @@ function usage() {
         print("Subsequence not found");
     } else {
         print("Subsequence found at: ");
-        const offset = distance(begin(seq), it);
+        const offset = distance(begin(haystack), it);
         print(offset);
     }
 }

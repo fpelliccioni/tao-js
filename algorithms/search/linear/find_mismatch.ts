@@ -13,8 +13,8 @@ function find_mismatch<I extends Iter<unknown>, J extends Iter<ValueOf<I>>>(
 }
 
 function __find_mismatch_usage() {
-    const left = sequence([2, 4, 6, 8]);
-    const right = sequence([2, 4, 7, 8]);
+    const left = seq([2, 4, 6, 8]);
+    const right = seq([2, 4, 7, 8]);
     const [a, b] = find_mismatch(begin(left), end(left), begin(right), end(right), eq);
 
     if (equal(a, end(left)) || equal(b, end(right))) {

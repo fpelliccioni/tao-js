@@ -17,16 +17,16 @@ function find_subsequence_naive<T>(f: Iter<T>, l: Iter<T>, sf: Iter<T>, sl: Iter
 }
 
 function __find_subsequence_naive_usage() {
-    const seq = sequence(array_from("Hello, World!"), "seq", undefined, "sll"); // singly-linked list
-    const sub = sequence(array_from("????"), "sub", undefined, "sll");
+    const haystack = seq(array_from("Hello, World!"), "seq", undefined, "sll"); // singly-linked list
+    const sub = seq(array_from("????"), "sub", undefined, "sll");
 
-    const it = find_subsequence_naive(begin(seq), end(seq), begin(sub), end(sub), eq);
+    const it = find_subsequence_naive(begin(haystack), end(haystack), begin(sub), end(sub), eq);
 
-    if (equal(it, end(seq))) {
+    if (equal(it, end(haystack))) {
         print("Subsequence not found");
     } else {
         print("Subsequence found at: ");
-        const offset = distance(begin(seq), it);
+        const offset = distance(begin(haystack), it);
         print(offset);
     }
 }

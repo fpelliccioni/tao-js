@@ -51,8 +51,8 @@ function partition_stable_n_iterative<I extends MutableForwardIterator, B extend
 }
 
 function __partition_stable_n_iterative_usage() {
-    const d = sequence([2, 7, 4, 1, 6, 3, 5], "d", undefined, "sll");
-    const buffer = sequence([0, 0, 0]);
+    const d = seq([2, 7, 4, 1, 6, 3, 5], "d", undefined, "sll");
+    const buffer = seq([0, 0, 0]);
     const f = begin(d);
     const [point] = partition_stable_n_iterative(f, size(d), begin(buffer), size(buffer), even);
     const index = distance(f, point);

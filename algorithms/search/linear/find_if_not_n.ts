@@ -9,7 +9,7 @@ function find_if_not_n<I extends Iter<unknown>>(
 }
 
 function __find_if_not_n_usage() {
-    const d = sequence([2, 4, 7, 8]);
+    const d = seq([2, 4, 7, 8]);
     const [result, remaining] = find_if_not_n(begin(d), size(d), even);
     if (remaining === 0) {
         print("No odd element.");

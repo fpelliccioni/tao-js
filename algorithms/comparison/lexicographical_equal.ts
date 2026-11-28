@@ -9,8 +9,8 @@ function lexicographical_equal<I extends Iter<unknown>, J extends Iter<ValueOf<I
 }
 
 function __lexicographical_equal_usage() {
-    const left = sequence(["a", "b"]);
-    const right = sequence(["a", "b", "c"]);
+    const left = seq(["a", "b"]);
+    const right = seq(["a", "b", "c"]);
     const same = lexicographical_equal(begin(left), end(left), begin(right), end(right));
     print("Equal ranges: " + same);
 }

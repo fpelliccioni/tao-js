@@ -14,8 +14,8 @@ function copy_select_n<T, U>(f: Iter<T>, n: number, o: Iter<U>, p: Predicate<Ite
 
 function __copy_select_n_usage() {
     const evenAt = predicate_source(even);
-    const s = sequence(array_random());
-    const z = sequence(array_all_equal(size(s), "-"));
+    const s = seq(array_random());
+    const z = seq(array_all_equal(size(s), "-"));
 
     copy_select_n(begin(s), size(s), begin(z), evenAt);
 

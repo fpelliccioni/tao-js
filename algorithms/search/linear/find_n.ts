@@ -9,7 +9,7 @@ function find_n<I extends Iter<unknown>>(
 }
 
 function __find_n_usage() {
-    const d = sequence([3, 7, 11, 7, 13]);
+    const d = seq([3, 7, 11, 7, 13]);
     const [result, remaining] = find_n(begin(d), size(d), 7);
 
     if (remaining === 0) {

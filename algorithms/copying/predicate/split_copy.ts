@@ -17,9 +17,9 @@ function split_copy<T, U>(f: Iter<T>, l: Iter<T>, u: Iter<U>, t: Iter<U>, p: Pre
 
 function __split_copy_usage() {
     const evenAt = predicate_source(even);
-    const s = sequence(array_random());
-    const evens = sequence(array_all_equal(size(s), "-"));
-    const odds = sequence(array_all_equal(size(s), "-"));
+    const s = seq(array_random());
+    const evens = seq(array_all_equal(size(s), "-"));
+    const odds = seq(array_all_equal(size(s), "-"));
 
     split_copy(begin(s), end(s), begin(odds), begin(evens), evenAt);
 

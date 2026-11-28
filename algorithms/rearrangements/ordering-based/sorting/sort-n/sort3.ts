@@ -30,12 +30,12 @@ function sort3<T>(x: Iter<T>, y: Iter<T>, z: Iter<T>, c: Relation<T>) {
 function __sort3_usage() {
     register_custom_stat("Misplaced elements");
 
-    const s = sequence([1, 2, 3, 4, 5], lt);
-    // var s = sequence([1, 2], "s", lt);
-    // const s = sequence(array_random(), "s", lt);
-    // var s = sequence(array_all_equal(), "s", lt);
-    // var s = sequence(array_ascending(), "s", lt);
-    // var s = sequence(array_descending(), "s", lt);
+    const s = seq([1, 2, 3, 4, 5], lt);
+    // var s = seq([1, 2], "s", lt);
+    // const s = seq(array_random(), "s", lt);
+    // var s = seq(array_all_equal(), "s", lt);
+    // var s = seq(array_ascending(), "s", lt);
+    // var s = seq(array_descending(), "s", lt);
 
     print(s);
     sort3(begin(s), successor(begin(s)), successor(begin(s), 2), lt);

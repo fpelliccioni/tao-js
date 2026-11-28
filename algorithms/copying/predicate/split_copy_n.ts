@@ -18,9 +18,9 @@ function split_copy_n<T, U>(f: Iter<T>, n: number, u: Iter<U>, t: Iter<U>, p: Pr
 
 function __split_copy_n_usage() {
     const evenAt = predicate_source(even);
-    const s = sequence(array_random());
-    const evens = sequence(array_all_equal(size(s), "-"));
-    const odds = sequence(array_all_equal(size(s), "-"));
+    const s = seq(array_random());
+    const evens = seq(array_all_equal(size(s), "-"));
+    const odds = seq(array_all_equal(size(s), "-"));
 
     split_copy_n(begin(s), size(s), begin(odds), begin(evens), evenAt);
 

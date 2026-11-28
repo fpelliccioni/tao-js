@@ -21,7 +21,7 @@ function add_to_counter<I extends ForwardIterator>(
 }
 
 function __add_to_counter_usage() {
-    const slots = sequence([1, 5, 0]);
+    const slots = seq([1, 5, 0]);
     add_to_counter(begin(slots), end(slots), add, 4, 0);
     print(slots);
 }

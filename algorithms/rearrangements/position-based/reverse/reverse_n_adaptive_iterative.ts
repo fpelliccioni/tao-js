@@ -79,8 +79,8 @@ function reverse_n_adaptive_iterative<I extends MutableForwardIterator, B extend
 }
 
 function __reverse_n_adaptive_iterative_usage() {
-    const d = sequence([1, 2, 3, 4, 5, 6, 7], "d", undefined, "sll");
-    const buffer = sequence([0, 0, 0]);
+    const d = seq([1, 2, 3, 4, 5, 6, 7], "d", undefined, "sll");
+    const buffer = seq([0, 0, 0]);
     reverse_n_adaptive_iterative(begin(d), size(d), begin(buffer), size(buffer));
     print(d);
 }

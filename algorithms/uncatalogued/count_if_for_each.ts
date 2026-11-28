@@ -14,7 +14,7 @@ function count_if_for_each<I extends Iter<unknown>>(
 }
 
 function __count_if_for_each_usage() {
-    const d = sequence([2, 3, 4, 7, 8]);
+    const d = seq([2, 3, 4, 7, 8]);
     const count = count_if_for_each(begin(d), end(d), even);
     print("Even elements: " + count);
 }

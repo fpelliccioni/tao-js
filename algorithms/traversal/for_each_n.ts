@@ -16,7 +16,7 @@ function for_each_n<I extends Iter<unknown>, Proc extends (value: ValueOf<I>) =>
 }
 
 function __for_each_n_usage() {
-    const d = sequence([2, 4, 6, 8], "d", undefined, "stream");
+    const d = seq([2, 4, 6, 8], "d", undefined, "stream");
     let total = 0;
     const [accumulate, next] = for_each_n(begin(d), 2, x => { total = add(total, x); });
 

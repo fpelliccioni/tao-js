@@ -33,7 +33,7 @@ function reduce_balanced<I extends Iter<unknown>>(
 
 function __reduce_balanced_usage() {
     const concatenate = binary_operation<string>((l, r) => l + r);
-    const d = sequence(["a", "b", "c", "d", "e"]);
+    const d = seq(["a", "b", "c", "d", "e"]);
     const concatenated = reduce_balanced(begin(d), end(d), concatenate, "");
     print("Concatenation: " + concatenated);
 }

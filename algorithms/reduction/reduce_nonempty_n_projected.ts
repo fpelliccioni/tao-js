@@ -17,7 +17,7 @@ function reduce_nonempty_n_projected<I extends Iter<unknown>, T>(
 }
 
 function __reduce_nonempty_n_projected_usage() {
-    const d = sequence(["one", "two", "three", "four"]);
+    const d = seq(["one", "two", "three", "four"]);
     const project = (it: Iter<string>) => source(it).length;
     const result = reduce_nonempty_n_projected(begin(d), 3, add, project);
     print("Characters in the first three words: " + result);

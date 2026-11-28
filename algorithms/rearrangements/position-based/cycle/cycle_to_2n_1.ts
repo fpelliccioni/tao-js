@@ -4,7 +4,7 @@ function cycle_to_2n_1<T>(i: Iter<T>, f: IteratorPermutation<T>) {
     let k = f(i);
     if (equal(k, i)) return;
 
-    const buf = sequence(array_all_equal(1, "-"), "buf");
+    const buf = seq(array_all_equal(1, "-"), "buf");
     let b: Iter<T | string> = begin(buf);
     let b2: Iter<T | string> = i;
 
@@ -43,7 +43,7 @@ function __cycle_to_2n_1_usage() {
         return ret;
     }
 
-    const s = sequence(array_random());
+    const s = seq(array_random());
     cycle_to_2n_1(begin(s), successorMod10);
     print(s);
 }

@@ -7,7 +7,7 @@ function some<I extends Iter<unknown>>(f: I, l: I, p: Predicate<ValueOf<I>>): bo
 }
 
 function __some_usage() {
-    const d = sequence([1, 2, 3]);
+    const d = seq([1, 2, 3]);
     const f = begin(d);
     const l = end(d);
 

@@ -16,7 +16,7 @@ function find_backward_if_not_unguarded<I extends BidirectionalIterator>(
 }
 
 function __find_backward_if_not_unguarded_usage() {
-    const d = sequence([1, 7, 4, 8]);
+    const d = seq([1, 7, 4, 8]);
     const result = find_backward_if_not_unguarded(end(d), even);
     const value = source(result);
     print("Last odd element: " + value);

@@ -25,7 +25,7 @@ function reduce_nonzeroes_n<I extends Iter<unknown>>(
 }
 
 function __reduce_nonzeroes_n_usage() {
-    const d = sequence([0, 2, 0, 4, 0, 8]);
+    const d = seq([0, 2, 0, 4, 0, 8]);
     const sum = reduce_nonzeroes_n(begin(d), 5, add, 0);
     print("Sum of the first five elements after skipping zeroes: " + sum);
 }

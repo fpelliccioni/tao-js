@@ -15,8 +15,8 @@ function insert_naive<T, K extends SequenceKind>(s: Seq<T | number, K>, ip: Iter
 }
 
 function __insert_naive_usage() {
-    let s = sequence(array_random());
-    const i = sequence(array_random(5));
+    let s = seq(array_random());
+    const i = seq(array_random(5));
 
     s = insert_naive(s, begin(s), begin(i), end(i));
     print(s);

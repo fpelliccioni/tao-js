@@ -45,8 +45,8 @@ function partition_stable_n_adaptive<I extends MutableForwardIterator, B extends
 }
 
 function __partition_stable_n_adaptive_usage() {
-    const d = sequence([2, 7, 4, 1, 6, 3, 5], "d", undefined, "sll");
-    const buffer = sequence([0, 0, 0]);
+    const d = seq([2, 7, 4, 1, 6, 3, 5], "d", undefined, "sll");
+    const buffer = seq([0, 0, 0]);
     const f = begin(d);
     const [point] = partition_stable_n_adaptive(f, size(d), begin(buffer), size(buffer), even);
     const index = distance(f, point);

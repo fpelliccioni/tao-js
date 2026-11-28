@@ -27,7 +27,7 @@ function equal_range<I extends ForwardIterator>(
 }
 
 function __equal_range_usage() {
-    const d = sequence([1, 2, 2, 2, 4, 7]);
+    const d = seq([1, 2, 2, 2, 4, 7]);
     const f = begin(d);
     const [first, last] = equal_range(f, size(d), 2, lt);
     const from = distance(f, first);

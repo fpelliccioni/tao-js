@@ -10,7 +10,7 @@ function mark_sieve(f: Iter<number | string>, l: Iter<number | string>, factor: 
 }
 
 function __mark_sieve_usage() {
-    const v = sequence(array_all_equal(20, '0'));
+    const v = seq(array_all_equal(20, '0'));
     mark_sieve(begin(v), end(v), 3);
     print_sieve(begin(v), size(v));
   }

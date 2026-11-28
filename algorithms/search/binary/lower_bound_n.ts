@@ -15,7 +15,7 @@ function lower_bound_n<I extends ForwardIterator>(
 function __lower_bound_n_usage() {
     const hasLowerDigitSum = relation((x, y) => digitSum(x) < digitSum(y));
 
-    const d = sequence([11, 22, 49, 58, 67]);
+    const d = seq([11, 22, 49, 58, 67]);
 
     const lb = lower_bound_n(begin(d), size(d), 38, hasLowerDigitSum);
     const insertionValue = source(lb);
