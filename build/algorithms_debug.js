@@ -474,6 +474,41 @@ function split_copy_n(f, n, u, t, p) {
     return res;
 }
 
+function __debug_extended_gcd(a, b) {
+    pre(() => Number.isSafeInteger(a) && Number.isSafeInteger(b), "Both operands must be safe integers.");
+    let u = Math.abs(a);
+    let v = Math.abs(b);
+    let x0 = 1;
+    let x1 = 0;
+    while (v !== 0) {
+        const r = u % v;
+        const q = (u - r) / v;
+        const x2 = x0 - q * x1;
+        x0 = x1;
+        x1 = x2;
+        u = v;
+        v = r;
+    }
+    const x = a < 0 ? -x0 : x0;
+    const g = u;
+    post(() => {
+        if (a === 0 && b === 0)
+            return g === 0;
+        if (g <= 0 || a % g !== 0 || b % g !== 0)
+            return false;
+        const difference = BigInt(g) - BigInt(a) * BigInt(x);
+        return b === 0 ? difference === 0n : difference % BigInt(b) === 0n;
+    }, "The result must divide both operands and satisfy Bézout's identity.");
+    return [x, g];
+}
+
+function extended_gcd(a, b) {
+    var _f_ = start_f('extended_gcd', a, b);
+    var res = __debug_extended_gcd(a, b);
+    end_f(_f_);
+    return res;
+}
+
 function __debug_gcd(a, b) {
     while (b != 0) {
         const r = remainder(a, b);
@@ -682,6 +717,45 @@ function __debug_smallest_divisor(n) {
 function smallest_divisor(n) {
     var _f_ = start_f('smallest_divisor', n);
     var res = __debug_smallest_divisor(n);
+    end_f(_f_);
+    return res;
+}
+
+function __debug_polynomial_value(f, l, x, ring) {
+    // Precondition: the supplied operations satisfy the semiring laws.
+    const coefficients = [];
+    pre(() => {
+        if (!is_bounded_range(f, l))
+            return false;
+        for (let i = f; !equal(i, l); i = successor(i)) {
+            coefficients.push(source(i));
+        }
+        return true;
+    }, "The iterators must delimit a readable range of coefficients.");
+    let result = ring.zero;
+    if (!equal(f, l)) {
+        result = source(f);
+        for (let i = successor(f); !equal(i, l); i = successor(i)) {
+            result = ring.add(ring.multiply(result, x), source(i));
+        }
+    }
+    post(() => {
+        let expected = ring.zero;
+        let power = ring.one;
+        for (let i = coefficients.length - 1; i >= 0; --i) {
+            const term = ring.multiply(coefficients[i], power);
+            expected = ring.add(term, expected);
+            if (i > 0)
+                power = ring.multiply(power, x);
+        }
+        return ring.equal(result, expected);
+    }, "The result must equal the sum of the coefficient terms.");
+    return result;
+}
+
+function polynomial_value(f, l, x, ring) {
+    var _f_ = start_f('polynomial_value', f, l, x, ring);
+    var res = __debug_polynomial_value(f, l, x, ring);
     end_f(_f_);
     return res;
 }
