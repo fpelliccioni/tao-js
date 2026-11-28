@@ -1,6 +1,6 @@
 // Reference: Elements of Programming, ch. 10, p. 174.
 
-function reverse_n_forward<T>(f: Iter<T>, n: number): Iter<T> {
+function reverse_n_forward<I extends Iter<unknown>>(f: I, n: number): I {
     if (n < 2) return successor(f, n);
     const h = half(n);
     const n_mod_2 = n - twice(h);

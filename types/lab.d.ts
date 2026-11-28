@@ -162,3 +162,5 @@ type SelectionEntry<T> = readonly [value: T, originalIndex: number];
 declare function selection_before<T>(x: SelectionEntry<T>, y: SelectionEntry<T>, r: Relation<T>): boolean;
 declare function selection_rank<T>(entries: readonly SelectionEntry<T>[], rank: number, r: Relation<T>): SelectionEntry<T>;
 declare function valid_selection_indices<T>(entries: readonly SelectionEntry<T>[]): boolean;
+type MutableRandomAccessIterator<T = unknown> = Iter<T, "array">;
+declare function range_snapshot<I extends Iter<unknown>>(f: I, l: I): ValueOf<I>[];

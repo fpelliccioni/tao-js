@@ -1442,6 +1442,22 @@ function reverse_bidirectional(f, l) {
     }
 }
 
+function reverse_indexed(f, l) {
+    let expected;
+    pre(() => {
+        if (!is_bounded_range(f, l))
+            return false;
+        expected = range_snapshot(f, l).reverse();
+        return true;
+    }, "The iterators must delimit a valid range.");
+    reverse_n_indexed(f, distance(f, l));
+    post(() => range_matches_snapshot(f, l, expected), "The range must be reversed.");
+}
+
+function reverse_n(f, l, n) {
+    reverse_n_bidirectional(f, l, n);
+}
+
 function reverse_n_adaptive(f_i, n_i, f_b, n_b) {
     if (n_i < 2)
         return successor(f_i, n_i);
@@ -1530,6 +1546,11 @@ function reverse_n_adaptive_iterative(f, n, buffer, capacity) {
     return last;
 }
 
+function reverse_n_bidirectional(f, l, n) {
+    pre(() => Number.isSafeInteger(n) && n >= 0 && is_bounded_range(f, l) && n <= distance(f, l), "The count must fit in the range.");
+    reverse_swap_ranges_n(l, f, Math.floor(n / 2));
+}
+
 function reverse_n_forward(f, n) {
     if (n < 2)
         return successor(f, n);
@@ -1553,6 +1574,67 @@ function reverse_n_indexed(f, n) {
 
 function reverse_n_with_buffer(f_i, n, f_b) {
     return reverse_copy(f_b, copy_n(f_i, n, f_b)[1], f_i);
+}
+
+function reverse_recursive(f, n) {
+    pre(() => Number.isSafeInteger(n) && n >= 0, "The count must be a nonnegative safe integer.");
+    let last;
+    let expected;
+    pre(() => {
+        last = successor(f, n);
+        expected = range_snapshot(f, last).reverse();
+        return true;
+    }, "The counted range must exist.");
+    const result = reverse_n_forward(f, n);
+    post(() => equal(result, last), "The result must be the end of the counted range.");
+    post(() => range_matches_snapshot(f, last, expected), "The counted range must be reversed.");
+    return result;
+}
+
+function reverse_until(f, m, l) {
+    pre(() => is_bounded_range(f, m) && is_bounded_range(m, l), "The middle must lie within the range.");
+    const n = Math.min(distance(f, m), distance(m, l));
+    const [back, front] = reverse_swap_ranges_n(l, f, n);
+    return [front, back];
+}
+
+function gries_mills_rotate(f, m, l) {
+    let expected;
+    pre(() => {
+        if (!is_bounded_range(f, m) || !is_bounded_range(m, l))
+            return false;
+        expected = range_snapshot(m, l).concat(range_snapshot(f, m));
+        return true;
+    }, "The middle must lie within the range.");
+    let first = f;
+    let middle = m;
+    while (!equal(first, middle) && !equal(middle, l)) {
+        const [nextFirst, nextSecond] = swap_ranges_bounded(first, middle, middle, l);
+        if (equal(nextFirst, middle) && equal(nextSecond, l))
+            break;
+        if (equal(nextFirst, middle)) {
+            first = middle;
+            middle = nextSecond;
+        }
+        else {
+            first = nextFirst;
+        }
+    }
+    post(() => range_matches_snapshot(f, l, expected), "The suffix must precede the original prefix.");
+}
+
+function rotate(f, m, l) {
+    let expected;
+    pre(() => {
+        if (!is_bounded_range(f, m) || !is_bounded_range(m, l))
+            return false;
+        expected = range_snapshot(m, l).concat(range_snapshot(f, m));
+        return true;
+    }, "The middle must lie within the range.");
+    const result = rotate_forward_range(f, m, l);
+    post(() => equal(result, successor(f, distance(m, l))), "The result must mark the new position of the original first element.");
+    post(() => range_matches_snapshot(f, l, expected), "The suffix must precede the original prefix.");
+    return result;
 }
 
 function rotate_bidirectional(f, m, l) {
@@ -1607,6 +1689,39 @@ function rotate_right_by_one_nonempty(f, l) {
     const x = source_move(butlast);
     move_backward(f, butlast, l);
     sink_move(f, x);
+}
+
+function rotate_unguarded(f, m, l) {
+    let expected;
+    pre(() => {
+        if (!is_bounded_range(f, m) || !is_bounded_range(m, l))
+            return false;
+        expected = range_snapshot(m, l).concat(range_snapshot(f, m));
+        return true;
+    }, "The middle must lie within the range.");
+    pre(() => !equal(f, m) && !equal(m, l), "Both parts must be nonempty.");
+    let middle = m;
+    let [first, second] = swap_ranges_bounded(f, middle, middle, l);
+    while (!equal(first, middle) || !equal(second, l)) {
+        if (equal(first, middle))
+            middle = second;
+        [first, second] = swap_ranges_bounded(first, middle, middle, l);
+    }
+    post(() => range_matches_snapshot(f, l, expected), "The suffix must precede the original prefix.");
+}
+
+function three_reverse_rotate(f, m, l) {
+    let expected;
+    pre(() => {
+        if (!is_bounded_range(f, m) || !is_bounded_range(m, l))
+            return false;
+        expected = range_snapshot(m, l).concat(range_snapshot(f, m));
+        return true;
+    }, "The middle must lie within the range.");
+    reverse_bidirectional(f, m);
+    reverse_bidirectional(m, l);
+    reverse_bidirectional(f, l);
+    post(() => range_matches_snapshot(f, l, expected), "The suffix must precede the original prefix.");
 }
 
 function shift_right_by_one(f, l) {
@@ -2873,6 +2988,46 @@ function exchange_values_2(x, y) {
     sink(y, t);
     increment_assignment_stat(); // we have to count 3 assignments
     increment_swap_stat(); // we need to count a swap
+}
+
+function reverse_swap_ranges(f0, l0, f1) {
+    pre(() => is_bounded_range(f0, l0), "The first iterators must delimit a valid range.");
+    const n = distance(f0, l0);
+    const [, result] = reverse_swap_ranges_n(l0, f1, n);
+    return result;
+}
+
+function reverse_swap_ranges_bounded(f0, l0, f1, l1) {
+    pre(() => is_bounded_range(f0, l0) && is_bounded_range(f1, l1), "Each pair of iterators must delimit a valid range.");
+    const n = Math.min(distance(f0, l0), distance(f1, l1));
+    return reverse_swap_ranges_n(l0, f1, n);
+}
+
+function reverse_swap_ranges_n(l0, f1, n) {
+    pre(() => Number.isSafeInteger(n) && n >= 0, "The swap count must be a nonnegative safe integer.");
+    let first;
+    let last;
+    let left;
+    let right;
+    pre(() => {
+        first = predecessor(l0, n);
+        last = successor(f1, n);
+        if (!disjoint_counted_ranges(first, n, f1, n))
+            return false;
+        left = range_snapshot(first, l0).reverse();
+        right = range_snapshot(f1, last).reverse();
+        return true;
+    }, "The two counted ranges must exist and be disjoint.");
+    let back = l0;
+    let front = f1;
+    for (let i = 0; i < n; ++i) {
+        back = predecessor(back);
+        iter_swap(back, front);
+        front = successor(front);
+    }
+    post(() => equal(back, first) && equal(front, last), "The iterators must advance by the swap count.");
+    post(() => range_matches_snapshot(first, l0, right) && range_matches_snapshot(f1, last, left), "The exchanged ranges must appear in reverse order.");
+    return [back, front];
 }
 
 function swap_ranges(f, l, f1) {
