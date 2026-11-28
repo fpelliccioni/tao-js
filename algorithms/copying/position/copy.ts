@@ -2,7 +2,7 @@
 
 // Doc (es): Copia [f, l) a partir de o y devuelve el iterador que sigue al último elemento escrito. El destino debe tener espacio suficiente.
 // Doc (en): Copies [f, l) starting at o and returns the iterator just past the last written element. The destination must have enough space.
-function copy<T, U>(f: Iter<T>, l: Iter<T>, o: Iter<U>) {
+function copy<I extends Iter<unknown>, O extends Iter<unknown>>(f: I, l: I, o: O): O {
     while ( ! equal(f, l)) {
         sink(o, source(f));
         o = successor(o);

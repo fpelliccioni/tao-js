@@ -114,8 +114,6 @@ declare function cycle_to_internal<T, U>(i: Iter<T>, k: Iter<T>, permutation: It
 declare function linear_insert<T>(f: Iter<T>, c: Iter<T>, r: Relation<T>): void;
 declare function linear_insert_backward<T>(c: Iter<T>, l: Iter<T>, r: Relation<T>): void;
 declare function shift_down<T>(f: Iter<T>, i: number, n: number): void;
-declare function rotate_forward_step<T>(ref: {f: Iter<T>; m: Iter<T>}, l: Iter<T>): void;
-declare function k_rotate_from_permutation_random_access<T>(f: Iter<T>, m: Iter<T>, l: Iter<T>): IteratorPermutation<T>;
 declare function push_heap_gnu_helper<T>(f: Iter<T>, hole: number, top: number, value: T, r: Relation<T>): void;
 declare function parent(index: number): number;
 

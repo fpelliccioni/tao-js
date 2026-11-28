@@ -1364,6 +1364,7 @@ function sort3(x, y, z, c) {
 }
 
 function cycle_from(i, f) {
+    // Precondition: f forms a closed permutation cycle through i, and all its positions are writable.
     const tmp = source(i);
     let j = i;
     let k = f(i);
@@ -1623,6 +1624,32 @@ function gries_mills_rotate(f, m, l) {
     post(() => range_matches_snapshot(f, l, expected), "The suffix must precede the original prefix.");
 }
 
+function k_rotate_from_permutation_indexed(f, m, l) {
+    pre(() => is_bounded_range(f, m) && is_bounded_range(m, l) && !equal(m, l), "The middle must belong to the nonempty range.");
+    const left = distance(f, m);
+    const right = distance(m, l);
+    return x => {
+        pre(() => is_bounded_range(f, x) && is_bounded_range(x, l) && !equal(x, l), "The destination must belong to the range.");
+        const offset = distance(f, x);
+        const result = offset < right ? successor(x, left) : successor(f, offset - right);
+        post(() => equal(result, successor(f, (distance(f, x) + left) % (left + right))), "The result must identify the source of the rotated element.");
+        return result;
+    };
+}
+
+function k_rotate_from_permutation_random_access(f, m, l) {
+    pre(() => is_bounded_range(f, m) && is_bounded_range(m, l) && !equal(m, l), "The middle must belong to the nonempty range.");
+    const left = distance(f, m);
+    const right = distance(m, l);
+    const boundary = successor(f, right);
+    return x => {
+        pre(() => is_bounded_range(f, x) && is_bounded_range(x, l) && !equal(x, l), "The destination must belong to the range.");
+        const result = distance(x, boundary) > 0 ? successor(x, left) : predecessor(x, right);
+        post(() => equal(result, successor(f, (distance(f, x) + left) % (left + right))), "The result must identify the source of the rotated element.");
+        return result;
+    };
+}
+
 function rotate(f, m, l) {
     let expected;
     pre(() => {
@@ -1644,35 +1671,137 @@ function rotate_bidirectional(f, m, l) {
 }
 
 function rotate_cycles(f, m, l, from) {
-    const m_l = distance(m, l);
-    const f_m = distance(f, m);
-    let d = gcd(f_m, m_l);
-    while (d != 0) {
-        cycle_from(successor(f, d), from);
-        --d;
+    let expected;
+    pre(() => {
+        if (!is_bounded_range(f, m) || !is_bounded_range(m, l))
+            return false;
+        const left = distance(f, m);
+        const n = distance(f, l);
+        for (let i = 0; i < n; ++i) {
+            if (!equal(from(successor(f, i)), successor(f, (i + left) % n)))
+                return false;
+        }
+        expected = range_snapshot(m, l).concat(range_snapshot(f, m));
+        return true;
+    }, "The range must be valid and from must be its rotation permutation.");
+    const left = distance(f, m);
+    const right = distance(m, l);
+    if (left !== 0 && right !== 0) {
+        for (let d = gcd(left, right); d > 0; --d) {
+            cycle_from(successor(f, d - 1), from);
+        }
     }
-    return successor(f, m_l);
+    const result = successor(f, right);
+    post(() => range_matches_snapshot(f, l, expected), "The suffix must precede the original prefix.");
+    return result;
 }
 
 function rotate_forward(f, m, l) {
-    // precondition: mutable_bounded_range(f, l) ∧ f ≺ m ≺ l
-    const ref = { f, m };
-    rotate_forward_step(ref, l);
-    f = ref.f;
-    m = ref.m;
-    const m_prime = f;
-    while (!equal(m, l)) {
-        const ref = { f, m };
-        rotate_forward_step(ref, l);
-        f = ref.f;
-        m = ref.m;
+    pre(() => is_bounded_range(f, m) && is_bounded_range(m, l)
+        && !equal(f, m) && !equal(m, l), "Both parts must be nonempty and belong to the same range.");
+    let expected;
+    pre(() => {
+        expected = range_snapshot(m, l).concat(range_snapshot(f, m));
+        return true;
+    });
+    const [result, middle] = rotate_forward_step(f, m, l);
+    let first = result;
+    let next = middle;
+    while (!equal(next, l)) {
+        [first, next] = rotate_forward_step(first, next, l);
     }
-    return m_prime;
+    post(() => equal(result, successor(f, distance(m, l))), "The result must mark the end of the moved suffix.");
+    post(() => range_matches_snapshot(f, l, expected), "The suffix must precede the original prefix.");
+    return result;
+}
+
+function rotate_forward_annotated(f, m, l) {
+    pre(() => is_bounded_range(f, m) && is_bounded_range(m, l)
+        && !equal(f, m) && !equal(m, l), "Both parts must be nonempty and belong to the same range.");
+    let expected;
+    pre(() => {
+        expected = range_snapshot(m, l).concat(range_snapshot(f, m));
+        return true;
+    });
+    let first = f;
+    let middle = m;
+    let left = distance(f, m);
+    let right = distance(m, l);
+    while (true) {
+        pre(() => left === distance(first, middle) && right === distance(middle, l), "The block counts must match the remaining ranges.");
+        const [nextFirst, nextSecond] = swap_ranges_bounded(first, middle, middle, l);
+        if (equal(nextFirst, middle) && equal(nextSecond, l))
+            break;
+        first = nextFirst;
+        if (equal(first, middle)) {
+            middle = nextSecond;
+            right -= left;
+        }
+        else {
+            left -= right;
+        }
+    }
+    post(() => range_matches_snapshot(f, l, expected), "The suffix must precede the original prefix.");
+}
+
+function rotate_forward_step(f, m, l) {
+    pre(() => is_bounded_range(f, m) && is_bounded_range(m, l)
+        && !equal(f, m) && !equal(m, l), "Both parts must be nonempty and belong to the same range.");
+    const start = f;
+    let expected;
+    let middleIndex = 0;
+    let completed = 0;
+    pre(() => {
+        expected = range_snapshot(f, l);
+        middleIndex = distance(f, m);
+        for (let i = middleIndex; i < expected.length; ++i) {
+            [expected[completed], expected[i]] = [expected[i], expected[completed]];
+            if (++completed === middleIndex)
+                middleIndex = i + 1;
+        }
+        return true;
+    });
+    let c = m;
+    do {
+        exchange_values(f, c);
+        f = successor(f);
+        c = successor(c);
+        if (equal(f, m))
+            m = c;
+    } while (!equal(c, l));
+    post(() => equal(f, successor(start, completed)) && equal(m, successor(start, middleIndex)), "The result must identify the updated start and middle.");
+    post(() => range_matches_snapshot(start, l, expected), "The range must reflect the swaps of one pass.");
+    return [f, m];
+}
+
+function rotate_indexed_nontrivial(f, m, l) {
+    pre(() => is_bounded_range(f, m) && is_bounded_range(m, l)
+        && !equal(f, m) && !equal(m, l), "Both parts must be nonempty and belong to the same range.");
+    const from = k_rotate_from_permutation_indexed(f, m, l);
+    return rotate_cycles(f, m, l, from);
+}
+
+function rotate_partial_nontrivial(f, m, l) {
+    pre(() => is_bounded_range(f, m) && is_bounded_range(m, l)
+        && !equal(f, m) && !equal(m, l), "Both parts must be nonempty and belong to the same range.");
+    let suffix;
+    let prefix;
+    pre(() => {
+        suffix = range_snapshot(m, l);
+        prefix = range_value_counts(f, m);
+        return true;
+    });
+    const result = swap_ranges(m, l, f);
+    post(() => equal(result, successor(f, suffix.length)), "The result must mark the end of the moved suffix.");
+    post(() => range_matches_snapshot(f, result, suffix) && has_range_value_counts(result, l, prefix), "The suffix must keep its order and the remaining values must come from the original prefix.");
+    return result;
 }
 
 function rotate_random_access_nontrivial(f, m, l) {
-    const p = k_rotate_from_permutation_random_access(f, m, l);
-    return rotate_cycles(f, m, l, p);
+    pre(() => is_bounded_range(f, m) && is_bounded_range(m, l)
+        && !equal(f, m) && !equal(m, l), "Both parts must be nonempty and belong to the same range.");
+    const from = k_rotate_from_permutation_random_access(f, m, l);
+    return rotate_cycles(f, m, l, from);
 }
 
 function rotate_right_by_one(f, l) {
@@ -1708,6 +1837,46 @@ function rotate_unguarded(f, m, l) {
         [first, second] = swap_ranges_bounded(first, middle, middle, l);
     }
     post(() => range_matches_snapshot(f, l, expected), "The suffix must precede the original prefix.");
+}
+
+function rotate_with_buffer_backward_nontrivial(f, m, l, buffer) {
+    pre(() => is_bounded_range(f, m) && is_bounded_range(m, l)
+        && !equal(f, m) && !equal(m, l), "Both parts must be nonempty and belong to the same range.");
+    let expected;
+    pre(() => {
+        const n = distance(f, l);
+        successor(buffer, n);
+        if (!disjoint_counted_ranges(f, n, buffer, n))
+            return false;
+        expected = range_snapshot(m, l).concat(range_snapshot(f, m));
+        return true;
+    }, "The buffer must be separate and have room for the entire range.");
+    const bufferEnd = copy(m, l, buffer);
+    copy_backward(f, m, l);
+    const result = copy(buffer, bufferEnd, f);
+    post(() => equal(result, successor(f, distance(m, l))), "The result must mark the end of the moved suffix.");
+    post(() => range_matches_snapshot(f, l, expected), "The suffix must precede the original prefix.");
+    return result;
+}
+
+function rotate_with_buffer_nontrivial(f, m, l, buffer) {
+    pre(() => is_bounded_range(f, m) && is_bounded_range(m, l)
+        && !equal(f, m) && !equal(m, l), "Both parts must be nonempty and belong to the same range.");
+    let expected;
+    pre(() => {
+        const n = distance(f, l);
+        successor(buffer, n);
+        if (!disjoint_counted_ranges(f, n, buffer, n))
+            return false;
+        expected = range_snapshot(m, l).concat(range_snapshot(f, m));
+        return true;
+    }, "The buffer must be separate and have room for the entire range.");
+    const bufferEnd = copy(f, m, buffer);
+    const result = copy(m, l, f);
+    copy(buffer, bufferEnd, result);
+    post(() => equal(result, successor(f, distance(m, l))), "The result must mark the end of the moved suffix.");
+    post(() => range_matches_snapshot(f, l, expected), "The suffix must precede the original prefix.");
+    return result;
 }
 
 function three_reverse_rotate(f, m, l) {
