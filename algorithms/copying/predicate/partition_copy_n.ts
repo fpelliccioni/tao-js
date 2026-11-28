@@ -6,7 +6,7 @@ function partition_copy_n<T, U>(f: Iter<T>, n: number, u: Iter<U>, t: Iter<U>, p
 }
 
 function __partition_copy_n_usage() {
-    const s = sequence(array_random(), "s", even);
+    const s = sequence(array_random(), even);
     const evens = sequence(array_all_equal(size(s), "-"));
     const odds = sequence(array_all_equal(size(s), "-"));
 

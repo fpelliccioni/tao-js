@@ -6,7 +6,7 @@ function count_if_not<T>(f: Iter<T>, l: Iter<T>, p: Predicate<T>) {
 }
 
 function __count_if_not_usage() {
-    const d = sequence(array_random(), "d", even);
+    const d = sequence(array_random(), even);
     const f = begin(d);
     const l = end(d);
 
