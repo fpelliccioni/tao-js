@@ -77,3 +77,12 @@ function convergence_reference(x, y, f) {
     }
     return { converges: true, point: x };
 }
+
+function range_snapshot(f, l) {
+    const values = [];
+    while (!equal(f, l)) {
+        values.push(source(f));
+        f = successor(f);
+    }
+    return values;
+}
